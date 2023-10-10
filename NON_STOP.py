@@ -42,10 +42,8 @@ def move_commando():
     commando.jump()  # 점프
     commando.mem_distance()  # 이동 거리를 측정하여 배경 스크롤 여부를 결정한다
     if -2048 + WIDTH / 2 <= commando.distance <= 2048 - WIDTH / 2:
-        land.scroll_right(commando.mv_right)
-        land.scroll_left(commando.mv_left)
-        bg.scroll_right(commando.mv_right)
-        bg.scroll_left(commando.mv_left)
+        land.scroll(commando.mv_right, commando.mv_left)
+        bg.scroll(commando.mv_right, commando.mv_left)
     elif -2048 + WIDTH / 2 >= commando.distance or commando.distance >= 2048 - WIDTH / 2:
         commando.move()
 

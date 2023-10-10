@@ -13,22 +13,22 @@ class Commando:
         self.jump_acc = JUMP_ACC
         self.rotate_right = 0
         self.rotate_left = 0
-        self.distance = 0
+        self.distance = 0  # 플레이어의 이동거리를 측정하는 변수
 
-    def draw(self):
+    def draw(self):  # 이미지 출력, 마우스 방향에 따라 출력 방향이 달라진다.
         if self.Dir == 1:
             self.image.rotate_draw(math.pi * self.rotate_right / 360, self.x, self.y, 400, 400)
         elif self.Dir == 0:
             self.image.clip_composite_draw(0, 0, 128, 128, math.pi * self.rotate_left / 360, 'h', self.x, self.y, 400, 400)
 
-    def move(self):  # 좌우 이동
+    def move(self):  # 좌우 이동, 창 가장자리에 닿으면 더 이상 이동하지 않는다.
         if self.mv_right and self.x <= WIDTH:
             self.x += 2
         if self.mv_left and self.x >= 0:
             self.x -= 2
 
     def mem_distance(self):  # 이동 거리를 측정 하여 배경 스크롤 여부를 결정
-        if self.mv_right and self.distance <= 2048:
+        if self.mv_right and self.distance <= 2048:  # 2048: 땅 이미지 가로 길이의 절반 값
             self.distance += 2
         if self.mv_left and self.distance >= -2048:
             self.distance -= 2
@@ -55,12 +55,10 @@ class Land:
     def draw(self):
         self.image.draw(self.x, self.y)
 
-    def scroll_right(self, op):
-        if op:
+    def scroll(self, op1, op2):  # 플레이어 이동 시 스크롤된다. op1: 플레이어 우측 이동 여부, op2: 그 반대
+        if op1:
             self.x -= 2
-
-    def scroll_left(self, op):
-        if op:
+        if op2:
             self.x += 2
 
 
@@ -74,10 +72,8 @@ class BackGround:
     def draw(self):
         self.image.draw(self.x, self.y)
 
-    def scroll_right(self, op):
-        if op:
+    def scroll(self, op1, op2):
+        if op1:
             self.x -= 0.5
-
-    def scroll_left(self, op):
-        if op:
+        if op2:
             self.x += 0.5
