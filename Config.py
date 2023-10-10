@@ -1,3 +1,7 @@
-WIDTH, HEIGHT = 1200, 600 #창 크기 
-JUMP_ACC = 9 #점프 가속도 
-JUMP_ACC_SPEED = 0.125 #점프 가감속도 비율
+from tkinter import *
+
+root = Tk()
+HEIGHT = root.winfo_screenheight() # 현재 모니터 크기를 인식하여 자동으로 창 사이즈를 조정한다.
+WIDTH = root.winfo_screenwidth()
+JUMP_ACC = 5.0 #점프 가속도
+JUMP_ACC_SPEED = 0.03125 #점프 가감속도 비율
