@@ -20,12 +20,14 @@ def handle_events():
                 commando.mv_right = True
             elif event.key == SDLK_a:
                 commando.mv_left = True
-            elif event.key == SDLK_SPACE and commando.mv_jump == False:
+            elif event.key == SDLK_SPACE:
                 commando.mv_jump = True
 
         elif event.type == SDL_KEYUP:
-            if event.key == SDLK_d: commando.mv_right = False
-            if event.key == SDLK_a: commando.mv_left = False
+            if event.key == SDLK_d:
+                commando.mv_right = False
+            if event.key == SDLK_a:
+                commando.mv_left = False
 
 
 def init_game():
@@ -36,8 +38,20 @@ def init_game():
     bg = BackGround()
 
 
+def move_commando():
+    commando.jump()  # 점프
+    commando.mem_distance()  # 이동 거리를 측정하여 배경 스크롤 여부를 결정한다
+    if -2048 + WIDTH / 2 <= commando.distance <= 2048 - WIDTH / 2:
+        land.scroll_right(commando.mv_right)
+        land.scroll_left(commando.mv_left)
+        bg.scroll_right(commando.mv_right)
+        bg.scroll_left(commando.mv_left)
+    elif -2048 + WIDTH / 2 >= commando.distance or commando.distance >= 2048 - WIDTH / 2:
+        commando.move()
+
+
 def update_game():
-    commando.move()
+    move_commando()
 
 
 def render():
@@ -46,16 +60,17 @@ def render():
     land.draw()
 
 
-
-
 open_canvas(WIDTH, HEIGHT)
 init_game()
 
 while running:
     clear_canvas()
     handle_events()
-    render()
-    update_game()
+
+    if GAME_SCENE == SCENE[2]:  # 인게임
+        render()
+        update_game()
+
     update_canvas()
 
 close_canvas()
