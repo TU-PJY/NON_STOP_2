@@ -7,7 +7,7 @@ class Commando:
     global WIDTH, HEIGHT, JUMP_ACC, JUMP_ACC_SPEED
 
     def __init__(self):
-        self.image = load_image('commando.png')
+        self.image = load_image(commando_image_directory)
         self.x, self.y, self.Dir = WIDTH / 2, 250, 1
         self.mv_right, self.mv_left, self.mv_jump = False, False, False
         self.jump_acc = JUMP_ACC
@@ -34,3 +34,25 @@ class Commando:
                 self.mv_jump = False
                 self.jump_acc = JUMP_ACC
                 self.rotate_right, self.rotate_left = 0, 0
+
+
+class Land:
+    global WIDTH
+
+    def __init__(self):
+        self.image = load_image(land_image_directory)
+        self.x, self.y = WIDTH / 2, -50
+
+    def draw(self):
+        self.image.draw(self.x, self.y)
+
+
+class BackGround:
+    global WIDTH, HEIGHT
+
+    def __init__(self):
+        self.image = load_image(bg_image_directory)
+        self.x, self.y= WIDTH / 2, HEIGHT / 2 - 25
+
+    def draw(self):
+        self.image.draw(self.x, self.y)

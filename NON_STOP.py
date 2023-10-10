@@ -1,6 +1,6 @@
 from pico2d import *
 from Config import *
-from Classes import Commando
+from Classes import Commando, Land, BackGround
 
 
 def handle_events():
@@ -28,10 +28,12 @@ def handle_events():
             if event.key == SDLK_a: commando.mv_left = False
 
 
-def set_game():
-    global running, commando
+def init_game():
+    global running, commando, land, bg
     running = True
     commando = Commando()
+    land = Land()
+    bg = BackGround()
 
 
 def update_game():
@@ -39,11 +41,15 @@ def update_game():
 
 
 def render():
+    bg.draw()
     commando.draw()
+    land.draw()
+
+
 
 
 open_canvas(WIDTH, HEIGHT)
-set_game()
+init_game()
 
 while running:
     clear_canvas()
