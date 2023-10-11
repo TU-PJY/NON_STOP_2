@@ -35,8 +35,8 @@ class Commando:
 
     def jump(self):  # 점프
         if self.mv_jump:
-            self.rotate_right += 0.3
-            self.rotate_left -= 0.3
+            self.rotate_right += 0.2
+            self.rotate_left -= 0.2
             self.y += self.jump_acc
             self.jump_acc -= JUMP_ACC_SPEED
             if self.jump_acc == -(JUMP_ACC + JUMP_ACC_SPEED):  # 점프 후 착지하면
@@ -53,7 +53,7 @@ class Land:
         self.x, self.y = WIDTH / 2, -50
 
     def draw(self):
-        self.image.draw(self.x, self.y)
+        self.image.draw(self.x, self.y, 4150, 512)
 
     def scroll(self, op1, op2):  # 플레이어 이동 시 스크롤된다. op1: 플레이어 우측 이동 여부, op2: 그 반대
         if op1:

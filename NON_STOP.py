@@ -1,7 +1,7 @@
 from pico2d import *
 from Config import *
 from Classes import Commando, Land, BackGround
-
+import math
 
 def handle_events():
     global running, mx, my, commando
