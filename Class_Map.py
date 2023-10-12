@@ -11,7 +11,7 @@ class BackGround:  # 배경
         self.p = p
 
     def draw(self):
-        self.image.draw(self.x, self.y - self.p.land_y)
+        self.image.draw(self.x, self.y - self.p.land_y, 4096, 1100)
 
     def update(self):
         if self.p.mv_right:

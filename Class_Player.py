@@ -20,10 +20,6 @@ def left_up(e):
     return e[0] == 'INPUT' and e[1].type == SDL_KEYUP and e[1].key == SDLK_a
 
 
-def look(e):
-    return e[0] == 'INPUT' and e[1].type == SDL_MOUSEMOTION
-
-
 class Move:
     @staticmethod
     def enter(p, e):
@@ -39,6 +35,7 @@ class Move:
 
     @staticmethod
     def do(p):
+        p.dir = 1 if p.mx > p.x else 0
         pass
 
     @staticmethod
@@ -60,6 +57,7 @@ class Idle:
 
     @staticmethod
     def do(p):
+        p.dir = 1 if p.mx > p.x else 0
         pass
 
     @staticmethod
@@ -110,6 +108,7 @@ class Player:
         self.rotate_right, self.rotate_left = 0, 0
         self.state_machine = StateMachine(self)
         self.state_machine.start()
+        self.mx, self.my = 0, 0
 
     def update(self):
         self.state_machine.update()
