@@ -1,5 +1,5 @@
 from pico2d import *
-from Config import *
+from Env_variable import *
 from Class_Map import *
 import math
 
@@ -44,9 +44,9 @@ class Move:
     @staticmethod
     def draw(p):
         if p.dir == 1:
-            p.image.clip_composite_draw(0, 0, 128, 128, math.pi * p.rotate_left / 360, '', p.x, p.y, 400, 400)
+            p.image.clip_composite_draw(0, 0, 128, 128, math.pi * p.rotate_left / 360, '', p.x, p.y - p.land_y, 400, 400)
         elif p.dir == 0:
-            p.image.clip_composite_draw(0, 0, 128, 128, -math.pi * p.rotate_left / 360, 'h', p.x, p.y, 400, 400)
+            p.image.clip_composite_draw(0, 0, 128, 128, -math.pi * p.rotate_left / 360, 'h', p.x, p.y - p.land_y, 400, 400)
 
 
 class Idle:
@@ -65,9 +65,9 @@ class Idle:
     @staticmethod
     def draw(p):
         if p.dir == 1:
-            p.image.clip_composite_draw(0, 0, 128, 128, math.pi * p.rotate_left / 360, '', p.x, p.y, 400, 400)
+            p.image.clip_composite_draw(0, 0, 128, 128, math.pi * p.rotate_left / 360, '', p.x, p.y - p.land_y, 400, 400)
         elif p.dir == 0:
-            p.image.clip_composite_draw(0, 0, 128, 128, -math.pi * p.rotate_left / 360, 'h', p.x, p.y, 400, 400)
+            p.image.clip_composite_draw(0, 0, 128, 128, -math.pi * p.rotate_left / 360, 'h', p.x, p.y - p.land_y, 400, 400)
 
 
 class StateMachine:
@@ -104,26 +104,35 @@ class Player:
     def __init__(self):
         self.image = load_image(commando_image_directory)
         self.x, self.y, self.dir = WIDTH / 2, 250, 1
-        self.mv_right, self.mv_left, self.mv_jump = False, False, False
+        self.mv_right, self.mv_left, self.mv_jump, self.land_shake = False, False, False, False
+        self.land_y = 0
         self.jump_acc = JUMP_ACC
-        self.rotate_right = 0
-        self.rotate_left = 0
-        self.dir = 1
-        self.dist = 0  # 플레이어의 이동거리를 측정하는 변수
+        self.rotate_right, self.rotate_left = 0, 0
         self.state_machine = StateMachine(self)
         self.state_machine.start()
 
     def update(self):
         self.state_machine.update()
+
         if self.mv_jump:
             self.rotate_right += 0.2
             self.rotate_left -= 0.2
             self.y += self.jump_acc
             self.jump_acc -= JUMP_ACC_SPEED
             if self.jump_acc == -(JUMP_ACC + JUMP_ACC_SPEED):  # 점프 후 착지하면
+                self.land_shake = True
+                self.land_y = LAND_SHAKE
+
                 self.mv_jump = False
                 self.jump_acc = JUMP_ACC
                 self.rotate_right, self.rotate_left = 0, 0
+
+        if self.land_shake:
+            if self.land_y > 0:
+                self.land_y -= LAND_SHAKE_REDUCE
+            else:
+                self.land_shake = False
+
 
     def handle_event(self, event):
         self.state_machine.handle_event(('INPUT', event))

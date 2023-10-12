@@ -1,5 +1,5 @@
 from pico2d import *
-from Config import *
+from Env_variable import *
 from Class_Player import Player
 from Class_Map import Land, BackGround, Wall
 

@@ -6,8 +6,11 @@ HEIGHT = root.winfo_screenheight()
 WIDTH = root.winfo_screenwidth()
 print(WIDTH, HEIGHT)
 
+MOVE_SPEED = 2  # 플레이어 이동 속도
 JUMP_ACC = 5.0  # 점프 가속도
-JUMP_ACC_SPEED = 0.03125  # 점프 가속도 변화량
+JUMP_ACC_SPEED = (0.03125)  # 점프 가속도 변화량
+LAND_SHAKE = 50  # 착지 시 맵이 눌리는 효과 수치
+LAND_SHAKE_REDUCE = 0.5  # 맵이 눌린 뒤의 복구 속도
 
 SCENE = ('intro', 'main', 'game')  # 씬 리스트. 각 씬마다 표시되는 화면이 달라진다.
 GAME_SCENE = SCENE[2]
