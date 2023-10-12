@@ -16,3 +16,4 @@ GAME_SCENE = SCENE[2]
 commando_image_directory = 'res//commando.png'
 land_image_directory = 'res//land.png'
 bg_image_directory = 'res//bg.png'
+wall_image_directory = 'res//wall.png'
