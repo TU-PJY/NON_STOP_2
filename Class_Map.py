@@ -33,11 +33,10 @@ class Land:
 class BackGround:
     global WIDTH, HEIGHT
 
-    def __init__(self, p, wall):
+    def __init__(self, p):
         self.image = load_image(bg_image_directory)
         self.x, self.y = WIDTH / 2, HEIGHT / 2 - 25
         self.p = p
-        self.wall = wall
 
     def draw(self):
         self.image.draw(self.x, self.y)
@@ -45,10 +44,10 @@ class BackGround:
     def update(self):
         if self.p.mv_right:
             self.x -= 0.5
+
         elif self.p.mv_left:
             self.x += 0.5
 
-        print(self.wall.x2 - 640)
     def handle_event(self, event):
         pass
 
@@ -74,6 +73,7 @@ class Wall:
             if self.x2 - 640 <= WIDTH / 2:
                 self.x1 += 2
                 self.x2 += 2
+
         elif self.p.mv_left:
             self.x1 += 2
             self.x2 += 2

@@ -1,6 +1,6 @@
 from pico2d import *
 from Config import *
-from Class_Object import *
+from Class_Map import *
 import math
 
 

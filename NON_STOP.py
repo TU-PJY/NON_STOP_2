@@ -1,7 +1,7 @@
 from pico2d import *
 from Config import *
 from Class_Player import Player
-from Class_Object import Land, BackGround, Wall
+from Class_Map import Land, BackGround, Wall
 
 
 def handle_events():
@@ -13,7 +13,7 @@ def handle_events():
             running = False
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE: #점프는 상태 상관없이 가능해야하므로 점프 기능은 이곳에 배치
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:  # 점프는 상태 상관없이 가능해야하므로 점프 기능은 이곳에 배치
             p.mv_jump = True
         elif event.type == SDL_MOUSEMOTION:
             mx, my = event.x, HEIGHT - 1 - event.y
@@ -31,12 +31,13 @@ def init_game():
     p = Player()
     land = Land(p)
     wall = Wall(p)
-    bg = BackGround(p, wall)
+    bg = BackGround(p)
 
     game.append(bg)
     game.append(p)
     game.append(land)
     game.append(wall)
+
 
 def update_game():
     for o in game:
