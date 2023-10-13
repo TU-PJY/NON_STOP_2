@@ -1,10 +1,8 @@
 from pico2d import load_image
 from Env_variable import *
-
+# Player move -> Map class
 
 class Land:  # 땅
-    global WIDTH
-
     def __init__(self, p):
         self.image = load_image(land_image_directory)
         self.x, self.y = WIDTH / 2, -50
@@ -31,8 +29,6 @@ class Land:  # 땅
 
 
 class Wall:  # 벽
-    global HEIGHT, WIDTH
-
     def __init__(self, p):
         self.image = load_image(wall_image_directory)
         self.p = p
@@ -58,8 +54,6 @@ class Wall:  # 벽
 
 
 class BackGround:  # 배경
-    global WIDTH, HEIGHT
-
     def __init__(self, p):
         self.image = load_image(bg_image_directory)
         self.x, self.y = WIDTH / 2, HEIGHT / 2 - 25

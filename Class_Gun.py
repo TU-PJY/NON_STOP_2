@@ -1,15 +1,17 @@
 from pico2d import *
 from Env_variable import *
-from Class_Player import Player
 import math
-
+# Player location -> Gun class
 
 class Gun:
     def __init__(self, p):
         self.scar_right = load_image(scar_h_right_directory)
         self.scar_left = load_image(scar_h_left_directory)
+
         self.p = p
-        self.deg = 0
+
+        self.deg = 0  # 총 이미지 각도
+
         self.trigger = False
         self.shoot = False
         self.shoot_delay = 0
@@ -29,7 +31,6 @@ class Gun:
                 if GUN_NAME == 'SCAR_H':
                     self.shoot = True
                     self.shoot_delay = 65
-
             else:
                 self.shoot = False
                 self.shoot_delay -= 1

@@ -4,7 +4,6 @@ from Class_Player import Player
 from Class_Map import Land, BackGround, Wall
 from Class_Gun import Gun
 from Class_Target import Target
-import math
 
 
 def handle_events():
@@ -18,17 +17,11 @@ def handle_events():
             running = False
         elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:  # 점프는 상태 상관없이 가능해야하므로 점프 기능은 이곳에 배치
             p.mv_jump = True
-
         elif event.type == SDL_MOUSEMOTION:
             p.mx, p.my = event.x, HEIGHT - 1 - event.y
 
-        elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
-            gun.trigger = True
-        elif event.type == SDL_MOUSEBUTTONUP and event.button == SDL_BUTTON_LEFT:
-            gun.trigger = False
-            gun.shoot_delay = 0
-
         else:
+            target.handle_event(event)
             p.handle_event(event)
 
 
@@ -67,6 +60,7 @@ open_canvas(WIDTH, HEIGHT)
 init_game()
 hide_cursor()
 hide_lattice()
+
 
 while running:
     clear_canvas()

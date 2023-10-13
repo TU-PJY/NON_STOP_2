@@ -24,6 +24,44 @@ def left_up(e):
     return e[0] == 'INPUT' and e[1].type == SDL_KEYUP and e[1].key == SDLK_a
 
 
+def draw_player(p):
+    if p.dir == 1:
+        p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.x, p.y - p.land_y, 400, 400)
+    elif p.dir == 0:
+        p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.x, p.y - p.land_y, 400, 400)
+
+
+def look_mouse(p):
+    if p.dir == 1:  # 마우스를 살짝 따라본다.
+        p.rotate = math.atan2((p.my - p.y), ((p.mx * 1.7) - p.x))
+    elif p.dir == 0:
+        p.rotate = math.atan2((p.my - p.y), (p.mx - (p.x * 1.7)))
+
+
+def jump_and_land(p):
+    if p.mv_jump:  # 점프 시
+        p.y += p.jump_acc
+
+        if p.acc_delay < ACC_DELAY:  # 빠른 딜레이로 인해 가속도 변화에 딜레이를 줘야 제대로 된 점프 애니메이션이 나온다.
+            p.acc_delay += 1
+        else:
+            p.jump_acc -= 1
+            p.acc_delay = 0
+
+        if p.jump_acc == -(JUMP_ACC + 1):  # 점프 후 착지하면
+            p.land_shake = True  # 땅에 착지 시 화면 흔들림이 활성화 된다
+            p.mv_jump = False  # 점프가 가능해진다
+            p.land_y = LAND_SHAKE  # LAND_SHAKE 만큼 화면이 눌린다
+            p.jump_acc = JUMP_ACC  # 점프 가속도 초기화
+            p.acc_delay = 0  # 점프 가속도 변화 딜레이 초기화
+
+    if p.land_shake:  # 땅 흔들림 활성화 시 화면 전체가 흔들린다.
+        if p.land_y > 0:
+            p.land_y -= LAND_SHAKE_REDUCE
+        else:
+            p.land_shake = False
+
+
 class Move:
     @staticmethod
     def enter(p, e):
@@ -40,15 +78,12 @@ class Move:
     @staticmethod
     def do(p):
         p.dir = 1 if p.mx > p.x else 0
-
-        pass
+        jump_and_land(p)
+        look_mouse(p)
 
     @staticmethod
     def draw(p):
-        if p.dir == 1:
-            p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.x, p.y - p.land_y, 400, 400)
-        elif p.dir == 0:
-            p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.x, p.y - p.land_y, 400, 400)
+        draw_player(p)
 
 
 class Idle:
@@ -63,14 +98,12 @@ class Idle:
     @staticmethod
     def do(p):
         p.dir = 1 if p.mx > p.x else 0
-        pass
+        jump_and_land(p)
+        look_mouse(p)
 
     @staticmethod
     def draw(p):
-        if p.dir == 1:
-            p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.x, p.y - p.land_y, 400, 400)
-        elif p.dir == 0:
-            p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.x, p.y - p.land_y, 400, 400)
+        draw_player(p)
 
 
 class StateMachine:
@@ -102,7 +135,6 @@ class StateMachine:
 
 
 class Player:
-    global WIDTH, HEIGHT, JUMP_ACC, ACC_DELAY
     def __init__(self):
         self.image = load_image(commando_image_directory)
         self.image_left = load_image(commando_left_image_directory)
@@ -112,9 +144,9 @@ class Player:
         
         self.speed = 2  # 플레이어 이동 속도 (사실상 맵 움직이는 속도)
         self.mx, self.my = 0, 0  # 마우스 좌표
-        
-        self.acc_delay = 0
+
         self.jump_acc = JUMP_ACC
+        self.acc_delay = 0
         self.land_y = 0  # 이 수치만큼 화면의 모든 이미지들이 아래로 눌린다.
 
         self.state_machine = StateMachine(self)
@@ -122,37 +154,8 @@ class Player:
 
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
 
-
     def update(self):
         self.state_machine.update()
-
-        if self.dir == 1:  # 마우스를 살짝 따라본다.
-            self.rotate = math.atan2((self.my - self.y), ((self.mx * 1.7) - self.x))
-        elif self.dir == 0:
-            self.rotate = math.atan2((self.my - self.y), (self.mx - (self.x * 1.7)))
-
-        if self.mv_jump:  # 점프 시 
-            self.y += self.jump_acc
-
-            if self.acc_delay < ACC_DELAY:  # 빠른 딜레이로 인해 가속도 변화에 딜레이를 줘야 제대로 된 점프 애니메이션이 나온다.
-                self.acc_delay += 1
-            else:
-                self.jump_acc -= 1
-                self.acc_delay = 0
-
-            if self.jump_acc == -(JUMP_ACC + 1):  # 점프 후 착지하면
-                self.land_shake = True  # 땅에 착지 시 화면 흔들림이 활성화 된다 
-                self.mv_jump = False  # 점프가 가능해진다 
-                self.land_y = LAND_SHAKE  # LAND_SHAKE 만큼 화면이 눌린다 
-                self.jump_acc = JUMP_ACC  # 점프 가속도 초기화 
-                self.acc_delay = 0  # 점프 가속도 변화 딜레이 초기화 
-
-        if self.land_shake:  # 땅 흔들림 활성화 시 화면 전체가 흔들린다. 
-            if self.land_y > 0:
-                self.land_y -= LAND_SHAKE_REDUCE
-            else:
-                self.land_shake = False
-
 
     def handle_event(self, event):
         self.state_machine.handle_event(('INPUT', event))
