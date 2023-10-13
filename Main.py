@@ -19,7 +19,6 @@ def handle_events():
             p.mv_jump = True
         elif event.type == SDL_MOUSEMOTION:
             p.mx, p.my = event.x, HEIGHT - 1 - event.y
-
         else:
             p.handle_event(event)
             gun.handle_event(event)

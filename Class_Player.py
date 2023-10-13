@@ -29,7 +29,8 @@ def draw_player(p):
     if p.dir == 1:
         p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.x + p.shake_x, p.y - p.land_y + p.shake_y, 400, 400)
     elif p.dir == 0:
-        p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.x + p.shake_x, p.y - p.land_y + p.shake_y, 400, 400)
+        p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.x + p.shake_x, p.y - p.land_y + p.shake_y,
+                                         400, 400)
 
 
 def look_mouse(p):
