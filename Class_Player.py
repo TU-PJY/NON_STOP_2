@@ -2,6 +2,7 @@ from pico2d import *
 from Env_variable import *
 from Class_Map import *
 import math
+import random
 
 
 # 실시간으로 총이 마우스 좌표를 향해야 하므로 Class_Player가 마우스 좌표를 받아 Class_Gun으로 전달한다.
@@ -26,9 +27,9 @@ def left_up(e):
 
 def draw_player(p):
     if p.dir == 1:
-        p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.x, p.y - p.land_y, 400, 400)
+        p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.x + p.shake_x, p.y - p.land_y + p.shake_y, 400, 400)
     elif p.dir == 0:
-        p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.x, p.y - p.land_y, 400, 400)
+        p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.x + p.shake_x, p.y - p.land_y + p.shake_y, 400, 400)
 
 
 def look_mouse(p):
@@ -62,6 +63,18 @@ def jump_and_land(p):
             p.land_shake = False
 
 
+def shake_display(p):
+    if p.shoot_shake:
+        if p.shake_timer > 0:
+            p.shake_x = random.randint(-p.shake_range, p.shake_range)
+            p.shake_y = random.randint(-p.shake_range, p.shake_range)
+            p.shake_timer -= 1
+        else:
+            p.shake_x = 0
+            p.shake_y = 0
+            p.shoot_shake = False
+
+
 class Move:
     @staticmethod
     def enter(p, e):
@@ -80,6 +93,7 @@ class Move:
         p.dir = 1 if p.mx > p.x else 0
         jump_and_land(p)
         look_mouse(p)
+        shake_display(p)
 
     @staticmethod
     def draw(p):
@@ -100,6 +114,7 @@ class Idle:
         p.dir = 1 if p.mx > p.x else 0
         jump_and_land(p)
         look_mouse(p)
+        shake_display(p)
 
     @staticmethod
     def draw(p):
@@ -153,6 +168,11 @@ class Player:
         self.state_machine.start()
 
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
+
+        self.shoot_shake = False
+        self.shake_timer = 0
+        self.shake_x, self.shake_y = 0, 0
+        self.shake_range = 0
 
     def update(self):
         self.state_machine.update()

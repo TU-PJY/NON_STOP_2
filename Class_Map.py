@@ -12,7 +12,7 @@ class Land:  # 땅
         self.p = p
 
     def draw(self):
-        self.image.draw(self.x, self.y - self.p.land_y, 4096, 512)
+        self.image.draw(self.x + self.p.shake_x, self.y - self.p.land_y + self.p.shake_y, 4096, 512)
 
     def update(self):  # 이 함수에서 땅 끝과 플레이어 좌표가 일치하면 모든 맵 클래스의 스크롤이 멈춘다.
         if self.p.mv_right:
@@ -40,8 +40,8 @@ class Wall:  # 벽
         self.y = HEIGHT / 2
 
     def draw(self):
-        self.image.draw(self.x1, self.y - self.p.land_y, 1280, 1920)
-        self.image.draw(self.x2, self.y - self.p.land_y, 1280, 1920)
+        self.image.draw(self.x1 + self.p.shake_x, self.y - self.p.land_y + self.p.shake_y, 1280, 1920)
+        self.image.draw(self.x2 + self.p.shake_x, self.y - self.p.land_y + self.p.shake_y, 1280, 1920)
 
     def update(self):
         if self.p.mv_right:
@@ -63,7 +63,7 @@ class BackGround:  # 배경
         self.p = p
 
     def draw(self):
-        self.image.draw(self.x, self.y - self.p.land_y, 4096, 1100)
+        self.image.draw(self.x + self.p.shake_x, self.y - self.p.land_y + self.p.shake_y, 4096, 1100)
 
     def update(self):
         if self.p.mv_right:

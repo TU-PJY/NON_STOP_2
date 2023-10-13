@@ -19,20 +19,26 @@ def draw_gun(gun):
 
     if GUN_NAME == 'SCAR_H':  # GUN_NAME에 따라 사용하는 총기가 달라진다.
         if gun.p.dir == 1:
-            gun.scar_right.clip_composite_draw(0, 0, 150, 100, gun.deg, '', gun.p.x, gun.p.y - 10 - gun.p.land_y, 170, 120)
+            gun.scar_right.clip_composite_draw(0, 0, 150, 100, gun.deg, '', gun.p.x + gun.p.shake_x,
+                                               gun.p.y - 10 - gun.p.land_y + gun.p.shake_y, 170, 120)
         elif gun.p.dir == 0:
-            gun.scar_left.clip_composite_draw(0, 0, 150, 100, gun.deg, 'h, v', gun.p.x, gun.p.y - 10 - gun.p.land_y, 170, 120)
+            gun.scar_left.clip_composite_draw(0, 0, 150, 100, gun.deg, 'h, v', gun.p.x + gun.p.shake_x,
+                                              gun.p.y - 10 - gun.p.land_y + gun.p.shake_y, 170, 120)
 
 
 def draw_flame(gun):
     if gun.flame_delay > 0:
         gun.flame_delay -= 1
         if gun.p.dir == 1:
-            gun.flame_right.clip_composite_draw(0, 0, 100, 100, gun.deg, '', gun.p.x + math.cos(gun.deg) * 150,
-                                            gun.p.y + math.sin(gun.deg) * 150 - gun.p.land_y, 100, 100)
+            gun.flame_right.clip_composite_draw(0, 0, 100, 100, gun.deg, '',
+                                                gun.p.x + math.cos(gun.deg) * 150 + gun.p.shake_x,
+                                                gun.p.y + math.sin(gun.deg) * 150 - gun.p.land_y + gun.p.shake_y, 100,
+                                                100)
         elif gun.p.dir == 0:
-            gun.flame_left.clip_composite_draw(0, 0, 100, 100, gun.deg, 'h, v', gun.p.x + math.cos(gun.deg) * 150,
-                                           gun.p.y + math.sin(gun.deg) * 150 - gun.p.land_y, 100, 100)
+            gun.flame_left.clip_composite_draw(0, 0, 100, 100, gun.deg, 'h, v',
+                                               gun.p.x + math.cos(gun.deg) * 150 + gun.p.shake_x,
+                                               gun.p.y + math.sin(gun.deg) * 150 - gun.p.land_y + gun.p.shake_y, 100,
+                                               100)
 
 
 def shoot_gun(gun):
@@ -41,7 +47,10 @@ def shoot_gun(gun):
             if GUN_NAME == 'SCAR_H':
                 gun.shoot = True
                 gun.flame_delay = 20
-                gun.shoot_delay = 65
+                gun.shoot_delay = 60
+                gun.p.shake_timer = 30
+                gun.p.shake_range = 10
+                gun.p.shoot_shake = True
         else:
             gun.shoot = False
             gun.shoot_delay -= 1
