@@ -102,7 +102,7 @@ class StateMachine:
 
 
 class Player:
-    global WIDTH, HEIGHT, JUMP_ACC, JUMP_ACC_SPEED
+    global WIDTH, HEIGHT, JUMP_ACC, ACC_DELAY
     def __init__(self):
         self.image = load_image(commando_image_directory)
         self.image_left = load_image(commando_left_image_directory)
@@ -113,6 +113,7 @@ class Player:
         self.speed = 2  # 플레이어 이동 속도 (사실상 맵 움직이는 속도)
         self.mx, self.my = 0, 0  # 마우스 좌표
         
+        self.acc_delay = 0
         self.jump_acc = JUMP_ACC
         self.land_y = 0  # 이 수치만큼 화면의 모든 이미지들이 아래로 눌린다.
 
@@ -132,13 +133,19 @@ class Player:
 
         if self.mv_jump:  # 점프 시 
             self.y += self.jump_acc
-            self.jump_acc -= JUMP_ACC_SPEED
-            if self.jump_acc == -(JUMP_ACC + JUMP_ACC_SPEED):  # 점프 후 착지하면
-                self.land_shake = True  # 땅에 착지 시 화면 흔들림이 활성화 된다 
-                self.land_y = LAND_SHAKE
 
-                self.mv_jump = False
-                self.jump_acc = JUMP_ACC
+            if self.acc_delay < ACC_DELAY:  # 빠른 딜레이로 인해 가속도 변화에 딜레이를 줘야 제대로 된 점프 애니메이션이 나온다.
+                self.acc_delay += 1
+            else:
+                self.jump_acc -= 1
+                self.acc_delay = 0
+
+            if self.jump_acc == -(JUMP_ACC + 1):  # 점프 후 착지하면
+                self.land_shake = True  # 땅에 착지 시 화면 흔들림이 활성화 된다 
+                self.mv_jump = False  # 점프가 가능해진다 
+                self.land_y = LAND_SHAKE  # LAND_SHAKE 만큼 화면이 눌린다 
+                self.jump_acc = JUMP_ACC  # 점프 가속도 초기화 
+                self.acc_delay = 0  # 점프 가속도 변화 딜레이 초기화 
 
         if self.land_shake:  # 땅 흔들림 활성화 시 화면 전체가 흔들린다. 
             if self.land_y > 0:
