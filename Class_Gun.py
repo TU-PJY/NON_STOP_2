@@ -62,12 +62,11 @@ class Shoot:
     @staticmethod
     def do(gun):
         shoot_gun(gun)
-        draw_flame(gun)
-
 
     @staticmethod
     def draw(gun):
         draw_gun(gun)
+        draw_flame(gun)
 
 
 class Idle:
@@ -86,6 +85,7 @@ class Idle:
     @staticmethod
     def draw(gun):
         draw_gun(gun)
+        draw_flame(gun)
 
 
 class StateMachineGun:
