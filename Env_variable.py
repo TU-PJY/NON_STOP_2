@@ -17,13 +17,13 @@ SCENE = ('intro', 'main', 'game')  # 씬 리스트. 각 씬마다 표시되는 �
 GAME_SCENE = SCENE[2]
 
 GUN_NAME = 'SCAR_H'  # 기본 SCAR_H
-RECOIL_REDUCE = 3
+RECOIL_REDUCE = 3  # 조준점 복구 속도
 
 # 플레이어 이미지 파일 경로
 commando_image_directory = 'res//commando.png'
 commando_left_image_directory = 'res//commando_left.png'
 
-#배경 이미지 파일 경로 
+# 배경 이미지 파일 경로
 land_image_directory = 'res//land.png'
 bg_image_directory = 'res//bg.png'
 wall_image_directory = 'res//wall.png'
@@ -37,3 +37,7 @@ target_left_directory = 'res//target_left.png'
 # 총 이미지 파일 경로 
 scar_h_right_directory = 'res//SCAR_H_right.png'
 scar_h_left_directory = 'res//SCAR_H_left.png'
+
+# 불꽃 이미지 파일 경로
+flame_right_directory = 'res//flame_right.png'
+flame_left_directory = 'res//flame_left.png'

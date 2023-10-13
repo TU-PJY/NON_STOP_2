@@ -21,8 +21,8 @@ def handle_events():
             p.mx, p.my = event.x, HEIGHT - 1 - event.y
 
         else:
-            target.handle_event(event)
             p.handle_event(event)
+            gun.handle_event(event)
 
 
 def init_game():
@@ -60,7 +60,6 @@ open_canvas(WIDTH, HEIGHT)
 init_game()
 hide_cursor()
 hide_lattice()
-
 
 while running:
     clear_canvas()

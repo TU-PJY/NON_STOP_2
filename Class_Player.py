@@ -141,7 +141,7 @@ class Player:
 
         self.x, self.y, self.dir = WIDTH / 2, 250, 1
         self.mv_right, self.mv_left, self.mv_jump, self.land_shake = False, False, False, False  # 플레이어 이동, 점프
-        
+
         self.speed = 2  # 플레이어 이동 속도 (사실상 맵 움직이는 속도)
         self.mx, self.my = 0, 0  # 마우스 좌표
 

@@ -1,6 +1,9 @@
 from pico2d import load_image
 from Env_variable import *
+
+
 # Player move -> Map class
+
 
 class Land:  # 땅
     def __init__(self, p):

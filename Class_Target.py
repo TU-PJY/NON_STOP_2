@@ -1,15 +1,9 @@
 from pico2d import *
 from Env_variable import *
 import math
+
+
 # MOUSEBUTTON -> Gun class -> Target class
-
-
-def l_button_down(e):
-    return e[0] == 'INPUT' and e[1].type == SDL_MOUSEBUTTONDOWN and e[1].button == SDL_BUTTON_LEFT
-
-
-def l_button_up(e):
-    return e[0] == 'INPUT' and e[1].type == SDL_MOUSEBUTTONUP and e[1].button == SDL_BUTTON_LEFT
 
 
 def draw_target(target):
@@ -39,29 +33,7 @@ def update_recoil(target):
             target.reduce_delay -= 1
 
 
-class Recoil:
-    @staticmethod
-    def enter(target, e):
-        if l_button_down(e):
-            target.gun.trigger = True
-
-    @staticmethod
-    def exit(target, e):
-        if l_button_up(e):
-            target.gun.trigger = False
-            target.gun.shoot_delay = 0
-
-    @staticmethod
-    def do(target):
-        cal_dis(target)
-        update_recoil(target)
-
-    @staticmethod
-    def draw(target):
-        draw_target(target)
-
-
-class Idle:
+class Update:
     @staticmethod
     def enter(target, e):
         pass
@@ -83,10 +55,9 @@ class Idle:
 class StateMachineTarget:
     def __init__(self, target):
         self.target = target
-        self.cur_state = Idle
+        self.cur_state = Update
         self.table = {
-            Idle: {l_button_down: Recoil},
-            Recoil: {l_button_up: Idle},
+            Update: {},
         }
 
     def start(self):
@@ -125,7 +96,7 @@ class Target:
 
     def draw(self):
         self.state_machine.draw()
-    
+
     def update(self):
         self.state_machine.update()
 
