@@ -4,6 +4,10 @@ from Class_Map import *
 import math
 
 
+# 실시간으로 총이 마우스 좌표를 향해야 하므로 Class_Player가 마우스 좌표를 받아 Class_Gun으로 전달한다.
+# 플레이어 이동 시 맵 자체가 움직이는 방식이기 때문에 컨트롤러의 키 누름 여부와 현재 플레이어 좌표를 Class_Map으로 전달한다.
+
+
 def right_down(e):
     return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_d
 
@@ -98,35 +102,40 @@ class StateMachine:
 
 class Player:
     global WIDTH, HEIGHT, JUMP_ACC, JUMP_ACC_SPEED
-
     def __init__(self):
         self.image = load_image(commando_image_directory)
+
         self.x, self.y, self.dir = WIDTH / 2, 250, 1
-        self.mv_right, self.mv_left, self.mv_jump, self.land_shake = False, False, False, False
-        self.land_y = 0
+        self.mv_right, self.mv_left, self.mv_jump, self.land_shake = False, False, False, False  # 플레이어 이동, 점프
+        
+        self.speed = 2  # 플레이어 이동 속도 (사실상 맵 움직이는 속도)
+        self.mx, self.my = 0, 0  # 마우스 좌표
+        
         self.jump_acc = JUMP_ACC
+        self.land_y = 0
+
         self.rotate_right, self.rotate_left = 0, 0
         self.state_machine = StateMachine(self)
         self.state_machine.start()
-        self.mx, self.my = 0, 0
+
 
     def update(self):
         self.state_machine.update()
 
-        if self.mv_jump:
+        if self.mv_jump:  # 점프 시 
             self.rotate_right += 0.2
             self.rotate_left -= 0.2
             self.y += self.jump_acc
             self.jump_acc -= JUMP_ACC_SPEED
             if self.jump_acc == -(JUMP_ACC + JUMP_ACC_SPEED):  # 점프 후 착지하면
-                self.land_shake = True
+                self.land_shake = True  # 땅에 착지 시 화면 흔들림이 활성화 된다 
                 self.land_y = LAND_SHAKE
 
                 self.mv_jump = False
                 self.jump_acc = JUMP_ACC
                 self.rotate_right, self.rotate_left = 0, 0
 
-        if self.land_shake:
+        if self.land_shake:    # 땅 흔들림 활성화시 화면 전체가 흔들린다. 
             if self.land_y > 0:
                 self.land_y -= LAND_SHAKE_REDUCE
             else:
