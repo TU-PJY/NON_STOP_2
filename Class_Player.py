@@ -40,14 +40,15 @@ class Move:
     @staticmethod
     def do(p):
         p.dir = 1 if p.mx > p.x else 0
+
         pass
 
     @staticmethod
     def draw(p):
         if p.dir == 1:
-            p.image.clip_composite_draw(0, 0, 128, 128, math.pi * p.rotate_left / 360, '', p.x, p.y - p.land_y, 400, 400)
+            p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.x, p.y - p.land_y, 400, 400)
         elif p.dir == 0:
-            p.image.clip_composite_draw(0, 0, 128, 128, -math.pi * p.rotate_left / 360, 'h', p.x, p.y - p.land_y, 400, 400)
+            p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.x, p.y - p.land_y, 400, 400)
 
 
 class Idle:
@@ -67,9 +68,9 @@ class Idle:
     @staticmethod
     def draw(p):
         if p.dir == 1:
-            p.image.clip_composite_draw(0, 0, 128, 128, math.pi * p.rotate_left / 360, '', p.x, p.y - p.land_y, 400, 400)
+            p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.x, p.y - p.land_y, 400, 400)
         elif p.dir == 0:
-            p.image.clip_composite_draw(0, 0, 128, 128, -math.pi * p.rotate_left / 360, 'h', p.x, p.y - p.land_y, 400, 400)
+            p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.x, p.y - p.land_y, 400, 400)
 
 
 class StateMachine:
@@ -104,6 +105,7 @@ class Player:
     global WIDTH, HEIGHT, JUMP_ACC, JUMP_ACC_SPEED
     def __init__(self):
         self.image = load_image(commando_image_directory)
+        self.image_left = load_image(commando_left_image_directory)
 
         self.x, self.y, self.dir = WIDTH / 2, 250, 1
         self.mv_right, self.mv_left, self.mv_jump, self.land_shake = False, False, False, False  # 플레이어 이동, 점프
@@ -112,19 +114,23 @@ class Player:
         self.mx, self.my = 0, 0  # 마우스 좌표
         
         self.jump_acc = JUMP_ACC
-        self.land_y = 0
+        self.land_y = 0  # 이 수치만큼 화면의 모든 이미지들이 아래로 눌린다.
 
-        self.rotate_right, self.rotate_left = 0, 0
         self.state_machine = StateMachine(self)
         self.state_machine.start()
+
+        self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
 
 
     def update(self):
         self.state_machine.update()
 
+        if self.dir == 1:  # 마우스를 살짝 따라본다.
+            self.rotate = math.atan2((self.my - self.y), ((self.mx * 2) - self.x))
+        elif self.dir == 0:
+            self.rotate = math.atan2((self.my - self.y), (self.mx - (self.x * 2)))
+
         if self.mv_jump:  # 점프 시 
-            self.rotate_right += 0.2
-            self.rotate_left -= 0.2
             self.y += self.jump_acc
             self.jump_acc -= JUMP_ACC_SPEED
             if self.jump_acc == -(JUMP_ACC + JUMP_ACC_SPEED):  # 점프 후 착지하면
@@ -133,9 +139,8 @@ class Player:
 
                 self.mv_jump = False
                 self.jump_acc = JUMP_ACC
-                self.rotate_right, self.rotate_left = 0, 0
 
-        if self.land_shake:    # 땅 흔들림 활성화시 화면 전체가 흔들린다. 
+        if self.land_shake:  # 땅 흔들림 활성화 시 화면 전체가 흔들린다. 
             if self.land_y > 0:
                 self.land_y -= LAND_SHAKE_REDUCE
             else:

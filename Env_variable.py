@@ -20,6 +20,7 @@ GUN_NAME = 'SCAR_H'  # 기본 SCAR_H
 
 # 이미지 파일 경로
 commando_image_directory = 'res//commando.png'
+commando_left_image_directory = 'res//commando_left.png'
 land_image_directory = 'res//land.png'
 bg_image_directory = 'res//bg.png'
 wall_image_directory = 'res//wall.png'
