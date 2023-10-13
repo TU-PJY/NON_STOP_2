@@ -9,7 +9,7 @@ WIDTH = root.winfo_screenwidth()
 print(WIDTH, HEIGHT)
 
 JUMP_ACC = 5.0  # 점프 가속도
-ACC_DELAY = 20  # 점프 가속도 변화 딜레이 
+ACC_DELAY = 25  # 점프 가속도 변화 딜레이
 LAND_SHAKE = 50  # 착지 시 맵이 눌리는 효과 수치
 LAND_SHAKE_REDUCE = 0.5  # 맵이 눌린 뒤의 복구 속도
 
@@ -17,6 +17,7 @@ SCENE = ('intro', 'main', 'game')  # 씬 리스트. 각 씬마다 표시되는 �
 GAME_SCENE = SCENE[2]
 
 GUN_NAME = 'SCAR_H'  # 기본 SCAR_H
+RECOIL_REDUCE = 3
 
 # 플레이어 이미지 파일 경로
 commando_image_directory = 'res//commando.png'

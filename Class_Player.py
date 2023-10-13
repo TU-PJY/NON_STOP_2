@@ -127,9 +127,9 @@ class Player:
         self.state_machine.update()
 
         if self.dir == 1:  # 마우스를 살짝 따라본다.
-            self.rotate = math.atan2((self.my - self.y), ((self.mx * 2) - self.x))
+            self.rotate = math.atan2((self.my - self.y), ((self.mx * 1.7) - self.x))
         elif self.dir == 0:
-            self.rotate = math.atan2((self.my - self.y), (self.mx - (self.x * 2)))
+            self.rotate = math.atan2((self.my - self.y), (self.mx - (self.x * 1.7)))
 
         if self.mv_jump:  # 점프 시 
             self.y += self.jump_acc

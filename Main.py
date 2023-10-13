@@ -8,7 +8,7 @@ import math
 
 
 def handle_events():
-    global running, p, gun
+    global running, p, gun, target
 
     events = get_events()
     for event in events:
@@ -18,8 +18,16 @@ def handle_events():
             running = False
         elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:  # 점프는 상태 상관없이 가능해야하므로 점프 기능은 이곳에 배치
             p.mv_jump = True
+
         elif event.type == SDL_MOUSEMOTION:
             p.mx, p.my = event.x, HEIGHT - 1 - event.y
+
+        elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
+            gun.trigger = True
+        elif event.type == SDL_MOUSEBUTTONUP and event.button == SDL_BUTTON_LEFT:
+            gun.trigger = False
+            gun.shoot_delay = 0
+
         else:
             p.handle_event(event)
 
@@ -35,7 +43,7 @@ def init_game():
     wall = Wall(p)
     bg = BackGround(p)
     gun = Gun(p)
-    target = Target(p)
+    target = Target(p, gun)
 
     game.append(bg)
     game.append(p)
@@ -43,7 +51,6 @@ def init_game():
     game.append(land)
     game.append(wall)
     game.append(target)
-
 
 
 def update_game():
