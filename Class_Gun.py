@@ -14,6 +14,14 @@ def l_up(e):
     return e[0] == 'INPUT' and e[1].type == SDL_MOUSEBUTTONUP and e[1].button == SDL_BUTTON_LEFT
 
 
+def load_gun_image(self):
+    self.flame_right = load_image(flame_right_directory)
+    self.flame_left = load_image(flame_left_directory)
+
+    self.scar_right = load_image(scar_h_right_directory)
+    self.scar_left = load_image(scar_h_left_directory)
+
+
 def draw_gun(gun):
     gun.deg = math.atan2(gun.p.my - gun.p.y, gun.p.mx - gun.p.x)
 
@@ -27,8 +35,8 @@ def draw_gun(gun):
 
 
 def draw_flame(gun):
-    if gun.flame_delay > 0:
-        gun.flame_delay -= 1
+    if gun.flame_display_time > 0:
+        gun.flame_display_time -= 1
         if gun.p.dir == 1:
             gun.flame_right.clip_composite_draw(0, 0, 100, 100, gun.deg, '',
                                                 gun.p.x + math.cos(gun.deg) * 150 + gun.p.shake_x,
@@ -41,16 +49,20 @@ def draw_flame(gun):
                                                100)
 
 
+def set_display_shake(gun):
+    gun.p.shake_timer = 30
+    gun.p.shake_range = 10
+    gun.p.shoot_shake = True
+
+
 def shoot_gun(gun):
     if gun.trigger:
-        if gun.shoot_delay == 0:
+        if gun.shoot_delay == 0:  # 딜레이는 총마다 다르며, 딜레이 수치가 낮을수록 연사 속도가 빠르다. 0이 될 때마다 발사된다.
             if GUN_NAME == 'SCAR_H':
-                gun.shoot = True
-                gun.flame_delay = 20
+                gun.shoot = True  # True일시 해당 값을 Target 클래스로 전달하여 Target 클래스의 recoil을 증가시킨다.
+                gun.flame_display_time = FLAME_DISPLAY_TIME
                 gun.shoot_delay = 60
-                gun.p.shake_timer = 30
-                gun.p.shake_range = 10
-                gun.p.shoot_shake = True
+                set_display_shake(gun)
         else:
             gun.shoot = False
             gun.shoot_delay -= 1
@@ -127,11 +139,7 @@ class StateMachineGun:
 
 class Gun:
     def __init__(self, p):
-        self.scar_right = load_image(scar_h_right_directory)
-        self.scar_left = load_image(scar_h_left_directory)
-        self.flame_right = load_image(flame_right_directory)
-        self.flame_left = load_image(flame_left_directory)
-
+        load_gun_image(self)
         self.p = p
 
         self.deg = 0  # 총 이미지 각도
@@ -140,7 +148,7 @@ class Gun:
         self.shoot = False
         self.shoot_delay = 0
 
-        self.flame_delay = 0
+        self.flame_display_time = 0
 
         self.state_machine = StateMachineGun(self)
         self.state_machine.start()

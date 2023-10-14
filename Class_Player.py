@@ -25,6 +25,11 @@ def left_up(e):
     return e[0] == 'INPUT' and e[1].type == SDL_KEYUP and e[1].key == SDLK_a
 
 
+def load_player_image(self):
+    self.image = load_image(commando_image_directory)
+    self.image_left = load_image(commando_left_image_directory)
+
+
 def draw_player(p):
     if p.dir == 1:
         p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.x + p.shake_x, p.y - p.land_y + p.shake_y, 400, 400)
@@ -152,8 +157,7 @@ class StateMachine:
 
 class Player:
     def __init__(self):
-        self.image = load_image(commando_image_directory)
-        self.image_left = load_image(commando_left_image_directory)
+        load_player_image(self)
 
         self.x, self.y, self.dir = WIDTH / 2, 250, 1
         self.mv_right, self.mv_left, self.mv_jump, self.land_shake = False, False, False, False  # 플레이어 이동, 점프

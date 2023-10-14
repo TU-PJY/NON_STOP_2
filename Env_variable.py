@@ -17,7 +17,8 @@ SCENE = ('intro', 'main', 'game')  # 씬 리스트. 각 씬마다 표시되는 �
 GAME_SCENE = SCENE[2]
 
 GUN_NAME = 'SCAR_H'  # 기본 SCAR_H
-RECOIL_REDUCE = 3  # 조준점 복구 속도
+RECOIL_REDUCE = 3  # 조준점 복구 지연 속도
+FLAME_DISPLAY_TIME = 20  # 총구 화염 출력 시간
 
 # 플레이어 이미지 파일 경로
 commando_image_directory = 'res//commando.png'
