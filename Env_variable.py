@@ -16,7 +16,6 @@ LAND_SHAKE_REDUCE = 0.5  # 맵이 눌린 뒤의 복구 속도
 SCENE = ('intro', 'main', 'game')  # 씬 리스트. 각 씬마다 표시되는 화면이 달라진다.
 GAME_SCENE = SCENE[2]
 
-GUN_NAME = 'SCAR_H'  # 기본 SCAR_H
 RECOIL_REDUCE = 3  # 조준점 복구 지연 속도
 FLAME_DISPLAY_TIME = 20  # 총구 화염 출력 시간
 
