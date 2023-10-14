@@ -35,7 +35,7 @@ def draw_player(p):
         p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.x + p.shake_x,
                                     p.y - p.land_y + p.shake_y + p.y_size * 40, 400, 400 + p.y_size * 100)
     elif p.dir == 0:
-        p.image_left.clip_composite_draw(0, 0, 128, 128 , p.rotate, 'h, v', p.x + p.shake_x,
+        p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.x + p.shake_x,
                                          p.y - p.land_y + p.shake_y + p.y_size * 40, 400, 400 + p.y_size * 100)
 
 
@@ -110,6 +110,7 @@ class Move:
     def exit(p, e):
         p.mv_right = False
         p.mv_left = False
+
         p.size_up = True
         p.size_deg = 0
         p.y_size = 0
