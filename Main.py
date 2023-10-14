@@ -15,10 +15,21 @@ def handle_events():
             running = False
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
+
         elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:  # 점프는 상태 상관없이 가능해야하므로 점프 기능은 이곳에 배치
             p.mv_jump = True
+
         elif event.type == SDL_MOUSEMOTION:
             p.mx, p.my = event.x, HEIGHT - 1 - event.y
+
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_q:  # 무기 교체
+            if gun.weapon_type == 0:
+                gun.weapon_type = 1
+                gun.flame_display_time = 0
+                return
+            elif gun.weapon_type == 1:
+                gun.weapon_type = 0
+
         else:
             p.handle_event(event)
             gun.handle_event(event)
@@ -59,6 +70,7 @@ open_canvas(WIDTH, HEIGHT)
 init_game()
 hide_cursor()
 hide_lattice()
+
 
 while running:
     clear_canvas()

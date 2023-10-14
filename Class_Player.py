@@ -32,9 +32,10 @@ def load_player_image(self):
 
 def draw_player(p):
     if p.dir == 1:
-        p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.x + p.shake_x, p.y - p.land_y + p.shake_y, 400, 400)
+        p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.x + p.shake_x, p.y - p.land_y + p.shake_y,
+                                    400, 400)
     elif p.dir == 0:
-        p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.x + p.shake_x, p.y - p.land_y + p.shake_y,
+        p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.x - p.shake_x, p.y - p.land_y + p.shake_y,
                                          400, 400)
 
 
@@ -178,6 +179,9 @@ class Player:
         self.shake_timer = 0
         self.shake_x, self.shake_y = 0, 0
         self.shake_range = 0
+
+        self.push_display = False
+        self.push_x = 0
 
     def update(self):
         self.state_machine.update()

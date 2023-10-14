@@ -41,3 +41,7 @@ scar_h_left_directory = 'res//SCAR_H_left.png'
 # 불꽃 이미지 파일 경로
 flame_right_directory = 'res//flame_right.png'
 flame_left_directory = 'res//flame_left.png'
+
+# 근접무기 이미지 경로
+knife_right_directory = 'res//knife_right.png'
+knife_left_directory = 'res//knife_left.png'
