@@ -36,8 +36,9 @@ def draw_gun(gun):
             if gun.p.dir == 1:
                 gun.scar_right.clip_composite_draw(0, 0, 150, 100, gun.deg, '', gun.p.x + gun.p.shake_x,
                                                    gun.p.y - 10 - gun.p.land_y + gun.p.shake_y, 170, 120)
+
             elif gun.p.dir == 0:
-                gun.scar_left.clip_composite_draw(0, 0, 150, 100, gun.deg, 'h, v', gun.p.x - gun.p.shake_x,
+                gun.scar_left.clip_composite_draw(0, 0, 150, 100, gun.deg, 'h, v', gun.p.x + gun.p.shake_x,
                                                   gun.p.y - 10 - gun.p.land_y + gun.p.shake_y, 170, 120)
 
 
@@ -79,11 +80,12 @@ def draw_melee(gun):
 
         if gun.melee == 'KNIFE':
             if gun.p.dir == 1:
-                gun.knife_right.clip_composite_draw(0, 0, 150, 100, gun.melee_deg, '', gun.p.x + 50 + gun.melee_x,
-                                                    gun.p.y - 10 - gun.p.land_y, 100, 50)
+                gun.knife_right.clip_composite_draw(0, 0, 150, 100, gun.melee_deg, '', gun.p.x + 50 + gun.melee_x +
+                                                    gun.p.shake_x, gun.p.y - 10 - gun.p.land_y + gun.p.shake_y, 100, 50)
+
             elif gun.p.dir == 0:
-                gun.knife_right.clip_composite_draw(0, 0, 150, 100, -gun.melee_deg, 'h', gun.p.x - 50 - gun.melee_x,
-                                                    gun.p.y - 10 - gun.p.land_y, 100, 50)
+                gun.knife_right.clip_composite_draw(0, 0, 150, 100, -gun.melee_deg, 'h', gun.p.x - 50 - gun.melee_x +
+                                                    gun.p.shake_x, gun.p.y - 10 - gun.p.land_y + gun.p.shake_y, 100, 50)
 
 
 def wield_melee(gun):
