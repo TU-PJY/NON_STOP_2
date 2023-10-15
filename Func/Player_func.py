@@ -25,20 +25,28 @@ def load_player_image(self):
     self.image_left = load_image(commando_left_image_directory)
 
 
-def draw_player(p):
-    if p.dir == 1:
-        p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.x + p.shake_x,
-                                    p.y - p.land_y + p.shake_y + p.size * 40, 400, 400 + p.size * 100)
-    elif p.dir == 0:
-        p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.x + p.shake_x,
-                                         p.y - p.land_y + p.shake_y + p.size * 40, 400, 400 + p.size * 100)
+def calculate_player_pos(p):
+    p.px = p.x + p.shake_x
+    p.py = p.y - p.land_y + p.shake_y + p.size * 40
+    p.py2 = p.y - p.land_y + p.shake_y  # 사이즈 변형 포함되지 않은 위치, 플레이어를 제외한 나머지 객체 위치에 사용
 
 
 def look_mouse(p):
-    if p.dir == 1:  # 마우스를 살짝 따라본다.
-        p.rotate = math.atan2((p.my - p.y), ((p.mx * 1.7) - p.x))
+    if p.look_mouse:
+        if p.dir == 1:  # 마우스를 살짝 따라본다.
+            p.rotate = math.atan2((p.my - p.y), ((p.mx * 1.7) - p.x))
+        elif p.dir == 0:
+            p.rotate = math.atan2((p.my - p.y), (p.mx - (p.x * 1.7)))
+
+
+def draw_player(p):
+    if p.dir == 1:
+        p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size*100)
     elif p.dir == 0:
-        p.rotate = math.atan2((p.my - p.y), (p.mx - (p.x * 1.7)))
+        if p.look_mouse:
+            p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size*100)
+        else:
+            p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size*100)
 
 
 def jump(p):

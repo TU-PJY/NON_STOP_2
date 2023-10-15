@@ -27,11 +27,13 @@ class Move:
     @staticmethod
     def do(p):
         p.dir = 1 if p.mx > p.x else 0
+        walk_animation(p)
         jump(p)
         look_mouse(p)
+        calculate_player_pos(p)
+
         shake_display(p)
         push_display(p)
-        walk_animation(p)
 
     @staticmethod
     def draw(p):
@@ -52,6 +54,8 @@ class Idle:
         p.dir = 1 if p.mx > p.x else 0
         jump(p)
         look_mouse(p)
+        calculate_player_pos(p)
+
         push_display(p)
         shake_display(p)
 
@@ -94,6 +98,7 @@ class Player:
 
         self.x, self.y, self.dir = WIDTH / 2, 250, 1
         self.mv_right, self.mv_left, self.mv_jump, self.land_shake = False, False, False, False  # 플레이어 이동, 점프
+        self.px, self.py, self.py2 = 0, 0, 0  # 디스플레이 효과를 모두 포함한 최종 좌표
 
         self.speed = 2  # 플레이어 이동 속도 (사실상 맵 움직이는 속도)
         self.mx, self.my = 0, 0  # 마우스 좌표
@@ -115,6 +120,8 @@ class Player:
         self.size = 0  # 걸을 때 플레이어 크기가 고무줄처럼 커졌다 작아진다.
         self.size_deg = 0
         self.size_up = True
+
+        self.look_mouse = True  # True일 시 플레이어는 마우스를 따라본다.
 
     def update(self):
         self.state_machine.update()

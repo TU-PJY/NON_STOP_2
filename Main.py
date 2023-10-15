@@ -24,10 +24,15 @@ def handle_events():
 
         elif event.type == SDL_KEYDOWN and event.key == SDLK_q:  # 무기 교체
             if weapon.weapon_type == 0:
+                p.look_mouse = False
+                p.rotate = 0
+
                 weapon.weapon_type = 1
                 weapon.flame_display_time = 0
                 return
+
             elif weapon.weapon_type == 1:
+                p.look_mouse = True
                 weapon.weapon_type = 0
 
         else:
