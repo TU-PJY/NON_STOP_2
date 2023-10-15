@@ -18,6 +18,7 @@ GAME_SCENE = SCENE[2]
 
 RECOIL_REDUCE = 3  # 조준점 복구 지연 속도
 FLAME_DISPLAY_TIME = 20  # 총구 화염 출력 시간
+TARGET_DOT_DISPLAY_TIME = 15
 
 # 플레이어 이미지 파일 경로
 commando_image_directory = 'res//commando.png'
@@ -33,6 +34,7 @@ target_up_directory = 'res//target_up.png'
 target_down_directory = 'res//target_down.png'
 target_right_directory = 'res//target_right.png'
 target_left_directory = 'res//target_left.png'
+target_dot_directory = 'res//target_dot.png'
 
 # 총 이미지 파일 경로 
 scar_h_right_directory = 'res//SCAR_H_right.png'

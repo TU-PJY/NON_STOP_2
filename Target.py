@@ -14,8 +14,8 @@ class Update:
 
     @staticmethod
     def do(target):
-        cal_dis(target)
-        update_recoil(target)
+        make_target_point(target)
+        update_target(target)
 
     @staticmethod
     def draw(target):
@@ -56,6 +56,9 @@ class Target:
         self.weapon = weapon
         self.dis, self.recoil = 0, 0
         self.reduce_delay = 0
+
+        self.tx, self.ty = 0, 0  # 조준점 범위 내에서 랜점으로 생성되는 좌표
+        self.target_dot_display_time = 0
 
         self.state_machine = StateMachineTarget(self)
         self.state_machine.start()

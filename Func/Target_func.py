@@ -2,6 +2,7 @@
 from pico2d import *
 from Env_variable import *
 import math
+import random
 
 
 def load_target(self):
@@ -9,6 +10,7 @@ def load_target(self):
     self.target_down = load_image(target_down_directory)
     self.target_right = load_image(target_right_directory)
     self.target_left = load_image(target_left_directory)
+    self.target_dot = load_image(target_dot_directory)
 
 
 def draw_target(target):
@@ -16,18 +18,14 @@ def draw_target(target):
     target.target_down.draw(target.p.mx, target.p.my - target.recoil - target.dis, 60, 60)
     target.target_right.draw(target.p.mx + target.recoil + target.dis, target.p.my, 60, 60)
     target.target_left.draw(target.p.mx - target.recoil - target.dis, target.p.my, 60, 60)
+    if target.target_dot_display_time > 0:
+        target.target_dot.draw(target.tx, target.ty, 30, 30)
 
 
-def cal_dis(target):
-    if target.weapon.name == 'SCAR_H':  # 분산도 계산 파트, 나누는 숫자가 작을수록 분산도가 크다.
+def update_target(target):
+    if target.weapon.name == 'SCAR_H':
         target.dis = 35 + math.sqrt((target.p.mx - WIDTH / 2) ** 2 + (target.p.y - target.p.my) ** 2) / 20
-    if target.dis < 0:
-        target.dis = 0
-
-
-def update_recoil(target):
-    if target.weapon.shoot:  # 총 추가시 여기에 추가
-        if target.weapon.name == 'SCAR_H':
+        if target.weapon.shoot:
             target.recoil += 20
 
     if target.recoil > 0:
@@ -36,3 +34,18 @@ def update_recoil(target):
             target.reduce_delay = RECOIL_REDUCE
         else:
             target.reduce_delay -= 1
+
+    if target.dis < 0:
+        target.dis = 0
+
+    if target.target_dot_display_time > 0:
+        target.target_dot_display_time -= 1
+
+
+def make_target_point(target):  # 이 함수에서 생성되는 좌표로 적 피격을 판정한다.
+    if target.weapon.shoot:
+        target.target_dot_display_time = TARGET_DOT_DISPLAY_TIME
+        target.tx = random.randint(target.p.mx - target.recoil - int(target.dis) + 30,
+                                   target.p.mx + target.recoil + int(target.dis) - 30)
+        target.ty = random.randint(target.p.my - target.recoil - int(target.dis) + 30,
+                                   target.p.my + target.recoil + int(target.dis) - 30)
