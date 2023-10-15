@@ -36,7 +36,6 @@ def draw_gun(gun):
             if gun.p.dir == 1:
                 gun.scar_right.clip_composite_draw(0, 0, 150, 100, gun.deg, '', gun.p.x + gun.p.shake_x,
                                                    gun.p.y - 10 - gun.p.land_y + gun.p.shake_y, 170, 120)
-
             elif gun.p.dir == 0:
                 gun.scar_left.clip_composite_draw(0, 0, 150, 100, gun.deg, 'h, v', gun.p.x + gun.p.shake_x,
                                                   gun.p.y - 10 - gun.p.land_y + gun.p.shake_y, 170, 120)
@@ -48,13 +47,13 @@ def draw_flame(gun):
         if gun.p.dir == 1:
             gun.flame_right.clip_composite_draw(0, 0, 100, 100, gun.deg, '',
                                                 gun.p.x + math.cos(gun.deg) * 150 + gun.p.shake_x,
-                                                gun.p.y + math.sin(gun.deg) * 150 - gun.p.land_y + gun.p.shake_y, 100,
-                                                100)
+                                                gun.p.y + math.sin(gun.deg) * 150 - gun.p.land_y + gun.p.shake_y,
+                                                100, 100)
         elif gun.p.dir == 0:
             gun.flame_left.clip_composite_draw(0, 0, 100, 100, gun.deg, 'h, v',
                                                gun.p.x + math.cos(gun.deg) * 150 + gun.p.shake_x,
-                                               gun.p.y + math.sin(gun.deg) * 150 - gun.p.land_y + gun.p.shake_y, 100,
-                                               100)
+                                               gun.p.y + math.sin(gun.deg) * 150 - gun.p.land_y + gun.p.shake_y,
+                                               100, 100)
 
 
 def shoot_gun(gun):
@@ -73,19 +72,21 @@ def shoot_gun(gun):
 
 def draw_melee(gun):
     if gun.weapon_type == 1:
-        if gun.melee_x > 0:
-            gun.melee_x -= 2
-        else:
+        if gun.melee_x == 0:
             gun.melee_deg = 170
 
         if gun.melee == 'KNIFE':
             if gun.p.dir == 1:
                 gun.knife_right.clip_composite_draw(0, 0, 150, 100, gun.melee_deg, '', gun.p.x + 50 + gun.melee_x +
                                                     gun.p.shake_x, gun.p.y - 10 - gun.p.land_y + gun.p.shake_y, 100, 50)
-
             elif gun.p.dir == 0:
                 gun.knife_right.clip_composite_draw(0, 0, 150, 100, -gun.melee_deg, 'h', gun.p.x - 50 - gun.melee_x +
                                                     gun.p.shake_x, gun.p.y - 10 - gun.p.land_y + gun.p.shake_y, 100, 50)
+
+
+def update_melee_position(gun):
+    if gun.melee_x > 0:
+        gun.melee_x -= 2
 
 
 def wield_melee(gun):
@@ -98,7 +99,7 @@ def wield_melee(gun):
                 gun.melee_x = 100
                 gun.melee_deg = 0
                 gun.wield_delay = 200
-                gun.p.shake_timer = 60
+                gun.p.shake_timer = 30
                 gun.p.shake_range = 10
         else:
             gun.weild = False
@@ -122,7 +123,6 @@ class Shoot:
 
     @staticmethod
     def exit(gun, e):
-        gun.melee_x = 0
         gun.trigger = False
         gun.shoot = False
         gun.use = False
@@ -138,6 +138,7 @@ class Shoot:
         draw_gun(gun)
         draw_melee(gun)
         draw_flame(gun)
+        update_melee_position(gun)
 
 
 class Idle:
@@ -152,6 +153,7 @@ class Idle:
     @staticmethod
     def do(gun):
         update_delay(gun)
+        update_melee_position(gun)
 
     @staticmethod
     def draw(gun):
