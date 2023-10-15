@@ -1,5 +1,4 @@
-from pico2d import load_image
-from Env_variable import *
+from Func.Map_func import *
 
 
 # Player move -> Map class
@@ -7,25 +6,15 @@ from Env_variable import *
 
 class Land:  # 땅
     def __init__(self, p):
-        self.image = load_image(land_image_directory)
+        load_land(self)
         self.x, self.y = WIDTH / 2, -50
         self.p = p
 
     def draw(self):
-        self.image.draw(self.x + self.p.shake_x, self.y - self.p.land_y + self.p.shake_y, 4096, 512)
+        draw_land(self)
 
     def update(self):  # 이 함수에서 땅 끝과 플레이어 좌표가 일치하면 모든 맵 클래스의 스크롤이 멈춘다.
-        if self.p.mv_right:
-            self.x -= self.p.speed
-            if self.x + 2048 <= WIDTH / 2:
-                self.p.mv_right = False
-                self.x += self.p.speed
-
-        elif self.p.mv_left:
-            self.x += self.p.speed
-            if self.x - 2048 >= WIDTH / 2:
-                self.p.mv_left = False
-                self.x -= self.p.speed
+        update_land(self)
 
     def handle_event(self, event):
         pass
@@ -33,24 +22,17 @@ class Land:  # 땅
 
 class Wall:  # 벽
     def __init__(self, p):
-        self.image = load_image(wall_image_directory)
+        load_wall(self)
         self.p = p
         self.x2 = WIDTH / 2 + 2048 + 640
         self.x1 = WIDTH / 2 - 2048 - 640
         self.y = HEIGHT / 2
 
     def draw(self):
-        self.image.draw(self.x1 + self.p.shake_x, self.y - self.p.land_y + self.p.shake_y, 1280, 1920)
-        self.image.draw(self.x2 + self.p.shake_x, self.y - self.p.land_y + self.p.shake_y, 1280, 1920)
+       draw_wall(self)
 
     def update(self):
-        if self.p.mv_right:
-            self.x1 -= self.p.speed
-            self.x2 -= self.p.speed
-
-        elif self.p.mv_left:
-            self.x1 += self.p.speed
-            self.x2 += self.p.speed
+        update_wall(self)
 
     def handle_event(self, event):
         pass
@@ -58,19 +40,15 @@ class Wall:  # 벽
 
 class BackGround:  # 배경
     def __init__(self, p):
-        self.image = load_image(bg_image_directory)
+        load_background(self)
         self.x, self.y = WIDTH / 2, HEIGHT / 2 - 25
         self.p = p
 
     def draw(self):
-        self.image.draw(self.x + self.p.shake_x, self.y - self.p.land_y + self.p.shake_y, 4096, 1100)
+        draw_background(self)
 
     def update(self):
-        if self.p.mv_right:
-            self.x -= self.p.speed / 4
-
-        elif self.p.mv_left:
-            self.x += self.p.speed / 4
+        update_background(self)
 
     def handle_event(self, event):
         pass

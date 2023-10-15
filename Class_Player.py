@@ -1,4 +1,3 @@
-from Class_Map import *
 from Func.Display_func import *
 from Func.Player_func import *
 

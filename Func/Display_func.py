@@ -4,7 +4,7 @@ import random
 
 
 def push_display(p):
-    if p.land_shake:  # 땅 흔들림 활성화 시 화면 전체가 흔들린다.
+    if p.land_shake:
         if p.land_y > 0:
             p.land_y -= LAND_SHAKE_REDUCE
         else:
