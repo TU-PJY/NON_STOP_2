@@ -2,7 +2,7 @@ from pico2d import *
 from Env_variable import *
 from Class_Player import Player
 from Class_Map import Land, BackGround, Wall
-from Class_Gun import Gun
+from Class_Weapon import Gun
 from Class_Target import Target
 
 
