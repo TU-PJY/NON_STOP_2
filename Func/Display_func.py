@@ -13,10 +13,10 @@ def push_display(p):
 
 def shake_display(p):
     if p.shoot_shake:
-        if p.shake_timer > 0:
+        if p.shake_time > 0:
             p.shake_x = random.randint(-p.shake_range, p.shake_range)
             p.shake_y = random.randint(-p.shake_range, p.shake_range)
-            p.shake_timer -= 1
+            p.shake_time -= 1
         else:
             p.shake_x = 0
             p.shake_y = 0

@@ -19,15 +19,15 @@ def draw_target(target):
 
 
 def cal_dis(target):
-    if target.gun.name == 'SCAR_H':  # 분산도 계산 파트, 나누는 숫자가 작을수록 분산도가 크다.
+    if target.weapon.name == 'SCAR_H':  # 분산도 계산 파트, 나누는 숫자가 작을수록 분산도가 크다.
         target.dis = 35 + math.sqrt((target.p.mx - WIDTH / 2) ** 2 + (target.p.y - target.p.my) ** 2) / 20
     if target.dis < 0:
         target.dis = 0
 
 
 def update_recoil(target):
-    if target.gun.shoot:  # 총 추가시 여기에 추가
-        if target.gun.name == 'SCAR_H':
+    if target.weapon.shoot:  # 총 추가시 여기에 추가
+        if target.weapon.name == 'SCAR_H':
             target.recoil += 20
 
     if target.recoil > 0:

@@ -25,85 +25,91 @@ def load_melee_image(self):
     self.knife_left = load_image(knife_left_directory)
 
 
-def draw_gun(gun):
-    if gun.weapon_type == 0:
-        gun.deg = math.atan2(gun.p.my - gun.p.y, gun.p.mx - gun.p.x)
+def draw_gun(weapon):
+    if weapon.weapon_type == 0:
+        weapon.deg = math.atan2(weapon.p.my - weapon.p.y, weapon.p.mx - weapon.p.x)
 
-        if gun.name == 'SCAR_H':  # GUN_NAME에 따라 사용하는 총기가 달라진다.
-            if gun.p.dir == 1:
-                gun.scar_right.clip_composite_draw(0, 0, 150, 100, gun.deg, '', gun.p.x + gun.p.shake_x,
-                                                   gun.p.y - 10 - gun.p.land_y + gun.p.shake_y, 170, 120)
-            elif gun.p.dir == 0:
-                gun.scar_left.clip_composite_draw(0, 0, 150, 100, gun.deg, 'h, v', gun.p.x + gun.p.shake_x,
-                                                  gun.p.y - 10 - gun.p.land_y + gun.p.shake_y, 170, 120)
-
-
-def draw_flame(gun):
-    if gun.flame_display_time > 0 and gun.weapon_type == 0:
-        gun.flame_display_time -= 1
-        if gun.p.dir == 1:
-            gun.flame_right.clip_composite_draw(0, 0, 100, 100, gun.deg, '',
-                                                gun.p.x + math.cos(gun.deg) * 150 + gun.p.shake_x,
-                                                gun.p.y + math.sin(gun.deg) * 150 - gun.p.land_y + gun.p.shake_y,
-                                                100, 100)
-        elif gun.p.dir == 0:
-            gun.flame_left.clip_composite_draw(0, 0, 100, 100, gun.deg, 'h, v',
-                                               gun.p.x + math.cos(gun.deg) * 150 + gun.p.shake_x,
-                                               gun.p.y + math.sin(gun.deg) * 150 - gun.p.land_y + gun.p.shake_y,
-                                               100, 100)
+        if weapon.name == 'SCAR_H':  # GUN_NAME에 따라 사용하는 총기가 달라진다.
+            if weapon.p.dir == 1:
+                weapon.scar_right.clip_composite_draw(0, 0, 150, 100, weapon.deg, '', weapon.p.x + weapon.p.shake_x,
+                                                      weapon.p.y - 10 - weapon.p.land_y + weapon.p.shake_y, 170, 120)
+            elif weapon.p.dir == 0:
+                weapon.scar_left.clip_composite_draw(0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.x + weapon.p.shake_x,
+                                                     weapon.p.y - 10 - weapon.p.land_y + weapon.p.shake_y, 170, 120)
 
 
-def draw_melee(gun):
-    if gun.weapon_type == 1:
-        if gun.melee_x == 0:
-            gun.melee_deg = 170
+def draw_flame(weapon):
+    if weapon.flame_display_time > 0 and weapon.weapon_type == 0:
+        weapon.flame_display_time -= 1
+        if weapon.p.dir == 1:
+            weapon.flame_right.clip_composite_draw(0, 0, 100, 100, weapon.deg, '',
+                                                   weapon.p.x + math.cos(weapon.deg) * 150 + weapon.p.shake_x,
+                                                   weapon.p.y + math.sin(
+                                                       weapon.deg) * 150 - weapon.p.land_y + weapon.p.shake_y,
+                                                   100, 100)
+        elif weapon.p.dir == 0:
+            weapon.flame_left.clip_composite_draw(0, 0, 100, 100, weapon.deg, 'h, v',
+                                                  weapon.p.x + math.cos(weapon.deg) * 150 + weapon.p.shake_x,
+                                                  weapon.p.y + math.sin(
+                                                      weapon.deg) * 150 - weapon.p.land_y + weapon.p.shake_y,
+                                                  100, 100)
 
-        if gun.melee == 'KNIFE':
-            if gun.p.dir == 1:
-                gun.knife_right.clip_composite_draw(0, 0, 150, 100, gun.melee_deg, '', gun.p.x + 50 + gun.melee_x +
-                                                    gun.p.shake_x, gun.p.y - 10 - gun.p.land_y + gun.p.shake_y, 100, 50)
-            elif gun.p.dir == 0:
-                gun.knife_right.clip_composite_draw(0, 0, 150, 100, -gun.melee_deg, 'h', gun.p.x - 50 - gun.melee_x +
-                                                    gun.p.shake_x, gun.p.y - 10 - gun.p.land_y + gun.p.shake_y, 100, 50)
+
+def draw_melee(weapon):
+    if weapon.weapon_type == 1:
+        if weapon.melee_x == 0:
+            weapon.melee_deg = 170
+
+        if weapon.melee == 'KNIFE':
+            if weapon.p.dir == 1:
+                weapon.knife_right.clip_composite_draw(0, 0, 150, 100, weapon.melee_deg, '',
+                                                       weapon.p.x + 50 + weapon.melee_x +
+                                                       weapon.p.shake_x,
+                                                       weapon.p.y - 10 - weapon.p.land_y + weapon.p.shake_y, 100, 50)
+            elif weapon.p.dir == 0:
+                weapon.knife_right.clip_composite_draw(0, 0, 150, 100, -weapon.melee_deg, 'h',
+                                                       weapon.p.x - 50 - weapon.melee_x +
+                                                       weapon.p.shake_x,
+                                                       weapon.p.y - 10 - weapon.p.land_y + weapon.p.shake_y, 100, 50)
 
 
-def shoot_gun(gun):
-    if gun.trigger and gun.weapon_type == 0:
-        if gun.shoot_delay == 0:  # 딜레이는 총마다 다르며, 딜레이 수치가 낮을수록 연사 속도가 빠르다. 0이 될 때마다 발사된다.
-            gun.shoot = True  # True일시 해당 값을 Target 클래스로 전달하여 Target 클래스의 recoil을 증가시킨다.
-            gun.p.shoot_shake = True
-            if gun.name == 'SCAR_H':
-                gun.flame_display_time = FLAME_DISPLAY_TIME
-                gun.shoot_delay = 60
-                gun.p.shake_timer = 30
-                gun.p.shake_range = 10
+def shoot_gun(weapon):
+    if weapon.trigger and weapon.weapon_type == 0:
+        if weapon.shoot_delay == 0:  # 딜레이는 총마다 다르며, 딜레이 수치가 낮을수록 연사 속도가 빠르다. 0이 될 때마다 발사된다.
+            weapon.shoot = True  # True일시 해당 값을 Target 클래스로 전달하여 Target 클래스의 recoil을 증가시킨다.
+            weapon.p.shoot_shake = True
+            if weapon.name == 'SCAR_H':
+                weapon.flame_display_time = FLAME_DISPLAY_TIME
+                weapon.shoot_delay = 60
+                weapon.p.shake_time = 30
+                weapon.p.shake_range = 10
         else:
-            gun.shoot = False
+            weapon.shoot = False
 
 
-def wield_melee(gun):
-    if gun.use and gun.weapon_type == 1:
-        if gun.wield_delay == 0:
-            gun.wield = True
-            gun.p.shoot_shake = True
+def wield_melee(weapon):
+    if weapon.use and weapon.weapon_type == 1:
+        if weapon.wield_delay == 0:
+            weapon.wield = True
+            weapon.p.shoot_shake = True
 
-            if gun.melee == 'KNIFE':
-                gun.melee_x = 100
-                gun.melee_deg = 0
-                gun.wield_delay = 200
-                gun.p.shake_timer = 30
-                gun.p.shake_range = 10
+            if weapon.melee == 'KNIFE':
+                weapon.melee_x = 100
+                weapon.melee_deg = 0
+                weapon.wield_delay = 200
+                weapon.p.shake_time = 30
+                weapon.p.shake_range = 10
         else:
-            gun.weild = False
+            weapon.weild = False
 
 
-def update_melee_position(gun):
-    if gun.melee_x > 0:
-        gun.melee_x -= 2
+def update_melee_position(weapon):
+    if weapon.melee_x > 0:
+        weapon.melee_x -= 2
 
 
-def update_delay(gun):
-    if gun.shoot_delay > 0:
-        gun.shoot_delay -= 1
-    if gun.wield_delay > 0:
-        gun.wield_delay -= 1
+def update_delay(weapon):
+    if weapon.shoot_delay > 0:
+        weapon.shoot_delay -= 1
+    if weapon.wield_delay > 0:
+        weapon.wield_delay -= 1

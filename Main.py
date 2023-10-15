@@ -7,7 +7,7 @@ from Target import Target
 
 
 def handle_events():
-    global running, p, gun, target
+    global running, p, weapon, target
 
     events = get_events()
     for event in events:
@@ -23,20 +23,20 @@ def handle_events():
             p.mx, p.my = event.x, HEIGHT - 1 - event.y
 
         elif event.type == SDL_KEYDOWN and event.key == SDLK_q:  # 무기 교체
-            if gun.weapon_type == 0:
-                gun.weapon_type = 1
-                gun.flame_display_time = 0
+            if weapon.weapon_type == 0:
+                weapon.weapon_type = 1
+                weapon.flame_display_time = 0
                 return
-            elif gun.weapon_type == 1:
-                gun.weapon_type = 0
+            elif weapon.weapon_type == 1:
+                weapon.weapon_type = 0
 
         else:
             p.handle_event(event)
-            gun.handle_event(event)
+            weapon.handle_event(event)
 
 
 def init_game():
-    global running, game, p, land, bg, wall, gun, target
+    global running, game, p, land, bg, wall, weapon, target
 
     running = True
     game = []
@@ -45,12 +45,12 @@ def init_game():
     land = Land(p)
     wall = Wall(p)
     bg = BackGround(p)
-    gun = Weapon(p)
-    target = Target(p, gun)
+    weapon = Weapon(p)
+    target = Target(p, weapon)
 
     game.append(bg)
     game.append(p)
-    game.append(gun)
+    game.append(weapon)
     game.append(land)
     game.append(wall)
     game.append(target)

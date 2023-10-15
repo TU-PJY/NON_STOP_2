@@ -2,62 +2,61 @@ from Func.Weapon_func import *
 
 
 # Player location -> Gun class
-# 이름은 Class_Gun 이지만 근접무기도 여기서 처리한다.
 
 
 class Shoot:
     @staticmethod
-    def enter(gun, e):
+    def enter(weapon, e):
         if l_down(e):
-            if gun.weapon_type == 0:
-                gun.trigger = True
-            elif gun.weapon_type == 1:
-                gun.use = True
+            if weapon.weapon_type == 0:
+                weapon.trigger = True
+            elif weapon.weapon_type == 1:
+                weapon.use = True
 
     @staticmethod
-    def exit(gun, e):
-        gun.trigger = False
-        gun.shoot = False
-        gun.use = False
+    def exit(weapon, e):
+        weapon.trigger = False
+        weapon.shoot = False
+        weapon.use = False
 
     @staticmethod
-    def do(gun):
-        update_delay(gun)
-        shoot_gun(gun)
-        wield_melee(gun)
+    def do(weapon):
+        update_delay(weapon)
+        shoot_gun(weapon)
+        wield_melee(weapon)
 
     @staticmethod
-    def draw(gun):
-        draw_gun(gun)
-        draw_melee(gun)
-        draw_flame(gun)
-        update_melee_position(gun)
+    def draw(weapon):
+        draw_gun(weapon)
+        draw_melee(weapon)
+        draw_flame(weapon)
+        update_melee_position(weapon)
 
 
 class Idle:
     @staticmethod
-    def enter(gun, e):
+    def enter(weapon, e):
         pass
 
     @staticmethod
-    def exit(gun, e):
+    def exit(weapon, e):
         pass
 
     @staticmethod
-    def do(gun):
-        update_delay(gun)
-        update_melee_position(gun)
+    def do(weapon):
+        update_delay(weapon)
+        update_melee_position(weapon)
 
     @staticmethod
-    def draw(gun):
-        draw_gun(gun)
-        draw_melee(gun)
-        draw_flame(gun)
+    def draw(weapon):
+        draw_gun(weapon)
+        draw_melee(weapon)
+        draw_flame(weapon)
 
 
 class StateMachineGun:
-    def __init__(self, gun):
-        self.gun = gun
+    def __init__(self, weapon):
+        self.weapon = weapon
         self.cur_state = Idle
         self.table = {
             Idle: {l_down: Shoot},
@@ -65,22 +64,22 @@ class StateMachineGun:
         }
 
     def start(self):
-        self.cur_state.enter(self.gun, ('NONE', 0))
+        self.cur_state.enter(self.weapon, ('NONE', 0))
 
     def update(self):
-        self.cur_state.do(self.gun)
+        self.cur_state.do(self.weapon)
 
     def handle_event(self, e):  # state event handling
         for check_event, next_state in self.table[self.cur_state].items():
             if check_event(e):
-                self.cur_state.exit(self.gun, e)
+                self.cur_state.exit(self.weapon, e)
                 self.cur_state = next_state
-                self.cur_state.enter(self.gun, e)
+                self.cur_state.enter(self.weapon, e)
                 return True
         return False
 
     def draw(self):
-        self.cur_state.draw(self.gun)
+        self.cur_state.draw(self.weapon)
 
 
 class Weapon:
@@ -93,9 +92,9 @@ class Weapon:
         self.name = 'SCAR_H'
         self.deg = 0  # 총 이미지 각도
 
-        self.trigger = False
-        self.shoot = False
-        self.shoot_delay = 0
+        self.trigger = False  # 마우스 좌클릭 시 True
+        self.shoot = False  # True일시 격발
+        self.shoot_delay = 0  # 0이 될때마다 self.shoot == True
 
         self.flame_display_time = 0
 

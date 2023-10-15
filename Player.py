@@ -22,7 +22,7 @@ class Move:
 
         p.size_up = True
         p.size_deg = 0
-        p.y_size = 0
+        p.size = 0
 
     @staticmethod
     def do(p):
@@ -108,11 +108,11 @@ class Player:
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
 
         self.shoot_shake = False
-        self.shake_timer = 0
+        self.shake_time = 0
         self.shake_x, self.shake_y = 0, 0
         self.shake_range = 0
 
-        self.y_size = 0  # 걸을 때 플레이어 크기가 고무줄처럼 커졌다 작아진다.
+        self.size = 0  # 걸을 때 플레이어 크기가 고무줄처럼 커졌다 작아진다.
         self.size_deg = 0
         self.size_up = True
 

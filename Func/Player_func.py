@@ -28,10 +28,10 @@ def load_player_image(self):
 def draw_player(p):
     if p.dir == 1:
         p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.x + p.shake_x,
-                                    p.y - p.land_y + p.shake_y + p.y_size * 40, 400, 400 + p.y_size * 100)
+                                    p.y - p.land_y + p.shake_y + p.size * 40, 400, 400 + p.size * 100)
     elif p.dir == 0:
         p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.x + p.shake_x,
-                                         p.y - p.land_y + p.shake_y + p.y_size * 40, 400, 400 + p.y_size * 100)
+                                         p.y - p.land_y + p.shake_y + p.size * 40, 400, 400 + p.size * 100)
 
 
 def look_mouse(p):
@@ -72,4 +72,4 @@ def walk_animation(p):
         if p.size_deg <= 0:
             p.size_deg = 0
             p.size_up = True
-    p.y_size = math.sin(p.size_deg)
+    p.size = math.sin(p.size_deg)
