@@ -83,7 +83,7 @@ class StateMachineGun:
         self.cur_state.draw(self.gun)
 
 
-class Gun:
+class Weapon:
     def __init__(self, p):
         load_gun_image(self)
         load_melee_image(self)

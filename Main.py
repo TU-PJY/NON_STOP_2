@@ -1,9 +1,9 @@
 from pico2d import *
 from Env_variable import *
-from Class_Player import Player
-from Class_Map import Land, BackGround, Wall
-from Class_Weapon import Gun
-from Class_Target import Target
+from Player import Player
+from Map import Land, BackGround, Wall
+from Weapon import Weapon
+from Target import Target
 
 
 def handle_events():
@@ -45,7 +45,7 @@ def init_game():
     land = Land(p)
     wall = Wall(p)
     bg = BackGround(p)
-    gun = Gun(p)
+    gun = Weapon(p)
     target = Target(p, gun)
 
     game.append(bg)
