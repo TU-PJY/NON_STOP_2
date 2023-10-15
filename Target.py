@@ -55,6 +55,7 @@ class Target:
         self.p = p
         self.weapon = weapon
         self.dis, self.recoil = 0, 0
+        self.dis2 = 0
         self.reduce_delay = 0
 
         self.tx, self.ty = 0, 0  # 조준점 범위 내에서 랜점으로 생성되는 좌표

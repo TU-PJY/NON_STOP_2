@@ -19,9 +19,6 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:  # 점프는 상태 상관없이 가능해야하므로 점프 기능은 이곳에 배치
             p.mv_jump = True
 
-        elif event.type == SDL_MOUSEMOTION:
-            p.mx, p.my = event.x, HEIGHT - 1 - event.y
-
         elif event.type == SDL_KEYDOWN and event.key == SDLK_q:  # 무기 교체
             if weapon.weapon_type == 0:
                 p.look_mouse = False   # 플레이어는 더 이상 마우스를 따라보지 않는다.
@@ -29,10 +26,12 @@ def handle_events():
                 weapon.weapon_type = 1
                 weapon.flame_display_time = 0
                 return
-
             else:
                 p.look_mouse = True
                 weapon.weapon_type = 0
+                
+        elif event.type == SDL_MOUSEMOTION:
+            p.mx, p.my = event.x, HEIGHT - 1 - event.y
 
         else:
             p.handle_event(event)
