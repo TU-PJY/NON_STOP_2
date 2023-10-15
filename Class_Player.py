@@ -1,12 +1,14 @@
 from pico2d import *
 from Env_variable import *
 from Class_Map import *
+from Display_effects import push_display, shake_display
 import math
 import random
 
 
 # 실시간으로 총이 마우스 좌표를 향해야 하므로 Class_Player가 마우스 좌표를 받아 Class_Gun으로 전달한다.
 # 플레이어 이동 시 맵 자체가 움직이는 방식이기 때문에 컨트롤러의 키 누름 여부와 현재 플레이어 좌표를 Class_Map으로 전달한다.
+# 화면 효과는 전적으로 Player 클래스에서 구동된다.
 
 
 def right_down(e):
@@ -46,7 +48,7 @@ def look_mouse(p):
         p.rotate = math.atan2((p.my - p.y), (p.mx - (p.x * 1.7)))
 
 
-def jump_and_land(p):
+def jump(p):
     if p.mv_jump:  # 점프 시
         p.y += p.jump_acc
 
@@ -57,29 +59,11 @@ def jump_and_land(p):
             p.acc_delay = 0
 
         if p.jump_acc == -(JUMP_ACC + 1):  # 점프 후 착지하면
-            p.land_shake = True  # 땅에 착지 시 화면 흔들림이 활성화 된다
-            p.mv_jump = False  # 점프가 가능해진다
-            p.land_y = LAND_SHAKE  # LAND_SHAKE 만큼 화면이 눌린다
             p.jump_acc = JUMP_ACC  # 점프 가속도 초기화
             p.acc_delay = 0  # 점프 가속도 변화 딜레이 초기화
-
-    if p.land_shake:  # 땅 흔들림 활성화 시 화면 전체가 흔들린다.
-        if p.land_y > 0:
-            p.land_y -= LAND_SHAKE_REDUCE
-        else:
-            p.land_shake = False
-
-
-def shake_display(p):
-    if p.shoot_shake:
-        if p.shake_timer > 0:
-            p.shake_x = random.randint(-p.shake_range, p.shake_range)
-            p.shake_y = random.randint(-p.shake_range, p.shake_range)
-            p.shake_timer -= 1
-        else:
-            p.shake_x = 0
-            p.shake_y = 0
-            p.shoot_shake = False
+            p.mv_jump = False  # 점프가 가능해진다
+            p.land_shake = True  # 땅에 착지 시 화면 흔들림이 활성화 된다
+            p.land_y = LAND_SHAKE  # LAND_SHAKE 만큼 화면이 눌린다
 
 
 def walk_animation(p):
@@ -118,9 +102,10 @@ class Move:
     @staticmethod
     def do(p):
         p.dir = 1 if p.mx > p.x else 0
-        jump_and_land(p)
+        jump(p)
         look_mouse(p)
         shake_display(p)
+        push_display(p)
         walk_animation(p)
 
     @staticmethod
@@ -140,8 +125,9 @@ class Idle:
     @staticmethod
     def do(p):
         p.dir = 1 if p.mx > p.x else 0
-        jump_and_land(p)
+        jump(p)
         look_mouse(p)
+        push_display(p)
         shake_display(p)
 
     @staticmethod
