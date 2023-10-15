@@ -1,4 +1,4 @@
-from Weapon_func import *
+from Func.Weapon_func import *
 
 
 # Player location -> Gun class

@@ -1,6 +1,6 @@
 from Class_Map import *
-from Display_func import *
-from Player_func import *
+from Func.Display_func import *
+from Func.Player_func import *
 
 
 # 실시간으로 총이 마우스 좌표를 향해야 하므로 Class_Player가 마우스 좌표를 받아 Class_Gun으로 전달한다.

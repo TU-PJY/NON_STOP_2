@@ -1,3 +1,4 @@
+# 플레이어 관련 함수 모음
 from pico2d import *
 from Env_variable import *
 import math
