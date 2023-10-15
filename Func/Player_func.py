@@ -53,18 +53,18 @@ def jump(p):
     if p.mv_jump:  # 점프 시
         p.y += p.jump_acc
 
+        if p.y <= 250:  # 점프 후 착지하면
+            p.y = 250
+            p.jump_acc = JUMP_ACC  # 점프 가속도 초기화
+            p.acc_delay = 0  # 점프 가속도 변화 딜레이 초기화
+            p.mv_jump = False  # 점프가 가능해진다
+            p.land_y = LAND_SHAKE  # LAND_SHAKE 만큼 화면이 눌린다
+
         if p.acc_delay < ACC_DELAY:  # 빠른 딜레이로 인해 가속도 변화에 딜레이를 줘야 제대로 된 점프 애니메이션이 나온다.
             p.acc_delay += 1
         else:
             p.jump_acc -= 1
             p.acc_delay = 0
-
-        if p.jump_acc == -(JUMP_ACC + 1):  # 점프 후 착지하면
-            p.jump_acc = JUMP_ACC  # 점프 가속도 초기화
-            p.acc_delay = 0  # 점프 가속도 변화 딜레이 초기화
-            p.mv_jump = False  # 점프가 가능해진다
-            p.land_shake = True  # 땅에 착지 시 화면 흔들림이 활성화 된다
-            p.land_y = LAND_SHAKE  # LAND_SHAKE 만큼 화면이 눌린다
 
 
 def walk_animation(p):

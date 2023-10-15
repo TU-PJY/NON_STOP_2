@@ -26,7 +26,7 @@ def update_target(target):
     if target.weapon.name == 'SCAR_H':
         target.dis = 35 + math.sqrt((target.p.mx - WIDTH / 2) ** 2 + (target.p.y - target.p.my) ** 2) / 20
         if target.weapon.shoot:
-            target.recoil += 20
+            target.recoil += 18
 
     if target.recoil > 0:
         if target.reduce_delay == 0:
@@ -36,7 +36,7 @@ def update_target(target):
             target.reduce_delay -= 1
 
     if target.dis < 0:
-        target.dis = 0
+        target.dis = 1
 
     if target.target_dot_display_time > 0:
         target.target_dot_display_time -= 1
@@ -45,7 +45,7 @@ def update_target(target):
 def make_target_point(target):  # 이 함수에서 생성되는 좌표로 적 피격을 판정한다.
     if target.weapon.shoot:
         target.target_dot_display_time = TARGET_DOT_DISPLAY_TIME
-        target.tx = random.randint(target.p.mx - target.recoil - int(target.dis) + 30,
-                                   target.p.mx + target.recoil + int(target.dis) - 30)
-        target.ty = random.randint(target.p.my - target.recoil - int(target.dis) + 30,
-                                   target.p.my + target.recoil + int(target.dis) - 30)
+        target.tx = random.randint(target.p.mx - target.recoil - int(target.dis) + 31,
+                                   target.p.mx + target.recoil + int(target.dis) - 31)
+        target.ty = random.randint(target.p.my - target.recoil - int(target.dis) + 31,
+                                   target.p.my + target.recoil + int(target.dis) - 31)

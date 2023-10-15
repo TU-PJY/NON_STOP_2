@@ -5,11 +5,10 @@ from Func.Weapon_func import *
 class Shoot:
     @staticmethod
     def enter(weapon, e):
-        if l_down(e):
-            if weapon.weapon_type == 0:
-                weapon.trigger = True
-            elif weapon.weapon_type == 1:
-                weapon.use = True
+        if weapon.weapon_type == 0:
+            weapon.trigger = True
+        elif weapon.weapon_type == 1:
+            weapon.use = True
 
     @staticmethod
     def exit(weapon, e):

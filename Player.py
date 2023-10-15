@@ -97,7 +97,7 @@ class Player:
         load_player_image(self)
 
         self.x, self.y, self.dir = WIDTH / 2, 250, 1
-        self.mv_right, self.mv_left, self.mv_jump, self.land_shake = False, False, False, False  # 플레이어 이동, 점프
+        self.mv_right, self.mv_left, self.mv_jump = False, False, False  # 플레이어 이동, 점프
         self.px, self.py, self.py2 = 0, 0, 0  # 디스플레이 효과를 모두 포함한 최종 좌표
 
         self.speed = 2  # 플레이어 이동 속도 (사실상 맵 움직이는 속도)
@@ -112,7 +112,6 @@ class Player:
 
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
 
-        self.shoot_shake = False
         self.shake_time = 0
         self.shake_x, self.shake_y = 0, 0
         self.shake_range = 0

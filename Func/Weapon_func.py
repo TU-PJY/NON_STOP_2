@@ -31,11 +31,11 @@ def draw_gun(weapon):
 
         if weapon.name == 'SCAR_H':  # GUN_NAME에 따라 사용하는 총기가 달라진다.
             if weapon.p.dir == 1:
-                weapon.scar_right.clip_composite_draw(0, 0, 150, 100, weapon.deg, '', weapon.p.px, weapon.p.py2,
+                weapon.scar_right.clip_composite_draw(0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2,
                                                       170, 120)
 
             elif weapon.p.dir == 0:
-                weapon.scar_left.clip_composite_draw(0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px, weapon.p.py2,
+                weapon.scar_left.clip_composite_draw(0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2,
                                                      170, 120)
 
 
@@ -44,12 +44,12 @@ def draw_flame(weapon):
         weapon.flame_display_time -= 1
         if weapon.p.dir == 1:
             weapon.flame_right.clip_composite_draw(0, 0, 100, 100, weapon.deg, '',
-                                                   weapon.p.px + math.cos(weapon.deg) * 150,
-                                                   weapon.p.py2 + 10 + math.sin(weapon.deg) * 150, 100, 100)
+                                                   weapon.p.px + math.cos(weapon.deg) * 170,
+                                                   weapon.p.py2 + 10 + math.sin(weapon.deg) * 170, 100, 100)
         elif weapon.p.dir == 0:
             weapon.flame_left.clip_composite_draw(0, 0, 100, 100, weapon.deg, 'h, v',
-                                                  weapon.p.px + math.cos(weapon.deg) * 150,
-                                                  weapon.p.py2 + 10 + math.sin(weapon.deg) * 150, 100, 100)
+                                                  weapon.p.px + math.cos(weapon.deg) * 170,
+                                                  weapon.p.py2 + 10 + math.sin(weapon.deg) * 170, 100, 100)
 
 
 def draw_melee(weapon):
@@ -73,7 +73,6 @@ def shoot_gun(weapon):
     if weapon.trigger and weapon.weapon_type == 0:
         if weapon.shoot_delay == 0:  # 딜레이는 총마다 다르며, 딜레이 수치가 낮을수록 연사 속도가 빠르다. 0이 될 때마다 발사된다.
             weapon.shoot = True  # True일시 해당 값을 Target 클래스로 전달하여 Target 클래스의 recoil을 증가시킨다.
-            weapon.p.shoot_shake = True
             if weapon.name == 'SCAR_H':
                 weapon.flame_display_time = FLAME_DISPLAY_TIME
                 weapon.shoot_delay = 60
@@ -87,7 +86,6 @@ def wield_melee(weapon):
     if weapon.use and weapon.weapon_type == 1:
         if weapon.wield_delay == 0:
             weapon.wield = True
-            weapon.p.shoot_shake = True
 
             if weapon.melee == 'KNIFE':
                 weapon.melee_x = 100
