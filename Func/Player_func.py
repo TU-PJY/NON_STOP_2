@@ -27,10 +27,10 @@ def load_player_image(self):
 
 def calculate_player_pos(p):
     p.px = p.x + p.shake_x + p.camera_x
-    p.py = p.y - p.land_y + p.shake_y + p.size * 40 + p.camera_y
+    p.py = p.y - p.land_y + p.shake_y + p.size * 50 + p.camera_y
 
     p.py2 = p.y - p.land_y + p.shake_y + p.camera_y
-    # 사이즈 변형 포함되지 않은 y 위치. 플레이어를 제외한 나머지 객체 위치에 사용
+    # 사이즈 변형 포함되지 않은 y 위치. 무기 좌표로 사용.
 
 def look_mouse(p):
     if p.look_mouse:
@@ -70,14 +70,14 @@ def jump(p):
 
 def walk_animation(p):
     if p.size_up:
-        p.size_deg += 0.005
+        p.size_deg += 0.01
 
         if p.size_deg >= 0.3:
             p.size_deg = 0.3
             p.size_up = False
 
     elif not p.size_up:
-        p.size_deg -= 0.005
+        p.size_deg -= 0.01
         if p.size_deg <= 0:
             p.size_deg = 0
             p.size_up = True

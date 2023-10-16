@@ -8,17 +8,17 @@ WIDTH = root.winfo_screenwidth()
 
 print(WIDTH, HEIGHT)
 
-JUMP_ACC = 5.5  # 점프 가속도
-ACC_DELAY = 25  # 점프 가속도 변화 딜레이
+JUMP_ACC = 9  # 점프 가속도
+ACC_DELAY = 6  # 점프 가속도 변화 딜레이
 LAND_SHAKE = 50  # 착지 시 맵이 눌리는 효과 수치
-LAND_SHAKE_REDUCE = 0.5  # 맵이 눌린 뒤의 복구 속도
+LAND_SHAKE_REDUCE = 1  # 맵이 눌린 뒤의 복구 속도
 
 SCENE = ('intro', 'main', 'game')  # 씬 리스트. 각 씬마다 표시되는 화면이 달라진다.
 GAME_SCENE = SCENE[2]
 
-RECOIL_REDUCE = 3  # 조준점 복구 지연 속도
-FLAME_DISPLAY_TIME = 20  # 총구 화염 출력 시간
-TARGET_DOT_DISPLAY_TIME = 20
+RECOIL_REDUCE = 1  # 조준점 복구 지연 속도
+FLAME_DISPLAY_TIME = 10  # 총구 화염 출력 시간
+TARGET_DOT_DISPLAY_TIME = 10  # 조준점 내부에 빨간 점이 표시되는 시간 
 
 # 플레이어 이미지 파일 경로
 commando_image_directory = 'res//commando.png'

@@ -75,8 +75,8 @@ def shoot_gun(weapon):
             weapon.shoot = True  # True일시 해당 값을 Target 클래스로 전달하여 Target 클래스의 recoil을 증가시킨다.
             if weapon.name == 'SCAR_H':
                 weapon.flame_display_time = FLAME_DISPLAY_TIME
-                weapon.shoot_delay = 60
-                weapon.p.shake_time = 30
+                weapon.shoot_delay = 25
+                weapon.p.shake_time = 15
                 weapon.p.shake_range = 10
         else:
             weapon.shoot = False
@@ -90,8 +90,8 @@ def wield_melee(weapon):
             if weapon.melee == 'KNIFE':
                 weapon.melee_x = 100
                 weapon.melee_deg = 0
-                weapon.wield_delay = 200
-                weapon.p.shake_time = 30
+                weapon.wield_delay = 80
+                weapon.p.shake_time = 10
                 weapon.p.shake_range = 10
         else:
             weapon.weild = False

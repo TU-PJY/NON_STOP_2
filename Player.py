@@ -27,6 +27,7 @@ class Move:
     @staticmethod
     def do(p):
         p.dir = 1 if p.mx > p.x else 0
+
         walk_animation(p)
         jump(p)
         look_mouse(p)
@@ -102,16 +103,12 @@ class Player:
         self.mv_right, self.mv_left, self.mv_jump = False, False, False  # 플레이어 이동, 점프
         self.px, self.py, self.py2 = 0, 0, 0  # 디스플레이 효과를 모두 포함한 최종 좌표
 
-        self.speed = 2  # 플레이어 이동 속도 (사실상 맵 움직이는 속도)
         self.mx, self.my = 0, 0  # 마우스 좌표
 
+        self.speed = 4  # 플레이어 이동 속도 (사실상 맵 움직이는 속도)
         self.jump_acc = JUMP_ACC
         self.acc_delay = 0
         self.land_y = 0  # 이 수치만큼 화면의 모든 이미지들이 아래로 눌린다.
-
-        self.state_machine = StateMachine(self)
-        self.state_machine.start()
-
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
 
         self.shake_time = 0
@@ -124,8 +121,11 @@ class Player:
 
         self.look_mouse = True  # True일 시 플레이어는 마우스를 따라본다.
 
-        self.camera_y = 0  # 점프 시 화면이 플레이어의 높이를 살짝 따라간다.
-        self.camera_x = 0  # 화면이 마우스 좌표를 살짝 따라간다.
+        self.camera_y = 0  # 화면이 마우스 좌표를 살짝 따라간다.
+        self.camera_x = 0 
+
+        self.state_machine = StateMachine(self)
+        self.state_machine.start()
 
     def update(self):
         self.state_machine.update()

@@ -17,14 +17,14 @@ def load_background(self):
 
 def draw_land(self):
     self.image.draw(self.x + self.p.shake_x + self.p.camera_x,
-                    self.y - self.p.land_y + self.p.shake_y + self.p.camera_y, 4096, 512)
+                    self.y - self.p.land_y + self.p.shake_y + self.p.camera_y - (self.p.y - 250) / 2, 4096, 512)
 
 
 def draw_wall(self):
     self.image.draw(self.x1 + self.p.shake_x + self.p.camera_x,
-                    self.y - self.p.land_y + self.p.shake_y + self.p.camera_y, 1280, 1920)
+                    self.y - self.p.land_y + self.p.shake_y + self.p.camera_y - (self.p.y - 250) / 2, 1280, 1920)
     self.image.draw(self.x2 + self.p.shake_x + self.p.camera_x,
-                    self.y - self.p.land_y + self.p.shake_y + self.p.camera_y, 1280, 1920)
+                    self.y - self.p.land_y + self.p.shake_y + self.p.camera_y - (self.p.y - 250) / 2, 1280, 1920)
 
 
 def draw_background(self):

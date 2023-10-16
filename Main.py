@@ -85,4 +85,6 @@ while running:
 
     update_canvas()
 
+    delay(0.001)
+
 close_canvas()
