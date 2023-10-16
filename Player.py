@@ -30,6 +30,7 @@ class Move:
         walk_animation(p)
         jump(p)
         look_mouse(p)
+        update_camera(p)
         calculate_player_pos(p)
 
         shake_display(p)
@@ -54,6 +55,7 @@ class Idle:
         p.dir = 1 if p.mx > p.x else 0
         jump(p)
         look_mouse(p)
+        update_camera(p)
         calculate_player_pos(p)
 
         push_display(p)
@@ -121,6 +123,9 @@ class Player:
         self.size_up = True
 
         self.look_mouse = True  # True일 시 플레이어는 마우스를 따라본다.
+
+        self.camera_y = 0  # 점프 시 화면이 플레이어의 높이를 살짝 따라간다.
+        self.camera_x = 0  # 화면이 마우스 좌표를 살짝 따라간다.
 
     def update(self):
         self.state_machine.update()

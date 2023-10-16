@@ -16,3 +16,8 @@ def shake_display(p):
     else:
         p.shake_x = 0
         p.shake_y = 0
+
+
+def update_camera(p):
+    p.camera_y = (p.y - p.my) / 4
+    p.camera_x = (p.x - p.mx) / 4

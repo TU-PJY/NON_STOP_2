@@ -26,10 +26,11 @@ def load_player_image(self):
 
 
 def calculate_player_pos(p):
-    p.px = p.x + p.shake_x
-    p.py = p.y - p.land_y + p.shake_y + p.size * 40
-    p.py2 = p.y - p.land_y + p.shake_y  # 사이즈 변형 포함되지 않은 위치, 플레이어를 제외한 나머지 객체 위치에 사용
+    p.px = p.x + p.shake_x + p.camera_x
+    p.py = p.y - p.land_y + p.shake_y + p.size * 40 + p.camera_y
 
+    p.py2 = p.y - p.land_y + p.shake_y + p.camera_y
+    # 사이즈 변형 포함되지 않은 y 위치. 플레이어를 제외한 나머지 객체 위치에 사용
 
 def look_mouse(p):
     if p.look_mouse:
@@ -41,12 +42,12 @@ def look_mouse(p):
 
 def draw_player(p):
     if p.dir == 1:
-        p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size*100)
+        p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
     elif p.dir == 0:
         if p.look_mouse:
-            p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size*100)
+            p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size * 100)
         else:
-            p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size*100)
+            p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
 
 
 def jump(p):

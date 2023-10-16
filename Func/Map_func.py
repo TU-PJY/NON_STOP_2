@@ -16,16 +16,19 @@ def load_background(self):
 
 
 def draw_land(self):
-    self.image.draw(self.x + self.p.shake_x, self.y - self.p.land_y + self.p.shake_y, 4096, 512)
+    self.image.draw(self.x + self.p.shake_x + self.p.camera_x,
+                    self.y - self.p.land_y + self.p.shake_y + self.p.camera_y, 4096, 512)
 
 
 def draw_wall(self):
-    self.image.draw(self.x1 + self.p.shake_x, self.y - self.p.land_y + self.p.shake_y, 1280, 1920)
-    self.image.draw(self.x2 + self.p.shake_x, self.y - self.p.land_y + self.p.shake_y, 1280, 1920)
+    self.image.draw(self.x1 + self.p.shake_x + self.p.camera_x,
+                    self.y - self.p.land_y + self.p.shake_y + self.p.camera_y, 1280, 1920)
+    self.image.draw(self.x2 + self.p.shake_x + self.p.camera_x,
+                    self.y - self.p.land_y + self.p.shake_y + self.p.camera_y, 1280, 1920)
 
 
 def draw_background(self):
-    self.image.draw(self.x + self.p.shake_x, self.y - self.p.land_y + self.p.shake_y, 4096, 1100)
+    self.image.draw(self.x + self.p.shake_x + self.p.camera_x, self.y - self.p.land_y, 4096, 1100)
 
 
 def update_land(self):  # 이 함수에서 나머지 맵 객체의 업데이트를 결정한다.

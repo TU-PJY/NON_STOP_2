@@ -44,12 +44,12 @@ def draw_flame(weapon):
         weapon.flame_display_time -= 1
         if weapon.p.dir == 1:
             weapon.flame_right.clip_composite_draw(0, 0, 100, 100, weapon.deg, '',
-                                                   weapon.p.px + math.cos(weapon.deg) * 170,
-                                                   weapon.p.py2 + 10 + math.sin(weapon.deg) * 170, 100, 100)
+                                                   weapon.p.px + 20 + math.cos(weapon.deg) * 150,
+                                                   weapon.p.py2 + 10 + math.sin(weapon.deg) * 150, 100, 100)
         elif weapon.p.dir == 0:
             weapon.flame_left.clip_composite_draw(0, 0, 100, 100, weapon.deg, 'h, v',
-                                                  weapon.p.px + math.cos(weapon.deg) * 170,
-                                                  weapon.p.py2 + 10 + math.sin(weapon.deg) * 170, 100, 100)
+                                                  weapon.p.px - 20 + math.cos(weapon.deg) * 150,
+                                                  weapon.p.py2 + 10 + math.sin(weapon.deg) * 150, 100, 100)
 
 
 def draw_melee(weapon):
