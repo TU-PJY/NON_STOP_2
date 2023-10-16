@@ -32,6 +32,7 @@ def calculate_player_pos(p):
     p.py2 = p.y - p.land_y + p.shake_y + p.camera_y
     # 사이즈 변형 포함되지 않은 y 위치. 무기 좌표로 사용.
 
+
 def look_mouse(p):
     if p.look_mouse:
         if p.dir == 1:  # 마우스를 살짝 따라본다.
