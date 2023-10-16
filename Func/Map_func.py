@@ -30,7 +30,7 @@ def draw_wall(self):
 
 def draw_background(self):
     self.image_back.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
-    self.image.draw(self.x + self.p.shake_x + self.p.camera_x, self.y - self.p.land_y + self.p.camera_y- (self.p.y - 250) / 2, 4096,
+    self.image.draw(self.x + self.p.shake_x + self.p.camera_x, self.y + self.p.shake_y - self.p.land_y + self.p.camera_y- (self.p.y - 250) / 2, 4096,
                     1100)
 
 

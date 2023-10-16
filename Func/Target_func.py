@@ -29,7 +29,7 @@ def update_target(target):
     if target.weapon.name == 'SCAR_H':
         target.dis2 = 35 + target.dis / 20
         if target.weapon.shoot:
-            target.recoil += 15
+            target.recoil += 18
 
     if target.recoil > 0:
         if target.reduce_delay == 0:

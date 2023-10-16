@@ -10,8 +10,8 @@ print(WIDTH, HEIGHT)
 
 JUMP_ACC = 7  # 점프 가속도
 ACC_DELAY = 10  # 점프 가속도 변화 딜레이
-LAND_SHAKE = 50  # 착지 시 맵이 눌리는 효과 수치
-LAND_SHAKE_REDUCE = 1  # 맵이 눌린 뒤의 복구 속도
+LAND_SHAKE = 100  # 착지 시 맵이 눌리는 효과 수치
+LAND_SHAKE_REDUCE = 2  # 맵이 눌린 뒤의 복구 속도
 
 SCENE = ('intro', 'main', 'game')  # 씬 리스트. 각 씬마다 표시되는 화면이 달라진다.
 GAME_SCENE = SCENE[2]

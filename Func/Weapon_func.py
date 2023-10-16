@@ -75,7 +75,7 @@ def shoot_gun(weapon):
             weapon.shoot = True  # True일시 해당 값을 Target 클래스로 전달하여 Target 클래스의 recoil을 증가시킨다.
             if weapon.name == 'SCAR_H':
                 weapon.flame_display_time = FLAME_DISPLAY_TIME
-                weapon.shoot_delay = 25
+                weapon.shoot_delay = 30
                 weapon.p.shake_time = 15
                 weapon.p.shake_range = 10
         else:
