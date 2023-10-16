@@ -91,7 +91,7 @@ def wield_melee(weapon):
                 weapon.melee_x = 100
                 weapon.melee_deg = 0
                 weapon.wield_delay = 80
-                weapon.p.shake_time = 10
+                weapon.p.shake_time = 15
                 weapon.p.shake_range = 10
         else:
             weapon.weild = False
