@@ -13,6 +13,7 @@ def load_wall(self):
 
 def load_background(self):
     self.image = load_image(bg_image_directory)
+    self.image_back = load_image(bg_back_image_directory)
 
 
 def draw_land(self):
@@ -28,7 +29,9 @@ def draw_wall(self):
 
 
 def draw_background(self):
-    self.image.draw(self.x + self.p.shake_x + self.p.camera_x, self.y - self.p.land_y, 4096, 1100)
+    self.image_back.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
+    self.image.draw(self.x + self.p.shake_x + self.p.camera_x, self.y - self.p.land_y + self.p.camera_y- (self.p.y - 250) / 2, 4096,
+                    1100)
 
 
 def update_land(self):  # 이 함수에서 나머지 맵 객체의 업데이트를 결정한다.

@@ -8,8 +8,8 @@ WIDTH = root.winfo_screenwidth()
 
 print(WIDTH, HEIGHT)
 
-JUMP_ACC = 9  # 점프 가속도
-ACC_DELAY = 6  # 점프 가속도 변화 딜레이
+JUMP_ACC = 7  # 점프 가속도
+ACC_DELAY = 10  # 점프 가속도 변화 딜레이
 LAND_SHAKE = 50  # 착지 시 맵이 눌리는 효과 수치
 LAND_SHAKE_REDUCE = 1  # 맵이 눌린 뒤의 복구 속도
 
@@ -28,6 +28,7 @@ commando_left_image_directory = 'res//commando_left.png'
 land_image_directory = 'res//land.png'
 bg_image_directory = 'res//bg.png'
 wall_image_directory = 'res//wall.png'
+bg_back_image_directory = 'res//bg_back.png'
 
 # 조준점 이미지 파일 경로 
 target_up_directory = 'res//target_up.png'
