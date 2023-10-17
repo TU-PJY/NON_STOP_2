@@ -111,9 +111,9 @@ class Player:
         self.land_y = 0  # 이 수치만큼 화면의 모든 이미지들이 아래로 눌린다.
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
 
-        self.shake_time = 0
+        self.shake_time = 0  # 화면 흔들림 변수. time이 1 이상일 경우 화면이 흔들리게 된다.
         self.shake_x, self.shake_y = 0, 0
-        self.shake_range = 0
+        self.shake_range = 0  # 화면 흔들림의 정도
 
         self.size = 0  # 걸을 때 플레이어 크기가 고무줄처럼 커졌다 작아진다.
         self.size_deg = 0
