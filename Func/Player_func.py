@@ -21,7 +21,7 @@ def left_up(e):
 
 
 def load_player_image(self):
-    self.image = load_image(commando_image_directory)
+    self.goblin = load_image(commando_image_directory)
     self.image_left = load_image(commando_left_image_directory)
 
 
@@ -33,7 +33,7 @@ def calculate_player_pos(p):
     # 사이즈 변형 포함되지 않은 y 위치. 무기 좌표로 사용.
 
     p.efx = p.shake_x + p.camera_x
-    p.efy = p.shake_y - p.land_y + p.camera_y
+    p.efy = p.shake_y - p.land_y + p.camera_y - (p.y - 250) / 1.5
     # 나머지 객체에 사용되는 좌표
 
 
@@ -47,7 +47,7 @@ def look_mouse(p):
 
 def draw_player(p):
     if p.dir == 1:
-        p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+        p.goblin.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
     elif p.dir == 0:
         if p.look_mouse:
             p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size * 100)
@@ -86,4 +86,5 @@ def walk_animation(p):
         if p.size_deg <= 0:
             p.size_deg = 0
             p.size_up = True
-    p.size = math.sin(p.size_deg)
+    if not p.mv_jump:
+        p.size = math.sin(p.size_deg)

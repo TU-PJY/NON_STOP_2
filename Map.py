@@ -29,7 +29,7 @@ class Wall:  # 벽
         self.y = HEIGHT / 2
 
     def draw(self):
-       draw_wall(self)
+        draw_wall(self)
 
     def update(self):
         update_wall(self)

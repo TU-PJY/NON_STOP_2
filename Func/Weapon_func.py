@@ -44,11 +44,11 @@ def draw_flame(weapon):
         if weapon.p.dir == 1:
             weapon.flame_right.clip_composite_draw(0, 0, 100, 100, weapon.deg, '',
                                                    weapon.p.px + 20 + math.cos(weapon.deg) * 150,
-                                                   weapon.p.py2 + 10 + math.sin(weapon.deg) * 150, 100, 100)
+                                                   weapon.p.py2 + math.sin(weapon.deg) * 150, 100, 100)
         elif weapon.p.dir == 0:
             weapon.flame_left.clip_composite_draw(0, 0, 100, 100, weapon.deg, 'h, v',
                                                   weapon.p.px - 20 + math.cos(weapon.deg) * 150,
-                                                  weapon.p.py2 + 10 + math.sin(weapon.deg) * 150, 100, 100)
+                                                  weapon.p.py2 + math.sin(weapon.deg) * 150, 100, 100)
 
 
 def draw_melee(weapon):
@@ -75,7 +75,7 @@ def shoot_gun(weapon):
             if weapon.name == 'SCAR_H':
                 weapon.flame_display_time = FLAME_DISPLAY_TIME
                 weapon.shoot_delay = 30
-                weapon.p.shake_time = 15
+                weapon.p.shake_time = 20
                 weapon.p.shake_range = 10
         else:
             weapon.shoot = False

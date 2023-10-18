@@ -19,6 +19,7 @@ def handle_events():
 
         elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:  # 점프는 상태 상관없이 가능해야하므로 점프 기능은 이곳에 배치
             p.mv_jump = True
+            p.size = 0
 
         elif event.type == SDL_KEYDOWN and event.key == SDLK_q:  # 무기 교체
             if weapon.weapon_type == 0:
@@ -40,7 +41,7 @@ def handle_events():
 
 
 def init_game():
-    global running, game, p, land, bg, wall, weapon, target, m
+    global running, game, p, land, bg, wall, weapon, target, m, mi
 
     running = True
     game = []
