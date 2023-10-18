@@ -48,3 +48,6 @@ flame_left_directory = 'res//flame_left.png'
 # 근접무기 이미지 경로
 knife_right_directory = 'res//knife_right.png'
 knife_left_directory = 'res//knife_left.png'
+
+# 몬스터 이미지 파일 경로
+goblin_directory = 'res//monster//goblin.png'

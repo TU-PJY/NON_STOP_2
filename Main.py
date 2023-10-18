@@ -4,6 +4,7 @@ from Player import Player
 from Map import Land, BackGround, Wall
 from Weapon import Weapon
 from Target import Target
+from Monster import Monster
 
 
 def handle_events():
@@ -39,7 +40,7 @@ def handle_events():
 
 
 def init_game():
-    global running, game, p, land, bg, wall, weapon, target
+    global running, game, p, land, bg, wall, weapon, target, m
 
     running = True
     game = []
@@ -50,8 +51,10 @@ def init_game():
     bg = BackGround(p)
     weapon = Weapon(p)
     target = Target(p, weapon)
+    m = Monster(p, target)
 
     game.append(bg)
+    game.append(m)
     game.append(p)
     game.append(weapon)
     game.append(land)

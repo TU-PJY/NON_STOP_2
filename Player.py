@@ -102,6 +102,7 @@ class Player:
         self.x, self.y, self.dir = WIDTH / 2, 250, 1
         self.mv_right, self.mv_left, self.mv_jump = False, False, False  # 플레이어 이동, 점프
         self.px, self.py, self.py2 = 0, 0, 0  # 디스플레이 효과를 모두 포함한 최종 좌표
+        self.efx, self.efy = 0, 0  # 플레이어 좌표를 제외한 디스플레이 효과 변수. 객체 좌표에 더하여 사용
 
         self.mx, self.my = 0, 0  # 마우스 좌표
 
@@ -122,7 +123,7 @@ class Player:
         self.look_mouse = True  # True일 시 플레이어는 마우스를 따라본다.
 
         self.camera_y = 0  # 화면이 마우스 좌표를 살짝 따라간다.
-        self.camera_x = 0 
+        self.camera_x = 0
 
         self.state_machine = StateMachine(self)
         self.state_machine.start()

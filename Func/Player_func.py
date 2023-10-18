@@ -32,6 +32,10 @@ def calculate_player_pos(p):
     p.py2 = p.y - p.land_y + p.shake_y + p.camera_y
     # 사이즈 변형 포함되지 않은 y 위치. 무기 좌표로 사용.
 
+    p.efx = p.shake_x + p.camera_x
+    p.efy = p.shake_y - p.land_y + p.camera_y
+    # 나머지 객체에 사용되는 좌표
+
 
 def look_mouse(p):
     if p.look_mouse:

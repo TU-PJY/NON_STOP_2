@@ -33,7 +33,6 @@ def draw_gun(weapon):
             if weapon.p.dir == 1:
                 weapon.scar_right.clip_composite_draw(0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2,
                                                       170, 120)
-
             elif weapon.p.dir == 0:
                 weapon.scar_left.clip_composite_draw(0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2,
                                                      170, 120)
