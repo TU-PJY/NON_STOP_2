@@ -26,11 +26,6 @@ def draw_target(target):
 def update_target(target):
     target.dis = math.sqrt((target.p.mx - WIDTH / 2) ** 2 + (target.p.y - target.p.my) ** 2)
 
-    if target.weapon.name == 'SCAR_H':
-        target.dis2 = 35 + target.dis / 20
-        if target.weapon.shoot:
-            target.recoil += 18
-
     if target.recoil > 0:
         if target.reduce_delay == 0:
             target.recoil -= 1
@@ -39,7 +34,12 @@ def update_target(target):
             target.reduce_delay -= 1
 
     if target.dis < 0:
-        target.dis = 1
+        target.dis = 0
+
+    if target.weapon.name == 'SCAR_H':
+        target.dis2 = 35 + target.dis / 20
+        if target.weapon.shoot:
+            target.recoil += 18
 
     if target.target_dot_display_time > 0:
         target.target_dot_display_time -= 1
