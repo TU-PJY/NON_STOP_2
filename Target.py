@@ -1,5 +1,6 @@
 from Func.Target_func import *
 
+
 # MOUSEBUTTON -> Gun class -> Target class
 
 
@@ -50,10 +51,12 @@ class StateMachineTarget:
 
 
 class Target:
-    def __init__(self, p, weapon):
+    def __init__(self, p, m, weapon):
         load_target(self)
         self.p = p
+        self.m = m
         self.weapon = weapon
+
         self.dis, self.recoil = 0, 0
         self.dis2 = 0
         self.reduce_delay = 0

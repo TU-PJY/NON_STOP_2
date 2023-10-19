@@ -52,3 +52,10 @@ def make_target_point(target):  # 이 함수에서 생성되는 좌표로 적 �
                                    target.p.mx + target.recoil + int(target.dis2) - 31)
         target.ty = random.randint(target.p.my - target.recoil - int(target.dis2) + 31,
                                    target.p.my + target.recoil + int(target.dis2) - 31)
+
+        for i in range(target.m.number):
+            if (target.m.list[i][0] - 125 <= target.tx <= target.m.list[i][0] + 125 and
+                    target.m.list[i][1] - 125 <= target.ty <= target.m.list[i][1] + 125):
+                target.m.hit_idx = i
+                target.m.list[target.m.hit_idx][8] = True
+                target.m.hit_type = 0

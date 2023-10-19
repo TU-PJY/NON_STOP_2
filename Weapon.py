@@ -1,4 +1,6 @@
 from Func.Weapon_func import *
+
+
 # Player location -> Gun class
 
 
@@ -21,6 +23,7 @@ class Shoot:
         update_delay(weapon)
         shoot_gun(weapon)
         wield_melee(weapon)
+        damage_monster(weapon)
 
     @staticmethod
     def draw(weapon):
@@ -80,10 +83,11 @@ class StateMachineGun:
 
 
 class Weapon:
-    def __init__(self, p):
+    def __init__(self, p, m):
         load_gun_image(self)
         load_melee_image(self)
         self.p = p
+        self.m = m
 
         self.weapon_type = 0  # 0: Gun, 1: Melee
         self.name = 'SCAR_H'

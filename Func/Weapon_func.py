@@ -85,7 +85,6 @@ def wield_melee(weapon):
     if weapon.use and weapon.weapon_type == 1:
         if weapon.wield_delay == 0:
             weapon.wield = True
-
             if weapon.melee == 'KNIFE':
                 weapon.melee_x = 100
                 weapon.melee_deg = 0
@@ -106,3 +105,18 @@ def update_delay(weapon):
         weapon.shoot_delay -= 1
     if weapon.wield_delay > 0:
         weapon.wield_delay -= 1
+
+
+def damage_monster(weapon):
+    if not weapon.m.list_exist:
+        return
+
+    global hit
+    hit = weapon.m.hit_idx
+
+    if weapon.m.list[hit][8]:
+        if weapon.m.hit_type == 0:
+            if weapon.name == 'SCAR_H':
+                weapon.m.list[hit][3] -= 45
+
+        weapon.m.list[hit][8] = False
