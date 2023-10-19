@@ -1,4 +1,4 @@
-from Func.Map_func import *
+from func.map_func import *
 
 
 # Player move -> Map class

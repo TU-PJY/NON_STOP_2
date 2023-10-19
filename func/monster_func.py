@@ -12,7 +12,7 @@ class d(Enum):  # 열겨형
     spd = 4
     f = 5
     fd = 6
-    mv = 7
+    atk = 7
     hit = 8
     type = 9
 
@@ -40,11 +40,11 @@ def spawn_monster(self):
             self.frame = random.randint(0, 1)  # 프레임이 개체마다 다르게 표시된다
             self.frame_delay = random.randint(1, 80)
 
-            self.move = True  # 이동 여부
+            self.attack = False  # 공격 여부
             self.hit = False
 
             self.list.append([self.x, self.y, self.mv_dir, self.hp,
-                              self.speed, self.frame, self.frame_delay, self.move, self.hit, self.type])
+                              self.speed, self.frame, self.frame_delay, self.attack, self.hit, self.type])
 
             self.number += 1
             self.spawn_time = 1000
@@ -59,7 +59,7 @@ def draw_monster(self, i):
 
     if self.list[i][d.type.value] == 1:
         if self.list[i][d.dir.value] == 0:
-            if self.list[i][d.mv.value]:  # 공격 상태
+            if self.list[i][d.atk.value]:  # 공격 상태
                 self.goblin.clip_composite_draw(self.list[i][d.f.value] * 100, 0, 100, 100, 0, '',
                                                 self.list[i][d.x.value] + self.p.efx,
                                                 self.list[i][d.y.value] + self.p.efy, 250, 250)
@@ -99,13 +99,13 @@ def move_monster(self, i):
         self.list[i][d.dir.value] = 0
 
     if not self.p.x - 80 <= self.list[i][d.x.value] <= self.p.x + 80:  # 공격 사거리 안에 들면 이동을 멈추고 공격한다
-        self.list[i][d.mv.value] = True  # 몬스터 공격 여부, False일 시 공격한다.
+        self.list[i][d.atk.value] = False  # 몬스터 공격 여부, True일 시 공격한다.
         if self.list[i][d.dir.value] == 0:  # move
             self.list[i][d.x.value] -= self.list[i][d.spd.value]  # 왼쪽 이동
         else:
             self.list[i][d.x.value] += self.list[i][d.spd.value]  # 오른쪽 이동
     else:
-        self.list[i][d.mv.value] = False
+        self.list[i][d.atk.value] = True
 
 
 def delete_monster(self):  # 몬스터 삭제

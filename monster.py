@@ -1,4 +1,4 @@
-from Func.Monster_func import *
+from func.monster_func import *
 
 
 class Monster:
@@ -22,7 +22,7 @@ class Monster:
         self.speed = 0
         self.frame = 0
         self.frame_delay = 0
-        self.move = False
+        self.attack = False
         self.hit = False
         self.hit_type = 0  # 0: gun, 1: melee
 
