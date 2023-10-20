@@ -107,16 +107,10 @@ def update_delay(weapon):
         weapon.wield_delay -= 1
 
 
-def damage_monster(weapon):
-    if not weapon.m.list_exist:
-        return
-
-    global hit
-    hit = weapon.m.hit_idx
-
-    if weapon.m.list[hit][8]:
+def damage_monster(weapon, i):  # 몬스터 대미지 처리
+    if weapon.m.list[i][8]:
         if weapon.m.hit_type == 0:
             if weapon.name == 'SCAR_H':
-                weapon.m.list[hit][3] -= 45
+                weapon.m.list[i][3] -= 45
 
-        weapon.m.list[hit][8] = False
+        weapon.m.list[i][8] = False

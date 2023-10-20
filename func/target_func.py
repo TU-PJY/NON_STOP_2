@@ -37,9 +37,9 @@ def update_target(target):
         target.dis = 0
 
     if target.weapon.name == 'SCAR_H':
-        target.dis2 = 35 + target.dis / 20
+        target.dis2 = 35 + target.dis / 25
         if target.weapon.shoot:
-            target.recoil += 18
+            target.recoil += 17
 
     if target.target_dot_display_time > 0:
         target.target_dot_display_time -= 1
@@ -47,15 +47,17 @@ def update_target(target):
 
 def make_target_point(target):  # 이 함수에서 생성되는 좌표로 적 피격을 판정한다.
     if target.weapon.shoot:
+        global x, y
         target.target_dot_display_time = TARGET_DOT_DISPLAY_TIME
         target.tx = random.randint(target.p.mx - target.recoil - int(target.dis2) + 31,
                                    target.p.mx + target.recoil + int(target.dis2) - 31)
         target.ty = random.randint(target.p.my - target.recoil - int(target.dis2) + 31,
                                    target.p.my + target.recoil + int(target.dis2) - 31)
 
-        for i in range(target.m.number):
-            if (target.m.list[i][0] - 125 <= target.tx <= target.m.list[i][0] + 125 and
-                    target.m.list[i][1] - 125 <= target.ty <= target.m.list[i][1] + 125):
+        for i in range(len(target.m.list) - 1, -1, -1):  # 몬스터에 명중하면 weapon 클래스가 대미지를 처리하도록 한다.
+            x, y = target.m.list[i][0], target.m.list[i][1]
+            if (x - 50 + target.p.efx <= target.tx <= x + 50 + target.p.efx and
+                    y - 50 + target.p.efy <= target.ty <= y + 50 + target.p.efy):
                 target.m.hit_idx = i
-                target.m.list[target.m.hit_idx][8] = True
+                target.m.list[i][8] = True  # 명중 사실을 monster 클래스로 보내고 monster클래스가 이를 weapon 클래스로 전달
                 target.m.hit_type = 0

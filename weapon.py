@@ -23,7 +23,8 @@ class Shoot:
         update_delay(weapon)
         shoot_gun(weapon)
         wield_melee(weapon)
-        damage_monster(weapon)
+        for i in range(len(weapon.m.list) -1, -1, -1):
+            damage_monster(weapon, i)
 
     @staticmethod
     def draw(weapon):
