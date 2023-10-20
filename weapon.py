@@ -1,4 +1,4 @@
-from func.weapon_func import *
+from func.weapon_manager import *
 
 
 # Player location -> Gun class
@@ -21,10 +21,13 @@ class Shoot:
     @staticmethod
     def do(weapon):
         update_delay(weapon)
+
+        for i in range(len(weapon.m.list) - 1, -1, -1):
+            damage_manager(weapon, i)
+            melee_hit_manager(weapon, i)
+
         shoot_gun(weapon)
         wield_melee(weapon)
-        for i in range(len(weapon.m.list) -1, -1, -1):
-            damage_monster(weapon, i)
 
     @staticmethod
     def draw(weapon):

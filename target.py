@@ -1,4 +1,4 @@
-from func.target_func import *
+from func.target_manager import *
 
 
 # MOUSEBUTTON -> Gun class -> Target class

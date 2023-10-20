@@ -92,7 +92,7 @@ def wield_melee(weapon):
                 weapon.p.shake_time = 15
                 weapon.p.shake_range = 10
         else:
-            weapon.weild = False
+            weapon.wield = False
 
 
 def update_melee_position(weapon):
@@ -107,7 +107,27 @@ def update_delay(weapon):
         weapon.wield_delay -= 1
 
 
-def damage_monster(weapon, i):  # 몬스터 대미지 처리
+def melee_hit_manager(weapon, i):
+    global mx  # monster x
+    mx = weapon.m.list[i][0]
+    if weapon.wield:  # 사용자 경험을 위해 50픽셀정도 더 길게 인식하도록 한다.
+        if weapon.melee == 'KNIFE':  # 무기마다 사거리가 다르므로 따로 범위를 지정해야 한다.
+            if weapon.p.dir == 1:
+                if (weapon.p.x + weapon.p.efx <= mx + 50 + weapon.p.efx <=
+                        weapon.p.x + weapon.melee_x + 200 + weapon.p.efx):
+                    weapon.m.list[i][8] = True
+                    return  # 중복 인식 방지를 위해 히트가 인식되면 바로 함수를 빠져나가도록 한다.
+
+            elif weapon.p.dir == 0:
+                if (weapon.p.x - weapon.melee_x - 200 + weapon.p.efx <= mx - 50 + weapon.p.efx <=
+                        weapon.p.x + weapon.p.efx):
+                    weapon.m.list[i][8] = True
+                    return
+
+        weapon.m.hit_type = 1
+
+
+def damage_manager(weapon, i):  # 몬스터 대미지 처리
     global hit
     hit = weapon.m.list[i][8]
 
@@ -115,5 +135,9 @@ def damage_monster(weapon, i):  # 몬스터 대미지 처리
         if weapon.m.hit_type == 0:
             if weapon.name == 'SCAR_H':  # 총기마다 다른 대미지가 들어간다.
                 weapon.m.list[i][3] -= 45
+
+        elif weapon.m.hit_type == 1:
+            if weapon.melee == 'KNIFE':
+                weapon.m.list[i][3] -= 50
 
         weapon.m.list[i][8] = False  # 총에 맞은 상태를 초기화 한다.

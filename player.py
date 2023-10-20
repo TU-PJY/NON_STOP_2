@@ -1,5 +1,5 @@
-from func.display_func import *
-from func.player_func import *
+from func.display_manager import *
+from func.player_manager import *
 
 
 # 실시간으로 총이 마우스 좌표를 향해야 하므로 Class_Player가 마우스 좌표를 받아 Class_Gun으로 전달한다.
