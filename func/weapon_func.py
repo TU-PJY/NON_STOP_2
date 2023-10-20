@@ -108,9 +108,12 @@ def update_delay(weapon):
 
 
 def damage_monster(weapon, i):  # 몬스터 대미지 처리
-    if weapon.m.list[i][8]:
+    global hit
+    hit = weapon.m.list[i][8]
+
+    if hit:  # 총에 맞으면
         if weapon.m.hit_type == 0:
-            if weapon.name == 'SCAR_H':
+            if weapon.name == 'SCAR_H':  # 총기마다 다른 대미지가 들어간다.
                 weapon.m.list[i][3] -= 45
 
-        weapon.m.list[i][8] = False
+        weapon.m.list[i][8] = False  # 총에 맞은 상태를 초기화 한다.

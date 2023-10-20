@@ -3,12 +3,8 @@ from tkinter import *
 
 # 현재 모니터 크기를 인식하여 자동으로 창 사이즈를 조정한다.
 root = Tk()
-# HEIGHT = root.winfo_screenheight()
-# WIDTH = root.winfo_screenwidth()
-
-HEIGHT = 800
-WIDTH = 1500
-
+HEIGHT = root.winfo_screenheight()
+WIDTH = root.winfo_screenwidth()
 print(WIDTH, HEIGHT)
 
 JUMP_ACC = 7  # 점프 가속도

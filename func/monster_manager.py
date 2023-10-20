@@ -1,8 +1,6 @@
 from pico2d import *
 from Env_variable import *
 import random
-
-
 #     x = 0
 #     y = 1
 #     dir = 2
@@ -36,7 +34,6 @@ def spawn_monster(self):
                               self.attack, self.hit, self.type])
 
             self.spawn_time = 1000
-            print(self.list, self.number)
     else:
         self.spawn_time -= 1  # 스폰 타이머가 0이 될때까지 감소시킨다.
 
@@ -60,15 +57,19 @@ def draw_monster(self, i):
                 self.type_1.clip_composite_draw(frame * 100, 0, 100, 100, 0, 'h', x + self.p.efx, y + self.p.efy,
                                                 250, 250)
 
+        draw_rectangle(x - 50 + self.p.efx, y + 50 + self.p.efy, x + 50 + self.p.efx, y - 70 + self.p.efy)
+
 
 def frame_monster(self, i):  # 몬스터 애니메이션
-    global frame, delay
+    global frame, delay, monster_type, attack
     frame, delay = self.list[i][5], self.list[i][6]
+    monster_type, attack = self.list[i][9], self.list[i][8]
 
-    if delay == 0:  # delay = 0일 시 다음 프레임 재생
-        self.list[i][5], self.list[i][6] = (frame + 1) % 2, 80
-    else:
-        self.list[i][6] -= 1
+    if monster_type == 1 and not attack:
+        if delay == 0:  # delay = 0일 시 다음 프레임 재생
+            self.list[i][5], self.list[i][6] = (frame + 1) % 2, 80
+        else:
+            self.list[i][6] -= 1
 
 
 def move_monster(self, i):
@@ -83,7 +84,7 @@ def move_monster(self, i):
         if not attack:
             if dir == 0:  # 아니면 이동
                 self.list[i][0] -= speed  # 왼쪽 이동
-            else:
+            elif dir == 1:
                 self.list[i][0] += speed  # 오른쪽 이동
 
 
