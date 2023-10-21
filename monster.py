@@ -1,4 +1,4 @@
-from func.monster_update import *
+from func.monster_manager import *
 
 
 class Update:
@@ -17,6 +17,7 @@ class Update:
         process_attack(m)
         move_monster(m)
         update_delay(m)
+        update_monster_size(m)
 
     @staticmethod
     def draw(m):
@@ -59,6 +60,7 @@ class Monster:
 
         self.atk_delay, self.dir = 0, 0
         self.attack_motion_time = 0  # 해당 시간동안 공격 모션을 보여준다.
+        self.size = 0  # 공격 시 크기 변화 애니메이션
 
         self.is_attack, self.is_hit = False, False
 

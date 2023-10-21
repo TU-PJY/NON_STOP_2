@@ -11,23 +11,23 @@ def draw_monster(m):
     if m.type == 1:
         if m.dir == 0:
             m.type1.clip_composite_draw\
-                (m.frame * 64, 0, 64, 64, 0, '', m.x + m.p.efx, m.y + m.p.efy, 250, 250)
+                (m.frame * 64, 0, 64, 64, 0, '', m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 250, 250 + m.size)
         elif m.dir == 1:
             m.type1.clip_composite_draw\
-                (m.frame * 64, 0, 64, 64, 0, 'h', m.x + m.p.efx,m.y + m.p.efy, 250, 250)
+                (m.frame * 64, 0, 64, 64, 0, 'h', m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 250, 250 + m.size)
 
         draw_rectangle\
             (m.x - 50 + m.p.efx, m.y + 50 + m.p.efy, m.x + 50 + m.p.efx, m.y - 70 + m.p.efy)
 
 
-
 def move_monster(m):
     m.dir = 1 if m.p.x > m.x else 0
     if not m.is_attack and m.attack_motion_time == 0:
-        if m.dir == 0:
-            m.x -= m.speed
-        elif m.dir == 1:
-            m.x += m.speed
+        if not m.x == m.p.x:
+            if m.dir == 0:
+                m.x -= m.speed
+            elif m.dir == 1:
+                m.x += m.speed
 
 
 def update_frame(m):
@@ -41,15 +41,12 @@ def update_frame(m):
 
 def process_attack(m):
     if m.type == 1:
-        if math.sqrt((m.x - m.p.x) ** 2 + (m.y - m.p.y) ** 2) <= 100:
-            m.is_attack = True
-        else:
-            m.is_attack = False
-
+        m.is_attack = True if math.sqrt((m.x - m.p.x) ** 2 + (m.y - m.p.y) ** 2) <= 100 else False
         if m.is_attack:
             if m.atk_delay == 0:
                 m.attack_motion_time = 50
                 m.atk_delay = 150
+                m.size = 100
 
             if m.attack_motion_time > 0:
                 m.frame = 2
@@ -62,6 +59,11 @@ def update_delay(m):
         m.attack_motion_time -= 1
     if m.atk_delay > 0:
         m.atk_delay -= 1
+
+
+def update_monster_size(m):
+    if m.size > 0:
+        m.size -= 2
 
 
 def update_monster_pos(m):
