@@ -1,40 +1,32 @@
-from func.monster_manager import *
+# from func.monster_manager import *
+from pico2d import *
+from Env_variable import *
 
 
 class Monster:
-    def __init__(self, p):
-        load_monster(self)
+    def __init__(self, p, weapon, target, x, y, speed, mv_dir, type):
+        self.type1 = load_image(type1_directory)
         self.p = p
-        self.list = []
-        # 몬스터들의 정보를 담는 리스트, 인덱스 오류 방지를 위한 더미 대이터가 있음
-        self.dead_list = []  # 몬스터 시체 정보를 담는 리스트
-
-        self.spawn_point_right = WIDTH / 2 + 2200  # 초기 몬스터 스폰 위치. 플레이어가 움직이면 그에 따라 업데이트 된다.
-        self.spawn_point_left = WIDTH / 2 - 2200
-
-        self.spawn_time = 0  # 이 변수가 0이 될 때마다 몬스터가 스폰된다.
-        self.type = 0  # 몬스터 타입
-
-        self.x, self.y, self.mv_dir = 0, 0, 0
-        self.hp, self.speed = 0, 0
-        self.frame, self.frame_delay = 0, 0
-        self.attack, self.hit, self.hit_type = False, False, 0
-        self.damg = 0  # 대미지를 입는 몬스터의 인덱스
+        self.weapon = weapon
+        self.target = target
+        self.type = type
+        self.x, self.y = x, y
+        self.speed, self.dir = speed, mv_dir
 
     def draw(self):
-        if self.list:
-            for i in range(len(self.list) - 1, -1, -1):
-                draw_monster(self, i)
+        if self.type == 1:
+            self.type1.clip_composite_draw(0, 0, 64, 64, 0, '', self.x + self.p.efx, self.y + self.p.efy, 250, 250)
 
     def update(self):
-        update_spawn_point(self)
-        spawn_monster(self)
+        if self.dir == 0:
+            self.x -= self.speed
+        elif self.dir == 1:
+            self.x += self.speed
 
-        for i in range(len(self.list) - 1, -1, -1):
-            move_monster(self, i)
-            frame_monster(self, i)
-            update_monster_pos(self, i)
-            delete_monster(self, i)
+        if self.p.mv_right:
+            self.x -= self.p.speed
+        elif self.p.mv_left:
+            self.x += self.p.speed
 
     def handle_events(self):
         pass

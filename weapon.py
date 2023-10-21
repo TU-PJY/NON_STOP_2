@@ -21,11 +21,6 @@ class Shoot:
     @staticmethod
     def do(weapon):
         update_delay(weapon)
-
-        for i in range(len(weapon.m.list) - 1, -1, -1):
-            damage_manager(weapon, i)
-            melee_hit_manager(weapon, i)
-
         shoot_gun(weapon)
         wield_melee(weapon)
 
@@ -87,11 +82,10 @@ class StateMachineGun:
 
 
 class Weapon:
-    def __init__(self, p, m):
+    def __init__(self, p):
         load_gun_image(self)
         load_melee_image(self)
         self.p = p
-        self.m = m
 
         self.weapon_type = 0  # 0: Gun, 1: Melee
         self.name = 'SCAR_H'

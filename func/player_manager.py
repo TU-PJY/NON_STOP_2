@@ -87,4 +87,9 @@ def walk_animation(p):
             p.size_deg = 0
             p.size_up = True
     if not p.mv_jump:
-        p.size = math.sin(p.size_deg)
+        p.size = (math.sin(p.size_deg))
+
+
+def update_damage_delay(p):
+    if p.dmg_delay > 0:
+        p.dmg_delay -= 1

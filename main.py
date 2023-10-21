@@ -4,7 +4,8 @@ from player import Player
 from map import Land, BackGround, Wall
 from weapon import Weapon
 from target import Target
-from monster import Monster
+from monater_manager import Manager
+import game_manager
 
 
 def handle_events():
@@ -40,7 +41,7 @@ def handle_events():
 
 
 def init_game():
-    global running, game, p, land, bg, wall, weapon, target, m, mi
+    global running, game, p, land, bg, wall, weapon, target, m, gp
 
     running = True
     game = []
@@ -49,27 +50,25 @@ def init_game():
     land = Land(p)
     wall = Wall(p)
     bg = BackGround(p)
-    m = Monster(p)
-    weapon = Weapon(p, m)
-    target = Target(p, m, weapon)
+    weapon = Weapon(p)
+    target = Target(p, weapon)
+    man = Manager(p, weapon, target)
 
-    game.append(bg)
-    game.append(m)
-    game.append(p)
-    game.append(weapon)
-    game.append(land)
-    game.append(wall)
-    game.append(target)
+    game_manager.add_object(man, 0)
+    game_manager.add_object(bg, 1)
+    game_manager.add_object(p, 3)
+    game_manager.add_object(weapon, 4)
+    game_manager.add_object(land, 5)
+    game_manager.add_object(wall, 6)
+    game_manager.add_object(target, 7)
 
 
 def update_game():
-    for o in game:
-        o.update()
+    game_manager.update()
 
 
 def render_game():
-    for o in game:
-        o.draw()
+    game_manager.render()
 
 
 open_canvas(WIDTH, HEIGHT)
