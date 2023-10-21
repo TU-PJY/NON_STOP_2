@@ -33,6 +33,7 @@ class Move:
         look_mouse(p)
         update_camera(p)
         calculate_player_pos(p)
+        update_damage_delay(p)
 
         shake_display(p)
         push_display(p)
@@ -58,6 +59,7 @@ class Idle:
         look_mouse(p)
         update_camera(p)
         calculate_player_pos(p)
+        update_damage_delay(p)
 
         push_display(p)
         shake_display(p)
@@ -105,6 +107,8 @@ class Player:
         self.efx, self.efy = 0, 0  # 플레이어 좌표를 제외한 디스플레이 효과 변수. 객체 좌표에 더하여 사용
 
         self.mx, self.my = 0, 0  # 마우스 좌표
+
+        self.dmg_delay = 0
 
         self.speed = 4  # 플레이어 이동 속도 (사실상 맵 움직이는 속도)
         self.jump_acc = JUMP_ACC
