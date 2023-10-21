@@ -4,30 +4,30 @@ from Env_variable import *
 
 
 def load_land(self):
-    self.goblin = load_image(land_image_directory)
+    self.image = load_image(land_image_directory)
 
 
 def load_wall(self):
-    self.goblin = load_image(wall_image_directory)
+    self.image = load_image(wall_image_directory)
 
 
 def load_background(self):
-    self.goblin = load_image(bg_image_directory)
+    self.image = load_image(bg_image_directory)
     self.image_back = load_image(bg_back_image_directory)
 
 
 def draw_land(self):
-    self.goblin.draw(self.x + self.p.efx, self.y + self.p.efy, 4096, 512)
+    self.image.draw(self.x + self.p.efx, self.y + self.p.efy, 4096, 512)
 
 
 def draw_wall(self):
-    self.goblin.draw(self.x1 + self.p.efx, self.y + self.p.efy, 1280, 1920)
-    self.goblin.draw(self.x2 + self.p.efx, self.y + self.p.efy, 1280, 1920)
+    self.image.draw(self.x1 + self.p.efx, self.y + self.p.efy, 1280, 1920)
+    self.image.draw(self.x2 + self.p.efx, self.y + self.p.efy, 1280, 1920)
 
 
 def draw_background(self):
     self.image_back.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
-    self.goblin.draw(self.x + self.p.efx, self.y + self.p.efy, 4096, 1100)
+    self.image.draw(self.x + self.p.efx, self.y + self.p.efy, 4096, 1100)
 
 
 def update_land(self):  # 이 함수에서 나머지 맵 객체의 업데이트를 결정한다.

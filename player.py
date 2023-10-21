@@ -17,12 +17,15 @@ class Move:
 
     @staticmethod
     def exit(p, e):
-        p.mv_right = False
-        p.mv_left = False
+        if space_down(e):
+            p.mv_jump = True
+        else:
+            p.mv_right = False
+            p.mv_left = False
 
-        p.size_up = True
-        p.size_deg = 0
-        p.size = 0
+            p.size_up = True
+            p.size_deg = 0
+            p.size = 0
 
     @staticmethod
     def do(p):
@@ -50,7 +53,8 @@ class Idle:
 
     @staticmethod
     def exit(p, e):
-        pass
+        if space_down(e):
+            p.mv_jump = True
 
     @staticmethod
     def do(p):
@@ -74,8 +78,8 @@ class StateMachine:
         self.p = p
         self.cur_state = Idle
         self.table = {
-            Idle: {right_down: Move, left_down: Move, left_up: Move, right_up: Move},
-            Move: {right_down: Idle, left_down: Idle, left_up: Idle, right_up: Idle},
+            Idle: {right_down: Move, left_down: Move, left_up: Move, right_up: Move, space_down: Idle},
+            Move: {right_down: Idle, left_down: Idle, left_up: Idle, right_up: Idle, space_down: Move},
         }
 
     def start(self):

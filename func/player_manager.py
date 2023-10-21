@@ -20,8 +20,12 @@ def left_up(e):
     return e[0] == 'INPUT' and e[1].type == SDL_KEYUP and e[1].key == SDLK_a
 
 
+def space_down(e):
+    return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_SPACE
+
+
 def load_player_image(self):
-    self.goblin = load_image(commando_image_directory)
+    self.image = load_image(commando_image_directory)
     self.image_left = load_image(commando_left_image_directory)
 
 
@@ -47,7 +51,7 @@ def look_mouse(p):
 
 def draw_player(p):
     if p.dir == 1:
-        p.goblin.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+        p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
     elif p.dir == 0:
         if p.look_mouse:
             p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size * 100)

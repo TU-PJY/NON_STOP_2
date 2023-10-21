@@ -18,20 +18,6 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
 
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:
-            p.mv_jump = True
-
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_q:  # 무기 교체
-            if weapon.weapon_type == 0:
-                p.look_mouse = False  # 플레이어는 더 이상 마우스를 따라보지 않는다.
-                p.rotate = 0
-                weapon.weapon_type = 1
-                weapon.flame_display_time = 0
-                return
-            else:
-                p.look_mouse = True
-                weapon.weapon_type = 0
-
         elif event.type == SDL_MOUSEMOTION:
             p.mx, p.my = event.x, HEIGHT - 1 - event.y
 

@@ -18,6 +18,9 @@ class Shoot:
         weapon.shoot = False
         weapon.use = False
 
+        if q_down(e):
+            change_weapon(weapon)
+
     @staticmethod
     def do(weapon):
         update_delay(weapon)
@@ -39,7 +42,8 @@ class Idle:
 
     @staticmethod
     def exit(weapon, e):
-        pass
+        if q_down(e):
+            change_weapon(weapon)
 
     @staticmethod
     def do(weapon):
@@ -58,8 +62,8 @@ class StateMachineGun:
         self.weapon = weapon
         self.cur_state = Idle
         self.table = {
-            Idle: {l_down: Shoot},
-            Shoot: {l_up: Idle}
+            Idle: {l_down: Shoot, q_down: Idle},
+            Shoot: {l_up: Idle, q_down: Shoot}
         }
 
     def start(self):

@@ -12,6 +12,10 @@ def l_up(e):
     return e[0] == 'INPUT' and e[1].type == SDL_MOUSEBUTTONUP and e[1].button == SDL_BUTTON_LEFT
 
 
+def q_down(e):
+    return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_q
+
+
 def load_gun_image(self):
     self.flame_right = load_image(flame_right_directory)
     self.flame_left = load_image(flame_left_directory)
@@ -68,6 +72,19 @@ def draw_melee(weapon):
                 weapon.knife_right.clip_composite_draw\
                     (0, 0, 150, 100, -weapon.melee_deg, 'h', weapon.p.px - 50 - weapon.melee_x,
                         weapon.p.py2 - 10, 100, 50)
+
+
+def change_weapon(weapon):
+    if weapon.weapon_type == 0:  # 총을 들고 있을 때 총 -> 근접무기
+        weapon.p.look_mouse = False  # 플레이어는 더 이상 마우스를 따라보지 않는다.
+        weapon.p.rotate = 0
+        weapon.weapon_type = 1
+        weapon.flame_display_time = 0
+        return
+
+    elif weapon.weapon_type == 1:  # 근접무기를 들고 있을 때 근접무기 -> 총
+        weapon.p.look_mouse = True
+        weapon.weapon_type = 0
 
 
 def shoot_gun(weapon):
