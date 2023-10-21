@@ -7,8 +7,8 @@ HEIGHT = root.winfo_screenheight()
 WIDTH = root.winfo_screenwidth()
 print(WIDTH, HEIGHT)
 
-JUMP_ACC = 6  # 점프 가속도
-ACC_DELAY = 12  # 점프 가속도 변화 딜레이
+JUMP_ACC = 5  # 점프 가속도
+ACC_DELAY = 19  # 점프 가속도 변화 딜레이
 LAND_SHAKE = 100  # 착지 시 맵이 눌리는 효과 수치
 LAND_SHAKE_REDUCE = 2  # 맵이 눌린 뒤의 복구 속도
 
