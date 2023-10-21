@@ -1,77 +1,75 @@
-# from func.monster_manager import *
-from pico2d import *
-from Env_variable import *
+from func.monster_update import *
+
+
+class Update:
+    @staticmethod
+    def enter(m, e):
+        pass
+
+    @staticmethod
+    def exit(m, e):
+        pass
+
+    @staticmethod
+    def do(m):
+        update_frame(m)
+        update_monster_pos(m)
+        process_attack(m)
+        move_monster(m)
+        update_delay(m)
+
+    @staticmethod
+    def draw(m):
+        draw_monster(m)
+
+
+class StateMachineTarget:
+    def __init__(self, m):
+        self.m = m
+        self.cur_state = Update
+        self.table = {
+            Update: {},
+        }
+
+    def start(self):
+        self.cur_state.enter(self.m, ('NONE', 0))
+
+    def update(self):
+        self.cur_state.do(self.m)
+
+    def handle_event(self, e):  # state event handling
+        for check_event, next_state in self.table[self.cur_state].items():
+            if check_event(e):
+                self.cur_state.exit(self.m, e)
+                self.cur_state = next_state
+                self.cur_state.enter(self.m, e)
+                return True
+        return False
+
+    def draw(self):
+        self.cur_state.draw(self.m)
 
 
 class Monster:
-    def __init__(self, p, weapon, target, x, y, speed, hp, frame, fdelay, type):
-        self.type1 = load_image(type1_directory)
-        self.p = p
-        self.weapon = weapon
-        self.target = target
-        self.type = type
-        self.x, self.y = x, y
-        self.hp = hp
-        self.speed = speed
-        self.frame = frame
-        self.fdelay = fdelay
-        self.atk_delay = 0
+    def __init__(self, p, weapon, target, x, y, speed, hp, frame, fdelay, monster_type):
+        load_monster(self)
+        self.p, self.weapon, self.target = p, weapon, target
+        self.type, self.x, self.y, self.hp, self.speed, self.frame, self.fdelay =\
+            monster_type, x, y, hp, speed, frame, fdelay
 
-        self.dir = 0
-        self.attack_motion_time = 0  # 해당 시간동안 공격 스파리아트를 보여준다.
+        self.atk_delay, self.dir = 0, 0
+        self.attack_motion_time = 0  # 해당 시간동안 공격 모션을 보여준다.
 
-        self.is_attack = False
-        self.is_hit = False
+        self.is_attack, self.is_hit = False, False
+
+        self.state_machine = StateMachineTarget(self)
+        self.state_machine.start()
 
     def draw(self):
-        if self.type == 1:
-            if self.dir == 0:
-                self.type1.clip_composite_draw((self.frame * 64), 0, 64, 64, 0, '', self.x + self.p.efx, self.y + self.p.efy, 250, 250)
-            elif self.dir == 1:
-                self.type1.clip_composite_draw((self.frame * 64), 0, 64, 64, 0, 'h', self.x + self.p.efx, self.y + self.p.efy, 250, 250)
-            draw_rectangle(self.x - 50 + self.p.efx, self.y + 50 + self.p.efy, self.x + 50 + self.p.efx, self.y - 70 + self.p.efy)
+        self.state_machine.draw()
 
     def update(self):
-        self.dir = 1 if self.p.x > self.x else 0
-        if self.type == 1:
-            if self.p.x - 90 <= self.x <= self.p.x + 90 and self.p.y - 200 <= self.y - 20 <= self.p.y + 200:
-                self.is_attack = True
-            else:
-                self.is_attack = False
+        self.state_machine.update()
 
-        if not self.is_attack and self.attack_motion_time == 0:
-            if self.dir == 0:
-                self.x -= self.speed
-            elif self.dir == 1:
-                self.x += self.speed
-
-        if self.p.mv_right:
-            self.x -= self.p.speed
-        elif self.p.mv_left:
-            self.x += self.p.speed
-
-        if not self.is_attack and self.attack_motion_time == 0:
-            if self.fdelay == 0:
-                self.frame = (self.frame + 1) % 2
-                self.fdelay = 70
-            else:
-                self.fdelay -= 1
-
-        elif self.is_attack:
-            if self.atk_delay == 0:
-                self.attack_motion_time = 50
-                self.atk_delay = 150
-
-            if self.attack_motion_time > 0:
-                self.frame = 2
-            else:
-                self.frame = 1
-
-        if self.attack_motion_time > 0:
-            self.attack_motion_time -= 1
-
-        if self.atk_delay > 0:
-            self.atk_delay -= 1
-
-    def handle_events(self):
-        pass
+    def handle_events(self, event):
+        self.state_machine.handle_event(('INPUT', event))
