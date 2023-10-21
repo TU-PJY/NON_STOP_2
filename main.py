@@ -4,7 +4,7 @@ from player import Player
 from map import Land, BackGround, Wall
 from weapon import Weapon
 from target import Target
-from monater_manager import Manager
+from monster_spawner import Manager
 import game_manager
 
 

@@ -53,12 +53,3 @@ def make_target_point(target):  # 이 함수에서 생성되는 좌표로 적 �
                                    target.p.mx + target.recoil + int(target.dis2) - 31)
         target.ty = random.randint(target.p.my - target.recoil - int(target.dis2) + 31,
                                    target.p.my + target.recoil + int(target.dis2) - 31)
-
-        # for i in range(len(target.m.list) - 1, -1, -1):  # 몬스터에 명중하면 weapon 클래스가 대미지를 처리하도록 한다.
-        #     x, y, type = target.m.list[i][0], target.m.list[i][1], target.m.list[i][9]
-        #
-        #     if type == 1:
-        #         if (x - 50 + target.p.efx <= target.tx <= x + 50 + target.p.efx and
-        #                 y - 70 + target.p.efy <= target.ty <= y + 50 + target.p.efy):
-        #             target.m.hit_type = 0
-        #             target.m.list[i][8] = True  # 명중 사실을 monster 클래스로 보내고 monster클래스가 이를 weapon 클래스로 전달

@@ -26,5 +26,5 @@ def remove_object(o):
         if o in layer:
             layer.remove(o)
             return
-    raise ValueError('왜 존재하지도 않는 걸 지우라구???')
+    raise ValueError('remove err')
 
