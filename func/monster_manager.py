@@ -14,7 +14,8 @@ import random
 
 
 def load_monster(self):
-    self.type_1 = load_image(goblin_directory)
+    self.type_1 = load_image(type1_directory)
+    self.type_2 = load_image(type2_directory)
 
 
 def spawn_monster(self):
@@ -46,16 +47,15 @@ def draw_monster(self, i):
     if monster_type == 1:
         if dir == 0:
             if attack:  # 공격 상태
-                self.type_1.clip_composite_draw(0, 0, 100, 100, 0, '', x + self.p.efx, y + self.p.efy, 250, 250)
+                self.type_1.clip_composite_draw((frame + 1) * 64, 0, 64, 64, 0, '', x + self.p.efx, y + self.p.efy, 250, 250)
             else:
-                self.type_1.clip_composite_draw(frame * 100, 0, 100, 100, 0, '', x + self.p.efx, y + self.p.efy,
-                                                250, 250)
+                self.type_1.clip_composite_draw(frame * 64, 0, 64, 64, 0, '', x + self.p.efx, y + self.p.efy, 250, 250)
+
         elif dir == 1:
             if attack:  # 공격 상태
-                self.type_1.clip_composite_draw(0, 0, 100, 100, 0, 'h', x + self.p.efx, y + self.p.efy, 250, 250)
+                self.type_1.clip_composite_draw((frame + 1) * 64, 0, 64, 64, 0, 'h', x + self.p.efx, y + self.p.efy, 250, 250)
             else:
-                self.type_1.clip_composite_draw(frame * 100, 0, 100, 100, 0, 'h', x + self.p.efx, y + self.p.efy,
-                                                250, 250)
+                self.type_1.clip_composite_draw(frame * 64, 0, 64, 64, 0, 'h', x + self.p.efx, y + self.p.efy, 250, 250)
 
         draw_rectangle(x - 50 + self.p.efx, y + 50 + self.p.efy, x + 50 + self.p.efx, y - 70 + self.p.efy)
 
@@ -63,13 +63,20 @@ def draw_monster(self, i):
 def frame_monster(self, i):  # 몬스터 애니메이션
     global frame, delay, monster_type, attack
     frame, delay = self.list[i][5], self.list[i][6]
-    monster_type, attack = self.list[i][9], self.list[i][8]
+    monster_type, attack = self.list[i][9], self.list[i][7]
 
-    if monster_type == 1 and not attack:
-        if delay == 0:  # delay = 0일 시 다음 프레임 재생
-            self.list[i][5], self.list[i][6] = (frame + 1) % 2, 80
-        else:
-            self.list[i][6] -= 1
+    if monster_type == 1:
+        if not attack:
+            if delay == 0:  # delay = 0일 시 다음 프레임 재생
+                self.list[i][5], self.list[i][6] = (frame + 1) % 2, 80
+            else:
+                self.list[i][6] -= 1
+
+        elif attack:
+            if delay == 0:
+                self.list[i][5], self.list[i][6] = (frame + 1) % 2, 80
+            else:
+                self.list[i][6] -= 1
 
 
 def move_monster(self, i):
@@ -80,7 +87,7 @@ def move_monster(self, i):
     self.list[i][2] = 1 if self.p.x >= x else 0  # 몬스터는 항상 플레이어를 바라본다.
 
     if monster_type == 1:  # type_1
-        self.list[i][7] = True if self.p.x - 80 <= x <= self.p.x + 80 else False  # 공격 사거리 안에 들면 이동 중지
+        self.list[i][7] = True if self.p.x - 120 <= x <= self.p.x + 120 else False  # 공격 사거리 안에 들면 이동 중지
         if not attack:
             if dir == 0:  # 아니면 이동
                 self.list[i][0] -= speed  # 왼쪽 이동
