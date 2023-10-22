@@ -1,6 +1,6 @@
 # 플레이어 관련 함수 모음
 from pico2d import *
-from Env_variable import *
+from game_main.Env_variable import *
 import math
 
 
@@ -25,7 +25,7 @@ def space_down(e):
 
 
 def load_player_image(self):
-    self.image = load_image(commando_image_directory)
+    self.image = load_image(commando_right_image_directory)
     self.image_left = load_image(commando_left_image_directory)
 
 

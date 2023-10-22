@@ -1,5 +1,5 @@
 from pico2d import *
-from Env_variable import *
+from game_main.Env_variable import *
 import math
 
 

@@ -1,4 +1,4 @@
-from func.map_manager import *
+from class_manager.map_manager import *
 
 
 # Player move -> Map class

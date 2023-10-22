@@ -1,7 +1,7 @@
-from monster import Monster
-from Env_variable import *
+from game_class.monster import Monster
+from game_main.Env_variable import *
 import random
-import game_manager
+from game_work import game_manager
 
 
 class Manager:

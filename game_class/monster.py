@@ -1,4 +1,4 @@
-from func.monster_manager import *
+from class_manager.monster_manager import *
 
 
 class Update:

@@ -1,5 +1,5 @@
 # 화면 효과 함수 모음
-from Env_variable import *
+from game_main.Env_variable import *
 import random
 
 

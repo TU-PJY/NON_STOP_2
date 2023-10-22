@@ -1,11 +1,11 @@
 from pico2d import *
 from Env_variable import *
-from player import Player
-from map import Land, BackGround, Wall
-from weapon import Weapon
-from target import Target
-from monster_spawner import Manager
-import game_manager
+from game_class.player import Player
+from game_class.map import Land, BackGround, Wall
+from game_class.weapon import Weapon
+from game_class.target import Target
+from class_manager.monster_tool import Manager
+from game_work import game_manager
 
 
 def handle_events():

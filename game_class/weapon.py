@@ -1,4 +1,4 @@
-from func.weapon_manager import *
+from class_manager.weapon_manager import *
 
 
 # Player location -> Gun class

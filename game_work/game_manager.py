@@ -5,8 +5,8 @@ game = [[], [], [], [], [], [], [], []]
 spawn_time = 0
 
 
-def add_object(o, deapth=0):
-    game[deapth].append(o)  # 지정된 깊이의 레이어에 객체 추가
+def add_object(o, depth = 0):
+    game[depth].append(o)  # 지정된 깊이의 레이어에 객체 추가
 
 
 def update():
