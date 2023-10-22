@@ -16,7 +16,6 @@ def draw_monster(m):
         elif m.dir == 1:
             m.type1.clip_composite_draw \
                 (m.frame * 64, 0, 64, 64, 0, 'h', m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 250, 250 + m.size)
-
         draw_rectangle \
             (m.x - 50 + m.p.efx, m.y + 50 + m.p.efy, m.x + 50 + m.p.efx, m.y - 70 + m.p.efy)
 
@@ -27,7 +26,6 @@ def draw_monster(m):
         elif m.dir == 1:
             m.type2.clip_composite_draw \
                 (m.frame * 128, 0, 128, 128, 0, 'h', m.x + m.p.efx, m.y + m.p.efy, 250, 250 + m.size)
-
         draw_rectangle \
             (m.x - 40 + m.p.efx, m.y + 20 + m.p.efy, m.x + 40 + m.p.efx, m.y - 60 + m.p.efy)
 
@@ -69,11 +67,12 @@ def process_attack(m):
                 m.frame = 1
 
     if m.type == 2:
-        if math.sqrt((m.x - m.p.x) ** 2 + (m.y - m.p.y) ** 2) <= 800 and not m.is_attack and m.atk_delay == 0:
-            m.incline = math.atan2(m.p.y - m.y, m.p.x - m.x)
-            m.temp_x, m.temp_y = m.p.x, m.p.y
-            m.is_dash = True
-            m.is_attack = True
+        if m.p.p_to_wall_left + 100 < m.x < m.p.p_to_wall_right - 100:  # 스폰 지점에서 바로 대쉬하지 않도록
+            if math.sqrt((m.x - m.p.x) ** 2 + (m.y - m.p.y) ** 2) <= 800 and not m.is_attack and m.atk_delay == 0:
+                m.incline = math.atan2(m.p.y - m.y, m.p.x - m.x)
+                m.temp_x, m.temp_y = m.p.x, m.p.y
+                m.is_dash = True
+                m.is_attack = True
 
         if m.is_dash:  # True일 시 대쉬 공격
             m.x += 6 * math.cos(m.incline)

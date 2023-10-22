@@ -49,7 +49,7 @@ def make_target_point(target):  # 이 함수에서 생성되는 좌표로 적 �
     if target.weapon.shoot:
         global x, y, type
         target.target_dot_display_time = TARGET_DOT_DISPLAY_TIME
-        target.tx = random.randint(target.p.mx - target.recoil - int(target.dis2) + 31,
-                                   target.p.mx + target.recoil + int(target.dis2) - 31)
-        target.ty = random.randint(target.p.my - target.recoil - int(target.dis2) + 31,
-                                   target.p.my + target.recoil + int(target.dis2) - 31)
+        target.tx = random.randint\
+            (target.p.mx - target.recoil - int(target.dis2) + 31, target.p.mx + target.recoil + int(target.dis2) - 31)
+        target.ty = random.randint\
+            (target.p.my - target.recoil - int(target.dis2) + 31, target.p.my + target.recoil + int(target.dis2) - 31)

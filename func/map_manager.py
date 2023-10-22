@@ -43,6 +43,9 @@ def update_land(self):  # 이 함수에서 나머지 맵 객체의 업데이트�
             self.p.mv_left = False
             self.x -= self.p.speed
 
+    self.p.p_to_wall_right = self.x + 2048
+    self.p.p_to_wall_left = self.x - 2048
+
 
 def update_wall(self):
     if self.p.mv_right:
