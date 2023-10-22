@@ -1,6 +1,6 @@
 # 무기 관련 함수 모음
 from pico2d import *
-from game_main.Env_variable import *
+from game_main.config import *
 import math
 
 
