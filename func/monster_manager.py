@@ -11,35 +11,38 @@ def load_monster(self):
 def draw_monster(m):
     if m.type == 1:
         if m.dir == 0:
-            m.type1.clip_composite_draw\
+            m.type1.clip_composite_draw \
                 (m.frame * 64, 0, 64, 64, 0, '', m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 250, 250 + m.size)
         elif m.dir == 1:
-            m.type1.clip_composite_draw\
+            m.type1.clip_composite_draw \
                 (m.frame * 64, 0, 64, 64, 0, 'h', m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 250, 250 + m.size)
 
-        draw_rectangle\
+        draw_rectangle \
             (m.x - 50 + m.p.efx, m.y + 50 + m.p.efy, m.x + 50 + m.p.efx, m.y - 70 + m.p.efy)
 
     if m.type == 2:
         if m.dir == 0:
-            m.type2.clip_composite_draw\
+            m.type2.clip_composite_draw \
                 (m.frame * 128, 0, 128, 128, 0, '', m.x + m.p.efx, m.y + m.p.efy, 250, 250 + m.size)
         elif m.dir == 1:
-            m.type2.clip_composite_draw\
+            m.type2.clip_composite_draw \
                 (m.frame * 128, 0, 128, 128, 0, 'h', m.x + m.p.efx, m.y + m.p.efy, 250, 250 + m.size)
 
-        draw_rectangle\
+        draw_rectangle \
             (m.x - 40 + m.p.efx, m.y + 20 + m.p.efy, m.x + 40 + m.p.efx, m.y - 60 + m.p.efy)
 
 
 def move_monster(m):
     m.dir = 1 if m.p.x > m.x else 0
     if not m.is_attack and m.attack_motion_time == 0:
-        if not m.x == m.p.x:
+        if not m.p.x - 5 <= m.x <= m.p.x + 5:
             if m.dir == 0:
                 m.x -= m.speed
             elif m.dir == 1:
                 m.x += m.speed
+
+        if m.type == 2 and m.y < 650:
+            m.y += 1
 
 
 def update_frame(m):
@@ -65,6 +68,21 @@ def process_attack(m):
             else:
                 m.frame = 1
 
+    if m.type == 2:
+        if math.sqrt((m.x - m.p.x) ** 2 + (m.y - m.p.y) ** 2) <= 800 and not m.is_attack and m.atk_delay == 0:
+            m.incline = math.atan2(m.p.y - m.y, m.p.x - m.x)
+            m.temp_x, m.temp_y = m.p.x, m.p.y
+            m.is_dash = True
+            m.is_attack = True
+
+        if m.is_dash:  # True일 시 대쉬 공격
+            m.x += 6 * math.cos(m.incline)
+            m.y += 6 * math.sin(m.incline)
+            if m.temp_x - 10 <= m.x <= m.temp_x + 10 and m.temp_y - 10 <= m.y <= m.temp_y + 10:
+                m.atk_delay = 600
+                m.is_dash = False
+                m.is_attack = False
+
 
 def update_delay(m):
     if m.attack_motion_time > 0:
@@ -81,5 +99,7 @@ def update_monster_size(m):
 def update_monster_pos(m):
     if m.p.mv_right:
         m.x -= m.p.speed
+        m.temp_x -= m.p.speed
     elif m.p.mv_left:
         m.x += m.p.speed
+        m.temp_x += m.p.speed

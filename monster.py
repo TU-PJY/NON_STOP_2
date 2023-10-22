@@ -64,6 +64,10 @@ class Monster:
 
         self.is_attack, self.is_hit = False, False
 
+        self.is_dash = False  # 몬스터 대쉬 공격 여부
+        self.temp_x, self.temp_y = 0, 0
+        self.incline = 0
+
         self.state_machine = StateMachineTarget(self)
         self.state_machine.start()
 
