@@ -33,7 +33,7 @@ def draw_gun(weapon):
     if weapon.weapon_type == 0:
         weapon.deg = math.atan2(weapon.p.my - weapon.p.y, weapon.p.mx - weapon.p.x)
 
-        if weapon.name == 'SCAR_H':  # GUN_NAME에 따라 사용하는 총기가 달라진다.
+        if weapon.gun == 'SCAR_H':  # GUN_NAME에 따라 사용하는 총기가 달라진다.
             if weapon.p.dir == 1:
                 weapon.scar_right.clip_composite_draw\
                     (0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2, 170, 120)
@@ -91,7 +91,7 @@ def shoot_gun(weapon):
     if weapon.trigger and weapon.weapon_type == 0:
         if weapon.shoot_delay == 0:  # 딜레이는 총마다 다르며, 딜레이 수치가 낮을수록 연사 속도가 빠르다. 0이 될 때마다 발사된다.
             weapon.shoot = True  # True일시 해당 값을 Target 클래스로 전달하여 Target 클래스의 recoil을 증가시킨다.
-            if weapon.name == 'SCAR_H':
+            if weapon.gun == 'SCAR_H':
                 weapon.flame_display_time = FLAME_DISPLAY_TIME
                 weapon.shoot_delay = 30
                 weapon.p.shake_time = 20

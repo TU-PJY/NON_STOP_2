@@ -62,6 +62,7 @@ init_game()
 hide_cursor()
 hide_lattice()
 
+
 while running:
     clear_canvas()
     handle_events()

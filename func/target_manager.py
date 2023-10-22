@@ -36,7 +36,7 @@ def update_target(target):
     if target.dis < 0:
         target.dis = 0
 
-    if target.weapon.name == 'SCAR_H':
+    if target.weapon.gun == 'SCAR_H':
         target.dis2 = 35 + target.dis / 20
         if target.weapon.shoot:
             target.recoil += 18

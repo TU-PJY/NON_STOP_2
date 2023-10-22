@@ -14,8 +14,8 @@ class Update:
     def do(m):
         update_frame(m)
         update_monster_pos(m)
-        process_attack(m)
         move_monster(m)
+        process_attack(m)
         update_delay(m)
         update_monster_size(m)
 
@@ -65,6 +65,7 @@ class Monster:
         self.is_attack, self.is_hit = False, False
 
         self.is_dash = False  # 몬스터 대쉬 공격 여부
+        self.dash_delay = 0
         self.temp_x, self.temp_y = 0, 0
         self.incline = 0
 

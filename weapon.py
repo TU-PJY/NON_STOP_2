@@ -92,7 +92,7 @@ class Weapon:
         self.p = p
 
         self.weapon_type = 0  # 0: Gun, 1: Melee
-        self.name = 'SCAR_H'
+        self.gun = 'SCAR_H'
         self.deg = 0  # 총 이미지 각도
 
         self.trigger = False  # 마우스 좌클릭 시 True
