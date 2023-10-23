@@ -1,5 +1,5 @@
 from pico2d import *
-from game_main.config import *
+from config import *
 import math
 
 

@@ -1,6 +1,6 @@
 # 맵 관련 함수 모음
 from pico2d import *
-from game_main.config import *
+from config import *
 
 
 def load_land(self):

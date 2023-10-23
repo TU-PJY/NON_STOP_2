@@ -19,8 +19,8 @@ FLAME_DISPLAY_TIME = 10  # 총구 화염 출력 시간
 TARGET_DOT_DISPLAY_TIME = 10  # 조준점 내부에 빨간 점이 표시되는 시간 
 
 # 플레이어 이미지 파일 경로
-commando_right_image_directory = 'res//player_image//player1_right.png'
-commando_left_image_directory = 'res//player_image//player1_left.png'
+player1_right_image_directory = 'res//player_image//player1_right.png'
+player1_left_image_directory = 'res//player_image//player1_left.png'
 
 # 배경 이미지 파일 경로
 land_image_directory = 'res//map_image//land.png'

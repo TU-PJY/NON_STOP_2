@@ -1,5 +1,5 @@
 from game_class.monster import Monster
-from game_main.config import *
+from config import *
 import random
 from game_work import game_manager
 

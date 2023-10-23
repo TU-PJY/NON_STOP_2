@@ -1,5 +1,5 @@
 # 화면 효과 함수 모음
-from game_main.config import *
+from config import *
 import random
 
 
