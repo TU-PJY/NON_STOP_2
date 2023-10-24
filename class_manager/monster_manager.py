@@ -12,20 +12,20 @@ def draw_monster(m):
     if m.type == 1:
         if m.dir == 0:
             m.type1.clip_composite_draw \
-                (m.frame * 64, 0, 64, 64, 0, '', m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 250, 250 + m.size)
+                (m.frame * 64, 0, 64, 64, 0, '', m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 300, 300 + m.size)
         elif m.dir == 1:
             m.type1.clip_composite_draw \
-                (m.frame * 64, 0, 64, 64, 0, 'h', m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 250, 250 + m.size)
+                (m.frame * 64, 0, 64, 64, 0, 'h', m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 300, 300 + m.size)
         draw_rectangle \
             (m.x - 50 + m.p.efx, m.y + 50 + m.p.efy, m.x + 50 + m.p.efx, m.y - 70 + m.p.efy)
 
     if m.type == 2:
         if m.dir == 0:
             m.type2.clip_composite_draw \
-                (m.frame * 128, 0, 128, 128, 0, '', m.x + m.p.efx, m.y + m.p.efy, 250, 250 + m.size)
+                (m.frame * 128, 0, 128, 128, 0, '', m.x + m.p.efx, m.y + m.p.efy, 300, 300 + m.size)
         elif m.dir == 1:
             m.type2.clip_composite_draw \
-                (m.frame * 128, 0, 128, 128, 0, 'h', m.x + m.p.efx, m.y + m.p.efy, 250, 250 + m.size)
+                (m.frame * 128, 0, 128, 128, 0, 'h', m.x + m.p.efx, m.y + m.p.efy, 300, 300 + m.size)
         draw_rectangle \
             (m.x - 40 + m.p.efx, m.y + 40 + m.p.efy, m.x + 40 + m.p.efx, m.y - 40 + m.p.efy)
 
@@ -54,7 +54,7 @@ def update_frame(m):
 
 def process_attack(m):
     if m.type == 1:
-        m.is_attack = True if math.sqrt((m.x - m.p.x) ** 2 + (m.y - m.p.y) ** 2) <= 100 else False
+        m.is_attack = True if math.sqrt((m.x - m.p.x) ** 2 + (m.y - m.p.y) ** 2) <= 150 else False
         if m.is_attack:
             if m.atk_delay == 0:
                 m.attack_motion_time = 50
@@ -67,7 +67,7 @@ def process_attack(m):
                 m.frame = 1
 
     if m.type == 2:
-        if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - m.y + (m.p.y - 250)/1.5) ** 2) <= 100 and not m.is_dash:  # 공중 접촉
+        if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 150 and not m.is_dash:  # 공중 접촉
             if m.atk_delay == 0:
                 m.size = 150
                 m.atk_delay = 150
@@ -86,7 +86,7 @@ def process_attack(m):
             m.x += 6 * math.cos(m.incline)
             m.y += 6 * math.sin(m.incline)
 
-            if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 100:  # 대쉬 접촉
+            if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 150:  # 대쉬 접촉
                 m.size = 150
 
             if m.temp_x - 10 <= m.x <= m.temp_x + 10 and m.temp_y - 10 <= m.y <= m.temp_y + 10:

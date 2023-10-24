@@ -45,7 +45,7 @@ class Manager:
             self.type = random.randint(1, 2)
 
             if self.type == 1:
-                self.y, self.speed, self.hp = 250, 2, 100
+                self.y, self.speed, self.hp = 265, 2, 100
 
             elif self.type == 2:
                 self.y, self.speed, self.hp = 650, 1, 70
