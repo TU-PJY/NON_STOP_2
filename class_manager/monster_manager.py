@@ -13,10 +13,10 @@ def draw_monster(m):
     if m.type == 1:
         if m.dir == 0:
             m.type1.clip_composite_draw \
-                (m.frame * 64, 0, 64, 64, 0, '', m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 300, 300 + m.size)
+                (m.frame * 64, 0, 64, 64, 0, '', m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 280, 280 + m.size)
         elif m.dir == 1:
             m.type1.clip_composite_draw \
-                (m.frame * 64, 0, 64, 64, 0, 'h', m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 300, 300 + m.size)
+                (m.frame * 64, 0, 64, 64, 0, 'h', m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 280, 280 + m.size)
         draw_rectangle \
             (m.x - 50 + m.p.efx, m.y + 50 + m.p.efy, m.x + 50 + m.p.efx, m.y - 70 + m.p.efy)
 
@@ -125,7 +125,7 @@ def process_attack(m):
     if m.type == 2:
         if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 100 and not m.is_dash:  # 공중 접촉
             if m.atk_delay == 0:
-                m.size = 150
+                m.size = 200
                 m.atk_delay = 150
 
         if m.p.p_to_wall_left + 100 < m.x < m.p.p_to_wall_right - 100:  # 스폰 지점에서 바로 대쉬하지 않도록
@@ -143,7 +143,7 @@ def process_attack(m):
             m.y += 6 * math.sin(m.incline)
 
             if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 100:  # 대쉬 접촉
-                m.size = 150
+                m.size = 200
 
             if m.temp_x - 10 <= m.x <= m.temp_x + 10 and m.temp_y - 10 <= m.y <= m.temp_y + 10:
                 m.dash_delay = 600

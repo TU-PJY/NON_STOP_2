@@ -42,11 +42,10 @@ class Manager:
             self.frame = random.randint(0, 1)
             self.fdelay = random.randint(0, 70)
 
-            # self.type = random.randint(1, 3)
-            self.type = 3
+            self.type = random.randint(1, 3)
 
             if self.type == 1:
-                self.y, self.speed, self.hp = 265, 2, 150
+                self.y, self.speed, self.hp = 260, 2, 150
 
             elif self.type == 2:
                 self.y, self.speed, self.hp = 650, 1, 70
