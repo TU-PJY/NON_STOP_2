@@ -83,7 +83,7 @@ def move_monster(m):
 
 
 def monster_animation(m):
-    if not m.is_attack and m.attack_motion_time == 0 and not m.type == 3:
+    if not m.is_attack and m.attack_motion_time == 0 and not m.type == 3:  # type3은 업데이트를 하지 않음
         if m.fdelay == 0:
             m.frame = (m.frame + 1) % 2
             m.fdelay = 70
@@ -103,12 +103,12 @@ def monster_animation(m):
 
         if not m.is_jump:
             m.size2 = math.sin(m.size_deg) * 100
+            m.frame = 0
 
         if m.is_jump:  # 점프 시 프레임이 다름
             m.frame = 1
             m.size2 = 0
-        else:
-            m.frame = 0
+
 
 
 def process_attack(m):
