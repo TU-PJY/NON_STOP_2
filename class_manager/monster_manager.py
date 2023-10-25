@@ -6,6 +6,7 @@ import math
 def load_monster(self):
     self.type1 = load_image(type1_directory)
     self.type2 = load_image(type2_directory)
+    self.type3 = load_image(type3_directory)
 
 
 def draw_monster(m):
@@ -28,6 +29,16 @@ def draw_monster(m):
                 (m.frame * 128, 0, 128, 128, 0, 'h', m.x + m.p.efx, m.y + m.p.efy, 300, 300 + m.size)
         draw_rectangle \
             (m.x - 40 + m.p.efx, m.y + 40 + m.p.efy, m.x + 40 + m.p.efx, m.y - 40 + m.p.efy)
+
+    if m.type == 3:
+        if m.dir == 0:
+            m.type3.clip_composite_draw \
+                (m.frame * 128, 0, 128, 128, 0, '', m.x + m.p.efx, m.y + m.p.efy, 300, 300 + m.size)
+        elif m.dir == 1:
+            m.type3.clip_composite_draw \
+                (m.frame * 128, 0, 128, 128, 0, 'h', m.x + m.p.efx, m.y + m.p.efy, 300, 300 + m.size)
+        draw_rectangle \
+            (m.x - 60 + m.p.efx, m.y + 60 + m.p.efy, m.x + 60 + m.p.efx, m.y - 60 + m.p.efy)
 
 
 def move_monster(m):
