@@ -12,7 +12,7 @@ class Update:
 
     @staticmethod
     def do(m):
-        update_frame(m)
+        monster_animation(m)
         update_monster_pos(m)
         move_monster(m)
         process_attack(m)
@@ -64,10 +64,18 @@ class Monster:
 
         self.is_attack, self.is_hit = False, False
 
-        self.is_dash = False  # 몬스터 대쉬 공격 여부
+        self.is_dash = False  # type2 전용 변수
         self.dash_delay = 0
         self.temp_x, self.temp_y = 0, 0
         self.incline = 0
+
+        self.is_jump = False  # type3 전용 변수
+        self.size2 = 0  # rubber animation 전용 크기 변수
+        self.size_up = True  # True일 시 크기 증가, False일 시 크기 감소
+        self.size_deg = 0  # rubber animation 전용 크기 변수
+        self.jump_acc = 0
+        self.acc_delay = 0
+        self.jump_delay = 0
 
         self.state_machine = StateMachineTarget(self)
         self.state_machine.start()

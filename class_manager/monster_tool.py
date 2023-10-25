@@ -42,7 +42,7 @@ class Manager:
             self.frame = random.randint(0, 1)
             self.fdelay = random.randint(0, 70)
 
-            # self.type = random.randint(1, 2)
+            # self.type = random.randint(1, 3)
             self.type = 3
 
             if self.type == 1:
@@ -52,7 +52,7 @@ class Manager:
                 self.y, self.speed, self.hp = 650, 1, 70
 
             elif self.type == 3:
-                self.y, self.speed, self.hp = 240, 1, 100
+                self.y, self.speed, self.hp, self.frame = 230, 1, 100, 0
 
             m = Monster\
                 (self.p, self.weapon, self.target, self.spawn_point,

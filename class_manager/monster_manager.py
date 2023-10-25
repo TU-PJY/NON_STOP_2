@@ -33,10 +33,12 @@ def draw_monster(m):
     if m.type == 3:
         if m.dir == 0:
             m.type3.clip_composite_draw \
-                (m.frame * 128, 0, 128, 128, 0, '', m.x + m.p.efx, m.y + m.p.efy, 300, 300 + m.size)
+                (m.frame * 128, 0, 128, 128, 0, '', m.x + m.p.efx, m.y + m.p.efy + m.size2 / 3 + m.size / 5,
+                 300, 300 + m.size2 + m.size)
         elif m.dir == 1:
             m.type3.clip_composite_draw \
-                (m.frame * 128, 0, 128, 128, 0, 'h', m.x + m.p.efx, m.y + m.p.efy, 300, 300 + m.size)
+                (m.frame * 128, 0, 128, 128, 0, 'h', m.x + m.p.efx, m.y + m.p.efy + m.size2 / 3 + m.size / 5,
+                 300, 300 + m.size2 + m.size)
         draw_rectangle \
             (m.x - 60 + m.p.efx, m.y + 60 + m.p.efy, m.x + 60 + m.p.efx, m.y - 60 + m.p.efy)
 
@@ -50,17 +52,60 @@ def move_monster(m):
             elif m.dir == 1:
                 m.x += m.speed
 
-        if m.type == 2 and m.y < 650:
+        if m.type == 2 and m.y < 650:  # 650보다 낮게 있으면 자기 자리로 복귀한다
             m.y += 1
 
+        if m.type == 3:
+            if not m.is_jump and m.jump_delay == 0:  # 점프하면서 이동
+                m.jump_acc = JUMP_ACC
+                m.is_jump = True
 
-def update_frame(m):
-    if not m.is_attack and m.attack_motion_time == 0:
+            if m.is_jump:
+                m.y += m.jump_acc * 2
+
+                if m.acc_delay == 0:
+                    m.jump_acc -= 1
+                    m.acc_delay = ACC_DELAY
+                else:
+                    m.acc_delay -= 1
+
+                if m.y <= 230 and m.jump_acc < 0:  # 땅에 착지할 경우
+                    m.y = 230
+                    m.is_jump = False
+                    m.acc_delay = 0
+                    m.jump_delay = 250  # 점프 타이밍이 존재
+
+            if m.jump_delay > 0:
+                m.jump_delay -= 1
+
+
+def monster_animation(m):
+    if not m.is_attack and m.attack_motion_time == 0 and not m.type == 3:
         if m.fdelay == 0:
             m.frame = (m.frame + 1) % 2
             m.fdelay = 70
         else:
             m.fdelay -= 1
+
+    if m.type == 3:
+        if m.size_up:
+            m.size_deg += 0.005
+            if m.size_deg >= 0.4:
+                m.size_deg, m.size_up = 0.4, False
+
+        elif not m.size_up:
+            m.size_deg -= 0.005
+            if m.size_deg <= 0:
+                m.size_deg, m.size_up = 0, True
+
+        if not m.is_jump:
+            m.size2 = math.sin(m.size_deg) * 100
+
+        if m.is_jump:  # 점프 시 프레임이 다름
+            m.frame = 1
+            m.size2 = 0
+        else:
+            m.frame = 0
 
 
 def process_attack(m):
@@ -104,6 +149,12 @@ def process_attack(m):
                 m.dash_delay = 600
                 m.is_dash = False
                 m.is_attack = False
+
+    if m.type == 3:
+        if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 110:
+            if m.atk_delay == 0:
+                m.size = 200
+                m.atk_delay = 150
 
 
 def update_delay(m):
