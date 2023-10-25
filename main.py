@@ -4,7 +4,7 @@ from game_class.player import Player
 from game_class.map import Land, BackGround, Wall
 from game_class.weapon import Weapon
 from game_class.target import Target
-from class_manager.monster_tool import Manager
+from game_class.monster_tool import Tool
 from game_work import game_manager
 
 
@@ -38,7 +38,7 @@ def init_game():
     bg = BackGround(p)
     weapon = Weapon(p)
     target = Target(p, weapon)
-    man = Manager(p, weapon, target)
+    man = Tool(p, weapon, target)
 
     game_manager.add_object(man, 0)
     game_manager.add_object(bg, 1)

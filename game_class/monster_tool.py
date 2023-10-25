@@ -1,8 +1,9 @@
 from class_manager.monster_tool_func import *
 from config import *
+# 몬스터 스폰 클래스
 
 
-class Manager:
+class Tool:
     def __init__(self, p, weapon, target):
         self.p = p
         self.weapon = weapon
