@@ -53,10 +53,11 @@ class StateMachineTarget:
 
 class Monster:
     def __init__(self, p, weapon, target, x, y, speed, hp, frame, fdelay, monster_type):
-        load_monster(self)
         self.p, self.weapon, self.target = p, weapon, target
         self.type, self.x, self.y, self.hp, self.speed, self.frame, self.fdelay =\
             monster_type, x, y, hp, speed, frame, fdelay
+
+        load_monster(self)
 
         self.atk_delay, self.dir = 0, 0
         self.attack_motion_time = 0  # 해당 시간동안 공격 모션을 보여준다.

@@ -4,9 +4,12 @@ import math
 
 
 def load_monster(self):
-    self.type1 = load_image(type1_directory)
-    self.type2 = load_image(type2_directory)
-    self.type3 = load_image(type3_directory)
+    if self.type == 1:
+        self.type1 = load_image(type1_directory)
+    elif self.type == 2:
+        self.type2 = load_image(type2_directory)
+    elif self.type == 3:
+        self.type3 = load_image(type3_directory)
 
 
 def draw_monster(m):
