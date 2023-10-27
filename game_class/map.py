@@ -10,8 +10,9 @@ class Map:  # 땅
         self.p = p
         self.wall = wall
         self.bg = bg
+
         self.x, self.y = WIDTH / 2, -50  # Map 자신이 그리는것은 land
-        self.playerToWallRight, self.playerToWallLeft = self.x + 2048, self.x - 2048
+        self.playerToWallRight, self.playerToWallLeft = self.p.x + 2048, self.p.x - 2048
 
     def draw(self):
         draw_land(self)
