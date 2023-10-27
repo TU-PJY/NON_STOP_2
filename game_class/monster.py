@@ -60,24 +60,26 @@ class Monster:
 
         load_monster(self)
 
+        # 공용 변수
         self.atk_delay, self.dir = 0, 0
         self.attack_motion_time = 0  # 해당 시간동안 공격 모션을 보여준다.
         self.size = 0  # 공격 시 크기 변화 애니메이션
-
         self.is_attack, self.is_hit = False, False
 
-        self.is_dash = False  # type2 전용 변수
+        # type2 전용 변수
+        self.is_dash = False
         self.dash_delay = 0
-        self.temp_x, self.temp_y = 0, 0
+        self.temp_x, self.temp_y = 0, 0  # 대쉬 목적지 좌표
         self.incline = 0
 
-        self.is_jump = False  # type3 전용 변수
-        self.size2 = 0  # rubber animation 전용 크기 변수
+        # type3 전용 변수
+        self.is_jump = False
+        self.size2 = 0  # rubber animation 크기 변수
         self.size_up = True  # True일 시 크기 증가, False일 시 크기 감소
         self.size_deg = 0  # rubber animation 전용 크기 변수
         self.jump_acc = 0
         self.acc_delay = 0
-        self.jump_delay = 0
+        self.jump_delay = 0  # 0이 될때마다 점프
 
         self.state_machine = StateMachineTarget(self)
         self.state_machine.start()

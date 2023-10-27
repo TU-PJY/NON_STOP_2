@@ -33,13 +33,14 @@ def update_target(target):
         else:
             target.reduce_delay -= 1
 
-    if target.dis < 0:
+    if target.dis < 0:  # 분산도가 0 밑으로 내려가지 않도록 한다.
         target.dis = 0
 
     if target.weapon.gun == 'SCAR_H':
-        target.dis2 = 35 + target.dis / 20
+        # empty randrange 방지를 위해 35를 더해야 함
+        target.dis2 = target.dis / 20 + 35  # 나누는 숫자가 작을 수록 분산도가 커진다.
         if target.weapon.shoot:
-            target.recoil += 18
+            target.recoil += 18  # 총기마다 반동 수치가 달라 조준점이 벌어지는 정도가 다르다.
 
     if target.target_dot_display_time > 0:
         target.target_dot_display_time -= 1
@@ -47,8 +48,8 @@ def update_target(target):
 
 def make_target_point(target):  # 이 함수에서 생성되는 좌표로 적 피격을 판정한다.
     if target.weapon.shoot:
-        global x, y, type
-        target.target_dot_display_time = TARGET_DOT_DISPLAY_TIME
+        global x, y
+        target.target_dot_display_time = TARGET_DOT_DISPLAY_TIME  # 해당 시간 동안 총구화염이 보이게 된다.
         target.tx = random.randint\
             (target.p.mx - target.recoil - int(target.dis2) + 31, target.p.mx + target.recoil + int(target.dis2) - 31)
         target.ty = random.randint\

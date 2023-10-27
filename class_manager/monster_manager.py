@@ -46,6 +46,11 @@ def draw_monster(m):
             (m.x - 60 + m.p.efx, m.y + 60 + m.p.efy, m.x + 60 + m.p.efx, m.y - 60 + m.p.efy)
 
 
+def update_monster_size(m):
+    if m.size > 0:
+        m.size -= 2
+
+
 def move_monster(m):
     m.dir = 1 if m.p.x > m.x else 0
     if not m.is_attack and m.attack_motion_time == 0:
@@ -83,13 +88,15 @@ def move_monster(m):
 
 
 def monster_animation(m):
-    if not m.is_attack and m.attack_motion_time == 0 and not m.type == 3:  # type3은 업데이트를 하지 않음
+    # all type animation
+    if not m.is_attack and m.attack_motion_time == 0 and not m.type == 3:  # type3은 프레임 업데이트를 하지 않음
         if m.fdelay == 0:
             m.frame = (m.frame + 1) % 2
             m.fdelay = 70
         else:
             m.fdelay -= 1
 
+    # type 3 animation
     if m.type == 3:
         if m.size_up:
             m.size_deg += 0.005
@@ -111,6 +118,7 @@ def monster_animation(m):
 
 
 def process_attack(m):
+    # type 1 attack
     if m.type == 1:
         m.is_attack = True if math.sqrt((m.x - m.p.x) ** 2 + (m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 100 else False
         if m.is_attack:
@@ -124,6 +132,7 @@ def process_attack(m):
             else:
                 m.frame = 1
 
+    # type 2 attack
     if m.type == 2:
         if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 100 and not m.is_dash:  # 공중 접촉
             if m.atk_delay == 0:
@@ -152,6 +161,7 @@ def process_attack(m):
                 m.is_dash = False
                 m.is_attack = False
 
+    # type 3 attack
     if m.type == 3:
         if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 110:
             if m.atk_delay == 0:
@@ -166,11 +176,6 @@ def update_delay(m):
         m.atk_delay -= 1
     if m.dash_delay > 0:
         m.dash_delay -= 1
-
-
-def update_monster_size(m):
-    if m.size > 0:
-        m.size -= 2
 
 
 def update_monster_pos(m):

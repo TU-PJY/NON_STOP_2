@@ -23,7 +23,6 @@ def spawn_monster(self):  # 몬스터 스폰
 
         self.frame = random.randint(0, 1)
         self.fdelay = random.randint(0, 70)
-
         self.type = random.randint(1, 3)
 
         if self.type == 1:

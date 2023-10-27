@@ -46,9 +46,7 @@ def update_map(self, speed):  # 맵 업데이트
     self.playerToWallLeft += speed
 
     if self.x + 2048 <= self.p.x:  # 맵 끝으로 갈 경우 벽에 막힌다
-        self.p.x = self.x + 2048
         self.p.mv_right = False
 
     if self.x - 2048 >= self.p.x:
-        self.p.x = self.x - 2048
         self.p.mv_left = False

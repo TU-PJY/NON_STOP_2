@@ -104,34 +104,33 @@ class StateMachine:
 class Player:
     def __init__(self):
         load_player_image(self)
-
-        self.x, self.y, self.dir = WIDTH / 2, 250, 1
-        self.mv_right, self.mv_left, self.mv_jump = False, False, False  # 플레이어 이동, 점프
-        self.px, self.py, self.py2 = 0, 0, 0  # 디스플레이 효과를 모두 포함한 최종 좌표
-        self.efx, self.efy = 0, 0  # 플레이어 좌표를 제외한 디스플레이 효과 변수. 객체 좌표에 더하여 사용
-
         self.mx, self.my = 0, 0  # 마우스 좌표
 
-        self.dmg_delay = 0
+        # player data
+        self.x, self.y, self.dir = WIDTH / 2, 250, 1
+        self.mv_right, self.mv_left, self.mv_jump = False, False, False  # 플레이어 이동, 점프
+        self.dmg_delay = 0  # 플레이어가 받는 대미지 딜레이
 
         self.speed = 4  # 플레이어 이동 속도 (사실상 맵 움직이는 속도)
         self.jump_acc = JUMP_ACC
         self.acc_delay = 0
-        self.land_y = 0  # 이 수치만큼 화면의 모든 이미지들이 아래로 눌린다.
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
-
-        self.shake_time = 0  # 화면 흔들림 변수. time이 1 이상일 경우 화면이 흔들리게 된다.
-        self.shake_x, self.shake_y = 0, 0
-        self.shake_range = 0  # 화면 흔들림의 정도
 
         self.size = 0  # 걸을 때 플레이어 크기가 고무줄처럼 커졌다 작아진다.
         self.size_deg = 0
         self.size_up = True
-
         self.look_mouse = True  # True일 시 플레이어는 마우스를 따라본다.
 
+        # display effects
+        self.land_y = 0  # 이 수치만큼 화면의 모든 이미지들이 아래로 눌린다.
+        self.shake_time = 0  # 화면 흔들림 변수. time이 1 이상일 경우 화면이 흔들리게 된다.
+        self.shake_x, self.shake_y = 0, 0
+        self.shake_range = 0  # 화면 흔들림의 정도
         self.camera_y = 0  # 화면이 마우스 좌표를 살짝 따라간다.
         self.camera_x = 0
+
+        self.efx, self.efy = 0, 0  # 플레이어 좌표를 제외한 디스플레이 효과 변수. 객체 좌표에 더하여 사용
+        self.px, self.py, self.py2 = 0, 0, 0  # 디스플레이 효과를 모두 포함한 좌표. 무기 출력에 사용.
 
         self.state_machine = StateMachine(self)
         self.state_machine.start()

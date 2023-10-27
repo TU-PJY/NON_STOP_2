@@ -30,11 +30,12 @@ def load_player_image(self):
 
 
 def calculate_player_pos(p):
-    p.px = p.x + p.shake_x + p.camera_x
+    p.px = p.x + p.shake_x + p.camera_x  # 무기 풀력 x 좌표로도 사용
     p.py = p.y - p.land_y + p.shake_y + p.size * 50 + p.camera_y
+    # 플레이어 출력 좌표
 
     p.py2 = p.y - p.land_y + p.shake_y + p.camera_y
-    # 사이즈 변형 포함되지 않은 y 위치. 무기 좌표로 사용.
+    # 무기 출력 y 좌표
 
     p.efx = p.shake_x + p.camera_x
     p.efy = p.shake_y - p.land_y + p.camera_y - (p.y - 250) / 1.5
