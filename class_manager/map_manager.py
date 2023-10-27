@@ -30,36 +30,25 @@ def draw_background(self):
     self.image.draw(self.x + self.p.efx, self.y + self.p.efy, 4096, 1100)
 
 
-def update_land(self):  # 이 함수에서 나머지 맵 객체의 업데이트를 결정한다.
+def update_map(self, speed):  # 맵 업데이트
     if self.p.mv_right:
-        self.x -= self.p.speed
-        if self.x + 2048 <= WIDTH / 2:
+        self.x -= speed
+        self.wall.x1 -= speed
+        self.wall.x2 -= speed
+        self.bg.x -= speed / 4
+        self.playerToWallRight -= speed
+        self.playerToWallLeft -= speed
+
+        if self.x + 2048 <= WIDTH / 2:  # 맵 끝으로 갈 경우 벽에 막힌다
             self.p.mv_right = False
-            self.x += self.p.speed
 
     elif self.p.mv_left:
-        self.x += self.p.speed
+        self.x += speed
+        self.wall.x1 += speed
+        self.wall.x2 += speed
+        self.bg.x += speed / 4
+        self.playerToWallRight += speed
+        self.playerToWallLeft += speed
+
         if self.x - 2048 >= WIDTH / 2:
             self.p.mv_left = False
-            self.x -= self.p.speed
-
-    self.p.p_to_wall_right = self.x + 2048
-    self.p.p_to_wall_left = self.x - 2048
-
-
-def update_wall(self):
-    if self.p.mv_right:
-        self.x1 -= self.p.speed
-        self.x2 -= self.p.speed
-
-    elif self.p.mv_left:
-        self.x1 += self.p.speed
-        self.x2 += self.p.speed
-
-
-def update_background(self):
-    if self.p.mv_right:
-        self.x -= self.p.speed / 4
-
-    elif self.p.mv_left:
-        self.x += self.p.speed / 4

@@ -133,9 +133,6 @@ class Player:
         self.camera_y = 0  # 화면이 마우스 좌표를 살짝 따라간다.
         self.camera_x = 0
 
-        self.p_to_wall_left = 0
-        self.p_to_wall_right = 0  # 플레이어와 벽간의 거리, 몬스터 벽 충돌 처리에 사용
-
         self.state_machine = StateMachine(self)
         self.state_machine.start()
 

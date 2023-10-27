@@ -52,8 +52,9 @@ class StateMachineTarget:
 
 
 class Monster:
-    def __init__(self, p, weapon, target, x, y, speed, hp, frame, fdelay, monster_type):
+    def __init__(self, p, weapon, target, mp, x, y, speed, hp, frame, fdelay, monster_type):
         self.p, self.weapon, self.target = p, weapon, target
+        self.mp = mp
         self.type, self.x, self.y, self.hp, self.speed, self.frame, self.fdelay =\
             monster_type, x, y, hp, speed, frame, fdelay
 

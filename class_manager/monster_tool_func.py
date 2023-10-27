@@ -36,7 +36,7 @@ def spawn_monster(self):  # 몬스터 스폰
             self.y, self.speed, self.hp, self.frame = 230, 1, 100, 0
 
         m = Monster \
-            (self.p, self.weapon, self.target, self.spawn_point,
+            (self.p, self.weapon, self.target, self.mp, self.spawn_point,
              self.y, self.speed, self.hp, self.frame, self.fdelay, self.type)
 
         game_manager.add_object(m, 2)

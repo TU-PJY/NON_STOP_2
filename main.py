@@ -1,7 +1,7 @@
 from pico2d import *
 from config import *
 from game_class.player import Player
-from game_class.map import Land, BackGround, Wall
+from game_class.map import Map, BackGround, Wall
 from game_class.weapon import Weapon
 from game_class.target import Target
 from game_class.monster_tool import Tool
@@ -27,24 +27,24 @@ def handle_events():
 
 
 def init_game():
-    global running, game, p, land, bg, wall, weapon, target, m, gp
+    global running, game, p, mp, bg, wall, weapon, target, m, gp
 
     running = True
     game = []
 
     p = Player()
-    land = Land(p)
     wall = Wall(p)
     bg = BackGround(p)
+    mp = Map(p, wall, bg)
     weapon = Weapon(p)
     target = Target(p, weapon)
-    man = Tool(p, weapon, target)
+    man = Tool(p, weapon, target, mp)
 
     game_manager.add_object(man, 0)
     game_manager.add_object(bg, 1)
     game_manager.add_object(p, 3)
     game_manager.add_object(weapon, 4)
-    game_manager.add_object(land, 5)
+    game_manager.add_object(mp, 5)
     game_manager.add_object(wall, 6)
     game_manager.add_object(target, 7)
 

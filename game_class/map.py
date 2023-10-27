@@ -4,17 +4,20 @@ from class_manager.map_manager import *
 # Player move -> Map class
 
 
-class Land:  # 땅
-    def __init__(self, p):
+class Map:  # 땅
+    def __init__(self, p, wall, bg):
         load_land(self)
-        self.x, self.y = WIDTH / 2, -50
         self.p = p
+        self.wall = wall
+        self.bg = bg
+        self.x, self.y = WIDTH / 2, -50  # Map 자신이 그리는것은 land
+        self.playerToWallRight, self.playerToWallLeft = self.x + 2048, self.x - 2048
 
     def draw(self):
         draw_land(self)
 
     def update(self):  # 이 함수에서 땅 끝과 플레이어 좌표가 일치하면 모든 맵 클래스의 스크롤이 멈춘다.
-        update_land(self)
+        update_map(self, self.p.speed)
 
     def handle_event(self, event):
         pass
@@ -32,7 +35,7 @@ class Wall:  # 벽
         draw_wall(self)
 
     def update(self):
-        update_wall(self)
+        pass
 
     def handle_event(self, event):
         pass
@@ -48,7 +51,7 @@ class BackGround:  # 배경
         draw_background(self)
 
     def update(self):
-        update_background(self)
+        pass
 
     def handle_event(self, event):
         pass

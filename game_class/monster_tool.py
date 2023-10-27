@@ -4,10 +4,11 @@ from config import *
 
 
 class Tool:
-    def __init__(self, p, weapon, target):
+    def __init__(self, p, weapon, target, mp):
         self.p = p
         self.weapon = weapon
         self.target = target
+        self.mp = mp
         self.frame = 0
         self.fdelay = 0
         self.spawn_time = 0

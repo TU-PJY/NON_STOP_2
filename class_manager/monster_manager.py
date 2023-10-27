@@ -110,7 +110,6 @@ def monster_animation(m):
             m.size2 = 0
 
 
-
 def process_attack(m):
     if m.type == 1:
         m.is_attack = True if math.sqrt((m.x - m.p.x) ** 2 + (m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 100 else False
@@ -131,7 +130,7 @@ def process_attack(m):
                 m.size = 200
                 m.atk_delay = 150
 
-        if m.p.p_to_wall_left + 100 < m.x < m.p.p_to_wall_right - 100:  # 스폰 지점에서 바로 대쉬하지 않도록
+        if m.mp.playerToWallLeft + 100 < m.x < m.mp.playerToWallRight - 100:  # 스폰 지점에서 바로 대쉬하지 않도록
             if m.dash_delay == 0:
                 if math.sqrt((m.x - m.p.x) ** 2 + (m.y - m.p.y) ** 2) <= 800 and not m.is_attack and m.atk_delay == 0:
                     m.incline = math.atan2(m.p.y - m.y, m.p.x - m.x)
