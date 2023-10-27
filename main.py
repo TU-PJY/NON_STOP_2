@@ -25,7 +25,7 @@ def handle_events():
 
 
 def init_game():
-    global running, game, p, mp, bg, wall, weapon, target, m, gp
+    global running, game, p, mp, bg, wall, weapon, target, m, gp, prob
 
     running = True
     game = []

@@ -53,3 +53,6 @@ type2_directory = 'res//monster_image//ghost_small.png'
 type3_directory = 'res//monster_image//slime.png'
 type4_directory = 'res//monster_image//apple.png'
 
+# Prop 이미지 파일 경로
+arrow_right_directory = 'res//monster_image//arrow_right.png'
+arrow_left_directory = 'res//monster_image//arrow_left.png'

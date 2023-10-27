@@ -1,6 +1,9 @@
 from pico2d import *
 from config import *
+from game_work import game_manager
+from game_class.prob import Prob
 import math
+
 
 
 def load_monster(self):
@@ -181,6 +184,23 @@ def process_attack(m):
                 m.size = 200
                 m.atk_delay = 150
 
+    # type 4 attack
+    if m.type == 4:
+        if m.mp.playerToWallLeft + 100 <= m.x <= m.mp.playerToWallRight - 100:
+            if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 800:
+                m.is_attack = True
+            else:
+                m.is_attack = False
+                m.shoot_delay = 100
+
+            if m.is_attack:
+                m.incline = math.atan2(m.p.y - m.y, m.p.x - m.x)
+                m.frame = 2
+                if m.shoot_delay == 0:
+                    pr = Prob(m.p, m.mp, m.x, m.y, m.incline, m.dir)  # 일정 간격으로 화살을 발사한다
+                    game_manager.add_object(pr, 2)
+                    m.shoot_delay = 300
+
 
 def update_delay(m):
     if m.attack_motion_time > 0:
@@ -189,6 +209,8 @@ def update_delay(m):
         m.atk_delay -= 1
     if m.dash_delay > 0:
         m.dash_delay -= 1
+    if m.shoot_delay > 0:
+        m.shoot_delay -= 1
 
 
 def update_monster_pos(m):

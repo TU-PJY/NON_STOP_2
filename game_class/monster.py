@@ -65,12 +65,12 @@ class Monster:
         self.attack_motion_time = 0  # 해당 시간동안 공격 모션을 보여준다.
         self.size = 0  # 공격 시 크기 변화 애니메이션
         self.is_attack, self.is_hit = False, False
+        self.incline = 0
 
         # type2 전용 변수
         self.is_dash = False
         self.dash_delay = 0
         self.temp_x, self.temp_y = 0, 0  # 대쉬 목적지 좌표
-        self.incline = 0
 
         # type3 전용 변수
         self.is_jump = False
@@ -80,6 +80,10 @@ class Monster:
         self.jump_acc = 0
         self.acc_delay = 0
         self.jump_delay = 0  # 0이 될때마다 점프
+
+        # type4 전용 변수
+        self.is_shoot = False
+        self.shoot_delay = 100
 
         self.state_machine = StateMachineTarget(self)
         self.state_machine.start()
