@@ -17,10 +17,8 @@ def handle_events():
             running = False
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
-
         elif event.type == SDL_MOUSEMOTION:
             p.mx, p.my = event.x, HEIGHT - 1 - event.y
-
         else:
             p.handle_event(event)
             weapon.handle_event(event)
@@ -61,7 +59,7 @@ open_canvas(WIDTH, HEIGHT)
 init_game()
 hide_cursor()
 hide_lattice()
-
+font = load_font('bump-it-up.ttf', 50)
 
 while running:
     clear_canvas()
