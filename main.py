@@ -8,6 +8,9 @@ from game_class.monster_tool import Tool
 from game_work import game_manager
 
 
+running = True
+
+
 def handle_events():
     global running, p, weapon, target
 
@@ -25,9 +28,8 @@ def handle_events():
 
 
 def init_game():
-    global running, game, p, mp, bg, wall, weapon, target, m, gp, prob
+    global game, p, mp, bg, wall, weapon, target, tool
 
-    running = True
     game = []
 
     p = Player()
