@@ -23,8 +23,7 @@ def spawn_monster(self):  # 몬스터 스폰
 
         self.frame = random.randint(0, 1)
         self.fdelay = random.randint(0, 70)
-        # self.type = random.randint(1, 3)
-        self.type = 4
+        self.type = random.randint(1, 4)
 
         if self.type == 1:
             self.y, self.speed, self.hp = 260, 2, 150

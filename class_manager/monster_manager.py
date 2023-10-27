@@ -1,7 +1,7 @@
 from pico2d import *
 from config import *
 from game_work import game_manager
-from game_class.prob import Prob
+from game_class.prop import Prop
 import math
 
 
@@ -197,7 +197,7 @@ def process_attack(m):
                 m.incline = math.atan2(m.p.y - m.y, m.p.x - m.x)
                 m.frame = 2
                 if m.shoot_delay == 0:
-                    pr = Prob(m.p, m.mp, m.x, m.y, m.incline, m.dir)  # 일정 간격으로 화살을 발사한다
+                    pr = Prop(m.p, m.mp, m.x, m.y, m.incline, m.dir)  # 일정 간격으로 화살을 발사한다
                     game_manager.add_object(pr, 2)
                     m.shoot_delay = 300
 

@@ -4,7 +4,7 @@ from game_work import game_manager
 import math
 
 
-class Prob:
+class Prop:
     def __init__(self, p, mp, x, y, incline, dir):
         self.x = x
         self.y = y
