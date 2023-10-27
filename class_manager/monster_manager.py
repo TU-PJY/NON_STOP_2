@@ -10,6 +10,8 @@ def load_monster(self):
         self.type2 = load_image(type2_directory)
     elif self.type == 3:
         self.type3 = load_image(type3_directory)
+    elif self.type == 4:
+        self.type4 = load_image(type4_directory)
 
 
 def draw_monster(m):
@@ -44,6 +46,17 @@ def draw_monster(m):
                  300, 300 + m.size2 + m.size)
         draw_rectangle \
             (m.x - 60 + m.p.efx, m.y + 60 + m.p.efy, m.x + 60 + m.p.efx, m.y - 60 + m.p.efy)
+
+    if m.type == 4:
+        if m.dir == 0:
+            m.type4.clip_composite_draw \
+                (m.frame * 128, 0, 128, 128, 0, '', m.x + m.p.efx, m.y + m.p.efy, 450, 450)
+        elif m.dir == 1:
+            m.type4.clip_composite_draw \
+                (m.frame * 128, 0, 128, 128, 0, 'h', m.x + m.p.efx, m.y + m.p.efy, 450, 450)
+        draw_rectangle \
+            (m.x - 55 + m.p.efx, m.y + 55 + m.p.efy, m.x + 55 + m.p.efx, m.y - 55 + m.p.efy)
+
 
 
 def update_monster_size(m):

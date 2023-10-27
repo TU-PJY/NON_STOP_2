@@ -23,7 +23,8 @@ def spawn_monster(self):  # 몬스터 스폰
 
         self.frame = random.randint(0, 1)
         self.fdelay = random.randint(0, 70)
-        self.type = random.randint(1, 3)
+        # self.type = random.randint(1, 3)
+        self.type = 4
 
         if self.type == 1:
             self.y, self.speed, self.hp = 260, 2, 150
@@ -33,6 +34,9 @@ def spawn_monster(self):  # 몬스터 스폰
 
         elif self.type == 3:
             self.y, self.speed, self.hp, self.frame = 230, 1, 100, 0
+
+        elif self.type == 4:
+            self.y, self.speed, self.hp = 240, 0.5, 60
 
         m = Monster \
             (self.p, self.weapon, self.target, self.mp, self.spawn_point,

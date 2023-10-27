@@ -51,4 +51,5 @@ knife_left_directory = 'res//melee_image//knife_left.png'
 type1_directory = 'res//monster_image//goblin_small.png'
 type2_directory = 'res//monster_image//ghost_small.png'
 type3_directory = 'res//monster_image//slime.png'
+type4_directory = 'res//monster_image//apple.png'
 
