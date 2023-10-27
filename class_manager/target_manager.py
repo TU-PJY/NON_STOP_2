@@ -11,13 +11,17 @@ def load_target(self):
     self.target_right = load_image(target_right_directory)
     self.target_left = load_image(target_left_directory)
     self.target_dot = load_image(target_dot_directory)
+    self.target_melee = load_image(target_melee_directory)
 
 
 def draw_target(self):
-    self.target_up.draw(self.p.mx, self.p.my + self.recoil + self.dis2, 60, 60)
-    self.target_down.draw(self.p.mx, self.p.my - self.recoil - self.dis2, 60, 60)
-    self.target_right.draw(self.p.mx + self.recoil + self.dis2, self.p.my, 60, 60)
-    self.target_left.draw(self.p.mx - self.recoil - self.dis2, self.p.my, 60, 60)
+    if self.weapon.weapon_type == 0:
+        self.target_up.draw(self.p.mx, self.p.my + self.recoil + self.dis2, 60, 60)
+        self.target_down.draw(self.p.mx, self.p.my - self.recoil - self.dis2, 60, 60)
+        self.target_right.draw(self.p.mx + self.recoil + self.dis2, self.p.my, 60, 60)
+        self.target_left.draw(self.p.mx - self.recoil - self.dis2, self.p.my, 60, 60)
+    elif self.weapon.weapon_type == 1:  # 근접 무기는 조준점이 필요 없으므로 타겟을 사용하지 않는다.
+        self.target_melee.draw(self.p.mx, self.p.my, 120, 120)
 
     if self.target_dot_display_time > 0:
         self.target_dot.draw(self.tx, self.ty, 30, 30)
