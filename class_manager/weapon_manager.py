@@ -35,11 +35,11 @@ def draw_gun(weapon):
 
         if weapon.gun == 'SCAR_H':  # GUN_NAME에 따라 사용하는 총기가 달라진다.
             if weapon.p.dir == 1:
-                weapon.scar_right.clip_composite_draw\
+                weapon.scar_right.clip_composite_draw \
                     (0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2, 170, 120)
 
             elif weapon.p.dir == 0:
-                weapon.scar_left.clip_composite_draw\
+                weapon.scar_left.clip_composite_draw \
                     (0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2, 170, 120)
 
 
@@ -47,14 +47,14 @@ def draw_flame(weapon):
     if weapon.flame_display_time > 0 and weapon.weapon_type == 0:
         weapon.flame_display_time -= 1
         if weapon.p.dir == 1:
-            weapon.flame_right.clip_composite_draw\
+            weapon.flame_right.clip_composite_draw \
                 (0, 0, 100, 100, weapon.deg, '', weapon.p.px + 20 + math.cos(weapon.deg) * 150,
-                    weapon.p.py2 + math.sin(weapon.deg) * 150, 100, 100)
+                 weapon.p.py2 + math.sin(weapon.deg) * 150, 100, 100)
 
         elif weapon.p.dir == 0:
-            weapon.flame_left.clip_composite_draw\
+            weapon.flame_left.clip_composite_draw \
                 (0, 0, 100, 100, weapon.deg, 'h, v', weapon.p.px - 20 + math.cos(weapon.deg) * 150,
-                    weapon.p.py2 + math.sin(weapon.deg) * 150, 100, 100)
+                 weapon.p.py2 + math.sin(weapon.deg) * 150, 100, 100)
 
 
 def draw_melee(weapon):
@@ -64,14 +64,14 @@ def draw_melee(weapon):
 
         if weapon.melee == 'KNIFE':
             if weapon.p.dir == 1:
-                weapon.knife_right.clip_composite_draw\
+                weapon.knife_right.clip_composite_draw \
                     (0, 0, 150, 100, weapon.melee_deg, '', weapon.p.px + 50 + weapon.melee_x,
-                        weapon.p.py2 - 10, 100, 50)
+                     weapon.p.py2 - 10, 100, 50)
 
             elif weapon.p.dir == 0:
-                weapon.knife_right.clip_composite_draw\
+                weapon.knife_right.clip_composite_draw \
                     (0, 0, 150, 100, -weapon.melee_deg, 'h', weapon.p.px - 50 - weapon.melee_x,
-                        weapon.p.py2 - 10, 100, 50)
+                     weapon.p.py2 - 10, 100, 50)
 
 
 def change_weapon(weapon):

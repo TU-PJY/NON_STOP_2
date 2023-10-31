@@ -53,7 +53,7 @@ def update_target(self):
 def make_target_point(self):  # 이 함수에서 생성되는 좌표로 적 피격을 판정한다.
     if self.weapon.shoot:
         self.target_dot_display_time = TARGET_DOT_DISPLAY_TIME  # 해당 시간 동안 조준점 내부에 점이 보인다.
-        self.tx = random.randint\
+        self.tx = random.randint \
             (self.p.mx - self.recoil - int(self.dis2) + 31, self.p.mx + self.recoil + int(self.dis2) - 31)
-        self.ty = random.randint\
+        self.ty = random.randint \
             (self.p.my - self.recoil - int(self.dis2) + 31, self.p.my + self.recoil + int(self.dis2) - 31)

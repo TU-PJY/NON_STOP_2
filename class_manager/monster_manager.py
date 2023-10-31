@@ -5,7 +5,6 @@ from game_class.prop import Prop
 import math
 
 
-
 def load_monster(self):
     if self.type == 1:
         self.type1 = load_image(type1_directory)
@@ -59,7 +58,6 @@ def draw_monster(m):
                 (m.frame * 128, 0, 128, 128, 0, 'h', m.x + m.p.efx, m.y + m.p.efy, 450, 450)
         draw_rectangle \
             (m.x - 55 + m.p.efx, m.y + 55 + m.p.efy, m.x + 55 + m.p.efx, m.y - 55 + m.p.efy)
-
 
 
 def update_monster_size(m):

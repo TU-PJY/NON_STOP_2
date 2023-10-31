@@ -7,7 +7,6 @@ from game_class.target import Target
 from game_class.monster_tool import Tool
 from game_work import game_manager
 
-
 running = True
 
 
