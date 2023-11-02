@@ -3,6 +3,8 @@ from pico2d import *
 from config import *
 import math
 
+from game_work import game_framework
+
 
 def l_down(e):
     return e[0] == 'INPUT' and e[1].type == SDL_MOUSEBUTTONDOWN and e[1].button == SDL_BUTTON_LEFT
@@ -44,8 +46,9 @@ def draw_gun(weapon):
 
 
 def draw_flame(weapon):
+    pps = PPS * game_framework.frame_time
     if weapon.flame_display_time > 0 and weapon.weapon_type == 0:
-        weapon.flame_display_time -= 1
+        weapon.flame_display_time -= pps / 3
         if weapon.p.dir == 1:
             weapon.flame_right.clip_composite_draw \
                 (0, 0, 100, 100, weapon.deg, '', weapon.p.px + 20 + math.cos(weapon.deg) * 150,
@@ -89,11 +92,11 @@ def change_weapon(weapon):
 
 def shoot_gun(weapon):
     if weapon.trigger and weapon.weapon_type == 0:
-        if weapon.shoot_delay == 0:  # 딜레이는 총마다 다르며, 딜레이 수치가 낮을수록 연사 속도가 빠르다. 0이 될 때마다 발사된다.
+        if weapon.shoot_delay <= 0:  # 딜레이는 총마다 다르며, 딜레이 수치가 낮을수록 연사 속도가 빠르다. 0이 될 때마다 발사된다.
             weapon.shoot = True  # True일시 해당 값을 Target 클래스로 전달하여 Target 클래스의 recoil을 증가시킨다.
             if weapon.gun == 'SCAR_H':
                 weapon.flame_display_time = FLAME_DISPLAY_TIME
-                weapon.shoot_delay = 30
+                weapon.shoot_delay = 38
                 weapon.p.shake_time = 20
                 weapon.p.shake_range = 15
         else:
@@ -102,10 +105,10 @@ def shoot_gun(weapon):
 
 def wield_melee(weapon):
     if weapon.use and weapon.weapon_type == 1:
-        if weapon.wield_delay == 0:
+        if weapon.wield_delay <= 0:
             weapon.wield = True
             if weapon.melee == 'KNIFE':
-                weapon.melee_x = 120
+                weapon.melee_x = 150
                 weapon.melee_deg = 0
                 weapon.wield_delay = 80
                 weapon.p.shake_time = 15
@@ -115,12 +118,16 @@ def wield_melee(weapon):
 
 
 def update_melee_position(weapon):
+    pps = PPS * game_framework.frame_time
     if weapon.melee_x > 0:
-        weapon.melee_x -= 2
+        weapon.melee_x -= pps
+    else:
+        weapon.melee_x = 0
 
 
 def update_delay(weapon):
+    pps = PPS * game_framework.frame_time
     if weapon.shoot_delay > 0:
-        weapon.shoot_delay -= 1
+        weapon.shoot_delay -= pps / 3
     if weapon.wield_delay > 0:
-        weapon.wield_delay -= 1
+        weapon.wield_delay -= pps / 3

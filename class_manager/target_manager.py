@@ -4,6 +4,8 @@ from config import *
 import math
 import random
 
+from game_work import game_framework
+
 
 def load_target(self):
     self.target_up = load_image(target_up_directory)
@@ -28,14 +30,13 @@ def draw_target(self):
 
 
 def update_target(self):
+    pps = PPS * game_framework.frame_time
     self.dis = math.sqrt((self.p.mx - WIDTH / 2) ** 2 + (self.p.y - self.p.my) ** 2)
 
     if self.recoil > 0:
-        if self.reduce_delay == 0:
-            self.recoil -= 1
-            self.reduce_delay = RECOIL_REDUCE
-        else:
-            self.reduce_delay -= 1
+        self.recoil -= pps / 7
+    else:
+        self.recoil = 0
 
     if self.dis < 0:  # 분산도가 0 밑으로 내려가지 않도록 한다.
         self.dis = 0
@@ -44,16 +45,16 @@ def update_target(self):
         # empty randrange 방지를 위해 35를 더해야 함
         self.dis2 = self.dis / 20 + 35  # 나누는 숫자가 작을 수록 분산도가 커진다.
         if self.weapon.shoot:
-            self.recoil += 18  # 총기마다 반동 수치가 달라 조준점이 벌어지는 정도가 다르다.
+            self.recoil += 20  # 총기마다 반동 수치가 달라 조준점이 벌어지는 정도가 다르다.
 
     if self.target_dot_display_time > 0:
-        self.target_dot_display_time -= 1
+        self.target_dot_display_time -= pps / 3
 
 
 def make_target_point(self):  # 이 함수에서 생성되는 좌표로 적 피격을 판정한다.
     if self.weapon.shoot:
         self.target_dot_display_time = TARGET_DOT_DISPLAY_TIME  # 해당 시간 동안 조준점 내부에 점이 보인다.
         self.tx = random.randint \
-            (self.p.mx - self.recoil - int(self.dis2) + 31, self.p.mx + self.recoil + int(self.dis2) - 31)
+            (self.p.mx - int(self.recoil) - int(self.dis2) + 31, self.p.mx + int(self.recoil) + int(self.dis2) - 31)
         self.ty = random.randint \
-            (self.p.my - self.recoil - int(self.dis2) + 31, self.p.my + self.recoil + int(self.dis2) - 31)
+            (self.p.my - int(self.recoil) - int(self.dis2) + 31, self.p.my + int(self.recoil) + int(self.dis2) - 31)

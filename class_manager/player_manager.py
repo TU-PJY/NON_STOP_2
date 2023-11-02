@@ -63,43 +63,40 @@ def draw_player(p):
 
 
 def jump(p):
-    speed = PLAYER_PPS * game_framework.frame_time
+    pps = PPS * game_framework.frame_time
     if p.mv_jump:  # 점프 시
-        p.y += p.jump_acc * speed / 4
+        p.y += p.jump_acc * pps / 4
 
         if p.y <= 250:  # 점프 후 착지하면
             p.y = 250
             p.jump_acc = JUMP_ACC  # 점프 가속도 초기화
-            p.acc_delay = 0  # 점프 가속도 변화 딜레이 초기화
             p.mv_jump = False  # 점프가 가능해진다
             p.land_y = LAND_SHAKE  # LAND_SHAKE 만큼 화면이 눌린다
 
-        if p.acc_delay < ACC_DELAY:  # 빠른 딜레이로 인해 가속도 변화에 딜레이를 줘야 제대로 된 점프 애니메이션이 나온다.
-            p.acc_delay += speed / 4
-        else:
-            p.jump_acc -= 1
-            p.acc_delay = 0
+        p.jump_acc -= pps / 90
 
 
 def walk_animation(p):
-    speed = p.speed * game_framework.frame_time
+    pps = PPS * game_framework.frame_time
 
     if p.size_up:
-        p.size_deg += 0.01 * speed / 5
+        p.size_deg += 0.01 * pps / 5
 
         if p.size_deg >= 0.3:
             p.size_deg = 0.3
             p.size_up = False
 
     elif not p.size_up:
-        p.size_deg -= 0.01 * speed / 5
+        p.size_deg -= 0.01 * pps / 5
         if p.size_deg <= 0:
             p.size_deg = 0
             p.size_up = True
+
     if not p.mv_jump:
         p.size = (math.sin(p.size_deg))
 
 
 def update_damage_delay(p):
+    pps = PPS * game_framework.frame_time
     if p.dmg_delay > 0:
-        p.dmg_delay -= 1
+        p.dmg_delay -= pps / 3

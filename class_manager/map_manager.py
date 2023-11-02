@@ -31,25 +31,25 @@ def draw_background(self):
     self.image.draw(self.x + self.p.efx, self.y + self.p.efy, 4096, 1100)
 
 
-def update_map(self, speed):  # 맵 업데이트
-    speed = speed * game_framework.frame_time
-
-    if self.p.mv_right:
-        speed = speed * -1
-    elif self.p.mv_left:
-        speed = speed
-    else:
-        speed = 0
-
-    self.x += speed
-    self.wall.x1 += speed
-    self.wall.x2 += speed
-    self.bg.x += speed / 4
-    self.playerToWallRight += speed
-    self.playerToWallLeft += speed
+def update_map(self, pps):  # 맵 업데이트
+    pps = pps * game_framework.frame_time
 
     if self.x + 2048 <= self.p.x:  # 맵 끝으로 갈 경우 벽에 막힌다
         self.p.mv_right = False
 
     if self.x - 2048 >= self.p.x:
         self.p.mv_left = False
+
+    if self.p.mv_right:
+        pps = pps * -1
+    elif self.p.mv_left:
+        pps = pps
+    else:
+        pps = 0
+
+    self.x += pps * self.p.speed * 70
+    self.wall.x1 += pps * self.p.speed * 70
+    self.wall.x2 += pps * self.p.speed * 70
+    self.bg.x += (pps * self.p.speed * 70) / 4
+    self.playerToWallRight += pps * self.p.speed * 70
+    self.playerToWallLeft += pps * self.p.speed * 70
