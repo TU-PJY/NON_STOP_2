@@ -11,6 +11,13 @@ ACC_DELAY = 19  # 점프 가속도 변화 딜레이
 LAND_SHAKE = 100  # 착지 시 맵이 눌리는 효과 수치
 LAND_SHAKE_REDUCE = 2  # 맵이 눌린 뒤의 복구 속도
 
+# 플레이어 이동 속도
+PIXEL_PER_METER = 150
+RUN_SPEED_KMPH = 25
+RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
+RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
+PLAYER_SPEED = (RUN_SPEED_MPS * PIXEL_PER_METER)
+
 SCENE = ('intro', 'game_main', 'game')  # 씬 리스트. 각 씬마다 표시되는 화면이 달라진다.
 GAME_SCENE = SCENE[2]
 

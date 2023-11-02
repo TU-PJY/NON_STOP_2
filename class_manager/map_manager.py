@@ -1,6 +1,7 @@
 # 맵 관련 함수 모음
 from pico2d import *
 from config import *
+from game_work import game_framework
 
 
 def load_land(self):
@@ -31,6 +32,8 @@ def draw_background(self):
 
 
 def update_map(self, speed):  # 맵 업데이트
+    speed = speed * game_framework.frame_time
+
     if self.p.mv_right:
         speed = speed * -1
     elif self.p.mv_left:
