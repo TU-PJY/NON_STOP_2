@@ -12,15 +12,21 @@ LAND_SHAKE = 100  # 착지 시 맵이 눌리는 효과 수치
 # 픽셀 비율
 PIXEL_PER_METER = 150  # 1미터 = 150픽셀
 
+# 게임 전체 속도
 RUN_SPEED_KMPH = 25
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)  # 게임에서 사용하는 공유 PPS
 
 # PPS USE RULE
-# 1. 딜레이 감소 시 PPS * frame_time / 3 사용
-# 2. 개체 이동 속도는 speed * PPS * frame_time * 70 사용
+# 1. 딜레이 및 타이머 감소 시 PPS * frame_time / 3 사용
+# 2. 개체 이동 속도는 speed * PPS * frame_time / 4 사용
 # 3. 그 외의 수치 변화는 알맞게 조정
+
+# 오브젝트 프레임 속도
+TIME_PER_ACTION = 2
+APT = 1.0 / TIME_PER_ACTION
+FPA = 8
 
 RECOIL_REDUCE = 1  # 조준점 복구 지연 속도
 FLAME_DISPLAY_TIME = 10  # 총구 화염 출력 시간
