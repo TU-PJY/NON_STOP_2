@@ -9,6 +9,8 @@ def push_display(p):
     pps = PPS * game_framework.frame_time
     if p.land_y > 0:
         p.land_y -= pps / 2
+    if p.land_y <= 0:
+        p.land_y = 0
 
 
 def shake_display(p):
