@@ -3,6 +3,8 @@ from pico2d import *
 from config import *
 import math
 
+from game_work import game_framework
+
 
 def right_down(e):
     return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_d
@@ -61,8 +63,9 @@ def draw_player(p):
 
 
 def jump(p):
+    speed = PLAYER_PPS * game_framework.frame_time
     if p.mv_jump:  # 점프 시
-        p.y += p.jump_acc
+        p.y += p.jump_acc * speed / 4
 
         if p.y <= 250:  # 점프 후 착지하면
             p.y = 250
@@ -72,22 +75,24 @@ def jump(p):
             p.land_y = LAND_SHAKE  # LAND_SHAKE 만큼 화면이 눌린다
 
         if p.acc_delay < ACC_DELAY:  # 빠른 딜레이로 인해 가속도 변화에 딜레이를 줘야 제대로 된 점프 애니메이션이 나온다.
-            p.acc_delay += 1
+            p.acc_delay += speed / 4
         else:
             p.jump_acc -= 1
             p.acc_delay = 0
 
 
 def walk_animation(p):
+    speed = p.speed * game_framework.frame_time
+
     if p.size_up:
-        p.size_deg += 0.01
+        p.size_deg += 0.01 * speed / 5
 
         if p.size_deg >= 0.3:
             p.size_deg = 0.3
             p.size_up = False
 
     elif not p.size_up:
-        p.size_deg -= 0.01
+        p.size_deg -= 0.01 * speed / 5
         if p.size_deg <= 0:
             p.size_deg = 0
             p.size_up = True

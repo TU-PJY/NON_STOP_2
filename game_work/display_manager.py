@@ -2,10 +2,13 @@
 from config import *
 import random
 
+from game_work import game_framework
+
 
 def push_display(p):
+    speed = PLAYER_PPS * game_framework.frame_time
     if p.land_y > 0:
-        p.land_y -= LAND_SHAKE_REDUCE
+        p.land_y -= speed / 2
 
 
 def shake_display(p):

@@ -111,7 +111,7 @@ class Player:
         self.mv_right, self.mv_left, self.mv_jump = False, False, False  # 플레이어 이동, 점프
         self.dmg_delay = 0  # 플레이어가 받는 대미지 딜레이
 
-        self.speed = PLAYER_SPEED  # 플레이어 이동 속도 (사실상 맵 움직이는 속도)
+        self.speed = PLAYER_PPS  # 플레이어 이동 속도 (사실상 맵 움직이는 속도)
         self.jump_acc = JUMP_ACC
         self.acc_delay = 0
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
