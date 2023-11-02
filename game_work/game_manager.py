@@ -1,6 +1,5 @@
 # 게임 월드의 표현
 game = [[], [], [], [], [], [], [], []]
-spawn_time = 0
 
 
 def add_object(o, depth=0):
@@ -25,3 +24,8 @@ def remove_object(o):
             layer.remove(o)
             return
     raise ValueError('remove err')
+
+
+def clear():
+    for layer in game:
+        layer.clear()
