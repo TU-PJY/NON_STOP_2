@@ -75,3 +75,6 @@ arrow_left_directory = 'res//prop//arrow_left.png'
 # ui 이미지 파일 경로
 shop_window_directory = 'res//ui//shop_window.png'
 pause_bg_directory = 'res//ui//pause_bg.png'
+
+# 폰트 경로
+font_directory = 'bump-it-up.ttf'
