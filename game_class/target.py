@@ -18,7 +18,8 @@ class Target:
         self.target_dot_display_time = 0
 
     def draw(self):
-        draw_target(self)
+        if game_framework.MODE == 'play':
+            draw_target(self)
 
     def update(self):
         make_target_point(self)

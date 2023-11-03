@@ -18,7 +18,7 @@ class Map:  # 땅
         draw_land(self)
 
     def update(self):  # 이 함수에서 땅 끝과 플레이어 좌표가 일치하면 모든 맵 클래스의 스크롤이 멈춘다.
-        update_map(self, self.p.speed)
+        update_map(self)
 
     def handle_event(self, event):
         pass

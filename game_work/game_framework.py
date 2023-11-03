@@ -4,6 +4,7 @@ import time
 running = None
 stack = None
 
+MODE = 'play'
 
 def change_mode(mode):
     global stack

@@ -71,3 +71,7 @@ type4_directory = 'res//monster_image//apple.png'
 # Prop 이미지 파일 경로
 arrow_right_directory = 'res//prop//arrow_right.png'
 arrow_left_directory = 'res//prop//arrow_left.png'
+
+# ui 이미지 파일 경로
+shop_window_directory = 'res//ui//shop_window.png'
+pause_bg_directory = 'res//ui//pause_bg.png'

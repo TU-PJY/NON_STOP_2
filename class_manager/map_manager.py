@@ -31,7 +31,7 @@ def draw_background(self):
     self.image.draw(self.x + self.p.efx, self.y + self.p.efy, 4096, 1100)
 
 
-def update_map(self, pps):  # 맵 업데이트
+def update_map(self):  # 맵 업데이트
     pps = PPS * game_framework.frame_time
 
     if self.x + 2048 <= self.p.x:  # 맵 끝으로 갈 경우 벽에 막힌다

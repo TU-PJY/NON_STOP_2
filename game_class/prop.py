@@ -4,7 +4,7 @@ from game_work import game_manager, game_framework
 import math
 
 
-class Prop:
+class Arrow:
     def __init__(self, p, mp, x, y, incline, dir):
         self.x = x
         self.y = y

@@ -6,10 +6,11 @@ from game_class.weapon import Weapon
 from game_class.target import Target
 from game_class.monster_tool import Tool
 from game_work import game_manager, game_framework
+from mods import shop_mode
 
 
 def handle_events():
-    global running, p, weapon, target
+    global p, weapon
 
     events = get_events()
     for event in events:
@@ -17,6 +18,10 @@ def handle_events():
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.quit()
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_TAB:  # to_shop_mode
+            game_framework.MODE = 'shop'
+            game_framework.push_mode(shop_mode)
+            show_cursor()
         elif event.type == SDL_MOUSEMOTION:
             p.mx, p.my = event.x, HEIGHT - 1 - event.y
         else:
