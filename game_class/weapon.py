@@ -115,7 +115,10 @@ class Weapon:
         self.state_machine.draw()
 
     def update(self):
-        self.state_machine.update()
+        if game_framework.MODE == 'play':
+            self.state_machine.update()
+        if game_framework.MODE == 'shop':
+            self.state_machine.cur_state = Idle
 
     def handle_event(self, event):
         self.state_machine.handle_event(('INPUT', event))

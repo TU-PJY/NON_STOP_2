@@ -12,7 +12,6 @@ class Tool:
         self.target = target
         self.mp = mp
         self.frame = 0
-        self.fdelay = 0
         self.spawn_time = 0
         self.spawn_point = 0
         self.spawn_point_right = WIDTH / 2 + 2100  # 초기 몬스터 스폰 위치. 플레이어가 움직이면 그에 따라 업데이트 된다.
@@ -26,9 +25,10 @@ class Tool:
         pass
 
     def update(self):
-        update_spawn_point(self)
-        spawn_monster(self)
-        update_timer(self)
+        if game_framework.MODE == 'play':
+            update_spawn_point(self)
+            spawn_monster(self)
+            update_timer(self)
 
     def handle_events(self):
         pass

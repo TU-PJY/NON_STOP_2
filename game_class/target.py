@@ -22,8 +22,9 @@ class Target:
             draw_target(self)
 
     def update(self):
-        make_target_point(self)
-        update_target(self)
+        if game_framework.MODE == 'play':
+            make_target_point(self)
+            update_target(self)
 
     def handle_event(self, event):
         pass

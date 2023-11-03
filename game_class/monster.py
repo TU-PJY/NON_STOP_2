@@ -92,7 +92,8 @@ class Monster:
         self.state_machine.draw()
 
     def update(self):
-        self.state_machine.update()
+        if game_framework.MODE == 'play':
+            self.state_machine.update()
 
     def handle_events(self, event):
         self.state_machine.handle_event(('INPUT', event))
