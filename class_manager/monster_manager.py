@@ -15,8 +15,15 @@ def load_monster(self):
     elif self.type == 4:
         self.type4 = load_image(type4_directory)
 
+    # 체력바 이미지
+    self.hp_back = load_image(hp_back_directory)
+    self.hp_front = load_image(hp_front_directory)
+
 
 def draw_monster(m):
+    m.hp_back.draw(m.x + m.p.efx, m.y + 100 + m.p.efy, m.hp_length + 10, 25)
+    m.hp_front.draw(m.x + m.p.efx, m.y + 100 + m.p.efy, m.hp, 20)
+
     if m.type == 1:
         if m.dir == 0:
             m.type1.clip_composite_draw \
@@ -211,11 +218,11 @@ def damage_monster(m):
 
         if m.hit:  # 맞은걸로 판정되면 대미지를 가한다.
             if m.weapon.gun == 'SCAR_H':
-                m.hp -= 20
+                m.hp -= 25
             elif m.weapon.gun == 'M16':
-                m.hp -= 15
+                m.hp -= 20
             elif m.weapon.gun == 'MP44':
-                m.hp -= 35
+                m.hp -= 40
 
             m.hit = False
 

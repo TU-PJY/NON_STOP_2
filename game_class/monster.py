@@ -69,6 +69,7 @@ class Monster:
         self.incline = 0
         self.dispx = 0  # 화면상에 출력되는 위치
         self.dispy = 0  # 화면상에 출력되는 위치
+        self.hp_length = self.hp
 
         # type2 전용 변수
         self.is_dash = False

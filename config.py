@@ -81,6 +81,8 @@ arrow_left_directory = 'res//prop//arrow_left.png'
 shop_window_directory = 'res//ui//shop_window.png'
 pause_bg_directory = 'res//ui//pause_bg.png'
 shop_button_directory = 'res//ui//shop_button.png'
+hp_back_directory = 'res//ui//hp_back.png'
+hp_front_directory = 'res//ui//hp_front.png'
 
 # 폰트 경로
 font_directory = 'bump-it-up.ttf'
