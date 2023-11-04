@@ -23,22 +23,21 @@ def draw_target(self):
         self.target_down.draw(self.p.mx, self.p.my - self.recoil - self.dis2, 60, 60)
         self.target_right.draw(self.p.mx + self.recoil + self.dis2, self.p.my, 60, 60)
         self.target_left.draw(self.p.mx - self.recoil - self.dis2, self.p.my, 60, 60)
-    elif self.weapon.weapon_type == 1:  # 근접 무기는 조준점이 필요 없으므로 타겟을 사용하지 않는다.
+
+    elif self.weapon.weapon_type == 1:
         self.not_target.draw(self.p.mx, self.p.my, 120, 120)
+        self.tmy = self.p.y + self.p.camera_y - self.p.land_y
+
+        if self.weapon.melee == 'KNIFE':
+            if self.p.dir == 1:
+                self.tmx = self.p.camera_x + self.p.x + 170
+                self.target_melee.composite_draw(0, '', self.tmx, self.tmy, 100, 150)
+            elif self.p.dir == 0:
+                self.tmx = self.p.camera_x + self.p.x - 170
+                self.target_melee.composite_draw(0, 'h', self.tmx, self.tmy, 100, 150)
 
     if self.target_dot_display_time > 0:
         self.target_dot.draw(self.tx, self.ty, 30, 30)
-
-    if self.weapon.weapon_type == 1:
-        if self.weapon.melee == 'KNIFE':
-            if self.p.dir == 1:
-                self.target_melee.composite_draw \
-                    (0, '', self.p.x + self.p.camera_x + 200, -self.p.land_y + self.p.y + self.p.camera_y,
-                     100, 150)
-            elif self.p.dir == 0:
-                self.target_melee.composite_draw \
-                    (0, 'h', self.p.x + self.p.camera_x - 200, -self.p.land_y + self.p.y + self.p.camera_y,
-                     100, 150)
 
 
 def update_target(self):

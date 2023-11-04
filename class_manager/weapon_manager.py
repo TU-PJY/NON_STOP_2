@@ -251,7 +251,7 @@ def wield_melee(weapon):
         if weapon.wield_delay <= 0:
             weapon.wield = True
             if weapon.melee == 'KNIFE':
-                weapon.melee_x = 150
+                weapon.melee_x = 120
                 weapon.melee_deg = 0
                 weapon.wield_delay = 80
                 weapon.p.shake_time = 15

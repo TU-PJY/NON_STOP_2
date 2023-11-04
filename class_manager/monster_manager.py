@@ -206,13 +206,13 @@ def damage_monster(m):
         if m.type == 1:  # 몬스터가 총에 맞았는지 판정한다.
             m.hit = True if m.dispx - 50 <= m.target.tx <= m.dispx + 50 and \
                             m.dispy - 70 <= m.target.ty <= m.dispy + 50 else False
-        if m.type == 2:
+        elif m.type == 2:
             m.hit = True if m.dispx - 65 <= m.target.tx <= m.dispx + 65 and \
                             m.dispy - 65 <= m.target.ty <= m.dispy + 65 else False
-        if m.type == 3:
+        elif m.type == 3:
             m.hit = True if m.dispx - 60 <= m.target.tx <= m.dispx + 60 and \
                             m.dispy - 60 <= m.target.ty <= m.dispy + 60 else False
-        if m.type == 4:
+        elif m.type == 4:
             m.hit = True if m.dispx - 55 <= m.target.tx <= m.dispx + 55 and \
                             m.dispy - 55 <= m.target.ty <= m.dispy + 55 else False
 
@@ -240,49 +240,42 @@ def damage_monster(m):
 
             m.hit = False
 
-    if m.weapon.wield:
-        m.dispx = m.x + m.p.efx
-        m.dispy = m.y + m.p.efy
+    elif m.weapon.wield:
+        global x1, x2, x11, x22, py, my  # 아래는 고정값
+
+        x1 = m.p.x              # dir == 1일 떄의 좌측 x 좌표
+        x22 = m.p.x             # dir == 0일 떄의 우측 x 좌표
+        my = m.y - (m.p.y - 250) / 1.5  # 화면상에 보이는 몬스터 중심 y 좌표
+        py = m.p.y - 10         # 무기의 y 좌표
+
+        # 각 근접무기마다 사거리가 다르다
+        if m.weapon.melee == 'KNIFE':  # 50 + 근접무기 최대 사거리
+            x2 = m.p.x + 220   # dir == 1일 때의 우측 x 좌표
+            x11 = m.p.x - 220  # dir == 0일 때의 좌측 x 좌표
 
         if m.type == 1:  # 몬스터가 근접무기에 맞았는지 판정한다.
             if m.p.dir == 1:
-                m.hit = True \
-                    if m.p.x <= m.x - 50 <= m.p.x + 250 and \
-                       m.y - 70 - (m.p.y - 250) / 1.5 <= m.p.y - 10 <= m.y + 50 - (m.p.y - 250) / 1.5 else False
+                m.hit = True if x1 <= m.x - 50 <= x2 and my - 70 <= py <= my + 50 else False
             elif m.p.dir == 0:
-                m.hit = True \
-                    if m.p.x - 250 <= m.x + 50 <= m.p.x and \
-                       m.y - 70 - (m.p.y - 250) / 1.5 <= m.p.y - 10 <= m.y + 50 - (m.p.y - 250) / 1.5 else False
+                m.hit = True if x11 <= m.x + 50 <= x22 and my - 70 <= py <= my + 50 else False
 
-        if m.type == 2:
+        elif m.type == 2:
             if m.p.dir == 1:
-                m.hit = True \
-                    if m.p.x <= m.x - 65 <= m.p.x + 250 and \
-                       m.y - 65 - (m.p.y - 250) / 1.5 <= m.p.y - 10 <= m.y + 65 - (m.p.y - 250) / 1.5 else False
+                m.hit = True if x1 <= m.x - 65 <= x2 and my - 65 <= py <= my + 65 else False
             elif m.p.dir == 0:
-                m.hit = True \
-                    if m.p.x - 250 <= m.x + 65 <= m.p.x and \
-                       m.y - 65 - (m.p.y - 250) / 1.5 <= m.p.y - 10 <= m.y + 65 - (m.p.y - 250) / 1.5 else False
+                m.hit = True if x11 <= m.x + 65 <= x22 and my - 65 / 1.5 <= py <= my + 65 else False
 
-        if m.type == 3:
+        elif m.type == 3:
             if m.p.dir == 1:
-                m.hit = True \
-                    if m.p.x <= m.x - 60 <= m.p.x + 250 and \
-                       m.y - 60 - (m.p.y - 250) / 1.5 <= m.p.y - 10 <= m.y + 60 - (m.p.y - 250) / 1.5 else False
+                m.hit = True if x1 <= m.x - 60 <= x2 and my - 60 / 1.5 <= py <= my + 60 else False
             elif m.p.dir == 0:
-                m.hit = True \
-                    if m.p.x - 250 <= m.x + 60 <= m.p.x and \
-                       m.y - 60 - (m.p.y - 250) / 1.5 <= m.p.y - 10 <= m.y + 60 - (m.p.y - 250) / 1.5 else False
+                m.hit = True if x11 <= m.x + 60 <= x22 and my - 60 <= py <= my + 60 else False
 
-        if m.type == 4:
+        elif m.type == 4:
             if m.p.dir == 1:
-                m.hit = True \
-                    if m.p.x <= m.x - 55 <= m.p.x + 250 and \
-                       m.y - 55 - (m.p.y - 250) / 1.5 <= m.p.y - 10 <= m.y + 55 - (m.p.y - 250) / 1.5 else False
+                m.hit = True if x1 <= m.x - 55 <= x2 and my - 55 <= py <= my + 55 else False
             elif m.p.dir == 0:
-                m.hit = True \
-                    if m.p.x - 250 <= m.x + 55 <= m.p.x and \
-                       m.y - 55 - (m.p.y - 250) / 1.5 <= m.p.y - 10 <= m.y + 55 - (m.p.y - 250) / 1.5 else False
+                m.hit = True if x11 <= m.x + 55 <= x22 and my - 55 <= py <= my + 55 else False
 
         if m.hit:
             if m.weapon.melee == 'KNIFE':

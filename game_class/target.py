@@ -17,6 +17,9 @@ class Target:
         self.tx, self.ty = 0, 0  # 조준점 범위 내에서 랜점으로 생성되는 좌표
         self.target_dot_display_time = 0
 
+        self.tmx = 0  # 근접무기 타겟 x 좌표
+        self.tmy = 0  # 근접무기 타겟 y 좌표
+
     def draw(self):
         if game_framework.MODE == 'play':
             draw_target(self)
