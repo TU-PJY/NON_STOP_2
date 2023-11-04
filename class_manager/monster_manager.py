@@ -157,16 +157,17 @@ def process_attack(m):
 
         if m.mp.playerToWallLeft + 100 < m.x < m.mp.playerToWallRight - 100:  # 스폰 지점에서 바로 대쉬하지 않도록
             if m.dash_delay <= 0:
-                if math.sqrt((m.x - m.p.x) ** 2 + (m.y - m.p.y) ** 2) <= 800 and not m.is_attack and m.atk_delay <= 0:
-                    m.incline = math.atan2(m.p.y - m.y + ((m.p.y - 250) / 1.5), m.p.x - m.x)
-                    m.temp_x, m.temp_y = m.p.x, m.p.y + ((m.p.y - 250) / 1.5)
+                if math.sqrt((m.x - m.p.x) ** 2 + (
+                        m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 800 and not m.is_attack and m.atk_delay <= 0:
+                    m.incline = math.atan2(m.p.y - m.y + (m.p.y - 250) / 1.5, m.p.x - m.x)
+                    m.temp_x, m.temp_y = m.p.x, m.p.y + (m.p.y - 250) / 1.5
                     m.is_dash = True
                     m.is_attack = True
 
         if m.is_dash:  # True일 시 대쉬 공격
             m.frame = 3
-            m.x += 6 * math.cos(m.incline) * pps / 4
-            m.y += 6 * math.sin(m.incline) * pps / 4
+            m.x += 7 * math.cos(m.incline) * pps / 4
+            m.y += 7 * math.sin(m.incline) * pps / 4
 
             if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 100:  # 대쉬 접촉
                 m.size = 200
@@ -193,7 +194,7 @@ def process_attack(m):
                 m.shoot_delay = 150
 
             if m.is_attack:
-                m.incline = math.atan2(m.p.y - m.y, m.p.x - m.x)
+                m.incline = math.atan2(m.p.y - m.y + (m.p.y - 250) / 1.5, m.p.x - m.x)
                 m.frame = 2
                 if m.shoot_delay <= 0:
                     ar = Arrow(m.p, m.mp, m.x, m.y, m.incline, m.dir)  # 일정 간격으로 화살을 발사한다
@@ -227,6 +228,55 @@ def damage_monster(m):
             elif m.weapon.gun == 'MP44':
                 m.hp -= 45
 
+            m.hit = False
+
+    if m.weapon.wield:
+        m.dispx = m.x + m.p.efx
+        m.dispy = m.y + m.p.efy
+
+        if m.type == 1:  # 몬스터가 근접무기에 맞았는지 판정한다.
+            if m.p.dir == 1:
+                m.hit = True \
+                    if m.p.x <= m.x - 50 <= m.p.x + 250 and \
+                       m.y - 70 - (m.p.y - 250) / 1.5 <= m.p.y - 10 <= m.y + 50 - (m.p.y - 250) / 1.5 else False
+            elif m.p.dir == 0:
+                m.hit = True \
+                    if m.p.x - 250 <= m.x + 50 <= m.p.x and \
+                       m.y - 70 - (m.p.y - 250) / 1.5 <= m.p.y - 10 <= m.y + 50 - (m.p.y - 250) / 1.5 else False
+
+        if m.type == 2:
+            if m.p.dir == 1:
+                m.hit = True \
+                    if m.p.x <= m.x - 65 <= m.p.x + 250 and \
+                       m.y - 65 - (m.p.y - 250) / 1.5 <= m.p.y - 10 <= m.y + 65 - (m.p.y - 250) / 1.5 else False
+            elif m.p.dir == 0:
+                m.hit = True \
+                    if m.p.x - 250 <= m.x + 65 <= m.p.x and \
+                       m.y - 65 - (m.p.y - 250) / 1.5 <= m.p.y - 10 <= m.y + 65 - (m.p.y - 250) / 1.5 else False
+
+        if m.type == 3:
+            if m.p.dir == 1:
+                m.hit = True \
+                    if m.p.x <= m.x - 60 <= m.p.x + 250 and \
+                       m.y - 60 - (m.p.y - 250) / 1.5 <= m.p.y - 10 <= m.y + 60 - (m.p.y - 250) / 1.5 else False
+            elif m.p.dir == 0:
+                m.hit = True \
+                    if m.p.x - 250 <= m.x + 60 <= m.p.x and \
+                       m.y - 60 - (m.p.y - 250) / 1.5 <= m.p.y - 10 <= m.y + 60 - (m.p.y - 250) / 1.5 else False
+
+        if m.type == 4:
+            if m.p.dir == 1:
+                m.hit = True \
+                    if m.p.x <= m.x - 55 <= m.p.x + 250 and \
+                       m.y - 55 - (m.p.y - 250) / 1.5 <= m.p.y - 10 <= m.y + 55 - (m.p.y - 250) / 1.5 else False
+            elif m.p.dir == 0:
+                m.hit = True \
+                    if m.p.x - 250 <= m.x + 55 <= m.p.x and \
+                       m.y - 55 - (m.p.y - 250) / 1.5 <= m.p.y - 10 <= m.y + 55 - (m.p.y - 250) / 1.5 else False
+
+        if m.hit:
+            if m.weapon.melee == 'KNIFE':
+                m.hp -= 60
             m.hit = False
 
     if m.hp <= 0:  # hp가 0이 될 경우 죽는다.
