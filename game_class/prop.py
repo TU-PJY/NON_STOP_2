@@ -1,5 +1,3 @@
-import math
-
 from pico2d import *
 
 from config import *

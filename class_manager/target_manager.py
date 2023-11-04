@@ -1,5 +1,4 @@
 # 조준점 관련 함수 오음
-import math
 import random
 
 from pico2d import *

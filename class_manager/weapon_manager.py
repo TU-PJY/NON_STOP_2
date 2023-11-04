@@ -1,5 +1,4 @@
 # 무기 관련 함수 모음
-import math
 
 from pico2d import *
 

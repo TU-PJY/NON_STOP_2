@@ -1,5 +1,4 @@
 # 플레이어 관련 함수 모음
-import math
 
 from pico2d import *
 
@@ -80,21 +79,12 @@ def jump(p):
 def walk_animation(p):
     pps = PPS * game_framework.frame_time
 
-    if p.size_up:
-        p.size_deg += 0.01 * pps / 5
-
-        if p.size_deg >= 0.3:
-            p.size_deg = 0.3
-            p.size_up = False
-
-    elif not p.size_up:
-        p.size_deg -= 0.01 * pps / 5
-        if p.size_deg <= 0:
-            p.size_deg = 0
-            p.size_up = True
+    p.size_deg += 1 * pps / 50
 
     if not p.mv_jump:
-        p.size = (math.sin(p.size_deg))
+        p.size = math.sin(p.size_deg) / 8
+    else:
+        p.size = 0
 
 
 def update_damage_delay(p):

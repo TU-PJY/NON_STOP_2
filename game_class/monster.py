@@ -78,7 +78,6 @@ class Monster:
         # type3 전용 변수
         self.is_jump = False
         self.size2 = 0  # rubber animation 크기 변수
-        self.size_up = True  # True일 시 크기 증가, False일 시 크기 감소
         self.size_deg = 0  # rubber animation 전용 크기 변수
         self.jump_acc = 0
         self.acc_delay = 0

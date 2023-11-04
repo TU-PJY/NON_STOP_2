@@ -1,5 +1,3 @@
-import math
-
 from pico2d import *
 
 from config import *
@@ -42,12 +40,12 @@ def draw_monster(m):
     if m.type == 3:
         if m.dir == 0:
             m.type3.clip_composite_draw \
-                (int(m.frame) * 128, 0, 128, 128, 0, '', m.x + m.p.efx, m.y + m.p.efy + m.size2 / 3 + m.size / 5,
-                 300, 300 + m.size2 + m.size)
+                (int(m.frame) * 128, 0, 128, 128, 0, '', m.x + m.p.efx, m.y + m.p.efy + m.size2 * 50 + m.size / 5,
+                 300, 300 + m.size2 * 100 + m.size)
         elif m.dir == 1:
             m.type3.clip_composite_draw \
-                (int(m.frame) * 128, 0, 128, 128, 0, 'h', m.x + m.p.efx, m.y + m.p.efy + m.size2 / 3 + m.size / 5,
-                 300, 300 + m.size2 + m.size)
+                (int(m.frame) * 128, 0, 128, 128, 0, 'h', m.x + m.p.efx, m.y + m.p.efy + m.size2 * 50 + m.size / 5,
+                 300, 300 + m.size2 * 100 + m.size)
         draw_rectangle \
             (m.x - 60 + m.p.efx, m.y + 60 + m.p.efy, m.x + 60 + m.p.efx, m.y - 60 + m.p.efy)
 
@@ -97,7 +95,7 @@ def move_monster(m):
                     m.y = 230
                     m.is_jump = False
                     m.acc_delay = 0
-                    m.jump_delay = 350  # 점프 타이밍이 존재
+                    m.jump_delay = 370  # 점프 타이밍이 존재
 
                 m.jump_acc -= pps / 90
 
@@ -113,18 +111,9 @@ def monster_animation(m):
 
     # type 3 animation
     if m.type == 3:
-        if m.size_up:
-            m.size_deg += 0.005 * pps / 5
-            if m.size_deg >= 0.4:
-                m.size_deg, m.size_up = 0.4, False
-
-        elif not m.size_up:
-            m.size_deg -= 0.005 * pps / 5
-            if m.size_deg <= 0:
-                m.size_deg, m.size_up = 0, True
-
+        m.size_deg += 1 * pps / 80
         if not m.is_jump:
-            m.size2 = math.sin(m.size_deg) * 100
+            m.size2 = math.sin(m.size_deg) / 6
             m.frame = 0
 
         if m.is_jump:  # 점프 시 프레임이 다름
@@ -222,11 +211,11 @@ def damage_monster(m):
 
         if m.hit:  # 맞은걸로 판정되면 대미지를 가한다.
             if m.weapon.gun == 'SCAR_H':
-                m.hp -= 30
+                m.hp -= 20
             elif m.weapon.gun == 'M16':
-                m.hp -= 25
+                m.hp -= 15
             elif m.weapon.gun == 'MP44':
-                m.hp -= 45
+                m.hp -= 35
 
             m.hit = False
 

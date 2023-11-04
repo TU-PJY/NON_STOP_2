@@ -118,7 +118,6 @@ class Player:
 
         self.size = 0  # 걸을 때 플레이어 크기가 고무줄처럼 커졌다 작아진다.
         self.size_deg = 0
-        self.size_up = True
         self.look_mouse = True  # True일 시 플레이어는 마우스를 따라본다.
 
         # display effects
