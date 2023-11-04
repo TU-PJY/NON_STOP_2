@@ -7,6 +7,7 @@ from game_class.target import Target
 from game_class.monster_tool import Tool
 from game_work import game_manager, game_framework
 from mods import shop_mode
+from ui_class.shop import Shop
 
 
 def handle_events():
@@ -30,7 +31,7 @@ def handle_events():
 
 
 def init():
-    global game, p, mp, bg, wall, weapon, target, tool
+    global game, p, mp, bg, wall, weapon, target, tool, shop
 
     game = []
 

@@ -1,6 +1,7 @@
 from pico2d import *
 from config import *
 from game_work import game_framework
+from mods import play_mode
 
 
 def load_shop_resource(self):
@@ -43,18 +44,23 @@ def window_animation(self):
     pps = PPS * game_framework.frame_time
     if self.window_y <= HEIGHT / 2:
         self.window_y += 20 * pps / 4
-        for i in range(4):
+        for i in range(len(self.button_y)):
             self.button_y[i] += 20 * pps / 4
     if self.window_y > HEIGHT / 2:
         self.window_y = HEIGHT / 2
-        for i in range(4):
+        for i in range(len(self.button_y)):
             self.button_y[i] = self.window_y + 210 - (140 * i)
 
 
 def click_button(self):
-    global gun
     for i in range(len(self.button_x)):
         for j in range(len(self.button_y)):
             if self.button_x[i] - 90 < self.mx < self.button_x[i] + 90 and \
                     self.button_y[j] - 75 < self.my < self.button_y[j] + 75:
-                print('click', self.button_x[i], self.button_y[j])
+                if(i, j) == (0, 0):
+                    play_mode.weapon.gun = 'SCAR_H'
+                elif (i, j) == (1, 0):
+                    play_mode.weapon.gun = 'M16'
+                elif (i, j) == (2, 0):
+                    play_mode.weapon.gun = 'MP44'
+            self.click = False

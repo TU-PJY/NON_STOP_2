@@ -1,7 +1,6 @@
 from pico2d import *
 from config import *
 from game_work import game_manager, game_framework
-
 from ui_class.shop import Shop
 
 
@@ -23,12 +22,10 @@ def handle_events():
 
         elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
             shop.click = True
-        elif event.type == SDL_MOUSEBUTTONUP and event.button == SDL_BUTTON_LEFT:
-            shop.click = False
 
 
 def init():
-    global shop, exit_enable
+    global exit_enable, shop
     exit_enable = False
     shop = Shop()
     game_manager.add_object(shop, 7)
