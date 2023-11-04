@@ -91,6 +91,8 @@ type4_directory = 'res//monster_image//apple.png'
 # Prop 이미지 파일 경로
 arrow_right_directory = 'res//prop//arrow_right.png'
 arrow_left_directory = 'res//prop//arrow_left.png'
+blood_gun_directory = 'res//prop//blood_gun.png'
+blood_melee_directory = 'res//prop//blood_melee.png'
 
 # ui 이미지 파일 경로
 shop_window_directory = 'res//ui//shop_window.png'

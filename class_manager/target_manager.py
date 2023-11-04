@@ -36,8 +36,8 @@ def draw_target(self):
                 self.tmx = self.p.camera_x + self.p.x - 170
                 self.target_melee.composite_draw(0, 'h', self.tmx, self.tmy, 100, 150)
 
-    if self.target_dot_display_time > 0:
-        self.target_dot.draw(self.tx, self.ty, 30, 30)
+    # if self.target_dot_display_time > 0:
+    #     self.target_dot.draw(self.tx, self.ty, 30, 30)
 
 
 def update_target(self):
@@ -61,7 +61,7 @@ def update_target(self):
     elif self.weapon.gun == 'M16':
         self.dis2 = self.dis / 30 + 35
         if self.weapon.shoot:
-            self.recoil += 14
+            self.recoil += 15
 
     elif self.weapon.gun == 'MP44':
         self.dis2 = self.dis / 35 + 35

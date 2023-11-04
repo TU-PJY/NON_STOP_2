@@ -1,7 +1,7 @@
 from pico2d import *
 
 from config import *
-from game_class.prop import Arrow
+from game_class.prop import Arrow, BloodGun, BloodMelee
 from game_work import game_manager, game_framework
 
 
@@ -102,7 +102,7 @@ def move_monster(m):
                     m.y = 230
                     m.is_jump = False
                     m.acc_delay = 0
-                    m.jump_delay = 370  # 점프 타이밍이 존재
+                    m.jump_delay = 330  # 점프 타이밍이 존재
 
                 m.jump_acc -= pps / 90
 
@@ -183,7 +183,7 @@ def process_attack(m):
     # type 4 attack
     if m.type == 4:
         if m.mp.playerToWallLeft + 100 <= m.x <= m.mp.playerToWallRight - 100:
-            if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 700:
+            if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 900:
                 m.is_attack = True
             else:
                 m.is_attack = False
@@ -217,6 +217,9 @@ def damage_monster(m):
                             m.dispy - 55 <= m.target.ty <= m.dispy + 55 else False
 
         if m.hit:  # 맞은걸로 판정되면 대미지를 가한다.
+            bd = BloodGun(m.target.tx - m.p.efx, m.target.ty - m.p.efy, m.dir, m.p)
+            game_manager.add_object(bd, 2)
+
             if m.weapon.gun == 'SCAR_H':
                 m.hp -= 25
             elif m.weapon.gun == 'M16':
@@ -230,7 +233,7 @@ def damage_monster(m):
             elif m.weapon.gun == 'AKS74':
                 m.hp -= 12
             elif m.weapon.gun == 'UMP':
-                m.hp -= 16
+                m.hp -= 18
             elif m.weapon.gun == 'VECTOR':
                 m.hp -= 12
             elif m.weapon.gun == 'THOMPSON':
@@ -241,8 +244,6 @@ def damage_monster(m):
             m.hit = False
 
     elif m.weapon.wield:
-        global x1, x2, x11, x22, py, my  # 아래는 고정값
-
         x1 = m.p.x              # dir == 1일 떄의 좌측 x 좌표
         x22 = m.p.x             # dir == 0일 떄의 우측 x 좌표
         my = m.y - (m.p.y - 250) / 1.5  # 화면상에 보이는 몬스터 중심 y 좌표
@@ -278,6 +279,9 @@ def damage_monster(m):
                 m.hit = True if x11 <= m.x + 55 <= x22 and my - 55 <= py <= my + 55 else False
 
         if m.hit:
+            bm = BloodMelee(m.x, m.p.y + (m.p.y - 250) / 1.5, m.dir, m.p)
+            game_manager.add_object(bm, 2)
+
             if m.weapon.melee == 'KNIFE':
                 m.hp -= 60
             m.hit = False
