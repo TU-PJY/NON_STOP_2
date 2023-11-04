@@ -12,6 +12,7 @@ class Update:
 
     @staticmethod
     def do(m):
+        damage_monster(m)
         monster_animation(m)
         update_monster_pos(m)
         move_monster(m)
@@ -66,6 +67,8 @@ class Monster:
         self.size = 0  # 공격 시 크기 변화 애니메이션
         self.is_attack, self.is_hit = False, False
         self.incline = 0
+        self.dispx = 0  # 화면상에 출력되는 위치
+        self.dispy = 0  # 화면상에 출력되는 위치
 
         # type2 전용 변수
         self.is_dash = False

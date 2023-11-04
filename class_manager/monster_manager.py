@@ -199,6 +199,38 @@ def process_attack(m):
                     m.shoot_delay = 400
 
 
+def damage_monster(m):
+    if m.weapon.shoot:
+        m.dispx = m.x + m.p.efx
+        m.dispy = m.y + m.p.efy
+
+        if m.type == 1:  # 몬스터가 총에 맞았는지 판정한다.
+            m.hit = True if m.dispx - 50 <= m.target.tx <= m.dispx + 50 and \
+                            m.dispy - 70 <= m.target.ty <= m.dispy + 50 else False
+        if m.type == 2:
+            m.hit = True if m.dispx - 65 <= m.target.tx <= m.dispx + 65 and \
+                            m.dispy - 65 <= m.target.ty <= m.dispy + 65 else False
+        if m.type == 3:
+            m.hit = True if m.dispx - 60 <= m.target.tx <= m.dispx + 60 and \
+                            m.dispy - 60 <= m.target.ty <= m.dispy + 60 else False
+        if m.type == 4:
+            m.hit = True if m.dispx - 55 <= m.target.tx <= m.dispx + 55 and \
+                            m.dispy - 55 <= m.target.ty <= m.dispy + 55 else False
+
+        if m.hit:  # 맞은걸로 판정되면 대미지를 가한다.
+            if m.weapon.gun == 'SCAR_H':
+                m.hp -= 30
+            elif m.weapon.gun == 'M16':
+                m.hp -= 25
+            elif m.weapon.gun == 'MP44':
+                m.hp -= 45
+
+            m.hit = False
+
+    if m.hp <= 0:  # hp가 0이 될 경우 죽는다.
+        game_manager.remove_object(m)
+
+
 def update_delay(m):
     pps = PPS * game_framework.frame_time
     if m.attack_motion_time > 0:
