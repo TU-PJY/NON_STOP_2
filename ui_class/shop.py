@@ -1,32 +1,29 @@
-from config import *
-from pico2d import *
-
-from game_work import game_framework
+from ui_manager.shop_manager import *
 
 
 class Shop:
     def __init__(self):
-        self.window = load_image(shop_window_directory)
-        self.back = load_image(pause_bg_directory)
         self.x = WIDTH / 2
         self.y = HEIGHT / 2
+        self.button_x = []
+        self.button_y = []
         self.window_y = -500
-        self.font = load_font(font_directory, 50)
+        self.mx = 0
+        self.my = 0
+        self.click = False  # 마우스 누름 여부
+
+        self.h, self.v = 0,0
+        load_shop_resource(self)
+        make_button_pos(self)
 
     def draw(self):
-        self.back.draw(self.x, self.y, WIDTH, HEIGHT)
-        self.back.opacify(80)
-        self.window.draw(self.x, self.window_y, 1000, 700)
-        self.font.draw(50, HEIGHT - 50, "SHOP", (255, 255, 255))
-        pass
+        draw_shop_window(self)
+        draw_items(self)
 
     def update(self):
-        pps = PPS * game_framework.frame_time
-        if self.window_y <= HEIGHT / 2:
-            self.window_y += 10 * pps / 4
-        if self.window_y >= HEIGHT / 2:
-            self.window_y = HEIGHT / 2
-        pass
+        window_animation(self)
+        if self.click:
+            click_button(self)
 
     def handle_event(self):
         pass

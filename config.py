@@ -53,6 +53,10 @@ target_melee_directory = 'res//target_image//mode_melee.png'
 # 총 이미지 파일 경로 
 scar_h_right_directory = 'res//gun_image//SCAR_H_right.png'
 scar_h_left_directory = 'res//gun_image//SCAR_H_left.png'
+m16_right_directory = 'res//gun_image//m16_right.png'
+m16_left_directory = 'res//gun_image//m16_left.png'
+mp44_right_directory = 'res//gun_image//mp44_right.png'
+mp44_left_directory = 'res//gun_image//mp44_left.png'
 
 # 불꽃 이미지 파일 경로
 flame_right_directory = 'res//gun_image//flame_right.png'
@@ -75,6 +79,7 @@ arrow_left_directory = 'res//prop//arrow_left.png'
 # ui 이미지 파일 경로
 shop_window_directory = 'res//ui//shop_window.png'
 pause_bg_directory = 'res//ui//pause_bg.png'
+shop_button_directory = 'res//ui//shop_button.png'
 
 # 폰트 경로
 font_directory = 'bump-it-up.ttf'
