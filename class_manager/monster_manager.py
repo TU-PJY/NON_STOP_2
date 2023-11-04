@@ -22,7 +22,7 @@ def load_monster(self):
 
 def draw_monster(m):
     m.hp_back.draw(m.x + m.p.efx, m.y + 100 + m.p.efy, m.hp_length + 10, 25)
-    m.hp_front.draw(m.x + m.p.efx, m.y + 100 + m.p.efy, m.hp, 20)
+    m.hp_front.draw(m.x + m.p.efx - ((m.hp_length - m.hp) / 2), m.y + 100 + m.p.efy, m.hp, 20)
 
     if m.type == 1:
         if m.dir == 0:
@@ -199,7 +199,7 @@ def process_attack(m):
 
 
 def damage_monster(m):
-    if m.weapon.shoot:
+    if m.weapon.shoot and m.mp.playerToWallLeft <= m.p.x <= m.mp.playerToWallRight:
         m.dispx = m.x + m.p.efx
         m.dispy = m.y + m.p.efy
 

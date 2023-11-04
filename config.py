@@ -81,6 +81,11 @@ arrow_left_directory = 'res//prop//arrow_left.png'
 shop_window_directory = 'res//ui//shop_window.png'
 pause_bg_directory = 'res//ui//pause_bg.png'
 shop_button_directory = 'res//ui//shop_button.png'
+button_gun_directory = 'res//ui//button_gun.png'
+button_melee_directory = 'res//ui//button_melee.png'
+button_exp_directory = 'res//ui//button_exp.png'
+
+# 몬스터 체력바 이미지 파일 경로
 hp_back_directory = 'res//ui//hp_back.png'
 hp_front_directory = 'res//ui//hp_front.png'
 

@@ -11,6 +11,9 @@ class Shop:
         self.mx = 0
         self.my = 0
         self.click = False  # 마우스 누름 여부
+        self.select_mode = 0  # 초기값 총 선택
+        self.cat_x = []
+        self.cat_y = []
 
         load_shop_resource(self)
         make_button_pos(self)
@@ -21,6 +24,7 @@ class Shop:
 
     def update(self):
         window_animation(self)
+        update_cat_button(self)
         if self.click:
             click_button(self)
 
