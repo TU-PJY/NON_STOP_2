@@ -57,7 +57,7 @@ def click_button(self):
         for j in range(len(self.button_y)):
             if self.button_x[i] - 90 < self.mx < self.button_x[i] + 90 and \
                     self.button_y[j] - 75 < self.my < self.button_y[j] + 75:
-                if(i, j) == (0, 0):
+                if (i, j) == (0, 0):
                     play_mode.weapon.gun = 'SCAR_H'
                 elif (i, j) == (1, 0):
                     play_mode.weapon.gun = 'M16'

@@ -47,6 +47,16 @@ def update_target(self):
         if self.weapon.shoot:
             self.recoil += 20  # 총기마다 반동 수치가 달라 조준점이 벌어지는 정도가 다르다.
 
+    if self.weapon.gun == 'M16':
+        self.dis2 = self.dis / 30 + 35
+        if self.weapon.shoot:
+            self.recoil += 14
+
+    if self.weapon.gun == 'MP44':
+        self.dis2 = self.dis / 35 + 35
+        if self.weapon.shoot:
+            self.recoil += 30
+
     if self.target_dot_display_time > 0:
         self.target_dot_display_time -= pps / 3
 

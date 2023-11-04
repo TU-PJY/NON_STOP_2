@@ -25,6 +25,12 @@ def load_gun_image(self):
     self.scar_right = load_image(scar_h_right_directory)
     self.scar_left = load_image(scar_h_left_directory)
 
+    self.m16_right = load_image(m16_right_directory)
+    self.m16_left = load_image(m16_left_directory)
+
+    self.mp44_right = load_image(mp44_right_directory)
+    self.mp44_left = load_image(mp44_left_directory)
+
 
 def load_melee_image(self):
     self.knife_right = load_image(knife_right_directory)
@@ -42,6 +48,24 @@ def draw_gun(weapon):
 
             elif weapon.p.dir == 0:
                 weapon.scar_left.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2, 170, 120)
+
+        if weapon.gun == 'M16':
+            if weapon.p.dir == 1:
+                weapon.m16_right.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2, 170, 120)
+
+            elif weapon.p.dir == 0:
+                weapon.m16_left.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2, 170, 120)
+
+        if weapon.gun == 'MP44':
+            if weapon.p.dir == 1:
+                weapon.mp44_right.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2, 170, 120)
+
+            elif weapon.p.dir == 0:
+                weapon.mp44_left.clip_composite_draw \
                     (0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2, 170, 120)
 
 
@@ -99,6 +123,18 @@ def shoot_gun(weapon):
                 weapon.shoot_delay = 38
                 weapon.p.shake_time = 20
                 weapon.p.shake_range = 15
+
+            if weapon.gun == 'M16':
+                weapon.flame_display_time = FLAME_DISPLAY_TIME
+                weapon.shoot_delay = 25
+                weapon.p.shake_time = 20
+                weapon.p.shake_range = 10
+
+            if weapon.gun == 'MP44':
+                weapon.flame_display_time = FLAME_DISPLAY_TIME
+                weapon.shoot_delay = 60
+                weapon.p.shake_time = 30
+                weapon.p.shake_range = 20
         else:
             weapon.shoot = False
 

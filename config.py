@@ -29,8 +29,8 @@ APT = 1.0 / TIME_PER_ACTION
 FPA = 8
 
 RECOIL_REDUCE = 1  # 조준점 복구 지연 속도
-FLAME_DISPLAY_TIME = 10  # 총구 화염 출력 시간
-TARGET_DOT_DISPLAY_TIME = 10  # 조준점 내부에 빨간 점이 표시되는 시간 
+FLAME_DISPLAY_TIME = 12  # 총구 화염 출력 시간
+TARGET_DOT_DISPLAY_TIME = 10  # 조준점 내부에 빨간 점이 표시되는 시간
 
 # 플레이어 이미지 파일 경로
 player1_right_image_directory = 'res//player_image//player1_right.png'
