@@ -16,7 +16,7 @@ class Shop:
     def draw(self):
         self.back.draw(self.x, self.y, WIDTH, HEIGHT)
         self.back.opacify(80)
-        self.window.draw(self.x, self.window_y, 800, 500)
+        self.window.draw(self.x, self.window_y, 1000, 700)
         self.font.draw(50, HEIGHT - 50, "SHOP", (255, 255, 255))
         pass
 
