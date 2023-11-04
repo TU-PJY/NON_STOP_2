@@ -17,6 +17,8 @@ def load_shop_resource(self):
     self.image_scar = load_image(scar_h_right_directory)
     self.image_m16 = load_image(m16_right_directory)
     self.image_mp44 = load_image(mp44_right_directory)
+    self.image_aug = load_image(aug_right_directory)
+    self.image_groza = load_image(groza_right_directory)
 
     self.image_knife = load_image(knife_right_directory)
 
@@ -49,9 +51,11 @@ def draw_shop_window(self):
 
 def draw_items(self):
     if self.select_mode == 0:
-        self.image_scar.draw(self.button_x[0] - 30, self.button_y[0], 200, 150)
-        self.image_m16.draw(self.button_x[1] - 30, self.button_y[0], 200, 150)
-        self.image_mp44.draw(self.button_x[2] - 30, self.button_y[0], 200, 150)
+        self.image_scar.draw(self.button_x[0] - 30, self.button_y[2], 200, 150)
+        self.image_m16.draw(self.button_x[1] - 30, self.button_y[2], 200, 150)
+        self.image_mp44.draw(self.button_x[2] - 30, self.button_y[2], 200, 150)
+        self.image_aug.draw(self.button_x[3] - 30, self.button_y[2], 200, 150)
+        self.image_groza.draw(self.button_x[4] - 30, self.button_y[2], 200, 150)
 
     if self.select_mode == 1:
         self.image_knife.draw(self.button_x[0], self.button_y[0], 150, 100)
@@ -86,12 +90,16 @@ def click_button(self):
             for j in range(len(self.button_y)):
                 if self.button_x[i] - 90 < self.mx < self.button_x[i] + 90 and \
                         self.button_y[j] - 75 < self.my < self.button_y[j] + 75:
-                    if (i, j) == (0, 0):
+                    if (i, j) == (0, 2):
                         play_mode.weapon.gun = 'SCAR_H'
-                    elif (i, j) == (1, 0):
+                    elif (i, j) == (1, 2):
                         play_mode.weapon.gun = 'M16'
-                    elif (i, j) == (2, 0):
+                    elif (i, j) == (2, 2):
                         play_mode.weapon.gun = 'MP44'
+                    elif (i, j) == (3, 2):
+                        play_mode.weapon.gun = 'AUG'
+                    elif (i, j) == (4, 2):
+                        play_mode.weapon.gun = 'GROZA'
 
     for i in range(len(self.cat_x)):
         for j in range(len(self.cat_y)):

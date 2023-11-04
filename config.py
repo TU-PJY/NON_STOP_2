@@ -58,6 +58,10 @@ m16_right_directory = 'res//gun_image//m16_right.png'
 m16_left_directory = 'res//gun_image//m16_left.png'
 mp44_right_directory = 'res//gun_image//mp44_right.png'
 mp44_left_directory = 'res//gun_image//mp44_left.png'
+aug_right_directory = 'res//gun_image//aug_right.png'
+aug_left_directory = 'res//gun_image//aug_left.png'
+groza_right_directory = 'res//gun_image//groza_right.png'
+groza_left_directory = 'res//gun_image//groza_left.png'
 
 # 불꽃 이미지 파일 경로
 flame_right_directory = 'res//gun_image//flame_right.png'

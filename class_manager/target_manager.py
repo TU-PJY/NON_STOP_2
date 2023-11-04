@@ -30,14 +30,12 @@ def draw_target(self):
         self.target_dot.draw(self.tx, self.ty, 30, 30)
 
     if self.weapon.weapon_type == 1:
-        if self.p.dir == 1:
-            if self.weapon.melee == 'KNIFE':
+        if self.weapon.melee == 'KNIFE':
+            if self.p.dir == 1:
                 self.target_melee.composite_draw \
                     (0, '', self.p.x + self.p.camera_x + 200, -self.p.land_y + self.p.y + self.p.camera_y,
                      100, 150)
-
-        elif self.p.dir == 0:
-            if self.weapon.melee == 'KNIFE':
+            elif self.p.dir == 0:
                 self.target_melee.composite_draw \
                     (0, 'h', self.p.x + self.p.camera_x - 200, -self.p.land_y + self.p.y + self.p.camera_y,
                      100, 150)
@@ -64,12 +62,22 @@ def update_target(self):
     if self.weapon.gun == 'M16':
         self.dis2 = self.dis / 30 + 35
         if self.weapon.shoot:
-            self.recoil += 15
+            self.recoil += 14
 
     if self.weapon.gun == 'MP44':
         self.dis2 = self.dis / 35 + 35
         if self.weapon.shoot:
             self.recoil += 30
+
+    if self.weapon.gun == 'AUG':
+        self.dis2 = self.dis / 45 + 35
+        if self.weapon.shoot:
+            self.recoil += 15
+
+    if self.weapon.gun == 'GROZA':
+        self.dis2 = self.dis / 40 + 35
+        if self.weapon.shoot:
+            self.recoil += 13
 
     if self.target_dot_display_time > 0:
         self.target_dot_display_time -= pps / 3

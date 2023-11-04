@@ -31,6 +31,12 @@ def load_gun_image(self):
     self.mp44_right = load_image(mp44_right_directory)
     self.mp44_left = load_image(mp44_left_directory)
 
+    self.aug_right = load_image(aug_right_directory)
+    self.aug_left = load_image(aug_left_directory)
+
+    self.groza_right = load_image(groza_right_directory)
+    self.groza_left = load_image(groza_left_directory)
+
 
 def load_melee_image(self):
     self.knife_right = load_image(knife_right_directory)
@@ -66,6 +72,24 @@ def draw_gun(weapon):
 
             elif weapon.p.dir == 0:
                 weapon.mp44_left.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2, 170, 120)
+
+        if weapon.gun == 'AUG':
+            if weapon.p.dir == 1:
+                weapon.aug_right.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2, 170, 120)
+
+            elif weapon.p.dir == 0:
+                weapon.aug_left.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2, 170, 120)
+
+        if weapon.gun == 'GROZA':
+            if weapon.p.dir == 1:
+                weapon.groza_right.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2, 170, 120)
+
+            elif weapon.p.dir == 0:
+                weapon.groza_left.clip_composite_draw \
                     (0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2, 170, 120)
 
 
@@ -121,7 +145,7 @@ def shoot_gun(weapon):
             if weapon.gun == 'SCAR_H':
                 weapon.flame_display_time = FLAME_DISPLAY_TIME
                 weapon.shoot_delay = 38
-                weapon.p.shake_time = 20
+                weapon.p.shake_time = 25
                 weapon.p.shake_range = 15
 
             if weapon.gun == 'M16':
@@ -135,6 +159,18 @@ def shoot_gun(weapon):
                 weapon.shoot_delay = 60
                 weapon.p.shake_time = 30
                 weapon.p.shake_range = 20
+
+            if weapon.gun == 'AUG':
+                weapon.flame_display_time = FLAME_DISPLAY_TIME
+                weapon.shoot_delay = 32
+                weapon.p.shake_time = 20
+                weapon.p.shake_range = 10
+
+            if weapon.gun == 'GROZA':
+                weapon.flame_display_time = FLAME_DISPLAY_TIME
+                weapon.shoot_delay = 26
+                weapon.p.shake_time = 20
+                weapon.p.shake_range = 10
         else:
             weapon.shoot = False
 
