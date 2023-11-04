@@ -1,8 +1,10 @@
-from pico2d import *
-from config import *
-from game_work import game_manager, game_framework
-from game_class.prop import Arrow
 import math
+
+from pico2d import *
+
+from config import *
+from game_class.prop import Arrow
+from game_work import game_manager, game_framework
 
 
 def load_monster(self):

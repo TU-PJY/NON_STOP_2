@@ -1,5 +1,5 @@
-from game_work.display_manager import *
 from class_manager.player_manager import *
+from game_work.display_manager import *
 
 
 # 실시간으로 총이 마우스 좌표를 향해야 하므로 Class_Player가 마우스 좌표를 받아 Class_Gun으로 전달한다.
@@ -12,7 +12,7 @@ class Move:
     def enter(p, e):
         if right_down(e) or left_up(e):
             p.mv_right = True
-        elif right_up(e) or left_down(e):
+        if right_up(e) or left_down(e):
             p.mv_left = True
 
     @staticmethod
@@ -138,10 +138,6 @@ class Player:
     def update(self):
         if game_framework.MODE == 'play':
             self.state_machine.update()
-        if game_framework.MODE == 'shop':
-            self.state_machine.cur_state = Idle
-            self.mv_right = False
-            self.mv_left = False
 
     def handle_event(self, event):
         self.state_machine.handle_event(('INPUT', event))

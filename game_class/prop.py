@@ -1,7 +1,9 @@
+import math
+
 from pico2d import *
+
 from config import *
 from game_work import game_manager, game_framework
-import math
 
 
 class Arrow:

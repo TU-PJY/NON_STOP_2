@@ -1,8 +1,9 @@
 # 플레이어 관련 함수 모음
-from pico2d import *
-from config import *
 import math
 
+from pico2d import *
+
+from config import *
 from game_work import game_framework
 
 

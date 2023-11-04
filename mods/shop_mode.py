@@ -1,11 +1,11 @@
-from pico2d import *
-from config import *
+from game_class.weapon import *
 from game_work import game_manager, game_framework
+from mods import play_mode
 from ui_class.shop import Shop
 
 
 def handle_events():
-    global mx, my, exit_enable, shop
+    global exit_enable, shop, p, weapon
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -22,6 +22,8 @@ def handle_events():
 
         elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
             shop.click = True
+        else:
+            play_mode.p.handle_event(event)  # 이동키를 누른 상태로 모드 전환 시 동작 오류 방지
 
 
 def init():

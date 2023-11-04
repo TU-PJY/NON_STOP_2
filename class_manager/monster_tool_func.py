@@ -1,7 +1,8 @@
+import random
+
+from config import *
 from game_class.monster import Monster
 from game_work import game_manager, game_framework
-from config import *
-import random
 
 
 def update_spawn_point(self):  # 스폰 지점 업데이트

@@ -1,8 +1,9 @@
 # 무기 관련 함수 모음
-from pico2d import *
-from config import *
 import math
 
+from pico2d import *
+
+from config import *
 from game_work import game_framework
 
 
@@ -126,7 +127,7 @@ def shoot_gun(weapon):
 
             if weapon.gun == 'M16':
                 weapon.flame_display_time = FLAME_DISPLAY_TIME
-                weapon.shoot_delay = 25
+                weapon.shoot_delay = 28
                 weapon.p.shake_time = 20
                 weapon.p.shake_range = 10
 

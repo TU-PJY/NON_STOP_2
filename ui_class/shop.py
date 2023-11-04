@@ -12,7 +12,6 @@ class Shop:
         self.my = 0
         self.click = False  # 마우스 누름 여부
 
-        self.h, self.v = 0,0
         load_shop_resource(self)
         make_button_pos(self)
 

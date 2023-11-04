@@ -48,7 +48,8 @@ target_down_directory = 'res//target_image//target_down.png'
 target_right_directory = 'res//target_image//target_right.png'
 target_left_directory = 'res//target_image//target_left.png'
 target_dot_directory = 'res//target_image//target_dot.png'
-target_melee_directory = 'res//target_image//mode_melee.png'
+target_x_directory = 'res//target_image//mode_melee.png'
+target_melee_directory = 'res//target_image//target_melee.png'
 
 # 총 이미지 파일 경로 
 scar_h_right_directory = 'res//gun_image//SCAR_H_right.png'

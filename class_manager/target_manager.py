@@ -1,9 +1,10 @@
 # 조준점 관련 함수 오음
-from pico2d import *
-from config import *
 import math
 import random
 
+from pico2d import *
+
+from config import *
 from game_work import game_framework
 
 
@@ -13,6 +14,7 @@ def load_target(self):
     self.target_right = load_image(target_right_directory)
     self.target_left = load_image(target_left_directory)
     self.target_dot = load_image(target_dot_directory)
+    self.not_target = load_image(target_x_directory)
     self.target_melee = load_image(target_melee_directory)
 
 
@@ -23,10 +25,23 @@ def draw_target(self):
         self.target_right.draw(self.p.mx + self.recoil + self.dis2, self.p.my, 60, 60)
         self.target_left.draw(self.p.mx - self.recoil - self.dis2, self.p.my, 60, 60)
     elif self.weapon.weapon_type == 1:  # 근접 무기는 조준점이 필요 없으므로 타겟을 사용하지 않는다.
-        self.target_melee.draw(self.p.mx, self.p.my, 120, 120)
+        self.not_target.draw(self.p.mx, self.p.my, 120, 120)
 
     if self.target_dot_display_time > 0:
         self.target_dot.draw(self.tx, self.ty, 30, 30)
+
+    if self.weapon.weapon_type == 1:
+        if self.p.dir == 1:
+            if self.weapon.melee == 'KNIFE':
+                self.target_melee.composite_draw \
+                    (0, '', self.p.x + self.p.camera_x + 200, -self.p.land_y + self.p.y + self.p.camera_y,
+                     100, 150)
+
+        elif self.p.dir == 0:
+            if self.weapon.melee == 'KNIFE':
+                self.target_melee.composite_draw \
+                    (0, 'h', self.p.x + self.p.camera_x - 200, -self.p.land_y + self.p.y + self.p.camera_y,
+                     100, 150)
 
 
 def update_target(self):
@@ -50,7 +65,7 @@ def update_target(self):
     if self.weapon.gun == 'M16':
         self.dis2 = self.dis / 30 + 35
         if self.weapon.shoot:
-            self.recoil += 14
+            self.recoil += 15
 
     if self.weapon.gun == 'MP44':
         self.dis2 = self.dis / 35 + 35

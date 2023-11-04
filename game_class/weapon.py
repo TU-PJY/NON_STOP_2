@@ -117,7 +117,7 @@ class Weapon:
     def update(self):
         if game_framework.MODE == 'play':
             self.state_machine.update()
-        if game_framework.MODE == 'shop':
+        if game_framework.MODE == 'shop':  # 모드 전환 시 더 이상 총이 발사되지 않도록 강제로 발사 상태 해제
             self.state_machine.cur_state = Idle
 
     def handle_event(self, event):
