@@ -227,6 +227,16 @@ def damage_monster(m):
                 m.hp -= 23
             elif m.weapon.gun == 'GROZA':
                 m.hp -= 20
+            elif m.weapon.gun == 'AKS74':
+                m.hp -= 12
+            elif m.weapon.gun == 'UMP':
+                m.hp -= 16
+            elif m.weapon.gun == 'VECTOR':
+                m.hp -= 12
+            elif m.weapon.gun == 'THOMPSON':
+                m.hp -= 20
+            elif m.weapon.gun == 'P90':
+                m.hp -= 15
 
             m.hit = False
 

@@ -59,23 +59,48 @@ def update_target(self):
         if self.weapon.shoot:
             self.recoil += 20  # 총기마다 반동 수치가 달라 조준점이 벌어지는 정도가 다르다.
 
-    if self.weapon.gun == 'M16':
+    elif self.weapon.gun == 'M16':
         self.dis2 = self.dis / 30 + 35
         if self.weapon.shoot:
             self.recoil += 14
 
-    if self.weapon.gun == 'MP44':
+    elif self.weapon.gun == 'MP44':
         self.dis2 = self.dis / 35 + 35
         if self.weapon.shoot:
             self.recoil += 30
 
-    if self.weapon.gun == 'AUG':
+    elif self.weapon.gun == 'AUG':
         self.dis2 = self.dis / 45 + 35
         if self.weapon.shoot:
             self.recoil += 15
 
-    if self.weapon.gun == 'GROZA':
+    elif self.weapon.gun == 'GROZA':
         self.dis2 = self.dis / 40 + 35
+        if self.weapon.shoot:
+            self.recoil += 13
+
+    elif self.weapon.gun == 'AKS74':
+        self.dis2 = self.dis / 30 + 35
+        if self.weapon.shoot:
+            self.recoil += 13
+
+    elif self.weapon.gun == 'UMP':
+        self.dis2 = self.dis / 25 + 35
+        if self.weapon.shoot:
+            self.recoil += 17
+
+    elif self.weapon.gun == 'VECTOR':
+        self.dis2 = self.dis / 12 + 35
+        if self.weapon.shoot:
+            self.recoil += 8
+
+    elif self.weapon.gun == 'THOMPSON':
+        self.dis2 = self.dis / 20 + 35
+        if self.weapon.shoot:
+            self.recoil += 17
+
+    elif self.weapon.gun == 'P90':
+        self.dis2 = self.dis / 15 + 35
         if self.weapon.shoot:
             self.recoil += 13
 

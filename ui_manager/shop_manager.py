@@ -20,6 +20,12 @@ def load_shop_resource(self):
     self.image_aug = load_image(aug_right_directory)
     self.image_groza = load_image(groza_right_directory)
 
+    self.image_aks74 = load_image(aks74_right_directory)
+    self.image_ump = load_image(ump_right_directory)
+    self.image_vector = load_image(vector_right_directpry)
+    self.image_thompson = load_image(thompson_right_directory)
+    self.image_p90 = load_image(p90_right_directory)
+
     self.image_knife = load_image(knife_right_directory)
 
 
@@ -56,6 +62,12 @@ def draw_items(self):
         self.image_mp44.draw(self.button_x[2] - 30, self.button_y[2], 200, 150)
         self.image_aug.draw(self.button_x[3] - 30, self.button_y[2], 200, 150)
         self.image_groza.draw(self.button_x[4] - 30, self.button_y[2], 200, 150)
+
+        self.image_aks74.draw(self.button_x[0] - 30, self.button_y[1], 200, 150)
+        self.image_ump.draw(self.button_x[1] - 30, self.button_y[1], 200, 150)
+        self.image_vector.draw(self.button_x[2] - 20, self.button_y[1], 200, 150)
+        self.image_thompson.draw(self.button_x[3] - 15, self.button_y[1], 200, 150)
+        self.image_p90.draw(self.button_x[4] - 30, self.button_y[1], 200, 150)
 
     if self.select_mode == 1:
         self.image_knife.draw(self.button_x[0], self.button_y[0], 150, 100)
@@ -100,6 +112,16 @@ def click_button(self):
                         play_mode.weapon.gun = 'AUG'
                     elif (i, j) == (4, 2):
                         play_mode.weapon.gun = 'GROZA'
+                    elif (i, j) == (0, 1):
+                        play_mode.weapon.gun = 'AKS74'
+                    elif (i, j) == (1, 1):
+                        play_mode.weapon.gun = 'UMP'
+                    elif (i, j) == (2, 1):
+                        play_mode.weapon.gun = 'VECTOR'
+                    elif (i, j) == (3, 1):
+                        play_mode.weapon.gun = 'THOMPSON'
+                    elif (i ,j) == (4, 1):
+                        play_mode.weapon.gun = 'P90'
 
     for i in range(len(self.cat_x)):
         for j in range(len(self.cat_y)):

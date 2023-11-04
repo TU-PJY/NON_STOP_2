@@ -62,6 +62,17 @@ aug_right_directory = 'res//gun_image//aug_right.png'
 aug_left_directory = 'res//gun_image//aug_left.png'
 groza_right_directory = 'res//gun_image//groza_right.png'
 groza_left_directory = 'res//gun_image//groza_left.png'
+aks74_right_directory = 'res//gun_image//aks74_right.png'
+aks74_left_directory = 'res//gun_image//aks74_left.png'
+ump_right_directory = 'res//gun_image//ump_right.png'
+ump_left_directory = 'res//gun_image//ump_left.png'
+vector_right_directpry = 'res//gun_image//vector_right.png'
+vector_left_directpry = 'res//gun_image//vector_left.png'
+thompson_right_directory = 'res//gun_image//thompson_right.png'
+thompson_left_directory = 'res//gun_image//thompson_left.png'
+p90_right_directory = 'res//gun_image//p90_right.png'
+p90_left_directory = 'res//gun_image//p90_left.png'
+
 
 # 불꽃 이미지 파일 경로
 flame_right_directory = 'res//gun_image//flame_right.png'

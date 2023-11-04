@@ -24,18 +24,24 @@ def load_gun_image(self):
 
     self.scar_right = load_image(scar_h_right_directory)
     self.scar_left = load_image(scar_h_left_directory)
-
     self.m16_right = load_image(m16_right_directory)
     self.m16_left = load_image(m16_left_directory)
-
     self.mp44_right = load_image(mp44_right_directory)
     self.mp44_left = load_image(mp44_left_directory)
-
     self.aug_right = load_image(aug_right_directory)
     self.aug_left = load_image(aug_left_directory)
-
     self.groza_right = load_image(groza_right_directory)
     self.groza_left = load_image(groza_left_directory)
+    self.aks74_right = load_image(aks74_right_directory)
+    self.aks74_left = load_image(aks74_left_directory)
+    self.ump_right = load_image(ump_right_directory)
+    self.ump_left = load_image(ump_left_directory)
+    self.vector_right = load_image(vector_right_directpry)
+    self.vector_left = load_image(vector_left_directpry)
+    self.thompson_right = load_image(thompson_right_directory)
+    self.thompson_left = load_image(thompson_left_directory)
+    self.p90_right = load_image(p90_right_directory)
+    self.p90_left = load_image(p90_left_directory)
 
 
 def load_melee_image(self):
@@ -51,45 +57,80 @@ def draw_gun(weapon):
             if weapon.p.dir == 1:
                 weapon.scar_right.clip_composite_draw \
                     (0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2, 170, 120)
-
             elif weapon.p.dir == 0:
                 weapon.scar_left.clip_composite_draw \
                     (0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2, 170, 120)
 
-        if weapon.gun == 'M16':
+        elif weapon.gun == 'M16':
             if weapon.p.dir == 1:
                 weapon.m16_right.clip_composite_draw \
                     (0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2, 170, 120)
-
             elif weapon.p.dir == 0:
                 weapon.m16_left.clip_composite_draw \
                     (0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2, 170, 120)
 
-        if weapon.gun == 'MP44':
+        elif weapon.gun == 'MP44':
             if weapon.p.dir == 1:
                 weapon.mp44_right.clip_composite_draw \
                     (0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2, 170, 120)
-
             elif weapon.p.dir == 0:
                 weapon.mp44_left.clip_composite_draw \
                     (0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2, 170, 120)
 
-        if weapon.gun == 'AUG':
+        elif weapon.gun == 'AUG':
             if weapon.p.dir == 1:
                 weapon.aug_right.clip_composite_draw \
                     (0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2, 170, 120)
-
             elif weapon.p.dir == 0:
                 weapon.aug_left.clip_composite_draw \
                     (0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2, 170, 120)
 
-        if weapon.gun == 'GROZA':
+        elif weapon.gun == 'GROZA':
             if weapon.p.dir == 1:
                 weapon.groza_right.clip_composite_draw \
                     (0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2, 170, 120)
-
             elif weapon.p.dir == 0:
                 weapon.groza_left.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2, 170, 120)
+
+        elif weapon.gun == 'AKS74':
+            if weapon.p.dir == 1:
+                weapon.aks74_right.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2, 170, 120)
+            elif weapon.p.dir == 0:
+                weapon.aks74_left.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2, 170, 120)
+
+        elif weapon.gun == 'UMP':
+            if weapon.p.dir == 1:
+                weapon.ump_right.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2, 170, 120)
+            elif weapon.p.dir == 0:
+                weapon.ump_left.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2, 170, 120)
+
+        elif weapon.gun == 'VECTOR':
+            if weapon.p.dir == 1:
+                weapon.vector_right.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2, 170, 120)
+            elif weapon.p.dir == 0:
+                weapon.vector_left.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2, 170, 120)
+
+        elif weapon.gun == 'THOMPSON':
+            if weapon.p.dir == 1:
+                weapon.thompson_right.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2, 170, 120)
+            elif weapon.p.dir == 0:
+                weapon.thompson_left.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2, 170, 120)
+
+        elif weapon.gun == 'P90':
+            if weapon.p.dir == 1:
+                weapon.p90_right.clip_composite_draw \
+                    (0, 0, 150, 100, weapon.deg, '', weapon.p.px + 20, weapon.p.py2, 170, 120)
+            elif weapon.p.dir == 0:
+                weapon.p90_left.clip_composite_draw \
                     (0, 0, 150, 100, weapon.deg, 'h, v', weapon.p.px - 20, weapon.p.py2, 170, 120)
 
 
@@ -148,27 +189,57 @@ def shoot_gun(weapon):
                 weapon.p.shake_time = 25
                 weapon.p.shake_range = 15
 
-            if weapon.gun == 'M16':
+            elif weapon.gun == 'M16':
                 weapon.flame_display_time = FLAME_DISPLAY_TIME
                 weapon.shoot_delay = 28
                 weapon.p.shake_time = 20
                 weapon.p.shake_range = 10
 
-            if weapon.gun == 'MP44':
+            elif weapon.gun == 'MP44':
                 weapon.flame_display_time = FLAME_DISPLAY_TIME
                 weapon.shoot_delay = 60
                 weapon.p.shake_time = 30
                 weapon.p.shake_range = 20
 
-            if weapon.gun == 'AUG':
+            elif weapon.gun == 'AUG':
                 weapon.flame_display_time = FLAME_DISPLAY_TIME
                 weapon.shoot_delay = 32
                 weapon.p.shake_time = 20
                 weapon.p.shake_range = 10
 
-            if weapon.gun == 'GROZA':
+            elif weapon.gun == 'GROZA':
                 weapon.flame_display_time = FLAME_DISPLAY_TIME
                 weapon.shoot_delay = 26
+                weapon.p.shake_time = 20
+                weapon.p.shake_range = 10
+
+            elif weapon.gun == 'AKS74':
+                weapon.flame_display_time = FLAME_DISPLAY_TIME
+                weapon.shoot_delay = 28
+                weapon.p.shake_time = 20
+                weapon.p.shake_range = 10
+
+            elif weapon.gun == 'UMP':
+                weapon.flame_display_time = FLAME_DISPLAY_TIME
+                weapon.shoot_delay = 35
+                weapon.p.shake_time = 20
+                weapon.p.shake_range = 10
+
+            elif weapon.gun == 'VECTOR':
+                weapon.flame_display_time = FLAME_DISPLAY_TIME
+                weapon.shoot_delay = 15
+                weapon.p.shake_time = 20
+                weapon.p.shake_range = 10
+
+            elif weapon.gun == 'THOMPSON':
+                weapon.flame_display_time = FLAME_DISPLAY_TIME
+                weapon.shoot_delay = 31
+                weapon.p.shake_time = 22
+                weapon.p.shake_range = 13
+
+            elif weapon.gun == 'P90':
+                weapon.flame_display_time = FLAME_DISPLAY_TIME
+                weapon.shoot_delay = 24
                 weapon.p.shake_time = 20
                 weapon.p.shake_range = 10
         else:
