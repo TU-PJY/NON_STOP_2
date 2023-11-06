@@ -103,7 +103,7 @@ def update_target(t):
             t.recoil += 17
 
     elif t.weapon.gun == 'P90':
-        t.dis2 = t.dis / 15 + 35
+        t.dis2 = t.dis / 20 + 35
         if t.weapon.shoot:
             t.recoil += 13
 

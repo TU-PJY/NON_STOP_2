@@ -199,7 +199,7 @@ def process_attack(m):
                 if m.shoot_delay <= 0:
                     ar = Arrow(m.p, m.mp, m.x, m.y, m.incline, m.dir)  # 일정 간격으로 화살을 발사한다
                     game_manager.add_object(ar, 2)
-                    m.shoot_delay = 400
+                    m.shoot_delay = 450
 
 
 def damage_monster(m):
@@ -227,7 +227,7 @@ def damage_monster(m):
             if m.weapon.gun == 'SCAR_H':
                 m.hp -= 25
             elif m.weapon.gun == 'M16':
-                m.hp -= 15
+                m.hp -= 18
             elif m.weapon.gun == 'MP44':
                 m.hp -= 40
             elif m.weapon.gun == 'AUG':
@@ -243,7 +243,7 @@ def damage_monster(m):
             elif m.weapon.gun == 'THOMPSON':
                 m.hp -= 20
             elif m.weapon.gun == 'P90':
-                m.hp -= 15
+                m.hp -= 17
 
             m.hit = False
 
