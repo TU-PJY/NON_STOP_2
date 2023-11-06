@@ -18,6 +18,11 @@ def q_down(e):
     return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_q
 
 
+def calc_pps():
+    global pps 
+    pps = PPS * game_framework.frame_time
+
+
 def load_gun_image(self):
     self.flame_right = load_image(flame_right_directory)
     self.flame_left = load_image(flame_left_directory)
@@ -122,7 +127,7 @@ def draw_gun(weapon):
 
 
 def draw_flame(weapon):
-    pps = PPS * game_framework.frame_time
+    global pps
     if weapon.flame_display_time > 0 and weapon.weapon_type == 0:
         weapon.flame_display_time -= pps / 3
         if weapon.p.dir == 1:
@@ -239,7 +244,7 @@ def wield_melee(weapon):
 
 
 def update_melee_position(weapon):
-    pps = PPS * game_framework.frame_time
+    global pps
     if weapon.melee_x > 0:
         weapon.melee_x -= pps
     else:
@@ -247,7 +252,7 @@ def update_melee_position(weapon):
 
 
 def update_delay(weapon):
-    pps = PPS * game_framework.frame_time
+    global pps
     if weapon.shoot_delay > 0:
         weapon.shoot_delay -= pps / 3
     if weapon.wield_delay > 0:

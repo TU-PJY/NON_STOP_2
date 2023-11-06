@@ -26,6 +26,7 @@ class Tool:
 
     def update(self):
         if game_framework.MODE == 'play':
+            calc_pps()
             update_spawn_point(self)
             spawn_monster(self)
             update_timer(self)

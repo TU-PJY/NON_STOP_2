@@ -5,6 +5,11 @@ from game_class.prop import Arrow, BloodGun, BloodMelee
 from game_work import game_manager, game_framework
 
 
+def calc_pps():
+    global pps 
+    pps = PPS * game_framework.frame_time
+
+
 def load_monster(self):
     if self.type == 1:
         self.type1 = load_image(type1_directory)
@@ -68,14 +73,13 @@ def draw_monster(m):
 
 
 def update_monster_size(m):
-    pps = PPS * game_framework.frame_time
+    global pps
     if m.size > 0:
         m.size -= 2 * pps / 3
 
 
 def move_monster(m):
-    pps = PPS * game_framework.frame_time
-
+    global pps
     m.dir = 1 if m.p.x > m.x else 0
 
     if not m.is_attack and m.attack_motion_time <= 0:
@@ -111,7 +115,7 @@ def move_monster(m):
 
 
 def monster_animation(m):
-    pps = PPS * game_framework.frame_time
+    global pps
     # all type animation except type 3
     if not m.is_attack and m.attack_motion_time <= 0 and not m.type == 3:  # type3은 프레임 업데이트를 하지 않음
         m.frame = (m.frame + APT * FPA * game_framework.frame_time) % 2
@@ -129,7 +133,7 @@ def monster_animation(m):
 
 
 def process_attack(m):
-    pps = PPS * game_framework.frame_time
+    global pps
     # type 1 attack
     if m.type == 1:
         m.is_attack = True if math.sqrt((m.x - m.p.x) ** 2 + (m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 100 else False
@@ -291,7 +295,7 @@ def damage_monster(m):
 
 
 def update_delay(m):
-    pps = PPS * game_framework.frame_time
+    global pps
     if m.attack_motion_time > 0:
         m.attack_motion_time -= pps / 3
     if m.atk_delay > 0:
@@ -303,7 +307,7 @@ def update_delay(m):
 
 
 def update_monster_pos(m):
-    pps = PPS * game_framework.frame_time
+    global pps
     if m.p.mv_right:
         m.x -= m.p.speed * pps / 4
         m.temp_x -= m.p.speed * pps / 4

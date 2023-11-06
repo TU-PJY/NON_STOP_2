@@ -5,8 +5,13 @@ from game_class.monster import Monster
 from game_work import game_manager, game_framework
 
 
-def update_spawn_point(self):  # 스폰 지점 업데이트
+def calc_pps():
+    global pps
     pps = PPS * game_framework.frame_time
+    
+
+def update_spawn_point(self):  # 스폰 지점 업데이트
+    global pps
     if self.p.mv_right:
         self.spawn_point_right -= self.p.speed * pps / 4
         self.spawn_point_left -= self.p.speed * pps / 4
@@ -49,6 +54,6 @@ def spawn_monster(self):  # 몬스터 스폰
 
 
 def update_timer(self):  # 스폰 타이머 업데이트
-    pps = PPS * game_framework.frame_time
+    global pps
     if self.spawn_time > 0:
         self.spawn_time -= pps / 3

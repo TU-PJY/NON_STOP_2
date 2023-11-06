@@ -5,6 +5,11 @@ from game_work import game_framework
 from mods import play_mode
 
 
+def calc_pps():
+    global pps
+    pps = PPS * game_framework.frame_time
+
+
 def load_shop_resource(self):
     self.window = load_image(shop_window_directory)
     self.back = load_image(pause_bg_directory)
@@ -74,7 +79,7 @@ def draw_items(self):
 
 
 def window_animation(self):
-    pps = PPS * game_framework.frame_time
+    global pps
     if self.window_y <= HEIGHT / 2:
         self.window_y += 20 * pps / 4
         for i in range(len(self.button_y)):
@@ -97,6 +102,18 @@ def update_cat_button(self):
 
 
 def click_button(self):
+    for i in range(len(self.cat_x)):
+        for j in range(len(self.cat_y)):
+            if self.cat_x[i] - 100 < self.mx < self.cat_x[i] + 100 and \
+                    self.cat_y[i] - 20 < self.my < self.cat_y[i] + 60:
+                if i == 0:
+                    self.select_mode = 0  # gun
+                elif i == 1:
+                    self.select_mode = 1  # melee
+                elif i == 2:
+                    self.select_mode = 2  # exp
+
+
     if self.select_mode == 0:
         for i in range(len(self.button_x)):
             for j in range(len(self.button_y)):
@@ -122,16 +139,5 @@ def click_button(self):
                         play_mode.weapon.gun = 'THOMPSON'
                     elif (i ,j) == (4, 1):
                         play_mode.weapon.gun = 'P90'
-
-    for i in range(len(self.cat_x)):
-        for j in range(len(self.cat_y)):
-            if self.cat_x[i] - 100 < self.mx < self.cat_x[i] + 100 and \
-                    self.cat_y[i] - 20 < self.my < self.cat_y[i] + 60:
-                if i == 0:
-                    self.select_mode = 0
-                elif i == 1:
-                    self.select_mode = 1
-                elif i == 2:
-                    self.select_mode = 2
 
     self.click = False

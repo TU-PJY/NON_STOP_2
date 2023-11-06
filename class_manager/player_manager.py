@@ -26,6 +26,11 @@ def space_down(e):
     return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_SPACE
 
 
+def calc_pps():
+    global pps
+    pps = PPS * game_framework.frame_time
+
+
 def load_player_image(self):
     self.image = load_image(player1_right_image_directory)
     self.image_left = load_image(player1_left_image_directory)
@@ -63,13 +68,13 @@ def draw_player(p):
 
 
 def jump(p):
-    pps = PPS * game_framework.frame_time
+    global pps
     if p.mv_jump:  # 점프 시
         p.y += p.jump_acc * pps / 4
 
         if p.y <= 250:  # 점프 후 착지하면
             p.y = 250
-            p.jump_acc = JUMP_ACC  # 점프 가속도 초기화
+            p.jump_acc = 0  # 점프 가속도 초기화
             p.mv_jump = False  # 점프가 가능해진다
             p.land_y = LAND_SHAKE  # LAND_SHAKE 만큼 화면이 눌린다
 
@@ -77,8 +82,7 @@ def jump(p):
 
 
 def walk_animation(p):
-    pps = PPS * game_framework.frame_time
-
+    global pps
     p.size_deg += 1 * pps / 50
 
     if not p.mv_jump:
@@ -88,6 +92,6 @@ def walk_animation(p):
 
 
 def update_damage_delay(p):
-    pps = PPS * game_framework.frame_time
+    global pps
     if p.dmg_delay > 0:
         p.dmg_delay -= pps / 3

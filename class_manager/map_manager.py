@@ -5,6 +5,11 @@ from config import *
 from game_work import game_framework
 
 
+def calc_pps():
+    global pps
+    pps = PPS * game_framework.frame_time
+
+
 def load_land(self):
     self.image = load_image(land_image_directory)
 
@@ -33,8 +38,7 @@ def draw_background(self):
 
 
 def update_map(self):  # 맵 업데이트
-    pps = PPS * game_framework.frame_time
-
+    global pps
     if self.x + 2048 <= self.p.x:  # 맵 끝으로 갈 경우 벽에 막힌다
         self.p.mv_right = False
 

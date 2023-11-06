@@ -18,6 +18,7 @@ class Move:
     @staticmethod
     def exit(p, e):
         if space_down(e):
+            p.jump_acc = JUMP_ACC
             p.mv_jump = True
         else:
             p.mv_right = False
@@ -30,7 +31,7 @@ class Move:
     @staticmethod
     def do(p):
         p.dir = 1 if p.mx > p.x else 0
-
+        calc_pps()
         walk_animation(p)
         jump(p)
         look_mouse(p)
@@ -54,11 +55,13 @@ class Idle:
     @staticmethod
     def exit(p, e):
         if space_down(e):
+            p.jump_acc = JUMP_ACC
             p.mv_jump = True
 
     @staticmethod
     def do(p):
         p.dir = 1 if p.mx > p.x else 0
+        calc_pps()
         jump(p)
         look_mouse(p)
         update_camera(p)

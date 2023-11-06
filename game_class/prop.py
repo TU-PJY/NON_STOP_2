@@ -22,8 +22,8 @@ class Arrow:
             self.arrow_right = load_image(arrow_right_directory)
 
     def update(self):
+        pps = PPS * game_framework.frame_time
         if game_framework.MODE == 'play':
-            pps = PPS * game_framework.frame_time
             if self.p.mv_right:
                 self.x -= self.p.speed * pps / 4
             elif self.p.mv_left:
@@ -85,15 +85,15 @@ class BloodGun:
 
     def update(self):
         pps = PPS * game_framework.frame_time
+        if game_framework.MODE == 'play':
+            if self.p.mv_right:
+                self.x -= self.p.speed * pps / 4
+            elif self.p.mv_left:
+                self.x += self.p.speed * pps / 4
 
-        if self.p.mv_right:
-            self.x -= self.p.speed * pps / 4
-        elif self.p.mv_left:
-            self.x += self.p.speed * pps / 4
-
-        self.frame = (self.frame + pps / 50) % 8
-        if self.frame >= 7:
-            game_manager.remove_object(self)
+            self.frame = (self.frame + pps / 50) % 8
+            if self.frame >= 7:
+                game_manager.remove_object(self)
 
     def handle_event(self):
         pass
@@ -118,15 +118,15 @@ class BloodMelee:
 
     def update(self):
         pps = PPS * game_framework.frame_time
+        if game_framework.MODE == 'play':
+            if self.p.mv_right:
+                self.x -= self.p.speed * pps / 4
+            elif self.p.mv_left:
+                self.x += self.p.speed * pps / 4
 
-        if self.p.mv_right:
-            self.x -= self.p.speed * pps / 4
-        elif self.p.mv_left:
-            self.x += self.p.speed * pps / 4
-
-        self.frame = (self.frame + pps / 50) % 10
-        if self.frame >= 9:
-            game_manager.remove_object(self)
+            self.frame = (self.frame + pps / 50) % 10
+            if self.frame >= 9:
+                game_manager.remove_object(self)
 
     def handle_event(self):
         pass

@@ -23,6 +23,7 @@ class Shoot:
 
     @staticmethod
     def do(weapon):
+        calc_pps()
         update_delay(weapon)
         shoot_gun(weapon)
         wield_melee(weapon)
@@ -47,6 +48,7 @@ class Idle:
 
     @staticmethod
     def do(weapon):
+        calc_pps()
         update_delay(weapon)
         update_melee_position(weapon)
 

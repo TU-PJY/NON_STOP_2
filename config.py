@@ -107,4 +107,4 @@ hp_back_directory = 'res//ui//hp_back.png'
 hp_front_directory = 'res//ui//hp_front.png'
 
 # 폰트 경로
-font_directory = 'bump-it-up.ttf'
+font_directory = 'res//font//bump-it-up.ttf'
