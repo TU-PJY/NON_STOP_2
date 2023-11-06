@@ -194,7 +194,7 @@ def process_attack(m):
                 m.shoot_delay = 150
 
             if m.is_attack:
-                m.incline = math.atan2(m.p.y - m.y + (m.p.y - 250) / 1.5, m.p.x - m.x)
+                m.incline = math.atan2(m.p.y - m.y + (m.p.y - 250) / 1.5 + 50, m.p.x - m.x)
                 m.frame = 2
                 if m.shoot_delay <= 0:
                     ar = Arrow(m.p, m.mp, m.x, m.y, m.incline, m.dir)  # 일정 간격으로 화살을 발사한다

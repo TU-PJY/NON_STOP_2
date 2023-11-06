@@ -70,7 +70,7 @@ def update_target(t):
     elif t.weapon.gun == 'MP44':
         t.dis2 = t.dis / 35 + 35
         if t.weapon.shoot:
-            t.recoil += 30
+            t.recoil += 29
 
     elif t.weapon.gun == 'AUG':
         t.dis2 = t.dis / 45 + 35

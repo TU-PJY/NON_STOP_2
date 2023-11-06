@@ -34,8 +34,8 @@ class Arrow:
                     self.y <= 190):
                 self.x += math.cos(self.incline) * 8 * pps / 4
                 self.y += math.sin(self.incline) * 8 * pps / 4
-                self.y += self.acc * pps / 5
-                self.acc -= 0.01 * pps / 5
+                self.y += self.acc * pps / 4
+                self.acc -= 0.01 * pps / 4
 
                 if self.dir == 1:
                     if self.deg > -90:

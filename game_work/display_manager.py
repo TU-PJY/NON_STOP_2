@@ -15,10 +15,10 @@ def push_display(p):
 
 def shake_display(p):
     pps = PPS * game_framework.frame_time
-    if p.shake_time > 0:
-        p.shake_x = random.randint(-p.shake_range, p.shake_range)
-        p.shake_y = random.randint(-p.shake_range, p.shake_range)
-        p.shake_time -= pps / 3
+    if not p.shake_range - pps / 8 < 0:  # empty randrange 방지
+        p.shake_x = random.randint(-int(p.shake_range), int(p.shake_range))
+        p.shake_y = random.randint(-int(p.shake_range), int(p.shake_range))
+        p.shake_range -= pps / 8
     else:
         p.shake_x = 0
         p.shake_y = 0

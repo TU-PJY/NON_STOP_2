@@ -77,6 +77,7 @@ def jump(p):
             p.jump_acc = 0  # 점프 가속도 초기화
             p.mv_jump = False  # 점프가 가능해진다
             p.land_y = LAND_SHAKE  # LAND_SHAKE 만큼 화면이 눌린다
+            p.jump_count = 0  # 점프 가능 횟수 초기화
 
         p.jump_acc -= pps / 90
 
@@ -86,7 +87,7 @@ def walk_animation(p):
     p.size_deg += 1 * pps / 50
 
     if not p.mv_jump:
-        p.size = math.sin(p.size_deg) / 8
+        p.size = math.sin(p.size_deg) / 7
     else:
         p.size = 0
 

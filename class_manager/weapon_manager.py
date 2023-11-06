@@ -175,53 +175,43 @@ def shoot_gun(weapon):
             weapon.shoot = True  # True일시 해당 값을 Target 클래스로 전달하여 Target 클래스의 recoil을 증가시킨다.
             if weapon.gun == 'SCAR_H':
                 weapon.shoot_delay = 38
-                weapon.p.shake_time = 25
-                weapon.p.shake_range = 15
+                weapon.p.shake_range = 17
 
             elif weapon.gun == 'M16':
                 weapon.shoot_delay = 28
-                weapon.p.shake_time = 20
-                weapon.p.shake_range = 10
+                weapon.p.shake_range = 15
 
             elif weapon.gun == 'MP44':
                 weapon.shoot_delay = 60
-                weapon.p.shake_time = 30
                 weapon.p.shake_range = 20
 
             elif weapon.gun == 'AUG':
                 weapon.shoot_delay = 32
-                weapon.p.shake_time = 20
-                weapon.p.shake_range = 10
+                weapon.p.shake_range = 15
 
             elif weapon.gun == 'GROZA':
                 weapon.shoot_delay = 26
-                weapon.p.shake_time = 20
-                weapon.p.shake_range = 10
+                weapon.p.shake_range = 15
 
             elif weapon.gun == 'AKS74':
                 weapon.shoot_delay = 28
-                weapon.p.shake_time = 20
                 weapon.p.shake_range = 10
 
             elif weapon.gun == 'UMP':
                 weapon.shoot_delay = 35
-                weapon.p.shake_time = 20
-                weapon.p.shake_range = 10
+                weapon.p.shake_range = 13
 
             elif weapon.gun == 'VECTOR':
                 weapon.shoot_delay = 15
-                weapon.p.shake_time = 20
                 weapon.p.shake_range = 10
 
             elif weapon.gun == 'THOMPSON':
                 weapon.shoot_delay = 31
-                weapon.p.shake_time = 22
-                weapon.p.shake_range = 13
+                weapon.p.shake_range = 16
 
             elif weapon.gun == 'P90':
                 weapon.shoot_delay = 24
-                weapon.p.shake_time = 20
-                weapon.p.shake_range = 10
+                weapon.p.shake_range = 15
 
             weapon.flame_display_time = FLAME_DISPLAY_TIME
 
@@ -237,8 +227,7 @@ def wield_melee(weapon):
                 weapon.melee_x = 120
                 weapon.melee_deg = 0
                 weapon.wield_delay = 80
-                weapon.p.shake_time = 15
-                weapon.p.shake_range = 10
+                weapon.p.shake_range = 15
         else:
             weapon.wield = False
 

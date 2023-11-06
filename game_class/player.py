@@ -18,8 +18,10 @@ class Move:
     @staticmethod
     def exit(p, e):
         if space_down(e):
-            p.jump_acc = JUMP_ACC
-            p.mv_jump = True
+            if p.jump_count < p.jump_level:
+                p.jump_acc = JUMP_ACC
+                p.jump_count += 1
+                p.mv_jump = True
         else:
             p.mv_right = False
             p.mv_left = False
@@ -55,8 +57,10 @@ class Idle:
     @staticmethod
     def exit(p, e):
         if space_down(e):
-            p.jump_acc = JUMP_ACC
-            p.mv_jump = True
+            if p.jump_count < p.jump_level:
+                p.jump_acc = JUMP_ACC
+                p.jump_count += 1
+                p.mv_jump = True
 
     @staticmethod
     def do(p):
@@ -116,6 +120,9 @@ class Player:
 
         self.speed = 4  # 플레이어 이동 속도 (사실상 맵 움직이는 속도)
         self.jump_acc = JUMP_ACC
+        self.jump_count = 0
+        self.jump_level = 1  # 레벨이 오를수록 연속 점프 횟수가 많아짐
+
         self.acc_delay = 0
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
 
@@ -125,7 +132,6 @@ class Player:
 
         # display effects
         self.land_y = 0  # 이 수치만큼 화면의 모든 이미지들이 아래로 눌린다.
-        self.shake_time = 0  # 화면 흔들림 변수. time이 1 이상일 경우 화면이 흔들리게 된다.
         self.shake_x, self.shake_y = 0, 0
         self.shake_range = 0  # 화면 흔들림의 정도
         self.camera_y = 0  # 화면이 마우스 좌표를 살짝 따라간다.
