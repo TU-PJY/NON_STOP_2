@@ -81,6 +81,10 @@ groza_left_directory = 'res//gun_image//ar//groza_left.png'
 m1_right_directory = 'res//gun_image//rifle//m1_right.png'
 m1_left_directory = 'res//gun_image//rifle//m1_left.png'
 
+# sr
+awp_right_directory = 'res//gun_image//sr//awp_right.png'
+awp_left_directory = 'res//gun_image//sr//awp_left.png'
+
 
 # 불꽃 이미지 파일 경로
 flame_right_directory = 'res//gun_image//misc//flame_right.png'
