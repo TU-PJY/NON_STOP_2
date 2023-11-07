@@ -222,7 +222,7 @@ def process_attack(m):
 
 
 def damage_monster(m):
-    if m.weapon.shoot and m.mp.playerToWallLeft <= m.p.x <= m.mp.playerToWallRight:
+    if m.weapon.shoot and m.mp.playerToWallLeft - 50 <= m.p.x <= m.mp.playerToWallRight + 50:
         m.dispx = m.x + m.p.efx  # 화면 상에 실제로 보이는 위치
         m.dispy = m.y + m.p.efy
 
