@@ -90,7 +90,7 @@ def update_monster_size(m):
 def update_monster_opacify(m):
     global pps 
     if m.op > 0:
-        m.op -= 2 * pps / 3
+        m.op -= 4 * pps / 3
         if m.op < 0:
             m.op = 0
     
