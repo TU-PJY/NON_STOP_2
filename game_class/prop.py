@@ -32,17 +32,17 @@ class Arrow:
             # 화살이 벽에 박힌다
             if not (self.x >= self.mp.playerToWallRight - 10 or self.x <= self.mp.playerToWallLeft + 10 or
                     self.y <= 190):
-                self.x += math.cos(self.incline) * 8 * pps / 4
-                self.y += math.sin(self.incline) * 8 * pps / 4
+                self.x += math.cos(self.incline) * 6 * pps / 4
+                self.y += math.sin(self.incline) * 6 * pps / 4
                 self.y += self.acc * pps / 4
                 self.acc -= 0.01 * pps / 4
 
                 if self.dir == 1:
-                    if self.deg > -90:
-                        self.deg -= 0.0015 * pps / 5
+                    # if self.deg > -90:
+                    self.deg -= 0.002 * pps / 4
                 elif self.dir == 0:
-                    if self.deg < 90:
-                        self.deg += 0.0015 * pps / 5
+                    # if self.deg < 90:
+                    self.deg += 0.002 * pps / 4
 
                 if self.y >= 2000:  # 너무 높이 올라가면 삭제
                     game_manager.remove_object(self)

@@ -72,7 +72,6 @@ def draw_shop_window(self):
             for j in range(1):
                 self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
 
-
     self.font.draw(WIDTH / 2 + 200, self.window_y + 295, "SHOP", (255, 255, 255))
 
     self.button_page_right.composite_draw(0, '', self.page_right_x, self.page_right_y, 80, 100)
@@ -82,11 +81,11 @@ def draw_shop_window(self):
 def draw_items(self):
     if self.select_mode == 0:
         if self.page == 1:
-            self.image_scar.draw(self.button_x[0] - 30, self.button_y[2], 200, 150)
-            self.image_m16.draw(self.button_x[1] - 30, self.button_y[2], 200, 150)
-            self.image_mp44.draw(self.button_x[2] - 30, self.button_y[2], 200, 150)
-            self.image_aug.draw(self.button_x[3] - 30, self.button_y[2], 200, 150)
-            self.image_groza.draw(self.button_x[4] - 30, self.button_y[2], 200, 150)
+            self.image_scar.draw(self.button_x[0] - 40, self.button_y[2], 240, 140)
+            self.image_m16.draw(self.button_x[1] - 40, self.button_y[2], 240, 140)
+            self.image_mp44.draw(self.button_x[2] - 40, self.button_y[2], 240, 140)
+            self.image_aug.draw(self.button_x[3] - 35, self.button_y[2], 240, 140)
+            self.image_groza.draw(self.button_x[4] - 30, self.button_y[2], 240, 140)
 
             self.image_aks74.draw(self.button_x[0] - 30, self.button_y[1], 200, 150)
             self.image_ump.draw(self.button_x[1] - 30, self.button_y[1], 200, 150)
@@ -94,7 +93,7 @@ def draw_items(self):
             self.image_thompson.draw(self.button_x[3] - 30, self.button_y[1], 200, 150)
             self.image_p90.draw(self.button_x[4] - 30, self.button_y[1], 200, 150)
 
-            self.image_m1.draw(self.button_x[0] - 20, self.button_y[3], 180, 130)
+            self.image_m1.draw(self.button_x[0] - 45, self.button_y[3], 250, 100)
 
         elif self.page == 2:
             pass
@@ -134,12 +133,12 @@ def update_cat_button(self):
 
 def click_button(self):
     if self.page_right_x - 40 < self.mx < self.page_right_x + 40 and \
-        self.page_right_y - 50 < self.my < self.page_right_y + 50:
+            self.page_right_y - 50 < self.my < self.page_right_y + 50:
         if self.page < 2:
             self.page += 1
-            
+
     elif self.page_left_x - 40 < self.mx < self.page_left_x + 40 and \
-        self.page_left_y - 50 < self.my < self.page_left_y + 50:
+            self.page_left_y - 50 < self.my < self.page_left_y + 50:
         if self.page > 1:
             self.page -= 1
 
@@ -154,7 +153,6 @@ def click_button(self):
                 elif i == 2:
                     self.select_mode = 2  # exp
 
-
     if self.select_mode == 0:
         for i in range(len(self.button_x)):
             for j in range(len(self.button_y)):
@@ -168,7 +166,7 @@ def click_button(self):
                         play_mode.weapon.gun = 'VECTOR'
                     elif (i, j) == (3, 1):
                         play_mode.weapon.gun = 'THOMPSON'
-                    elif (i ,j) == (4, 1):
+                    elif (i, j) == (4, 1):
                         play_mode.weapon.gun = 'P90'
 
                     elif (i, j) == (0, 2):
@@ -181,8 +179,8 @@ def click_button(self):
                         play_mode.weapon.gun = 'AUG'
                     elif (i, j) == (4, 2):
                         play_mode.weapon.gun = 'GROZA'
-        
-                    elif (i, j) == (0, 3): 
+
+                    elif (i, j) == (0, 3):
                         play_mode.weapon.gun = 'M1'
 
     self.click = False

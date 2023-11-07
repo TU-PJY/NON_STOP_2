@@ -41,7 +41,8 @@ def calculate_player_pos(p):
     p.py = p.y - p.land_y + p.shake_y + p.size * 50 + p.camera_y
     # 플레이어 출력 좌표
 
-    p.py2 = p.y - 5 - p.land_y + p.shake_y + p.camera_y
+    # p.py2 = p.y - 5 - p.land_y + p.shake_y + p.camera_y
+    p.py2 = p.y - p.land_y + p.shake_y + p.size * 50 + p.camera_y - 5
     # 무기 출력 y 좌표
 
     p.efx = p.shake_x + p.camera_x
@@ -87,7 +88,7 @@ def walk_animation(p):
     p.size_deg += 1 * pps / 50
 
     if not p.mv_jump:
-        p.size = math.sin(p.size_deg) / 7
+        p.size = math.sin(p.size_deg) / 5
     else:
         p.size = 0
 

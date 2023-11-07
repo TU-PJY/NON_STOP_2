@@ -41,9 +41,9 @@ def draw_monster(m):
     if m.type == 1:
         m.type1_damage.opacify(int(m.op))
         m.type1.clip_composite_draw \
-            (int(m.frame) * 64, 0, 64, 64, 0, m.flip, m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 280, 280 + m.size)
+            (int(m.frame) * 64, 0, 64, 64, 0, m.flip, m.x + m.p.efx, m.y + m.p.efy + m.size / 6, 280, 280 + m.size)
         m.type1_damage.clip_composite_draw \
-            (int(m.frame) * 64, 0, 64, 64, 0, m.flip, m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 280, 280 + m.size)
+            (int(m.frame) * 64, 0, 64, 64, 0, m.flip, m.x + m.p.efx, m.y + m.p.efy + m.size / 6, 280, 280 + m.size)
 
         draw_rectangle \
             (m.x - 50 + m.p.efx, m.y + 50 + m.p.efy, m.x + 50 + m.p.efx, m.y - 70 + m.p.efy)
@@ -51,9 +51,9 @@ def draw_monster(m):
     if m.type == 2:
         m.type2_damage.opacify(int(m.op))
         m.type2.clip_composite_draw \
-            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, m.x + m.p.efx, m.y + m.p.efy, 400, 400 + m.size)
+            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, m.x + m.p.efx, m.y + m.p.efy + m.size / 2, 400, 400 + m.size)
         m.type2_damage.clip_composite_draw \
-            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, m.x + m.p.efx, m.y + m.p.efy, 400, 400 + m.size)
+            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, m.x + m.p.efx, m.y + m.p.efy + m.size / 2, 400, 400 + m.size)
 
         draw_rectangle \
             (m.x - 65 + m.p.efx, m.y + 65 + m.p.efy, m.x + 65 + m.p.efx, m.y - 65 + m.p.efy)
@@ -160,7 +160,7 @@ def process_attack(m):
             if m.atk_delay <= 0:
                 m.attack_motion_time = 50
                 m.atk_delay = 200
-                m.size = 100
+                m.size = 200
 
             if m.attack_motion_time > 0:
                 m.frame = 2
@@ -223,7 +223,7 @@ def process_attack(m):
 
 def damage_monster(m):
     if m.weapon.shoot and m.mp.playerToWallLeft <= m.p.x <= m.mp.playerToWallRight:
-        m.dispx = m.x + m.p.efx
+        m.dispx = m.x + m.p.efx  # 화면 상에 실제로 보이는 위치
         m.dispy = m.y + m.p.efy
 
         if m.type == 1:  # 몬스터가 총에 맞았는지 판정한다.
@@ -240,9 +240,6 @@ def damage_monster(m):
                             m.dispy - 55 <= m.target.ty <= m.dispy + 55 else False
 
         if m.hit:  # 맞은걸로 판정되면 대미지를 가한다.
-            # bd = BloodGun(m.target.tx - m.p.efx, m.target.ty - m.p.efy, m.dir, m.p)
-            # game_manager.add_object(bd, 2)
-
             if m.weapon.gun == 'AKS74':
                 m.hp -= 12
             elif m.weapon.gun == 'UMP':
@@ -255,7 +252,7 @@ def damage_monster(m):
                 m.hp -= 17
 
             elif m.weapon.gun == 'SCAR_H':
-                m.hp -= 25
+                m.hp -= 22
             elif m.weapon.gun == 'M16':
                 m.hp -= 18
             elif m.weapon.gun == 'MP44':
