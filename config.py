@@ -84,15 +84,17 @@ knife_left_directory = 'res//melee_image//knife_left.png'
 
 # 몬스터 이미지 파일 경로
 type1_directory = 'res//monster_image//goblin_small.png'
+type1_damage_directory = 'res//monster_image//goblin_small_damage.png'
 type2_directory = 'res//monster_image//ghost_small.png'
+type2_damage_directory = 'res//monster_image//ghost_small_damage.png'
 type3_directory = 'res//monster_image//slime.png'
+type3_damage_directory = 'res//monster_image//slime_damage.png'
 type4_directory = 'res//monster_image//apple.png'
+type4_damage_directory = 'res//monster_image//apple_damage.png'
 
 # Prop 이미지 파일 경로
 arrow_right_directory = 'res//prop//arrow_right.png'
 arrow_left_directory = 'res//prop//arrow_left.png'
-blood_gun_directory = 'res//prop//blood_gun.png'
-blood_melee_directory = 'res//prop//blood_melee.png'
 
 # ui 이미지 파일 경로
 shop_window_directory = 'res//ui//shop_window.png'

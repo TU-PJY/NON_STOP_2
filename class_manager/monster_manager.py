@@ -1,7 +1,7 @@
 from pico2d import *
 
 from config import *
-from game_class.prop import Arrow, BloodGun, BloodMelee
+from game_class.prop import Arrow
 from game_work import game_manager, game_framework
 
 
@@ -13,12 +13,16 @@ def calc_pps():
 def load_monster(self):
     if self.type == 1:
         self.type1 = load_image(type1_directory)
+        self.type1_damage = load_image(type1_damage_directory)
     elif self.type == 2:
         self.type2 = load_image(type2_directory)
+        self.type2_damage = load_image(type2_damage_directory)
     elif self.type == 3:
         self.type3 = load_image(type3_directory)
+        self.type3_damage = load_image(type3_damage_directory)
     elif self.type == 4:
         self.type4 = load_image(type4_directory)
+        self.type4_damage = load_image(type4_damage_directory)
 
     # 체력바 이미지
     self.hp_back = load_image(hp_back_directory)
@@ -29,45 +33,50 @@ def draw_monster(m):
     m.hp_back.draw(m.x + m.p.efx, m.y + 100 + m.p.efy, m.hp_length + 10, 25)
     m.hp_front.draw(m.x + m.p.efx - ((m.hp_length - m.hp) / 2), m.y + 100 + m.p.efy, m.hp, 20)
 
+    if m.dir == 0:  # 보는 방향에 따라 이미지 방향이 달라진다
+        m.flip = ''
+    elif m.dir == 1:
+        m.flip = 'h'
+
     if m.type == 1:
-        if m.dir == 0:
-            m.type1.clip_composite_draw \
-                (int(m.frame) * 64, 0, 64, 64, 0, '', m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 280, 280 + m.size)
-        elif m.dir == 1:
-            m.type1.clip_composite_draw \
-                (int(m.frame) * 64, 0, 64, 64, 0, 'h', m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 280, 280 + m.size)
+        m.type1_damage.opacify(int(m.op))
+        m.type1.clip_composite_draw \
+            (int(m.frame) * 64, 0, 64, 64, 0, m.flip, m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 280, 280 + m.size)
+        m.type1_damage.clip_composite_draw \
+            (int(m.frame) * 64, 0, 64, 64, 0, m.flip, m.x + m.p.efx, m.y + m.p.efy + m.size / 3, 280, 280 + m.size)
+
         draw_rectangle \
             (m.x - 50 + m.p.efx, m.y + 50 + m.p.efy, m.x + 50 + m.p.efx, m.y - 70 + m.p.efy)
 
     if m.type == 2:
-        if m.dir == 0:
-            m.type2.clip_composite_draw \
-                (int(m.frame) * 128, 0, 128, 128, 0, '', m.x + m.p.efx, m.y + m.p.efy, 400, 400 + m.size)
-        elif m.dir == 1:
-            m.type2.clip_composite_draw \
-                (int(m.frame) * 128, 0, 128, 128, 0, 'h', m.x + m.p.efx, m.y + m.p.efy, 400, 400 + m.size)
+        m.type2_damage.opacify(int(m.op))
+        m.type2.clip_composite_draw \
+            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, m.x + m.p.efx, m.y + m.p.efy, 400, 400 + m.size)
+        m.type2_damage.clip_composite_draw \
+            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, m.x + m.p.efx, m.y + m.p.efy, 400, 400 + m.size)
+
         draw_rectangle \
             (m.x - 65 + m.p.efx, m.y + 65 + m.p.efy, m.x + 65 + m.p.efx, m.y - 65 + m.p.efy)
 
     if m.type == 3:
-        if m.dir == 0:
-            m.type3.clip_composite_draw \
-                (int(m.frame) * 128, 0, 128, 128, 0, '', m.x + m.p.efx, m.y + m.p.efy + m.size2 * 50 + m.size / 5,
-                 300, 300 + m.size2 * 100 + m.size)
-        elif m.dir == 1:
-            m.type3.clip_composite_draw \
-                (int(m.frame) * 128, 0, 128, 128, 0, 'h', m.x + m.p.efx, m.y + m.p.efy + m.size2 * 50 + m.size / 5,
-                 300, 300 + m.size2 * 100 + m.size)
+        m.type3_damage.opacify(int(m.op))
+        m.type3.clip_composite_draw \
+            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, m.x + m.p.efx, m.y + m.p.efy + m.size2 * 50 + m.size / 5,
+             300, 300 + m.size2 * 100 + m.size)
+        m.type3_damage.clip_composite_draw \
+            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, m.x + m.p.efx, m.y + m.p.efy + m.size2 * 50 + m.size / 5,
+             300, 300 + m.size2 * 100 + m.size)
+
         draw_rectangle \
             (m.x - 60 + m.p.efx, m.y + 60 + m.p.efy, m.x + 60 + m.p.efx, m.y - 60 + m.p.efy)
 
     if m.type == 4:
-        if m.dir == 0:
-            m.type4.clip_composite_draw \
-                (int(m.frame) * 128, 0, 128, 128, 0, '', m.x + m.p.efx, m.y + m.p.efy, 450, 450)
-        elif m.dir == 1:
-            m.type4.clip_composite_draw \
-                (int(m.frame) * 128, 0, 128, 128, 0, 'h', m.x + m.p.efx, m.y + m.p.efy, 450, 450)
+        m.type4_damage.opacify(int(m.op))
+        m.type4.clip_composite_draw \
+            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, m.x + m.p.efx, m.y + m.p.efy, 450, 450)
+        m.type4_damage.clip_composite_draw \
+            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, m.x + m.p.efx, m.y + m.p.efy, 450, 450)
+
         draw_rectangle \
             (m.x - 55 + m.p.efx, m.y + 55 + m.p.efy, m.x + 55 + m.p.efx, m.y - 55 + m.p.efy)
 
@@ -77,6 +86,14 @@ def update_monster_size(m):
     if m.size > 0:
         m.size -= 2 * pps / 3
 
+
+def update_monster_opacify(m):
+    global pps 
+    if m.op > 0:
+        m.op -= 2 * pps / 3
+        if m.op < 0:
+            m.op = 0
+    
 
 def move_monster(m):
     global pps
@@ -89,10 +106,15 @@ def move_monster(m):
             elif m.dir == 1:
                 m.x += m.speed * pps / 4
 
-        if m.type == 2 and m.y < 670:  # 670보다 낮게 있으면 자기 자리로 복귀한다
-            m.y += pps / 4
-            if m.y >= 670:
-                m.y = 670
+        if m.type == 2: 
+            if m.y < 670:  # 670보다 낮게 있으면 자기 자리로 복귀한다
+                m.y += pps / 4
+                if m.y >= 670:
+                    m.y = 670
+            elif m.y > 670: # 670보다 높게 있으면 자기 자리로 복귀한다
+                m.y -= pps / 4
+                if m.y <= 670:
+                    m.y = 670
 
         if m.type == 3:
             if not m.is_jump and m.jump_delay <= 0:  # 점프하면서 이동
@@ -109,9 +131,6 @@ def move_monster(m):
                     m.jump_delay = 330  # 점프 타이밍이 존재
 
                 m.jump_acc -= pps / 90
-
-            if m.jump_delay > 0:
-                m.jump_delay -= pps / 3
 
 
 def monster_animation(m):
@@ -221,8 +240,8 @@ def damage_monster(m):
                             m.dispy - 55 <= m.target.ty <= m.dispy + 55 else False
 
         if m.hit:  # 맞은걸로 판정되면 대미지를 가한다.
-            bd = BloodGun(m.target.tx - m.p.efx, m.target.ty - m.p.efy, m.dir, m.p)
-            game_manager.add_object(bd, 2)
+            # bd = BloodGun(m.target.tx - m.p.efx, m.target.ty - m.p.efy, m.dir, m.p)
+            # game_manager.add_object(bd, 2)
 
             if m.weapon.gun == 'SCAR_H':
                 m.hp -= 25
@@ -245,11 +264,12 @@ def damage_monster(m):
             elif m.weapon.gun == 'P90':
                 m.hp -= 17
 
+            m.op = 100  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달 
             m.hit = False
 
     elif m.weapon.wield:
-        x1 = m.p.x              # dir == 1일 떄의 좌측 x 좌표
-        x22 = m.p.x             # dir == 0일 떄의 우측 x 좌표
+        x1 = m.p.x              # dir == 1일 때의 좌측 x 좌표
+        x22 = m.p.x             # dir == 0일 때의 우측 x 좌표
         my = m.y - (m.p.y - 250) / 1.5  # 화면상에 보이는 몬스터 중심 y 좌표
         py = m.p.y - 10         # 무기의 y 좌표
 
@@ -283,11 +303,13 @@ def damage_monster(m):
                 m.hit = True if x11 <= m.x + 55 <= x22 and my - 55 <= py <= my + 55 else False
 
         if m.hit:
-            bm = BloodMelee(m.x, m.p.y + (m.p.y - 250) / 1.5, m.dir, m.p)
-            game_manager.add_object(bm, 2)
+            # bm = BloodMelee(m.x, m.p.y + (m.p.y - 250) / 1.5, m.dir, m.p)
+            # game_manager.add_object(bm, 2)
 
             if m.weapon.melee == 'KNIFE':
                 m.hp -= 60
+
+            m.op = 100  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달 
             m.hit = False
 
     if m.hp <= 0:  # hp가 0이 될 경우 죽는다.
@@ -304,6 +326,8 @@ def update_delay(m):
         m.dash_delay -= pps / 3
     if m.shoot_delay > 0:
         m.shoot_delay -= pps / 3
+    if m.jump_delay > 0:
+        m.jump_delay -= pps / 3
 
 
 def update_monster_pos(m):

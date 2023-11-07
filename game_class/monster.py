@@ -16,6 +16,7 @@ class Update:
         damage_monster(m)
         monster_animation(m)
         update_monster_pos(m)
+        update_monster_opacify(m)
         move_monster(m)
         process_attack(m)
         update_delay(m)
@@ -71,6 +72,8 @@ class Monster:
         self.dispx = 0  # 화면상에 출력되는 위치
         self.dispy = 0  # 화면상에 출력되는 위치
         self.hp_length = self.hp
+        self.op = 0
+        self.flip = ''
 
         # type2 전용 변수
         self.is_dash = False
