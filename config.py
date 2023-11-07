@@ -72,6 +72,8 @@ thompson_right_directory = 'res//gun_image//thompson_right.png'
 thompson_left_directory = 'res//gun_image//thompson_left.png'
 p90_right_directory = 'res//gun_image//p90_right.png'
 p90_left_directory = 'res//gun_image//p90_left.png'
+m1_right_directory = 'res//gun_image//m1_right.png'
+m1_left_directory = 'res//gun_image//m1_left.png'
 
 
 # 불꽃 이미지 파일 경로

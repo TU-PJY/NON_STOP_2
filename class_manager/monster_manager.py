@@ -206,7 +206,7 @@ def process_attack(m):
     # type 4 attack
     if m.type == 4:
         if m.mp.playerToWallLeft + 100 <= m.x <= m.mp.playerToWallRight - 100:
-            if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 900:
+            if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - m.y + (m.p.y - 250) / 1.5) ** 2) <= 800:
                 m.is_attack = True
             else:
                 m.is_attack = False
@@ -243,17 +243,7 @@ def damage_monster(m):
             # bd = BloodGun(m.target.tx - m.p.efx, m.target.ty - m.p.efy, m.dir, m.p)
             # game_manager.add_object(bd, 2)
 
-            if m.weapon.gun == 'SCAR_H':
-                m.hp -= 25
-            elif m.weapon.gun == 'M16':
-                m.hp -= 18
-            elif m.weapon.gun == 'MP44':
-                m.hp -= 40
-            elif m.weapon.gun == 'AUG':
-                m.hp -= 23
-            elif m.weapon.gun == 'GROZA':
-                m.hp -= 20
-            elif m.weapon.gun == 'AKS74':
+            if m.weapon.gun == 'AKS74':
                 m.hp -= 12
             elif m.weapon.gun == 'UMP':
                 m.hp -= 18
@@ -263,6 +253,20 @@ def damage_monster(m):
                 m.hp -= 20
             elif m.weapon.gun == 'P90':
                 m.hp -= 17
+
+            elif m.weapon.gun == 'SCAR_H':
+                m.hp -= 25
+            elif m.weapon.gun == 'M16':
+                m.hp -= 18
+            elif m.weapon.gun == 'MP44':
+                m.hp -= 40
+            elif m.weapon.gun == 'AUG':
+                m.hp -= 23
+            elif m.weapon.gun == 'GROZA':
+                m.hp -= 20
+            
+            elif m.weapon.gun == 'M1':
+                m.hp -= 60
 
             m.op = 100  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달 
             m.hit = False

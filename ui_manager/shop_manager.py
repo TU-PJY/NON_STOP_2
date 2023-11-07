@@ -31,6 +31,8 @@ def load_shop_resource(self):
     self.image_thompson = load_image(thompson_right_directory)
     self.image_p90 = load_image(p90_right_directory)
 
+    self.image_m1 = load_image(m1_right_directory)
+
     self.image_knife = load_image(knife_right_directory)
 
 
@@ -73,6 +75,8 @@ def draw_items(self):
         self.image_vector.draw(self.button_x[2] - 20, self.button_y[1], 200, 150)
         self.image_thompson.draw(self.button_x[3] - 30, self.button_y[1], 200, 150)
         self.image_p90.draw(self.button_x[4] - 30, self.button_y[1], 200, 150)
+
+        self.image_m1.draw(self.button_x[0] - 20, self.button_y[3], 180, 130)
 
     if self.select_mode == 1:
         self.image_knife.draw(self.button_x[0], self.button_y[0], 150, 100)
@@ -119,17 +123,7 @@ def click_button(self):
             for j in range(len(self.button_y)):
                 if self.button_x[i] - 90 < self.mx < self.button_x[i] + 90 and \
                         self.button_y[j] - 75 < self.my < self.button_y[j] + 75:
-                    if (i, j) == (0, 2):
-                        play_mode.weapon.gun = 'SCAR_H'
-                    elif (i, j) == (1, 2):
-                        play_mode.weapon.gun = 'M16'
-                    elif (i, j) == (2, 2):
-                        play_mode.weapon.gun = 'MP44'
-                    elif (i, j) == (3, 2):
-                        play_mode.weapon.gun = 'AUG'
-                    elif (i, j) == (4, 2):
-                        play_mode.weapon.gun = 'GROZA'
-                    elif (i, j) == (0, 1):
+                    if (i, j) == (0, 1):
                         play_mode.weapon.gun = 'AKS74'
                     elif (i, j) == (1, 1):
                         play_mode.weapon.gun = 'UMP'
@@ -139,5 +133,19 @@ def click_button(self):
                         play_mode.weapon.gun = 'THOMPSON'
                     elif (i ,j) == (4, 1):
                         play_mode.weapon.gun = 'P90'
+
+                    elif (i, j) == (0, 2):
+                        play_mode.weapon.gun = 'SCAR_H'
+                    elif (i, j) == (1, 2):
+                        play_mode.weapon.gun = 'M16'
+                    elif (i, j) == (2, 2):
+                        play_mode.weapon.gun = 'MP44'
+                    elif (i, j) == (3, 2):
+                        play_mode.weapon.gun = 'AUG'
+                    elif (i, j) == (4, 2):
+                        play_mode.weapon.gun = 'GROZA'
+        
+                    elif (i, j) == (0, 3): 
+                        play_mode.weapon.gun = 'M1'
 
     self.click = False

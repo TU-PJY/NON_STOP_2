@@ -16,8 +16,8 @@ class Update:
     @staticmethod
     def do(t):
         calc_pps()
-        update_target(t)
         make_target_point(t)
+        update_target(t)
 
     @staticmethod
     def draw(t):

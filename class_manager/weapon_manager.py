@@ -47,6 +47,8 @@ def load_gun_image(self):
     self.thompson_left = load_image(thompson_left_directory)
     self.p90_right = load_image(p90_right_directory)
     self.p90_left = load_image(p90_left_directory)
+    self.m1_right = load_image(m1_right_directory)
+    self.m1_left  = load_image(m1_left_directory)
 
 
 def load_melee_image(self):
@@ -65,37 +67,8 @@ def draw_gun(weapon):
         elif weapon.p.dir == 0:
             x = weapon.p.px - 20
 
-        if weapon.gun == 'SCAR_H':  # GUN_NAME에 따라 사용하는 총기가 달라진다.
-            if weapon.p.dir == 1:
-                weapon.scar_right.clip_composite_draw(0, 0, 150, 100, weapon.deg, '', x, y, 170, 120)
-            elif weapon.p.dir == 0:
-                weapon.scar_left.clip_composite_draw(0, 0, 150, 100, weapon.deg, 'h, v', x, y, 170, 120)
-
-        elif weapon.gun == 'M16':
-            if weapon.p.dir == 1:
-                weapon.m16_right.clip_composite_draw(0, 0, 150, 100, weapon.deg, '', x, y, 170, 120)
-            elif weapon.p.dir == 0:
-                weapon.m16_left.clip_composite_draw(0, 0, 150, 100, weapon.deg, 'h, v', x, y, 170, 120)
-
-        elif weapon.gun == 'MP44':
-            if weapon.p.dir == 1:
-                weapon.mp44_right.clip_composite_draw(0, 0, 150, 100, weapon.deg, '', x, y, 170, 120)
-            elif weapon.p.dir == 0:
-                weapon.mp44_left.clip_composite_draw(0, 0, 150, 100, weapon.deg, 'h, v', x, y, 170, 120)
-
-        elif weapon.gun == 'AUG':
-            if weapon.p.dir == 1:
-                weapon.aug_right.clip_composite_draw(0, 0, 150, 100, weapon.deg, '', x, y, 170, 120)
-            elif weapon.p.dir == 0:
-                weapon.aug_left.clip_composite_draw(0, 0, 150, 100, weapon.deg, 'h, v', x, y, 170, 120)
-
-        elif weapon.gun == 'GROZA':
-            if weapon.p.dir == 1:
-                weapon.groza_right.clip_composite_draw(0, 0, 150, 100, weapon.deg, '', x, y, 170, 120)
-            elif weapon.p.dir == 0:
-                weapon.groza_left.clip_composite_draw(0, 0, 150, 100, weapon.deg, 'h, v', x, y, 170, 120)
-
-        elif weapon.gun == 'AKS74':
+        # GUN_NAME에 따라 사용하는 총기가 달라진다.
+        if weapon.gun == 'AKS74':
             if weapon.p.dir == 1:
                 weapon.aks74_right.clip_composite_draw(0, 0, 150, 100, weapon.deg, '', x, y, 170, 120)
             elif weapon.p.dir == 0:
@@ -126,6 +99,44 @@ def draw_gun(weapon):
                 weapon.p90_left.clip_composite_draw(0, 0, 150, 100, weapon.deg, 'h, v', x, y, 170, 120)
 
 
+        elif weapon.gun == 'SCAR_H':
+            if weapon.p.dir == 1:
+                weapon.scar_right.clip_composite_draw(0, 0, 150, 100, weapon.deg , '', x, y, 170, 120)
+            elif weapon.p.dir == 0:
+                weapon.scar_left.clip_composite_draw(0, 0, 150, 100, weapon.deg, 'h, v', x, y, 170, 120)
+
+        elif weapon.gun == 'M16':
+            if weapon.p.dir == 1:
+                weapon.m16_right.clip_composite_draw(0, 0, 150, 100, weapon.deg, '', x, y, 170, 120)
+            elif weapon.p.dir == 0:
+                weapon.m16_left.clip_composite_draw(0, 0, 150, 100, weapon.deg, 'h, v', x, y, 170, 120)
+
+        elif weapon.gun == 'MP44':
+            if weapon.p.dir == 1:
+                weapon.mp44_right.clip_composite_draw(0, 0, 150, 100, weapon.deg, '', x, y, 170, 120)
+            elif weapon.p.dir == 0:
+                weapon.mp44_left.clip_composite_draw(0, 0, 150, 100, weapon.deg, 'h, v', x, y, 170, 120)
+
+        elif weapon.gun == 'AUG':
+            if weapon.p.dir == 1:
+                weapon.aug_right.clip_composite_draw(0, 0, 150, 100, weapon.deg, '', x, y, 170, 120)
+            elif weapon.p.dir == 0:
+                weapon.aug_left.clip_composite_draw(0, 0, 150, 100, weapon.deg, 'h, v', x, y, 170, 120)
+
+        elif weapon.gun == 'GROZA':
+            if weapon.p.dir == 1:
+                weapon.groza_right.clip_composite_draw(0, 0, 150, 100, weapon.deg, '', x, y, 170, 120)
+            elif weapon.p.dir == 0:
+                weapon.groza_left.clip_composite_draw(0, 0, 150, 100, weapon.deg, 'h, v', x, y, 170, 120)
+
+
+        elif weapon.gun == 'M1':
+            if weapon.p.dir == 1:
+                weapon.m1_right.clip_composite_draw(0, 0, 150, 100, weapon.deg, '', x + 10, y, 170, 120)
+            elif weapon.p.dir == 0:
+                weapon.m1_left.clip_composite_draw(0, 0, 150, 100, weapon.deg, 'h, v', x - 10, y, 170, 120)
+
+
 def draw_flame(weapon):
     global pps
     if weapon.flame_display_time > 0 and weapon.weapon_type == 0:
@@ -153,7 +164,7 @@ def draw_melee(weapon):
                 weapon.knife_right.clip_composite_draw(0, 0, 150, 100, weapon.melee_deg, '', x, y, 100, 50)
             elif weapon.p.dir == 0:
                 x = weapon.p.px - 50 - weapon.melee_x
-                weapon.knife_right.clip_composite_draw(0, 0, 150, 100, -weapon.melee_deg, 'h', x, y, 100, 50)
+                weapon.knife_left.clip_composite_draw(0, 0, 150, 100, -weapon.melee_deg, '', x, y, 100, 50)
 
 
 def change_weapon(weapon):
@@ -173,6 +184,7 @@ def shoot_gun(weapon):
     if weapon.trigger and weapon.weapon_type == 0:
         if weapon.shoot_delay <= 0:  # 딜레이는 총마다 다르며, 딜레이 수치가 낮을수록 연사 속도가 빠르다. 0이 될 때마다 발사된다.
             weapon.shoot = True  # True일시 해당 값을 Target 클래스로 전달하여 Target 클래스의 recoil을 증가시킨다.
+
             if weapon.gun == 'SCAR_H':
                 weapon.shoot_delay = 38
                 weapon.p.shake_range = 17
@@ -213,10 +225,15 @@ def shoot_gun(weapon):
                 weapon.shoot_delay = 24
                 weapon.p.shake_range = 15
 
+            elif weapon.gun == 'M1':  # 반자동 소총이므로 연사 딜레이를 무한대로 부여함
+                weapon.shoot_delay = 9999999999999999999
+                weapon.p.shake_range = 30
+
             weapon.flame_display_time = FLAME_DISPLAY_TIME
 
         else:
             weapon.shoot = False
+            
 
 
 def wield_melee(weapon):

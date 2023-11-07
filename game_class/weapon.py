@@ -14,6 +14,9 @@ class Shoot:
 
     @staticmethod
     def exit(weapon, e):
+        if weapon.gun == 'M1':  # 반자동 소총만 예외적으로 트리거 해제 시 연사 딜레이가 초기화 되도록 함
+            weapon.shoot_delay = 0
+
         weapon.trigger = False
         weapon.shoot = False
         weapon.use = False
@@ -96,6 +99,7 @@ class Weapon:
         self.weapon_type = 0  # 0: Gun, 1: Melee
         self.gun = 'SCAR_H'
         self.deg = 0  # 총 이미지 각도
+        self.flip = ''
 
         self.trigger = False  # 마우스 좌클릭 시 True
         self.shoot = False  # True일시 격발
@@ -119,8 +123,6 @@ class Weapon:
     def update(self):
         if game_framework.MODE == 'play':
             self.state_machine.update()
-        if game_framework.MODE == 'shop':  # 모드 전환 시 더 이상 총이 발사되지 않도록 강제로 발사 상태 해제
-            self.state_machine.cur_state = Idle
 
     def handle_event(self, event):
         self.state_machine.handle_event(('INPUT', event))

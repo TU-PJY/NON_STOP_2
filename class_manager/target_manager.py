@@ -56,33 +56,11 @@ def update_target(t):
     if t.dis < 0:  # 분산도가 0 밑으로 내려가지 않도록 한다.
         t.dis = 0
 
-    if t.weapon.gun == 'SCAR_H':
-        # empty randrange 방지를 위해 35를 더해야 함
-        t.dis2 = t.dis / 20 + 35  # 나누는 숫자가 작을 수록 분산도가 커진다.
-        if t.weapon.shoot:
-            t.recoil += 20  # 총기마다 반동 수치가 달라 조준점이 벌어지는 정도가 다르다.
+    # empty randrange 방지를 위해 35를 더해야 함
+    # 나누는 숫자가 작을 수록 분산도가 커진다.
+    # 총기마다 반동 수치가 달라 조준점이 벌어지는 정도가 다르다.
 
-    elif t.weapon.gun == 'M16':
-        t.dis2 = t.dis / 30 + 35
-        if t.weapon.shoot:
-            t.recoil += 15
-
-    elif t.weapon.gun == 'MP44':
-        t.dis2 = t.dis / 35 + 35
-        if t.weapon.shoot:
-            t.recoil += 29
-
-    elif t.weapon.gun == 'AUG':
-        t.dis2 = t.dis / 45 + 35
-        if t.weapon.shoot:
-            t.recoil += 16
-
-    elif t.weapon.gun == 'GROZA':
-        t.dis2 = t.dis / 40 + 35
-        if t.weapon.shoot:
-            t.recoil += 13
-
-    elif t.weapon.gun == 'AKS74':
+    if t.weapon.gun == 'AKS74':
         t.dis2 = t.dis / 30 + 35
         if t.weapon.shoot:
             t.recoil += 13
@@ -106,6 +84,38 @@ def update_target(t):
         t.dis2 = t.dis / 20 + 35
         if t.weapon.shoot:
             t.recoil += 13
+
+
+    elif t.weapon.gun == 'SCAR_H':
+        t.dis2 = t.dis / 20 + 35  
+        if t.weapon.shoot:
+            t.recoil += 20  
+
+    elif t.weapon.gun == 'M16':
+        t.dis2 = t.dis / 30 + 35
+        if t.weapon.shoot:
+            t.recoil += 15
+
+    elif t.weapon.gun == 'MP44':
+        t.dis2 = t.dis / 35 + 35
+        if t.weapon.shoot:
+            t.recoil += 29
+
+    elif t.weapon.gun == 'AUG':
+        t.dis2 = t.dis / 45 + 35
+        if t.weapon.shoot:
+            t.recoil += 16
+
+    elif t.weapon.gun == 'GROZA':
+        t.dis2 = t.dis / 40 + 35
+        if t.weapon.shoot:
+            t.recoil += 13
+
+
+    elif t.weapon.gun == 'M1':
+        t.dis2 = t.dis / 55 + 35
+        if t.weapon.shoot:
+            t.recoil += 55
 
     if t.target_dot_display_time > 0:
         t.target_dot_display_time -= pps / 3
