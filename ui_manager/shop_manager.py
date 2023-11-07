@@ -17,6 +17,8 @@ def load_shop_resource(self):
     self.button_gun = load_image(button_gun_directory)
     self.button_melee = load_image(button_melee_directory)
     self.button_exp = load_image(button_exp_directory)
+    self.button_page_left = load_image(button_page_directory)
+    self.button_page_right = load_image(button_page_directory)
     self.font = load_font(font_directory, 50)
 
     self.image_scar = load_image(scar_h_right_directory)
@@ -60,6 +62,10 @@ def draw_shop_window(self):
         for j in range(4):
             self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
     self.font.draw(WIDTH / 2 + 200, self.window_y + 295, "SHOP", (255, 255, 255))
+
+    self.button_page_right.composite_draw(0, '', WIDTH / 2 + 600, self.window_y - 200, 80, 100)
+    self.button_page_left.composite_draw(0, 'h', WIDTH / 2 + 500, self.window_y - 200, 80, 100)
+
 
 
 def draw_items(self):

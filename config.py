@@ -1,4 +1,5 @@
 # 환경 변수 파일 
+
 from tkinter import *
 
 # 현재 모니터 크기를 인식하여 자동으로 창 사이즈를 조정한다.
@@ -105,6 +106,7 @@ shop_button_directory = 'res//ui//shop_button.png'
 button_gun_directory = 'res//ui//button_gun.png'
 button_melee_directory = 'res//ui//button_melee.png'
 button_exp_directory = 'res//ui//button_exp.png'
+button_page_directory = 'res//ui//page_button.png'
 
 # 몬스터 체력바 이미지 파일 경로
 hp_back_directory = 'res//ui//hp_back.png'
