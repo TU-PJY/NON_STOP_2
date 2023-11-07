@@ -53,16 +53,7 @@ target_x_directory = 'res//target_image//mode_melee.png'
 target_melee_directory = 'res//target_image//target_melee.png'
 
 # 총 이미지 파일 경로 
-scar_h_right_directory = 'res//gun_image//ar//SCAR_H_right.png'
-scar_h_left_directory = 'res//gun_image//ar//SCAR_H_left.png'
-m16_right_directory = 'res//gun_image//ar//m16_right.png'
-m16_left_directory = 'res//gun_image//ar//m16_left.png'
-mp44_right_directory = 'res//gun_image//ar//mp44_right.png'
-mp44_left_directory = 'res//gun_image//ar//mp44_left.png'
-aug_right_directory = 'res//gun_image//ar//aug_right.png'
-aug_left_directory = 'res//gun_image//ar//aug_left.png'
-groza_right_directory = 'res//gun_image//ar//groza_right.png'
-groza_left_directory = 'res//gun_image//ar//groza_left.png'
+# smg
 aks74_right_directory = 'res//gun_image//smg//aks74_right.png'
 aks74_left_directory = 'res//gun_image//smg//aks74_left.png'
 ump_right_directory = 'res//gun_image//smg//ump_right.png'
@@ -73,6 +64,20 @@ thompson_right_directory = 'res//gun_image//smg//thompson_right.png'
 thompson_left_directory = 'res//gun_image//smg//thompson_left.png'
 p90_right_directory = 'res//gun_image//smg//p90_right.png'
 p90_left_directory = 'res//gun_image//smg//p90_left.png'
+
+# ar
+scar_h_right_directory = 'res//gun_image//ar//SCAR_H_right.png'
+scar_h_left_directory = 'res//gun_image//ar//SCAR_H_left.png'
+m16_right_directory = 'res//gun_image//ar//m16_right.png'
+m16_left_directory = 'res//gun_image//ar//m16_left.png'
+mp44_right_directory = 'res//gun_image//ar//mp44_right.png'
+mp44_left_directory = 'res//gun_image//ar//mp44_left.png'
+aug_right_directory = 'res//gun_image//ar//aug_right.png'
+aug_left_directory = 'res//gun_image//ar//aug_left.png'
+groza_right_directory = 'res//gun_image//ar//groza_right.png'
+groza_left_directory = 'res//gun_image//ar//groza_left.png'
+
+# rifle
 m1_right_directory = 'res//gun_image//rifle//m1_right.png'
 m1_left_directory = 'res//gun_image//rifle//m1_left.png'
 

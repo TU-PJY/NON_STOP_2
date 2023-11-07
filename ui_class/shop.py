@@ -14,6 +14,12 @@ class Shop:
         self.select_mode = 0  # 초기값 총 선택
         self.cat_x = []
         self.cat_y = []
+        self.page = 1
+
+        self.page_right_x = 0
+        self.page_left_x = 0
+        self.page_right_y = 0
+        self.page_left_y = 0
 
         load_shop_resource(self)
         make_button_pos(self)

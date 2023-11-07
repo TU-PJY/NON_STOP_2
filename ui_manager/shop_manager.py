@@ -49,6 +49,11 @@ def make_button_pos(self):  # shop 버튼 위치 생성
         for j in range(1):
             self.cat_y.append(self.window_y + 270)
 
+    self.page_left_x = WIDTH / 2 + 500
+    self.page_left_y = self.window_y - 200
+    self.page_right_x = WIDTH / 2 + 600
+    self.page_right_y = self.window_y - 200
+
 
 def draw_shop_window(self):
     self.back.draw(self.x, self.y, WIDTH, HEIGHT)
@@ -58,31 +63,41 @@ def draw_shop_window(self):
     self.button_exp.draw(self.cat_x[2], self.cat_y[2], 200, 120)
     self.window.draw(self.x, self.window_y, 950, 550)
 
-    for i in range(5):
-        for j in range(4):
-            self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
+    if self.page == 1:
+        for i in range(5):
+            for j in range(4):
+                self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
+    elif self.page == 2:
+        for i in range(5):
+            for j in range(1):
+                self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
+
+
     self.font.draw(WIDTH / 2 + 200, self.window_y + 295, "SHOP", (255, 255, 255))
 
-    self.button_page_right.composite_draw(0, '', WIDTH / 2 + 600, self.window_y - 200, 80, 100)
-    self.button_page_left.composite_draw(0, 'h', WIDTH / 2 + 500, self.window_y - 200, 80, 100)
-
+    self.button_page_right.composite_draw(0, '', self.page_right_x, self.page_right_y, 80, 100)
+    self.button_page_left.composite_draw(0, 'h', self.page_left_x, self.page_left_y, 80, 100)
 
 
 def draw_items(self):
     if self.select_mode == 0:
-        self.image_scar.draw(self.button_x[0] - 30, self.button_y[2], 200, 150)
-        self.image_m16.draw(self.button_x[1] - 30, self.button_y[2], 200, 150)
-        self.image_mp44.draw(self.button_x[2] - 30, self.button_y[2], 200, 150)
-        self.image_aug.draw(self.button_x[3] - 30, self.button_y[2], 200, 150)
-        self.image_groza.draw(self.button_x[4] - 30, self.button_y[2], 200, 150)
+        if self.page == 1:
+            self.image_scar.draw(self.button_x[0] - 30, self.button_y[2], 200, 150)
+            self.image_m16.draw(self.button_x[1] - 30, self.button_y[2], 200, 150)
+            self.image_mp44.draw(self.button_x[2] - 30, self.button_y[2], 200, 150)
+            self.image_aug.draw(self.button_x[3] - 30, self.button_y[2], 200, 150)
+            self.image_groza.draw(self.button_x[4] - 30, self.button_y[2], 200, 150)
 
-        self.image_aks74.draw(self.button_x[0] - 30, self.button_y[1], 200, 150)
-        self.image_ump.draw(self.button_x[1] - 30, self.button_y[1], 200, 150)
-        self.image_vector.draw(self.button_x[2] - 20, self.button_y[1], 200, 150)
-        self.image_thompson.draw(self.button_x[3] - 30, self.button_y[1], 200, 150)
-        self.image_p90.draw(self.button_x[4] - 30, self.button_y[1], 200, 150)
+            self.image_aks74.draw(self.button_x[0] - 30, self.button_y[1], 200, 150)
+            self.image_ump.draw(self.button_x[1] - 30, self.button_y[1], 200, 150)
+            self.image_vector.draw(self.button_x[2] - 20, self.button_y[1], 200, 150)
+            self.image_thompson.draw(self.button_x[3] - 30, self.button_y[1], 200, 150)
+            self.image_p90.draw(self.button_x[4] - 30, self.button_y[1], 200, 150)
 
-        self.image_m1.draw(self.button_x[0] - 20, self.button_y[3], 180, 130)
+            self.image_m1.draw(self.button_x[0] - 20, self.button_y[3], 180, 130)
+
+        elif self.page == 2:
+            pass
 
     if self.select_mode == 1:
         self.image_knife.draw(self.button_x[0], self.button_y[0], 150, 100)
@@ -97,6 +112,9 @@ def window_animation(self):
         for i in range(len(self.cat_x)):
             self.cat_y[i] += 20 * pps / 4
 
+        self.page_right_y += 20 * pps / 4
+        self.page_left_y += 20 * pps / 4
+
     if self.window_y > HEIGHT / 2:
         self.window_y = HEIGHT / 2
 
@@ -106,12 +124,25 @@ def window_animation(self):
         for i in range(len(self.cat_x)):
             self.cat_y[i] = self.window_y + 270
 
+        self.page_right_y = self.window_y - 200
+        self.page_left_y = self.window_y - 200
+
 
 def update_cat_button(self):
     self.cat_y[self.select_mode] = self.window_y + 290
 
 
 def click_button(self):
+    if self.page_right_x - 40 < self.mx < self.page_right_x + 40 and \
+        self.page_right_y - 50 < self.my < self.page_right_y + 50:
+        if self.page < 2:
+            self.page += 1
+            
+    elif self.page_left_x - 40 < self.mx < self.page_left_x + 40 and \
+        self.page_left_y - 50 < self.my < self.page_left_y + 50:
+        if self.page > 1:
+            self.page -= 1
+
     for i in range(len(self.cat_x)):
         for j in range(len(self.cat_y)):
             if self.cat_x[i] - 100 < self.mx < self.cat_x[i] + 100 and \
