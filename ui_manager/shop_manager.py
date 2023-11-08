@@ -87,11 +87,11 @@ def draw_items(self):
             self.image_aug.draw(self.button_x[3] - 35, self.button_y[2], 240, 140)
             self.image_groza.draw(self.button_x[4] - 30, self.button_y[2], 240, 140)
 
-            self.image_aks74.draw(self.button_x[0] - 30, self.button_y[1], 200, 150)
-            self.image_ump.draw(self.button_x[1] - 30, self.button_y[1], 200, 150)
-            self.image_vector.draw(self.button_x[2] - 20, self.button_y[1], 200, 150)
-            self.image_thompson.draw(self.button_x[3] - 30, self.button_y[1], 200, 150)
-            self.image_p90.draw(self.button_x[4] - 30, self.button_y[1], 200, 150)
+            self.image_aks74.draw(self.button_x[0] - 35, self.button_y[1], 240, 140)
+            self.image_ump.draw(self.button_x[1] - 30, self.button_y[1], 240, 140)
+            self.image_vector.draw(self.button_x[2] - 30, self.button_y[1], 240, 140)
+            self.image_thompson.draw(self.button_x[3] - 35, self.button_y[1], 240, 140)
+            self.image_p90.draw(self.button_x[4] - 30, self.button_y[1], 240, 140)
 
             self.image_m1.draw(self.button_x[0] - 45, self.button_y[3], 250, 100)
 
