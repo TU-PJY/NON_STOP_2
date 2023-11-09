@@ -69,34 +69,36 @@ class Monster:
         self.size = 0  # 공격 시 크기 변화 애니메이션
         self.is_attack, self.is_hit = False, False
         self.incline = 0
-        self.dispx = 0  # 화면상에 출력되는 위치
-        self.dispy = 0  # 화면상에 출력되는 위치
         self.hp_length = self.hp
         self.op = 0
         self.flip = ''
 
         # type2 전용 변수
-        self.is_dash = False
-        self.dash_delay = 0
-        self.temp_x, self.temp_y = 0, 0  # 대쉬 목적지 좌표
+        if self.type == 2:
+            self.is_dash = False
+            self.dash_delay = 0
+            self.temp_x, self.temp_y = 0, 0  # 대쉬 목적지 좌표
 
         # type3 전용 변수
-        self.is_jump = False
-        self.size2 = 0  # rubber animation 크기 변수
-        self.size_deg = 0  # rubber animation 전용 크기 변수
-        self.jump_acc = 0
-        self.acc_delay = 0
-        self.jump_delay = 0  # 0이 될때마다 점프
+        elif self.type == 3:
+            self.is_jump = False
+            self.size2 = 0  # rubber animation 크기 변수
+            self.size_deg = 0  # rubber animation 전용 크기 변수
+            self.jump_acc = 0
+            self.acc_delay = 0
+            self.jump_delay = 0  # 0이 될때마다 점프
 
         # type4 전용 변수
-        self.is_shoot = False
-        self.shoot_delay = 100
+        elif self.type == 4:
+            self.is_shoot = False
+            self.shoot_delay = 100
 
         self.state_machine = StateMachineTarget(self)
         self.state_machine.start()
 
     def draw(self):
         self.state_machine.draw()
+        draw_rectangle(*self.get_bb())
 
     def update(self):
         if game_framework.MODE == 'play':
@@ -104,3 +106,23 @@ class Monster:
 
     def handle_events(self, event):
         self.state_machine.handle_event(('INPUT', event))
+
+    def get_bb(self):
+        if self.type == 1:
+            return self.x - 50, self.y - 70, self.x + 50, self.y + 60
+        elif self.type == 2:
+            return self.x - 65, self.y - 65, self.x + 65, self.y + 65
+        elif self.type == 3:
+            return self.x - 60, self.y - 60, self.x + 60, self.y + 60
+        elif self.type == 4:
+            return self.x - 55, self.y - 55, self.x + 55, self.y + 55
+
+    def handle_collision(self, group, other):
+        if group == 'player:monster':
+            if self.type == 1:  # type1 접촉 시 이동 정지
+                self.is_attack = True
+
+            if self.atk_delay <= 0:  # 실질적인 공격
+                self.attack_motion_time = 50
+                self.atk_delay = 200
+                self.size = 200

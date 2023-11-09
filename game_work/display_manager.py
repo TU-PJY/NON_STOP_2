@@ -6,26 +6,29 @@ from game_work import game_framework
 
 
 def push_display(p):
-    pps = PPS * game_framework.frame_time
-    if p.land_y > 0:
-        p.land_y -= pps / 2
-    if p.land_y <= 0:
-        p.land_y = 0
+    # pps = PPS * game_framework.frame_time
+    # if p.land_y > 0:
+    #     p.land_y -= pps / 2
+    # if p.land_y <= 0:
+    #     p.land_y = 0
+    pass
 
 
 def shake_display(p):
-    pps = PPS * game_framework.frame_time
-    if not p.shake_range - pps / 8 < 0:  # empty randrange 방지
-        p.shake_x = random.randint(-int(p.shake_range), int(p.shake_range))
-        p.shake_y = random.randint(-int(p.shake_range), int(p.shake_range))
-        p.shake_range -= pps / 8
-        p.scope_rot = p.shake_x / 200
-    else:
-        p.shake_x = 0
-        p.shake_y = 0
-        p.scope_rot = 0
+    # pps = PPS * game_framework.frame_time
+    # if not p.shake_range - pps / 8 < 0:  # empty randrange 방지
+    #     p.shake_x = random.randint(-int(p.shake_range), int(p.shake_range))
+    #     p.shake_y = random.randint(-int(p.shake_range), int(p.shake_range))
+    #     p.shake_range -= pps / 8
+    #     p.scope_rot = p.shake_x / 200
+    # else:
+    #     p.shake_x = 0
+    #     p.shake_y = 0
+    #     p.scope_rot = 0
+    pass
 
 
 def update_camera(p):
-    p.camera_y = (p.y - p.my) / 3
-    p.camera_x = (p.x - p.mx) / 3
+    # p.camera_y = (p.y - p.my) / 3
+    # p.camera_x = (p.x - p.mx) / 3
+    pass

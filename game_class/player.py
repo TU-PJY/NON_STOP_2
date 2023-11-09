@@ -20,7 +20,7 @@ class Move:
         if space_down(e):
             if p.jump_count < p.jump_level:
                 p.jump_acc = JUMP_ACC
-                p.jump_count += 1
+                # p.jump_count += 1
                 p.mv_jump = True
         else:
             p.mv_right = False
@@ -59,7 +59,7 @@ class Idle:
         if space_down(e):
             if p.jump_count < p.jump_level:
                 p.jump_acc = JUMP_ACC
-                p.jump_count += 1
+                # p.jump_count += 1
                 p.mv_jump = True
 
     @staticmethod
@@ -154,3 +154,10 @@ class Player:
 
     def draw(self):
         self.state_machine.draw()
+        draw_rectangle(*self.get_bb())
+
+    def get_bb(self):
+        return self.x - 40, self.y - 65, self.x + 40, self.y + 60
+
+    def handle_collision(self, group, other):
+        pass

@@ -46,7 +46,7 @@ def calculate_player_pos(p):
     # 무기 출력 y 좌표
 
     p.efx = p.shake_x + p.camera_x
-    p.efy = p.shake_y - p.land_y + p.camera_y - (p.y - 250) / 1.5
+    p.efy = p.shake_y - p.land_y + p.camera_y #- (p.y - 250) / 1.5
     # 나머지 객체에 사용되는 좌표
 
 
@@ -60,12 +60,12 @@ def look_mouse(p):
 
 def draw_player(p):
     if p.dir == 1:
-        p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+        p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.x, p.y + p.size * 50, 400, 400 + p.size * 100)
     elif p.dir == 0:
         if p.look_mouse:
-            p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size * 100)
+            p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.x, p.y + p.size * 50, 400, 400 + p.size * 100)
         else:
-            p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+            p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.x, p.y + p.size * 50, 400, 400 + p.size * 100)
 
 
 def jump(p):
@@ -77,7 +77,7 @@ def jump(p):
             p.y = 250
             p.jump_acc = 0  # 점프 가속도 초기화
             p.mv_jump = False  # 점프가 가능해진다
-            p.land_y = LAND_SHAKE  # LAND_SHAKE 만큼 화면이 눌린다
+            # p.land_y = LAND_SHAKE  # LAND_SHAKE 만큼 화면이 눌린다
             p.jump_count = 0  # 점프 가능 횟수 초기화
 
         p.jump_acc -= pps / 90

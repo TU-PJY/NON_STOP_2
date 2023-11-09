@@ -38,10 +38,8 @@ class Arrow:
                 self.acc -= 0.01 * pps / 4
 
                 if self.dir == 1:
-                    # if self.deg > -90:
                     self.deg -= 0.002 * pps / 4
                 elif self.dir == 0:
-                    # if self.deg < 90:
                     self.deg += 0.002 * pps / 4
 
                 if self.y >= 2000:  # 너무 높이 올라가면 삭제
@@ -57,10 +55,10 @@ class Arrow:
     def draw(self):
         if self.dir == 0:
             self.arrow_left.clip_composite_draw \
-                (0, 0, 128, 128, self.deg, 'h', self.x + self.p.efx, self.y + self.p.efy, 400, 400)
+                (0, 0, 128, 128, self.deg, 'h', self.x, self.y, 400, 400)
         elif self.dir == 1:
             self.arrow_right.clip_composite_draw \
-                (0, 0, 128, 128, self.deg, '', self.x + self.p.efx, self.y + self.p.efy, 400, 400)
+                (0, 0, 128, 128, self.deg, '', self.x, self.y, 400, 400)
 
     def handle_event(self):
         pass

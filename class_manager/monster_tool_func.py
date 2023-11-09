@@ -49,6 +49,7 @@ def spawn_monster(self):  # 몬스터 스폰
             (self.p, self.weapon, self.target, self.mp, self.spawn_point,
              self.y, self.speed, self.hp, self.frame, self.type)
 
+        game_manager.add_collision_pair('player:monster', None, m)
         game_manager.add_object(m, 2)
         self.spawn_time = 1500
 
