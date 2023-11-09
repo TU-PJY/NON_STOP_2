@@ -51,6 +51,7 @@ target_left_directory = 'res//target_image//target_left.png'
 target_dot_directory = 'res//target_image//target_dot.png'
 target_x_directory = 'res//target_image//mode_melee.png'
 target_melee_directory = 'res//target_image//target_melee.png'
+scope_directory = 'res//target_image//scope.png'
 
 # 총 이미지 파일 경로 
 # smg

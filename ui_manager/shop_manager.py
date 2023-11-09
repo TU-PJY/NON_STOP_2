@@ -35,6 +35,8 @@ def load_shop_resource(self):
 
     self.image_m1 = load_image(m1_right_directory)
 
+    self.image_awp = load_image(awp_right_directory)
+
     self.image_knife = load_image(knife_right_directory)
 
 
@@ -81,22 +83,22 @@ def draw_shop_window(self):
 def draw_items(self):
     if self.select_mode == 0:
         if self.page == 1:
-            self.image_scar.draw(self.button_x[0] - 40, self.button_y[2], 240, 140)
-            self.image_m16.draw(self.button_x[1] - 40, self.button_y[2], 240, 140)
-            self.image_mp44.draw(self.button_x[2] - 40, self.button_y[2], 240, 140)
-            self.image_aug.draw(self.button_x[3] - 35, self.button_y[2], 240, 140)
-            self.image_groza.draw(self.button_x[4] - 30, self.button_y[2], 240, 140)
-
             self.image_aks74.draw(self.button_x[0] - 35, self.button_y[1], 240, 140)
             self.image_ump.draw(self.button_x[1] - 30, self.button_y[1], 240, 140)
             self.image_vector.draw(self.button_x[2] - 30, self.button_y[1], 240, 140)
             self.image_thompson.draw(self.button_x[3] - 35, self.button_y[1], 240, 140)
             self.image_p90.draw(self.button_x[4] - 30, self.button_y[1], 240, 140)
 
+            self.image_scar.draw(self.button_x[0] - 40, self.button_y[2], 240, 140)
+            self.image_m16.draw(self.button_x[1] - 40, self.button_y[2], 240, 140)
+            self.image_mp44.draw(self.button_x[2] - 40, self.button_y[2], 240, 140)
+            self.image_aug.draw(self.button_x[3] - 35, self.button_y[2], 240, 140)
+            self.image_groza.draw(self.button_x[4] - 30, self.button_y[2], 240, 140)
+
             self.image_m1.draw(self.button_x[0] - 45, self.button_y[3], 250, 100)
 
         elif self.page == 2:
-            pass
+            self.image_awp.draw(self.button_x[0] - 45, self.button_y[0], 250, 100)
 
     if self.select_mode == 1:
         self.image_knife.draw(self.button_x[0], self.button_y[0], 150, 100)
@@ -158,29 +160,34 @@ def click_button(self):
             for j in range(len(self.button_y)):
                 if self.button_x[i] - 90 < self.mx < self.button_x[i] + 90 and \
                         self.button_y[j] - 75 < self.my < self.button_y[j] + 75:
-                    if (i, j) == (0, 1):
-                        play_mode.weapon.gun = 'AKS74'
-                    elif (i, j) == (1, 1):
-                        play_mode.weapon.gun = 'UMP'
-                    elif (i, j) == (2, 1):
-                        play_mode.weapon.gun = 'VECTOR'
-                    elif (i, j) == (3, 1):
-                        play_mode.weapon.gun = 'THOMPSON'
-                    elif (i, j) == (4, 1):
-                        play_mode.weapon.gun = 'P90'
+                    if self.page == 1:
+                        if (i, j) == (0, 1):
+                            play_mode.weapon.gun = 'AKS74'
+                        elif (i, j) == (1, 1):
+                            play_mode.weapon.gun = 'UMP'
+                        elif (i, j) == (2, 1):
+                            play_mode.weapon.gun = 'VECTOR'
+                        elif (i, j) == (3, 1):
+                            play_mode.weapon.gun = 'THOMPSON'
+                        elif (i, j) == (4, 1):
+                            play_mode.weapon.gun = 'P90'
 
-                    elif (i, j) == (0, 2):
-                        play_mode.weapon.gun = 'SCAR_H'
-                    elif (i, j) == (1, 2):
-                        play_mode.weapon.gun = 'M16'
-                    elif (i, j) == (2, 2):
-                        play_mode.weapon.gun = 'MP44'
-                    elif (i, j) == (3, 2):
-                        play_mode.weapon.gun = 'AUG'
-                    elif (i, j) == (4, 2):
-                        play_mode.weapon.gun = 'GROZA'
+                        elif (i, j) == (0, 2):
+                            play_mode.weapon.gun = 'SCAR_H'
+                        elif (i, j) == (1, 2):
+                            play_mode.weapon.gun = 'M16'
+                        elif (i, j) == (2, 2):
+                            play_mode.weapon.gun = 'MP44'
+                        elif (i, j) == (3, 2):
+                            play_mode.weapon.gun = 'AUG'
+                        elif (i, j) == (4, 2):
+                            play_mode.weapon.gun = 'GROZA'
 
-                    elif (i, j) == (0, 3):
-                        play_mode.weapon.gun = 'M1'
+                        elif (i, j) == (0, 3):
+                            play_mode.weapon.gun = 'M1'
+
+                    elif self.page == 2:
+                        if (i, j) == (0, 0):
+                            play_mode.weapon.gun = 'AWP'
 
     self.click = False

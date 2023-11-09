@@ -67,6 +67,9 @@ class Target:
         self.tmx = 0  # 근접무기 타겟 x 좌표
         self.tmy = 0  # 근접무기 타겟 y 좌표
 
+        self.scope_size_x, self.scope_size_y = 32768, 16384
+        self.draw_scope = False
+
         self.state_machine = StateMachineTarget(self)
         self.state_machine.start()
 

@@ -137,6 +137,8 @@ class Player:
         self.camera_y = 0  # 화면이 마우스 좌표를 살짝 따라간다.
         self.camera_x = 0
 
+        self.scope_rot = 0  # scope 흔들림 각도
+
         self.efx, self.efy = 0, 0  # 플레이어 좌표를 제외한 디스플레이 효과 변수. 객체 좌표에 더하여 사용
         self.px, self.py, self.py2 = 0, 0, 0  # 디스플레이 효과를 모두 포함한 좌표. 무기 출력에 사용.
 

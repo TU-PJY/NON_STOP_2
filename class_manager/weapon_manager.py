@@ -18,6 +18,14 @@ def q_down(e):
     return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_q
 
 
+def r_down(e):
+    return e[0] == 'INPUT' and e[1].type == SDL_MOUSEBUTTONDOWN and e[1].button == SDL_BUTTON_RIGHT
+
+
+def r_up(e):
+    return e[0] == 'INPUT' and e[1].type == SDL_MOUSEBUTTONUP and e[1].button == SDL_BUTTON_RIGHT
+
+
 def calc_pps():
     global pps
     pps = PPS * game_framework.frame_time
@@ -26,6 +34,17 @@ def calc_pps():
 def load_gun_image(self):
     self.flame_right = load_image(flame_right_directory)
     self.flame_left = load_image(flame_left_directory)
+
+    self.aks74_right = load_image(aks74_right_directory)
+    self.aks74_left = load_image(aks74_left_directory)
+    self.ump_right = load_image(ump_right_directory)
+    self.ump_left = load_image(ump_left_directory)
+    self.vector_right = load_image(vector_right_directpry)
+    self.vector_left = load_image(vector_left_directpry)
+    self.thompson_right = load_image(thompson_right_directory)
+    self.thompson_left = load_image(thompson_left_directory)
+    self.p90_right = load_image(p90_right_directory)
+    self.p90_left = load_image(p90_left_directory)
 
     self.scar_right = load_image(scar_h_right_directory)
     self.scar_left = load_image(scar_h_left_directory)
@@ -37,18 +56,12 @@ def load_gun_image(self):
     self.aug_left = load_image(aug_left_directory)
     self.groza_right = load_image(groza_right_directory)
     self.groza_left = load_image(groza_left_directory)
-    self.aks74_right = load_image(aks74_right_directory)
-    self.aks74_left = load_image(aks74_left_directory)
-    self.ump_right = load_image(ump_right_directory)
-    self.ump_left = load_image(ump_left_directory)
-    self.vector_right = load_image(vector_right_directpry)
-    self.vector_left = load_image(vector_left_directpry)
-    self.thompson_right = load_image(thompson_right_directory)
-    self.thompson_left = load_image(thompson_left_directory)
-    self.p90_right = load_image(p90_right_directory)
-    self.p90_left = load_image(p90_left_directory)
+
     self.m1_right = load_image(m1_right_directory)
     self.m1_left = load_image(m1_left_directory)
+
+    self.awp_right = load_image(awp_right_directory)
+    self.awp_left = load_image(awp_left_directory)
 
 
 def load_melee_image(self):
@@ -136,6 +149,12 @@ def draw_gun(weapon):
                 weapon.m1_right.clip_composite_draw(0, 0, 250, 100, weapon.deg, '', x, y, 270, 120)
             elif weapon.p.dir == 0:
                 weapon.m1_left.clip_composite_draw(0, 0, 250, 100, weapon.deg, 'h, v', x, y, 270, 120)
+
+        elif weapon.gun == 'AWP':
+            if weapon.p.dir == 1:
+                weapon.awp_right.clip_composite_draw(0, 0, 250, 100, weapon.deg, '', x, y, 270, 120)
+            elif weapon.p.dir == 0:
+                weapon.awp_left.clip_composite_draw(0, 0, 250, 100, weapon.deg, 'h, v', x, y, 270, 120)
 
 
 def draw_flame(weapon):
@@ -237,6 +256,10 @@ def shoot_gun(weapon):
             elif weapon.gun == 'M1':  # 반자동 소총이므로 연사 딜레이를 무한대로 부여함
                 weapon.shoot_delay = 9999999999999999999
                 weapon.p.shake_range = 30
+
+            elif weapon.gun == 'AWP':
+                weapon.shoot_delay = 550
+                weapon.p.shake_range = 60
 
             weapon.flame_display_time = FLAME_DISPLAY_TIME
 

@@ -265,6 +265,9 @@ def damage_monster(m):
             elif m.weapon.gun == 'M1':
                 m.hp -= 60
 
+            elif m.weapon.gun == 'AWP':
+                m.hp -= 200
+
             m.op = 100  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달 
             m.hit = False
 

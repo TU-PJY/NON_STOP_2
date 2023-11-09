@@ -23,6 +23,10 @@ class Shoot:
 
         if q_down(e):
             change_weapon(weapon)
+        if r_down(e):
+            weapon.zoom = True
+        if r_up(e):
+            weapon.zoom = False
 
     @staticmethod
     def do(weapon):
@@ -48,6 +52,10 @@ class Idle:
     def exit(weapon, e):
         if q_down(e):
             change_weapon(weapon)
+        if r_down(e):
+            weapon.zoom = True
+        if r_up(e):
+            weapon.zoom = False
 
     @staticmethod
     def do(weapon):
@@ -67,8 +75,8 @@ class StateMachineGun:
         self.weapon = weapon
         self.cur_state = Idle
         self.table = {
-            Idle: {l_down: Shoot, q_down: Idle},
-            Shoot: {l_up: Idle, q_down: Shoot}
+            Idle: {l_down: Shoot, q_down: Idle, r_down: Idle, r_up: Idle},
+            Shoot: {l_up: Idle, q_down: Shoot, r_down: Shoot, r_up: Shoot}
         }
 
     def start(self):
@@ -113,6 +121,9 @@ class Weapon:
         self.use = False
         self.wield = False
         self.wield_delay = 0
+
+        # sr 전용 변수
+        self.zoom = False
 
         self.state_machine = StateMachineGun(self)
         self.state_machine.start()
