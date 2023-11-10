@@ -65,19 +65,25 @@ def draw_shop_window(self):
     self.button_exp.draw(self.cat_x[2], self.cat_y[2], 200, 120)
     self.window.draw(self.x, self.window_y, 950, 550)
 
-    if self.page == 1:
+    if self.select_mode == 0 :
+        if self.page == 1:
+            for i in range(5):
+                for j in range(4):
+                    self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
+        elif self.page == 2:
+            for i in range(5):
+                for j in range(1):
+                    self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
+
+        self.button_page_right.composite_draw(0, '', self.page_right_x, self.page_right_y, 80, 100)
+        self.button_page_left.composite_draw(0, 'h', self.page_left_x, self.page_left_y, 80, 100)
+
+    else:
         for i in range(5):
             for j in range(4):
                 self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
-    elif self.page == 2:
-        for i in range(5):
-            for j in range(1):
-                self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
 
     self.font.draw(WIDTH / 2 + 200, self.window_y + 295, "SHOP", (255, 255, 255))
-
-    self.button_page_right.composite_draw(0, '', self.page_right_x, self.page_right_y, 80, 100)
-    self.button_page_left.composite_draw(0, 'h', self.page_left_x, self.page_left_y, 80, 100)
 
 
 def draw_items(self):
@@ -134,15 +140,16 @@ def update_cat_button(self):
 
 
 def click_button(self):
-    if self.page_right_x - 40 < self.mx < self.page_right_x + 40 and \
-            self.page_right_y - 50 < self.my < self.page_right_y + 50:
-        if self.page < 2:
-            self.page += 1
+    if self.select_mode == 0:
+        if self.page_right_x - 40 < self.mx < self.page_right_x + 40 and \
+                self.page_right_y - 50 < self.my < self.page_right_y + 50:
+            if self.page < 2:
+                self.page += 1
 
-    elif self.page_left_x - 40 < self.mx < self.page_left_x + 40 and \
-            self.page_left_y - 50 < self.my < self.page_left_y + 50:
-        if self.page > 1:
-            self.page -= 1
+        elif self.page_left_x - 40 < self.mx < self.page_left_x + 40 and \
+                self.page_left_y - 50 < self.my < self.page_left_y + 50:
+            if self.page > 1:
+                self.page -= 1
 
     for i in range(len(self.cat_x)):
         for j in range(len(self.cat_y)):

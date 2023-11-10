@@ -24,9 +24,10 @@ class Shoot:
         if q_down(e):
             change_weapon(weapon)
         if r_down(e):
-            weapon.zoom = True
-        if r_up(e):
-            weapon.zoom = False
+            if not weapon.zoom:
+                weapon.zoom = True
+            elif weapon.zoom:
+                weapon.zoom = False
 
     @staticmethod
     def do(weapon):
@@ -53,9 +54,10 @@ class Idle:
         if q_down(e):
             change_weapon(weapon)
         if r_down(e):
-            weapon.zoom = True
-        if r_up(e):
-            weapon.zoom = False
+            if not weapon.zoom:
+                weapon.zoom = True
+            elif weapon.zoom:
+                weapon.zoom = False
 
     @staticmethod
     def do(weapon):

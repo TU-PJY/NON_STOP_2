@@ -40,6 +40,7 @@ def init():
     tool = Tool(p, weapon, target, mp)
 
     game_manager.add_collision_pair('player:monster', p, None)
+    game_manager.add_collision_pair('weapon:monster', target, None)
 
     game_manager.add_object(tool, 0)  # monster tool은 맨 아래 레이어에서 구동된다.
     game_manager.add_object(bg, 1)

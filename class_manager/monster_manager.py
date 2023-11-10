@@ -30,40 +30,42 @@ def load_monster(self):
 
 
 def draw_monster(m):
-    m.hp_back.draw(m.x, m.y + 100, m.hp_length + 10, 25)  # 체력 바
-    m.hp_front.draw(m.x + ((m.hp_length - m.hp) / 2), m.y + 100, m.hp, 20)
+    x = m.x + m.p.ex
+    y = m.y + m.p.ey
+    m.hp_back.draw(x, y + 100, m.hp_length + 10, 25)  # 체력 바
+    m.hp_front.draw(x + ((m.hp_length - m.hp) / 2), y + 100, m.hp, 20)
 
     m.flip = '' if m.dir == 0 else 'h'  # 보는 방향에 따라 이미지 방향이 바뀐다.
 
     if m.type == 1:
         m.type1_damage.opacify(int(m.op))
         m.type1.clip_composite_draw \
-            (int(m.frame) * 64, 0, 64, 64, 0, m.flip, m.x, m.y + m.size / 6, 280, 280 + m.size)
+            (int(m.frame) * 64, 0, 64, 64, 0, m.flip, x, y + m.size / 6, 280, 280 + m.size)
         m.type1_damage.clip_composite_draw \
-            (int(m.frame) * 64, 0, 64, 64, 0, m.flip, m.x, m.y + m.size / 6, 280, 280 + m.size)
+            (int(m.frame) * 64, 0, 64, 64, 0, m.flip, x, y + m.size / 6, 280, 280 + m.size)
 
     if m.type == 2:
         m.type2_damage.opacify(int(m.op))
         m.type2.clip_composite_draw \
-            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, m.x, m.y, 400, 400 + m.size)
+            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, x, y, 400, 400 + m.size)
         m.type2_damage.clip_composite_draw \
-            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, m.x, m.y, 400, 400 + m.size)
+            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, x, y, 400, 400 + m.size)
 
     if m.type == 3:
         m.type3_damage.opacify(int(m.op))
         m.type3.clip_composite_draw \
-            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, m.x, m.y + m.size2 * 50 + m.size / 5,
+            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, x, y + m.size2 * 50 + m.size / 5,
              300, 300 + m.size2 * 100 + m.size)
         m.type3_damage.clip_composite_draw \
-            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, m.x, m.y + m.size2 * 50 + m.size / 5,
+            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, x, y + m.size2 * 50 + m.size / 5,
              300, 300 + m.size2 * 100 + m.size)
 
     if m.type == 4:
         m.type4_damage.opacify(int(m.op))
         m.type4.clip_composite_draw \
-            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, m.x, m.y, 450, 450)
+            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, x, y, 450, 450)
         m.type4_damage.clip_composite_draw \
-            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, m.x, m.y, 450, 450)
+            (int(m.frame) * 128, 0, 128, 128, 0, m.flip, x, y, 450, 450)
     
 
 def move_monster(m):
@@ -82,7 +84,7 @@ def move_monster(m):
             m.y += 2 * pps / 4
             if m.y >= 670:
                 m.y = 670
-        elif m.y > 670: # 670보다 높게 있으면 자기 자리로 복귀한다
+        elif m.y > 670:  # 670보다 높게 있으면 자기 자리로 복귀한다
             m.y -= 2 * pps / 4
             if m.y <= 670:
                 m.y = 670
@@ -104,6 +106,7 @@ def move_monster(m):
             m.jump_acc -= pps / 90
 
 
+# cam_h는 플레이어와 상대적 위치 차이를 발생시키기 때문에 몬스터 y위치에 cam_h를 포함해줘야함
 def process_attack(m):
     global pps
     # type 1 attack
@@ -119,9 +122,9 @@ def process_attack(m):
     if m.type == 2:
         if m.mp.playerToWallLeft < m.x < m.mp.playerToWallRight:  # 스폰 지점에서 바로 대쉬하지 않도록
             if m.dash_delay <= 0 and not m.is_attack and m.atk_delay <= 0:
-                if math.sqrt((m.x - m.p.x) ** 2 + (m.p.y - m.p.y) ** 2) <= 800:
-                    m.incline = math.atan2(m.p.y - m.y, m.p.x - m.x)
-                    m.temp_x, m.temp_y = m.p.x, m.p.y
+                if math.sqrt((m.x - m.p.x) ** 2 + ((m.y + m.p.cam_h) - m.p.y) ** 2) <= 800:
+                    m.incline = math.atan2(m.p.y - (m.y + m.p.cam_h), m.p.x - m.x)
+                    m.temp_x, m.temp_y = m.p.x, m.p.y - m.p.cam_h
                     m.is_dash = True
                     m.is_attack = True
 
@@ -142,14 +145,14 @@ def process_attack(m):
     # type 4 attack
     if m.type == 4:
         if m.mp.playerToWallLeft + 100 <= m.x <= m.mp.playerToWallRight - 100:
-            if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - m.y) ** 2) <= 800:
+            if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - (m.y + m.p.cam_h)) ** 2) <= 800:
                 m.is_attack = True
             else:
                 m.is_attack = False
                 m.shoot_delay = 150
 
             if m.is_attack:
-                m.incline = math.atan2(m.p.y - m.y + 50, m.p.x - m.x)  # 머리쪽으로 살짝 높혀서 쏜다
+                m.incline = math.atan2(m.p.y + 50 - (m.y + m.p.cam_h), m.p.x - m.x)  # 머리쪽으로 살짝 높혀서 쏜다
                 m.frame = 2
                 if m.shoot_delay <= 0:
                     ar = Arrow(m.p, m.mp, m.x, m.y, m.incline, m.dir)  # 일정 간격으로 화살을 발사한다
@@ -159,7 +162,7 @@ def process_attack(m):
 
 def damage_monster(m):
     if m.weapon.shoot and m.mp.playerToWallLeft - 30 <= m.p.x <= m.mp.playerToWallRight + 30:
-        if m.hit:  # 맞은걸로 판정되면 대미지를 가한다.
+        if m.is_hit:  # 맞은걸로 판정되면 대미지를 가한다.
             if m.weapon.gun == 'AKS74':
                 m.hp -= 12
             elif m.weapon.gun == 'UMP':
@@ -172,13 +175,13 @@ def damage_monster(m):
                 m.hp -= 17
 
             elif m.weapon.gun == 'SCAR_H':
-                m.hp -= 22
+                m.hp -= 19
             elif m.weapon.gun == 'M16':
                 m.hp -= 18
             elif m.weapon.gun == 'MP44':
                 m.hp -= 40
             elif m.weapon.gun == 'AUG':
-                m.hp -= 23
+                m.hp -= 21
             elif m.weapon.gun == 'GROZA':
                 m.hp -= 20
             
@@ -189,15 +192,15 @@ def damage_monster(m):
                 m.hp -= 200
 
             m.op = 100  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달 
-            m.hit = False
+            m.is_hit = False
 
     elif m.weapon.wield:
-        if m.hit:
+        if m.is_hit:
             if m.weapon.melee == 'KNIFE':
                 m.hp -= 60
 
             m.op = 100  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달 
-            m.hit = False
+            m.is_hit = False
 
     if m.hp <= 0:  # hp가 0이 될 경우 죽는다.
         game_manager.remove_object(m)

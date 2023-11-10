@@ -24,17 +24,24 @@ def load_background(self):
 
 
 def draw_land(self):
-    self.image.draw(self.x, self.y, 4096, 512)
+    x = self.x + self.p.ex
+    y = self.y + self.p.ey
+    self.image.draw(x, y, 4096, 512)
 
 
 def draw_wall(self):
-    self.image.draw(self.x1 + self.p.efx, self.y, 1280, 1920)
-    self.image.draw(self.x2 + self.p.efx, self.y, 1280, 1920)
+    x1 = self.x1 + self.p.ex
+    x2 = self.x2 + self.p.ex
+    y = self.y + self.p.ey
+    self.image.draw(x1, y, 1280, 1920)
+    self.image.draw(x2, y, 1280, 1920)
 
 
 def draw_background(self):
+    x = self.x + self.p.ex
+    y = self.y + self.p.ey
     self.image_back.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
-    self.image.draw(self.x, self.y, 4096, 1100)
+    self.image.draw(x, y, 4096, 1100)
 
 
 def update_map(self):  # 맵 업데이트

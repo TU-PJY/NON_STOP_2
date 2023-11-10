@@ -109,13 +109,13 @@ class Monster:
 
     def get_bb(self):
         if self.type == 1:
-            return self.x - 50, self.y - 70, self.x + 50, self.y + 60
+            return self.x + self.p.ex - 50, self.y + self.p.ey - 70, self.x + self.p.ex + 50, self.y + self.p.ey + 60
         elif self.type == 2:
-            return self.x - 65, self.y - 65, self.x + 65, self.y + 65
+            return self.x + self.p.ex - 65, self.y + self.p.ey - 65, self.x + self.p.ex + 65, self.y + self.p.ey + 65
         elif self.type == 3:
-            return self.x - 60, self.y - 60, self.x + 60, self.y + 60
+            return self.x + self.p.ex - 60, self.y + self.p.ey - 60, self.x + self.p.ex + 60, self.y + self.p.ey + 60
         elif self.type == 4:
-            return self.x - 55, self.y - 55, self.x + 55, self.y + 55
+            return self.x + self.p.ex - 55, self.y + self.p.ey - 55, self.x + self.p.ex + 55, self.y + self.p.ey + 55
 
     def handle_collision(self, group, other):
         if group == 'player:monster':
@@ -123,6 +123,9 @@ class Monster:
                 self.is_attack = True
 
             if self.atk_delay <= 0:  # 실질적인 공격
-                self.attack_motion_time = 50
+                self.attack_motion_time = 100
                 self.atk_delay = 200
                 self.size = 200
+
+        if group == 'weapon:monster':  # 총이나 근접무기에 맞을 경우 대미지를 받는다
+            self.is_hit = True

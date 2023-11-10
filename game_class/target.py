@@ -62,7 +62,6 @@ class Target:
         self.reduce_delay = 0
 
         self.tx, self.ty = 0, 0  # 조준점 범위 내에서 랜점으로 생성되는 좌표
-        self.target_dot_display_time = 0
 
         self.tmx = 0  # 근접무기 타겟 x 좌표
         self.tmy = 0  # 근접무기 타겟 y 좌표
@@ -75,6 +74,8 @@ class Target:
 
     def draw(self):
         self.state_machine.draw()
+        if self.weapon.weapon_type == 1:
+            draw_rectangle(*self.get_bb())
 
     def update(self):
         if game_framework.MODE == 'play':
@@ -82,3 +83,18 @@ class Target:
 
     def handle_events(self, event):
         self.state_machine.handle_event(('INPUT', event))
+
+    def handle_collision(self, group, other):
+        pass
+
+    def get_bb(self):
+        if self.weapon.weapon_type == 0:  # 총의 경우 타겟 내부에 생성된 지점을 히트박스로 리턴한다.
+            return self.tx, self.ty, self.tx, self.ty
+
+        elif self.weapon.weapon_type == 1:  # 근접무기 히트박스, 방향에 따라 좌표가 다름
+            if self.p.dir == 0:
+                return self.tmx + self.p.ex, self.tmy + self.p.ey - 65 - self.p.cam_h,\
+                    self.p.x + self.p.ex, self.p.y + self.p.ey + 60 - self.p.cam_h
+            elif self.p.dir == 1:
+                return self.p.x + self.p.ex, self.p.y + self.p.ey - 65 - self.p.cam_h,\
+                    self.tmx + self.p.ex, self.p.y + self.p.ey + 60 - self.p.cam_h

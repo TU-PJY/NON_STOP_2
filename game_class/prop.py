@@ -15,6 +15,7 @@ class Arrow:
         self.acc = 0
         self.deg = self.incline
         self.remove_timer = 300
+        self.simulate = True  # True일 동안 움직임
 
         if self.dir == 0:
             self.arrow_left = load_image(arrow_left_directory)
@@ -30,8 +31,7 @@ class Arrow:
                 self.x += self.p.speed * pps / 4
 
             # 화살이 벽에 박힌다
-            if not (self.x >= self.mp.playerToWallRight - 10 or self.x <= self.mp.playerToWallLeft + 10 or
-                    self.y <= 190):
+            if self.simulate:
                 self.x += math.cos(self.incline) * 6 * pps / 4
                 self.y += math.sin(self.incline) * 6 * pps / 4
                 self.y += self.acc * pps / 4
@@ -41,6 +41,10 @@ class Arrow:
                     self.deg -= 0.002 * pps / 4
                 elif self.dir == 0:
                     self.deg += 0.002 * pps / 4
+
+                # 화살이 벽에 박히면
+                if self.x >= self.mp.playerToWallRight - 10 or self.x <= self.mp.playerToWallLeft + 10 or self.y <= 190:
+                    self.simulate = False  # 움직임을 멈춘다
 
                 if self.y >= 2000:  # 너무 높이 올라가면 삭제
                     game_manager.remove_object(self)
@@ -53,12 +57,14 @@ class Arrow:
                     game_manager.remove_object(self)
 
     def draw(self):
+        x = self.x + self.p.ex
+        y = self.y + self.p.ey
         if self.dir == 0:
             self.arrow_left.clip_composite_draw \
-                (0, 0, 128, 128, self.deg, 'h', self.x, self.y, 400, 400)
+                (0, 0, 128, 128, self.deg, 'h', x, y, 400, 400)
         elif self.dir == 1:
             self.arrow_right.clip_composite_draw \
-                (0, 0, 128, 128, self.deg, '', self.x, self.y, 400, 400)
+                (0, 0, 128, 128, self.deg, '', x, y, 400, 400)
 
     def handle_event(self):
         pass

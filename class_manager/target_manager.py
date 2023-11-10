@@ -6,6 +6,7 @@ from pico2d import *
 from config import *
 from game_work import game_framework
 
+
 def calc_pps():
     global pps 
     pps = PPS * game_framework.frame_time
@@ -16,9 +17,10 @@ def load_target(t):
     t.target_down = load_image(target_down_directory)
     t.target_right = load_image(target_right_directory)
     t.target_left = load_image(target_left_directory)
-    t.target_dot = load_image(target_dot_directory)
+
     t.not_target = load_image(target_x_directory)
     t.target_melee = load_image(target_melee_directory)
+
     t.scope = load_image(scope_directory)
 
 
@@ -26,9 +28,11 @@ def draw_target(t):
     if t.weapon.weapon_type == 0:
         if t.weapon.gun == 'AWP':
             if t.draw_scope:
+                x = t.p.mx + t.p.shake_x
+                y = t.p.my + t.p.shake_y
                 t.scope.opacify(50)
-                t.scope.rotate_draw(t.p.scope_rot, t.p.mx + t.p.shake_x, t.p.my + t.p.shake_y,
-                                    t.scope_size_x, t.scope_size_y)
+                t.scope.rotate_draw(t.p.scope_rot, x, y, t.scope_size_x, t.scope_size_y)
+
             else:
                 t.target_up.draw(t.p.mx, t.p.my + t.recoil + t.dis2 + 30, 60, 60)
                 t.target_right.draw(t.p.mx + t.recoil + t.dis2 + 30, t.p.my, 60, 60)
@@ -43,23 +47,21 @@ def draw_target(t):
 
     elif t.weapon.weapon_type == 1:
         t.not_target.draw(t.p.mx, t.p.my, 120, 120)
-        t.tmy = t.p.y + t.p.camera_y - t.p.land_y
+        t.tmy = t.p.y
+        y = t.tmy + t.p.cam_y - t.p.push_y
 
         if t.weapon.melee == 'KNIFE':
             if t.p.dir == 1:
-                t.tmx = t.p.camera_x + t.p.x + 170
-                t.target_melee.composite_draw(0, '', t.tmx, t.tmy, 100, 150)
+                t.tmx = t.p.x + 180
+                t.target_melee.composite_draw(0, '', t.tmx + t.p.cam_x, y, 100, 150)
             elif t.p.dir == 0:
-                t.tmx = t.p.camera_x + t.p.x - 170
-                t.target_melee.composite_draw(0, 'h', t.tmx, t.tmy, 100, 150)
-
-    # if t.target_dot_display_time > 0:
-    #     t.target_dot.draw(t.tx, t.ty, 30, 30)
+                t.tmx = t.p.x - 180
+                t.target_melee.composite_draw(0, 'h', t.tmx + t.p.cam_x, y, 100, 150)
 
 
 def update_target(t):
     global pps 
-    t.dis = math.sqrt((t.p.mx - t.p.px) ** 2 + (t.p.my - t.p.py) ** 2)
+    t.dis = math.sqrt((t.p.mx - (t.p.x + t.p.cam_x)) ** 2 + (t.p.my - (t.p.y + t.p.cam_y)) ** 2)
 
     if t.recoil > 0:
         t.recoil -= pps / 7
@@ -125,10 +127,10 @@ def update_target(t):
     elif t.weapon.gun == 'M1':
         t.dis2 = t.dis / 55
         if t.weapon.shoot:
-            t.recoil += 55
+            t.recoil += 60
 
     elif t.weapon.gun == 'AWP':
-        if t.weapon.zoom:
+        if t.weapon.zoom:  # 우클릭 시 스코프 애니메이션 출력
             t.draw_scope = True
             if t.scope_size_x > 8192:
                 t.scope_size_x -= 400 * pps
@@ -158,9 +160,6 @@ def update_target(t):
 
         if t.weapon.shoot:
             t.recoil += 80
-
-    if t.target_dot_display_time > 0:
-        t.target_dot_display_time -= pps / 3
 
 
 def make_target_point(t):  # 이 함수에서 생성되는 좌표로 적 피격을 판정한다.

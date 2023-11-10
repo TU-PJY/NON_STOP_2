@@ -70,18 +70,15 @@ def load_melee_image(self):
 
 
 def draw_gun(weapon):
+    x = weapon.p.wx
+
     if weapon.weapon_type == 0:
         if weapon.gun == 'M1':
-            weapon.deg = math.atan2(weapon.p.my - (weapon.p.py2 + 5), weapon.p.mx - weapon.p.px)
-            y = weapon.p.py2 + 5
+            y = weapon.p.wy + 5
+            weapon.deg = math.atan2(weapon.p.my - (y + 5), weapon.p.mx - x)
         else:
-            weapon.deg = math.atan2(weapon.p.my - weapon.p.py2, weapon.p.mx - weapon.p.px)
-            y = weapon.p.py2
-
-        if weapon.p.dir == 1:  # 플레이어 방향에 따라 총 이미지 방향도 달라짐
-            x = weapon.p.px
-        elif weapon.p.dir == 0:
-            x = weapon.p.px
+            y = weapon.p.wy
+            weapon.deg = math.atan2(weapon.p.my - y, weapon.p.mx - x)
 
         # GUN_NAME에 따라 사용하는 총기가 달라진다.
         if weapon.gun == 'AKS74':
@@ -162,17 +159,20 @@ def draw_flame(weapon):
     if weapon.flame_display_time > 0 and weapon.weapon_type == 0:
         weapon.flame_display_time -= pps / 3
         if weapon.gun == 'M1':
-            x = weapon.p.px + math.cos(weapon.deg) * 200
-            y = weapon.p.py2 + 5 + math.sin(weapon.deg) * 200
+            x = weapon.p.wx + math.cos(weapon.deg) * 200
+            y = weapon.p.wy + 5 + math.sin(weapon.deg) * 200
+
         elif weapon.gun == 'AKS74' or weapon.gun == 'UMP' or weapon.gun == 'VECTOR' or weapon.gun == 'P90':
-            x = weapon.p.px + math.cos(weapon.deg) * 140
-            y = weapon.p.py2 + math.sin(weapon.deg) * 140
+            x = weapon.p.wx + math.cos(weapon.deg) * 140
+            y = weapon.p.wy + math.sin(weapon.deg) * 140
+
         elif weapon.gun == 'GROZA' or weapon.gun == 'THOMPSON':
-            x = weapon.p.px + math.cos(weapon.deg) * 150
-            y = weapon.p.py2 + math.sin(weapon.deg) * 150
+            x = weapon.p.wx + math.cos(weapon.deg) * 150
+            y = weapon.p.wy + math.sin(weapon.deg) * 150
+
         else:
-            x = weapon.p.px + math.cos(weapon.deg) * 180
-            y = weapon.p.py2 + math.sin(weapon.deg) * 180
+            x = weapon.p.wx + math.cos(weapon.deg) * 180
+            y = weapon.p.wy + math.sin(weapon.deg) * 180
 
         if weapon.p.dir == 1:
             weapon.flame_right.clip_composite_draw(0, 0, 100, 100, weapon.deg, '', x, y, 100, 100)
@@ -188,10 +188,10 @@ def draw_melee(weapon):
 
         if weapon.melee == 'KNIFE':
             if weapon.p.dir == 1:
-                x = weapon.p.px + 50 + weapon.melee_x
+                x = weapon.p.px + weapon.melee_x + 50
                 weapon.knife_right.clip_composite_draw(0, 0, 150, 100, weapon.melee_deg, '', x, y, 100, 50)
             elif weapon.p.dir == 0:
-                x = weapon.p.px - 50 - weapon.melee_x
+                x = weapon.p.px - weapon.melee_x - 50
                 weapon.knife_left.clip_composite_draw(0, 0, 150, 100, -weapon.melee_deg, '', x, y, 100, 50)
 
 
@@ -259,7 +259,7 @@ def shoot_gun(weapon):
 
             elif weapon.gun == 'AWP':
                 weapon.shoot_delay = 550
-                weapon.p.shake_range = 60
+                weapon.p.shake_range = 70
 
             weapon.flame_display_time = FLAME_DISPLAY_TIME
 
@@ -272,7 +272,7 @@ def wield_melee(weapon):
         if weapon.wield_delay <= 0:
             weapon.wield = True
             if weapon.melee == 'KNIFE':
-                weapon.melee_x = 120
+                weapon.melee_x = 100
                 weapon.melee_deg = 0
                 weapon.wield_delay = 80
                 weapon.p.shake_range = 15

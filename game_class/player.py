@@ -20,7 +20,7 @@ class Move:
         if space_down(e):
             if p.jump_count < p.jump_level:
                 p.jump_acc = JUMP_ACC
-                # p.jump_count += 1
+                p.jump_count += 1
                 p.mv_jump = True
         else:
             p.mv_right = False
@@ -38,7 +38,7 @@ class Move:
         jump(p)
         look_mouse(p)
         update_camera(p)
-        calculate_player_pos(p)
+        process_effect(p)
         update_damage_delay(p)
 
         shake_display(p)
@@ -59,7 +59,7 @@ class Idle:
         if space_down(e):
             if p.jump_count < p.jump_level:
                 p.jump_acc = JUMP_ACC
-                # p.jump_count += 1
+                p.jump_count += 1
                 p.mv_jump = True
 
     @staticmethod
@@ -69,7 +69,7 @@ class Idle:
         jump(p)
         look_mouse(p)
         update_camera(p)
-        calculate_player_pos(p)
+        process_effect(p)
         update_damage_delay(p)
 
         push_display(p)
@@ -131,15 +131,16 @@ class Player:
         self.look_mouse = True  # True일 시 플레이어는 마우스를 따라본다.
 
         # display effects
-        self.land_y = 0  # 이 수치만큼 화면의 모든 이미지들이 아래로 눌린다.
+        self.push_y = 0  # 이 수치만큼 화면의 모든 이미지들이 아래로 눌린다.
         self.shake_x, self.shake_y = 0, 0
         self.shake_range = 0  # 화면 흔들림의 정도
         self.camera_y = 0  # 화면이 마우스 좌표를 살짝 따라간다.
         self.camera_x = 0
+        self.camera_h = 0  # 플레이어 점프 시 플레이어, 무기를 제외한 나머지 객제들의 위치가 살짝 내려간다.
 
         self.scope_rot = 0  # scope 흔들림 각도
 
-        self.efx, self.efy = 0, 0  # 플레이어 좌표를 제외한 디스플레이 효과 변수. 객체 좌표에 더하여 사용
+        self.ex, self.ey = 0, 0  # 플레이어 좌표를 제외한 디스플레이 효과 변수. 객체 좌표에 더하여 사용
         self.px, self.py, self.py2 = 0, 0, 0  # 디스플레이 효과를 모두 포함한 좌표. 무기 출력에 사용.
 
         self.state_machine = StateMachine(self)
@@ -157,7 +158,7 @@ class Player:
         draw_rectangle(*self.get_bb())
 
     def get_bb(self):
-        return self.x - 40, self.y - 65, self.x + 40, self.y + 60
+        return self.px - 40, self.py - 65, self.px + 40, self.py + 60
 
     def handle_collision(self, group, other):
         pass
