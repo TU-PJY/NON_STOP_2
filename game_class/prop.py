@@ -32,8 +32,8 @@ class Arrow:
 
             # 화살이 벽에 박힌다
             if self.simulate:
-                self.x += math.cos(self.incline) * 6 * pps / 4
-                self.y += math.sin(self.incline) * 6 * pps / 4
+                self.x += math.cos(self.incline) * 7 * pps / 4
+                self.y += math.sin(self.incline) * 7 * pps / 4
                 self.y += self.acc * pps / 4
                 self.acc -= 0.01 * pps / 4
 

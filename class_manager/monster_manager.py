@@ -145,7 +145,7 @@ def process_attack(m):
     # type 4 attack
     if m.type == 4:
         if m.mp.playerToWallLeft + 100 <= m.x <= m.mp.playerToWallRight - 100:
-            if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - (m.y + m.p.cam_h)) ** 2) <= 800:
+            if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - (m.y + m.p.cam_h)) ** 2) <= 900:
                 m.is_attack = True
             else:
                 m.is_attack = False
@@ -186,7 +186,7 @@ def damage_monster(m):
                 m.hp -= 20
             
             elif m.weapon.gun == 'M1':
-                m.hp -= 60
+                m.hp -= 50
 
             elif m.weapon.gun == 'AWP':
                 m.hp -= 200

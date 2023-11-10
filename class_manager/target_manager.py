@@ -127,7 +127,7 @@ def update_target(t):
     elif t.weapon.gun == 'M1':
         t.dis2 = t.dis / 55
         if t.weapon.shoot:
-            t.recoil += 60
+            t.recoil += 70
 
     elif t.weapon.gun == 'AWP':
         if t.weapon.zoom:  # 우클릭 시 스코프 애니메이션 출력
@@ -165,6 +165,6 @@ def update_target(t):
 def make_target_point(t):  # 이 함수에서 생성되는 좌표로 적 피격을 판정한다.
     if t.weapon.shoot:
         t.tx = random.randint \
-            (t.p.mx - int(t.recoil) - int(t.dis2) - 10, t.p.mx + int(t.recoil) + int(t.dis2) + 10)
+            (t.p.mx - int(t.recoil) - int(t.dis2) - 30, t.p.mx + int(t.recoil) + int(t.dis2) + 30)
         t.ty = random.randint \
-            (t.p.my - int(t.recoil) - int(t.dis2) - 10, t.p.my + int(t.recoil) + int(t.dis2) + 10)
+            (t.p.my - int(t.recoil) - int(t.dis2) - 30, t.p.my + int(t.recoil) + int(t.dis2) + 30)
