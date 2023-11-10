@@ -116,6 +116,7 @@ button_gun_directory = 'res//ui//button_gun.png'
 button_melee_directory = 'res//ui//button_melee.png'
 button_exp_directory = 'res//ui//button_exp.png'
 button_page_directory = 'res//ui//page_button.png'
+cursor_directory = 'res//ui//cursor.png'
 
 # 몬스터 체력바 이미지 파일 경로
 hp_back_directory = 'res//ui//hp_back.png'

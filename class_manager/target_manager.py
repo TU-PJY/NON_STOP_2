@@ -35,15 +35,15 @@ def draw_target(t):
 
             else:
                 t.target_up.draw(t.p.mx, t.p.my + t.recoil + t.dis2 + 30, 60, 60)
+                t.target_down.draw(t.p.mx, t.p.my - t.recoil - t.dis2 - 30, 60, 60)
                 t.target_right.draw(t.p.mx + t.recoil + t.dis2 + 30, t.p.my, 60, 60)
                 t.target_left.draw(t.p.mx - t.recoil - t.dis2 - 30, t.p.my, 60, 60)
-                t.target_down.draw(t.p.mx, t.p.my - t.recoil - t.dis2 - 30, 60, 60)
 
         else:
             t.target_up.draw(t.p.mx, t.p.my + t.recoil + t.dis2 + 30, 60, 60)
+            t.target_down.draw(t.p.mx, t.p.my - t.recoil - t.dis2 - 30, 60, 60)
             t.target_right.draw(t.p.mx + t.recoil + t.dis2 + 30, t.p.my, 60, 60)
             t.target_left.draw(t.p.mx - t.recoil - t.dis2 - 30, t.p.my, 60, 60)
-            t.target_down.draw(t.p.mx, t.p.my - t.recoil - t.dis2 - 30, 60, 60)
 
     elif t.weapon.weapon_type == 1:
         t.not_target.draw(t.p.mx, t.p.my, 120, 120)

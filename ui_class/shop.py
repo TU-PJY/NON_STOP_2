@@ -27,6 +27,7 @@ class Shop:
     def draw(self):
         draw_shop_window(self)
         draw_items(self)
+        draw_cursor(self)
 
     def update(self):
         calc_pps()

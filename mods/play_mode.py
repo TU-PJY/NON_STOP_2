@@ -19,7 +19,6 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_TAB:  # to_shop_mode
             game_framework.MODE = 'shop'
             game_framework.push_mode(shop_mode)
-            show_cursor()
         elif event.type == SDL_MOUSEMOTION:
             p.mx, p.my = event.x, HEIGHT - 1 - event.y
         else:

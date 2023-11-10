@@ -21,6 +21,8 @@ def load_shop_resource(self):
     self.button_page_right = load_image(button_page_directory)
     self.font = load_font(font_directory, 50)
 
+    self.cursor = load_image(cursor_directory)
+
     self.image_scar = load_image(scar_h_right_directory)
     self.image_m16 = load_image(m16_right_directory)
     self.image_mp44 = load_image(mp44_right_directory)
@@ -108,6 +110,10 @@ def draw_items(self):
 
     if self.select_mode == 1:
         self.image_knife.draw(self.button_x[0], self.button_y[0], 150, 100)
+
+
+def draw_cursor(self):
+    self.cursor.draw(self.mx + 50, self.my - 50, 70, 70)
 
 
 def window_animation(self):

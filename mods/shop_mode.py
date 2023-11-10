@@ -16,7 +16,6 @@ def handle_events():
             if exit_enable:
                 game_framework.MODE = 'play'
                 game_framework.pop_mode()
-                hide_cursor()
         elif event.type == SDL_MOUSEMOTION:
             shop.mx, shop.my = event.x, HEIGHT - 1 - event.y
 
