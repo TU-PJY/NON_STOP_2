@@ -60,9 +60,9 @@ def update_sniper_bolt(weapon):
 
 def make_shell(weapon, size_x=15, size_y=15):  # 탄피 생성
     if weapon.p.dir == 0:
-        shell = Shell\
+        shell = Shell \
             (weapon.p, weapon.mp, weapon.p.x - 20, weapon.p.y - weapon.p.cam_h + 10, weapon.p.dir, size_x, size_y)
     elif weapon.p.dir == 1:
-        shell = Shell\
+        shell = Shell \
             (weapon.p, weapon.mp, weapon.p.x + 20, weapon.p.y - weapon.p.cam_h + 10, weapon.p.dir, size_x, size_y)
     game_manager.add_object(shell, 4)  # 총을 발사하면 탄피가 나온다
