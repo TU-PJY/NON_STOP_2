@@ -80,6 +80,17 @@ groza_left_directory = 'res//gun_image//ar//groza_left.png'
 # rifle
 m1_right_directory = 'res//gun_image//rifle//m1_right.png'
 m1_left_directory = 'res//gun_image//rifle//m1_left.png'
+win_right_directory = 'res//gun_image//rifle//winchester_right.png'
+win_spin_right_directory = 'res//gun_image//rifle//winchester_right_spin.png'
+win_left_directory = 'res//gun_image//rifle//winchester_left.png'
+win_spin_left_directory = 'res//gun_image//rifle//winchester_left_spin.png'
+mini14_right_directory = 'res//gun_image//rifle//mini14_right.png'
+mini14_left_directory = 'res//gun_image//rifle//mini14_left.png'
+fal_right_directory = 'res//gun_image//rifle//fal_right.png'
+fal_left_directory = 'res//gun_image//rifle//fal_left.png'
+lvoas_right_directory = 'res//gun_image//rifle//lvoas_right.png'
+lvoas_left_directory = 'res//gun_image//rifle//lvoas_left.png'
+
 
 # sr
 awp_right_directory = 'res//gun_image//sr//awp_right.png'
@@ -107,6 +118,7 @@ type4_damage_directory = 'res//monster_image//feedback//apple_damage.png'
 # Prop 이미지 파일 경로
 arrow_right_directory = 'res//prop//arrow_right.png'
 arrow_left_directory = 'res//prop//arrow_left.png'
+shell_directory = 'res//prop//catridge.png'
 
 # ui 이미지 파일 경로
 shop_window_directory = 'res//ui//shop_window.png'

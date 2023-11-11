@@ -59,6 +59,16 @@ def load_gun_image(self):
 
     self.m1_right = load_image(m1_right_directory)
     self.m1_left = load_image(m1_left_directory)
+    self.win_right = load_image(win_right_directory)
+    self.win_left = load_image(win_left_directory)
+    self.win_spin_right = load_image(win_spin_right_directory)
+    self.win_spin_left = load_image(win_spin_left_directory)
+    self.mini14_right = load_image(mini14_right_directory)
+    self.mini14_left = load_image(mini14_left_directory)
+    self.fal_right = load_image(fal_right_directory)
+    self.fal_left = load_image(fal_left_directory)
+    self.lvoas_right = load_image(lvoas_right_directory)
+    self.lvoas_left = load_image(lvoas_left_directory)
 
     self.awp_right = load_image(awp_right_directory)
     self.awp_left = load_image(awp_left_directory)
@@ -75,10 +85,14 @@ def draw_gun(weapon):
     if weapon.weapon_type == 0:
         if weapon.gun == 'M1':
             y = weapon.p.wy + 5
-            weapon.deg = math.atan2(weapon.p.my - (y + 5), weapon.p.mx - x)
+
+        if weapon.gun == 'GROZA':
+            y = weapon.p.wy - 5
+
         else:
             y = weapon.p.wy
-            weapon.deg = math.atan2(weapon.p.my - y, weapon.p.mx - x)
+
+        weapon.deg = math.atan2(weapon.p.my - y, weapon.p.mx - x)
 
         # GUN_NAME에 따라 사용하는 총기가 달라진다.
         if weapon.gun == 'AKS74':
@@ -147,13 +161,46 @@ def draw_gun(weapon):
             elif weapon.p.dir == 0:
                 weapon.m1_left.clip_composite_draw(0, 0, 250, 100, weapon.deg, 'h, v', x, y, 270, 120)
 
+        elif weapon.gun == 'WIN':
+            if weapon.is_spin and weapon.shoot_delay < 200:  # 윈체스터는 총을 휘둘러 장전한다
+                if weapon.p.dir == 1:
+                    weapon.win_spin_right.clip_composite_draw(0, 0, 300, 300, weapon.deg + weapon.spin,
+                                                              '', x, y, 300, 300)
+                elif weapon.p.dir == 0:
+                    weapon.win_spin_left.clip_composite_draw(0, 0, 300, 300, weapon.deg - weapon.spin,
+                                                             'h, v', x, y, 300, 300)
+            else:
+                if weapon.p.dir == 1:
+                    weapon.win_right.clip_composite_draw(0, 0, 300, 100, weapon.deg, '', x, y, 300, 100)
+                elif weapon.p.dir == 0:
+                    weapon.win_left.clip_composite_draw(0, 0, 300, 100, weapon.deg, 'h, v', x, y, 300, 100)
+
+        elif weapon.gun == 'MINI14':
+            if weapon.p.dir == 1:
+                weapon.mini14_right.clip_composite_draw(0, 0, 200, 100, weapon.deg, '', x, y, 230, 130)
+            elif weapon.p.dir == 0:
+                weapon.mini14_left.clip_composite_draw(0, 0, 200, 100, weapon.deg, 'h, v', x, y, 230, 130)
+
+        elif weapon.gun == 'FAL':
+            if weapon.p.dir == 1:
+                weapon.fal_right.clip_composite_draw(0, 0, 250, 100, weapon.deg, '', x, y, 270, 120)
+            elif weapon.p.dir == 0:
+                weapon.fal_left.clip_composite_draw(0, 0, 250, 100, weapon.deg, 'h, v', x, y, 270, 120)
+
+        elif weapon.gun == 'LVOAS':
+            if weapon.p.dir == 1:
+                weapon.lvoas_right.clip_composite_draw(0, 0, 250, 100, weapon.deg, '', x, y, 250, 100)
+            elif weapon.p.dir == 0:
+                weapon.lvoas_left.clip_composite_draw(0, 0, 250, 100, weapon.deg, 'h, v', x, y, 250, 100)
+
         elif weapon.gun == 'AWP':
             if weapon.p.dir == 1:
-                weapon.awp_right.clip_composite_draw(0, 0, 250, 100, weapon.deg, '', x, y, 270, 120)
+                weapon.awp_right.clip_composite_draw(0, 0, 250, 100, weapon.deg, '', x, y, 290, 140)
             elif weapon.p.dir == 0:
-                weapon.awp_left.clip_composite_draw(0, 0, 250, 100, weapon.deg, 'h, v', x, y, 270, 120)
+                weapon.awp_left.clip_composite_draw(0, 0, 250, 100, weapon.deg, 'h, v', x, y, 290, 140)
 
 
+# 총열 길이가 총마다 다르므로 불꽃 위치도 다르다
 def draw_flame(weapon):
     global pps
     if weapon.flame_display_time > 0 and weapon.weapon_type == 0:
@@ -162,13 +209,25 @@ def draw_flame(weapon):
             x = weapon.p.wx + math.cos(weapon.deg) * 200
             y = weapon.p.wy + 5 + math.sin(weapon.deg) * 200
 
+        elif weapon.gun == 'FAL' or weapon.gun == 'LVOAS':
+            x = weapon.p.wx + math.cos(weapon.deg) * 200
+            y = weapon.p.wy + math.sin(weapon.deg) * 200
+
+        elif weapon.gun == 'WIN' or weapon.gun == 'AWP':
+            x = weapon.p.wx + math.cos(weapon.deg) * 230
+            y = weapon.p.wy + math.sin(weapon.deg) * 230
+
         elif weapon.gun == 'AKS74' or weapon.gun == 'UMP' or weapon.gun == 'VECTOR' or weapon.gun == 'P90':
             x = weapon.p.wx + math.cos(weapon.deg) * 140
             y = weapon.p.wy + math.sin(weapon.deg) * 140
 
-        elif weapon.gun == 'GROZA' or weapon.gun == 'THOMPSON':
+        elif weapon.gun == 'THOMPSON':
             x = weapon.p.wx + math.cos(weapon.deg) * 150
             y = weapon.p.wy + math.sin(weapon.deg) * 150
+
+        elif weapon.gun == 'GROZA':
+            x = weapon.p.wx + math.cos(weapon.deg) * 150
+            y = weapon.p.wy - 5 + math.sin(weapon.deg) * 150
 
         else:
             x = weapon.p.wx + math.cos(weapon.deg) * 180
@@ -254,14 +313,47 @@ def shoot_gun(weapon):
                 weapon.p.shake_range = 15
 
             elif weapon.gun == 'M1':  # 반자동 소총이므로 연사 딜레이를 무한대로 부여함
-                weapon.shoot_delay = 9999999999999999999
+                weapon.shoot_delay = 220
                 weapon.p.shake_range = 30
 
-            elif weapon.gun == 'AWP':
-                weapon.shoot_delay = 550
-                weapon.p.shake_range = 70
+            elif weapon.gun == 'WIN':
+                weapon.shoot_delay = 310
+                weapon.p.shake_range = 40
+                weapon.is_spin = True
 
-            weapon.flame_display_time = FLAME_DISPLAY_TIME
+            elif weapon.gun == 'MINI14':
+                weapon.shoot_delay = 140
+                weapon.p.shake_range = 25
+
+            elif weapon.gun == 'FAL':
+                weapon.shoot_delay = 180
+                weapon.p.shake_range = 30
+
+            elif weapon.gun == 'LVOAS':
+                if weapon.shoot_count < 2:
+                    weapon.shoot_delay = 32
+                    weapon.p.shake_range = 15
+                    weapon.shoot_count += 1
+
+                else:
+                    weapon.shoot_delay = 70
+                    weapon.p.shake_range = 20
+                    weapon.shoot_count = 0
+
+            elif weapon.gun == 'AWP':
+                if weapon.zoom:  # 정조준 시에만 발사 가능
+                    weapon.shoot_delay = 550
+                    weapon.p.shake_range = 70
+                    weapon.flame_display_time = FLAME_DISPLAY_TIME
+
+            if not weapon.gun == 'AWP':
+                weapon.flame_display_time = FLAME_DISPLAY_TIME
+
+            if weapon.gun == 'VECTOR':
+                weapon.flame_display_time = 6
+
+            else:
+                weapon.flame_display_time = FLAME_DISPLAY_TIME
 
         else:
             weapon.shoot = False
@@ -294,3 +386,13 @@ def update_delay(weapon):
         weapon.shoot_delay -= pps / 3
     if weapon.wield_delay > 0:
         weapon.wield_delay -= pps / 3
+
+
+def spin_win(weapon):
+    global pps
+    if weapon.shoot_delay < 200:
+        if weapon.spin < 6:
+            weapon.spin += pps / 50
+            if weapon.spin >= 6:
+                weapon.spin = 0
+                weapon.is_spin = False

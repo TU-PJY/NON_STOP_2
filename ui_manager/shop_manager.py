@@ -36,6 +36,10 @@ def load_shop_resource(self):
     self.image_p90 = load_image(p90_right_directory)
 
     self.image_m1 = load_image(m1_right_directory)
+    self.image_win = load_image(win_right_directory)
+    self.image_mini14 = load_image(mini14_right_directory)
+    self.image_fal = load_image(fal_right_directory)
+    self.image_lvoas = load_image(lvoas_right_directory)
 
     self.image_awp = load_image(awp_right_directory)
 
@@ -94,7 +98,7 @@ def draw_items(self):
             self.image_aks74.draw(self.button_x[0] - 35, self.button_y[1], 240, 140)
             self.image_ump.draw(self.button_x[1] - 30, self.button_y[1], 240, 140)
             self.image_vector.draw(self.button_x[2] - 30, self.button_y[1], 240, 140)
-            self.image_thompson.draw(self.button_x[3] - 35, self.button_y[1], 240, 140)
+            self.image_thompson.draw(self.button_x[3] - 35, self.button_y[1], 250, 140)
             self.image_p90.draw(self.button_x[4] - 30, self.button_y[1], 240, 140)
 
             self.image_scar.draw(self.button_x[0] - 40, self.button_y[2], 240, 140)
@@ -104,6 +108,10 @@ def draw_items(self):
             self.image_groza.draw(self.button_x[4] - 30, self.button_y[2], 240, 140)
 
             self.image_m1.draw(self.button_x[0] - 45, self.button_y[3], 250, 100)
+            self.image_win.draw(self.button_x[1] - 52, self.button_y[3], 250, 75)
+            self.image_mini14.draw(self.button_x[2] - 35, self.button_y[3], 200, 100)
+            self.image_fal.draw(self.button_x[3] - 47, self.button_y[3], 250, 100)
+            self.image_lvoas.draw(self.button_x[4] - 47, self.button_y[3], 250, 100)
 
         elif self.page == 2:
             self.image_awp.draw(self.button_x[0] - 45, self.button_y[0], 250, 100)
@@ -198,6 +206,14 @@ def click_button(self):
 
                         elif (i, j) == (0, 3):
                             play_mode.weapon.gun = 'M1'
+                        elif (i, j) == (1, 3):
+                            play_mode.weapon.gun = 'WIN'
+                        elif (i, j) == (2, 3):
+                            play_mode.weapon.gun = 'MINI14'
+                        elif (i, j) == (3, 3):
+                            play_mode.weapon.gun = 'FAL'
+                        elif (i, j) == (4, 3):
+                            play_mode.weapon.gun = 'LVOAS'
 
                     elif self.page == 2:
                         if (i, j) == (0, 0):

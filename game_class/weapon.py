@@ -14,12 +14,12 @@ class Shoot:
 
     @staticmethod
     def exit(weapon, e):
-        if weapon.gun == 'M1':  # 반자동 소총만 예외적으로 트리거 해제 시 연사 딜레이가 초기화 되도록 함
-            weapon.shoot_delay = 0
-
         weapon.trigger = False
         weapon.shoot = False
         weapon.use = False
+
+        if weapon.gun == 'LVOAS':  # LVOAS는 2점사 소총이므로 따로 처리를 해주어야 한다
+            weapon.shoot_count = 0
 
         if q_down(e):
             change_weapon(weapon)
@@ -35,6 +35,8 @@ class Shoot:
         update_delay(weapon)
         shoot_gun(weapon)
         wield_melee(weapon)
+        if weapon.gun == 'WIN' and weapon.is_spin:
+            spin_win(weapon)
 
     @staticmethod
     def draw(weapon):
@@ -64,6 +66,8 @@ class Idle:
         calc_pps()
         update_delay(weapon)
         update_melee_position(weapon)
+        if weapon.gun == 'WIN' and weapon.is_spin:
+            spin_win(weapon)
 
     @staticmethod
     def draw(weapon):
@@ -107,7 +111,7 @@ class Weapon:
         self.p = p
 
         self.weapon_type = 0  # 0: Gun, 1: Melee
-        self.gun = 'SCAR_H'
+        self.gun = 'AKS74'
         self.deg = 0  # 총 이미지 각도
         self.flip = ''
 
@@ -126,6 +130,13 @@ class Weapon:
 
         # sr 전용 변수
         self.zoom = False
+
+        # WIN 전용 변수
+        self.spin = 0
+        self.is_spin = False
+
+        # LVOAS 전용 변수
+        self.shoot_count = 0
 
         self.state_machine = StateMachineGun(self)
         self.state_machine.start()

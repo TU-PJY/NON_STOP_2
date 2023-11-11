@@ -34,12 +34,20 @@ def draw_target(t):
                 t.scope.rotate_draw(t.p.scope_rot, x, y, t.scope_size_x, t.scope_size_y)
 
             else:
+                t.target_up.opacify(150)
+                t.target_down.opacify(150)
+                t.target_left.opacify(150)
+                t.target_right.opacify(150)
                 t.target_up.draw(t.p.mx, t.p.my + t.recoil + t.dis2 + 30, 60, 60)
                 t.target_down.draw(t.p.mx, t.p.my - t.recoil - t.dis2 - 30, 60, 60)
                 t.target_right.draw(t.p.mx + t.recoil + t.dis2 + 30, t.p.my, 60, 60)
                 t.target_left.draw(t.p.mx - t.recoil - t.dis2 - 30, t.p.my, 60, 60)
 
         else:
+            t.target_up.opacify(1)
+            t.target_down.opacify(1)
+            t.target_left.opacify(1)
+            t.target_right.opacify(1)
             t.target_up.draw(t.p.mx, t.p.my + t.recoil + t.dis2 + 30, 60, 60)
             t.target_down.draw(t.p.mx, t.p.my - t.recoil - t.dis2 - 30, 60, 60)
             t.target_right.draw(t.p.mx + t.recoil + t.dis2 + 30, t.p.my, 60, 60)
@@ -127,44 +135,63 @@ def update_target(t):
     elif t.weapon.gun == 'M1':
         t.dis2 = t.dis / 55
         if t.weapon.shoot:
-            t.recoil += 70
+            t.recoil += 110
+
+    elif t.weapon.gun == 'WIN':
+        t.dis2 = t.dis / 55
+        if t.weapon.shoot:
+            t.recoil += 120
+
+    elif t.weapon.gun == 'MINI14':
+        t.dis2 = t.dis / 55
+        if t.weapon.shoot:
+            t.recoil += 60
+
+    elif t.weapon.gun == 'FAL':
+        t.dis2 = t.dis / 55
+        if t.weapon.shoot:
+            t.recoil += 85
+
+    elif t.weapon.gun == 'LVOAS':
+        t.dis2 = t.dis / 55
+        if t.weapon.shoot:
+            t.recoil += 25
 
     elif t.weapon.gun == 'AWP':
-        if t.weapon.zoom:  # 우클릭 시 스코프 애니메이션 출력
-            t.draw_scope = True
-            if t.scope_size_x > 8192:
-                t.scope_size_x -= 400 * pps
-            if t.scope_size_y > 4096:
-                t.scope_size_y -= 200 * pps
-
-                if t.scope_size_x < 8192:
-                    t.scope_size_x = 8192
-                    t.dis2 = 0
-
-                if t.scope_size_y < 4096:
-                    t.scope_size_y = 4096
-
-        elif not t.weapon.zoom:
-            t.dis2 = 200
-            if t.scope_size_x < 32768:
-                t.scope_size_x += 400 * pps
-            if t.scope_size_y < 16384:
-                t.scope_size_y += 200 * pps
-
-                if t.scope_size_x > 32768:
-                    t.scope_size_x = 32768
-                    t.draw_scope = False
-
-                if t.scope_size_y > 16384:
-                    t.scope_size_y = 16384
-
-        if t.weapon.shoot:
-            t.recoil += 80
+        t.dis2 = 0
+        update_scope(t)
 
 
 def make_target_point(t):  # 이 함수에서 생성되는 좌표로 적 피격을 판정한다.
     if t.weapon.shoot:
         t.tx = random.randint \
-            (t.p.mx - int(t.recoil) - int(t.dis2) - 30, t.p.mx + int(t.recoil) + int(t.dis2) + 30)
+            (t.p.mx - int(t.recoil) - int(t.dis2) - 1, t.p.mx + int(t.recoil) + int(t.dis2) + 1)
         t.ty = random.randint \
-            (t.p.my - int(t.recoil) - int(t.dis2) - 30, t.p.my + int(t.recoil) + int(t.dis2) + 30)
+            (t.p.my - int(t.recoil) - int(t.dis2) - 1, t.p.my + int(t.recoil) + int(t.dis2) + 1)
+
+
+def update_scope(t):
+    if t.weapon.zoom:  # 우클릭 시 스코프 애니메이션 출력
+        t.draw_scope = True
+        if t.scope_size_x > 8192:
+            t.scope_size_x -= 400 * pps
+        if t.scope_size_y > 4096:
+            t.scope_size_y -= 200 * pps
+
+            if t.scope_size_x < 8192:
+                t.scope_size_x = 8192
+            if t.scope_size_y < 4096:
+                t.scope_size_y = 4096
+
+    elif not t.weapon.zoom:
+        if t.scope_size_x < 32768:
+            t.scope_size_x += 400 * pps
+        if t.scope_size_y < 16384:
+            t.scope_size_y += 200 * pps
+
+            if t.scope_size_x > 32768:
+                t.scope_size_x = 32768
+                t.draw_scope = False
+
+            if t.scope_size_y > 16384:
+                t.scope_size_y = 16384

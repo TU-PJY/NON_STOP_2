@@ -89,12 +89,26 @@ class Target:
 
     def get_bb(self):
         if self.weapon.weapon_type == 0:  # 총의 경우 타겟 내부에 생성된 지점을 히트박스로 리턴한다.
-            return self.tx, self.ty, self.tx, self.ty
+            if self.weapon.shoot:  # 총을 쏘는 순간에만 조준점 좌표를 제공한다.
+                return self.tx, self.ty, self.tx, self.ty
+            else:
+                return -9999, -9999, -9999, -9999
 
         elif self.weapon.weapon_type == 1:  # 근접무기 히트박스, 방향에 따라 좌표가 다름
+            # if self.weapon.wield:
+            #     if self.p.dir == 0:
+            #         return self.tmx + self.p.ex, self.tmy + self.p.ey - 65 - self.p.cam_h,\
+            #             self.p.x + self.p.ex, self.p.y + self.p.ey + 60 - self.p.cam_h
+            #     elif self.p.dir == 1:
+            #         return self.p.x + self.p.ex, self.p.y + self.p.ey - 65 - self.p.cam_h,\
+            #             self.tmx + self.p.ex, self.p.y + self.p.ey + 60 - self.p.cam_h
+            # else:
+            #     return -9999, -9999, -9999, -9999
+
+            # 디버그 시 아래 코드 사용
             if self.p.dir == 0:
-                return self.tmx + self.p.ex, self.tmy + self.p.ey - 65 - self.p.cam_h,\
-                    self.p.x + self.p.ex, self.p.y + self.p.ey + 60 - self.p.cam_h
+                return self.tmx + self.p.ex, self.tmy + self.p.ey - 65 - self.p.cam_h, \
+                       self.p.x + self.p.ex, self.p.y + self.p.ey + 60 - self.p.cam_h
             elif self.p.dir == 1:
-                return self.p.x + self.p.ex, self.p.y + self.p.ey - 65 - self.p.cam_h,\
-                    self.tmx + self.p.ex, self.p.y + self.p.ey + 60 - self.p.cam_h
+                return self.p.x + self.p.ex, self.p.y + self.p.ey - 65 - self.p.cam_h, \
+                       self.tmx + self.p.ex, self.p.y + self.p.ey + 60 - self.p.cam_h

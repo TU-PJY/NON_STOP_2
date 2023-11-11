@@ -179,14 +179,22 @@ def damage_monster(m):
             elif m.weapon.gun == 'M16':
                 m.hp -= 18
             elif m.weapon.gun == 'MP44':
-                m.hp -= 40
+                m.hp -= 30
             elif m.weapon.gun == 'AUG':
                 m.hp -= 21
             elif m.weapon.gun == 'GROZA':
                 m.hp -= 20
             
             elif m.weapon.gun == 'M1':
+                m.hp -= 70
+            elif m.weapon.gun == 'WIN':
+                m.hp -= 100
+            elif m.weapon.gun == 'MINI14':
                 m.hp -= 50
+            elif m.weapon.gun == 'FAL':
+                m.hp -= 70
+            elif m.weapon.gun == 'LVOAS':
+                m.hp -= 25
 
             elif m.weapon.gun == 'AWP':
                 m.hp -= 200
