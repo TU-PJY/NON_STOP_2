@@ -28,21 +28,22 @@ class Shoot:
 
         if q_down(e):
             change_weapon(weapon)
-        if r_down(e):
-            if not weapon.zoom:
-                weapon.zoom = True
-            elif weapon.zoom:
-                weapon.zoom = False
+
+        if r_down(e) and weapon.weapon_type == 0:
+            if weapon.gun == 'sr':
+                if not weapon.zoom:
+                    weapon.zoom = True
+                elif weapon.zoom:
+                    weapon.zoom = False
 
     @staticmethod
     def do(weapon):
         update_delay(weapon)
         shoot_gun(weapon)
         wield_melee(weapon)
-        if weapon.gun == 'WIN' and weapon.is_spin:
+        if weapon.is_spin:
             spin_win(weapon)
-        if weapon.gun == 'AWP':
-            update_sniper_bolt(weapon)
+        update_sniper_bolt(weapon)
 
     @staticmethod
     def draw(weapon):
@@ -61,20 +62,20 @@ class Idle:
     def exit(weapon, e):
         if q_down(e):
             change_weapon(weapon)
-        if r_down(e):
-            if not weapon.zoom:
-                weapon.zoom = True
-            elif weapon.zoom:
-                weapon.zoom = False
+        if r_down(e) and weapon.weapon_type == 0:
+            if weapon.gun_type == 'sr':
+                if not weapon.zoom:
+                    weapon.zoom = True
+                elif weapon.zoom:
+                    weapon.zoom = False
 
     @staticmethod
     def do(weapon):
         update_delay(weapon)
         update_melee_position(weapon)
-        if weapon.gun == 'WIN' and weapon.is_spin:
+        if weapon.is_spin:
             spin_win(weapon)
-        if weapon.gun == 'AWP':
-            update_sniper_bolt(weapon)
+        update_sniper_bolt(weapon)
 
     @staticmethod
     def draw(weapon):
@@ -126,6 +127,7 @@ class Weapon:
         self.trigger = False  # 마우스 좌클릭 시 True
         self.shoot = False  # True일시 격발
         self.shoot_delay = 0  # 0이 될때마다 self.shoot == True
+        self.gun_type = 'smg'
 
         self.flame_display_time = 0
 

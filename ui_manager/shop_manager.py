@@ -109,7 +109,7 @@ def draw_items(self):
             self.image_lvoas.draw(self.button_x[4] - 47, self.button_y[3], 250, 100)
 
         elif self.page == 2:
-            self.image_awp.draw(self.button_x[0] - 45, self.button_y[0], 250, 100)
+            self.image_awp.draw(self.button_x[0] - 50, self.button_y[0], 240, 90)
 
     if self.select_mode == 1:
         self.image_knife.draw(self.button_x[0], self.button_y[0], 150, 100)
@@ -177,42 +177,61 @@ def click_button(self):
             for j in range(len(self.button_y)):
                 if self.button_x[i] - 90 < self.mx < self.button_x[i] + 90 and \
                         self.button_y[j] - 75 < self.my < self.button_y[j] + 75:
+                    play_mode.weapon.zoom = False  # 다른 총 선택 시 스코프 모드 해제
+                    play_mode.target.draw_scope = False
+
                     if self.page == 1:
                         if (i, j) == (0, 1):
                             play_mode.weapon.gun = 'AKS74'
+                            play_mode.weapon.gun_type = 'smg'
                         elif (i, j) == (1, 1):
                             play_mode.weapon.gun = 'UMP'
+                            play_mode.weapon.gun_type = 'smg'
                         elif (i, j) == (2, 1):
                             play_mode.weapon.gun = 'VECTOR'
+                            play_mode.weapon.gun_type = 'smg'
                         elif (i, j) == (3, 1):
                             play_mode.weapon.gun = 'THOMPSON'
+                            play_mode.weapon.gun_type = 'smg'
                         elif (i, j) == (4, 1):
                             play_mode.weapon.gun = 'P90'
+                            play_mode.weapon.gun_type = 'smg'
 
                         elif (i, j) == (0, 2):
                             play_mode.weapon.gun = 'SCAR_H'
+                            play_mode.weapon.gun_type = 'ar'
                         elif (i, j) == (1, 2):
                             play_mode.weapon.gun = 'M16'
+                            play_mode.weapon.gun_type = 'ar'
                         elif (i, j) == (2, 2):
                             play_mode.weapon.gun = 'MP44'
+                            play_mode.weapon.gun_type = 'ar'
                         elif (i, j) == (3, 2):
                             play_mode.weapon.gun = 'AUG'
+                            play_mode.weapon.gun_type = 'ar'
                         elif (i, j) == (4, 2):
                             play_mode.weapon.gun = 'GROZA'
+                            play_mode.weapon.gun_type = 'ar'
 
                         elif (i, j) == (0, 3):
                             play_mode.weapon.gun = 'M1'
+                            play_mode.weapon.gun_type = 'rifle'
                         elif (i, j) == (1, 3):
                             play_mode.weapon.gun = 'WIN'
+                            play_mode.weapon.gun_type = 'rifle'
                         elif (i, j) == (2, 3):
                             play_mode.weapon.gun = 'MINI14'
+                            play_mode.weapon.gun_type = 'rifle'
                         elif (i, j) == (3, 3):
                             play_mode.weapon.gun = 'FAL'
+                            play_mode.weapon.gun_type = 'rifle'
                         elif (i, j) == (4, 3):
                             play_mode.weapon.gun = 'LVOAS'
+                            play_mode.weapon.gun_type = 'rifle'
 
                     elif self.page == 2:
                         if (i, j) == (0, 0):
                             play_mode.weapon.gun = 'AWP'
+                            play_mode.weapon.gun_type = 'sr'
 
     self.click = False

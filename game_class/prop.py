@@ -73,13 +73,15 @@ class Arrow:
 
 
 class Shell:
-    def __init__(self, p, mp, x, y, dir):
+    def __init__(self, p, mp, x, y, dir, size_x, size_y):
         self.image = load_image(shell_directory)
         self.p = p
         self.mp = mp
         self.x = x
         self.y = y
         self.dir = dir
+        self.size_x = size_x
+        self.size_y = size_y
         self.acc = 2
         self.speed = random.uniform(1, 2)
         self.deg = 0
@@ -129,7 +131,7 @@ class Shell:
     def draw(self):
         x = self.x + self.p.ex
         y = self.y + self.p.ey
-        self.image.rotate_draw(self.deg, x, y, 20, 20)
+        self.image.rotate_draw(self.deg, x, y, self.size_x, self.size_y)
 
     def handle_evnet(self):
         pass

@@ -72,7 +72,8 @@ class Target:
         self.state_machine.start()
 
     def draw(self):
-        self.state_machine.draw()
+        if game_framework.MODE == 'play':
+            self.state_machine.draw()
         if self.weapon.weapon_type == 1:
             draw_rectangle(*self.get_bb())
 

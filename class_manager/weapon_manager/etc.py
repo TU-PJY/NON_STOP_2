@@ -30,6 +30,7 @@ def change_weapon(weapon):
         weapon.p.rotate = 0
         weapon.weapon_type = 1
         weapon.flame_display_time = 0
+        weapon.zoom = False
         return
 
     elif weapon.weapon_type == 1:  # 근접무기를 들고 있을 때 근접무기 -> 총
@@ -46,16 +47,22 @@ def update_delay(weapon):
 
 
 def update_sniper_bolt(weapon):
-    if weapon.bolt_action:
-        if weapon.gun == 'AWP':
-            if weapon.shoot_delay < 350:  # 스나이퍼건 역시 탄피를 한 번에 1회만 생성한다.
-                make_shell(weapon)
-                weapon.bolt_action = False
+    if weapon.gun == 'AWP':
+        if 100 < weapon.shoot_delay < 350 and not weapon.shell_out:  # 탄피를 한 번만 만들도록 한다
+            weapon.bolt_action = True
+            make_shell(weapon, 30, 20)
+            weapon.shell_out = True
+
+        if 0 < weapon.shoot_delay < 100:
+            weapon.bolt_action = False
+            weapon.shell_out = False
 
 
-def make_shell(weapon):  # 탄피 생성
+def make_shell(weapon, size_x=15, size_y=15):  # 탄피 생성
     if weapon.p.dir == 0:
-        shell = Shell(weapon.p, weapon.mp, weapon.p.x - 20, weapon.p.y - weapon.p.cam_h + 10, weapon.p.dir)
+        shell = Shell\
+            (weapon.p, weapon.mp, weapon.p.x - 20, weapon.p.y - weapon.p.cam_h + 10, weapon.p.dir, size_x, size_y)
     elif weapon.p.dir == 1:
-        shell = Shell(weapon.p, weapon.mp, weapon.p.x + 20, weapon.p.y - weapon.p.cam_h + 10, weapon.p.dir)
+        shell = Shell\
+            (weapon.p, weapon.mp, weapon.p.x + 20, weapon.p.y - weapon.p.cam_h + 10, weapon.p.dir, size_x, size_y)
     game_manager.add_object(shell, 4)  # 총을 발사하면 탄피가 나온다

@@ -6,7 +6,7 @@ def spin_win(weapon):
     pps = game_framework.pps
     if weapon.shoot_delay < 200:
         if not weapon.shell_out:  # 장전하는 순간 탄피를 1회만 생성한다.
-            make_shell(weapon)
+            make_shell(weapon, 20, 20)
             weapon.shell_out = True
 
         if weapon.spin < 6:

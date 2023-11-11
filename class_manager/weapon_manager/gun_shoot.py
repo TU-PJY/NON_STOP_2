@@ -56,6 +56,7 @@ def shoot_gun(weapon):
                 weapon.shoot_delay = 310
                 weapon.p.shake_range = 40
                 weapon.is_spin = True
+                weapon.flame_display_time = FLAME_DISPLAY_TIME
 
             elif weapon.gun == 'MINI14':
                 weapon.shoot_delay = 140
@@ -67,12 +68,12 @@ def shoot_gun(weapon):
 
             elif weapon.gun == 'LVOAS':
                 if weapon.shoot_count < 1:
-                    weapon.shoot_delay = 32
+                    weapon.shoot_delay = 25
                     weapon.p.shake_range = 15
                     weapon.shoot_count += 1
 
                 else:
-                    weapon.shoot_delay = 70
+                    weapon.shoot_delay = 120
                     weapon.p.shake_range = 20
                     weapon.shoot_count = 0
 
@@ -81,11 +82,18 @@ def shoot_gun(weapon):
                     weapon.shoot_delay = 550
                     weapon.p.shake_range = 70
                     weapon.flame_display_time = FLAME_DISPLAY_TIME
-                    weapon.bolt_action = True  # 쏘고 나면 볼트를 당긴다
 
-            if not weapon.gun == 'AWP' and not weapon.gun == 'WIN':
+            if not weapon.gun == 'AWP' and not weapon.gun == 'WIN':  # 총 종류에 따라 탄피 크기가 다르다
+                if weapon.gun_type == 'smg':
+                    make_shell(weapon)
+                elif weapon.gun_type == 'ar':
+                    make_shell(weapon, 18, 18)
+                elif weapon.gun_type == 'rifle':
+                    if weapon.gun == 'MINI14':  # mini14는 5.56mm보통탄을 쓰므로 예외
+                        make_shell(weapon, 18, 18)
+                    else:
+                        make_shell(weapon, 20, 20)
                 weapon.flame_display_time = FLAME_DISPLAY_TIME
-                make_shell(weapon)
 
             if weapon.gun == 'VECTOR':
                 weapon.flame_display_time = 6

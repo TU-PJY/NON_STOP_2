@@ -189,7 +189,7 @@ def damage_monster(m):
             elif m.weapon.gun == 'FAL':
                 m.hp -= 70
             elif m.weapon.gun == 'LVOAS':
-                m.hp -= 30
+                m.hp -= 40
 
             elif m.weapon.gun == 'AWP':
                 m.hp -= 200

@@ -168,16 +168,29 @@ def make_target_point(t):  # 이 함수에서 생성되는 좌표로 적 피격�
 def update_scope(t):
     pps = game_framework.pps
     if t.weapon.zoom:  # 우클릭 시 스코프 애니메이션 출력
-        t.draw_scope = True
-        if t.scope_size_x > 8192:
-            t.scope_size_x -= 400 * pps
-        if t.scope_size_y > 4096:
-            t.scope_size_y -= 200 * pps
+        if t.weapon.bolt_action:  # 발사 후에는 자동으로 스코프가 비활성화 되었다가 다시 활성화 된다
+            if t.scope_size_x < 32768:
+                t.scope_size_x += 400 * pps
+            if t.scope_size_y < 16384:
+                t.scope_size_y += 200 * pps
 
-            if t.scope_size_x < 8192:
-                t.scope_size_x = 8192
-            if t.scope_size_y < 4096:
-                t.scope_size_y = 4096
+                if t.scope_size_x > 32768:
+                    t.scope_size_x = 32768
+                    t.draw_scope = False
+
+                if t.scope_size_y > 16384:
+                    t.scope_size_y = 16384
+        else:
+            t.draw_scope = True
+            if t.scope_size_x > 8192:
+                t.scope_size_x -= 400 * pps
+            if t.scope_size_y > 4096:
+                t.scope_size_y -= 200 * pps
+
+                if t.scope_size_x < 8192:
+                    t.scope_size_x = 8192
+                if t.scope_size_y < 4096:
+                    t.scope_size_y = 4096
 
     elif not t.weapon.zoom:
         if t.scope_size_x < 32768:
