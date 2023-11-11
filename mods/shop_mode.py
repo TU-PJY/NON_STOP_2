@@ -1,3 +1,4 @@
+from config import *
 from game_class.weapon import *
 from game_work import game_manager, game_framework
 from mods import play_mode

@@ -12,7 +12,6 @@ class Update:
 
     @staticmethod
     def do(m):
-        calc_pps()
         damage_monster(m)
         monster_animation(m)
         update_monster_pos(m)

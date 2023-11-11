@@ -34,7 +34,7 @@ def init():
     wall = Wall(p)
     bg = BackGround(p)
     mp = Map(p, wall, bg)
-    weapon = Weapon(p)
+    weapon = Weapon(p, mp)
     target = Target(p, weapon)
     tool = Tool(p, weapon, target, mp)
 

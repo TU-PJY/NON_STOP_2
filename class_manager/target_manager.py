@@ -7,11 +7,6 @@ from config import *
 from game_work import game_framework
 
 
-def calc_pps():
-    global pps 
-    pps = PPS * game_framework.frame_time
-
-
 def load_target(t):
     t.target_up = load_image(target_up_directory)
     t.target_down = load_image(target_down_directory)
@@ -68,7 +63,7 @@ def draw_target(t):
 
 
 def update_target(t):
-    global pps 
+    pps = game_framework.pps
     t.dis = math.sqrt((t.p.mx - (t.p.x + t.p.cam_x)) ** 2 + (t.p.my - (t.p.y + t.p.cam_y)) ** 2)
 
     if t.recoil > 0:
@@ -110,7 +105,7 @@ def update_target(t):
     elif t.weapon.gun == 'SCAR_H':
         t.dis2 = t.dis / 20
         if t.weapon.shoot:
-            t.recoil += 20  
+            t.recoil += 20
 
     elif t.weapon.gun == 'M16':
         t.dis2 = t.dis / 30
@@ -150,7 +145,7 @@ def update_target(t):
     elif t.weapon.gun == 'FAL':
         t.dis2 = t.dis / 55
         if t.weapon.shoot:
-            t.recoil += 85
+            t.recoil += 83
 
     elif t.weapon.gun == 'LVOAS':
         t.dis2 = t.dis / 55
@@ -171,6 +166,7 @@ def make_target_point(t):  # 이 함수에서 생성되는 좌표로 적 피격�
 
 
 def update_scope(t):
+    pps = game_framework.pps
     if t.weapon.zoom:  # 우클릭 시 스코프 애니메이션 출력
         t.draw_scope = True
         if t.scope_size_x > 8192:

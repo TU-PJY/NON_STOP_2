@@ -1,5 +1,7 @@
 import time
 
+from config import PPS
+
 running = None
 stack = None
 
@@ -49,7 +51,8 @@ def run(start_mode):
     stack = [start_mode]
     start_mode.init()
 
-    global frame_time
+    global frame_time, pps
+    pps = 0
     frame_time = 0.0
     current_time = time.time()
 
@@ -59,6 +62,7 @@ def run(start_mode):
         stack[-1].draw()
         frame_time = time.time() - current_time
         current_time += frame_time
+        pps = PPS * frame_time
 
     # repeatedly delete the top of the stack
     while (len(stack) > 0):

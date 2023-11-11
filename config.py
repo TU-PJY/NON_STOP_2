@@ -91,11 +91,9 @@ fal_left_directory = 'res//gun_image//rifle//fal_left.png'
 lvoas_right_directory = 'res//gun_image//rifle//lvoas_right.png'
 lvoas_left_directory = 'res//gun_image//rifle//lvoas_left.png'
 
-
 # sr
 awp_right_directory = 'res//gun_image//sr//awp_right.png'
 awp_left_directory = 'res//gun_image//sr//awp_left.png'
-
 
 # 불꽃 이미지 파일 경로
 flame_right_directory = 'res//gun_image//misc//flame_right.png'

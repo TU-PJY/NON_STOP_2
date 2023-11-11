@@ -1,3 +1,5 @@
+import random
+
 from pico2d import *
 
 from config import *
@@ -23,7 +25,7 @@ class Arrow:
             self.arrow_right = load_image(arrow_right_directory)
 
     def update(self):
-        pps = PPS * game_framework.frame_time
+        pps = game_framework.pps
         if game_framework.MODE == 'play':
             if self.p.mv_right:
                 self.x -= self.p.speed * pps / 4
@@ -67,4 +69,67 @@ class Arrow:
                 (0, 0, 128, 128, self.deg, '', x, y, 400, 400)
 
     def handle_event(self):
+        pass
+
+
+class Shell:
+    def __init__(self, p, mp, x, y, dir):
+        self.image = load_image(shell_directory)
+        self.p = p
+        self.mp = mp
+        self.x = x
+        self.y = y
+        self.dir = dir
+        self.acc = 2
+        self.speed = random.uniform(1, 2)
+        self.deg = 0
+        self.simulate = True
+        self.remove_timer = 100
+
+    def update(self):
+        pps = game_framework.pps
+        if game_framework.MODE == 'play':
+            if self.p.mv_right:
+                self.x -= self.p.speed * pps / 4
+            elif self.p.mv_left:
+                self.x += self.p.speed * pps / 4
+
+            if self.simulate:
+                if self.dir == 1:
+                    self.x -= self.speed * pps / 4
+                    self.deg += 0.1 * pps / 3
+
+                elif self.dir == 0:
+                    self.x += self.speed * pps / 4
+                    self.deg -= 0.1 * pps / 3
+
+                self.y += self.acc * pps / 3
+                self.acc -= 0.05 * pps / 3
+
+                if self.y < 190:  # 튕길 속도가 나는 한 계속 튄다
+                    self.y = 190
+                    self.acc = (self.acc / 2) * -1
+
+                    if -1 <= self.acc <= 1:  # 더 이상 튕길 속도가 나지 않으면 시뮬레이션을 정지한다.
+                        self.deg = 0
+                        self.y = 195
+                        self.simulate = False
+
+                if self.x <= self.mp.playerToWallLeft + 10:  # 벽에 튕기면 반대로 튄다
+                    self.dir = 0
+
+                if self.x >= self.mp.playerToWallRight - 10:
+                    self.dir = 1
+
+            else:
+                self.remove_timer -= pps / 3
+                if self.remove_timer <= 0:
+                    game_manager.remove_object(self)
+
+    def draw(self):
+        x = self.x + self.p.ex
+        y = self.y + self.p.ey
+        self.image.rotate_draw(self.deg, x, y, 20, 20)
+
+    def handle_evnet(self):
         pass

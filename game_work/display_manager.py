@@ -1,7 +1,6 @@
 # 화면 효과 함수 모음
 import random
 
-from config import *
 from game_work import game_framework
 
 
@@ -18,7 +17,7 @@ def process_effect(p):
 
 
 def push_display(p):
-    pps = PPS * game_framework.frame_time
+    pps = game_framework.pps
 
     if p.push_y > 0:
         p.push_y -= pps / 2
@@ -28,7 +27,7 @@ def push_display(p):
 
 
 def shake_display(p):
-    pps = PPS * game_framework.frame_time
+    pps = game_framework.pps
 
     if not p.shake_range - pps / 8 < 0:  # empty randrange 방지
         p.shake_x = random.randint(-int(p.shake_range), int(p.shake_range))

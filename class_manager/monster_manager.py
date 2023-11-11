@@ -5,11 +5,6 @@ from game_class.prop import Arrow
 from game_work import game_manager, game_framework
 
 
-def calc_pps():
-    global pps 
-    pps = PPS * game_framework.frame_time
-
-
 def load_monster(self):
     if self.type == 1:
         self.type1 = load_image(type1_directory)
@@ -66,10 +61,10 @@ def draw_monster(m):
             (int(m.frame) * 128, 0, 128, 128, 0, m.flip, x, y, 450, 450)
         m.type4_damage.clip_composite_draw \
             (int(m.frame) * 128, 0, 128, 128, 0, m.flip, x, y, 450, 450)
-    
+
 
 def move_monster(m):
-    global pps
+    pps = game_framework.pps
     m.dir = 1 if m.p.x > m.x else 0
 
     if not m.is_attack and m.attack_motion_time <= 0:
@@ -108,7 +103,7 @@ def move_monster(m):
 
 # cam_h는 플레이어와 상대적 위치 차이를 발생시키기 때문에 몬스터 y위치에 cam_h를 포함해줘야함
 def process_attack(m):
-    global pps
+    pps = game_framework.pps
     # type 1 attack
     if m.type == 1:
         if m.is_attack:
@@ -184,7 +179,7 @@ def damage_monster(m):
                 m.hp -= 21
             elif m.weapon.gun == 'GROZA':
                 m.hp -= 20
-            
+
             elif m.weapon.gun == 'M1':
                 m.hp -= 70
             elif m.weapon.gun == 'WIN':
@@ -194,7 +189,7 @@ def damage_monster(m):
             elif m.weapon.gun == 'FAL':
                 m.hp -= 70
             elif m.weapon.gun == 'LVOAS':
-                m.hp -= 25
+                m.hp -= 30
 
             elif m.weapon.gun == 'AWP':
                 m.hp -= 200
@@ -215,7 +210,7 @@ def damage_monster(m):
 
 
 def monster_animation(m):
-    global pps
+    pps = game_framework.pps
     # all type animation except type 3
     if not m.is_attack and m.attack_motion_time <= 0 and not m.type == 3:  # type3은 프레임 업데이트를 하지 않음
         m.frame = (m.frame + APT * FPA * game_framework.frame_time) % 2
@@ -232,7 +227,7 @@ def monster_animation(m):
 
 
 def update_delay(m):
-    global pps
+    pps = game_framework.pps
     if m.attack_motion_time > 0:
         m.attack_motion_time -= pps / 3
     if m.atk_delay > 0:
@@ -246,13 +241,13 @@ def update_delay(m):
 
 
 def update_monster_size(m):
-    global pps
+    pps = game_framework.pps
     if m.size > 0:
         m.size -= 2 * pps / 3
 
 
 def update_monster_opacify(m):
-    global pps
+    pps = game_framework.pps
     if m.op > 0:
         m.op -= 4 * pps / 3
         if m.op < 0:
@@ -260,7 +255,7 @@ def update_monster_opacify(m):
 
 
 def update_monster_pos(m):
-    global pps
+    pps = game_framework.pps
     if m.p.mv_right:
         m.x -= m.p.speed * pps / 4
         if m.type == 2:

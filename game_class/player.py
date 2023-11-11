@@ -33,7 +33,6 @@ class Move:
     @staticmethod
     def do(p):
         p.dir = 1 if p.mx > p.x else 0
-        calc_pps()
         walk_animation(p)
         jump(p)
         look_mouse(p)
@@ -65,7 +64,6 @@ class Idle:
     @staticmethod
     def do(p):
         p.dir = 1 if p.mx > p.x else 0
-        calc_pps()
         jump(p)
         look_mouse(p)
         update_camera(p)

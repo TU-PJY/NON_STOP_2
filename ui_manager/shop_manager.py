@@ -5,11 +5,6 @@ from game_work import game_framework
 from mods import play_mode
 
 
-def calc_pps():
-    global pps
-    pps = PPS * game_framework.frame_time
-
-
 def load_shop_resource(self):
     self.window = load_image(shop_window_directory)
     self.back = load_image(pause_bg_directory)
@@ -71,7 +66,7 @@ def draw_shop_window(self):
     self.button_exp.draw(self.cat_x[2], self.cat_y[2], 200, 120)
     self.window.draw(self.x, self.window_y, 950, 550)
 
-    if self.select_mode == 0 :
+    if self.select_mode == 0:
         if self.page == 1:
             for i in range(5):
                 for j in range(4):
@@ -125,7 +120,8 @@ def draw_cursor(self):
 
 
 def window_animation(self):
-    global pps
+    pps = game_framework.pps
+
     if self.window_y <= HEIGHT / 2:
         self.window_y += 20 * pps / 4
         for i in range(len(self.button_y)):

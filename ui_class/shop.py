@@ -30,7 +30,6 @@ class Shop:
         draw_cursor(self)
 
     def update(self):
-        calc_pps()
         window_animation(self)
         update_cat_button(self)
         if self.click:

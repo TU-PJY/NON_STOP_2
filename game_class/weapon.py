@@ -1,7 +1,12 @@
-from class_manager.weapon_manager import *
-
-
-# Player location -> Gun class
+from class_manager.weapon_manager.etc import *
+from class_manager.weapon_manager.file_loader import load_gun_image, load_melee_image
+from class_manager.weapon_manager.flame_output import draw_flame
+from class_manager.weapon_manager.gun_output import draw_gun
+from class_manager.weapon_manager.gun_shoot import shoot_gun
+from class_manager.weapon_manager.melee_output import draw_melee
+from class_manager.weapon_manager.melee_wield import wield_melee
+from class_manager.weapon_manager.weapon_animation import spin_win, update_melee_position
+from game_work import game_framework
 
 
 class Shoot:
@@ -31,12 +36,13 @@ class Shoot:
 
     @staticmethod
     def do(weapon):
-        calc_pps()
         update_delay(weapon)
         shoot_gun(weapon)
         wield_melee(weapon)
         if weapon.gun == 'WIN' and weapon.is_spin:
             spin_win(weapon)
+        if weapon.gun == 'AWP':
+            update_sniper_bolt(weapon)
 
     @staticmethod
     def draw(weapon):
@@ -63,11 +69,12 @@ class Idle:
 
     @staticmethod
     def do(weapon):
-        calc_pps()
         update_delay(weapon)
         update_melee_position(weapon)
         if weapon.gun == 'WIN' and weapon.is_spin:
             spin_win(weapon)
+        if weapon.gun == 'AWP':
+            update_sniper_bolt(weapon)
 
     @staticmethod
     def draw(weapon):
@@ -105,10 +112,11 @@ class StateMachineGun:
 
 
 class Weapon:
-    def __init__(self, p):
+    def __init__(self, p, mp):
         load_gun_image(self)
         load_melee_image(self)
         self.p = p
+        self.mp = mp
 
         self.weapon_type = 0  # 0: Gun, 1: Melee
         self.gun = 'AKS74'
@@ -130,10 +138,12 @@ class Weapon:
 
         # sr 전용 변수
         self.zoom = False
+        self.bolt_action = False
 
-        # WIN 전용 변수
+        # sr, WIN 전용 변수
         self.spin = 0
         self.is_spin = False
+        self.shell_out = False
 
         # LVOAS 전용 변수
         self.shoot_count = 0

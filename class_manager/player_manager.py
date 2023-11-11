@@ -26,11 +26,6 @@ def space_down(e):
     return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_SPACE
 
 
-def calc_pps():
-    global pps
-    pps = PPS * game_framework.frame_time
-
-
 def load_player_image(self):
     self.image = load_image(player1_right_image_directory)
     self.image_left = load_image(player1_left_image_directory)
@@ -55,7 +50,7 @@ def draw_player(p):
 
 
 def jump(p):
-    global pps
+    pps = game_framework.pps
     if p.mv_jump:  # 점프 시
         p.y += p.jump_acc * pps / 4
 
@@ -70,7 +65,7 @@ def jump(p):
 
 
 def walk_animation(p):
-    global pps
+    pps = game_framework.pps
     p.size_deg += 1 * pps / 50
 
     if not p.mv_jump:
