@@ -150,6 +150,9 @@ class Weapon:
         # LVOAS 전용 변수
         self.shoot_count = 0
 
+        # QHAND 전용 변수
+        self.fire_pos = 'in'  # in이면 안쪽 총, out이면 바깥쪽 총
+
         self.state_machine = StateMachineGun(self)
         self.state_machine.start()
 

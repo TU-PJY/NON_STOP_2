@@ -98,8 +98,8 @@ def draw_items(self):
         if self.page == 1:
             self.image_m1911.draw(self.button_x[0] - 40, self.button_y[0], 400, 200)
             self.image_m92.draw(self.button_x[1] - 50, self.button_y[0], 400, 200)
-            self.image_m500.draw(self.button_x[2] - 63, self.button_y[0], 400, 200)
-            self.image_degle.draw(self.button_x[3] - 50, self.button_y[0], 400, 200)
+            self.image_degle.draw(self.button_x[2] - 50, self.button_y[0], 400, 200)
+            self.image_m500.draw(self.button_x[3] - 63, self.button_y[0], 400, 200)
             self.image_qhand.draw(self.button_x[4] - 70, self.button_y[0], 300, 150)
 
             self.image_aks74.draw(self.button_x[0] - 35, self.button_y[1], 240, 140)
@@ -198,9 +198,9 @@ def click_button(self):
                         elif (i, j) == (1, 0):
                             play_mode.weapon.gun = 'M92'
                         elif (i, j) == (2, 0):
-                            play_mode.weapon.gun = 'M500'
-                        elif (i, j) == (3, 0):
                             play_mode.weapon.gun = 'DEGLE'
+                        elif (i, j) == (3, 0):
+                            play_mode.weapon.gun = 'M500'
                         elif (i, j) == (4, 0):
                             play_mode.weapon.gun = 'QHAND'
 

@@ -8,7 +8,31 @@ def shoot_gun(weapon):
             # True일시 해당 값을 Target 클래스로 전달하여 Target 클래스의 recoil을 증가시킨다.
             weapon.shoot = True
 
-            if weapon.gun == 'SCAR_H':
+            if weapon.gun == 'M1911':
+                weapon.shoot_delay = 65
+                weapon.p.shake_range = 15
+
+            elif weapon.gun == 'M92':
+                weapon.shoot_delay = 55
+                weapon.p.shake_range = 15
+
+            elif weapon.gun == 'DEGLE':
+                weapon.shoot_delay = 95
+                weapon.p.shake_range = 25
+
+            elif weapon.gun == 'M500':
+                weapon.shoot_delay = 130
+                weapon.p.shake_range = 30
+
+            elif weapon.gun == 'QHAND':
+                weapon.shoot_delay = 40
+                weapon.p.shake_range = 20
+                if weapon.fire_pos == 'in':  # 쌍권총이므로 번갈아 가면서 쏘기 때문에 불꽃 위치가 매번 다르다
+                    weapon.fire_pos = 'out'
+                else:
+                    weapon.fire_pos = 'in'
+
+            elif weapon.gun == 'SCAR_H':
                 weapon.shoot_delay = 38
                 weapon.p.shake_range = 17
 
