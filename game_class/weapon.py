@@ -138,6 +138,8 @@ class Weapon:
         self.wield = False
         self.wield_delay = 0
 
+        self.hit_once = False  # 겹쳐있는 몬스터에게 한꺼번에 대미지를 주지 않도록 한다.
+
         # sr 전용 변수
         self.zoom = False
         self.bolt_action = False
@@ -152,6 +154,10 @@ class Weapon:
 
         # QHAND 전용 변수
         self.fire_pos = 'in'  # in이면 안쪽 총, out이면 바깥쪽 총
+
+        # 관통 구현 변수
+        self.pen_enable = False
+        self.pen_count = 0
 
         self.state_machine = StateMachineGun(self)
         self.state_machine.start()

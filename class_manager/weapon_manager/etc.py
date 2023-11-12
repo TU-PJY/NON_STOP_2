@@ -48,7 +48,7 @@ def update_delay(weapon):
 
 def update_sniper_bolt(weapon):
     if weapon.gun == 'AWP':
-        if 100 < weapon.shoot_delay < 350 and not weapon.shell_out:  # 탄피를 한 번만 만들도록 한다
+        if 100 < weapon.shoot_delay < 500 and not weapon.shell_out:  # 탄피를 한 번만 만들도록 한다
             weapon.bolt_action = True
             make_shell(weapon, 30, 20)
             weapon.shell_out = True

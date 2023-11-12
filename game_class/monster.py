@@ -71,6 +71,7 @@ class Monster:
         self.hp_length = self.hp
         self.op = 0
         self.flip = ''
+        self.once = False  # 관통 대미지가 중복으로 발생하지 않도록 한다.
 
         # type2 전용 변수
         if self.type == 2:
@@ -102,6 +103,8 @@ class Monster:
     def update(self):
         if game_framework.MODE == 'play':
             self.state_machine.update()
+            if self.weapon.shoot_delay <= 0:
+                self.once = False  # 한 개체당 한 번씩만 관통 대미지를 받도록 한다.
 
     def handle_events(self, event):
         self.state_machine.handle_event(('INPUT', event))
@@ -127,4 +130,18 @@ class Monster:
                 self.size = 200
 
         if group == 'weapon:monster':  # 총이나 근접무기에 맞을 경우 대미지를 받는다
-            self.is_hit = True
+            if not self.weapon.hit_once and self.hp > 0:  # 겹쳐있는 몬스터가 한꺼번에 대미지를 받지 않도록 한다
+                self.is_hit = True
+                self.weapon.hit_once = True
+
+        if group == 'bullet:monster':
+            # 대미지를 여러 번 받지 않게 끔 한다.
+            if not self.once:  # 이전 카운트와 비교하여 다르다면 대미지를 입히지 않는다.
+                if self.weapon.pen_enable:
+                    if self.weapon.gun == 'AWP':
+                        self.hp -= 200 - 35 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
+                        self.weapon.pen_count += 1
+                        if self.weapon.pen_count == 4:  # 최대 관통 수를 초과하면 더 이상 초과하지 않는다.
+                            self.weapon.pen_count = 0
+                            self.weapon.pen_enable = False
+                self.once = True

@@ -1,7 +1,7 @@
 from pico2d import *
 
 from config import *
-from game_class.prop import Arrow
+from game_class.prop import Arrow, Bullet
 from game_work import game_manager, game_framework
 
 
@@ -203,10 +203,15 @@ def damage_monster(m):
                 m.hp -= 40
 
             elif m.weapon.gun == 'AWP':
-                m.hp -= 200
+                # 관통을 위한 가상 객체 생성
+                bullet = Bullet(m.p, m.mp, m.target.tx - m.p.ex, m.target.ty - m.p.ey, m.weapon.deg, 'AWP')
+                game_manager.add_object(bullet, 3)
+                game_manager.add_collision_pair('bullet:monster', bullet, None)
+                m.weapon.pen_enable = True  # 해당 변수가 활성화 되어야 관통이 된다.
 
             m.op = 100  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달 
             m.is_hit = False
+            m.weapon.hit_once = False
 
     elif m.weapon.wield:
         if m.is_hit:

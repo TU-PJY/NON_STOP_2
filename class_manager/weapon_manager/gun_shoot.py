@@ -54,7 +54,7 @@ def shoot_gun(weapon):
 
             elif weapon.gun == 'AKS74':
                 weapon.shoot_delay = 28
-                weapon.p.shake_range = 10
+                weapon.p.shake_range = 12
 
             elif weapon.gun == 'UMP':
                 weapon.shoot_delay = 35
@@ -102,9 +102,10 @@ def shoot_gun(weapon):
 
             elif weapon.gun == 'AWP':
                 if weapon.zoom:  # 정조준 시에만 발사 가능
-                    weapon.shoot_delay = 550
+                    weapon.shoot_delay = 700
                     weapon.p.shake_range = 70
                     weapon.flame_display_time = FLAME_DISPLAY_TIME
+                    weapon.pen_count = 0  # 관통 개수 초기화
 
             # 일부 총기는 장전 시 탄피를 배출하므로 예외 처리
             if not weapon.gun == 'AWP' and not weapon.gun == 'WIN':  # 총 종류에 따라 탄피 크기가 다르다

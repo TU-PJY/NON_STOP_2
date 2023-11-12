@@ -254,5 +254,4 @@ def click_button(self):
                         if j == 0:
                             play_mode.weapon.gun_type = 'sr'
 
-
     self.click = False

@@ -135,3 +135,38 @@ class Shell:
 
     def handle_evnet(self):
         pass
+
+
+class Bullet:
+    def __init__(self, p, mp, x, y, incline, name):
+        self.p, self.mp = p, mp
+        self.x, self.y = x, y
+        self.incline, self.dir = incline, dir
+        self.name = name
+
+    def update(self):
+        pps = game_framework.pps
+
+        if game_framework.MODE == 'play':
+            if self.x < self.mp.playerToWallLeft + 60 or self.x > self.mp.playerToWallRight - 60:
+                game_manager.remove_object(self)
+
+            self.x += math.cos(self.incline) * 30 * pps / 4
+            self.y += math.sin(self.incline) * 30 * pps / 4
+
+            if self.p.mv_right:
+                self.x -= self.p.speed * pps / 4
+            elif self.p.mv_left:
+                self.x += self.p.speed * pps / 4
+
+    def draw(self):
+        draw_rectangle(*self.get_bb())
+
+    def handle_event(self):
+        pass
+
+    def get_bb(self):
+        return self.x - 120 + self.p.ex, self.y + self.p.ey, self.x + 120 + self.p.ex, self.y + self.p.ey
+
+    def handle_collision(self, group, other):
+        pass
