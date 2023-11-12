@@ -13,8 +13,8 @@ def draw_flame(weapon):
             y = weapon.p.wy + 5 + math.sin(weapon.deg) * 200
 
         elif weapon.gun == 'FAL' or weapon.gun == 'LVOAS':
-            x = weapon.p.wx + math.cos(weapon.deg) * 200
-            y = weapon.p.wy + math.sin(weapon.deg) * 200
+            x = weapon.p.wx + math.cos(weapon.deg) * 210
+            y = weapon.p.wy + math.sin(weapon.deg) * 210
 
         elif weapon.gun == 'WIN' or weapon.gun == 'AWP':
             x = weapon.p.wx + math.cos(weapon.deg) * 230
@@ -32,11 +32,11 @@ def draw_flame(weapon):
             x = weapon.p.wx + math.cos(weapon.deg) * 150
             y = weapon.p.wy - 5 + math.sin(weapon.deg) * 150
 
-        if weapon.gun_type == 'pistol':
+        elif weapon.gun_type == 'pistol':
             if weapon.gun == 'QHAND':
                 if weapon.fire_pos == 'in':
-                    x = weapon.p.wx + math.cos(weapon.deg) * 160
-                    y = weapon.p.wy + math.sin(weapon.deg) * 160
+                    x = weapon.p.wx + math.cos(weapon.deg) * 150
+                    y = weapon.p.wy + math.sin(weapon.deg) * 150
                 else:
                     x = weapon.p.wx + math.cos(weapon.deg) * 200
                     y = weapon.p.wy + math.sin(weapon.deg) * 200

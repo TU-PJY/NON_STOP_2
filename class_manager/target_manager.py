@@ -164,7 +164,7 @@ def update_target(t):
     elif t.weapon.gun == 'MINI14':
         t.dis2 = t.dis / 55
         if t.weapon.shoot:
-            t.recoil += 60
+            t.recoil += 65
 
     elif t.weapon.gun == 'FAL':
         t.dis2 = t.dis / 55
@@ -174,7 +174,7 @@ def update_target(t):
     elif t.weapon.gun == 'LVOAS':
         t.dis2 = t.dis / 55
         if t.weapon.shoot:
-            t.recoil += 25
+            t.recoil += 35
 
     elif t.weapon.gun == 'AWP':
         t.dis2 = 0
