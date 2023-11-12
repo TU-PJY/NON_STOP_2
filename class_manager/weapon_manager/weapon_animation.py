@@ -10,7 +10,7 @@ def spin_win(weapon):
             weapon.shell_out = True
 
         if weapon.spin < 6:
-            weapon.spin += pps / 50
+            weapon.spin += pps / 30
             if weapon.spin >= 6:
                 weapon.spin = 0
                 weapon.is_spin = False

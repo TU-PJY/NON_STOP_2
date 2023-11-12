@@ -161,13 +161,13 @@ def damage_monster(m):
             if m.weapon.gun == 'AKS74':
                 m.hp -= 12
             elif m.weapon.gun == 'UMP':
-                m.hp -= 18
+                m.hp -= 15
             elif m.weapon.gun == 'VECTOR':
                 m.hp -= 12
             elif m.weapon.gun == 'THOMPSON':
-                m.hp -= 20
+                m.hp -= 18
             elif m.weapon.gun == 'P90':
-                m.hp -= 17
+                m.hp -= 15
 
             elif m.weapon.gun == 'SCAR_H':
                 m.hp -= 19

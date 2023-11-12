@@ -18,17 +18,23 @@ def load_shop_resource(self):
 
     self.cursor = load_image(cursor_directory)
 
-    self.image_scar = load_image(scar_h_right_directory)
-    self.image_m16 = load_image(m16_right_directory)
-    self.image_mp44 = load_image(mp44_right_directory)
-    self.image_aug = load_image(aug_right_directory)
-    self.image_groza = load_image(groza_right_directory)
+    self.image_m1911 = load_image(m1911_right_directory)
+    self.image_m92 = load_image(m92_right_directory)
+    self.image_m500 = load_image(m500_right_directory)
+    self.image_degle = load_image(degle_right_directory)
+    self.image_qhand = load_image(qhand_right_directory)
 
     self.image_aks74 = load_image(aks74_right_directory)
     self.image_ump = load_image(ump_right_directory)
     self.image_vector = load_image(vector_right_directpry)
     self.image_thompson = load_image(thompson_right_directory)
     self.image_p90 = load_image(p90_right_directory)
+
+    self.image_scar = load_image(scar_h_right_directory)
+    self.image_m16 = load_image(m16_right_directory)
+    self.image_mp44 = load_image(mp44_right_directory)
+    self.image_aug = load_image(aug_right_directory)
+    self.image_groza = load_image(groza_right_directory)
 
     self.image_m1 = load_image(m1_right_directory)
     self.image_win = load_image(win_right_directory)
@@ -90,6 +96,12 @@ def draw_shop_window(self):
 def draw_items(self):
     if self.select_mode == 0:
         if self.page == 1:
+            self.image_m1911.draw(self.button_x[0] - 40, self.button_y[0], 400, 200)
+            self.image_m92.draw(self.button_x[1] - 50, self.button_y[0], 400, 200)
+            self.image_m500.draw(self.button_x[2] - 63, self.button_y[0], 400, 200)
+            self.image_degle.draw(self.button_x[3] - 50, self.button_y[0], 400, 200)
+            self.image_qhand.draw(self.button_x[4] - 70, self.button_y[0], 300, 150)
+
             self.image_aks74.draw(self.button_x[0] - 35, self.button_y[1], 240, 140)
             self.image_ump.draw(self.button_x[1] - 30, self.button_y[1], 240, 140)
             self.image_vector.draw(self.button_x[2] - 30, self.button_y[1], 240, 140)
@@ -181,57 +193,66 @@ def click_button(self):
                     play_mode.target.draw_scope = False
 
                     if self.page == 1:
-                        if (i, j) == (0, 1):
+                        if (i, j) == (0, 0):
+                            play_mode.weapon.gun = 'M1911'
+                        elif (i, j) == (1, 0):
+                            play_mode.weapon.gun = 'M92'
+                        elif (i, j) == (2, 0):
+                            play_mode.weapon.gun = 'M500'
+                        elif (i, j) == (3, 0):
+                            play_mode.weapon.gun = 'DEGLE'
+                        elif (i, j) == (4, 0):
+                            play_mode.weapon.gun = 'QHAND'
+
+                        elif (i, j) == (0, 1):
                             play_mode.weapon.gun = 'AKS74'
-                            play_mode.weapon.gun_type = 'smg'
                         elif (i, j) == (1, 1):
                             play_mode.weapon.gun = 'UMP'
-                            play_mode.weapon.gun_type = 'smg'
                         elif (i, j) == (2, 1):
                             play_mode.weapon.gun = 'VECTOR'
-                            play_mode.weapon.gun_type = 'smg'
                         elif (i, j) == (3, 1):
                             play_mode.weapon.gun = 'THOMPSON'
-                            play_mode.weapon.gun_type = 'smg'
                         elif (i, j) == (4, 1):
                             play_mode.weapon.gun = 'P90'
-                            play_mode.weapon.gun_type = 'smg'
 
                         elif (i, j) == (0, 2):
                             play_mode.weapon.gun = 'SCAR_H'
-                            play_mode.weapon.gun_type = 'ar'
                         elif (i, j) == (1, 2):
                             play_mode.weapon.gun = 'M16'
-                            play_mode.weapon.gun_type = 'ar'
                         elif (i, j) == (2, 2):
                             play_mode.weapon.gun = 'MP44'
-                            play_mode.weapon.gun_type = 'ar'
                         elif (i, j) == (3, 2):
                             play_mode.weapon.gun = 'AUG'
-                            play_mode.weapon.gun_type = 'ar'
                         elif (i, j) == (4, 2):
                             play_mode.weapon.gun = 'GROZA'
-                            play_mode.weapon.gun_type = 'ar'
 
                         elif (i, j) == (0, 3):
                             play_mode.weapon.gun = 'M1'
-                            play_mode.weapon.gun_type = 'rifle'
                         elif (i, j) == (1, 3):
                             play_mode.weapon.gun = 'WIN'
-                            play_mode.weapon.gun_type = 'rifle'
                         elif (i, j) == (2, 3):
                             play_mode.weapon.gun = 'MINI14'
-                            play_mode.weapon.gun_type = 'rifle'
                         elif (i, j) == (3, 3):
                             play_mode.weapon.gun = 'FAL'
-                            play_mode.weapon.gun_type = 'rifle'
                         elif (i, j) == (4, 3):
                             play_mode.weapon.gun = 'LVOAS'
+
+                        if j == 0:
+                            play_mode.weapon.gun_type = 'pistol'
+                        elif j == 1:
+                            play_mode.weapon.gun_type = 'smg'
+                        elif j == 2:
+                            play_mode.weapon.gun_type = 'ar'
+                        elif j == 3:
                             play_mode.weapon.gun_type = 'rifle'
 
                     elif self.page == 2:
                         if (i, j) == (0, 0):
                             play_mode.weapon.gun = 'AWP'
                             play_mode.weapon.gun_type = 'sr'
+
+                        if j == 0:
+                            play_mode.weapon.gun_type = 'sr'
+
 
     self.click = False

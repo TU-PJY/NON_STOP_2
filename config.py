@@ -52,7 +52,21 @@ target_x_directory = 'res//target_image//mode_melee.png'
 target_melee_directory = 'res//target_image//target_melee.png'
 scope_directory = 'res//target_image//scope.png'
 
-# 총 이미지 파일 경로 
+# 총 이미지 파일 경로
+# pistol
+m1911_right_directory = 'res//gun_image//pistol//m1911_right.png'
+m1911_left_directory = 'res//gun_image//pistol//m1911_left.png'
+m92_right_directory = 'res//gun_image//pistol//m92_right.png'
+m92_left_directory = 'res//gun_image//pistol//m92_left.png'
+m500_right_directory = 'res//gun_image//pistol//m500_right.png'
+m500_left_directory = 'res//gun_image//pistol//m500_left.png'
+degle_right_directory = 'res//gun_image//pistol//degle_right.png'
+degle_left_directory = 'res//gun_image//pistol//degle_left.png'
+qhand_right_directory = 'res//gun_image//pistol//qhand_right.png'
+qhand_left_directory = 'res//gun_image//pistol//qhand_left.png'
+qhand_spin_right_directory = 'res//gun_image//qhand_spin_right.png'
+qhand_spin_left_directory = 'res//gun_image//qhand_spin_left.png'
+
 # smg
 aks74_right_directory = 'res//gun_image//smg//aks74_right.png'
 aks74_left_directory = 'res//gun_image//smg//aks74_left.png'

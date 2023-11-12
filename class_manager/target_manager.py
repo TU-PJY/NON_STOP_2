@@ -95,12 +95,12 @@ def update_target(t):
     elif t.weapon.gun == 'THOMPSON':
         t.dis2 = t.dis / 20
         if t.weapon.shoot:
-            t.recoil += 17
+            t.recoil += 16
 
     elif t.weapon.gun == 'P90':
         t.dis2 = t.dis / 20
         if t.weapon.shoot:
-            t.recoil += 13
+            t.recoil += 12
 
     elif t.weapon.gun == 'SCAR_H':
         t.dis2 = t.dis / 20
