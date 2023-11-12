@@ -17,7 +17,37 @@ def draw_gun(weapon):
         weapon.deg = math.atan2(weapon.p.my - y, weapon.p.mx - x)
 
         # GUN_NAME에 따라 사용하는 총기가 달라진다.
-        if weapon.gun == 'AKS74':
+        if weapon.gun == 'M1911':
+            if weapon.p.dir == 1:
+                weapon.m1911_right.clip_composite_draw(0, 0, 200, 100, weapon.deg, '', x, y, 320, 160)
+            elif weapon.p.dir == 0:
+                weapon.m1911_left.clip_composite_draw(0, 0, 200, 100, weapon.deg, 'h, v', x, y, 320, 160)
+
+        if weapon.gun == 'M92':
+            if weapon.p.dir == 1:
+                weapon.m92_right.clip_composite_draw(0, 0, 200, 100, weapon.deg, '', x, y, 300, 150)
+            elif weapon.p.dir == 0:
+                weapon.m92_left.clip_composite_draw(0, 0, 200, 100, weapon.deg, 'h, v', x, y, 300, 150)
+
+        if weapon.gun == 'M500':
+            if weapon.p.dir == 1:
+                weapon.m500_right.clip_composite_draw(0, 0, 200, 100, weapon.deg, '', x, y, 300, 150)
+            elif weapon.p.dir == 0:
+                weapon.m500_left.clip_composite_draw(0, 0, 200, 100, weapon.deg, 'h, v', x, y, 300, 150)
+
+        if weapon.gun == 'DEGLE':
+            if weapon.p.dir == 1:
+                weapon.degle_right.clip_composite_draw(0, 0, 200, 100, weapon.deg, '', x, y, 320, 160)
+            elif weapon.p.dir == 0:
+                weapon.degle_left.clip_composite_draw(0, 0, 200, 100, weapon.deg, 'h, v', x, y, 320, 160)
+
+        if weapon.gun == 'QHAND':
+            if weapon.p.dir == 1:
+                weapon.qhand_right.clip_composite_draw(0, 0, 200, 100, weapon.deg, '', x, y, 300, 150)
+            elif weapon.p.dir == 0:
+                weapon.qhand_left.clip_composite_draw(0, 0, 200, 100, weapon.deg, 'h, v', x, y, 300, 150)
+
+        elif weapon.gun == 'AKS74':
             if weapon.p.dir == 1:
                 weapon.aks74_right.clip_composite_draw(0, 0, 200, 100, weapon.deg, '', x, y, 200, 100)
             elif weapon.p.dir == 0:

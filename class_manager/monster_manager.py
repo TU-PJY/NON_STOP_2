@@ -170,7 +170,7 @@ def damage_monster(m):
                 m.hp -= 15
 
             elif m.weapon.gun == 'SCAR_H':
-                m.hp -= 19
+                m.hp -= 20
             elif m.weapon.gun == 'M16':
                 m.hp -= 18
             elif m.weapon.gun == 'MP44':

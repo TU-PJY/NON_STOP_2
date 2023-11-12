@@ -64,8 +64,8 @@ degle_right_directory = 'res//gun_image//pistol//degle_right.png'
 degle_left_directory = 'res//gun_image//pistol//degle_left.png'
 qhand_right_directory = 'res//gun_image//pistol//qhand_right.png'
 qhand_left_directory = 'res//gun_image//pistol//qhand_left.png'
-qhand_spin_right_directory = 'res//gun_image//qhand_spin_right.png'
-qhand_spin_left_directory = 'res//gun_image//qhand_spin_left.png'
+qhand_spin_right_directory = 'res//gun_image//pistol//qhand_spin_right.png'
+qhand_spin_left_directory = 'res//gun_image//pistol//qhand_spin_left.png'
 
 # smg
 aks74_right_directory = 'res//gun_image//smg//aks74_right.png'
