@@ -15,6 +15,7 @@ def load_shop_resource(self):
     self.button_page_left = load_image(button_page_directory)
     self.button_page_right = load_image(button_page_directory)
     self.font = load_font(font_directory, 50)
+    self.font = load_font(font_directory, 30)
 
     self.cursor = load_image(cursor_directory)
 
@@ -91,6 +92,9 @@ def draw_shop_window(self):
                 self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
 
     self.font.draw(WIDTH / 2 + 200, self.window_y + 295, "SHOP", (255, 255, 255))
+    if self.select_mode == 0:
+        self.font.draw(WIDTH / 2 + 500, self.window_y - 120, "A", (255, 255, 255))
+        self.font.draw(WIDTH / 2 + 570, self.window_y - 120, "D", (255, 255, 255))
 
 
 def draw_items(self):
