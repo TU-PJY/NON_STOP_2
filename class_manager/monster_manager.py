@@ -1,7 +1,7 @@
 from pico2d import *
 
 from config import *
-from game_class.prop import Arrow, Bullet
+from game_class.prop import Arrow, Bullet, Feedback
 from game_work import game_manager, game_framework
 
 
@@ -212,6 +212,10 @@ def damage_monster(m):
             m.op = 100  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달 
             m.is_hit = False
             m.weapon.hit_once = False
+
+            if not m.weapon.gun_type == 'sr':
+                fd = Feedback(m.target.tx, m.target.ty)
+                game_manager.add_object(fd, 7)
 
     elif m.weapon.wield:
         if m.is_hit:

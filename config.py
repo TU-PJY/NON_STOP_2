@@ -126,6 +126,7 @@ type3_directory = 'res//monster_image//slime.png'
 type3_damage_directory = 'res//monster_image//feedback//slime_damage.png'
 type4_directory = 'res//monster_image//apple.png'
 type4_damage_directory = 'res//monster_image//feedback//apple_damage.png'
+hit_feeeback_directory = 'res//monster_image//feedback//hit.png'
 
 # Prop 이미지 파일 경로
 arrow_right_directory = 'res//prop//arrow_right.png'

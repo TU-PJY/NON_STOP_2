@@ -147,7 +147,10 @@ class Monster:
 
         if group == 'bullet:monster':
             # 대미지를 여러 번 받지 않게 끔 한다.
-            if not self.once:  # 이전 카운트와 비교하여 다르다면 대미지를 입히지 않는다.
+            if not self.once and self.hp > 0:  # 이전 카운트와 비교하여 다르다면 대미지를 입히지 않는다.
+                fd = Feedback(self.x + self.p.ex, self.y + self.p.ey)
+                game_manager.add_object(fd, 7)
+
                 if self.weapon.pen_enable:
                     if self.weapon.gun == 'AWP':
                         self.hp -= 200 - 40 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.

@@ -137,6 +137,29 @@ class Shell:
         pass
 
 
+class Feedback:
+    def __init__(self, x, y):
+        self.image = load_image(hit_feeeback_directory)
+        self.x = x
+        self.y = y
+        self.op = 300
+
+    def draw(self):
+        self.image.opacify(self.op)
+        self.image.draw(self.x, self.y, 40, 40)
+
+    def update(self):
+        pps = game_framework.pps
+
+        if self.op > 0:
+            self.op -= 4 * pps / 3
+        else:
+            game_manager.remove_object(self)
+
+    def handle_event(self):
+        pass
+
+
 class Bullet:
     def __init__(self, weapon, p, mp, x, y, incline, name):
         self.weapon = weapon

@@ -92,7 +92,7 @@ def shoot_gun(weapon):
 
             elif weapon.gun == 'LVOAS':
                 if weapon.shoot_count < 1:
-                    weapon.shoot_delay = 25
+                    weapon.shoot_delay = 35
                     weapon.p.shake_range = 15
                     weapon.shoot_count += 1
                 else:
