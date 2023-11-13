@@ -97,13 +97,41 @@ def shoot_gun(weapon):
                     weapon.shoot_count += 1
                 else:
                     weapon.shoot_delay = 120
-                    weapon.p.shake_range = 20
+                    weapon.p.shake_range = 27
                     weapon.shoot_count = 0
+
+            elif weapon.gun == 'SPRING':
+                if weapon.zoom:  # 정조준 시에만 발사 가능
+                    weapon.shoot_delay = 600
+                    weapon.p.shake_range = 60
+                    weapon.flame_display_time = FLAME_DISPLAY_TIME
+                    weapon.pen_count = 0  # 관통 개수 초기화
+
+            elif weapon.gun == 'KAR98':
+                if weapon.zoom:  # 정조준 시에만 발사 가능
+                    weapon.shoot_delay = 600
+                    weapon.p.shake_range = 60
+                    weapon.flame_display_time = FLAME_DISPLAY_TIME
+                    weapon.pen_count = 0  # 관통 개수 초기화
+
+            elif weapon.gun == 'M24':
+                if weapon.zoom:  # 정조준 시에만 발사 가능
+                    weapon.shoot_delay = 700
+                    weapon.p.shake_range = 70
+                    weapon.flame_display_time = FLAME_DISPLAY_TIME
+                    weapon.pen_count = 0  # 관통 개수 초기화
 
             elif weapon.gun == 'AWP':
                 if weapon.zoom:  # 정조준 시에만 발사 가능
                     weapon.shoot_delay = 700
                     weapon.p.shake_range = 70
+                    weapon.flame_display_time = FLAME_DISPLAY_TIME
+                    weapon.pen_count = 0  # 관통 개수 초기화
+
+            elif weapon.gun == 'CHEYTAC':
+                if weapon.zoom:  # 정조준 시에만 발사 가능
+                    weapon.shoot_delay = 1000
+                    weapon.p.shake_range = 100
                     weapon.flame_display_time = FLAME_DISPLAY_TIME
                     weapon.pen_count = 0  # 관통 개수 초기화
 

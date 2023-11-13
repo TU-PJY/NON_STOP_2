@@ -16,9 +16,13 @@ def draw_flame(weapon):
             x = weapon.p.wx + math.cos(weapon.deg) * 210
             y = weapon.p.wy + math.sin(weapon.deg) * 210
 
-        elif weapon.gun == 'WIN' or weapon.gun == 'AWP':
+        elif weapon.gun == 'WIN' or weapon.gun == 'SPRING' or weapon.gun == 'M24' or weapon.gun == 'KAR98':
             x = weapon.p.wx + math.cos(weapon.deg) * 230
             y = weapon.p.wy + math.sin(weapon.deg) * 230
+
+        elif weapon.gun == 'AWP' or weapon.gun == 'CHEYTAC':
+            x = weapon.p.wx + math.cos(weapon.deg) * 250
+            y = weapon.p.wy + math.sin(weapon.deg) * 250
 
         elif weapon.gun == 'AKS74' or weapon.gun == 'UMP' or weapon.gun == 'VECTOR' or weapon.gun == 'P90':
             x = weapon.p.wx + math.cos(weapon.deg) * 140

@@ -103,7 +103,7 @@ class Monster:
     def update(self):
         if game_framework.MODE == 'play':
             self.state_machine.update()
-            if self.weapon.shoot_delay <= 0:
+            if self.weapon.shoot_delay <= 10:
                 self.once = False  # 한 개체당 한 번씩만 관통 대미지를 받도록 한다.
 
     def handle_events(self, event):
@@ -147,15 +147,32 @@ class Monster:
 
         if group == 'bullet:monster':
             # 대미지를 여러 번 받지 않게 끔 한다.
-            if not self.once and self.hp > 0:  # 이전 카운트와 비교하여 다르다면 대미지를 입히지 않는다.
+            if not self.once and self.hp > 0:
                 fd = Feedback(self.x + self.p.ex, self.y + self.p.ey)
                 game_manager.add_object(fd, 7)
 
                 if self.weapon.pen_enable:
-                    if self.weapon.gun == 'AWP':
+                    if self.weapon.gun == 'SPRING':
+                        self.hp -= 150 - 50 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
+                        self.weapon.pen_count += 1
+
+                    elif self.weapon.gun == 'KAR98':
+                        self.hp -= 170 - 40 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
+                        self.weapon.pen_count += 1
+
+                    elif self.weapon.gun == 'M24':
                         self.hp -= 200 - 40 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
                         self.weapon.pen_count += 1
-                        if self.weapon.pen_count == 4:  # 최대 관통 수를 초과하면 더 이상 초과하지 않는다.
-                            self.weapon.pen_count = 0
-                            self.weapon.pen_enable = False
+
+                    elif self.weapon.gun == 'AWP':
+                        self.hp -= 220 - 30 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
+                        self.weapon.pen_count += 1
+
+                    elif self.weapon.gun == 'CHEYTAC':
+                        self.hp -= 250 - 30 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
+                        self.weapon.pen_count += 1
+
+                    if self.weapon.pen_count == self.weapon.pen_limit:  # 최대 관통 수를 초과하면 더 이상 초과하지 않는다.
+                        self.weapon.pen_count = 0
+                        self.weapon.pen_enable = False
                 self.once = True

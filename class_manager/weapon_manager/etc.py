@@ -57,6 +57,46 @@ def update_sniper_bolt(weapon):
             weapon.bolt_action = False
             weapon.shell_out = False
 
+    if weapon.gun == 'SPRING':
+        if 100 < weapon.shoot_delay < 400 and not weapon.shell_out:  # 탄피를 한 번만 만들도록 한다
+            weapon.bolt_action = True
+            make_shell(weapon, 30, 20)
+            weapon.shell_out = True
+
+        if weapon.shoot_delay < 100:
+            weapon.bolt_action = False
+            weapon.shell_out = False
+
+    if weapon.gun == 'KAR98':
+        if 100 < weapon.shoot_delay < 400 and not weapon.shell_out:  # 탄피를 한 번만 만들도록 한다
+            weapon.bolt_action = True
+            make_shell(weapon, 30, 20)
+            weapon.shell_out = True
+
+        if weapon.shoot_delay < 100:
+            weapon.bolt_action = False
+            weapon.shell_out = False
+
+    if weapon.gun == 'M24':
+        if 100 < weapon.shoot_delay < 500 and not weapon.shell_out:  # 탄피를 한 번만 만들도록 한다
+            weapon.bolt_action = True
+            make_shell(weapon, 30, 20)
+            weapon.shell_out = True
+
+        if weapon.shoot_delay < 100:
+            weapon.bolt_action = False
+            weapon.shell_out = False
+
+    if weapon.gun == 'CHEYTAC':
+        if 100 < weapon.shoot_delay < 700 and not weapon.shell_out:  # 탄피를 한 번만 만들도록 한다
+            weapon.bolt_action = True
+            make_shell(weapon, 40, 30)
+            weapon.shell_out = True
+
+        if weapon.shoot_delay < 100:
+            weapon.bolt_action = False
+            weapon.shell_out = False
+
 
 def make_shell(weapon, size_x=15, size_y=15):  # 탄피 생성
     if weapon.p.dir == 0:

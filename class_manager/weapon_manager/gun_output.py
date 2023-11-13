@@ -145,8 +145,32 @@ def draw_gun(weapon):
             elif weapon.p.dir == 0:
                 weapon.lvoas_left.clip_composite_draw(0, 0, 250, 100, weapon.deg, 'h, v', x, y, 250, 100)
 
+        elif weapon.gun == 'SPRING':
+            if weapon.p.dir == 1:
+                weapon.spring_right.clip_composite_draw(0, 0, 250, 100, weapon.deg, '', x, y, 270, 120)
+            elif weapon.p.dir == 0:
+                weapon.spring_left.clip_composite_draw(0, 0, 250, 100, weapon.deg, 'h, v', x, y, 270, 120)
+
+        elif weapon.gun == 'KAR98':
+            if weapon.p.dir == 1:
+                weapon.kar98_right.clip_composite_draw(0, 0, 250, 100, weapon.deg, '', x, y, 270, 120)
+            elif weapon.p.dir == 0:
+                weapon.kar98_left.clip_composite_draw(0, 0, 250, 100, weapon.deg, 'h, v', x, y, 270, 120)
+
+        elif weapon.gun == 'M24':
+            if weapon.p.dir == 1:
+                weapon.m24_right.clip_composite_draw(0, 0, 250, 100, weapon.deg, '', x, y, 270, 120)
+            elif weapon.p.dir == 0:
+                weapon.m24_left.clip_composite_draw(0, 0, 250, 100, weapon.deg, 'h, v', x, y, 270, 120)
+
         elif weapon.gun == 'AWP':
             if weapon.p.dir == 1:
-                weapon.awp_right.clip_composite_draw(0, 0, 250, 100, weapon.deg, '', x, y, 290, 140)
+                weapon.awp_right.clip_composite_draw(0, 0, 300, 100, weapon.deg, '', x, y, 340, 120)
             elif weapon.p.dir == 0:
-                weapon.awp_left.clip_composite_draw(0, 0, 250, 100, weapon.deg, 'h, v', x, y, 290, 140)
+                weapon.awp_left.clip_composite_draw(0, 0, 300, 100, weapon.deg, 'h, v', x, y, 340, 120)
+
+        elif weapon.gun == 'CHEYTAC':
+            if weapon.p.dir == 1:
+                weapon.cheytac_right.clip_composite_draw(0, 0, 300, 100, weapon.deg, '', x, y, 340, 120)
+            elif weapon.p.dir == 0:
+                weapon.cheytac_left.clip_composite_draw(0, 0, 300, 100, weapon.deg, 'h, v', x, y, 340, 120)

@@ -34,8 +34,8 @@ class Arrow:
 
             # 화살이 벽에 박힌다
             if self.simulate:
-                self.x += math.cos(self.incline) * 7 * pps / 4
-                self.y += math.sin(self.incline) * 7 * pps / 4
+                self.x += math.cos(self.incline) * 5 * pps / 4
+                self.y += math.sin(self.incline) * 5 * pps / 4
                 self.y += self.acc * pps / 4
                 self.acc -= 0.01 * pps / 4
 
@@ -165,15 +165,19 @@ class Bullet:
         self.weapon = weapon
         self.p, self.mp = p, mp
         self.x, self.y = x, y
-        self.incline, self.dir = incline, dir
+        self.incline = incline
         self.name = name
 
     def update(self):
         pps = game_framework.pps
 
         if game_framework.MODE == 'play':
-            if self.x < self.mp.playerToWallLeft + 60 or self.x > self.mp.playerToWallRight - 60:
+            if self.x < self.mp.playerToWallLeft or self.x > self.mp.playerToWallRight:
                 self.weapon.pen_enable = False  # 벽에 닿으면 관통 비활성화 후 객체 삭제
+                game_manager.remove_object(self)
+
+            if self.y < 120 + self.p.cam_h or self.y > 750 + self.p.y + self.p.cam_h:  # 바닥이나 너무 높이 올라가도 삭제
+                self.weapon.pen_enable = False
                 game_manager.remove_object(self)
 
             self.x += math.cos(self.incline) * 40 * pps / 4
@@ -192,7 +196,7 @@ class Bullet:
         pass
 
     def get_bb(self):
-        return self.x + self.p.ex - 50, self.y + self.p.ey, self.x + self.p.ex + 50, self.y + self.p.ey
+        return self.x + self.p.ex - 70, self.y + self.p.ey - 30, self.x + self.p.ex + 70, self.y + self.p.ey + 30
 
     def handle_collision(self, group, other):
         pass

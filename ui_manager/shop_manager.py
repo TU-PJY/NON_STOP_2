@@ -43,7 +43,11 @@ def load_shop_resource(self):
     self.image_fal = load_image(fal_right_directory)
     self.image_lvoas = load_image(lvoas_right_directory)
 
+    self.image_spring = load_image(spring_right_directory)
+    self.image_kar98 = load_image(kar98_right_directory)
+    self.image_m24 = load_image(m24_right_directory)
     self.image_awp = load_image(awp_right_directory)
+    self.image_cheytac = load_image(cheytac_right_directory)
 
     self.image_knife = load_image(knife_right_directory)
 
@@ -125,7 +129,11 @@ def draw_items(self):
             self.image_lvoas.draw(self.button_x[4] - 47, self.button_y[3], 230, 90)
 
         elif self.page == 2:
-            self.image_awp.draw(self.button_x[0] - 50, self.button_y[0], 240, 90)
+            self.image_spring.draw(self.button_x[0] - 50, self.button_y[0], 240, 95)
+            self.image_kar98.draw(self.button_x[1] - 50, self.button_y[0], 240, 95)
+            self.image_m24.draw(self.button_x[2] - 50, self.button_y[0], 240, 90)
+            self.image_awp.draw(self.button_x[3] - 50, self.button_y[0], 250, 80)
+            self.image_cheytac.draw(self.button_x[4] - 55, self.button_y[0], 250, 80)
 
     if self.select_mode == 1:
         self.image_knife.draw(self.button_x[0], self.button_y[0], 150, 100)
@@ -252,8 +260,20 @@ def click_button(self):
 
                     elif self.page == 2:
                         if (i, j) == (0, 0):
+                            play_mode.weapon.gun = 'SPRING'
+                            play_mode.weapon.pen_limit = 2
+                        if (i, j) == (1, 0):
+                            play_mode.weapon.gun = 'KAR98'
+                            play_mode.weapon.pen_limit = 3
+                        if (i, j) == (2, 0):
+                            play_mode.weapon.gun = 'M24'
+                            play_mode.weapon.pen_limit = 4
+                        if (i, j) == (3, 0):
                             play_mode.weapon.gun = 'AWP'
-                            play_mode.weapon.gun_type = 'sr'
+                            play_mode.weapon.pen_limit = 6
+                        if (i, j) == (4, 0):
+                            play_mode.weapon.gun = 'CHEYTAC'
+                            play_mode.weapon.pen_limit = 8
 
                         if j == 0:
                             play_mode.weapon.gun_type = 'sr'

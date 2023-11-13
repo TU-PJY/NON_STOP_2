@@ -14,7 +14,10 @@ class Shop:
         self.select_mode = 0  # 초기값 총 선택
         self.cat_x = []
         self.cat_y = []
-        self.page = 1
+        if not play_mode.weapon.gun_type == 'sr':
+            self.page = 1
+        else:
+            self.page = 2
 
         self.page_right_x = 0
         self.page_left_x = 0

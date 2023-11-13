@@ -115,7 +115,7 @@ def process_attack(m):
 
     # type 2 attack
     if m.type == 2:
-        if m.mp.playerToWallLeft < m.x < m.mp.playerToWallRight:  # 스폰 지점에서 바로 대쉬하지 않도록
+        if m.mp.playerToWallLeft - 50 < m.x < m.mp.playerToWallRight + 50:  # 스폰 지점에서 바로 대쉬하지 않도록
             if m.dash_delay <= 0 and not m.is_attack and m.atk_delay <= 0:
                 if math.sqrt((m.x - m.p.x) ** 2 + ((m.y + m.p.cam_h) - m.p.y) ** 2) <= 800:
                     m.incline = math.atan2(m.p.y - (m.y + m.p.cam_h), m.p.x - m.x)
@@ -140,14 +140,14 @@ def process_attack(m):
     # type 4 attack
     if m.type == 4:
         if m.mp.playerToWallLeft + 100 <= m.x <= m.mp.playerToWallRight - 100:
-            if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - (m.y + m.p.cam_h)) ** 2) <= 900:
+            if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - (m.y + m.p.cam_h)) ** 2) <= 750:
                 m.is_attack = True
             else:
                 m.is_attack = False
                 m.shoot_delay = 150
 
             if m.is_attack:
-                m.incline = math.atan2(m.p.y + 50 - (m.y + m.p.cam_h), m.p.x - m.x)  # 머리쪽으로 살짝 높혀서 쏜다
+                m.incline = math.atan2(m.p.y + 70 - (m.y + m.p.cam_h), m.p.x - m.x)  # 머리쪽으로 살짝 높혀서 쏜다
                 m.frame = 2
                 if m.shoot_delay <= 0:
                     ar = Arrow(m.p, m.mp, m.x, m.y, m.incline, m.dir)  # 일정 간격으로 화살을 발사한다
@@ -159,15 +159,15 @@ def damage_monster(m):
     if m.weapon.shoot and m.mp.playerToWallLeft - 30 <= m.p.x <= m.mp.playerToWallRight + 30:
         if m.is_hit:  # 맞은걸로 판정되면 대미지를 가한다.
             if m.weapon.gun == 'M1911':
-                m.hp -= 15
-            elif m.weapon.gun == 'M92':
-                m.hp -= 13
-            elif m.weapon.gun == 'DEGLE':
                 m.hp -= 20
+            elif m.weapon.gun == 'M92':
+                m.hp -= 18
+            elif m.weapon.gun == 'DEGLE':
+                m.hp -= 30
             elif m.weapon.gun == 'M500':
-                m.hp -= 25
+                m.hp -= 35
             elif m.weapon.gun == 'QHAND':
-                m.hp -= 15
+                m.hp -= 18
 
             elif m.weapon.gun == 'AKS74':
                 m.hp -= 12
@@ -202,7 +202,7 @@ def damage_monster(m):
             elif m.weapon.gun == 'LVOAS':
                 m.hp -= 40
 
-            elif m.weapon.gun == 'AWP':
+            elif m.weapon.gun_type == 'sr':
                 # 관통을 위한 가상 객체 생성
                 bullet = Bullet(m.weapon, m.p, m.mp, m.target.tx - m.p.ex, m.target.ty - m.p.ey, m.weapon.deg, 'AWP')
                 game_manager.add_object(bullet, 3)

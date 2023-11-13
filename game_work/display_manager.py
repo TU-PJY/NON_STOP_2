@@ -33,7 +33,7 @@ def shake_display(p):
         p.shake_x = random.randint(-int(p.shake_range), int(p.shake_range))
         p.shake_y = random.randint(-int(p.shake_range), int(p.shake_range))
         p.shake_range -= pps / 8
-        p.scope_rot = p.shake_x / 200
+        # p.scope_rot = p.shake_x / 200
     else:
         p.shake_x = 0
         p.shake_y = 0

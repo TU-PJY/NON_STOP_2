@@ -57,6 +57,14 @@ def load_gun_image(self):
 
     self.awp_right = load_image(awp_right_directory)
     self.awp_left = load_image(awp_left_directory)
+    self.spring_right = load_image(spring_right_directory)
+    self.spring_left = load_image(spring_left_directory)
+    self.kar98_right = load_image(kar98_right_directory)
+    self.kar98_left = load_image(kar98_left_directory)
+    self.m24_right = load_image(m24_right_directory)
+    self.m24_left = load_image(m24_left_directory)
+    self.cheytac_right = load_image(cheytac_right_directory)
+    self.cheytac_left = load_image(cheytac_left_directory)
 
 
 def load_melee_image(self):

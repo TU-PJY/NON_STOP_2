@@ -158,6 +158,7 @@ class Weapon:
         # 관통 구현 변수
         self.pen_enable = False
         self.pen_count = 0
+        self.pen_limit = 0
 
         self.state_machine = StateMachineGun(self)
         self.state_machine.start()

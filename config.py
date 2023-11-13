@@ -50,7 +50,12 @@ target_right_directory = 'res//target_image//target_right.png'
 target_left_directory = 'res//target_image//target_left.png'
 target_x_directory = 'res//target_image//mode_melee.png'
 target_melee_directory = 'res//target_image//target_melee.png'
-scope_directory = 'res//target_image//scope.png'
+
+scope_awp_directory = 'res//target_image//scope_awp.png'
+scope_spring_directory = 'res//target_image//scope_spring.png'
+scope_kar98_directory = 'res//target_image//scope_kar98.png'
+scope_m24_directory = 'res//target_image//scope_m24.png'
+scope_cheytac_directory = 'res//target_image//scope_cheytac.png'
 
 # 총 이미지 파일 경로
 # pistol
@@ -106,8 +111,16 @@ lvoas_right_directory = 'res//gun_image//rifle//lvoas_right.png'
 lvoas_left_directory = 'res//gun_image//rifle//lvoas_left.png'
 
 # sr
+spring_right_directory = 'res//gun_image//sr//spring_right.png'
+spring_left_directory = 'res//gun_image//sr//spring_left.png'
+kar98_right_directory = 'res//gun_image//sr//kar98_right.png'
+kar98_left_directory = 'res//gun_image//sr//kar98_left.png'
+m24_right_directory = 'res//gun_image//sr//m24_right.png'
+m24_left_directory = 'res//gun_image//sr//m24_left.png'
 awp_right_directory = 'res//gun_image//sr//awp_right.png'
 awp_left_directory = 'res//gun_image//sr//awp_left.png'
+cheytac_right_directory = 'res//gun_image//sr//cheytac_right.png'
+cheytac_left_directory = 'res//gun_image//sr//cheytac_left.png'
 
 # 불꽃 이미지 파일 경로
 flame_right_directory = 'res//gun_image//misc//flame_right.png'

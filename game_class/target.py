@@ -89,10 +89,10 @@ class Target:
 
     def get_bb(self):
         if self.weapon.weapon_type == 0:  # 총의 경우 타겟 내부에 생성된 지점을 히트박스로 리턴한다.
-            if not self.weapon.gun == 'AWP' and self.weapon.shoot:  # 총을 쏘는 순간에만 조준점 좌표를 제공한다.
+            if not self.weapon.gun_type == 'sr' and self.weapon.shoot:  # 총을 쏘는 순간에만 조준점 좌표를 제공한다.
                 return self.tx, self.ty, self.tx, self.ty
 
-            elif self.weapon.gun == 'AWP' and self.weapon.zoom and self.weapon.shoot:
+            elif self.weapon.gun_type == 'sr' and self.weapon.zoom and self.weapon.shoot:
                 return self.tx, self.ty, self.tx, self.ty
 
             else:

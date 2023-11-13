@@ -16,17 +16,35 @@ def load_target(t):
     t.not_target = load_image(target_x_directory)
     t.target_melee = load_image(target_melee_directory)
 
-    t.scope = load_image(scope_directory)
+    t.scope_awp = load_image(scope_awp_directory)
+    t.scope_spring = load_image(scope_spring_directory)
+    t.scope_kar98 = load_image(scope_kar98_directory)
+    t.scope_m24 = load_image(scope_m24_directory)
+    t.scope_cheytac = load_image(scope_cheytac_directory)
 
 
 def draw_target(t):
     if t.weapon.weapon_type == 0:
-        if t.weapon.gun == 'AWP':
+        if t.weapon.gun_type == 'sr':
             if t.draw_scope:
                 x = t.p.mx + t.p.shake_x
                 y = t.p.my + t.p.shake_y
-                t.scope.opacify(50)
-                t.scope.rotate_draw(t.p.scope_rot, x, y, t.scope_size_x, t.scope_size_y)
+
+                if t.weapon.gun == 'SPRING':
+                    t.scope_spring.opacify(50)
+                    t.scope_spring.rotate_draw(t.p.scope_rot, x, y, t.scope_size_x, t.scope_size_y)
+                if t.weapon.gun == 'KAR98':
+                    t.scope_kar98.opacify(50)
+                    t.scope_kar98.rotate_draw(t.p.scope_rot, x, y, t.scope_size_x, t.scope_size_y)
+                if t.weapon.gun == 'M24':
+                    t.scope_m24.opacify(50)
+                    t.scope_m24.rotate_draw(t.p.scope_rot, x, y, t.scope_size_x, t.scope_size_y)
+                if t.weapon.gun == 'AWP':
+                    t.scope_awp.opacify(50)
+                    t.scope_awp.rotate_draw(t.p.scope_rot, x, y, t.scope_size_x, t.scope_size_y)
+                if t.weapon.gun == 'CHEYTAC':
+                    t.scope_cheytac.opacify(50)
+                    t.scope_cheytac.rotate_draw(t.p.scope_rot, x, y, t.scope_size_x, t.scope_size_y)
 
             else:
                 t.target_up.opacify(150)
@@ -176,7 +194,7 @@ def update_target(t):
         if t.weapon.shoot:
             t.recoil += 35
 
-    elif t.weapon.gun == 'AWP':
+    elif t.weapon.gun_type == 'sr':
         t.dis2 = 0
         update_scope(t)
 
