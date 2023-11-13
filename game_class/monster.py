@@ -150,7 +150,7 @@ class Monster:
             if not self.once:  # 이전 카운트와 비교하여 다르다면 대미지를 입히지 않는다.
                 if self.weapon.pen_enable:
                     if self.weapon.gun == 'AWP':
-                        self.hp -= 200 - 35 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
+                        self.hp -= 200 - 40 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
                         self.weapon.pen_count += 1
                         if self.weapon.pen_count == 4:  # 최대 관통 수를 초과하면 더 이상 초과하지 않는다.
                             self.weapon.pen_count = 0
