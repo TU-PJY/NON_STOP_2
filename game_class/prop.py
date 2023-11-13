@@ -40,9 +40,11 @@ class Arrow:
                 self.acc -= 0.01 * pps / 4
 
                 if self.dir == 1:
-                    self.deg -= 0.002 * pps / 4
+                    if self.deg > -90:
+                        self.deg -= 0.002555 * pps / 4
                 elif self.dir == 0:
-                    self.deg += 0.002 * pps / 4
+                    if self.deg < 90:
+                        self.deg += 0.002555 * pps / 4
 
                 # 화살이 벽에 박히면
                 if self.x >= self.mp.playerToWallRight - 10 or self.x <= self.mp.playerToWallLeft + 10 or self.y <= 190:

@@ -42,7 +42,7 @@ def init():
     game_manager.add_collision_pair('weapon:monster', target, None)
 
     game_manager.add_object(tool, 0)  # monster tool은 맨 아래 레이어에서 구동된다.
-    game_manager.add_object(bg, 1)
+    game_manager.add_object(bg, 1)  # 몬스터는 2번 레이어에 추가된다
     game_manager.add_object(p, 3)
     game_manager.add_object(weapon, 4)
     game_manager.add_object(mp, 5)

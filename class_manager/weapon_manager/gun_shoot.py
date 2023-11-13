@@ -136,7 +136,7 @@ def shoot_gun(weapon):
                     weapon.pen_count = 0  # 관통 개수 초기화
 
             # 일부 총기는 장전 시 탄피를 배출하므로 예외 처리
-            if not weapon.gun == 'AWP' and not weapon.gun == 'WIN':  # 총 종류에 따라 탄피 크기가 다르다
+            if not weapon.gun_type == 'sr' and not weapon.gun == 'WIN':  # 총 종류에 따라 탄피 크기가 다르다
                 if weapon.gun_type == 'smg' or weapon.gun_type == 'pistol':
                     make_shell(weapon)
 

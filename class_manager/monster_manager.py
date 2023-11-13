@@ -95,7 +95,6 @@ def move_monster(m):
             if m.y <= 230 and m.jump_acc < 0:  # 땅에 착지할 경우
                 m.y = 230
                 m.is_jump = False
-                m.acc_delay = 0
                 m.jump_delay = 330  # 점프 타이밍이 존재
 
             m.jump_acc -= pps / 90

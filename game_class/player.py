@@ -116,12 +116,12 @@ class Player:
         self.mv_right, self.mv_left, self.mv_jump = False, False, False  # 플레이어 이동, 점프
         self.dmg_delay = 0  # 플레이어가 받는 대미지 딜레이
 
+        self.temp_speed = 0  # 추후 근접무기 특수 능력 구현에 사용
         self.speed = 4  # 플레이어 이동 속도 (사실상 맵 움직이는 속도)
         self.jump_acc = JUMP_ACC
         self.jump_count = 0
         self.jump_level = 1  # 레벨이 오를수록 연속 점프 횟수가 많아짐
 
-        self.acc_delay = 0
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
 
         self.size = 0  # 걸을 때 플레이어 크기가 고무줄처럼 커졌다 작아진다.
@@ -139,7 +139,8 @@ class Player:
         self.scope_rot = 0  # scope 흔들림 각도
 
         self.ex, self.ey = 0, 0  # 플레이어 좌표를 제외한 디스플레이 효과 변수. 객체 좌표에 더하여 사용
-        self.px, self.py, self.py2 = 0, 0, 0  # 디스플레이 효과를 모두 포함한 좌표. 무기 출력에 사용.
+        self.px, self.py = 0, 0  # 플레이어 좌표
+        self.wx, self.wy = 0, 0  # 무기 좌표
 
         self.state_machine = StateMachine(self)
         self.state_machine.start()
