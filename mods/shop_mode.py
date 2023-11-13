@@ -19,11 +19,11 @@ def handle_events():
                     game_framework.MODE = 'play'
                     game_framework.pop_mode()
 
-            elif event.key == SDLK_d and :
+            elif event.key == SDLK_d and shop.select_mode == 0:
                 if shop.page < 2:
                     shop.page += 1
 
-            elif event.key == SDLK_a:
+            elif event.key == SDLK_a and shop.select_mode == 0:
                 if shop.page > 1:
                     shop.page -= 1
 
