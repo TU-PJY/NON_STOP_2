@@ -138,7 +138,8 @@ class Shell:
 
 
 class Bullet:
-    def __init__(self, p, mp, x, y, incline, name):
+    def __init__(self, weapon, p, mp, x, y, incline, name):
+        self.weapon = weapon
         self.p, self.mp = p, mp
         self.x, self.y = x, y
         self.incline, self.dir = incline, dir
@@ -149,10 +150,11 @@ class Bullet:
 
         if game_framework.MODE == 'play':
             if self.x < self.mp.playerToWallLeft + 60 or self.x > self.mp.playerToWallRight - 60:
+                self.weapon.pen_enable = False  # 벽에 닿으면 관통 비활성화 후 객체 삭제
                 game_manager.remove_object(self)
 
-            self.x += math.cos(self.incline) * 30 * pps / 4
-            self.y += math.sin(self.incline) * 30 * pps / 4
+            self.x += math.cos(self.incline) * 40 * pps / 4
+            self.y += math.sin(self.incline) * 40 * pps / 4
 
             if self.p.mv_right:
                 self.x -= self.p.speed * pps / 4
@@ -160,13 +162,14 @@ class Bullet:
                 self.x += self.p.speed * pps / 4
 
     def draw(self):
-        draw_rectangle(*self.get_bb())
+        pass
+        # draw_rectangle(*self.get_bb())
 
     def handle_event(self):
         pass
 
     def get_bb(self):
-        return self.x - 120 + self.p.ex, self.y + self.p.ey, self.x + 120 + self.p.ex, self.y + self.p.ey
+        return self.x + self.p.ex, self.y + self.p.ey, self.x + self.p.ex, self.y + self.p.ey
 
     def handle_collision(self, group, other):
         pass

@@ -26,7 +26,7 @@ def spawn_monster(self):  # 몬스터 스폰
 
         self.frame = random.randint(0, 1)
         self.frame = self.frame + APT * FPA * game_framework.frame_time
-        self.type = random.randint(1, 4)
+        self.type = 1
 
         if self.type == 1:
             self.y, self.speed, self.hp = 260, 2, 200
@@ -48,7 +48,7 @@ def spawn_monster(self):  # 몬스터 스폰
         game_manager.add_collision_pair('weapon:monster', None, m)
         game_manager.add_collision_pair('bullet:monster', None, m)
         game_manager.add_object(m, 2)
-        self.spawn_time = 1500
+        self.spawn_time = 1000
 
 
 def update_timer(self):  # 스폰 타이머 업데이트

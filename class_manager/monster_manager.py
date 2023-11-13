@@ -204,7 +204,7 @@ def damage_monster(m):
 
             elif m.weapon.gun == 'AWP':
                 # 관통을 위한 가상 객체 생성
-                bullet = Bullet(m.p, m.mp, m.target.tx - m.p.ex, m.target.ty - m.p.ey, m.weapon.deg, 'AWP')
+                bullet = Bullet(m.weapon, m.p, m.mp, m.target.tx - m.p.ex, m.target.ty - m.p.ey, m.weapon.deg, 'AWP')
                 game_manager.add_object(bullet, 3)
                 game_manager.add_collision_pair('bullet:monster', bullet, None)
                 m.weapon.pen_enable = True  # 해당 변수가 활성화 되어야 관통이 된다.
