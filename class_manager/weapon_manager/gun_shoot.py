@@ -107,6 +107,9 @@ def shoot_gun(weapon):
                         weapon.p.shake_range = 60
                         weapon.flame_display_time = FLAME_DISPLAY_TIME
                         weapon.pen_count = 0  # 관통 개수 초기화
+                        weapon.cur_ammo -= 1  # 발사 시 총알 소모
+                        if weapon.cur_ammo == 0:  # 탄창의 탄약을 모두 소모하면 재장전을 해야한다.
+                            weapon.reload_need = True
 
                 elif weapon.gun == 'KAR98':
                     if weapon.zoom:  # 정조준 시에만 발사 가능
@@ -114,6 +117,9 @@ def shoot_gun(weapon):
                         weapon.p.shake_range = 60
                         weapon.flame_display_time = FLAME_DISPLAY_TIME
                         weapon.pen_count = 0  # 관통 개수 초기화
+                        weapon.cur_ammo -= 1  # 발사 시 총알 소모
+                        if weapon.cur_ammo == 0:  # 탄창의 탄약을 모두 소모하면 재장전을 해야한다.
+                            weapon.reload_need = True
 
                 elif weapon.gun == 'M24':
                     if weapon.zoom:  # 정조준 시에만 발사 가능
@@ -121,6 +127,9 @@ def shoot_gun(weapon):
                         weapon.p.shake_range = 70
                         weapon.flame_display_time = FLAME_DISPLAY_TIME
                         weapon.pen_count = 0  # 관통 개수 초기화
+                        weapon.cur_ammo -= 1  # 발사 시 총알 소모
+                        if weapon.cur_ammo == 0:  # 탄창의 탄약을 모두 소모하면 재장전을 해야한다.
+                            weapon.reload_need = True
 
                 elif weapon.gun == 'AWP':
                     if weapon.zoom:  # 정조준 시에만 발사 가능
@@ -128,6 +137,9 @@ def shoot_gun(weapon):
                         weapon.p.shake_range = 70
                         weapon.flame_display_time = FLAME_DISPLAY_TIME
                         weapon.pen_count = 0  # 관통 개수 초기화
+                        weapon.cur_ammo -= 1  # 발사 시 총알 소모
+                        if weapon.cur_ammo == 0:  # 탄창의 탄약을 모두 소모하면 재장전을 해야한다.
+                            weapon.reload_need = True
 
                 elif weapon.gun == 'CHEYTAC':
                     if weapon.zoom:  # 정조준 시에만 발사 가능
@@ -135,6 +147,9 @@ def shoot_gun(weapon):
                         weapon.p.shake_range = 100
                         weapon.flame_display_time = FLAME_DISPLAY_TIME
                         weapon.pen_count = 0  # 관통 개수 초기화
+                        weapon.cur_ammo -= 1  # 발사 시 총알 소모
+                        if weapon.cur_ammo == 0:  # 탄창의 탄약을 모두 소모하면 재장전을 해야한다.
+                            weapon.reload_need = True
 
                 # 일부 총기는 장전 시 탄피를 배출하므로 예외 처리
                 if not weapon.gun_type == 'sr' and not weapon.gun == 'WIN':  # 총 종류에 따라 탄피 크기가 다르다
@@ -155,10 +170,10 @@ def shoot_gun(weapon):
                 if weapon.gun == 'VECTOR':
                     weapon.flame_display_time = 6
 
-                
-                weapon.cur_ammo -= 1  # 발사 시 총알 소모
-                if weapon.cur_ammo == 0:  # 탄창의 탄약을 모두 소모하면 재장전을 해야한다.
-                    weapon.reload_need = True
+                if not weapon.gun_type == 'sr':
+                    weapon.cur_ammo -= 1  # 발사 시 총알 소모
+                    if weapon.cur_ammo == 0:  # 탄창의 탄약을 모두 소모하면 재장전을 해야한다.
+                        weapon.reload_need = True
 
         else:
             weapon.shoot = False

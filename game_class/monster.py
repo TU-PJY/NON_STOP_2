@@ -112,13 +112,16 @@ class Monster:
     def get_bb(self):
         if self.weapon.pen_enable:  # 관통이 활성화 되는 순간에만 히트박스를 넓힌다.
             if self.type == 1:
-                return self.x + self.p.ex - 110, self.y + self.p.ey - 70, self.x + self.p.ex + 110, self.y + self.p.ey + 60
+                return self.x + self.p.ex - 110, self.y + self.p.ey - 140, self.x + self.p.ex + 110, self.y + self.p.ey + 60
             elif self.type == 2:
-                return self.x + self.p.ex - 140, self.y + self.p.ey - 65, self.x + self.p.ex + 140, self.y + self.p.ey + 65
+                return self.x + self.p.ex - 140, self.y + self.p.ey - 65, self.x + self.p.ex + 140, self.y + self.p.ey + 120
             elif self.type == 3:
-                return self.x + self.p.ex - 130, self.y + self.p.ey - 60, self.x + self.p.ex + 130, self.y + self.p.ey + 60
+                if self.is_jump:
+                    return self.x + self.p.ex - 130, self.y + self.p.ey - 60, self.x + self.p.ex + 130, self.y + self.p.ey + 120
+                else:
+                    return self.x + self.p.ex - 130, self.y + self.p.ey - 120, self.x + self.p.ex + 130, self.y + self.p.ey + 60
             elif self.type == 4:
-                return self.x + self.p.ex - 120, self.y + self.p.ey - 55, self.x + self.p.ex + 120, self.y + self.p.ey + 55
+                return self.x + self.p.ex - 120, self.y + self.p.ey - 140, self.x + self.p.ex + 120, self.y + self.p.ey + 55
 
         else:
             if self.type == 1:

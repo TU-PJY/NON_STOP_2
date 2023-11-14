@@ -145,6 +145,7 @@ class Weapon:
         self.trigger = False  # 마우스 좌클릭 시 True
         self.shoot = False  # True일시 격발
         self.shoot_delay = 0  # 0이 될때마다 self.shoot == True
+
         self.gun_type = 'pistol'  # 현재 총 타입 
         self.prev_gun_type = 'pistol'  # 교체 전 이전 총 타입 
 
@@ -181,13 +182,10 @@ class Weapon:
 
         # 탄약 관련
         # 개발 중에는 99999로 초기화
-        self.num_ammo_small = 99999  # pistol, smg 탄종, 게임 시작 시 기본으로 100발이 주어짐
-        self.num_ammo_middle = 99999  # ar, 일부 rifle 탄종
-        self.num_ammo_big = 99999  # rifle, ar 탄종
-
-        # self.num_ammo_small = 100  # pistol, smg 탄종, 게임 시작 시 기본으로 100발이 주어짐
-        # self.num_ammo_middle = 0  # ar, 일부 rifle 탄종
-        # self.num_ammo_big = 0  # rifle, ar 탄종
+        self.pistol_ammo = 99999  # pistol, smg 탄종, 게임 시작 시 기본으로 100발이 주어짐
+        self.ar_ammo = 99999  # ar 탄종
+        self.rifle_ammo = 99999  # rifle 탄종
+        self.sniper_ammo = 99999  # sr 탄종
 
         self.cur_ammo = 7  # 현재 탄창에 있는 탄약 수, 기본 권총의 장탄 수 
         self.limit_ammo = 7  # 총기마다 다른 장탄수를 가진다.
@@ -196,7 +194,7 @@ class Weapon:
         self.reload_time = 150  # 재장전 소요 시간
         self.cur_reload_time = 0  # 해당 값이 reload_time에 도달해야 재장전이 완료된다.
 
-        self.reloading = False # true일 시 재장전 중
+        self.reloading = False  # true일 시 재장전 중
 
         self.state_machine = StateMachineGun(self)
         self.state_machine.start()

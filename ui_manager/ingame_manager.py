@@ -13,11 +13,13 @@ def render_ammo_ind(self):
 	cur = self.weapon.cur_ammo
 
 	if self.weapon.gun_type == 'pistol' or self.weapon.gun_type == 'smg':
-		num = self.weapon.num_ammo_small
+		num = self.weapon.pistol_ammo
 	elif self.weapon.gun_type == 'ar':
-		num = self.weapon.num_ammo_middle
-	elif self.weapon.gun_type == 'rifle' or self.weapon.gun_type == 'sr':
-		num = self.weapon.num_ammo_big
+		num = self.weapon.ar_ammo
+	elif self.weapon.gun_type == 'rifle':
+		num = self.weapon.rifle_ammo
+	elif self.weapon.gun_type == 'sr':
+		num = self.weapon.sniper_ammo
 
 	self.font.draw(20, 120, '%d | %d' %(cur, num), (self.r, self.g, self.b))
 	pass

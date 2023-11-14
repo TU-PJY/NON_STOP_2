@@ -204,7 +204,6 @@ def click_button(self):
                     play_mode.weapon.zoom = False  # 다른 총 선택 시 스코프 모드 해제
                     play_mode.target.draw_scope = False
 
-
                     if self.page == 1:
                         if (i, j) == (0, 0):
                             play_mode.weapon.gun = 'M1911'
@@ -310,19 +309,21 @@ def click_button(self):
                             play_mode.weapon.reload_time = 350
 
 
-                # 총기 교체 시 잔탄을 모두 반환한 후 재장전 상태로 변경
-                if play_mode.weapon.prev_gun_type == 'pistol' or play_mode.weapon.prev_gun_type == 'smg':
-                    play_mode.weapon.num_ammo_small += play_mode.weapon.cur_ammo
+                    # 총기 교체 시 잔탄을 모두 반환한 후 재장전 상태로 변경
+                    if play_mode.weapon.prev_gun_type == 'pistol' or play_mode.weapon.prev_gun_type == 'smg':
+                        play_mode.weapon.pistol_ammo += play_mode.weapon.cur_ammo
 
-                elif play_mode.weapon.prev_gun_type == 'ar':
-                    play_mode.weapon.num_ammo_middle += play_mode.weapon.cur_ammo
+                    elif play_mode.weapon.prev_gun_type == 'ar':
+                        play_mode.weapon.ar_ammo += play_mode.weapon.cur_ammo
 
-                elif play_mode.weapon.prev_gun_type == 'rifle' or play_mode.weapon.prev_gun_type == 'sr':
-                    play_mode.weapon.num_ammo_big += play_mode.weapon.cur_ammo
+                    elif play_mode.weapon.prev_gun_type == 'rifle':
+                        play_mode.weapon.rifle_ammo += play_mode.weapon.cur_ammo
 
+                    elif play_mode.weapon.prev_gun_type == 'sr':
+                        play_mode.weapon.sniper_ammo += play_mode.weapon.cur_ammo
 
-                play_mode.weapon.prev_gun_type = play_mode.weapon.gun_type
-                play_mode.weapon.cur_ammo = 0
-                play_mode.weapon.reloading = True
+                    play_mode.weapon.prev_gun_type = play_mode.weapon.gun_type
+                    play_mode.weapon.cur_ammo = 0
+                    play_mode.weapon.reloading = True
 
     self.click = False

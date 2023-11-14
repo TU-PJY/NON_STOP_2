@@ -57,19 +57,11 @@ def update_sniper_bolt(weapon):
             make_shell(weapon, 30, 20)
             weapon.shell_out = True
 
-        if 0 < weapon.shoot_delay < 100:
-            weapon.bolt_action = False
-            weapon.shell_out = False
-
     if weapon.gun == 'SPRING':
         if 100 < weapon.shoot_delay < 400 and not weapon.shell_out:  # 탄피를 한 번만 만들도록 한다
             weapon.bolt_action = True
             make_shell(weapon, 30, 20)
             weapon.shell_out = True
-
-        if weapon.shoot_delay < 100:
-            weapon.bolt_action = False
-            weapon.shell_out = False
 
     if weapon.gun == 'KAR98':
         if 100 < weapon.shoot_delay < 400 and not weapon.shell_out:  # 탄피를 한 번만 만들도록 한다
@@ -77,19 +69,11 @@ def update_sniper_bolt(weapon):
             make_shell(weapon, 30, 20)
             weapon.shell_out = True
 
-        if weapon.shoot_delay < 100:
-            weapon.bolt_action = False
-            weapon.shell_out = False
-
     if weapon.gun == 'M24':
         if 100 < weapon.shoot_delay < 500 and not weapon.shell_out:  # 탄피를 한 번만 만들도록 한다
             weapon.bolt_action = True
             make_shell(weapon, 30, 20)
             weapon.shell_out = True
-
-        if weapon.shoot_delay < 100:
-            weapon.bolt_action = False
-            weapon.shell_out = False
 
     if weapon.gun == 'CHEYTAC':
         if 100 < weapon.shoot_delay < 700 and not weapon.shell_out:  # 탄피를 한 번만 만들도록 한다
@@ -97,9 +81,11 @@ def update_sniper_bolt(weapon):
             make_shell(weapon, 40, 30)
             weapon.shell_out = True
 
-        if weapon.shoot_delay < 100:
-            weapon.bolt_action = False
-            weapon.shell_out = False
+    if weapon.shoot_delay < 100:
+        weapon.bolt_action = False
+        weapon.shell_out = False
+        if weapon.reload_need:
+            weapon.zoom = False
 
 
 def make_shell(weapon, size_x=15, size_y=15):  # 탄피 생성
@@ -121,11 +107,13 @@ def reload_gun(weapon):
 
     else:  #  값에 도달하면 재장전 완료
         if weapon.gun_type == 'pistol' or weapon.gun_type == 'smg':
-            weapon.num_ammo_small -= (weapon.limit_ammo - weapon.cur_ammo)
+            weapon.pistol_ammo -= (weapon.limit_ammo - weapon.cur_ammo)
         elif weapon.gun_type == 'ar':
-            weapon.num_ammo_middle -= (weapon.limit_ammo - weapon.cur_ammo)
-        elif weapon.gun_type == 'rifle' or weapon.gun_type == 'sr':
-            weapon.num_ammo_big -= (weapon.limit_ammo - weapon.cur_ammo)
+            weapon.ar_ammo -= (weapon.limit_ammo - weapon.cur_ammo)
+        elif weapon.gun_type == 'rifle':
+            weapon.rifle_ammo -= (weapon.limit_ammo - weapon.cur_ammo)
+        elif weapon.gun_type == 'sr':
+            weapon.sniper_ammo -= (weapon.limit_ammo - weapon.cur_ammo)
 
         weapon.cur_ammo = weapon.limit_ammo  # 탄창을 갈아 낀다
         weapon.reload_need = False
