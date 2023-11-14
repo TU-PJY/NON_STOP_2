@@ -24,6 +24,10 @@ def r_up(e):
     return e[0] == 'INPUT' and e[1].type == SDL_MOUSEBUTTONUP and e[1].button == SDL_BUTTON_RIGHT
 
 
+def reload_down(e):
+    return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_r
+
+
 def change_weapon(weapon):
     if weapon.weapon_type == 0:  # 총을 들고 있을 때 총 -> 근접무기
         weapon.p.look_mouse = False  # 플레이어는 더 이상 마우스를 따라보지 않는다.
@@ -106,3 +110,24 @@ def make_shell(weapon, size_x=15, size_y=15):  # 탄피 생성
         shell = Shell \
             (weapon.p, weapon.mp, weapon.p.x + 20, weapon.p.y - weapon.p.cam_h + 10, weapon.p.dir, size_x, size_y)
     game_manager.add_object(shell, 4)  # 총을 발사하면 탄피가 나온다
+
+
+def reload_gun(weapon):
+    pps = game_framework.pps
+
+    weapon.zoom = False
+    if weapon.cur_reload_time < weapon.reload_time:  # 정해진 값 까지 도달할때까지 더한다
+        weapon.cur_reload_time += pps / 3
+
+    else:  #  값에 도달하면 재장전 완료
+        if weapon.gun_type == 'pistol' or weapon.gun_type == 'smg':
+            weapon.num_ammo_small -= (weapon.limit_ammo - weapon.cur_ammo)
+        elif weapon.gun_type == 'ar':
+            weapon.num_ammo_middle -= (weapon.limit_ammo - weapon.cur_ammo)
+        elif weapon.gun_type == 'rifle' or weapon.gun_type == 'sr':
+            weapon.num_ammo_big -= (weapon.limit_ammo - weapon.cur_ammo)
+
+        weapon.cur_ammo = weapon.limit_ammo  # 탄창을 갈아 낀다
+        weapon.reload_need = False
+        weapon.cur_reload_time = 0
+        weapon.reloading = False

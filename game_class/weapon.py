@@ -14,6 +14,9 @@ class Shoot:
     def enter(weapon, e):
         if weapon.weapon_type == 0:
             weapon.trigger = True
+            if weapon.reload_need:
+                weapon.reloading = True
+
         elif weapon.weapon_type == 1:
             weapon.use = True
 
@@ -36,6 +39,11 @@ class Shoot:
                 elif weapon.zoom:
                     weapon.zoom = False
 
+        if weapon.limit_ammo - weapon.cur_ammo > 0:  # 탄창이 꽉 찬 상태에서는 재장전을 실행하지 않는다
+            if reload_down(e) and not weapon.reloading:  # 재장전
+                weapon.reloading = True
+
+
     @staticmethod
     def do(weapon):
         update_delay(weapon)
@@ -44,6 +52,9 @@ class Shoot:
         if weapon.is_spin:
             spin_win(weapon)
         update_sniper_bolt(weapon)
+
+        if weapon.reloading:
+            reload_gun(weapon)
 
     @staticmethod
     def draw(weapon):
@@ -69,6 +80,10 @@ class Idle:
                 elif weapon.zoom:
                     weapon.zoom = False
 
+        if weapon.limit_ammo - weapon.cur_ammo > 0:  # 탄창이 꽉 찬 상태에서는 재장전을 실행하지 않는다
+            if reload_down(e) and not weapon.reloading:  # 재장전
+                weapon.reloading = True
+
     @staticmethod
     def do(weapon):
         update_delay(weapon)
@@ -76,6 +91,9 @@ class Idle:
         if weapon.is_spin:
             spin_win(weapon)
         update_sniper_bolt(weapon)
+
+        if weapon.reloading:
+            reload_gun(weapon)
 
     @staticmethod
     def draw(weapon):
@@ -89,8 +107,8 @@ class StateMachineGun:
         self.weapon = weapon
         self.cur_state = Idle
         self.table = {
-            Idle: {l_down: Shoot, q_down: Idle, r_down: Idle, r_up: Idle},
-            Shoot: {l_up: Idle, q_down: Shoot, r_down: Shoot, r_up: Shoot}
+            Idle: {l_down: Shoot, q_down: Idle, r_down: Idle, r_up: Idle, reload_down: Idle},
+            Shoot: {l_up: Idle, q_down: Shoot, r_down: Shoot, r_up: Shoot, reload_down: Idle}
         }
 
     def start(self):
@@ -120,14 +138,15 @@ class Weapon:
         self.mp = mp
 
         self.weapon_type = 0  # 0: Gun, 1: Melee
-        self.gun = 'AKS74'
+        self.gun = 'M1911'
         self.deg = 0  # 총 이미지 각도
         self.flip = ''
 
         self.trigger = False  # 마우스 좌클릭 시 True
         self.shoot = False  # True일시 격발
         self.shoot_delay = 0  # 0이 될때마다 self.shoot == True
-        self.gun_type = 'smg'
+        self.gun_type = 'pistol'  # 현재 총 타입 
+        self.prev_gun_type = 'pistol'  # 교체 전 이전 총 타입 
 
         self.flame_display_time = 0
 
@@ -159,6 +178,25 @@ class Weapon:
         self.pen_enable = False
         self.pen_count = 0
         self.pen_limit = 0
+
+        # 탄약 관련
+        # 개발 중에는 99999로 초기화
+        self.num_ammo_small = 99999  # pistol, smg 탄종, 게임 시작 시 기본으로 100발이 주어짐
+        self.num_ammo_middle = 99999  # ar, 일부 rifle 탄종
+        self.num_ammo_big = 99999  # rifle, ar 탄종
+
+        # self.num_ammo_small = 100  # pistol, smg 탄종, 게임 시작 시 기본으로 100발이 주어짐
+        # self.num_ammo_middle = 0  # ar, 일부 rifle 탄종
+        # self.num_ammo_big = 0  # rifle, ar 탄종
+
+        self.cur_ammo = 7  # 현재 탄창에 있는 탄약 수, 기본 권총의 장탄 수 
+        self.limit_ammo = 7  # 총기마다 다른 장탄수를 가진다.
+
+        self.reload_need = False  # true일 시 발사 불가
+        self.reload_time = 150  # 재장전 소요 시간
+        self.cur_reload_time = 0  # 해당 값이 reload_time에 도달해야 재장전이 완료된다.
+
+        self.reloading = False # true일 시 재장전 중
 
         self.state_machine = StateMachineGun(self)
         self.state_machine.start()

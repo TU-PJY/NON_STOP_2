@@ -204,78 +204,125 @@ def click_button(self):
                     play_mode.weapon.zoom = False  # 다른 총 선택 시 스코프 모드 해제
                     play_mode.target.draw_scope = False
 
+
                     if self.page == 1:
                         if (i, j) == (0, 0):
                             play_mode.weapon.gun = 'M1911'
+                            play_mode.weapon.limit_ammo = 7
                         elif (i, j) == (1, 0):
                             play_mode.weapon.gun = 'M92'
+                            play_mode.weapon.limit_ammo = 15
                         elif (i, j) == (2, 0):
                             play_mode.weapon.gun = 'DEGLE'
+                            play_mode.weapon.limit_ammo = 8
                         elif (i, j) == (3, 0):
                             play_mode.weapon.gun = 'M500'
+                            play_mode.weapon.limit_ammo = 6
                         elif (i, j) == (4, 0):
                             play_mode.weapon.gun = 'QHAND'
+                            play_mode.weapon.limit_ammo = 12
 
                         elif (i, j) == (0, 1):
                             play_mode.weapon.gun = 'AKS74'
+                            play_mode.weapon.limit_ammo = 30
                         elif (i, j) == (1, 1):
                             play_mode.weapon.gun = 'UMP'
+                            play_mode.weapon.limit_ammo = 25
                         elif (i, j) == (2, 1):
                             play_mode.weapon.gun = 'VECTOR'
+                            play_mode.weapon.limit_ammo = 25
                         elif (i, j) == (3, 1):
                             play_mode.weapon.gun = 'THOMPSON'
+                            play_mode.weapon.limit_ammo = 30
                         elif (i, j) == (4, 1):
                             play_mode.weapon.gun = 'P90'
+                            play_mode.weapon.limit_ammo = 50
 
                         elif (i, j) == (0, 2):
                             play_mode.weapon.gun = 'SCAR_H'
+                            play_mode.weapon.limit_ammo = 25
                         elif (i, j) == (1, 2):
                             play_mode.weapon.gun = 'M16'
+                            play_mode.weapon.limit_ammo = 30
                         elif (i, j) == (2, 2):
                             play_mode.weapon.gun = 'MP44'
+                            play_mode.weapon.limit_ammo = 20
                         elif (i, j) == (3, 2):
                             play_mode.weapon.gun = 'AUG'
+                            play_mode.weapon.limit_ammo = 30
                         elif (i, j) == (4, 2):
                             play_mode.weapon.gun = 'GROZA'
+                            play_mode.weapon.limit_ammo = 40
 
                         elif (i, j) == (0, 3):
                             play_mode.weapon.gun = 'M1'
+                            play_mode.weapon.limit_ammo = 8
                         elif (i, j) == (1, 3):
                             play_mode.weapon.gun = 'WIN'
+                            play_mode.weapon.limit_ammo = 10
                         elif (i, j) == (2, 3):
                             play_mode.weapon.gun = 'MINI14'
+                            play_mode.weapon.limit_ammo = 30
                         elif (i, j) == (3, 3):
                             play_mode.weapon.gun = 'FAL'
+                            play_mode.weapon.limit_ammo = 20
                         elif (i, j) == (4, 3):
                             play_mode.weapon.gun = 'LVOAS'
+                            play_mode.weapon.limit_ammo = 20
 
                         if j == 0:
                             play_mode.weapon.gun_type = 'pistol'
+                            play_mode.weapon.reload_time = 150
                         elif j == 1:
                             play_mode.weapon.gun_type = 'smg'
+                            play_mode.weapon.reload_time = 200
                         elif j == 2:
                             play_mode.weapon.gun_type = 'ar'
+                            play_mode.weapon.reload_time = 250
                         elif j == 3:
                             play_mode.weapon.gun_type = 'rifle'
+                            play_mode.weapon.reload_time = 250
 
                     elif self.page == 2:
                         if (i, j) == (0, 0):
                             play_mode.weapon.gun = 'SPRING'
                             play_mode.weapon.pen_limit = 2
+                            play_mode.weapon.limit_ammo = 5
                         if (i, j) == (1, 0):
                             play_mode.weapon.gun = 'KAR98'
                             play_mode.weapon.pen_limit = 3
+                            play_mode.weapon.limit_ammo = 5
                         if (i, j) == (2, 0):
                             play_mode.weapon.gun = 'M24'
                             play_mode.weapon.pen_limit = 4
+                            play_mode.weapon.limit_ammo = 5
                         if (i, j) == (3, 0):
                             play_mode.weapon.gun = 'AWP'
                             play_mode.weapon.pen_limit = 6
+                            play_mode.weapon.limit_ammo = 5
                         if (i, j) == (4, 0):
                             play_mode.weapon.gun = 'CHEYTAC'
                             play_mode.weapon.pen_limit = 8
+                            play_mode.weapon.limit_ammo = 7
 
                         if j == 0:
                             play_mode.weapon.gun_type = 'sr'
+                            play_mode.weapon.reload_time = 350
+
+
+                # 총기 교체 시 잔탄을 모두 반환한 후 재장전 상태로 변경
+                if play_mode.weapon.prev_gun_type == 'pistol' or play_mode.weapon.prev_gun_type == 'smg':
+                    play_mode.weapon.num_ammo_small += play_mode.weapon.cur_ammo
+
+                elif play_mode.weapon.prev_gun_type == 'ar':
+                    play_mode.weapon.num_ammo_middle += play_mode.weapon.cur_ammo
+
+                elif play_mode.weapon.prev_gun_type == 'rifle' or play_mode.weapon.prev_gun_type == 'sr':
+                    play_mode.weapon.num_ammo_big += play_mode.weapon.cur_ammo
+
+
+                play_mode.weapon.prev_gun_type = play_mode.weapon.gun_type
+                play_mode.weapon.cur_ammo = 0
+                play_mode.weapon.reloading = True
 
     self.click = False
