@@ -62,7 +62,7 @@ def shoot_gun(weapon):
                     weapon.p.shake_range = 13
 
                 elif weapon.gun == 'VECTOR':
-                    weapon.shoot_delay = 15
+                    weapon.shoot_delay = 12
                     weapon.p.shake_range = 10
 
                 elif weapon.gun == 'THOMPSON':

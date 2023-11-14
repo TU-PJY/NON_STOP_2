@@ -158,15 +158,15 @@ def damage_monster(m):
     if m.weapon.shoot and m.mp.playerToWallLeft - 30 <= m.p.x <= m.mp.playerToWallRight + 30:
         if m.is_hit:  # 맞은걸로 판정되면 대미지를 가한다.
             if m.weapon.gun == 'M1911':
-                m.hp -= 20
+                m.hp -= 25
             elif m.weapon.gun == 'M92':
-                m.hp -= 18
+                m.hp -= 23
             elif m.weapon.gun == 'DEGLE':
-                m.hp -= 30
-            elif m.weapon.gun == 'M500':
                 m.hp -= 35
+            elif m.weapon.gun == 'M500':
+                m.hp -= 40
             elif m.weapon.gun == 'QHAND':
-                m.hp -= 18
+                m.hp -= 20
 
             elif m.weapon.gun == 'AKS74':
                 m.hp -= 12

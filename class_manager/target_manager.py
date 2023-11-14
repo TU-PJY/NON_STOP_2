@@ -95,17 +95,17 @@ def update_target(t):
     # 나누는 숫자가 작을 수록 분산도가 커진다.
     # 총기마다 반동 수치가 달라 조준점이 벌어지는 정도가 다르다.
     if t.weapon.gun == 'M1911':
-        t.dis2 = t.dis / 10
+        t.dis2 = t.dis / 15
         if t.weapon.shoot:
             t.recoil += 20
 
     elif t.weapon.gun == 'M92':
-        t.dis2 = t.dis / 13
+        t.dis2 = t.dis / 15
         if t.weapon.shoot:
             t.recoil += 20
 
     elif t.weapon.gun == 'DEGLE':
-        t.dis2 = t.dis / 13
+        t.dis2 = t.dis / 15
         if t.weapon.shoot:
             t.recoil += 45
 
