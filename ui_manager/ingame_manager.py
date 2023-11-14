@@ -21,7 +21,10 @@ def render_ammo_ind(self):
 	elif self.weapon.gun_type == 'sr':
 		num = self.weapon.sniper_ammo
 
-	self.font.draw(20, 60, '%d | %d' %(cur, num), (self.r, self.g, self.b))
+	x = 20 + self.p.shake_x
+	y = 60 + self.p.shake_y - self.p.push_y
+
+	self.font.draw(x, y, '%d | %d' %(cur, num), (self.r, self.g, self.b))
 	pass
 
 
