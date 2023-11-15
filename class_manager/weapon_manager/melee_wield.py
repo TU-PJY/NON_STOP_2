@@ -26,12 +26,18 @@ def wield_melee(weapon):
                 weapon.melee_x = 150
                 weapon.p.shake_range = 20
                 weapon.wield_delay = 45
+
+            elif weapon.melee == 'KATANA':
+                weapon.melee_x = 100
+                weapon.p.shake_range = 20
+                weapon.wield_delay = 140
+                weapon.swing_down = True
+                weapon.swing = True
         else:
             weapon.wield = False
 
 
 def melee_skill(weapon):
-    global x
     if weapon.melee == 'RAPIER':
         if weapon.wield_delay <= 0:
             weapon.rapier_y = random.randint(-10, 10)
@@ -39,7 +45,7 @@ def melee_skill(weapon):
             weapon.melee_deg = 0
             weapon.melee_x = 150
             weapon.p.shake_range = 20
-            weapon.wield_delay = 25
+            weapon.wield_delay = 18
             weapon.wield = True
 
         else:

@@ -63,7 +63,7 @@ class Shoot:
         if weapon.reloading:
             reload_gun(weapon)
 
-        if weapon.melee == 'BAT' and weapon.swing:
+        if weapon.swing:
             swing(weapon)
 
         if weapon.melee == 'RAPIER':
@@ -121,7 +121,7 @@ class Idle:
         if weapon.reloading:
             reload_gun(weapon)
 
-        if weapon.melee == 'BAT' and weapon.swing:
+        if weapon.swing:
             swing(weapon)
 
         if weapon.melee == 'RAPIER':
@@ -187,7 +187,7 @@ class Weapon:
 
         self.flame_display_time = 0
 
-        self.melee = 'RAPIER'
+        self.melee = 'KATANA'
         self.melee_x = 0
         self.melee_deg = 170
         self.use = False

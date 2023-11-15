@@ -133,6 +133,8 @@ bat_directory = 'res//melee_image//bat.png'
 bat_swing_directory = 'res//melee_image//bat_swing.png'
 rapier_directory = 'res//melee_image//rapier.png'
 rapid_directory = 'res//melee_image//effect//rapid.png'
+katana_directory = 'res//melee_image//katana.png'
+katana_swing_directory = 'res//melee_image//katana_swing.png'
 
 # 몬스터 이미지 파일 경로
 type1_directory = 'res//monster_image//goblin_small.png'

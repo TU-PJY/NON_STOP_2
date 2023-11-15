@@ -88,11 +88,27 @@ def draw_target(t):
                 t.target_melee.composite_draw(0, 'h', t.tmx + t.p.cam_x, y, 100, 150)
 
         elif t.weapon.melee == 'RAPIER':
+            if t.weapon.skill_enable:
+                if t.p.dir == 1:
+                    t.tmx = t.p.x + 370
+                    t.target_melee.composite_draw(0, '', t.tmx + t.p.cam_x, y, 100, 150)
+                elif t.p.dir == 0:
+                    t.tmx = t.p.x - 370
+                    t.target_melee.composite_draw(0, 'h', t.tmx + t.p.cam_x, y, 100, 150)
+            else:
+                if t.p.dir == 1:
+                    t.tmx = t.p.x + 300
+                    t.target_melee.composite_draw(0, '', t.tmx + t.p.cam_x, y, 100, 150)
+                elif t.p.dir == 0:
+                    t.tmx = t.p.x - 300
+                    t.target_melee.composite_draw(0, 'h', t.tmx + t.p.cam_x, y, 100, 150)
+
+        elif t.weapon.melee == 'KATANA':
             if t.p.dir == 1:
-                t.tmx = t.p.x + 300
+                t.tmx = t.p.x + 270
                 t.target_melee.composite_draw(0, '', t.tmx + t.p.cam_x, y, 100, 150)
             elif t.p.dir == 0:
-                t.tmx = t.p.x - 300
+                t.tmx = t.p.x - 270
                 t.target_melee.composite_draw(0, 'h', t.tmx + t.p.cam_x, y, 100, 150)
 
 

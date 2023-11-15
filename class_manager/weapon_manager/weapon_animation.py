@@ -49,17 +49,33 @@ def update_rapier_player(weapon):
 def swing(weapon):
     pps = game_framework.pps
 
-    if weapon.swing_down:
-        weapon.melee_deg -= pps / 20
-        weapon.p.rotate -= pps / 60
-        if weapon.melee_deg <= 117.5:
-            weapon.swing_down = False
-            weapon.swing_up = True
+    if weapon.melee == 'BAT':
+        if weapon.swing_down:
+            weapon.melee_deg -= pps / 20
+            weapon.p.rotate -= pps / 60
+            if weapon.melee_deg <= 117.5:
+                weapon.swing_down = False
+                weapon.swing_up = True
 
-    elif weapon.swing_up:
-        weapon.melee_deg += pps / 200
-        weapon.p.rotate += pps / 600
-        if weapon.melee_deg >= 120:
-            weapon.swing_up = False
-            weapon.swing = False
+        elif weapon.swing_up:
+            weapon.melee_deg += pps / 200
+            weapon.p.rotate += pps / 600
+            if weapon.melee_deg >= 120:
+                weapon.swing_up = False
+                weapon.swing = False
+
+    elif weapon.melee == 'KATANA':
+        if weapon.swing_down:
+            weapon.melee_deg -= pps / 10
+            weapon.p.rotate -= pps / 50
+            if weapon.melee_deg <= -2.2:
+                weapon.swing_down = False
+                weapon.swing_up = True
+
+        elif weapon.swing_up:
+            weapon.melee_deg += pps / 100
+            weapon.p.rotate += pps / 500
+            if weapon.melee_deg >= 0:
+                weapon.swing_up = False
+                weapon.swing = False
 

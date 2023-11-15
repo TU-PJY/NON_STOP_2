@@ -52,6 +52,7 @@ def load_shop_resource(self):
     self.image_knife = load_image(knife_right_directory)
     self.image_bat = load_image(bat_directory)
     self.image_rapier = load_image(rapier_directory)
+    self.image_katana = load_image(katana_directory)
 
 
 def make_button_pos(self):  # shop 버튼 위치 생성
@@ -146,6 +147,7 @@ def draw_items(self):
         self.image_knife.draw(self.button_x[0], self.button_y[0], 150, 100)
         self.image_bat.rotate_draw(-45, self.button_x[1] - 43, self.button_y[0] - 30, 35, 325)
         self.image_rapier.rotate_draw(0.5, self.button_x[2] - 50, self.button_y[0] - 25, 300, 75)
+        self.image_katana.rotate_draw(-45, self.button_x[3] - 45, self.button_y[0] - 33, 35, 260)
 
 
 def draw_cursor(self):
@@ -353,5 +355,7 @@ def click_button(self):
                         play_mode.weapon.melee = 'BAT'
                     elif (i, j) == (2, 0):
                         play_mode.weapon.melee = 'RAPIER'
+                    elif (i, j) == (3, 0):
+                        play_mode.weapon.melee = 'KATANA'
 
     self.click = False
