@@ -208,7 +208,7 @@ def damage_monster(m):
                 game_manager.add_collision_pair('bullet:monster', bullet, None)
                 m.weapon.pen_enable = True  # 해당 변수가 활성화 되어야 관통이 된다.
 
-            m.op = 100  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달 
+            m.op = 100  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달
             m.is_hit = False
             m.weapon.hit_once = False
 
@@ -222,15 +222,15 @@ def damage_monster(m):
                 m.hp -= 60
 
             elif m.weapon.melee == 'BAT':
-                m.hp -= 100
+                m.hp -= 120
 
             elif m.weapon.melee == 'RAPIER':
                 m.hp -= 30
 
             elif m.weapon.melee == 'KATANA':
-                m.hp -= 80
+                m.hp -= 100
 
-            m.op = 100  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달 
+            m.op = 100  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달
             m.is_hit = False
             m.weapon.hit_once = False
 
@@ -278,7 +278,7 @@ def update_monster_size(m):
 def update_monster_opacify(m):
     pps = game_framework.pps
     if m.op > 0:
-        m.op -= 4 * pps / 3
+        m.op -= int(4 * pps / 3)
         if m.op < 0:
             m.op = 0
 

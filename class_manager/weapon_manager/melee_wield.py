@@ -1,6 +1,7 @@
 import random
 
 from game_work import game_framework
+from mods import play_mode
 
 
 def wield_melee(weapon):
@@ -51,11 +52,27 @@ def melee_skill(weapon):
         else:
             weapon.wield = False
 
+    elif weapon.melee == 'KATANA':
+        weapon.p.shake_range = 35
+        weapon.p.rotate = 118.8
+
+
+def update_rapier_player(weapon):
+    if weapon.melee == 'RAPIER':
+        if weapon.use or weapon.skill_enable:
+            weapon.p.rotate = 119
+        else:
+            weapon.p.rotate = 0
+
 
 def update_melee_skill(weapon):
     pps = game_framework.pps
     if weapon.skill_time > 0:
         weapon.skill_time -= pps / 3
     else:
+        if weapon.melee == 'KATANA':
+            weapon.p.speed = weapon.p.temp_speed
+            weapon.p.rotate = 0
         weapon.skill_enable = False
         weapon.wield = False
+

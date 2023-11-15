@@ -6,8 +6,11 @@ def draw_melee(weapon):
         elif weapon.melee == 'BAT' and not weapon.swing:
             weapon.melee_deg = 120
 
-        elif weapon.melee == 'KATANA' and not weapon.swing:
-            weapon.melee_deg = 0
+        elif weapon.melee == 'KATANA':
+            if weapon.skill_enable:
+                weapon.melee_deg = -58.5
+            elif not weapon.swing and not weapon.skill_enable:
+                weapon.melee_deg = 0
 
         elif weapon.melee_x == 0 and weapon.melee == 'RAPIER':
             weapon.melee_deg = 0.3
@@ -20,7 +23,10 @@ def draw_melee(weapon):
             y = weapon.p.wy - 10
 
         elif weapon.melee == 'KATANA':
-            y = weapon.p.wy - 10
+            if weapon.skill_enable:
+                y = weapon.p.wy - 30
+            else:
+                y = weapon.p.wy - 10
 
         elif weapon.melee == 'RAPIER':
             y = weapon.p.wy - 10 + weapon.rapier_y
@@ -69,11 +75,20 @@ def draw_melee(weapon):
         elif weapon.melee == 'KATANA':
             if not weapon.swing or (weapon.swing and weapon.swing_up):
                 if weapon.p.dir == 1:
-                    x = weapon.p.px + weapon.melee_x + 40
-                    weapon.katana.clip_composite_draw(0, 0, 60, 410, weapon.melee_deg, '', x, y, 50, 360)
+                    if weapon.skill_enable:
+                        x = weapon.p.px + weapon.melee_x - 40
+                        weapon.katana.clip_composite_draw(0, 0, 60, 410, -weapon.melee_deg, 'h', x, y, 50, 360)
+                    else:
+                        x = weapon.p.px + weapon.melee_x + 40
+                        weapon.katana.clip_composite_draw(0, 0, 60, 410, weapon.melee_deg, '', x, y, 50, 360)
+
                 elif weapon.p.dir == 0:
-                    x = weapon.p.px - weapon.melee_x - 40
-                    weapon.katana.clip_composite_draw(0, 0, 60, 410, -weapon.melee_deg, 'h', x, y, 50, 360)
+                    if weapon.skill_enable:
+                        x = weapon.p.px - weapon.melee_x + 40
+                        weapon.katana.clip_composite_draw(0, 0, 60, 410, weapon.melee_deg, '', x, y, 50, 360)
+                    else:
+                        x = weapon.p.px - weapon.melee_x - 40
+                        weapon.katana.clip_composite_draw(0, 0, 60, 410, -weapon.melee_deg, 'h', x, y, 50, 360)
 
             elif weapon.swing and weapon.swing_down:
                 if weapon.p.dir == 1:
@@ -82,5 +97,3 @@ def draw_melee(weapon):
                 elif weapon.p.dir == 0:
                     x = weapon.p.px - weapon.melee_x - 40
                     weapon.katana_swing.clip_composite_draw(0, 0, 410, 410, -weapon.melee_deg, 'h', x, y, 400, 360)
-
-

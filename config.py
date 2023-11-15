@@ -151,6 +151,10 @@ hit_feeeback_directory = 'res//monster_image//feedback//hit.png'
 arrow_right_directory = 'res//prop//arrow_right.png'
 arrow_left_directory = 'res//prop//arrow_left.png'
 shell_directory = 'res//prop//catridge.png'
+katana_slice_directory = 'res//melee_image//katana_slice.png'
+player1_slice_right_directory = 'res//player_image//player1_slice_right.png'
+player1_slice_left_directory = 'res//player_image//player1_slice_left.png'
+slice_effect_directory = 'res//melee_image//effect//slice_effect.png'
 
 # ui 이미지 파일 경로
 shop_window_directory = 'res//ui//shop_window.png'

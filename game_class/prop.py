@@ -144,7 +144,7 @@ class Feedback:
         self.image = load_image(hit_feeeback_directory)
         self.x = x
         self.y = y
-        self.op = 300
+        self.op = 1
 
     def draw(self):
         self.image.opacify(self.op)
@@ -153,8 +153,8 @@ class Feedback:
     def update(self):
         pps = game_framework.pps
 
-        if self.op > 0:
-            self.op -= 4 * pps / 3
+        if self.op < 99:
+            self.op += int(2 * pps / 3)
         else:
             game_manager.remove_object(self)
 
@@ -169,7 +169,7 @@ class Bullet:
         self.x, self.y = x, y
         self.incline = incline
         self.name = name
-        self.move_delay = 20
+        self.move_delay = 30
 
     def update(self):
         pps = game_framework.pps
@@ -203,4 +203,76 @@ class Bullet:
         return self.x + self.p.ex, self.y + self.p.ey, self.x + self.p.ex, self.y + self.p.ey
 
     def handle_collision(self, group, other):
+        pass
+
+
+class KatanaSlice:
+    def __init__(self, p, weapon):
+        self.p, self.weapon = p, weapon
+        self.x, self.y = 0, 0
+        self.dir = 0
+        self.player_deg = 0
+        self.melee_deg = 0
+        self.op = 1
+        self.op_reduce = False
+
+        self.dir = self.p.dir
+
+        self.back = load_image(pause_bg_directory)
+        self.katana_slice = load_image(katana_slice_directory)
+        self.player1_slice_right = load_image(player1_slice_right_directory)
+        self.player1_slice_left = load_image(player1_slice_left_directory)
+        self.effect = load_image(slice_effect_directory)
+
+        self.start_x = self.p.px
+        self.stary_y = self.p.py
+
+    def draw(self):
+        self.back.opacify(self.op + 50)
+        self.katana_slice.opacify(self.op)
+        self.effect.opacify(self.op)
+
+        self.back.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
+
+        if self.dir == 1:
+            self.effect.clip_composite_draw(0, 0, 1500, 280, 0, '', self.p.px - 900, self.p.py, 1500, 280)
+        else :
+            self.effect.clip_composite_draw(0, 0, 1500, 280, 0, 'h', self.p.px + 900, self.p.py, 1500, 280)
+
+        if self.p.dir == 1:
+            self.player1_slice_right.opacify(self.op)
+            (self.player1_slice_right.rotate_draw(self.p.rotate, self.p.px, self.p.py, 400, 400))
+            if self.weapon.skill_enable:
+                self.katana_slice.clip_composite_draw\
+                    (0, 0, 60, 410, -self.weapon.melee_deg, 'h', self.p.px - 40, self.p.py - 30, 50, 360)
+            else:
+                self.katana_slice.clip_composite_draw \
+                    (0, 0, 60, 410, self.weapon.melee_deg, '', self.p.px + 40, self.p.py - 30, 50, 360)\
+
+
+
+        elif self.p.dir == 0:
+            self.player1_slice_left.opacify(self.op)
+            self.player1_slice_left.rotate_draw(-self.p.rotate, self.p.px, self.p.py, 400, 400)
+            if self.weapon.skill_enable:
+                self.katana_slice.clip_composite_draw\
+                    (0, 0, 60, 410, self.weapon.melee_deg, '', self.p.px + 40, self.p.py - 30, 50, 360)
+            else:
+                self.katana_slice.clip_composite_draw \
+                    (0, 0, 60, 410, -self.weapon.melee_deg, 'h', self.p.px - 40, self.p.py - 30, 50, 360)
+
+
+
+    def update(self):
+        pps = game_framework.pps
+
+        if not self.weapon.skill_enable:
+            self.op_reduce = True
+
+        if self.op_reduce:
+            self.op += int(4 * pps / 3)
+            if self.op >= 99:
+                game_manager.remove_object(self)
+
+    def handle_event(self):
         pass

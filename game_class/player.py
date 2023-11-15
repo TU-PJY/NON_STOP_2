@@ -1,5 +1,6 @@
 from class_manager.player_manager import *
 from game_work.display_manager import *
+from mods import play_mode
 
 
 # 실시간으로 총이 마우스 좌표를 향해야 하므로 Class_Player가 마우스 좌표를 받아 Class_Gun으로 전달한다.
@@ -12,8 +13,15 @@ class Move:
     def enter(p, e):
         if right_down(e) or left_up(e):
             p.mv_right = True
+            if play_mode.weapon.melee == 'KATANA' and play_mode.weapon.skill_enable:
+                play_mode.weapon.skill_enable = False
+                p.speed = p.temp_speed
+
         if right_up(e) or left_down(e):
             p.mv_left = True
+            if play_mode.weapon.melee == 'KATANA' and play_mode.weapon.skill_enable:
+                play_mode.weapon.skill_enable = False
+                p.speed = p.temp_speed
 
     @staticmethod
     def exit(p, e):
@@ -32,9 +40,11 @@ class Move:
 
     @staticmethod
     def do(p):
-        p.dir = 1 if p.mx > p.x else 0
-        walk_animation(p)
+        if not play_mode.weapon.skill_enable:
+            p.dir = 1 if p.mx > p.x else 0
+
         jump(p)
+        walk_animation(p)
         look_mouse(p)
         update_camera(p)
         process_effect(p)
@@ -63,7 +73,9 @@ class Idle:
 
     @staticmethod
     def do(p):
-        p.dir = 1 if p.mx > p.x else 0
+        if not play_mode.weapon.skill_enable:
+            p.dir = 1 if p.mx > p.x else 0
+
         jump(p)
         look_mouse(p)
         update_camera(p)

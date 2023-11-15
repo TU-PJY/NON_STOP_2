@@ -4,9 +4,11 @@ from class_manager.weapon_manager.flame_output import draw_flame
 from class_manager.weapon_manager.gun_output import draw_gun
 from class_manager.weapon_manager.gun_shoot import shoot_gun
 from class_manager.weapon_manager.melee_output import draw_melee
-from class_manager.weapon_manager.melee_wield import wield_melee, melee_skill, update_melee_skill
-from class_manager.weapon_manager.weapon_animation import spin_win, update_melee_position, swing, update_rapier_player
+from class_manager.weapon_manager.melee_wield import wield_melee, melee_skill, update_melee_skill, update_rapier_player
+from class_manager.weapon_manager.weapon_animation import spin_win, update_melee_position, swing
+from game_class.prop import KatanaSlice
 from game_work import game_framework
+from mods import play_mode
 
 
 class Shoot:
@@ -45,7 +47,16 @@ class Shoot:
         if r_down(e) and weapon.weapon_type == 1 and weapon.skill_usable and not weapon.skill_enable:
             if weapon.melee == 'RAPIER':
                 weapon.skill_time = 400
-            weapon.skill_enable = True
+                weapon.skill_enable = True
+
+            elif weapon.melee == 'KATANA' and (weapon.p.mv_right or weapon.p.mv_left):
+                if (weapon.p.mv_right and weapon.p.dir == 1) or (weapon.p.mv_left and weapon.p.dir == 0):
+                    weapon.skill_time = 100
+                    weapon.p.temp_speed = weapon.p.speed
+                    weapon.p.speed = 30
+                    ks = KatanaSlice(weapon.p, weapon)
+                    game_manager.add_object(ks, 7)
+                    weapon.skill_enable = True
 
         if weapon.limit_ammo - weapon.cur_ammo > 0:  # 탄창이 꽉 찬 상태에서는 재장전을 실행하지 않는다
             if reload_down(e) and not weapon.reloading:  # 재장전
@@ -66,7 +77,7 @@ class Shoot:
         if weapon.swing:
             swing(weapon)
 
-        if weapon.melee == 'RAPIER':
+        if weapon.melee == 'RAPIER' and weapon.weapon_type == 1:
             update_rapier_player(weapon)
 
         if weapon.skill_enable:
@@ -104,7 +115,16 @@ class Idle:
         if r_down(e) and weapon.weapon_type == 1 and weapon.skill_usable and not weapon.skill_enable:
             if weapon.melee == 'RAPIER':
                 weapon.skill_time = 300
-            weapon.skill_enable = True
+                weapon.skill_enable = True
+
+            elif weapon.melee == 'KATANA' and (weapon.p.mv_right or weapon.p.mv_left):
+                if (weapon.p.mv_right and weapon.p.dir == 1) or (weapon.p.mv_left and weapon.p.dir == 0):
+                    weapon.skill_time = 100
+                    weapon.p.temp_speed = weapon.p.speed
+                    weapon.p.speed = 30
+                    ks = KatanaSlice(weapon.p, weapon)
+                    game_manager.add_object(ks, 7)
+                    weapon.skill_enable = True
 
         if weapon.limit_ammo - weapon.cur_ammo > 0:  # 탄창이 꽉 찬 상태에서는 재장전을 실행하지 않는다
             if reload_down(e) and not weapon.reloading:  # 재장전
@@ -124,7 +144,7 @@ class Idle:
         if weapon.swing:
             swing(weapon)
 
-        if weapon.melee == 'RAPIER':
+        if weapon.melee == 'RAPIER' and weapon.weapon_type == 1:
             update_rapier_player(weapon)
 
         if weapon.skill_enable:

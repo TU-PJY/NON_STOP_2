@@ -38,14 +38,6 @@ def update_melee_position(weapon):
             weapon.melee_x = 0
 
 
-def update_rapier_player(weapon):
-    if weapon.melee == 'RAPIER':
-        if weapon.use or weapon.skill_enable:
-            weapon.p.rotate = 119
-        else:
-            weapon.p.rotate = 0
-
-
 def swing(weapon):
     pps = game_framework.pps
 
