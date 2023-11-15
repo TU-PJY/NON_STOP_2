@@ -169,6 +169,7 @@ class Bullet:
         self.x, self.y = x, y
         self.incline = incline
         self.name = name
+        self.move_delay = 20
 
     def update(self):
         pps = game_framework.pps
@@ -179,8 +180,11 @@ class Bullet:
                 self.weapon.pen_enable = False
                 game_manager.remove_object(self)
 
-            self.x += math.cos(self.incline) * 30 * pps / 4
-            self.y += math.sin(self.incline) * 30 * pps / 4
+            if self.move_delay > 0:
+                self.move_delay -= pps / 4
+            else:
+                self.x += math.cos(self.incline) * 30 * pps / 4
+                self.y += math.sin(self.incline) * 30 * pps / 4
 
             if self.p.mv_right:
                 self.x -= self.p.speed * pps / 4
@@ -195,7 +199,7 @@ class Bullet:
         pass
 
     def get_bb(self):
-        return self.x + self.p.ex - 80, self.y + self.p.ey - 30, self.x + self.p.ex + 80, self.y + self.p.ey + 30
+        return self.x + self.p.ex, self.y + self.p.ey, self.x + self.p.ex, self.y + self.p.ey
 
     def handle_collision(self, group, other):
         pass
