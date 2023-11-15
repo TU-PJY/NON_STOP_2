@@ -336,6 +336,13 @@ def click_button(self):
                     play_mode.weapon.reloading = True
 
                 elif self.select_mode == 1:
+                    play_mode.p.rotate = 0  # 무기 사용 중 무기 변경 시 무기 정보를 초기화 한다
+                    play_mode.weapon.melee_deg = 0
+                    play_mode.weapon.melee_x = 0
+                    play_mode.weapon.swing = False
+                    play_mode.weapon.swing_down = False
+                    play_mode.weapon.swing_up = False
+
                     if (i, j) == (0, 0):
                         play_mode.weapon.melee = 'KNIFE'
                     elif (i, j) == (1, 0):
