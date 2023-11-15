@@ -180,6 +180,7 @@ class Bullet:
                 self.weapon.pen_enable = False
                 game_manager.remove_object(self)
 
+            # 객체 생성하자마자 움직이면 최초로 쏜 몬스터와 충돌하지 않을수도 있으므로 약간의 딜레이 후 움직인다.
             if self.move_delay > 0:
                 self.move_delay -= pps / 4
             else:

@@ -32,10 +32,10 @@ def spawn_monster(self):  # 몬스터 스폰
             self.y, self.speed, self.hp = 260, 1.5, 200
 
         elif self.type == 2:
-            self.y, self.speed, self.hp = 670, 1.3, 180
+            self.y, self.speed, self.hp = 670, 1.3, 150
 
         elif self.type == 3:
-            self.y, self.speed, self.hp, self.frame = 230, 1, 150, 0
+            self.y, self.speed, self.hp, self.frame = 230, 1, 180, 0
 
         elif self.type == 4:
             self.y, self.speed, self.hp = 240, 0.5, 130

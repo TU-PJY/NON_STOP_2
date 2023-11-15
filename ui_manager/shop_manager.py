@@ -210,6 +210,7 @@ def click_button(self):
                         self.button_y[j] - 75 < self.my < self.button_y[j] + 75:
                     play_mode.weapon.zoom = False  # 다른 총 선택 시 스코프 모드 해제
                     play_mode.target.draw_scope = False
+                    play_mode.weapon.pen_enable = False
 
                     if self.page == 1:
                         if (i, j) == (0, 0):
