@@ -24,7 +24,8 @@ def render_ammo_ind(self):
 	x = 20 + self.p.shake_x
 	y = 60 + self.p.shake_y - self.p.push_y
 
-	self.font.draw(x, y, '%d | %d' %(cur, num), (self.r, self.g, self.b))
+	if game_framework.MODE == 'play':
+		self.font.draw(x, y, '%d | %d' %(cur, num), (self.r, self.g, self.b))
 	pass
 
 
