@@ -19,10 +19,24 @@ def spin_win(weapon):
 
 def update_melee_position(weapon):
     pps = game_framework.pps
-    if weapon.melee_x > 0:
-        weapon.melee_x -= pps / 2
+    if weapon.melee == 'RAPIER':
+        if weapon.melee_x > 0:
+            weapon.melee_x -= pps * 2
+        else:
+            weapon.melee_x = 0
     else:
-        weapon.melee_x = 0
+        if weapon.melee_x > 0:
+            weapon.melee_x -= pps / 2
+        else:
+            weapon.melee_x = 0
+
+
+def update_rapier_player(weapon):
+    if weapon.melee == 'RAPIER':
+        if weapon.use:
+            weapon.p.rotate = 119
+        else:
+            weapon.p.rotate = 0
 
 
 def swing(weapon):

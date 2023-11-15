@@ -72,3 +72,4 @@ def load_melee_image(self):
     self.knife_left = load_image(knife_left_directory)
     self.bat = load_image(bat_directory)
     self.bat_swing = load_image(bat_swing_directory)
+    self.rapier = load_image(rapier_directory)

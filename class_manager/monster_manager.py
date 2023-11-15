@@ -224,6 +224,9 @@ def damage_monster(m):
             elif m.weapon.melee == 'BAT':
                 m.hp -= 100
 
+            elif m.weapon.melee == 'RAPIER':
+                m.hp -= 30
+
             m.op = 100  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달 
             m.is_hit = False
             m.weapon.hit_once = False

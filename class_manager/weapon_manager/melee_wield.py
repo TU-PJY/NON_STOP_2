@@ -1,3 +1,5 @@
+import random
+
 from game_work import game_framework
 
 
@@ -17,6 +19,12 @@ def wield_melee(weapon):
                 weapon.wield_delay = 250
                 weapon.swing_down = True
                 weapon.swing = True
-                pass
+
+            elif weapon.melee == 'RAPIER':
+                weapon.rapier_y = random.randint(-10, 10)
+                weapon.melee_deg = 0
+                weapon.melee_x = 150
+                weapon.p.shake_range = 20
+                weapon.wield_delay = 45
         else:
             weapon.wield = False

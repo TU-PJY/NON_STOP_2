@@ -99,23 +99,24 @@ def make_shell(weapon, size_x=15, size_y=15):  # 탄피 생성
 
 
 def reload_gun(weapon):
-    pps = game_framework.pps
+    if weapon.weapon_type == 0:
+        pps = game_framework.pps
 
-    weapon.zoom = False
-    if weapon.cur_reload_time < weapon.reload_time:  # 정해진 값 까지 도달할때까지 더한다
-        weapon.cur_reload_time += pps / 3
+        weapon.zoom = False
+        if weapon.cur_reload_time < weapon.reload_time:  # 정해진 값 까지 도달할때까지 더한다
+            weapon.cur_reload_time += pps / 3
 
-    else:  #  값에 도달하면 재장전 완료
-        if weapon.gun_type == 'pistol' or weapon.gun_type == 'smg':
-            weapon.pistol_ammo -= (weapon.limit_ammo - weapon.cur_ammo)
-        elif weapon.gun_type == 'ar':
-            weapon.ar_ammo -= (weapon.limit_ammo - weapon.cur_ammo)
-        elif weapon.gun_type == 'rifle':
-            weapon.rifle_ammo -= (weapon.limit_ammo - weapon.cur_ammo)
-        elif weapon.gun_type == 'sr':
-            weapon.sniper_ammo -= (weapon.limit_ammo - weapon.cur_ammo)
+        else:  #  값에 도달하면 재장전 완료
+            if weapon.gun_type == 'pistol' or weapon.gun_type == 'smg':
+                weapon.pistol_ammo -= (weapon.limit_ammo - weapon.cur_ammo)
+            elif weapon.gun_type == 'ar':
+                weapon.ar_ammo -= (weapon.limit_ammo - weapon.cur_ammo)
+            elif weapon.gun_type == 'rifle':
+                weapon.rifle_ammo -= (weapon.limit_ammo - weapon.cur_ammo)
+            elif weapon.gun_type == 'sr':
+                weapon.sniper_ammo -= (weapon.limit_ammo - weapon.cur_ammo)
 
-        weapon.cur_ammo = weapon.limit_ammo  # 탄창을 갈아 낀다
-        weapon.reload_need = False
-        weapon.cur_reload_time = 0
-        weapon.reloading = False
+            weapon.cur_ammo = weapon.limit_ammo  # 탄창을 갈아 낀다
+            weapon.reload_need = False
+            weapon.cur_reload_time = 0
+            weapon.reloading = False

@@ -1,17 +1,23 @@
 def draw_melee(weapon):
-
     if weapon.weapon_type == 1:
         if weapon.melee_x == 0 and weapon.melee == 'KNIFE':
             weapon.melee_deg = 170
 
-        if weapon.melee == 'BAT' and not weapon.swing:
+        elif weapon.melee == 'BAT' and not weapon.swing:
             weapon.melee_deg = 120
 
-        if weapon.melee == 'KNIFE':
-            y = weapon.p.py - 10  # 고정값
+        elif weapon.melee_x == 0 and weapon.melee == 'RAPIER':
+            weapon.melee_deg = 0.3
+            weapon.rapier_y = 0
 
-        if weapon.melee == 'BAT':
-            y = weapon.p.py
+        if weapon.melee == 'KNIFE':
+            y = weapon.p.wy - 10  # 고정값
+
+        elif weapon.melee == 'BAT':
+            y = weapon.p.wy - 10
+
+        elif weapon.melee == 'RAPIER':
+            y = weapon.p.wy - 10 + weapon.rapier_y
 
         if weapon.melee == 'KNIFE':
             if weapon.p.dir == 1:
@@ -37,5 +43,13 @@ def draw_melee(weapon):
                 elif weapon.p.dir == 0:
                     x = weapon.p.px - weapon.melee_x
                     weapon.bat_swing.clip_composite_draw(0, 0, 400, 400, -weapon.melee_deg, 'h', x, y, 400, 400)
+
+        elif weapon.melee == 'RAPIER':
+            if weapon.p.dir == 1:
+                x = weapon.p.px + weapon.melee_x + 20
+                weapon.rapier.clip_composite_draw(0, 0, 350, 100, weapon.melee_deg, '', x, y, 335, 75)
+            elif weapon.p.dir == 0:
+                x = weapon.p.px - weapon.melee_x - 20
+                weapon.rapier.clip_composite_draw(0, 0, 350, 100, -weapon.melee_deg, 'h', x, y, 335, 75)
 
 

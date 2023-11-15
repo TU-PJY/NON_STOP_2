@@ -5,7 +5,7 @@ from class_manager.weapon_manager.gun_output import draw_gun
 from class_manager.weapon_manager.gun_shoot import shoot_gun
 from class_manager.weapon_manager.melee_output import draw_melee
 from class_manager.weapon_manager.melee_wield import wield_melee
-from class_manager.weapon_manager.weapon_animation import spin_win, update_melee_position, swing
+from class_manager.weapon_manager.weapon_animation import spin_win, update_melee_position, swing, update_rapier_player
 from game_work import game_framework
 
 
@@ -31,6 +31,8 @@ class Shoot:
 
         if q_down(e):
             change_weapon(weapon)
+            weapon.cur_reload_time = 0  # 근접무기 전환 시 재장전이 취소된다
+            weapon.reloading = False
 
         if r_down(e) and weapon.weapon_type == 0:
             if weapon.gun == 'sr':
@@ -58,6 +60,9 @@ class Shoot:
         if weapon.melee == 'BAT' and weapon.swing:
             swing(weapon)
 
+        if weapon.melee == 'RAPIER':
+            update_rapier_player(weapon)
+
     @staticmethod
     def draw(weapon):
         draw_gun(weapon)
@@ -75,6 +80,9 @@ class Idle:
     def exit(weapon, e):
         if q_down(e):
             change_weapon(weapon)
+            weapon.cur_reload_time = 0
+            weapon.reloading = False
+
         if r_down(e) and weapon.weapon_type == 0:
             if weapon.gun_type == 'sr':
                 if not weapon.zoom:
@@ -99,6 +107,9 @@ class Idle:
 
         if weapon.melee == 'BAT' and weapon.swing:
             swing(weapon)
+
+        if weapon.melee == 'RAPIER':
+            update_rapier_player(weapon)
 
     @staticmethod
     def draw(weapon):
@@ -156,7 +167,7 @@ class Weapon:
 
         self.flame_display_time = 0
 
-        self.melee = 'BAT'
+        self.melee = 'RAPIER'
         self.melee_x = 0
         self.melee_deg = 170
         self.use = False
@@ -185,8 +196,13 @@ class Weapon:
         self.pen_count = 0
         self.pen_limit = 0
 
-        self.swing = False  # bat 전용 변수
+        # bat 전용 변수
+        self.swing = False
         self.swing_down, self.swing_up = False, False
+
+        # rapier 전용 변수
+        self.rapier_y = 0
+        self.repier_rapid = False
 
         # 탄약 관련
         # 개발 중에는 99999로 초기화
