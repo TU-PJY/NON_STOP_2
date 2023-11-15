@@ -4,7 +4,7 @@ from class_manager.weapon_manager.flame_output import draw_flame
 from class_manager.weapon_manager.gun_output import draw_gun
 from class_manager.weapon_manager.gun_shoot import shoot_gun
 from class_manager.weapon_manager.melee_output import draw_melee
-from class_manager.weapon_manager.melee_wield import wield_melee
+from class_manager.weapon_manager.melee_wield import wield_melee, melee_skill, update_melee_skill
 from class_manager.weapon_manager.weapon_animation import spin_win, update_melee_position, swing, update_rapier_player
 from game_work import game_framework
 
@@ -17,7 +17,7 @@ class Shoot:
             if weapon.reload_need:
                 weapon.reloading = True
 
-        elif weapon.weapon_type == 1:
+        elif weapon.weapon_type == 1 and not weapon.skill_enable:
             weapon.use = True
 
     @staticmethod
@@ -33,6 +33,7 @@ class Shoot:
             change_weapon(weapon)
             weapon.cur_reload_time = 0  # 근접무기 전환 시 재장전이 취소된다
             weapon.reloading = False
+            weapon.skill_enable = False
 
         if r_down(e) and weapon.weapon_type == 0:
             if weapon.gun == 'sr':
@@ -40,6 +41,11 @@ class Shoot:
                     weapon.zoom = True
                 elif weapon.zoom:
                     weapon.zoom = False
+
+        if r_down(e) and weapon.weapon_type == 1 and weapon.skill_usable and not weapon.skill_enable:
+            if weapon.melee == 'RAPIER':
+                weapon.skill_time = 400
+            weapon.skill_enable = True
 
         if weapon.limit_ammo - weapon.cur_ammo > 0:  # 탄창이 꽉 찬 상태에서는 재장전을 실행하지 않는다
             if reload_down(e) and not weapon.reloading:  # 재장전
@@ -63,6 +69,10 @@ class Shoot:
         if weapon.melee == 'RAPIER':
             update_rapier_player(weapon)
 
+        if weapon.skill_enable:
+            melee_skill(weapon)
+            update_melee_skill(weapon)
+
     @staticmethod
     def draw(weapon):
         draw_gun(weapon)
@@ -82,6 +92,7 @@ class Idle:
             change_weapon(weapon)
             weapon.cur_reload_time = 0
             weapon.reloading = False
+            weapon.skill_enable = False
 
         if r_down(e) and weapon.weapon_type == 0:
             if weapon.gun_type == 'sr':
@@ -89,6 +100,11 @@ class Idle:
                     weapon.zoom = True
                 elif weapon.zoom:
                     weapon.zoom = False
+
+        if r_down(e) and weapon.weapon_type == 1 and weapon.skill_usable and not weapon.skill_enable:
+            if weapon.melee == 'RAPIER':
+                weapon.skill_time = 300
+            weapon.skill_enable = True
 
         if weapon.limit_ammo - weapon.cur_ammo > 0:  # 탄창이 꽉 찬 상태에서는 재장전을 실행하지 않는다
             if reload_down(e) and not weapon.reloading:  # 재장전
@@ -110,6 +126,10 @@ class Idle:
 
         if weapon.melee == 'RAPIER':
             update_rapier_player(weapon)
+
+        if weapon.skill_enable:
+            melee_skill(weapon)
+            update_melee_skill(weapon)
 
     @staticmethod
     def draw(weapon):
@@ -202,7 +222,12 @@ class Weapon:
 
         # rapier 전용 변수
         self.rapier_y = 0
-        self.repier_rapid = False
+        self.rapid_x = 0
+
+        # 근접무기 특수 능력 변수
+        self.skill_time = 0
+        self.skill_enable = False
+        self.skill_usable = True  # True일 시 스킬 사용 가능
 
         # 탄약 관련
         # 개발 중에는 99999로 초기화

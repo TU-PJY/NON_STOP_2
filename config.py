@@ -132,6 +132,7 @@ knife_left_directory = 'res//melee_image//knife_left.png'
 bat_directory = 'res//melee_image//bat.png'
 bat_swing_directory = 'res//melee_image//bat_swing.png'
 rapier_directory = 'res//melee_image//rapier.png'
+rapid_directory = 'res//melee_image//effect//rapid.png'
 
 # 몬스터 이미지 파일 경로
 type1_directory = 'res//monster_image//goblin_small.png'

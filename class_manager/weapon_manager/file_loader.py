@@ -73,3 +73,4 @@ def load_melee_image(self):
     self.bat = load_image(bat_directory)
     self.bat_swing = load_image(bat_swing_directory)
     self.rapier = load_image(rapier_directory)
+    self.rapid = load_image(rapid_directory)

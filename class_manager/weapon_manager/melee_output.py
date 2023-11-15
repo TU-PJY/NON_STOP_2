@@ -52,4 +52,12 @@ def draw_melee(weapon):
                 x = weapon.p.px - weapon.melee_x - 20
                 weapon.rapier.clip_composite_draw(0, 0, 350, 100, -weapon.melee_deg, 'h', x, y, 335, 75)
 
+            if weapon.skill_enable:
+                if weapon.p.dir == 1:
+                    rx = weapon.p.px + weapon.melee_x + 150 + weapon.rapid_x
+                    weapon.rapid.clip_composite_draw(0, 0, 350, 100, 0, '', rx, y, 335, 75)
+                elif weapon.p.dir == 0:
+                    rx = weapon.p.px - weapon.melee_x - 150 - weapon.rapid_x
+                    weapon.rapid.clip_composite_draw(0, 0, 350, 100, 0, 'h', rx, y, 335, 75)
+
 
