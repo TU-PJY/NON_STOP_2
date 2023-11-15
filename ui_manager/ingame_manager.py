@@ -6,6 +6,8 @@ from mods import play_mode
 
 def load_resource(self):
 	self.font = load_font(font_directory, 40)
+	self.back = load_image(ammo_ind_back_directory)
+	self.reload_bar = load_image(reload_bar_directory)
 	pass
 
 
@@ -22,10 +24,19 @@ def render_ammo_ind(self):
 		num = self.weapon.sniper_ammo
 
 	x = 20 + self.p.shake_x
-	y = 60 + self.p.shake_y - self.p.push_y
+	y = 40 + self.p.shake_y - self.p.push_y
 
 	if game_framework.MODE == 'play' and play_mode.weapon.weapon_type == 0:
-		self.font.draw(x, y, '%d | %d' %(cur, num), (self.r, self.g, self.b))
+		self.back.opacify(400)
+		self.back.draw(60 + self.p.shake_x, 20 + self.p.shake_y - self.p.push_y, 810, 210)
+
+		if self.weapon.reloading:
+			self.reload_bar.draw(20, 90, 700 * (self.weapon.cur_reload_time / self.weapon.reload_time), 120)
+
+		if self.weapon.cur_ammo > 0:
+			self.font.draw(x, y, '%d | %d' % (cur, num), (self.r, self.g, self.b))
+		else:
+			self.font.draw(x, y, 'R | %d' % num, (self.r, self.g, self.b))
 	pass
 
 

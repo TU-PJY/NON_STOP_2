@@ -156,6 +156,9 @@ button_exp_directory = 'res//ui//button_exp.png'
 button_page_directory = 'res//ui//page_button.png'
 cursor_directory = 'res//ui//cursor.png'
 
+ammo_ind_back_directory = 'res//ui//ammo_ind_back.png'
+reload_bar_directory = 'res//ui//reload_bar.png'
+
 # 몬스터 체력바 이미지 파일 경로
 hp_back_directory = 'res//ui//hp_back.png'
 hp_front_directory = 'res//ui//hp_front.png'

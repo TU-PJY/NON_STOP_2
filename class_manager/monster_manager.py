@@ -27,8 +27,8 @@ def load_monster(self):
 def draw_monster(m):
     x = m.x + m.p.ex
     y = m.y + m.p.ey
-    m.hp_back.draw(x, y + 100, m.hp_length + 10, 25)  # 체력 바
-    m.hp_front.draw(x + ((m.hp_length - m.hp) / 2), y + 100, m.hp, 20)
+    m.hp_back.draw(x, y + 100, 210, 25)  # 체력 바
+    m.hp_front.draw(x - 100 + (200 * m.hp / m.hp_length) / 2, y + 100, 200 * m.hp / m.hp_length, 20)
 
     m.flip = '' if m.dir == 0 else 'h'  # 보는 방향에 따라 이미지 방향이 바뀐다.
 
