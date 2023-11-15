@@ -5,7 +5,7 @@ from class_manager.weapon_manager.gun_output import draw_gun
 from class_manager.weapon_manager.gun_shoot import shoot_gun
 from class_manager.weapon_manager.melee_output import draw_melee
 from class_manager.weapon_manager.melee_wield import wield_melee
-from class_manager.weapon_manager.weapon_animation import spin_win, update_melee_position
+from class_manager.weapon_manager.weapon_animation import spin_win, update_melee_position, swing
 from game_work import game_framework
 
 
@@ -43,7 +43,6 @@ class Shoot:
             if reload_down(e) and not weapon.reloading:  # 재장전
                 weapon.reloading = True
 
-
     @staticmethod
     def do(weapon):
         update_delay(weapon)
@@ -55,6 +54,9 @@ class Shoot:
 
         if weapon.reloading:
             reload_gun(weapon)
+
+        if weapon.melee == 'BAT' and weapon.swing:
+            swing(weapon)
 
     @staticmethod
     def draw(weapon):
@@ -94,6 +96,9 @@ class Idle:
 
         if weapon.reloading:
             reload_gun(weapon)
+
+        if weapon.melee == 'BAT' and weapon.swing:
+            swing(weapon)
 
     @staticmethod
     def draw(weapon):
@@ -151,7 +156,7 @@ class Weapon:
 
         self.flame_display_time = 0
 
-        self.melee = 'KNIFE'
+        self.melee = 'BAT'
         self.melee_x = 0
         self.melee_deg = 170
         self.use = False
@@ -179,6 +184,9 @@ class Weapon:
         self.pen_enable = False
         self.pen_count = 0
         self.pen_limit = 0
+
+        self.swing = False  # bat 전용 변수
+        self.swing_down, self.swing_up = False, False
 
         # 탄약 관련
         # 개발 중에는 99999로 초기화

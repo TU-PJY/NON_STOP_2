@@ -100,19 +100,37 @@ class Target:
 
         elif self.weapon.weapon_type == 1:  # 근접무기 히트박스, 방향에 따라 좌표가 다름
             if self.weapon.wield:
-                if self.p.dir == 0:
-                    return self.tmx + self.p.ex, self.tmy + self.p.ey - 65 - self.p.cam_h,\
-                        self.p.x + self.p.ex, self.p.y + self.p.ey + 60 - self.p.cam_h
-                elif self.p.dir == 1:
-                    return self.p.x + self.p.ex, self.p.y + self.p.ey - 65 - self.p.cam_h,\
-                        self.tmx + self.p.ex, self.p.y + self.p.ey + 60 - self.p.cam_h
+                if self.weapon.melee == 'KNIFE':
+                    if self.p.dir == 0:
+                        return self.tmx + self.p.ex, self.tmy + self.p.ey - 35 - self.p.cam_h,\
+                            self.p.x + self.p.ex, self.p.y + self.p.ey + 30 - self.p.cam_h
+                    elif self.p.dir == 1:
+                        return self.p.x + self.p.ex, self.p.y + self.p.ey - 35 - self.p.cam_h,\
+                            self.tmx + self.p.ex, self.p.y + self.p.ey + 30 - self.p.cam_h
+
+                elif self.weapon.melee == 'BAT':
+                    if self.p.dir == 0:
+                        return self.tmx + self.p.ex, self.tmy + self.p.ey - 65 - self.p.cam_h,\
+                            self.p.x + self.p.ex, self.p.y + self.p.ey + 60 - self.p.cam_h
+                    elif self.p.dir == 1:
+                        return self.p.x + self.p.ex, self.p.y + self.p.ey - 65 - self.p.cam_h,\
+                            self.tmx + self.p.ex, self.p.y + self.p.ey + 60 - self.p.cam_h
             else:
                 return -9999, -9999, -9999, -9999
 
     def get_melee_bb(self):  # 디버깅용 bb, 히트박스 출력용
-        if self.p.dir == 0:
-            return self.tmx + self.p.ex, self.tmy + self.p.ey - 65 - self.p.cam_h, \
-                   self.p.x + self.p.ex, self.p.y + self.p.ey + 60 - self.p.cam_h
-        elif self.p.dir == 1:
-            return self.p.x + self.p.ex, self.p.y + self.p.ey - 65 - self.p.cam_h, \
-                   self.tmx + self.p.ex, self.p.y + self.p.ey + 60 - self.p.cam_h
+        if self.weapon.melee == 'KNIFE':
+            if self.p.dir == 0:
+                return self.tmx + self.p.ex, self.tmy + self.p.ey - 35 - self.p.cam_h, \
+                       self.p.x + self.p.ex, self.p.y + self.p.ey + 30 - self.p.cam_h
+            elif self.p.dir == 1:
+                return self.p.x + self.p.ex, self.p.y + self.p.ey - 35 - self.p.cam_h, \
+                       self.tmx + self.p.ex, self.p.y + self.p.ey + 30 - self.p.cam_h
+
+        elif self.weapon.melee == 'BAT':
+            if self.p.dir == 0:
+                return self.tmx + self.p.ex, self.tmy + self.p.ey - 65 - self.p.cam_h, \
+                       self.p.x + self.p.ex, self.p.y + self.p.ey + 60 - self.p.cam_h
+            elif self.p.dir == 1:
+                return self.p.x + self.p.ex, self.p.y + self.p.ey - 65 - self.p.cam_h, \
+                       self.tmx + self.p.ex, self.p.y + self.p.ey + 60 - self.p.cam_h

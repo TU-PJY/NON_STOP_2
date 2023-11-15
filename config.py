@@ -129,6 +129,8 @@ flame_left_directory = 'res//gun_image//misc//flame_left.png'
 # 근접무기 이미지 경로
 knife_right_directory = 'res//melee_image//knife_right.png'
 knife_left_directory = 'res//melee_image//knife_left.png'
+bat_directory = 'res//melee_image//bat.png'
+bat_swing_directory = 'res//melee_image//bat_swing.png'
 
 # 몬스터 이미지 파일 경로
 type1_directory = 'res//monster_image//goblin_small.png'

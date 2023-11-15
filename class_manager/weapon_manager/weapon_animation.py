@@ -20,6 +20,25 @@ def spin_win(weapon):
 def update_melee_position(weapon):
     pps = game_framework.pps
     if weapon.melee_x > 0:
-        weapon.melee_x -= pps
+        weapon.melee_x -= pps / 2
     else:
         weapon.melee_x = 0
+
+
+def swing(weapon):
+    pps = game_framework.pps
+
+    if weapon.swing_down:
+        weapon.melee_deg -= pps / 20
+        weapon.p.rotate -= pps / 60
+        if weapon.melee_deg <= 117.5:
+            weapon.swing_down = False
+            weapon.swing_up = True
+
+    elif weapon.swing_up:
+        weapon.melee_deg += pps / 200
+        weapon.p.rotate += pps / 600
+        if weapon.melee_deg >= 120:
+            weapon.swing_up = False
+            weapon.swing = False
+

@@ -70,3 +70,5 @@ def load_gun_image(self):
 def load_melee_image(self):
     self.knife_right = load_image(knife_right_directory)
     self.knife_left = load_image(knife_left_directory)
+    self.bat = load_image(bat_directory)
+    self.bat_swing = load_image(bat_swing_directory)

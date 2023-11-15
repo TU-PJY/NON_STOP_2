@@ -50,6 +50,7 @@ def load_shop_resource(self):
     self.image_cheytac = load_image(cheytac_right_directory)
 
     self.image_knife = load_image(knife_right_directory)
+    self.image_bat = load_image(bat_directory)
 
 
 def make_button_pos(self):  # shop 버튼 위치 생성
@@ -97,8 +98,6 @@ def draw_shop_window(self):
             for j in range(4):
                 self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
 
-
-
     self.font.draw(WIDTH / 2 + 200, self.window_y + 295, "SHOP", (255, 255, 255))
     if self.select_mode == 0:
         self.font.draw(WIDTH / 2 + 500, self.window_y - 120, "A", (255, 255, 255))
@@ -144,6 +143,7 @@ def draw_items(self):
 
     if self.select_mode == 1:
         self.image_knife.draw(self.button_x[0], self.button_y[0], 150, 100)
+        self.image_bat.rotate_draw(-45, self.button_x[1] - 43, self.button_y[0] - 30, 35, 325)
 
 
 def draw_cursor(self):
@@ -195,7 +195,7 @@ def click_button(self):
     for i in range(len(self.cat_x)):
         for j in range(len(self.cat_y)):
             if self.cat_x[i] - 100 < self.mx < self.cat_x[i] + 100 and \
-                    self.cat_y[i] - 20 < self.my < self.cat_y[i] + 60:
+                    self.cat_y[j] - 20 < self.my < self.cat_y[j] + 60:
                 if i == 0:
                     self.select_mode = 0  # gun
                 elif i == 1:
@@ -203,11 +203,12 @@ def click_button(self):
                 elif i == 2:
                     self.select_mode = 2  # exp
 
-    if self.select_mode == 0:
-        for i in range(len(self.button_x)):
-            for j in range(len(self.button_y)):
-                if self.button_x[i] - 90 < self.mx < self.button_x[i] + 90 and \
-                        self.button_y[j] - 75 < self.my < self.button_y[j] + 75:
+    for i in range(len(self.button_x)):
+        for j in range(len(self.button_y)):
+            if self.button_x[i] - 90 < self.mx < self.button_x[i] + 90 and \
+                    self.button_y[j] - 75 < self.my < self.button_y[j] + 75:
+
+                if self.select_mode == 0:
                     play_mode.weapon.zoom = False  # 다른 총 선택 시 스코프 모드 해제
                     play_mode.target.draw_scope = False
                     play_mode.weapon.pen_enable = False
@@ -333,5 +334,11 @@ def click_button(self):
                     play_mode.weapon.prev_gun_type = play_mode.weapon.gun_type
                     play_mode.weapon.cur_ammo = 0
                     play_mode.weapon.reloading = True
+
+                elif self.select_mode == 1:
+                    if (i, j) == (0, 0):
+                        play_mode.weapon.melee = 'KNIFE'
+                    elif (i, j) == (1, 0):
+                        play_mode.weapon.melee = 'BAT'
 
     self.click = False

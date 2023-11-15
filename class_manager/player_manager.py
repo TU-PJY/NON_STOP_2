@@ -40,13 +40,16 @@ def look_mouse(p):
 
 
 def draw_player(p):
-    if p.dir == 1:
-        p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
-    elif p.dir == 0:
-        if p.look_mouse:
+    if p.look_mouse:
+        if p.dir == 1:
+            p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+        elif p.dir == 0:
             p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size * 100)
-        else:
-            p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+    else:
+        if p.dir == 1:
+            p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+        elif p.dir == 0:
+            p.image_left.clip_composite_draw(0, 0, 128, 128, -p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
 
 
 def jump(p):
