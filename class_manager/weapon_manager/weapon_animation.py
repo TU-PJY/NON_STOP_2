@@ -70,4 +70,3 @@ def swing(weapon):
             if weapon.melee_deg >= 0:
                 weapon.swing_up = False
                 weapon.swing = False
-

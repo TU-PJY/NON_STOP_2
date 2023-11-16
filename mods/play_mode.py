@@ -1,11 +1,11 @@
 from game_class.map import Map, BackGround, Wall
 from game_class.monster_tool import Tool
-from ui_class.ingame import Ingame
 from game_class.player import *
 from game_class.target import *
 from game_class.weapon import *
 from game_work import game_manager, game_framework
 from mods import shop_mode
+from ui_class.ingame import Ingame
 
 
 def handle_events():

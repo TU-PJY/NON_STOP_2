@@ -2,7 +2,6 @@ import random
 
 from game_class.prop import KatanaSlice
 from game_work import game_framework, game_manager
-from mods import play_mode
 
 
 def wield_melee(weapon):
@@ -112,4 +111,3 @@ def init_melee(weapon):
     weapon.swing_up = False
     weapon.swing = False
     weapon.melee_deg = 0
-

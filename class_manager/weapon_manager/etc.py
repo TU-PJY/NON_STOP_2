@@ -106,7 +106,7 @@ def reload_gun(weapon):
         if weapon.cur_reload_time < weapon.reload_time:  # 정해진 값 까지 도달할때까지 더한다
             weapon.cur_reload_time += pps / 3
 
-        else:  #  값에 도달하면 재장전 완료
+        else:  # 값에 도달하면 재장전 완료
             if weapon.gun_type == 'pistol' or weapon.gun_type == 'smg':
                 weapon.pistol_ammo -= (weapon.limit_ammo - weapon.cur_ammo)
             elif weapon.gun_type == 'ar':

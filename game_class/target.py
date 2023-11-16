@@ -102,19 +102,19 @@ class Target:
             if self.weapon.wield:
                 if self.weapon.melee == 'KNIFE':
                     if self.p.dir == 0:
-                        return self.tmx + self.p.ex, self.tmy + self.p.ey - 35 - self.p.cam_h,\
-                            self.p.x + self.p.ex, self.p.y + self.p.ey + 30 - self.p.cam_h
+                        return self.tmx + self.p.ex, self.tmy + self.p.ey - 35 - self.p.cam_h, \
+                               self.p.x + self.p.ex, self.p.y + self.p.ey + 30 - self.p.cam_h
                     elif self.p.dir == 1:
-                        return self.p.x + self.p.ex, self.p.y + self.p.ey - 35 - self.p.cam_h,\
-                            self.tmx + self.p.ex, self.p.y + self.p.ey + 30 - self.p.cam_h
+                        return self.p.x + self.p.ex, self.p.y + self.p.ey - 35 - self.p.cam_h, \
+                               self.tmx + self.p.ex, self.p.y + self.p.ey + 30 - self.p.cam_h
 
                 elif self.weapon.melee == 'BAT':
                     if self.p.dir == 0:
-                        return self.tmx + self.p.ex, self.tmy + self.p.ey - 65 - self.p.cam_h,\
-                            self.p.x + self.p.ex, self.p.y + self.p.ey + 80 - self.p.cam_h
+                        return self.tmx + self.p.ex, self.tmy + self.p.ey - 65 - self.p.cam_h, \
+                               self.p.x + self.p.ex, self.p.y + self.p.ey + 80 - self.p.cam_h
                     elif self.p.dir == 1:
-                        return self.p.x + self.p.ex, self.p.y + self.p.ey - 65 - self.p.cam_h,\
-                            self.tmx + self.p.ex, self.p.y + self.p.ey + 80 - self.p.cam_h
+                        return self.p.x + self.p.ex, self.p.y + self.p.ey - 65 - self.p.cam_h, \
+                               self.tmx + self.p.ex, self.p.y + self.p.ey + 80 - self.p.cam_h
 
                 elif self.weapon.melee == 'RAPIER':
                     if self.p.dir == 0:

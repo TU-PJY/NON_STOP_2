@@ -175,7 +175,7 @@ class Bullet:
         pps = game_framework.pps
 
         if game_framework.MODE == 'play':
-            if self.x < self.mp.playerToWallLeft or self.x > self.mp.playerToWallRight or\
+            if self.x < self.mp.playerToWallLeft or self.x > self.mp.playerToWallRight or \
                     self.y < 120 + self.p.cam_h or self.y > self.p.y + 800:
                 self.weapon.pen_enable = False
                 game_manager.remove_object(self)
@@ -236,32 +236,28 @@ class KatanaSlice:
 
         if self.dir == 1:
             self.effect.clip_composite_draw(0, 0, 1500, 280, 0, '', self.p.px - 900, self.p.py, 1500, 280)
-        else :
+        else:
             self.effect.clip_composite_draw(0, 0, 1500, 280, 0, 'h', self.p.px + 900, self.p.py, 1500, 280)
 
         if self.p.dir == 1:
             self.player1_slice_right.opacify(self.op)
             (self.player1_slice_right.rotate_draw(self.p.rotate, self.p.px, self.p.py, 400, 400))
             if self.weapon.skill_enable:
-                self.katana_slice.clip_composite_draw\
+                self.katana_slice.clip_composite_draw \
                     (0, 0, 60, 410, -self.weapon.melee_deg, 'h', self.p.px - 40, self.p.py - 30, 50, 360)
             else:
                 self.katana_slice.clip_composite_draw \
-                    (0, 0, 60, 410, self.weapon.melee_deg, '', self.p.px + 40, self.p.py - 30, 50, 360)\
-
-
+                    (0, 0, 60, 410, self.weapon.melee_deg, '', self.p.px + 40, self.p.py - 30, 50, 360) \
 
         elif self.p.dir == 0:
             self.player1_slice_left.opacify(self.op)
             self.player1_slice_left.rotate_draw(-self.p.rotate, self.p.px, self.p.py, 400, 400)
             if self.weapon.skill_enable:
-                self.katana_slice.clip_composite_draw\
+                self.katana_slice.clip_composite_draw \
                     (0, 0, 60, 410, self.weapon.melee_deg, '', self.p.px + 40, self.p.py - 30, 50, 360)
             else:
                 self.katana_slice.clip_composite_draw \
                     (0, 0, 60, 410, -self.weapon.melee_deg, 'h', self.p.px - 40, self.p.py - 30, 50, 360)
-
-
 
     def update(self):
         pps = game_framework.pps

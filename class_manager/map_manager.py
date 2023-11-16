@@ -3,7 +3,6 @@ from pico2d import *
 
 from config import *
 from game_work import game_framework
-from mods import play_mode
 
 
 def load_land(self):
