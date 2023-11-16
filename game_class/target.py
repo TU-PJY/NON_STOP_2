@@ -132,7 +132,7 @@ class Target:
                         return self.p.x + self.p.ex, self.p.y + self.p.ey - 65 - self.p.cam_h, \
                                self.tmx + self.p.ex, self.p.y + self.p.ey + 100 - self.p.cam_h
 
-            if self.weapon.skill_enable:
+            elif self.weapon.skill_enable:
                 if self.weapon.melee == 'KATANA':
                     if self.p.dir == 0:
                         return self.tmx + self.p.ex, self.tmy + self.p.ey - 65 - self.p.cam_h, \

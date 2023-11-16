@@ -1,6 +1,7 @@
 import random
 
-from game_work import game_framework
+from game_class.prop import KatanaSlice
+from game_work import game_framework, game_manager
 from mods import play_mode
 
 
@@ -36,6 +37,21 @@ def wield_melee(weapon):
                 weapon.swing = True
         else:
             weapon.wield = False
+
+
+def set_skill(weapon):
+    if weapon.melee == 'RAPIER':
+        weapon.skill_time = 300
+        weapon.skill_enable = True
+
+    elif weapon.melee == 'KATANA' and (weapon.p.mv_right or weapon.p.mv_left):
+        if (weapon.p.mv_right and weapon.p.dir == 1) or (weapon.p.mv_left and weapon.p.dir == 0):
+            weapon.skill_time = 100
+            weapon.p.temp_speed = weapon.p.speed
+            weapon.p.speed = 30
+            ks = KatanaSlice(weapon.p, weapon)
+            game_manager.add_object(ks, 7)
+            weapon.skill_enable = True
 
 
 def melee_skill(weapon):

@@ -321,7 +321,6 @@ def click_button(self):
                             play_mode.weapon.gun_type = 'sr'
                             play_mode.weapon.reload_time = 350
 
-
                     # 총기 교체 시 잔탄을 모두 반환한 후 재장전 상태로 변경
                     if play_mode.weapon.prev_gun_type == 'pistol' or play_mode.weapon.prev_gun_type == 'smg':
                         play_mode.weapon.pistol_ammo += play_mode.weapon.cur_ammo
@@ -337,6 +336,7 @@ def click_button(self):
 
                     play_mode.weapon.prev_gun_type = play_mode.weapon.gun_type
                     play_mode.weapon.cur_ammo = 0
+                    play_mode.weapon.reload_need = True
                     play_mode.weapon.reloading = True
 
                 elif self.select_mode == 1:
@@ -347,7 +347,13 @@ def click_button(self):
                     play_mode.weapon.swing_down = False
                     play_mode.weapon.swing_up = False
                     play_mode.weapon.wield = False
+
+                    if play_mode.weapon.skill_enable and play_mode.weapon.melee == 'KATANA':
+                        play_mode.p.speed = play_mode.p.temp_speed
+
                     play_mode.weapon.skill_enable = False
+
+
 
                     if (i, j) == (0, 0):
                         play_mode.weapon.melee = 'KNIFE'
