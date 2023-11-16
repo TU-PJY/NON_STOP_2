@@ -41,16 +41,24 @@ def wield_melee(weapon):
 
 def set_skill(weapon):
     if weapon.melee == 'RAPIER':
+        weapon.p.rotate = 0
         weapon.skill_time = 300
         weapon.skill_enable = True
 
     elif weapon.melee == 'KATANA' and (weapon.p.mv_right or weapon.p.mv_left):
         if (weapon.p.mv_right and weapon.p.dir == 1) or (weapon.p.mv_left and weapon.p.dir == 0):
+            weapon.swing = False
+            weapon.swing_down = False
+            weapon.swing_up = False
+            weapon.p.rotate = 0
+
             weapon.skill_time = 100
             weapon.p.temp_speed = weapon.p.speed
             weapon.p.speed = 30
+
             ks = KatanaSlice(weapon.p, weapon)
             game_manager.add_object(ks, 7)
+
             weapon.skill_enable = True
 
 
@@ -59,10 +67,12 @@ def melee_skill(weapon):
         if weapon.wield_delay <= 0:
             weapon.rapier_y = random.randint(-10, 10)
             weapon.rapid_x = random.randint(-30, 30)
+
             weapon.melee_deg = 0
             weapon.melee_x = 150
             weapon.p.shake_range = 20
             weapon.wield_delay = 18
+
             weapon.wield = True
 
         else:

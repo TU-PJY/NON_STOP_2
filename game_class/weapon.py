@@ -36,7 +36,11 @@ class Shoot:
             change_weapon(weapon)
             weapon.cur_reload_time = 0  # 근접무기 전환 시 재장전이 취소된다
             weapon.reloading = False
-            weapon.skill_enable = False
+            if weapon.melee == 'KATANA' and weapon.skill_enable:
+                weapon.p.speed = weapon.p.temp_speed
+                weapon.skill_enable = False
+            else:
+                weapon.skill_enable = False
 
         if r_down(e) and weapon.weapon_type == 0:
             if weapon.gun == 'sr':

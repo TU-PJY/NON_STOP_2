@@ -353,8 +353,6 @@ def click_button(self):
 
                     play_mode.weapon.skill_enable = False
 
-
-
                     if (i, j) == (0, 0):
                         play_mode.weapon.melee = 'KNIFE'
                     elif (i, j) == (1, 0):
