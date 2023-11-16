@@ -53,6 +53,7 @@ def load_shop_resource(self):
     self.image_bat = load_image(bat_directory)
     self.image_rapier = load_image(rapier_directory)
     self.image_katana = load_image(katana_directory)
+    self.image_axe = load_image(axe_directory)
 
 
 def make_button_pos(self):  # shop 버튼 위치 생성
@@ -148,6 +149,7 @@ def draw_items(self):
         self.image_bat.rotate_draw(-45, self.button_x[1] - 43, self.button_y[0] - 30, 35, 325)
         self.image_rapier.rotate_draw(0.5, self.button_x[2] - 50, self.button_y[0] - 25, 300, 75)
         self.image_katana.rotate_draw(-45, self.button_x[3] - 45, self.button_y[0] - 33, 35, 260)
+        self.image_axe.rotate_draw(-45, self.button_x[4] - 28, self.button_y[0] - 15, 128, 256)
 
 
 def draw_cursor(self):
@@ -339,7 +341,8 @@ def click_button(self):
                     play_mode.weapon.reload_need = True
 
                 elif self.select_mode == 1:
-                    play_mode.p.rotate = 0  # 무기 사용 중 무기 변경 시 무기 정보를 초기화 한다
+                    if play_mode.weapon.weapon_type == 1:
+                        play_mode.p.rotate = 0  # 무기 사용 중 무기 변경 시 무기 정보를 초기화 한다
                     play_mode.weapon.melee_deg = 0
                     play_mode.weapon.melee_x = 0
                     play_mode.weapon.swing = False
