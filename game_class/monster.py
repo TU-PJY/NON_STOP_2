@@ -135,8 +135,11 @@ class Monster:
             if self.weapon.skill_enable and self.weapon.melee == 'RAPIER':
                 self.is_hit = True
 
-            elif self.weapon.melee == 'KATANA':
+            elif self.weapon.skill_enable and self.weapon.melee == 'KATANA':
                 self.hp -= 20
+
+            elif not self.weapon.skill_enable and self.weapon.melee == 'KATANA':
+                self.is_hit = True
 
             else:
                 if not self.weapon.hit_once and self.hp > 0:

@@ -5,7 +5,7 @@ from class_manager.weapon_manager.gun_output import draw_gun
 from class_manager.weapon_manager.gun_shoot import shoot_gun
 from class_manager.weapon_manager.melee_output import draw_melee
 from class_manager.weapon_manager.melee_wield import wield_melee, melee_skill, update_melee_skill, update_rapier_player, \
-    set_skill
+    set_skill, init_melee
 from class_manager.weapon_manager.weapon_animation import spin_win, update_melee_position, swing
 from game_work import game_framework
 
@@ -32,11 +32,9 @@ class Shoot:
 
         if q_down(e):
             change_weapon(weapon)
+            init_melee(weapon)
             weapon.cur_reload_time = 0  # 근접무기 전환 시 재장전이 취소된다
             weapon.reloading = False
-            if weapon.melee == 'KATANA' and weapon.skill_enable:
-                weapon.p.speed = weapon.p.temp_speed
-            weapon.skill_enable = False
 
         if r_down(e) and weapon.weapon_type == 0:
             if weapon.gun == 'sr':
@@ -57,9 +55,9 @@ class Shoot:
         update_delay(weapon)
         shoot_gun(weapon)
         wield_melee(weapon)
+        update_sniper_bolt(weapon)
         if weapon.is_spin:
             spin_win(weapon)
-        update_sniper_bolt(weapon)
 
         if weapon.reloading:
             reload_gun(weapon)
@@ -91,11 +89,9 @@ class Idle:
     def exit(weapon, e):
         if q_down(e):
             change_weapon(weapon)
+            init_melee(weapon)
             weapon.cur_reload_time = 0
             weapon.reloading = False
-            if weapon.skill_enable and weapon.melee == 'KATANA':
-                weapon.p.speed = weapon.p.temp_speed
-            weapon.skill_enable = False
 
         if r_down(e) and weapon.weapon_type == 0:
             if weapon.gun_type == 'sr':
@@ -115,9 +111,9 @@ class Idle:
     def do(weapon):
         update_delay(weapon)
         update_melee_position(weapon)
+        update_sniper_bolt(weapon)
         if weapon.is_spin:
             spin_win(weapon)
-        update_sniper_bolt(weapon)
 
         if weapon.reloading:
             reload_gun(weapon)

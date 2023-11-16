@@ -135,6 +135,7 @@ rapier_directory = 'res//melee_image//rapier.png'
 rapid_directory = 'res//melee_image//effect//rapid.png'
 katana_directory = 'res//melee_image//katana.png'
 katana_swing_directory = 'res//melee_image//katana_swing.png'
+axe_directory = 'res//melee_image//axe.png'
 
 # 몬스터 이미지 파일 경로
 type1_directory = 'res//monster_image//goblin_small.png'
