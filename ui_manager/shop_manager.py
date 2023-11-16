@@ -347,6 +347,7 @@ def click_button(self):
                     play_mode.weapon.swing_up = False
                     play_mode.weapon.wield = False
 
+                    # 카타나 스킬 사용 중이었다면 플레이어 이동 속도를 복구
                     if play_mode.weapon.skill_enable and play_mode.weapon.melee == 'KATANA':
                         play_mode.p.speed = play_mode.p.temp_speed
 

@@ -132,15 +132,16 @@ class Monster:
 
         if group == 'weapon:monster':  # 총이나 근접무기에 맞을 경우 대미지를 받는다
             # 겹쳐있는 몬스터가 한꺼번에 대미지를 받지 않도록 한다
-            if not self.weapon.hit_once and self.hp > 0 and not self.weapon.skill_enable:
-                self.is_hit = True
-                self.weapon.hit_once = True
-
-            elif self.weapon.skill_enable and self.weapon.melee == 'RAPIER':
+            if self.weapon.skill_enable and self.weapon.melee == 'RAPIER':
                 self.is_hit = True
 
-            elif self.weapon.skill_enable and self.weapon.melee == 'KATANA':
+            elif self.weapon.melee == 'KATANA':
                 self.hp -= 20
+
+            else:
+                if not self.weapon.hit_once and self.hp > 0:
+                    self.is_hit = True
+                    self.weapon.hit_once = True
 
         if group == 'bullet:monster':  # sr 계열 총기 관통 대미지
             # 대미지를 여러 번 받지 않게 끔 한다.

@@ -15,12 +15,14 @@ class Move:
             p.mv_right = True
             if play_mode.weapon.melee == 'KATANA' and play_mode.weapon.skill_enable:
                 play_mode.weapon.skill_enable = False
+                p.rotate = 0
                 p.speed = p.temp_speed
 
         if right_up(e) or left_down(e):
             p.mv_left = True
             if play_mode.weapon.melee == 'KATANA' and play_mode.weapon.skill_enable:
                 play_mode.weapon.skill_enable = False
+                p.rotate = 0
                 p.speed = p.temp_speed
 
     @staticmethod

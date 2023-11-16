@@ -7,9 +7,7 @@ from class_manager.weapon_manager.melee_output import draw_melee
 from class_manager.weapon_manager.melee_wield import wield_melee, melee_skill, update_melee_skill, update_rapier_player, \
     set_skill
 from class_manager.weapon_manager.weapon_animation import spin_win, update_melee_position, swing
-from game_class.prop import KatanaSlice
 from game_work import game_framework
-from mods import play_mode
 
 
 class Shoot:
@@ -38,9 +36,7 @@ class Shoot:
             weapon.reloading = False
             if weapon.melee == 'KATANA' and weapon.skill_enable:
                 weapon.p.speed = weapon.p.temp_speed
-                weapon.skill_enable = False
-            else:
-                weapon.skill_enable = False
+            weapon.skill_enable = False
 
         if r_down(e) and weapon.weapon_type == 0:
             if weapon.gun == 'sr':
@@ -99,9 +95,7 @@ class Idle:
             weapon.reloading = False
             if weapon.skill_enable and weapon.melee == 'KATANA':
                 weapon.p.speed = weapon.p.temp_speed
-                weapon.skill_enable = False
-            else:
-                weapon.skill_enable = False
+            weapon.skill_enable = False
 
         if r_down(e) and weapon.weapon_type == 0:
             if weapon.gun_type == 'sr':
