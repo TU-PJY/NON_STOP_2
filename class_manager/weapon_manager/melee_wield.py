@@ -34,6 +34,13 @@ def wield_melee(weapon):
                 weapon.wield_delay = 140
                 weapon.swing_down = True
                 weapon.swing = True
+
+            elif weapon.melee == 'AXE':
+                weapon.melee_x = 100
+                weapon.p.shake_range = 20
+                weapon.wield_delay = 350
+                weapon.swing_down = True
+                weapon.swing = True
         else:
             weapon.wield = False
 

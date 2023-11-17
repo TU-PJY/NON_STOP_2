@@ -76,3 +76,4 @@ def load_melee_image(self):
     self.rapid = load_image(rapid_directory)
     self.katana = load_image(katana_directory)
     self.katana_swing = load_image(katana_swing_directory)
+    self.axe = load_image(axe_directory)

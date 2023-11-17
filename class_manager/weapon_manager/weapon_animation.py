@@ -70,3 +70,18 @@ def swing(weapon):
             if weapon.melee_deg >= 0:
                 weapon.swing_up = False
                 weapon.swing = False
+
+    elif weapon.melee == 'AXE':
+        if weapon.swing_down:
+            weapon.melee_deg -= pps / 30
+            weapon.p.rotate -= pps / 100
+            if weapon.melee_deg <= 117.5:
+                weapon.swing_down = False
+                weapon.swing_up = True
+
+        elif weapon.swing_up:
+            weapon.melee_deg += pps / 300
+            weapon.p.rotate += pps / 1000
+            if weapon.melee_deg >= 120:
+                weapon.swing_up = False
+                weapon.swing = False

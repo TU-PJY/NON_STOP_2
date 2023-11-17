@@ -183,5 +183,7 @@ def click_button(self):
                         play_mode.weapon.melee = 'RAPIER'
                     elif (i, j) == (3, 0):
                         play_mode.weapon.melee = 'KATANA'
+                    elif (i, j) == (4, 0):
+                        play_mode.weapon.melee = 'AXE'
 
     self.click = False

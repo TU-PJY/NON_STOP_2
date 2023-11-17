@@ -132,6 +132,14 @@ class Target:
                         return self.p.x + self.p.ex, self.p.y + self.p.ey - 65 - self.p.cam_h, \
                                self.tmx + self.p.ex, self.p.y + self.p.ey + 100 - self.p.cam_h
 
+                elif self.weapon.melee == 'AXE':
+                    if self.p.dir == 0:
+                        return self.tmx + self.p.ex, self.tmy + self.p.ey - 65 - self.p.cam_h, \
+                               self.p.x + self.p.ex, self.p.y + self.p.ey + 80 - self.p.cam_h
+                    elif self.p.dir == 1:
+                        return self.p.x + self.p.ex, self.p.y + self.p.ey - 65 - self.p.cam_h, \
+                               self.tmx + self.p.ex, self.p.y + self.p.ey + 80 - self.p.cam_h
+
             elif self.weapon.skill_enable:
                 if self.weapon.melee == 'KATANA':
                     if self.p.dir == 0:
@@ -184,3 +192,11 @@ class Target:
             elif self.p.dir == 1:
                 return self.p.x + self.p.ex, self.p.y + self.p.ey - 65 - self.p.cam_h, \
                        self.tmx + self.p.ex, self.p.y + self.p.ey + 100 - self.p.cam_h
+
+        elif self.weapon.melee == 'AXE':
+            if self.p.dir == 0:
+                return self.tmx + self.p.ex, self.tmy + self.p.ey - 65 - self.p.cam_h, \
+                       self.p.x + self.p.ex, self.p.y + self.p.ey + 80 - self.p.cam_h
+            elif self.p.dir == 1:
+                return self.p.x + self.p.ex, self.p.y + self.p.ey - 65 - self.p.cam_h, \
+                       self.tmx + self.p.ex, self.p.y + self.p.ey + 80 - self.p.cam_h

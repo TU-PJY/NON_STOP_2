@@ -120,7 +120,7 @@ class Monster:
             return self.x + self.p.ex - 55, self.y + self.p.ey - 55, self.x + self.p.ex + 55, self.y + self.p.ey + 55
 
     def handle_collision(self, group, other):
-        if group == 'player:monster':
+        if group == 'player:monster':  # 카타나 스킬 사용 중에는 대미지를 받지 않는다.
             if not self.weapon.skill_enable and self.weapon.melee == 'KATANA':
                 if self.type == 1:  # type1 접촉 시 이동 정지
                     self.is_attack = True
@@ -130,7 +130,7 @@ class Monster:
                     self.atk_delay = 200
                     self.size = 200
 
-        if group == 'weapon:monster':  # 총이나 근접무기에 맞을 경우 대미지를 받는다
+        if group == 'weapon:monster':  # 총이나 근접무기에 맞을 경우 대미지를 가한다
             # 겹쳐있는 몬스터가 한꺼번에 대미지를 받지 않도록 한다
             if self.weapon.skill_enable and self.weapon.melee == 'RAPIER':
                 self.is_hit = True
@@ -138,6 +138,7 @@ class Monster:
             elif self.weapon.skill_enable and self.weapon.melee == 'KATANA':
                 self.hp -= 20
 
+            # 카타나의 경우 몬스터가 겹쳐있어도 모두 대미지를 가함
             elif not self.weapon.skill_enable and self.weapon.melee == 'KATANA':
                 self.is_hit = True
 
