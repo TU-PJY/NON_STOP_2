@@ -180,11 +180,13 @@ class Weapon:
         self.shoot_delay = 0  # 0이 될때마다 self.shoot == True
 
         self.gun_type = 'pistol'  # 현재 총 타입 
-        self.prev_gun_type = 'pistol'  # 교체 전 이전 총 타입 
+        self.prev_gun_type = 'pistol'  # 교체 전 이전 총 타입
+
+        self.prev_melee = 'AXE'
 
         self.flame_display_time = 0
 
-        self.melee = 'KATANA'
+        self.melee = 'AXE'
         self.melee_x = 0
         self.melee_deg = 170
         self.use = False
@@ -225,6 +227,7 @@ class Weapon:
         self.skill_time = 0
         self.skill_enable = False
         self.skill_usable = True  # True일 시 스킬 사용 가능
+        self.hit_ground = False
 
         # 탄약 관련
         # 개발 중에는 99999로 초기화

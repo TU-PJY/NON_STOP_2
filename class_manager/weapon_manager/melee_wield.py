@@ -67,6 +67,17 @@ def set_skill(weapon):
 
             weapon.skill_enable = True
 
+    elif weapon.melee == 'AXE' and not weapon.p.mv_jump:
+        weapon.swing = False
+        weapon.swing_down = False
+        weapon.swing_up = False
+        weapon.p.rotate = 0
+
+        weapon.skill_time = 235
+        weapon.skill_enable = True
+        weapon.p.mv_jump = True
+        weapon.p.jump_acc = 8
+
 
 def melee_skill(weapon):
     if weapon.melee == 'RAPIER':
@@ -80,7 +91,6 @@ def melee_skill(weapon):
             weapon.wield_delay = 18
 
             weapon.wield = True
-
         else:
             weapon.wield = False
 
@@ -101,10 +111,16 @@ def update_melee_skill(weapon):
     pps = game_framework.pps
     if weapon.skill_time > 0:
         weapon.skill_time -= pps / 3
+
     else:
         if weapon.melee == 'KATANA':
-            weapon.p.speed = weapon.p.temp_speed
             weapon.p.rotate = 0
+            weapon.p.speed = weapon.p.temp_speed
+
+        elif weapon.melee == 'AXE':
+            weapon.hit_ground = False
+            weapon.p.mv_jump = False
+
         weapon.skill_enable = False
         weapon.wield = False
 
@@ -117,4 +133,5 @@ def init_melee(weapon):
     weapon.swing_down = False
     weapon.swing_up = False
     weapon.swing = False
+    weapon.p.jump_acc = 0
     weapon.melee_deg = 0

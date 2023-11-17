@@ -4,6 +4,7 @@ from pico2d import *
 
 from config import *
 from game_work import game_framework
+from mods import play_mode
 
 
 def right_down(e):
@@ -54,17 +55,39 @@ def draw_player(p):
 
 def jump(p):
     pps = game_framework.pps
-    if p.mv_jump:  # 점프 시
+    if p.mv_jump and play_mode.weapon.melee == 'AXE' and play_mode.weapon.skill_enable:
         p.y += p.jump_acc * pps / 4
 
         if p.y <= 250:  # 점프 후 착지하면
             p.y = 250
             p.jump_acc = 0  # 점프 가속도 초기화
-            p.mv_jump = False  # 점프가 가능해진다
-            p.push_y = LAND_SHAKE  # LAND_SHAKE 만큼 화면이 눌린다
-            p.jump_count = 0  # 점프 가능 횟수 초기화
+            p.push_y = 150  # LAND_SHAKE 만큼 화면이 눌린다
+            p.jump_delay = 0
+            p.shake_range = 80
+            play_mode.weapon.hit_ground = True
 
-        p.jump_acc -= pps / 90
+        if 0 < p.jump_acc:
+            p.jump_acc -= pps / 50
+
+        elif p.jump_acc <= 0:
+            if p.jump_delay < 30:
+                p.jump_acc = 0
+                p.jump_delay += pps / 4
+            elif p.jump_delay > 30:
+                p.jump_acc -= pps / 5
+
+    else:
+        if p.mv_jump:  # 점프 시
+            p.y += p.jump_acc * pps / 4
+
+            if p.y <= 250:  # 점프 후 착지하면
+                p.y = 250
+                p.jump_acc = 0  # 점프 가속도 초기화
+                p.mv_jump = False  # 점프가 가능해진다
+                p.push_y = LAND_SHAKE  # LAND_SHAKE 만큼 화면이 눌린다
+                p.jump_count = 0  # 점프 가능 횟수 초기화
+
+            p.jump_acc -= pps / 90
 
 
 def walk_animation(p):
@@ -78,6 +101,6 @@ def walk_animation(p):
 
 
 def update_damage_delay(p):
-    global pps
+    pps = game_framework.pps
     if p.dmg_delay > 0:
         p.dmg_delay -= pps / 3

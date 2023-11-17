@@ -13,26 +13,24 @@ class Move:
     def enter(p, e):
         if right_down(e) or left_up(e):
             p.mv_right = True
-            if play_mode.weapon.melee == 'KATANA' and play_mode.weapon.skill_enable:
-                play_mode.weapon.skill_enable = False
-                p.rotate = 0
-                p.speed = p.temp_speed
 
         if right_up(e) or left_down(e):
             p.mv_left = True
-            if play_mode.weapon.melee == 'KATANA' and play_mode.weapon.skill_enable:
-                play_mode.weapon.skill_enable = False
-                p.rotate = 0
-                p.speed = p.temp_speed
 
     @staticmethod
     def exit(p, e):
         if space_down(e):
-            if p.jump_count < p.jump_level:
-                p.jump_acc = JUMP_ACC
-                p.jump_count += 1
-                p.mv_jump = True
+            if not p.mv_jump:
+                if p.jump_count < p.jump_level:
+                    p.jump_acc = JUMP_ACC
+                    p.jump_count += 1
+                    p.mv_jump = True
         else:
+            if play_mode.weapon.melee == 'KATANA' and play_mode.weapon.skill_enable:
+                play_mode.weapon.skill_enable = False
+                p.rotate = 0
+                p.speed = p.temp_speed
+
             p.mv_right = False
             p.mv_left = False
 
@@ -68,10 +66,11 @@ class Idle:
     @staticmethod
     def exit(p, e):
         if space_down(e):
-            if p.jump_count < p.jump_level:
-                p.jump_acc = JUMP_ACC
-                p.jump_count += 1
-                p.mv_jump = True
+            if not p.mv_jump:
+                if p.jump_count < p.jump_level:
+                    p.jump_acc = JUMP_ACC
+                    p.jump_count += 1
+                    p.mv_jump = True
 
     @staticmethod
     def do(p):
@@ -135,6 +134,8 @@ class Player:
         self.jump_acc = JUMP_ACC
         self.jump_count = 0
         self.jump_level = 1  # 레벨이 오를수록 연속 점프 횟수가 많아짐
+
+        self.jump_delay = 0
 
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
 

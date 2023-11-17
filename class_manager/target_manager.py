@@ -112,12 +112,15 @@ def draw_target(t):
                 t.target_melee.composite_draw(0, 'h', t.tmx + t.p.cam_x, y, 100, 150)
 
         elif t.weapon.melee == 'AXE':
-            if t.p.dir == 1:
-                t.tmx = t.p.x + 180
-                t.target_melee.composite_draw(0, '', t.tmx + t.p.cam_x, y, 100, 150)
-            elif t.p.dir == 0:
-                t.tmx = t.p.x - 180
-                t.target_melee.composite_draw(0, 'h', t.tmx + t.p.cam_x, y, 100, 150)
+            if t.weapon.skill_enable:
+                t.tmx = t.p.x
+            else:
+                if t.p.dir == 1:
+                    t.tmx = t.p.x + 180
+                    t.target_melee.composite_draw(0, '', t.tmx + t.p.cam_x, y, 100, 150)
+                elif t.p.dir == 0:
+                    t.tmx = t.p.x - 180
+                    t.target_melee.composite_draw(0, 'h', t.tmx + t.p.cam_x, y, 100, 150)
 
 
 def update_target(t):

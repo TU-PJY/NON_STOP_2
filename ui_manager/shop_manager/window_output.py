@@ -67,3 +67,7 @@ def window_animation(self):
 
         self.page_right_y = self.window_y - 200
         self.page_left_y = self.window_y - 200
+
+
+def update_cat_button(self):
+    self.cat_y[self.select_mode] = self.window_y + 290

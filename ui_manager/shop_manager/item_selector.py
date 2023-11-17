@@ -1,10 +1,6 @@
 from mods import play_mode
 
 
-def update_cat_button(self):
-    self.cat_y[self.select_mode] = self.window_y + 290
-
-
 def click_button(self):
     if self.select_mode == 0:
         if self.page_right_x - 40 < self.mx < self.page_right_x + 40 and \
@@ -173,6 +169,9 @@ def click_button(self):
                     if play_mode.weapon.skill_enable and play_mode.weapon.melee == 'KATANA':
                         play_mode.p.speed = play_mode.p.temp_speed
 
+                    if play_mode.weapon.skill_enable and play_mode.weapon.prev_melee == 'AXE':
+                        play_mode.p.jump_acc = 0
+
                     play_mode.weapon.skill_enable = False
 
                     if (i, j) == (0, 0):
@@ -185,5 +184,7 @@ def click_button(self):
                         play_mode.weapon.melee = 'KATANA'
                     elif (i, j) == (4, 0):
                         play_mode.weapon.melee = 'AXE'
+
+                    play_mode.weapon.prev_melee = play_mode.weapon.melee
 
     self.click = False
