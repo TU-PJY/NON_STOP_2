@@ -82,14 +82,13 @@ class Arrow:
 
     def handle_collision(self, group, other):
         if group == 'player:arrow':
-            if self.p.dmg_delay <= 0:
-                self.p.dmg_shake_range = 30
-                self.p.dmg_delay = 200
-                pd = PlayerDamage()
-                game_manager.add_object(pd, 7)
+            if self.simulate:  # 움직이는 화살만 인식하도록 설정
+                if self.p.dmg_delay <= 0:
+                    self.p.dmg_shake_range = 30
+                    self.p.dmg_delay = 200
+                    pd = PlayerDamage()
+                    game_manager.add_object(pd, 7)
             game_manager.remove_object(self)
-
-
 
 
 class Shell:
