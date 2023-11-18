@@ -24,12 +24,13 @@ def render_ammo_ind(self):
     elif self.weapon.gun_type == 'sr':
         num = self.weapon.sniper_ammo
 
-    x = 20 + self.p.shake_x
-    y = 40 + self.p.shake_y - self.p.push_y
+    x = 20 + self.p.shake_x + self.p.shake_dx
+    y = 40 + self.p.shake_y - self.p.push_y + self.p.shake_dy
 
     if game_framework.MODE == 'play' and play_mode.weapon.weapon_type == 0:
         self.back.opacify(400)
-        self.back.draw(60 + self.p.shake_x, 20 + self.p.shake_y - self.p.push_y, 810, 210)
+        self.back.draw\
+            (60 + self.p.shake_x + self.p.shake_dx, 20 + self.p.shake_y - self.p.push_y + self.p.shake_dy, 810, 210)
 
         if self.weapon.reloading:
             self.reload_bar.draw(20, 90, 700 * (self.weapon.cur_reload_time / self.weapon.reload_time), 120)

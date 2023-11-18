@@ -156,6 +156,7 @@ katana_slice_directory = 'res//melee_image//katana_slice.png'
 player1_slice_right_directory = 'res//player_image//player1_slice_right.png'
 player1_slice_left_directory = 'res//player_image//player1_slice_left.png'
 slice_effect_directory = 'res//melee_image//effect//slice_effect.png'
+player_damage_directory = 'res//player_image//player_damage.png'
 
 # ui 이미지 파일 경로
 shop_window_directory = 'res//ui//shop_window.png'

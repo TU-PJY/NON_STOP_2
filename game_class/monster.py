@@ -1,4 +1,5 @@
 from class_manager.monster_manager import *
+from game_class.prop import PlayerDamage
 
 
 class Update:
@@ -125,10 +126,16 @@ class Monster:
                 if self.type == 1:  # type1 접촉 시 이동 정지
                     self.is_attack = True
 
-                if self.atk_delay <= 0:  # 실질적인 공격
+                if self.atk_delay <= 0 and not self.type == 4:  # 실질적인 공격, 원거리형 몬스터는 근접 대미지가 없다.
                     self.attack_motion_time = 100
                     self.atk_delay = 200
                     self.size = 200
+
+                    if self.p.dmg_delay <= 0:
+                        self.p.dmg_shake_range = 30
+                        self.p.dmg_delay = 200
+                        pd = PlayerDamage()
+                        game_manager.add_object(pd, 7)
 
         if group == 'weapon:monster':  # 총이나 근접무기에 맞을 경우 대미지를 가한다
             # 겹쳐있는 몬스터가 한꺼번에 대미지를 받지 않도록 한다
@@ -154,8 +161,6 @@ class Monster:
 
                 elif self.weapon.skill_enable and self.weapon.melee == 'KATANA':
                     self.hp -= 7
-
-
 
             elif self.weapon.weapon_type == 0:
                 if not self.weapon.hit_once and self.hp > 0:

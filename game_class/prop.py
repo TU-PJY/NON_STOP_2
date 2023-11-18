@@ -70,8 +70,26 @@ class Arrow:
             self.arrow_right.clip_composite_draw \
                 (0, 0, 128, 128, self.deg, '', x, y, 400, 400)
 
+        draw_rectangle(*self.get_bb())
+
     def handle_event(self):
         pass
+
+    def get_bb(self):
+        x = self.x + math.cos(self.deg) * 50 + self.p.ex
+        y = self.y + math.sin(self.deg) * 50 + self.p.ey
+        return x - 10, y - 10, x + 10, y + 10
+
+    def handle_collision(self, group, other):
+        if group == 'player:arrow':
+            if self.p.dmg_delay <= 0:
+                self.p.dmg_shake_range = 30
+                self.p.dmg_delay = 200
+                pd = PlayerDamage()
+                game_manager.add_object(pd, 7)
+            game_manager.remove_object(self)
+
+
 
 
 class Shell:
@@ -269,6 +287,29 @@ class KatanaSlice:
             self.op += int(4 * pps / 3)
             if self.op >= 99:
                 game_manager.remove_object(self)
+
+    def handle_event(self):
+        pass
+
+
+class PlayerDamage:
+    def __init__(self):
+        self.op = 1
+        self.image = load_image(player_damage_directory)
+
+    def draw(self):
+        self.image.opacify(self.op)
+        self.image.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
+        pass
+
+    def update(self):
+        pps = game_framework.pps
+        if self.op < 250:
+            self.op += int(pps / 2)
+        else:
+            game_manager.remove_object(self)
+
+        pass
 
     def handle_event(self):
         pass

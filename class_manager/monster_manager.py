@@ -150,6 +150,7 @@ def process_attack(m):
                 m.frame = 2
                 if m.shoot_delay <= 0:
                     ar = Arrow(m.p, m.mp, m.x, m.y, m.incline, m.dir)  # 일정 간격으로 화살을 발사한다
+                    game_manager.add_collision_pair('player:arrow', None, ar)
                     game_manager.add_object(ar, 2)
                     m.shoot_delay = 450
 

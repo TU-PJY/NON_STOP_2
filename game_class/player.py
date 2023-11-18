@@ -52,6 +52,7 @@ class Move:
 
         shake_display(p)
         push_display(p)
+        dmg_shake(p)
 
     @staticmethod
     def draw(p):
@@ -85,6 +86,7 @@ class Idle:
 
         push_display(p)
         shake_display(p)
+        dmg_shake(p)
 
     @staticmethod
     def draw(p):
@@ -151,7 +153,8 @@ class Player:
         self.camera_x = 0
         self.camera_h = 0  # 플레이어 점프 시 플레이어, 무기를 제외한 나머지 객제들의 위치가 살짝 내려간다.
 
-        self.scope_rot = 0  # scope 흔들림 각도
+        self.dmg_shake_range = 0
+        self.shake_dx, self.shake_dy = 0, 0
 
         self.ex, self.ey = 0, 0  # 플레이어 좌표를 제외한 디스플레이 효과 변수. 객체 좌표에 더하여 사용
         self.px, self.py = 0, 0  # 플레이어 좌표
