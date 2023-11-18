@@ -98,6 +98,14 @@ def melee_skill(weapon):
         weapon.p.shake_range = 35
         weapon.p.rotate = 118.8
 
+    elif weapon.melee == 'AXE':
+        if weapon.p.jump_acc > 0:
+            weapon.melee_deg = 120.5
+            weapon.p.rotate = 0.5
+        else:
+            weapon.melee_deg = 118.5
+            weapon.p.rotate = -1.2
+
 
 def update_rapier_player(weapon):
     if weapon.melee == 'RAPIER':
@@ -120,6 +128,7 @@ def update_melee_skill(weapon):
         elif weapon.melee == 'AXE':
             weapon.hit_ground = False
             weapon.p.mv_jump = False
+            weapon.p.rotate = 0
 
         weapon.skill_enable = False
         weapon.wield = False

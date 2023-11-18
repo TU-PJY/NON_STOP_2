@@ -28,8 +28,13 @@ def draw_melee(weapon):
 
         elif weapon.melee == 'AXE':
             y = weapon.p.wy - 10
-            if not weapon.swing:
+            if not weapon.swing and not weapon.skill_enable:
                 weapon.melee_deg = 120
+            elif weapon.skill_enable:
+                if weapon.p.jump_acc > 0:
+                    y = weapon.p.wy + 20
+                else:
+                    y = weapon.p.wy + 50
 
         if weapon.melee == 'KNIFE':
             if weapon.p.dir == 1:
@@ -101,10 +106,23 @@ def draw_melee(weapon):
         elif weapon.melee == 'AXE':
             if not weapon.swing or (weapon.swing and weapon.swing_up):
                 if weapon.p.dir == 1:
-                    x = weapon.p.px + weapon.melee_x
+                    if weapon.skill_enable:
+                        if weapon.p.jump_acc > 0:
+                            x = weapon.p.px + weapon.melee_x - 80
+                        else:
+                            x = weapon.p.px + weapon.melee_x + 80
+                    else:
+                        x = weapon.p.px + weapon.melee_x
                     weapon.axe.clip_composite_draw(0, 0, 64, 128, weapon.melee_deg, '', x, y, 153, 306)
+
                 elif weapon.p.dir == 0:
-                    x = weapon.p.px - weapon.melee_x
+                    if weapon.skill_enable:
+                        if weapon.p.jump_acc > 0:
+                            x = weapon.p.px - weapon.melee_x + 80
+                        else:
+                            x = weapon.p.px - weapon.melee_x - 80
+                    else:
+                        x = weapon.p.px - weapon.melee_x
                     weapon.axe.clip_composite_draw(0, 0, 64, 128, -weapon.melee_deg, 'h', x, y, 153, 306)
 
             elif weapon.swing and weapon.swing_down:
