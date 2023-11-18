@@ -312,3 +312,70 @@ class PlayerDamage:
 
     def handle_event(self):
         pass
+
+
+class Coin:
+    def __init__(self, p, x, y, dir):
+        self.image = load_image(coin_icon_directory)
+        self.p = p
+        self.x = x
+        self.y = y
+        self.dir = dir
+        self.acc = 4
+        self.size_down = True
+        self.size_x = 70
+        self.up = False
+        self.fall = True
+        self.op = 1
+
+    def draw(self):
+        self.image.opacify(self.op)
+        self.image.draw(self.x + self.p.ex, self.y + self.p.ey, self.size_x, 70)
+        draw_rectangle(*self.get_bb())
+
+    def update(self):
+        pps = game_framework.pps
+
+        if self.fall:  # true 일 시 코인이 떨어진다
+            self.y += self.acc
+            self.acc -= pps / 70
+            if self.y <= 220 and self.acc <= 0:  # 바닥에 떨어지면
+                self.y = 220
+                self.fall = False
+
+        if self.p.mv_right:
+            self.x -= self.p.speed * pps / 4
+        elif self.p.mv_left:
+            self.x += self.p.speed * pps / 4
+
+        if self.size_down:  # 코인이 좌우로 회전한다
+            self.size_x -= pps / 5
+            if self.size_x <= 0:
+                self.size_x = 0
+                self.size_down = False
+        else:
+            self.size_x += pps / 5
+            if self.size_x >= 70:
+                self.size_x = 70
+                self.size_down = True
+
+        if self.up:  # 플레이어가 코인을 얻으면 투명해지면서 사라지는 효과를 출력
+            self.y += pps
+            self.op += int(pps)
+            if self.op > 250:
+                game_manager.remove_object(self)
+
+    def handle_event(self):
+        pass
+
+    def handle_collision(self, group, other):
+        if group == 'player:coin':
+            if not self.up:
+                self.p.coin += 30
+                self.up = True
+
+    def get_bb(self):
+        x = self.x + self.p.ex
+        y = self.y + self.p.ey
+        return x - 30, y - 30, x + 30, y + 30
+

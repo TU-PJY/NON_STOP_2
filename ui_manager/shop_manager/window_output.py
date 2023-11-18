@@ -13,7 +13,6 @@ def draw_shop_window(self):
     self.coin_icon.draw(WIDTH / 2 - 420, self.window_y - 280, 50, 50)
     self.font_small.draw(WIDTH / 2 - 390, self.window_y - 280, '%d' % play_mode.p.coin, (255, 255, 255))
 
-
     if self.select_mode == 0:
         if self.page == 1:
             for i in range(5):

@@ -1,7 +1,7 @@
 from pico2d import *
 
 from config import *
-from game_class.prop import Arrow, Bullet, Feedback
+from game_class.prop import Arrow, Bullet, Feedback, Coin
 from game_work import game_manager, game_framework
 
 
@@ -235,6 +235,9 @@ def damage_monster(m):
             m.weapon.hit_once = False
 
     if m.hp <= 0:  # hp가 0이 될 경우 죽는다.
+        coin = Coin(m.p, m.x, m.y, m.dir)
+        game_manager.add_object(coin, 3)
+        game_manager.add_collision_pair('player:coin', None, coin)
         game_manager.remove_object(m)
 
 
