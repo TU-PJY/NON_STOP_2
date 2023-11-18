@@ -389,20 +389,91 @@ class Coin:
         return x - 30, y - 30, x + 30, y + 30
 
 
+class Explode:
+    def __init__(self, p, x, y):
+        self.image = load_image(explode_directory)
+        self.x = x
+        self.y = y + 50
+        self.p = p
+        self.frame = 0
+
+    def draw(self):
+        x = self.x + self.p.ex
+        y = self.y + self.p.ey
+        self.image.clip_composite_draw(100 * int(self.frame), 0, 100, 695, 0, '', x, y, 500, 500)
+
+    def update(self):
+        pps = game_framework.pps
+
+        self.frame = (self.frame + pps / 50) % 7
+        if int(self.frame) == 6:
+            game_manager.remove_object(self)
+
+    def handle_event(self):
+        pass
+
+
 class Grenade:
-    def __init__(self, p, mp, x, y, dir, incline):
+    def __init__(self, p, mp, x, y, dir):
         self.image = load_image(grenade_directory)
         self.x, self.y, self.dir = x, y, dir
         self.p, self.mp = p, mp
-        self.timer = 400
-        self.acc = 0
-        self.incline = incline
+        self.timer = 1200
+        self.acc = 5
+        self.speed = 5
+        self.simulate = True
+        self.deg = 0
+
+        if self.p.mv_right and self.dir == 1:
+            self.speed = 9
+        elif self.p.mv_left and self.dir == 0:
+            self.speed = 9
 
     def draw(self):
+        x = self.x + self.p.ex
+        y = self.y + self.p.ey
+        self.image.rotate_draw(self.deg, x, y, 40, 40)
         pass
 
     def update(self):
-        pass
+        pps = game_framework.pps
+        if self.simulate:
+            if self.dir == 1:
+                self.deg -= 5 * pps / 4
+                self.x += self.speed * pps / 4
+                if self.x >= self.mp.playerToWallRight:
+                    self.speed -= 2
+                    self.dir = 0
+
+            elif self.dir == 0:
+                self.deg += 5 * pps / 4
+                self.x -= self.speed * pps / 4
+                if self.x <= self.mp.playerToWallLeft:
+                    self.speed -= 2
+                    self.dir = 1
+
+            self.y += self.acc
+            self.acc -= pps / 50
+
+            if self.y <= 200:
+                self.speed -= 1
+                self.y = 200
+                self.acc = self.acc / 2 * -1
+                if self.acc < 1:
+                    self.simulate = False
+
+        if self.p.mv_right:
+            self.x -= self.p.speed * pps / 4
+        elif self.p.mv_left:
+            self.x += self.p.speed * pps / 4
+
+        self.timer -= pps / 3
+
+        if self.timer <= 0:
+            ex = Explode(self.p, self.x, self.y)
+            self.p.ex_shake_range = 100
+            game_manager.add_object(ex, 5)
+            game_manager.remove_object(self)
 
     def handle_event(self):
         pass

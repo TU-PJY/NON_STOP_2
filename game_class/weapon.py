@@ -50,6 +50,9 @@ class Shoot:
             if reload_down(e) and not weapon.reloading:  # 재장전
                 weapon.reloading = True
 
+        if shift_down(e) and weapon.throwable:
+            throw_grenade(weapon)
+
     @staticmethod
     def do(weapon):
         update_delay(weapon)
@@ -107,6 +110,9 @@ class Idle:
             if reload_down(e) and not weapon.reloading:  # 재장전
                 weapon.reloading = True
 
+        if shift_down(e) and weapon.throwable:
+            throw_grenade(weapon)
+
     @staticmethod
     def do(weapon):
         update_delay(weapon)
@@ -140,8 +146,8 @@ class StateMachineGun:
         self.weapon = weapon
         self.cur_state = Idle
         self.table = {
-            Idle: {l_down: Shoot, q_down: Idle, r_down: Idle, r_up: Idle, reload_down: Idle},
-            Shoot: {l_up: Idle, q_down: Shoot, r_down: Shoot, r_up: Shoot, reload_down: Idle}
+            Idle: {l_down: Shoot, q_down: Idle, r_down: Idle, r_up: Idle, reload_down: Idle, shift_down: Idle},
+            Shoot: {l_up: Idle, q_down: Shoot, r_down: Shoot, r_up: Shoot, reload_down: Idle, shift_down: Shoot}
         }
 
     def start(self):
@@ -230,7 +236,7 @@ class Weapon:
         self.hit_ground = False
 
         # 수류탄 전용 변수
-        self.thorwable = True
+        self.throwable = True
         self.throw_delay = 0
 
         # 탄약 관련

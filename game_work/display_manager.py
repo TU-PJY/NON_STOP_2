@@ -5,14 +5,14 @@ from game_work import game_framework
 
 
 def process_effect(p):
-    p.wx = p.x + p.shake_x + p.shake_dx + p.cam_x  # 무기 출력 좌표, weapon x, weapon y
-    p.wy = p.y + p.shake_y + p.shake_dy + p.cam_y - p.push_y + p.size * 50
+    p.wx = p.x + p.shake_x + p.shake_dx + p.shake_ex + p.cam_x  # 무기 출력 좌표, weapon x, weapon y
+    p.wy = p.y + p.shake_y + p.shake_dy + p.shake_ey + p.cam_y - p.push_y + p.size * 50
 
     p.px = p.wx  # 플레이어 출력 좌표, player x, player y
     p.py = p.wy
 
-    p.ex = p.shake_x + p.shake_dx + p.cam_x  # 디스플레이 효과만 사용할때 쓰는 값, 무기, 플레이어를 제외한 객체에 사용
-    p.ey = p.shake_y + p.shake_dy + p.cam_y + p.cam_h - p.push_y  # effect x, effect y
+    p.ex = p.shake_ex + p.shake_x + p.shake_dx + p.cam_x  # 디스플레이 효과만 사용할때 쓰는 값, 무기, 플레이어를 제외한 객체에 사용
+    p.ey = p.shake_ey + p.shake_y + p.shake_dy + p.cam_y + p.cam_h - p.push_y  # effect x, effect y
     pass
 
 
@@ -47,6 +47,17 @@ def dmg_shake(p):
     else:
         p.shake_dx = 0
         p.shake_dy = 0
+
+
+def explode_shake(p):
+    pps = game_framework.pps
+    if not p.ex_shake_range / 8 < 0:
+        p.shake_ex = random.randint(-int(p.ex_shake_range), int(p.ex_shake_range))
+        p.shake_ey = random.randint(-int(p.ex_shake_range), int(p.ex_shake_range))
+        p.ex_shake_range -= pps / 8
+    else:
+        p.shake_ex = 0
+        p.shake_ey = 0
 
 
 def update_camera(p):

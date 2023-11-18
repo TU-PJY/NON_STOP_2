@@ -53,6 +53,7 @@ class Move:
         shake_display(p)
         push_display(p)
         dmg_shake(p)
+        explode_shake(p)
 
     @staticmethod
     def draw(p):
@@ -87,6 +88,7 @@ class Idle:
         push_display(p)
         shake_display(p)
         dmg_shake(p)
+        explode_shake(p)
 
     @staticmethod
     def draw(p):
@@ -159,6 +161,9 @@ class Player:
 
         self.dmg_shake_range = 0
         self.shake_dx, self.shake_dy = 0, 0
+
+        self.ex_shake_range = 0
+        self.shake_ex, self.shake_ey = 0, 0
 
         self.ex, self.ey = 0, 0  # 플레이어 좌표를 제외한 디스플레이 효과 변수. 객체 좌표에 더하여 사용
         self.px, self.py = 0, 0  # 플레이어 좌표

@@ -34,9 +34,8 @@ def render_ammo_ind(self):
     x = 20
     y = 40
 
-    ex = self.p.shake_x + self.p.shake_dx
-    ey = self.p.shake_y - self.p.push_y / 2 + self.p.shake_dy
-    get_y = 0
+    ex = self.p.shake_x + self.p.shake_dx + self.p.shake_ex
+    ey = self.p.shake_y - self.p.push_y / 2 + self.p.shake_dy + self.p.shake_ey
 
     if self.p.get_coin:
         self.get_y = 50

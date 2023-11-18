@@ -1,6 +1,6 @@
 from pico2d import *
 
-from game_class.prop import Shell
+from game_class.prop import Shell, Grenade
 from game_work import game_manager, game_framework
 
 
@@ -124,3 +124,8 @@ def reload_gun(weapon):
             weapon.reload_need = False
             weapon.cur_reload_time = 0
             weapon.reloading = False
+
+
+def throw_grenade(weapon):
+    gren = Grenade(weapon.p, weapon.mp, weapon.p.x, weapon.p.y - weapon.p.cam_h, weapon.p.dir)
+    game_manager.add_object(gren, 3)
