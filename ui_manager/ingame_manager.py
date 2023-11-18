@@ -14,6 +14,8 @@ def load_resource(self):
     self.hp_player = load_image(hp_player_directory)
     self.shop_icon = load_image(shop_icon_directory)
     self.coin_icon = load_image(coin_icon_directory)
+    self.grenade_able_icon = load_image(grenable_able_icon_directory)
+    self.grenade_unable_icon = load_image(grenable_unable_icon_directory)
     pass
 
 
@@ -58,6 +60,12 @@ def render_ammo_ind(self):
                 self.font.draw(x + ex, y + ey, '%d | %d' % (cur, num), (self.r, self.g, self.b))
             else:
                 self.font.draw(x + ex, y + ey, 'R | %d' % num, (self.r, self.g, self.b))
+
+        if self.weapon.throwable:
+            self.grenade_able_icon.draw(500 + ex, 50 + ey, 100, 100)
+        else:
+            self.font_small.draw(550 + ex, 45 + ey, '%d' % (30 - self.weapon.throw_delay_time), (255, 255, 255))
+            self.grenade_unable_icon.draw(500 + ex, 50 + ey, 100, 100)
 
         self.hp_back.draw(WIDTH / 2 + ex, 20 + ey, 410, 30)
         self.font_small.draw(WIDTH / 2 - 200 + ex, 50 + ey, 'HP  %d' % self.p.hp, (255, 255, 255))

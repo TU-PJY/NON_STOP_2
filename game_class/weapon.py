@@ -75,6 +75,8 @@ class Shoot:
             melee_skill(weapon)
             update_melee_skill(weapon)
 
+        update_throw_delay(weapon)
+
     @staticmethod
     def draw(weapon):
         draw_gun(weapon)
@@ -133,6 +135,8 @@ class Idle:
         if weapon.skill_enable:
             melee_skill(weapon)
             update_melee_skill(weapon)
+
+        update_throw_delay(weapon)
 
     @staticmethod
     def draw(weapon):
@@ -237,7 +241,9 @@ class Weapon:
 
         # 수류탄 전용 변수
         self.throwable = True
-        self.throw_delay = 0
+        self.throw_delay = 0  # 수류탄 사용 간격
+        self.throw_delay_time = 0  # ui에 쿨타임을 출력하기 위한 변수
+        self.temp_time = 0  # 모드 전환 시 쿨타임을 저장하기 위한 임시 변수
 
         # 탄약 관련
         # 개발 중에는 99999로 초기화

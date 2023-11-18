@@ -170,10 +170,11 @@ class Feedback:
     def update(self):
         pps = game_framework.pps
 
-        if self.op < 99:
-            self.op += int(2 * pps / 3)
-        else:
-            game_manager.remove_object(self)
+        if game_framework.MODE == 'play':
+            if self.op < 99:
+                self.op += int(2 * pps / 3)
+            else:
+                game_manager.remove_object(self)
 
     def handle_event(self):
         pass
@@ -279,13 +280,14 @@ class KatanaSlice:
     def update(self):
         pps = game_framework.pps
 
-        if not self.weapon.skill_enable:
-            self.op_reduce = True
+        if game_framework.MODE == 'play':
+            if not self.weapon.skill_enable:
+                self.op_reduce = True
 
-        if self.op_reduce:
-            self.op += int(4 * pps / 3)
-            if self.op >= 99:
-                game_manager.remove_object(self)
+            if self.op_reduce:
+                self.op += int(4 * pps / 3)
+                if self.op >= 99:
+                    game_manager.remove_object(self)
 
     def handle_event(self):
         pass
@@ -303,12 +305,11 @@ class PlayerDamage:
 
     def update(self):
         pps = game_framework.pps
-        if self.op < 250:
-            self.op += int(pps / 2)
-        else:
-            game_manager.remove_object(self)
-
-        pass
+        if game_framework.MODE == 'play':
+            if self.op < 250:
+                self.op += int(pps / 2)
+            else:
+                game_manager.remove_object(self)
 
     def handle_event(self):
         pass
@@ -336,42 +337,42 @@ class Coin:
 
     def update(self):
         pps = game_framework.pps
+        if game_framework.MODE == 'play':
+            if self.fall:  # true 일 시 코인이 떨어진다
+                self.y += self.acc
+                self.acc -= pps / 70
+                if self.dir == 1:
+                    if self.x > self.mp.playerToWallLeft + 20:
+                        self.x -= 1 * pps / 4
+                elif self.dir == 0:
+                    if self.x < self.mp.playerToWallRight + 20:
+                        self.x += 1 * pps / 4
 
-        if self.fall:  # true 일 시 코인이 떨어진다
-            self.y += self.acc
-            self.acc -= pps / 70
-            if self.dir == 1:
-                if self.x > self.mp.playerToWallLeft + 20:
-                    self.x -= 1 * pps / 4
-            elif self.dir == 0:
-                if self.x < self.mp.playerToWallRight + 20:
-                    self.x += 1 * pps / 4
+                if self.y <= 230 and self.acc <= 0:  # 바닥에 떨어지면
+                    self.y = 230
+                    self.fall = False
 
-            if self.y <= 230 and self.acc <= 0:  # 바닥에 떨어지면
-                self.y = 230
-                self.fall = False
+            if self.p.mv_right:
+                self.x -= self.p.speed * pps / 4
+            elif self.p.mv_left:
+                self.x += self.p.speed * pps / 4
 
-        if self.p.mv_right:
-            self.x -= self.p.speed * pps / 4
-        elif self.p.mv_left:
-            self.x += self.p.speed * pps / 4
+            if self.size_down:  # 코인이 좌우로 회전한다
+                self.size_x -= pps / 5
+                if self.size_x <= 0:
+                    self.size_x = 0
+                    self.size_down = False
+            else:
+                self.size_x += pps / 5
+                if self.size_x >= 70:
+                    self.size_x = 70
+                    self.size_down = True
 
-        if self.size_down:  # 코인이 좌우로 회전한다
-            self.size_x -= pps / 5
-            if self.size_x <= 0:
-                self.size_x = 0
-                self.size_down = False
-        else:
-            self.size_x += pps / 5
-            if self.size_x >= 70:
-                self.size_x = 70
-                self.size_down = True
-
-        if self.up:  # 플레이어가 코인을 얻으면 투명해지면서 사라지는 효과를 출력
-            self.y += pps
-            self.op += int(pps)
-            if self.op > 250:
-                game_manager.remove_object(self)
+            if self.up:  # 플레이어가 코인을 얻으면 투명해지면서 사라지는 효과를 출력
+                self.y += pps
+                self.op += int(pps)
+                if self.op > 250:
+                    game_manager.remove_object(self)
 
     def handle_event(self):
         pass
@@ -404,10 +405,10 @@ class Explode:
 
     def update(self):
         pps = game_framework.pps
-
-        self.frame = (self.frame + pps / 50) % 7
-        if int(self.frame) == 6:
-            game_manager.remove_object(self)
+        if game_framework.MODE == 'play':
+            self.frame = (self.frame + pps / 50) % 7
+            if int(self.frame) == 6:
+                game_manager.remove_object(self)
 
     def handle_event(self):
         pass
@@ -437,37 +438,38 @@ class Grenade:
 
     def update(self):
         pps = game_framework.pps
-        if self.simulate:
-            if self.dir == 1:
-                self.deg -= 5 * pps / 4
-                self.x += self.speed * pps / 4
-                if self.x >= self.mp.playerToWallRight:
-                    self.speed -= 2
-                    self.dir = 0
+        if game_framework.MODE == 'play':
+            if self.simulate:
+                if self.dir == 1:
+                    self.deg -= 5 * pps / 4
+                    self.x += self.speed * pps / 4
+                    if self.x >= self.mp.playerToWallRight:
+                        self.speed -= 2
+                        self.dir = 0
 
-            elif self.dir == 0:
-                self.deg += 5 * pps / 4
-                self.x -= self.speed * pps / 4
-                if self.x <= self.mp.playerToWallLeft:
-                    self.speed -= 2
-                    self.dir = 1
+                elif self.dir == 0:
+                    self.deg += 5 * pps / 4
+                    self.x -= self.speed * pps / 4
+                    if self.x <= self.mp.playerToWallLeft:
+                        self.speed -= 2
+                        self.dir = 1
 
-            self.y += self.acc
-            self.acc -= pps / 50
+                self.y += self.acc
+                self.acc -= pps / 50
 
-            if self.y <= 200:
-                self.speed -= 1
-                self.y = 200
-                self.acc = self.acc / 2 * -1
-                if self.acc < 1:
-                    self.simulate = False
+                if self.y <= 200:
+                    self.speed -= 1
+                    self.y = 200
+                    self.acc = self.acc / 2 * -1
+                    if self.acc < 1:
+                        self.simulate = False
 
-        if self.p.mv_right:
-            self.x -= self.p.speed * pps / 4
-        elif self.p.mv_left:
-            self.x += self.p.speed * pps / 4
+            if self.p.mv_right:
+                self.x -= self.p.speed * pps / 4
+            elif self.p.mv_left:
+                self.x += self.p.speed * pps / 4
 
-        self.timer -= pps / 3
+            self.timer -= pps / 3
 
         if self.timer <= 0:
             ex = Explode(self.p, self.x, self.y)

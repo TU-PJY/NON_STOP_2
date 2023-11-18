@@ -169,6 +169,8 @@ button_melee_directory = 'res//ui//button_melee.png'
 button_exp_directory = 'res//ui//button_exp.png'
 button_page_directory = 'res//ui//page_button.png'
 cursor_directory = 'res//ui//cursor.png'
+grenable_able_icon_directory = 'res//ui//grenade_able_icon.png'
+grenable_unable_icon_directory = 'res//ui//grenade_unable_icon.png'
 
 hp_back_directory = 'res//ui//hp_back.png'
 hp_front_directory = 'res//ui//hp_front.png'

@@ -129,3 +129,14 @@ def reload_gun(weapon):
 def throw_grenade(weapon):
     gren = Grenade(weapon.p, weapon.mp, weapon.p.x, weapon.p.y - weapon.p.cam_h, weapon.p.dir)
     game_manager.add_object(gren, 3)
+    weapon.throwable = False
+    weapon.throw_delay = get_time()
+
+
+def update_throw_delay(weapon):
+    if not weapon.throwable:
+        weapon.throw_delay_time = get_time() - weapon.throw_delay
+        if weapon.throw_delay_time > 29:
+            weapon.throwable = True
+
+

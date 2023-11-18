@@ -16,6 +16,8 @@ def handle_events():
         elif event.type == SDL_KEYDOWN:
             if event.key == SDLK_ESCAPE or event.key == SDLK_TAB:  # to play_mode
                 if exit_enable:
+                    # 상점모드에서 소요된 시간을 다시 쿨타임에 반환
+                    play_mode.weapon.throw_delay = get_time() - play_mode.weapon.temp_time
                     game_framework.MODE = 'play'
                     game_framework.pop_mode()
 
