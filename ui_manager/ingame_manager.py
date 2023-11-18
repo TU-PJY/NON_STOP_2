@@ -18,6 +18,8 @@ def load_resource(self):
 
 
 def render_ammo_ind(self):
+    pps = game_framework.pps
+
     cur = self.weapon.cur_ammo
 
     if self.weapon.gun_type == 'pistol' or self.weapon.gun_type == 'smg':
@@ -34,6 +36,16 @@ def render_ammo_ind(self):
 
     ex = self.p.shake_x + self.p.shake_dx
     ey = self.p.shake_y - self.p.push_y / 2 + self.p.shake_dy
+    get_y = 0
+
+    if self.p.get_coin:
+        self.get_y = 50
+        self.p.get_coin = False
+
+    if self.get_y > 0:
+        self.get_y -= pps / 3
+        if self.get_y < 0:
+            self.get_y = 0
 
     if game_framework.MODE == 'play':
         if play_mode.weapon.weapon_type == 0:
@@ -54,8 +66,9 @@ def render_ammo_ind(self):
 
         self.font_small.draw(75 + ex, HEIGHT - 40 + ey, 'TAB', (255, 255, 255))
         self.shop_icon.draw(40 + ex, HEIGHT - 40 + ey, 50, 50)
-        self.coin_icon.draw(WIDTH / 2 + 250 + ex, 30 + ey, 50, 50)
-        self.font_small.draw(WIDTH / 2 + 280 + ex, 30 + ey, '%d' % play_mode.p.coin, (255, 255, 255))
+
+        self.coin_icon.draw(WIDTH / 2 + 250 + ex, 30 + ey + self.get_y, 50, 50)
+        self.font_small.draw(WIDTH / 2 + 280 + ex, 30 + ey + self.get_y, '%d' % play_mode.p.coin, (255, 255, 255))
     pass
 
 

@@ -141,6 +141,7 @@ class Player:
         self.jump_delay = 0
 
         self.coin = 0
+        self.get_coin = False
 
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
 

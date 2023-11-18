@@ -381,6 +381,7 @@ class Coin:
             if not self.up:
                 self.p.coin += 30
                 self.up = True
+                self.p.get_coin = True
 
     def get_bb(self):
         x = self.x + self.p.ex

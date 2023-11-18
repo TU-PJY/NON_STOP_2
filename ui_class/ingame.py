@@ -12,6 +12,8 @@ class Ingame:
         self.b = 255
         load_resource(self)
 
+        self.get_y = 0
+
     def update(self):
         update_ammo_ind(self)
 
