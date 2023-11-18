@@ -315,9 +315,10 @@ class PlayerDamage:
 
 
 class Coin:
-    def __init__(self, p, x, y, dir):
+    def __init__(self, p, mp, x, y, dir):
         self.image = load_image(coin_icon_directory)
         self.p = p
+        self.mp = mp
         self.x = x
         self.y = y
         self.dir = dir
@@ -339,8 +340,15 @@ class Coin:
         if self.fall:  # true 일 시 코인이 떨어진다
             self.y += self.acc
             self.acc -= pps / 70
-            if self.y <= 220 and self.acc <= 0:  # 바닥에 떨어지면
-                self.y = 220
+            if self.dir == 1:
+                if self.x > self.mp.playerToWallLeft + 20:
+                    self.x -= 1 * pps / 4
+            elif self.dir == 0:
+                if self.x < self.mp.playerToWallRight + 20:
+                    self.x += 1 * pps / 4
+
+            if self.y <= 230 and self.acc <= 0:  # 바닥에 떨어지면
+                self.y = 230
                 self.fall = False
 
         if self.p.mv_right:
