@@ -12,10 +12,12 @@ def load_shop_resource(self):
     self.button_exp = load_image(button_exp_directory)
     self.button_page_left = load_image(button_page_directory)
     self.button_page_right = load_image(button_page_directory)
-    self.font = load_font(font_directory, 50)
     self.font = load_font(font_directory, 30)
+    self.font_small = load_font(font_directory, 20)
 
     self.cursor = load_image(cursor_directory)
+
+    self.coin_icon = load_image(coin_icon_directory)
 
     self.image_m1911 = load_image(m1911_right_directory)
     self.image_m92 = load_image(m92_right_directory)

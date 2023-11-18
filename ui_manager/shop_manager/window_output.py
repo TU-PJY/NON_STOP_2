@@ -1,5 +1,6 @@
 from config import *
 from game_work import game_framework
+from mods import play_mode
 
 
 def draw_shop_window(self):
@@ -9,6 +10,9 @@ def draw_shop_window(self):
     self.button_melee.draw(self.cat_x[1], self.cat_y[1], 200, 120)
     self.button_exp.draw(self.cat_x[2], self.cat_y[2], 200, 120)
     self.window.draw(self.x, self.window_y, 950, 550)
+    self.coin_icon.draw(WIDTH / 2 - 420, self.window_y - 280, 50, 50)
+    self.font_small.draw(WIDTH / 2 - 390, self.window_y - 280, '%d' % play_mode.p.coin, (255, 255, 255))
+
 
     if self.select_mode == 0:
         if self.page == 1:

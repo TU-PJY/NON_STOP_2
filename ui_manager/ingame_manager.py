@@ -13,6 +13,7 @@ def load_resource(self):
     self.hp_back = load_image(hp_back_directory)
     self.hp_player = load_image(hp_player_directory)
     self.shop_icon = load_image(shop_icon_directory)
+    self.coin_icon = load_image(coin_icon_directory)
     pass
 
 
@@ -53,6 +54,8 @@ def render_ammo_ind(self):
 
         self.font_small.draw(75 + ex, HEIGHT - 40 + ey, 'TAB', (255, 255, 255))
         self.shop_icon.draw(40 + ex, HEIGHT - 40 + ey, 50, 50)
+        self.coin_icon.draw(WIDTH / 2 + 250 + ex, 30 + ey, 50, 50)
+        self.font_small.draw(WIDTH / 2 + 280 + ex, 30 + ey, '%d' % play_mode.p.coin, (255, 255, 255))
     pass
 
 

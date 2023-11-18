@@ -172,6 +172,7 @@ hp_back_directory = 'res//ui//hp_back.png'
 hp_front_directory = 'res//ui//hp_front.png'
 hp_player_directory = 'res//ui//hp_player.png'
 shop_icon_directory = 'res//ui//shop_icon.png'
+coin_icon_directory = 'res//ui//coin.png'
 
 ammo_ind_back_directory = 'res//ui//ammo_ind_back.png'
 reload_bar_directory = 'res//ui//reload_bar.png'

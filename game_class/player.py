@@ -138,8 +138,9 @@ class Player:
         self.jump_acc = JUMP_ACC
         self.jump_count = 0
         self.jump_level = 1  # 레벨이 오를수록 연속 점프 횟수가 많아짐
-
         self.jump_delay = 0
+
+        self.coin = 0
 
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
 
