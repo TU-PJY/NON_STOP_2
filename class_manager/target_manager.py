@@ -32,19 +32,19 @@ def draw_target(t):
 
                 if t.weapon.gun == 'SPRING':
                     t.scope_spring.opacify(50)
-                    t.scope_spring.rotate_draw(t.p.scope_rot, x, y, t.scope_size_x, t.scope_size_y)
+                    t.scope_spring.rotate_draw(0, x, y, t.scope_size_x, t.scope_size_y)
                 if t.weapon.gun == 'KAR98':
                     t.scope_kar98.opacify(50)
-                    t.scope_kar98.rotate_draw(t.p.scope_rot, x, y, t.scope_size_x, t.scope_size_y)
+                    t.scope_kar98.rotate_draw(0, x, y, t.scope_size_x, t.scope_size_y)
                 if t.weapon.gun == 'M24':
                     t.scope_m24.opacify(50)
-                    t.scope_m24.rotate_draw(t.p.scope_rot, x, y, t.scope_size_x, t.scope_size_y)
+                    t.scope_m24.rotate_draw(0, x, y, t.scope_size_x, t.scope_size_y)
                 if t.weapon.gun == 'AWP':
                     t.scope_awp.opacify(50)
-                    t.scope_awp.rotate_draw(t.p.scope_rot, x, y, t.scope_size_x, t.scope_size_y)
+                    t.scope_awp.rotate_draw(0, x, y, t.scope_size_x, t.scope_size_y)
                 if t.weapon.gun == 'CHEYTAC':
                     t.scope_cheytac.opacify(50)
-                    t.scope_cheytac.rotate_draw(t.p.scope_rot, x, y, t.scope_size_x, t.scope_size_y)
+                    t.scope_cheytac.rotate_draw(0, x, y, t.scope_size_x, t.scope_size_y)
 
             else:
                 t.target_up.opacify(150)

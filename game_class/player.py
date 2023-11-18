@@ -126,6 +126,8 @@ class Player:
         load_player_image(self)
         self.mx, self.my = 0, 0  # 마우스 좌표
 
+        self.hp = 200
+
         # player data
         self.x, self.y, self.dir = WIDTH / 2, 250, 1
         self.mv_right, self.mv_left, self.mv_jump = False, False, False  # 플레이어 이동, 점프

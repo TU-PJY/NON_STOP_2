@@ -138,29 +138,15 @@ class Monster:
                         game_manager.add_object(pd, 7)
 
         if group == 'weapon:monster':  # 총이나 근접무기에 맞을 경우 대미지를 가한다
-            # 겹쳐있는 몬스터가 한꺼번에 대미지를 받지 않도록 한다
-            if self.weapon.weapon_type == 1 and self.hp > 0:
-                if self.weapon.melee == 'RAPIER':
-                    self.is_hit = True
-
-                elif not self.weapon.skill_enable and self.weapon.melee == 'KATANA':
-                    self.is_hit = True
-
-                elif self.weapon.melee == 'BAT':
-                    self.is_hit = True
-
-                elif self.weapon.melee == 'KNIFE':
-                    self.is_hit = True
-
-                elif not self.weapon.skill_enable and self.weapon.melee == 'AXE':
-                    self.is_hit = True
-
-                # 땅을 내리쳐 지진을 일으킨다
-                elif self.weapon.melee == 'AXE' and self.weapon.hit_ground:
+            if self.weapon.weapon_type == 1:
+                if self.weapon.melee == 'AXE' and self.weapon.hit_ground:
                     self.hp -= 5.7
 
                 elif self.weapon.skill_enable and self.weapon.melee == 'KATANA':
                     self.hp -= 7
+
+                else:
+                    self.is_hit = True
 
             elif self.weapon.weapon_type == 0:
                 if not self.weapon.hit_once and self.hp > 0:

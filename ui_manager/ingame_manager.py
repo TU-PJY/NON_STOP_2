@@ -7,8 +7,12 @@ from mods import play_mode
 
 def load_resource(self):
     self.font = load_font(font_directory, 40)
+    self.font_small = load_font(font_directory, 20)
     self.back = load_image(ammo_ind_back_directory)
     self.reload_bar = load_image(reload_bar_directory)
+    self.hp_back = load_image(hp_back_directory)
+    self.hp_player = load_image(hp_player_directory)
+    self.shop_icon = load_image(shop_icon_directory)
     pass
 
 
@@ -24,21 +28,31 @@ def render_ammo_ind(self):
     elif self.weapon.gun_type == 'sr':
         num = self.weapon.sniper_ammo
 
-    x = 20 + self.p.shake_x + self.p.shake_dx
-    y = 40 + self.p.shake_y - self.p.push_y + self.p.shake_dy
+    x = 20
+    y = 40
 
-    if game_framework.MODE == 'play' and play_mode.weapon.weapon_type == 0:
-        self.back.opacify(400)
-        self.back.draw\
-            (60 + self.p.shake_x + self.p.shake_dx, 20 + self.p.shake_y - self.p.push_y + self.p.shake_dy, 810, 210)
+    ex = self.p.shake_x + self.p.shake_dx
+    ey = self.p.shake_y - self.p.push_y / 2 + self.p.shake_dy
 
-        if self.weapon.reloading:
-            self.reload_bar.draw(20, 90, 700 * (self.weapon.cur_reload_time / self.weapon.reload_time), 120)
+    if game_framework.MODE == 'play':
+        if play_mode.weapon.weapon_type == 0:
+            self.back.opacify(400)
+            self.back.draw(60 + ex, 20 + ey, 810, 210)
 
-        if self.weapon.cur_ammo > 0:
-            self.font.draw(x, y, '%d | %d' % (cur, num), (self.r, self.g, self.b))
-        else:
-            self.font.draw(x, y, 'R | %d' % num, (self.r, self.g, self.b))
+            if self.weapon.reloading:
+                self.reload_bar.draw(20 + ex, 90 + ey, 700 * (self.weapon.cur_reload_time / self.weapon.reload_time), 120)
+
+            if self.weapon.cur_ammo > 0:
+                self.font.draw(x + ex, y + ey, '%d | %d' % (cur, num), (self.r, self.g, self.b))
+            else:
+                self.font.draw(x + ex, y + ey, 'R | %d' % num, (self.r, self.g, self.b))
+
+        self.hp_back.draw(WIDTH / 2 + ex, 20 + ey, 410, 30)
+        self.font_small.draw(WIDTH / 2 - 200 + ex, 50 + ey, 'HP  %d' % self.p.hp, (255, 255, 255))
+        self.hp_player.draw(WIDTH / 2 + ex + (self.p.hp / 200) / 2, 20 + ey, 400 * self.p.hp / 200, 25)
+
+        self.font_small.draw(75 + ex, HEIGHT - 40 + ey, 'TAB', (255, 255, 255))
+        self.shop_icon.draw(40 + ex, HEIGHT - 40 + ey, 50, 50)
     pass
 
 

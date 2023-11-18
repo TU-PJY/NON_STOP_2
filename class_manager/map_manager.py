@@ -44,15 +44,33 @@ def update_map(self):  # 맵 업데이트
     pps = game_framework.pps
     if self.x + 2048 <= self.p.x:  # 맵 끝으로 갈 경우 벽에 막힌다
         self.p.mv_right = False
-        play_mode.weapon.skill_enable = False
-        self.p.speed = self.p.temp_speed
-        self.p.rotate = 0
+
+        self.x += pps / 4 * self.p.speed
+        self.wall.x1 += pps / 4 * self.p.speed
+        self.wall.x2 += pps / 4 * self.p.speed
+        self.bg.x += (pps / 4 * self.p.speed) / 4
+        self.playerToWallRight += pps / 4 * self.p.speed
+        self.playerToWallLeft += pps / 4 * self.p.speed
+
+        if play_mode.weapon.skill_enable:
+            play_mode.weapon.skill_enable = False
+            self.p.speed = self.p.temp_speed
+            self.p.rotate = 0
 
     if self.x - 2048 >= self.p.x:
         self.p.mv_left = False
-        play_mode.weapon.skill_enable = False
-        self.p.speed = self.p.temp_speed
-        self.p.rotate = 0
+
+        self.x -= pps / 4 * self.p.speed
+        self.wall.x1 -= pps / 4 * self.p.speed
+        self.wall.x2 -= pps / 4 * self.p.speed
+        self.bg.x -= (pps / 4 * self.p.speed) / 4
+        self.playerToWallRight -= pps / 4 * self.p.speed
+        self.playerToWallLeft -= pps / 4 * self.p.speed
+
+        if play_mode.weapon.skill_enable:
+            play_mode.weapon.skill_enable = False
+            self.p.speed = self.p.temp_speed
+            self.p.rotate = 0
 
     if self.p.mv_right:
         pps = pps * -1
