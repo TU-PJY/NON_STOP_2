@@ -28,6 +28,10 @@ def reload_down(e):
     return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_r
 
 
+def shift_down(e):
+    return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_LSHIFT
+
+
 def change_weapon(weapon):
     if weapon.weapon_type == 0:  # 총을 들고 있을 때 총 -> 근접무기
         weapon.p.look_mouse = False  # 플레이어는 더 이상 마우스를 따라보지 않는다.

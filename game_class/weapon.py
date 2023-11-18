@@ -229,6 +229,10 @@ class Weapon:
         self.skill_usable = True  # True일 시 스킬 사용 가능
         self.hit_ground = False
 
+        # 수류탄 전용 변수
+        self.thorwable = True
+        self.throw_delay = 0
+
         # 탄약 관련
         # 개발 중에는 99999로 초기화
         self.pistol_ammo = 99999  # pistol, smg 탄종, 게임 시작 시 기본으로 100발이 주어짐

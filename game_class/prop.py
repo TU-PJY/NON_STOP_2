@@ -15,7 +15,6 @@ class Arrow:
         self.mp = mp
         self.dir = dir
         self.acc = 0
-        self.deg = self.incline
         self.remove_timer = 300
         self.simulate = True  # True일 동안 움직임
 
@@ -34,17 +33,18 @@ class Arrow:
 
             # 화살이 벽에 박힌다
             if self.simulate:
-                self.x += math.cos(self.incline) * 5 * pps / 4
-                self.y += math.sin(self.incline) * 5 * pps / 4
-                self.y += self.acc * pps / 4
-                self.acc -= 0.01 * pps / 4
+                self.x += math.cos(self.incline) * 4 * pps / 4
+                self.y += math.sin(self.incline) * 4 * pps / 4
 
                 if self.dir == 1:
-                    if self.deg > -90:
-                        self.deg -= 0.002555 * pps / 4
+                    if self.incline > -1.5:
+                        self.incline += self.acc * pps / 3
+                        self.acc -= 0.0000055 * pps / 3
+
                 elif self.dir == 0:
-                    if self.deg < 90:
-                        self.deg += 0.002555 * pps / 4
+                    if self.incline < 4.6:
+                        self.incline -= self.acc * pps / 3
+                        self.acc -= 0.0000055 * pps / 3
 
                 # 화살이 벽에 박히면
                 if self.x >= self.mp.playerToWallRight - 10 or self.x <= self.mp.playerToWallLeft + 10 or self.y <= 190:
@@ -65,10 +65,10 @@ class Arrow:
         y = self.y + self.p.ey
         if self.dir == 0:
             self.arrow_left.clip_composite_draw \
-                (0, 0, 128, 128, self.deg, 'h', x, y, 400, 400)
+                (0, 0, 128, 128, self.incline, 'h', x, y, 400, 400)
         elif self.dir == 1:
             self.arrow_right.clip_composite_draw \
-                (0, 0, 128, 128, self.deg, '', x, y, 400, 400)
+                (0, 0, 128, 128, self.incline, '', x, y, 400, 400)
 
         draw_rectangle(*self.get_bb())
 
@@ -76,8 +76,8 @@ class Arrow:
         pass
 
     def get_bb(self):
-        x = self.x + math.cos(self.deg) * 50 + self.p.ex
-        y = self.y + math.sin(self.deg) * 50 + self.p.ey
+        x = self.x + math.cos(self.incline) * 50 + self.p.ex
+        y = self.y + math.sin(self.incline) * 50 + self.p.ey
         return x - 10, y - 10, x + 10, y + 10
 
     def handle_collision(self, group, other):
@@ -387,4 +387,23 @@ class Coin:
         x = self.x + self.p.ex
         y = self.y + self.p.ey
         return x - 30, y - 30, x + 30, y + 30
+
+
+class Grenade:
+    def __init__(self, p, mp, x, y, dir, incline):
+        self.image = load_image(grenade_directory)
+        self.x, self.y, self.dir = x, y, dir
+        self.p, self.mp = p, mp
+        self.timer = 400
+        self.acc = 0
+        self.incline = incline
+
+    def draw(self):
+        pass
+
+    def update(self):
+        pass
+
+    def handle_event(self):
+        pass
 
