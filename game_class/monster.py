@@ -186,3 +186,6 @@ class Monster:
                         self.weapon.pen_count = 0
                         self.weapon.pen_enable = False
                 self.once = True
+
+        if group == 'grenade:monster':  # 수류탄 폭발에 맞으면 무조건 즉사
+            game_manager.remove_object(self)

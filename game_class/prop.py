@@ -413,6 +413,17 @@ class Explode:
     def handle_event(self):
         pass
 
+    def get_bb(self):
+        x = self.x + self.p.ex
+        y = self.y + self.p.ey
+        if int(self.frame) == 0:
+            return x - 300, y - 100, x + 300, y + 300
+        else:
+            return -9999, -9999, -9999, -9999
+
+    def handle_collision(self, group, other):
+        pass
+
 
 class Grenade:
     def __init__(self, p, mp, x, y, dir):
@@ -475,8 +486,8 @@ class Grenade:
             ex = Explode(self.p, self.x, self.y)
             self.p.ex_shake_range = 100
             game_manager.add_object(ex, 5)
+            game_manager.add_collision_pair('grenade:monster', ex, None)
             game_manager.remove_object(self)
 
     def handle_event(self):
         pass
-
