@@ -36,7 +36,7 @@ class Arrow:
                 self.x += math.cos(self.incline) * 4 * pps / 4
                 self.y += math.sin(self.incline) * 4 * pps / 4
 
-                if self.dir == 1:
+                if self.dir == 1:  # 중력에 의해 점차 앞으로 기울어진다.
                     if self.incline > -1.5:
                         self.incline += self.acc * pps / 3
                         self.acc -= 0.0000055 * pps / 3
@@ -115,7 +115,7 @@ class Shell:
             elif self.p.mv_left:
                 self.x += self.p.speed * pps / 4
 
-            if self.simulate:
+            if self.simulate:  # true 일 때만 움직인다
                 if self.dir == 1:
                     self.x -= self.speed * pps / 4
                     self.deg += 0.1 * pps / 3
@@ -125,7 +125,7 @@ class Shell:
                     self.deg -= 0.1 * pps / 3
 
                 self.y += self.acc * pps / 3
-                self.acc -= 0.05 * pps / 3
+                self.acc -= 0.05 * pps / 3  # 바닥에 튕길때마다 가속값이 감소
 
                 if self.y < 190:  # 튕길 속도가 나는 한 계속 튄다
                     self.y = 190
@@ -171,9 +171,9 @@ class Feedback:
         pps = game_framework.pps
 
         if game_framework.MODE == 'play':
-            if self.op < 99:
+            if self.op < 99:  # 피드백이 점차 투명해진다
                 self.op += int(2 * pps / 3)
-            else:
+            else:  # 완전히 투명해지면 객체 삭제
                 game_manager.remove_object(self)
 
     def handle_event(self):
@@ -195,14 +195,14 @@ class Bullet:
         if game_framework.MODE == 'play':
             if self.x < self.mp.playerToWallLeft or self.x > self.mp.playerToWallRight or \
                     self.y < 120 + self.p.cam_h or self.y > self.p.y + 800:
-                self.weapon.pen_enable = False
+                self.weapon.pen_enable = False  # 벽에 부딫히거나 너무 높이 올라가면 객체 삭제
                 game_manager.remove_object(self)
 
-            # 객체 생성하자마자 움직이면 최초로 쏜 몬스터와 충돌하지 않을수도 있으므로 약간의 딜레이 후 움직인다.
+            # 생성하자마자 움직이면 최초로 쏜 몬스터와 충돌하지 않을수도 있으므로 약간의 딜레이 후 움직인다.
             if self.move_delay > 0:
                 self.move_delay -= pps / 4
             else:
-                self.x += math.cos(self.incline) * 30 * pps / 4
+                self.x += math.cos(self.incline) * 30 * pps / 4  # 총을 쏜 각도대로 움직인다
                 self.y += math.sin(self.incline) * 30 * pps / 4
 
             if self.p.mv_right:
@@ -252,6 +252,7 @@ class KatanaSlice:
 
         self.back.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
 
+        # 스킬 이펙트 출력
         if self.dir == 1:
             self.effect.clip_composite_draw(0, 0, 1500, 280, 0, '', self.p.px - 900, self.p.py, 1500, 280)
         else:
@@ -284,9 +285,9 @@ class KatanaSlice:
             if not self.weapon.skill_enable:
                 self.op_reduce = True
 
-            if self.op_reduce:
+            if self.op_reduce:  # 스킬 사용이 끝나면 효과가 점차 투명해진다
                 self.op += int(4 * pps / 3)
-                if self.op >= 99:
+                if self.op >= 99:  # 완전히 투명해지면 객체 삭제
                     game_manager.remove_object(self)
 
     def handle_event(self):
@@ -306,10 +307,10 @@ class PlayerDamage:
     def update(self):
         pps = game_framework.pps
         if game_framework.MODE == 'play':
-            if self.op < 250:
+            if self.op < 250:  # 점점 투명해진다
                 self.op += int(pps / 2)
             else:
-                game_manager.remove_object(self)
+                game_manager.remove_object(self)  # 완전히 투명해지면 객체 삭제
 
     def handle_event(self):
         pass
@@ -341,7 +342,8 @@ class Coin:
             if self.fall:  # true 일 시 코인이 떨어진다
                 self.y += self.acc
                 self.acc -= pps / 70
-                if self.dir == 1:
+
+                if self.dir == 1:  # 몬스터가 드랍한 직후 지정 방향으로 살짝 움직인다.
                     if self.x > self.mp.playerToWallLeft + 20:
                         self.x -= 1 * pps / 4
                 elif self.dir == 0:
@@ -379,7 +381,7 @@ class Coin:
 
     def handle_collision(self, group, other):
         if group == 'player:coin':
-            if not self.up:
+            if not self.up:  # 획득하지 않은 코인에 대해서만 코인 획득 피드백 재생
                 self.p.coin += 30
                 self.up = True
                 self.p.get_coin = True
@@ -406,8 +408,8 @@ class Explode:
     def update(self):
         pps = game_framework.pps
         if game_framework.MODE == 'play':
-            self.frame = (self.frame + pps / 50) % 7
-            if int(self.frame) == 6:
+            self.frame = (self.frame + pps / 30) % 7
+            if int(self.frame) == 6:  # 폭발 애니메이션이 다 출력되면 객체 삭제
                 game_manager.remove_object(self)
 
     def handle_event(self):
@@ -416,7 +418,7 @@ class Explode:
     def get_bb(self):
         x = self.x + self.p.ex
         y = self.y + self.p.ey
-        if int(self.frame) == 0:
+        if int(self.frame) == 0:  # 폭발 순간에만 히트박스 제공
             return x - 300, y - 100, x + 300, y + 300
         else:
             return -9999, -9999, -9999, -9999
@@ -436,7 +438,7 @@ class Grenade:
         self.simulate = True
         self.deg = 0
 
-        if self.p.mv_right and self.dir == 1:
+        if self.p.mv_right and self.dir == 1:  # 움직이는 방향으로 향하여 던지면 더 빨리 날아간다
             self.speed = 9
         elif self.p.mv_left and self.dir == 0:
             self.speed = 9
@@ -450,7 +452,7 @@ class Grenade:
     def update(self):
         pps = game_framework.pps
         if game_framework.MODE == 'play':
-            if self.simulate:
+            if self.simulate:  # true 일 때만 움직임
                 if self.dir == 1:
                     self.deg -= 5 * pps / 4
                     self.x += self.speed * pps / 4
@@ -482,10 +484,10 @@ class Grenade:
 
             self.timer -= pps / 3
 
-        if self.timer <= 0:
+        if self.timer <= 0:  # 타이머가 0이되면 폭발한다.
             ex = Explode(self.p, self.x, self.y)
-            self.p.ex_shake_range = 100
-            game_manager.add_object(ex, 5)
+            self.p.ex_shake_range = 100  # 화면이 흔들린다
+            game_manager.add_object(ex, 5)  # 폭발 애니메이션 추가
             game_manager.add_collision_pair('grenade:monster', ex, None)
             game_manager.remove_object(self)
 

@@ -142,8 +142,8 @@ class Player:
         self.jump_level = 1  # 레벨이 오를수록 연속 점프 횟수가 많아짐
         self.jump_delay = 0
 
-        self.coin = 0
-        self.get_coin = False
+        self.coin = 0  # 플레이어가 소지한 코인 개수
+        self.get_coin = False  # true일 시 코인 획득 피드백 재생
 
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
 
@@ -159,10 +159,10 @@ class Player:
         self.camera_x = 0
         self.camera_h = 0  # 플레이어 점프 시 플레이어, 무기를 제외한 나머지 객제들의 위치가 살짝 내려간다.
 
-        self.dmg_shake_range = 0
+        self.dmg_shake_range = 0  # 플레이어가 대미지를 받을 시 화면이 흔들리는 수치
         self.shake_dx, self.shake_dy = 0, 0
 
-        self.ex_shake_range = 0
+        self.ex_shake_range = 0  # 폭발물 폭발 시 화면아 흔들리는 수치
         self.shake_ex, self.shake_ey = 0, 0
 
         self.ex, self.ey = 0, 0  # 플레이어 좌표를 제외한 디스플레이 효과 변수. 객체 좌표에 더하여 사용

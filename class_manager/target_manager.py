@@ -30,6 +30,8 @@ def draw_target(t):
                 x = t.p.mx + t.p.shake_x
                 y = t.p.my + t.p.shake_y
 
+                # 정조준을 할 경우
+                # 총기마다 스코프 형태가 다르다
                 if t.weapon.gun == 'SPRING':
                     t.scope_spring.opacify(50)
                     t.scope_spring.rotate_draw(0, x, y, t.scope_size_x, t.scope_size_y)
@@ -46,6 +48,7 @@ def draw_target(t):
                     t.scope_cheytac.opacify(50)
                     t.scope_cheytac.rotate_draw(0, x, y, t.scope_size_x, t.scope_size_y)
 
+            # 정조준을 하지 않을 경우
             else:
                 t.target_up.opacify(150)
                 t.target_down.opacify(150)
@@ -56,7 +59,7 @@ def draw_target(t):
                 t.target_right.draw(t.p.mx + t.recoil + t.dis2 + 30, t.p.my, 60, 60)
                 t.target_left.draw(t.p.mx - t.recoil - t.dis2 - 30, t.p.my, 60, 60)
 
-        else:
+        else:  # sr계열 총기가 아닐경우 일반 조준점 출력
             t.target_up.opacify(1)
             t.target_down.opacify(1)
             t.target_left.opacify(1)
@@ -66,7 +69,7 @@ def draw_target(t):
             t.target_right.draw(t.p.mx + t.recoil + t.dis2 + 30, t.p.my, 60, 60)
             t.target_left.draw(t.p.mx - t.recoil - t.dis2 - 30, t.p.my, 60, 60)
 
-    elif t.weapon.weapon_type == 1:
+    elif t.weapon.weapon_type == 1:  # 근접 무기 공격 사거리 출력
         t.not_target.draw(t.p.mx, t.p.my, 120, 120)
         t.tmy = t.p.y
         y = t.tmy + t.p.cam_y - t.p.push_y
@@ -113,7 +116,7 @@ def draw_target(t):
 
         elif t.weapon.melee == 'AXE':
             if t.weapon.skill_enable:
-                t.tmx = t.p.x
+                t.tmx = t.p.x  # 스킬 사용 시 히트박스 중점이 플레이어 좌표가 된다
             else:
                 if t.p.dir == 1:
                     t.tmx = t.p.x + 180
@@ -127,10 +130,10 @@ def update_target(t):
     pps = game_framework.pps
     t.dis = math.sqrt((t.p.mx - (t.p.x + t.p.cam_x)) ** 2 + (t.p.my - (t.p.y + t.p.cam_y)) ** 2)
 
-    if t.recoil > 0:
+    if t.recoil > 0:  # 조준점이 벌어져 있을 경우 점차 복구된다
         t.recoil -= pps / 7
     else:
-        t.recoil = 0
+        t.recoil = 0  # 더 이산 복구되지 않는다
 
     if t.dis < 0:  # 분산도가 0 밑으로 내려가지 않도록 한다.
         t.dis = 0
@@ -243,7 +246,7 @@ def update_target(t):
 
 
 def make_target_point(t):  # 이 함수에서 생성되는 좌표로 적 피격을 판정한다.
-    if t.weapon.shoot:
+    if t.weapon.shoot:  # 격발하는 순간에 조준점 내부에 랜덤한 위치에 좌표를 생성하여 몬스터 명중을 판단한다
         t.tx = random.randint \
             (t.p.mx - int(t.recoil) - int(t.dis2) - 1, t.p.mx + int(t.recoil) + int(t.dis2) + 1)
         t.ty = random.randint \
@@ -253,7 +256,7 @@ def make_target_point(t):  # 이 함수에서 생성되는 좌표로 적 피격�
 def update_scope(t):
     pps = game_framework.pps
     if t.weapon.zoom:  # 우클릭 시 스코프 애니메이션 출력
-        if t.weapon.bolt_action:  # 발사 후에는 자동으로 스코프가 비활성화 되었다가 다시 활성화 된다
+        if t.weapon.bolt_action:  # 발사 후에는 자동으로 스코프가 비활성화 되었다가 자동으로 다시 활성화 된다
             if t.scope_size_x < 32768:
                 t.scope_size_x += 400 * pps
             if t.scope_size_y < 16384:
@@ -261,12 +264,12 @@ def update_scope(t):
 
                 if t.scope_size_x > 32768:
                     t.scope_size_x = 32768
-                    t.draw_scope = False
+                    t.draw_scope = False  # 작아지면 더 이산 스코프 이미지가 보이지 않는다
 
                 if t.scope_size_y > 16384:
                     t.scope_size_y = 16384
         else:
-            t.draw_scope = True
+            t.draw_scope = True  # 스코프 이미지가 보인다
             if t.scope_size_x > 8192:
                 t.scope_size_x -= 400 * pps
             if t.scope_size_y > 4096:

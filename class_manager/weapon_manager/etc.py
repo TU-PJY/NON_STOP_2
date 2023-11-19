@@ -46,7 +46,7 @@ def change_weapon(weapon):
         weapon.weapon_type = 0
 
 
-def update_delay(weapon):
+def update_delay(weapon):  # 발사 간격과 근접 무기 공속 관리
     pps = game_framework.pps
     if weapon.shoot_delay > 0:
         weapon.shoot_delay -= pps / 3
@@ -62,19 +62,19 @@ def update_sniper_bolt(weapon):
             weapon.shell_out = True
 
     if weapon.gun == 'SPRING':
-        if 100 < weapon.shoot_delay < 400 and not weapon.shell_out:  # 탄피를 한 번만 만들도록 한다
+        if 100 < weapon.shoot_delay < 400 and not weapon.shell_out:
             weapon.bolt_action = True
             make_shell(weapon, 30, 20)
             weapon.shell_out = True
 
     if weapon.gun == 'KAR98':
-        if 100 < weapon.shoot_delay < 400 and not weapon.shell_out:  # 탄피를 한 번만 만들도록 한다
+        if 100 < weapon.shoot_delay < 400 and not weapon.shell_out:
             weapon.bolt_action = True
             make_shell(weapon, 30, 20)
             weapon.shell_out = True
 
     if weapon.gun == 'M24':
-        if 100 < weapon.shoot_delay < 500 and not weapon.shell_out:  # 탄피를 한 번만 만들도록 한다
+        if 100 < weapon.shoot_delay < 500 and not weapon.shell_out:
             weapon.bolt_action = True
             make_shell(weapon, 30, 20)
             weapon.shell_out = True
@@ -88,7 +88,7 @@ def update_sniper_bolt(weapon):
     if weapon.shoot_delay < 100:
         weapon.bolt_action = False
         weapon.shell_out = False
-        if weapon.reload_need:
+        if weapon.reload_need:  # 재장전 상태가 되면 정조준 해제
             weapon.zoom = False
 
 
@@ -123,20 +123,20 @@ def reload_gun(weapon):
             weapon.cur_ammo = weapon.limit_ammo  # 탄창을 갈아 낀다
             weapon.reload_need = False
             weapon.cur_reload_time = 0
-            weapon.reloading = False
+            weapon.reloading = False  # 재장전 상태 해제
 
 
 def throw_grenade(weapon):
     gren = Grenade(weapon.p, weapon.mp, weapon.p.x, weapon.p.y - weapon.p.cam_h, weapon.p.dir)
     game_manager.add_object(gren, 3)
     weapon.throwable = False
-    weapon.throw_delay = get_time()
+    weapon.throw_delay = get_time()  # 던진 직후부터 쿨타임 측정
 
 
 def update_throw_delay(weapon):
-    if not weapon.throwable:
+    if not weapon.throwable:  # 수류탄 던진 후 쿨타임 측정
         weapon.throw_delay_time = get_time() - weapon.throw_delay
         if weapon.throw_delay_time > 29:
-            weapon.throwable = True
+            weapon.throwable = True  # 쿨타임이 0이되면 다시 수류탄 활성화
 
 

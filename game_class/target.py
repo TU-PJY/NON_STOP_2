@@ -56,17 +56,16 @@ class Target:
         self.p = p
         self.weapon = weapon
 
-        self.dis, self.recoil = 0, 0
-        self.dis2 = 0
-        self.reduce_delay = 0
+        self.dis, self.recoil = 0, 0  # 총과 조준점의 거리, 조준점이 벌어지는 수치
+        self.dis2 = 0  # 최종 분산도
 
         self.tx, self.ty = 0, 0  # 조준점 범위 내에서 랜점으로 생성되는 좌표
 
         self.tmx = 0  # 근접무기 타겟 x 좌표
         self.tmy = 0  # 근접무기 타겟 y 좌표
 
-        self.scope_size_x, self.scope_size_y = 32768, 16384
-        self.draw_scope = False
+        self.scope_size_x, self.scope_size_y = 32768, 16384  # 스코프 이미지 크기
+        self.draw_scope = False  # true일 경우 스코프 이미지 출력
 
         self.state_machine = StateMachineTarget(self)
         self.state_machine.start()
@@ -163,8 +162,9 @@ class Target:
                                self.tmx + self.p.ex + 350, self.p.y + self.p.ey + 80 - self.p.cam_h
                     else:
                         return -9999, -9999, -9999, -9999
+                        # 스킬 사용 직후 일반 공격 시 엉뚱한 범위에 대미지가 들어가는 것을 방지
 
-            else:
+            else:  # 공격 하는 순간이 아니면 일체 대미지를 가하지 않도록 한다.
                 return -9999, -9999, -9999, -9999
 
     def get_melee_bb(self):  # 디버깅용 bb, 히트박스 출력용

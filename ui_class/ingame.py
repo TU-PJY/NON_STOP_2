@@ -7,12 +7,12 @@ class Ingame:
         self.p = p
         self.x = 0
         self.y = 0
-        self.r = 255
+        self.r = 255  # 폰트 색상 rgb
         self.g = 255
         self.b = 255
         load_resource(self)
 
-        self.get_y = 0
+        self.get_y = 0  # 코인 획득 피드백을 위한 추가 좌표
 
     def update(self):
         update_ammo_ind(self)

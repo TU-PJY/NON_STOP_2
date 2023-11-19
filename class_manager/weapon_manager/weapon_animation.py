@@ -2,6 +2,7 @@ from class_manager.weapon_manager.etc import make_shell
 from game_work import game_framework
 
 
+# 윈체스터 휘두르기 장전 모션
 def spin_win(weapon):
     pps = game_framework.pps
     if weapon.shoot_delay < 200:
@@ -17,6 +18,7 @@ def spin_win(weapon):
                 weapon.shell_out = False
 
 
+# 근접무기 출력 위치 조정
 def update_melee_position(weapon):
     pps = game_framework.pps
     if weapon.melee == 'RAPIER':
@@ -38,6 +40,7 @@ def update_melee_position(weapon):
             weapon.melee_x = 0
 
 
+# 근접무기 휘두르기 모션
 def swing(weapon):
     pps = game_framework.pps
 

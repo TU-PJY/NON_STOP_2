@@ -33,7 +33,7 @@ def load_player_image(self):
 
 
 def look_mouse(p):
-    if p.look_mouse:
+    if p.look_mouse:  # 해당 변수가 true일 때만 플레이어는 마우스를 바라본다
         if p.dir == 1:  # 마우스를 살짝 따라본다.
             p.rotate = math.atan2((p.my - p.y), ((p.mx * 1.7) - p.x))
         elif p.dir == 0:
@@ -55,6 +55,7 @@ def draw_player(p):
 
 def jump(p):
     pps = game_framework.pps
+    # AXE 스킬을 사용할 경우
     if p.mv_jump and play_mode.weapon.melee == 'AXE' and play_mode.weapon.skill_enable:
         p.y += p.jump_acc * pps / 4
 
@@ -76,6 +77,7 @@ def jump(p):
             elif p.jump_delay > 30:
                 p.jump_acc -= pps / 5
 
+    # 일반 점프
     else:
         if p.mv_jump:  # 점프 시
             p.y += p.jump_acc * pps / 4
@@ -90,7 +92,7 @@ def jump(p):
             p.jump_acc -= pps / 90
 
 
-def walk_animation(p):
+def walk_animation(p):  # 플레이어 rubber animation 출력
     pps = game_framework.pps
     p.size_deg += 1 * pps / 50
 
@@ -100,7 +102,7 @@ def walk_animation(p):
         p.size = 0
 
 
-def update_damage_delay(p):
+def update_damage_delay(p):  # 플레이어 대미지 딜레이 업데이트
     pps = game_framework.pps
     if p.dmg_delay > 0:
         p.dmg_delay -= pps / 3

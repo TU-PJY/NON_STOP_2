@@ -91,7 +91,7 @@ def shoot_gun(weapon):
                     weapon.shoot_delay = 180
                     weapon.p.shake_range = 30
 
-                elif weapon.gun == 'LVOAS':
+                elif weapon.gun == 'LVOAS':  # 2점사ㅣ 총기이므로 2번 쏠 때마다 딜레이를 길게 부여
                     if weapon.shoot_count < 1:
                         weapon.shoot_delay = 35
                         weapon.p.shake_range = 15
@@ -167,13 +167,13 @@ def shoot_gun(weapon):
 
                     weapon.flame_display_time = FLAME_DISPLAY_TIME
 
-                if weapon.gun == 'VECTOR':
+                if weapon.gun == 'VECTOR':  # 연사 속도가 매우 빠르므로 총구 화염 출력시간은 더 짧게 부여
                     weapon.flame_display_time = 6
 
                 if not weapon.gun_type == 'sr':
                     weapon.cur_ammo -= 1  # 발사 시 총알 소모
                     if weapon.cur_ammo == 0:  # 탄창의 탄약을 모두 소모하면 재장전을 해야한다.
-                        weapon.reload_need = True
+                        weapon.reload_need = True  # 더 이상 발사되지 않는다
 
         else:
             weapon.shoot = False

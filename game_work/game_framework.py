@@ -62,7 +62,7 @@ def run(start_mode):
         stack[-1].draw()
         frame_time = time.time() - current_time
         current_time += frame_time
-        pps = PPS * frame_time
+        pps = PPS * frame_time  # 게임 전체에서 사용하는 공용 pps, 속도 또는 딜레이 감소에 곱하여 사용한다.
 
     # repeatedly delete the top of the stack
     while (len(stack) > 0):

@@ -18,6 +18,7 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_TAB:  # to_shop_mode
+            # 수류탄 쿨타임이 남아있다면 수류탄 쿨타임이 얼마나 남았는지를 저장
             weapon.temp_time = weapon.throw_delay_time
             game_framework.MODE = 'shop'
             game_framework.push_mode(shop_mode)

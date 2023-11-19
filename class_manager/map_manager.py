@@ -45,14 +45,14 @@ def update_map(self):  # 맵 업데이트
     if self.x + 2048 <= self.p.x:  # 맵 끝으로 갈 경우 벽에 막힌다
         self.p.mv_right = False
 
-        self.x += pps / 4 * self.p.speed
+        self.x += pps / 4 * self.p.speed  # 플레이어를 벽 위치로 보정한다
         self.wall.x1 += pps / 4 * self.p.speed
         self.wall.x2 += pps / 4 * self.p.speed
         self.bg.x += (pps / 4 * self.p.speed) / 4
         self.playerToWallRight += pps / 4 * self.p.speed
         self.playerToWallLeft += pps / 4 * self.p.speed
 
-        if play_mode.weapon.skill_enable:
+        if play_mode.weapon.skill_enable:  # katana 스킬 사용할 경우 스킬 상태 해제
             play_mode.weapon.skill_enable = False
             self.p.speed = self.p.temp_speed
             self.p.rotate = 0

@@ -11,21 +11,22 @@ class Shop:
     def __init__(self):
         self.x = WIDTH / 2
         self.y = HEIGHT / 2
-        self.button_x = []
+        self.button_x = []  # 아이템 버튼의 x, y 좌표
         self.button_y = []
-        self.window_y = -500
-        self.mx = 0
+        self.window_y = -500  # 초기 윈도우 t 위치
+        self.mx = 0  # 마우스좌표
         self.my = 0
         self.click = False  # 마우스 누름 여부
         self.select_mode = 0  # 초기값 총 선택
-        self.cat_x = []
+        self.cat_x = []  # 카테고리 버튼의 x, y 좌표
         self.cat_y = []
+        #  페이지에 사용 중인 총이 있다면 해당 총이 존재하는 페이지를 먼저 출력
         if not play_mode.weapon.gun_type == 'sr':
             self.page = 1
         else:
             self.page = 2
 
-        self.page_right_x = 0
+        self.page_right_x = 0  # 페이지 이동 버튼 좌표
         self.page_left_x = 0
         self.page_right_y = 0
         self.page_left_y = 0

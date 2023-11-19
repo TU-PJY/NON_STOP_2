@@ -104,13 +104,15 @@ class Monster:
     def update(self):
         if game_framework.MODE == 'play':
             self.state_machine.update()
+
+            # sr계열 격발 후 다시 관통 대미지를 한 번만 주도록 세팅한다.
             if self.weapon.shoot_delay <= 10:
                 self.once = False  # 한 개체당 한 번씩만 관통 대미지를 받도록 한다.
 
     def handle_events(self, event):
         self.state_machine.handle_event(('INPUT', event))
 
-    def get_bb(self):
+    def get_bb(self):  # 각 몬스터마다 히트박스 크기가 다름
         if self.type == 1:
             return self.x + self.p.ex - 50, self.y + self.p.ey - 70, self.x + self.p.ex + 50, self.y + self.p.ey + 60
         elif self.type == 2:
@@ -133,31 +135,29 @@ class Monster:
 
                     if self.p.dmg_delay <= 0:
                         self.p.dmg_shake_range = 30
-                        self.p.dmg_delay = 200
-                        pd = PlayerDamage()
+                        self.p.dmg_delay = 200  # 해당 변수가 0이 되어야 플레이어는 다음 대미지를 받는다
+                        pd = PlayerDamage()  # 대미지를 받으면 화면에 대미지 피드백을 표시한다
                         game_manager.add_object(pd, 7)
 
         if group == 'weapon:monster':  # 총이나 근접무기에 맞을 경우 대미지를 가한다
-            if self.weapon.weapon_type == 1:
-                if self.weapon.melee == 'AXE' and self.weapon.hit_ground:
+            if self.weapon.weapon_type == 1:  # 스킬 공격의 경우 범위 내 중첩 대미지로 판정
+                if self.weapon.hit_ground and self.weapon.melee == 'AXE':  # 해당 무기의 경우 아주 짧은 순간에만 대미지
                     self.hp -= 5.7
-
                 elif self.weapon.skill_enable and self.weapon.melee == 'KATANA':
                     self.hp -= 7
-
-                else:
+                else:  # 나머지 일반 공격
                     self.is_hit = True
 
-            elif self.weapon.weapon_type == 0:
+            elif self.weapon.weapon_type == 0:  # 여러개의 몬스터 히트박스가 중첩될경우 한 마리만 대미지를 가한다.
                 if not self.weapon.hit_once and self.hp > 0:
-                    self.is_hit = True
-                    self.weapon.hit_once = True
+                    self.is_hit = True  # 대미지를 가하지만
+                    self.weapon.hit_once = True  # 한 마리에게만 가한다
 
         if group == 'bullet:monster':  # sr 계열 총기 관통 대미지
             # 대미지를 여러 번 받지 않게 끔 한다.
             if not self.once and self.hp > 0:
                 fd = Feedback(self.x + self.p.cam_x, self.y + self.p.cam_y + self.p.cam_h)
-                game_manager.add_object(fd, 7)
+                game_manager.add_object(fd, 7)  # 명중 피드백
 
                 self.op = 100
 
@@ -185,7 +185,8 @@ class Monster:
                     if self.weapon.pen_count == self.weapon.pen_limit:  # 최대 관통 수를 초과하면 더 이상 초과하지 않는다.
                         self.weapon.pen_count = 0
                         self.weapon.pen_enable = False
-                self.once = True
+                self.once = True  # 이 변수가 true가 되면 더 이상 대미지가 중첩되지 않는다.
 
-        if group == 'grenade:monster':  # 수류탄 폭발에 맞으면 무조건 즉사
-            game_manager.remove_object(self)
+        if group == 'grenade:monster':
+            # 수류탄 폭발에 맞으면 무조건 즉사
+            self.hp -= 500

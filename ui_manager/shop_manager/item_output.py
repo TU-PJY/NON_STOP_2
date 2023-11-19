@@ -1,4 +1,5 @@
 def draw_items(self):
+    # 페이지 및 카테고리에 따라 아이템이 다르게 출력된다
     if self.select_mode == 0:
         if self.page == 1:
             self.image_m1911.draw(self.button_x[0] - 40, self.button_y[0], 400, 200)

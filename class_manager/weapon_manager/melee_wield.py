@@ -4,6 +4,7 @@ from game_class.prop import KatanaSlice
 from game_work import game_framework, game_manager
 
 
+# 근접무기 공격
 def wield_melee(weapon):
     if weapon.use and weapon.weapon_type == 1:
         if weapon.wield_delay <= 0:
@@ -22,6 +23,7 @@ def wield_melee(weapon):
                 weapon.swing = True
 
             elif weapon.melee == 'RAPIER':
+                # 찌를 시 랜덤한 높이로 출력되도록 한다
                 weapon.rapier_y = random.randint(-10, 10)
                 weapon.melee_deg = 0
                 weapon.melee_x = 150
@@ -32,6 +34,7 @@ def wield_melee(weapon):
                 weapon.melee_x = 100
                 weapon.p.shake_range = 20
                 weapon.wield_delay = 140
+                # 휘두르기 활성화
                 weapon.swing_down = True
                 weapon.swing = True
 
@@ -45,6 +48,7 @@ def wield_melee(weapon):
             weapon.wield = False
 
 
+# 근접무기 스킬 사용 준비
 def set_skill(weapon):
     if weapon.melee == 'RAPIER':
         weapon.p.rotate = 0
@@ -62,6 +66,7 @@ def set_skill(weapon):
             weapon.p.temp_speed = weapon.p.speed
             weapon.p.speed = 30
 
+            # 스킬 이펙트 출력
             ks = KatanaSlice(weapon.p, weapon)
             game_manager.add_object(ks, 7)
 
@@ -75,10 +80,12 @@ def set_skill(weapon):
 
         weapon.skill_time = 235
         weapon.skill_enable = True
+        # 위로 날아올라 내려찍을 준비
         weapon.p.mv_jump = True
         weapon.p.jump_acc = 8
 
 
+# 근접무기 스킬 사용 시의 수치 조정
 def melee_skill(weapon):
     if weapon.melee == 'RAPIER':
         if weapon.wield_delay <= 0:
@@ -107,6 +114,7 @@ def melee_skill(weapon):
             weapon.p.rotate = -1.2
 
 
+# 레이피어 이미지 출력 각도
 def update_rapier_player(weapon):
     if weapon.melee == 'RAPIER':
         if weapon.use or weapon.skill_enable:
@@ -115,12 +123,13 @@ def update_rapier_player(weapon):
             weapon.p.rotate = 0
 
 
+# 근접무기 스킬 업데이트
 def update_melee_skill(weapon):
     pps = game_framework.pps
-    if weapon.skill_time > 0:
+    if weapon.skill_time > 0:  # 해당 시간 동안 스킬 사용 가능
         weapon.skill_time -= pps / 3
 
-    else:
+    else:  # 시간이 초과되면 스킬 상태 해제
         if weapon.melee == 'KATANA':
             weapon.p.rotate = 0
             weapon.p.speed = weapon.p.temp_speed

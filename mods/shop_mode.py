@@ -16,7 +16,7 @@ def handle_events():
         elif event.type == SDL_KEYDOWN:
             if event.key == SDLK_ESCAPE or event.key == SDLK_TAB:  # to play_mode
                 if exit_enable:
-                    # 상점모드에서 소요된 시간을 다시 쿨타임에 반환
+                    # 상점모드에서 소요된 시간을 다시 수류탄 사용 쿨타임에 반환
                     play_mode.weapon.throw_delay = get_time() - play_mode.weapon.temp_time
                     game_framework.MODE = 'play'
                     game_framework.pop_mode()
@@ -37,13 +37,13 @@ def handle_events():
                 if shop.select_mode > 0:
                     shop.select_mode -= 1
 
-            play_mode.p.handle_event(event)  # 이동키를 누른 상태로 모드 전환 시 동작 오류 방지
+            play_mode.p.handle_event(event)  # 상점 페이지 이동 키 사용 시 플레이어 상태 오류 방지
 
         elif event.type == SDL_MOUSEMOTION:
             shop.mx, shop.my = event.x, HEIGHT - 1 - event.y
 
         elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
-            shop.click = True
+            shop.click = True  # true일 시 상점창이 반응한다
 
         else:
             play_mode.p.handle_event(event)  # 이동키를 누른 상태로 모드 전환 시 동작 오류 방지

@@ -3,6 +3,7 @@ from mods import play_mode
 
 def click_button(self):
     if self.select_mode == 0:
+        # 페이지 이동 버튼 클릭
         if self.page_right_x - 40 < self.mx < self.page_right_x + 40 and \
                 self.page_right_y - 50 < self.my < self.page_right_y + 50:
             if self.page < 2:
@@ -13,6 +14,7 @@ def click_button(self):
             if self.page > 1:
                 self.page -= 1
 
+    # 카테고리 버튼 클릭
     for i in range(len(self.cat_x)):
         for j in range(len(self.cat_y)):
             if self.cat_x[i] - 100 < self.mx < self.cat_x[i] + 100 and \
@@ -24,6 +26,7 @@ def click_button(self):
                 elif i == 2:
                     self.select_mode = 2  # exp
 
+    # 아이템 버튼 클릭
     for i in range(len(self.button_x)):
         for j in range(len(self.button_y)):
             if self.button_x[i] - 90 < self.mx < self.button_x[i] + 90 and \
@@ -99,7 +102,7 @@ def click_button(self):
                             play_mode.weapon.gun = 'LVOAS'
                             play_mode.weapon.limit_ammo = 20
 
-                        if j == 0:
+                        if j == 0:  # 총기 타입마다 재장전 소요 시간이 다르다
                             play_mode.weapon.gun_type = 'pistol'
                             play_mode.weapon.reload_time = 150
                         elif j == 1:
@@ -112,7 +115,7 @@ def click_button(self):
                             play_mode.weapon.gun_type = 'rifle'
                             play_mode.weapon.reload_time = 250
 
-                    elif self.page == 2:
+                    elif self.page == 2:  # sr의 경우 각 총마다 최대 관통 횟수가 다르다
                         if (i, j) == (0, 0):
                             play_mode.weapon.gun = 'SPRING'
                             play_mode.weapon.pen_limit = 2
@@ -139,6 +142,7 @@ def click_button(self):
                             play_mode.weapon.reload_time = 350
 
                     # 총기 교체 시 잔탄을 모두 반환한 후 재장전 상태로 변경
+                    # 이전에 사용하던 총기 타입에 맞는 탄약 개수에 반환한다
                     if play_mode.weapon.prev_gun_type == 'pistol' or play_mode.weapon.prev_gun_type == 'smg':
                         play_mode.weapon.pistol_ammo += play_mode.weapon.cur_ammo
 
@@ -153,7 +157,7 @@ def click_button(self):
 
                     play_mode.weapon.prev_gun_type = play_mode.weapon.gun_type
                     play_mode.weapon.cur_ammo = 0
-                    play_mode.weapon.reload_need = True
+                    play_mode.weapon.reload_need = True  # 재장전 필요 상태로 초기화
 
                 elif self.select_mode == 1:
                     if play_mode.weapon.weapon_type == 1:
@@ -168,7 +172,7 @@ def click_button(self):
                     # 카타나 스킬 사용 중이었다면 플레이어 이동 속도를 복구
                     if play_mode.weapon.skill_enable and play_mode.weapon.melee == 'KATANA':
                         play_mode.p.speed = play_mode.p.temp_speed
-
+                    # AXE 스킬 사용 중이었다면 가속도 초기화
                     if play_mode.weapon.skill_enable and play_mode.weapon.prev_melee == 'AXE':
                         play_mode.p.jump_acc = 0
 

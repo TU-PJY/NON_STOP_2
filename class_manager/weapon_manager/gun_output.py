@@ -4,6 +4,7 @@ import math
 def draw_gun(weapon):
     x = weapon.p.wx
 
+    # 특정 총기는 위치를 조금 다르게 지정
     if weapon.weapon_type == 0:
         if weapon.gun == 'M1':
             y = weapon.p.wy + 5
@@ -14,7 +15,7 @@ def draw_gun(weapon):
         else:
             y = weapon.p.wy
 
-        weapon.deg = math.atan2(weapon.p.my - y, weapon.p.mx - x)
+        weapon.deg = math.atan2(weapon.p.my - y, weapon.p.mx - x)  # 총기 이미지 출력 각도
 
         # GUN_NAME에 따라 사용하는 총기가 달라진다.
         if weapon.gun == 'M1911':

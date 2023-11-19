@@ -192,22 +192,21 @@ class Weapon:
         self.gun_type = 'pistol'  # 현재 총 타입 
         self.prev_gun_type = 'pistol'  # 교체 전 이전 총 타입
 
-        self.prev_melee = 'AXE'
-
-        self.flame_display_time = 0
+        self.flame_display_time = 0  # 총구 화염 출력 시간
 
         self.melee = 'AXE'
+        self.prev_melee = 'AXE'
         self.melee_x = 0
         self.melee_deg = 170
-        self.use = False
-        self.wield = False
+        self.use = False  # 무기 사용 상태
+        self.wield = False  # 무기 공격 여부
         self.wield_delay = 0
 
         self.hit_once = False  # 겹쳐있는 몬스터에게 한꺼번에 대미지를 주지 않도록 한다.
 
         # sr 전용 변수
         self.zoom = False
-        self.bolt_action = False
+        self.bolt_action = False  # 해당 변수가 true일 시 sr 정조준이 해제된다
 
         # sr, WIN 전용 변수
         self.spin = 0

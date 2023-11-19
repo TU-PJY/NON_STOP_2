@@ -3,6 +3,7 @@ from game_work import game_framework
 from mods import play_mode
 
 
+# 상점 창 출력
 def draw_shop_window(self):
     self.back.draw(self.x, self.y, WIDTH, HEIGHT)
     self.back.opacify(80)
@@ -13,6 +14,7 @@ def draw_shop_window(self):
     self.coin_icon.draw(WIDTH / 2 - 420, self.window_y - 280, 50, 50)
     self.font_small.draw(WIDTH / 2 - 390, self.window_y - 280, '%d' % play_mode.p.coin, (255, 255, 255))
 
+    # 카테고리 및 페이지에 따라 출력되는 버튼 개수가 다르다
     if self.select_mode == 0:
         if self.page == 1:
             for i in range(5):
@@ -42,10 +44,12 @@ def draw_shop_window(self):
         self.button_page_left.composite_draw(0, 'h', self.page_left_x, self.page_left_y, 80, 100)
 
 
+# 커서 출력
 def draw_cursor(self):
     self.cursor.draw(self.mx + 50, self.my - 50, 70, 70)
 
 
+# 최초 상점 실행 시 밑에서 위로 창이 올라온다
 def window_animation(self):
     pps = game_framework.pps
 
@@ -72,5 +76,6 @@ def window_animation(self):
         self.page_left_y = self.window_y - 200
 
 
+# 선택한 카테고리 버튼은 위로 올라와 표시된다
 def update_cat_button(self):
     self.cat_y[self.select_mode] = self.window_y + 290

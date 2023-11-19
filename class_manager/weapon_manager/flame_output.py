@@ -4,6 +4,7 @@ import math
 from game_work import game_framework
 
 
+# 각 총마다 총구 위치가 다르므로 총구 화염 위치도 따로 지정해야 한다
 def draw_flame(weapon):
     pps = game_framework.pps
     if weapon.flame_display_time > 0 and weapon.weapon_type == 0:
