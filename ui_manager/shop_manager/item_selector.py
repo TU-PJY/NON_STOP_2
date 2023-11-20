@@ -1,3 +1,5 @@
+from pico2d import draw_rectangle
+
 from mods import play_mode
 
 
@@ -29,8 +31,8 @@ def click_button(self):
     # 아이템 버튼 클릭
     for i in range(len(self.button_x)):
         for j in range(len(self.button_y)):
-            if self.button_x[i] - 90 < self.mx < self.button_x[i] + 90 and \
-                    self.button_y[j] - 75 < self.my < self.button_y[j] + 75:
+            if self.button_x[i] - 75 < self.mx < self.button_x[i] + 75 and \
+                    self.button_y[j] - 50 < self.my < self.button_y[j] + 50:
 
                 if self.select_mode == 0:
                     play_mode.weapon.zoom = False  # 다른 총 선택 시 스코프 모드 해제

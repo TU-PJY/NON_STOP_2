@@ -172,6 +172,8 @@ cursor_directory = 'res//ui//cursor.png'
 grenable_able_icon_directory = 'res//ui//grenade_able_icon.png'
 grenable_unable_icon_directory = 'res//ui//grenade_unable_icon.png'
 
+info_back_directory = 'res//ui//info_back.png'
+
 hp_back_directory = 'res//ui//hp_back.png'
 hp_front_directory = 'res//ui//hp_front.png'
 hp_player_directory = 'res//ui//hp_player.png'
