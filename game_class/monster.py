@@ -141,10 +141,12 @@ class Monster:
 
         if group == 'weapon:monster':  # 총이나 근접무기에 맞을 경우 대미지를 가한다
             if self.weapon.weapon_type == 1:  # 스킬 공격의 경우 범위 내 중첩 대미지로 판정
+                # AXE와 KATANA의 경우 스킬 사용 시 몬스터는 즉사한다
                 if self.weapon.hit_ground and self.weapon.melee == 'AXE':  # 해당 무기의 경우 아주 짧은 순간에만 대미지
-                    self.hp -= 5.7
+                    self.hp -= 500
+                    self.p.dmg_delay = 100  # 스킬 사용 직후 몬스터에게 공격받지 않도록 함
                 elif self.weapon.skill_enable and self.weapon.melee == 'KATANA':
-                    self.hp -= 7
+                    self.hp -= 500
                 else:  # 나머지 일반 공격
                     self.is_hit = True
 

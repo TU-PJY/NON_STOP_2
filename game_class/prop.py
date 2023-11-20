@@ -218,7 +218,7 @@ class Bullet:
         pass
 
     def get_bb(self):
-        return self.x + self.p.ex, self.y + self.p.ey, self.x + self.p.ex, self.y + self.p.ey
+        return self.x + self.p.ex - 30, self.y + self.p.ey - 30, self.x + self.p.ex + 30, self.y + self.p.ey + 30
 
     def handle_collision(self, group, other):
         pass

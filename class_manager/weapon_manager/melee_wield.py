@@ -62,7 +62,7 @@ def set_skill(weapon):
             weapon.swing_up = False
             weapon.p.rotate = 0
 
-            weapon.skill_time = 100
+            weapon.skill_time = 50
             weapon.p.temp_speed = weapon.p.speed
             weapon.p.speed = 30
 
