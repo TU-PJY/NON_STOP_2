@@ -54,3 +54,8 @@ def load_shop_resource(self):
     self.image_rapier = load_image(rapier_directory)
     self.image_katana = load_image(katana_directory)
     self.image_axe = load_image(axe_directory)
+
+    self.image_ammo_pistol = load_image(ammo_pistol_icon_directory)
+    self.image_ammo_ar = load_image(ammo_ar_icon_directory)
+    self.image_ammo_rifle = load_image(ammo_rifle_icon_directory)
+    self.image_ammo_sr = load_image(ammo_sr_icon_directory)

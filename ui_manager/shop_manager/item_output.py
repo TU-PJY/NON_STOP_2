@@ -33,9 +33,15 @@ def draw_items(self):
             self.image_awp.draw(self.button_x[3] - 50, self.button_y[0], 250, 80)
             self.image_cheytac.draw(self.button_x[4] - 55, self.button_y[0], 250, 80)
 
-    if self.select_mode == 1:
+    elif self.select_mode == 1:
         self.image_knife.draw(self.button_x[0], self.button_y[0], 150, 100)
         self.image_bat.rotate_draw(-45, self.button_x[1] - 43, self.button_y[0] - 30, 35, 325)
         self.image_rapier.rotate_draw(0.5, self.button_x[2] - 50, self.button_y[0] - 25, 300, 75)
         self.image_katana.rotate_draw(-45, self.button_x[3] - 45, self.button_y[0] - 33, 35, 260)
         self.image_axe.rotate_draw(-45, self.button_x[4] - 28, self.button_y[0] - 20, 128, 256)
+
+    elif self.select_mode == 2:
+        self.image_ammo_pistol.draw(self.button_x[0], self.button_y[0], 100, 100)
+        self.image_ammo_ar.draw(self.button_x[1], self.button_y[0], 100, 100)
+        self.image_ammo_rifle.draw(self.button_x[2], self.button_y[0], 100, 100)
+        self.image_ammo_sr.draw(self.button_x[3], self.button_y[0], 100, 100)

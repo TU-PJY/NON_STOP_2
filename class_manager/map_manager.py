@@ -67,7 +67,7 @@ def update_map(self):  # 맵 업데이트
         self.playerToWallRight -= pps / 4 * self.p.speed
         self.playerToWallLeft -= pps / 4 * self.p.speed
 
-        if play_mode.weapon.skill_enable:
+        if play_mode.weapon.skill_enable and play_mode.weapon.melee == 'KATANA':
             play_mode.weapon.skill_enable = False
             self.p.speed = self.p.temp_speed
             self.p.rotate = 0

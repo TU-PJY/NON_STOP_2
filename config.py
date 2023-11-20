@@ -181,6 +181,11 @@ coin_icon_directory = 'res//ui//coin.png'
 ammo_ind_back_directory = 'res//ui//ammo_ind_back.png'
 reload_bar_directory = 'res//ui//reload_bar.png'
 
+ammo_pistol_icon_directory = 'res//ui//ammo_pistol.png'
+ammo_ar_icon_directory = 'res//ui//ammo_ar.png'
+ammo_rifle_icon_directory = 'res//ui//ammo_rifle.png'
+ammo_sr_icon_directory = 'res//ui//ammo_sr.png'
+
 
 # 폰트 경로
 font_directory = 'res//font//bump-it-up.ttf'
