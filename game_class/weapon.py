@@ -182,6 +182,7 @@ class Weapon:
 
         self.weapon_type = 0  # 0: Gun, 1: Melee
         self.gun = 'M1911'
+        self.prev_gun = 'M1911'
         self.deg = 0  # 총 이미지 각도
         self.flip = ''
 

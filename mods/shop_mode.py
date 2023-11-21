@@ -45,6 +45,9 @@ def handle_events():
         elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
             shop.click = True  # true일 시 상점창이 반응한다
 
+        elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_RIGHT:
+            shop.right_click = True  # true일 시 상점창이 반응한다
+
         else:
             play_mode.p.handle_event(event)  # 이동키를 누른 상태로 모드 전환 시 동작 오류 방지
             play_mode.weapon.handle_event(event)  # 마우스 버튼을 누른 채로 모드 전환 시 동작 오류 방지

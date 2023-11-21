@@ -22,8 +22,8 @@ def draw_shop_window(self):
             for i in range(5):
                 for j in range(4):
                     self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
-                    draw_rectangle(self.button_x[i] - 75, self.button_y[j] - 50, self.button_x[i] + 75,
-                                   self.button_y[j] + 50)
+                    # draw_rectangle(self.button_x[i] - 75, self.button_y[j] - 50, self.button_x[i] + 75,
+                    #                self.button_y[j] + 50)
         elif self.page == 2:
             for i in range(5):
                 for j in range(1):
