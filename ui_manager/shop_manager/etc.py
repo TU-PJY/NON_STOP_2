@@ -20,7 +20,7 @@ def make_button_pos(self):  # shop 버튼 위치 생성
     self.page_right_y = self.window_y - 200
 
 
-def draw_equiped_gun(self):
+def set_equiped_gun_ind_pos(self):  # 장착 중인 아이템 표시
     if self.page == 1:
         if play_mode.weapon.gun == 'M1911':
             self.eq_gun_x, self.eq_gun_y = 0, 0
@@ -74,6 +74,3 @@ def draw_equiped_gun(self):
             self.eq_gun_x, self.eq_gun_y = 3, 0
         elif play_mode.weapon.gun == 'CHEYTAC':
             self.eq_gun_x, self.eq_gun_y = 4, 0
-
-    if self.page == self.eq_page:
-        self.ind_equip.draw(self.button_x[self.eq_gun_x], self.button_y[self.eq_gun_y], 160, 110)

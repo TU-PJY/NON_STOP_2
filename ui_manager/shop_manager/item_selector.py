@@ -103,4 +103,10 @@ def click_button(self):
                     elif (i, j) == (4, 0):
                         self.select_melee = 'AXE'
 
+                self.ind_sel_x = i  # 표시할 위치, 페이지, 카테고리 저장
+                self.ind_sel_y = j
+                self.sel_page = self.page
+                self.sel_cat = self.select_mode
+
+                self.selected_item = True  # 선택한 이이템이 표시된다
     self.click = False

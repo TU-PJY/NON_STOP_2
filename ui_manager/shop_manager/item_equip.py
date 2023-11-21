@@ -49,7 +49,7 @@ def equip_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 �
                             play_mode.weapon.limit_ammo = 50
 
                         elif (i, j) == (0, 2) and self.select_gun == 'SCAR_H':
-                            play_mode.weapon.gun = 'SCAR_h'
+                            play_mode.weapon.gun = 'SCAR_H'
                             play_mode.weapon.limit_ammo = 25
 
                         elif (i, j) == (1, 2) and self.select_gun == 'M16':
@@ -163,6 +163,9 @@ def equip_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 �
                         play_mode.weapon.cur_ammo = 0
                         play_mode.weapon.reload_need = True  # 재장전 필요 상태로 초기화
 
+                        self.eq_size_x = 250  # 아이템 장착 피드백을 재생한다
+                        self.eq_size_y = 200
+
 
                 elif self.select_mode == 1:
                     if (i, j) == (0, 0) and self.select_melee == 'KNIFE':
@@ -198,5 +201,8 @@ def equip_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 �
                         play_mode.weapon.skill_enable = False
 
                         play_mode.weapon.prev_melee = play_mode.weapon.melee  # 이전 사용 근접 무기 갱신
+
+                if self.select_mode == 0 or self.select_mode == 1:
+                    self.selected_item = False   # 더 이상 선택한 아이템이 표시되지 않는다.
 
     self.right_click = False

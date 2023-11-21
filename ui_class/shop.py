@@ -5,7 +5,8 @@ from ui_manager.shop_manager.file_loader import load_shop_resource
 from ui_manager.shop_manager.item_equip import equip_item
 from ui_manager.shop_manager.item_output import draw_items
 from ui_manager.shop_manager.item_selector import click_button
-from ui_manager.shop_manager.window_output import draw_shop_window, draw_cursor, window_animation, update_cat_button
+from ui_manager.shop_manager.window_output import draw_shop_window, draw_cursor, window_animation, update_cat_button, \
+    update_ind_size, draw_ind
 
 
 class Shop:
@@ -43,12 +44,18 @@ class Shop:
         self.eq_melee_x = 0  # 장착 중인 근접 무기 표시 위치
         self.eq_melee_y = 0
 
-        self.ind_eq_size_x = 160  # 표시기 크기
-        self.ind_eq_size_y = 110
-        self.ind_sel_size = 160
-        self.ind_sel_size_y = 110
+        self.ind_sel_x = 0  # 마우스로 선택한 아이템 표시기 위치
+        self.ind_sel_y = 0
+        self.sel_page = 0  # 특정 페이지에서만 표시되도록 함
+        self.sel_cat = 0  # 특정 카테고리에서만 표시되도록 함
 
-        self.sel_item = False  # 아이템 선택 시 현재 선택중인 아이템을 표시함다. 해당 아이템 장착 시 사라진다.
+        self.eq_size_x = 160  # 표시기 크기
+        self.eq_size_y = 110
+
+        self.sel_size_x = 160
+        self.sel_size_y = 110
+
+        self.selected_item = False  # 아이템 선택 시 현재 선택중인 아이템을 표시함다. 해당 아이템 장착 시 사라진다.
 
         load_shop_resource(self)
         make_button_pos(self)
@@ -56,6 +63,7 @@ class Shop:
     def draw(self):
         draw_shop_window(self)
         draw_items(self)
+        draw_ind(self)
         draw_cursor(self)
 
     def update(self):
@@ -65,6 +73,7 @@ class Shop:
             click_button(self)
         elif self.right_click:
             equip_item(self)
+        update_ind_size(self)
 
     def handle_event(self):
         pass

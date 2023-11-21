@@ -3,7 +3,7 @@ from pico2d import draw_rectangle
 from config import *
 from game_work import game_framework
 from mods import play_mode
-from ui_manager.shop_manager.etc import draw_equiped_gun
+from ui_manager.shop_manager.etc import set_equiped_gun_ind_pos
 
 
 # 상점 창 출력
@@ -48,9 +48,6 @@ def draw_shop_window(self):
 
     self.info_back.draw(WIDTH / 2 + 560, self.window_y + 75, 240, 342)
 
-    if self.select_mode == 0:
-        draw_equiped_gun(self)
-
 
 # 커서 출력
 def draw_cursor(self):
@@ -87,3 +84,29 @@ def window_animation(self):
 # 선택한 카테고리 버튼은 위로 올라와 표시된다
 def update_cat_button(self):
     self.cat_y[self.select_mode] = self.window_y + 290
+
+
+def draw_ind(self):
+    if self.select_mode == 0:
+        set_equiped_gun_ind_pos(self)
+        if self.page == self.eq_page:
+            self.ind_equip.draw\
+                (self.button_x[self.eq_gun_x], self.button_y[self.eq_gun_y], self.eq_size_x, self.eq_size_y)
+
+    if self.selected_item:
+        if self.sel_page == self.page and self.sel_cat == self.select_mode:
+            self.ind_select.draw\
+                (self.button_x[self.ind_sel_x], self.button_y[self.ind_sel_y], self.sel_size_x, self.sel_size_y)
+
+
+def update_ind_size(self):  # 아이템 선택 피드백을 출력한다.
+    pps = game_framework.pps
+    if self.eq_size_x > 160:
+        self.eq_size_x -= pps / 2
+    if self.eq_size_y > 110:
+        self.eq_size_y -= pps / 2
+
+    if self.eq_size_x < 160:
+        self.eq_size_x = 160
+    if self.eq_size_y < 110:
+        self.eq_size_y = 110
