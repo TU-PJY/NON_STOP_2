@@ -88,7 +88,7 @@ def equip_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 �
                             play_mode.weapon.gun = 'LVOAS'
                             play_mode.weapon.limit_ammo = 20
 
-                        if j == 0:  # 총기 타입마다 재장전 소요 시간이 다르다
+                        if j == 0:  # 총기 타입마다 사용 탄약, 재장전 소요 시간이 다르다
                             play_mode.weapon.gun_type = 'pistol'
                             play_mode.weapon.reload_time = 150
                         elif j == 1:
@@ -165,7 +165,6 @@ def equip_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 �
 
                         self.eq_size_x = 250  # 아이템 장착 피드백을 재생한다
                         self.eq_size_y = 200
-
 
                 elif self.select_mode == 1:
                     if (i, j) == (0, 0) and self.select_melee == 'KNIFE':

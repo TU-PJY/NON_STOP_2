@@ -113,3 +113,22 @@ def update_ind_size(self):  # 아이템 선택 피드백을 출력한다.
         self.eq_size_x = 160
     if self.eq_size_y < 110:
         self.eq_size_y = 110
+
+    if self.sel_size_big:  # 이미지가 커졌다 작아졌다를 반복한다.
+        self.sel_size_x = 180
+        self.sel_size_y = 130
+        self.sel_size_delay += pps / 3
+        if self.sel_size_delay >= 100:
+            self.sel_size_delay = 0
+            self.sel_size_small = True
+            self.sel_size_big = False
+
+    elif self.sel_size_small:
+        self.sel_size_x = 160
+        self.sel_size_y = 110
+        self.sel_size_delay += pps / 3
+        if self.sel_size_delay >= 100:
+            self.sel_size_delay = 0
+            self.sel_size_big = True
+            self.sel_size_small = False
+

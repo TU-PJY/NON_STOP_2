@@ -52,8 +52,10 @@ class Shop:
         self.eq_size_x = 160  # 표시기 크기
         self.eq_size_y = 110
 
+        self.sel_size_big, self.sel_size_small = True, False  # 선택 아이템 피드백 변수
         self.sel_size_x = 160
         self.sel_size_y = 110
+        self.sel_size_delay = 0
 
         self.selected_item = False  # 아이템 선택 시 현재 선택중인 아이템을 표시함다. 해당 아이템 장착 시 사라진다.
 
