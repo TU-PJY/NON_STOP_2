@@ -3,6 +3,7 @@ from pico2d import draw_rectangle
 from config import *
 from game_work import game_framework
 from mods import play_mode
+from ui_manager.shop_manager.etc import draw_equiped_gun
 
 
 # 상점 창 출력
@@ -22,8 +23,6 @@ def draw_shop_window(self):
             for i in range(5):
                 for j in range(4):
                     self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
-                    # draw_rectangle(self.button_x[i] - 75, self.button_y[j] - 50, self.button_x[i] + 75,
-                    #                self.button_y[j] + 50)
         elif self.page == 2:
             for i in range(5):
                 for j in range(1):
@@ -48,6 +47,9 @@ def draw_shop_window(self):
         self.button_page_left.composite_draw(0, 'h', self.page_left_x, self.page_left_y, 80, 100)
 
     self.info_back.draw(WIDTH / 2 + 560, self.window_y + 75, 240, 342)
+
+    if self.select_mode == 0:
+        draw_equiped_gun(self)
 
 
 # 커서 출력

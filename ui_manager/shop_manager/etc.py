@@ -1,4 +1,5 @@
 from config import *
+from mods import play_mode
 
 
 def make_button_pos(self):  # shop 버튼 위치 생성
@@ -17,3 +18,62 @@ def make_button_pos(self):  # shop 버튼 위치 생성
     self.page_left_y = self.window_y - 200
     self.page_right_x = WIDTH / 2 + 600
     self.page_right_y = self.window_y - 200
+
+
+def draw_equiped_gun(self):
+    if self.page == 1:
+        if play_mode.weapon.gun == 'M1911':
+            self.eq_gun_x, self.eq_gun_y = 0, 0
+        elif play_mode.weapon.gun == 'M92':
+            self.eq_gun_x, self.eq_gun_y = 1, 0
+        elif play_mode.weapon.gun == 'DEGLE':
+            self.eq_gun_x, self.eq_gun_y = 2, 0
+        elif play_mode.weapon.gun == 'M500':
+            self.eq_gun_x, self.eq_gun_y = 3, 0
+        elif play_mode.weapon.gun == 'QHAND':
+            self.eq_gun_x, self.eq_gun_y = 4, 0
+        elif play_mode.weapon.gun == 'AKS74':
+            self.eq_gun_x, self.eq_gun_y = 0, 1
+        elif play_mode.weapon.gun == 'UMP':
+            self.eq_gun_x, self.eq_gun_y = 1, 1
+        elif play_mode.weapon.gun == 'VECTOR':
+            self.eq_gun_x, self.eq_gun_y = 2, 1
+        elif play_mode.weapon.gun == 'THOMPSON':
+            self.eq_gun_x, self.eq_gun_y = 3, 1
+        elif play_mode.weapon.gun == 'P90':
+            self.eq_gun_x, self.eq_gun_y = 4, 1
+        elif play_mode.weapon.gun == 'SCAR_H':
+            self.eq_gun_x, self.eq_gun_y = 0, 2
+        elif play_mode.weapon.gun == 'M16':
+            self.eq_gun_x, self.eq_gun_y = 1, 2
+        elif play_mode.weapon.gun == 'MP44':
+            self.eq_gun_x, self.eq_gun_y = 2, 2
+        elif play_mode.weapon.gun == 'AUG':
+            self.eq_gun_x, self.eq_gun_y = 3, 2
+        elif play_mode.weapon.gun == 'GROZA':
+            self.eq_gun_x, self.eq_gun_y = 4, 2
+        elif play_mode.weapon.gun == 'M1':
+            self.eq_gun_x, self.eq_gun_y = 0, 3
+        elif play_mode.weapon.gun == 'WIN':
+            self.eq_gun_x, self.eq_gun_y = 1, 3
+        elif play_mode.weapon.gun == 'MINI14':
+            self.eq_gun_x, self.eq_gun_y = 2, 3
+        elif play_mode.weapon.gun == 'FAL':
+            self.eq_gun_x, self.eq_gun_y = 3, 3
+        elif play_mode.weapon.gun == 'LVOAS':
+            self.eq_gun_x, self.eq_gun_y = 4, 3
+
+    elif self.page == 2:
+        if play_mode.weapon.gun == 'SPRING':
+            self.eq_gun_x, self.eq_gun_y = 0, 0
+        elif play_mode.weapon.gun == 'KAR98':
+            self.eq_gun_x, self.eq_gun_y = 1, 0
+        elif play_mode.weapon.gun == 'M24':
+            self.eq_gun_x, self.eq_gun_y = 2, 0
+        elif play_mode.weapon.gun == 'AWP':
+            self.eq_gun_x, self.eq_gun_y = 3, 0
+        elif play_mode.weapon.gun == 'CHEYTAC':
+            self.eq_gun_x, self.eq_gun_y = 4, 0
+
+    if self.page == self.eq_page:
+        self.ind_equip.draw(self.button_x[self.eq_gun_x], self.button_y[self.eq_gun_y], 160, 110)

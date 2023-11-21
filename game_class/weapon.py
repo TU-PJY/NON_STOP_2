@@ -261,6 +261,8 @@ class Weapon:
 
         self.reloading = False  # true일 시 재장전 중
 
+        self.eq_page = 1  # 상점창에서 특정 페이지에서만 장착중인 아이템을 표시하도록 한다.
+
         self.state_machine = StateMachineGun(self)
         self.state_machine.start()
 

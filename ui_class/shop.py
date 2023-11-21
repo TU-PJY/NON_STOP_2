@@ -36,6 +36,19 @@ class Shop:
         self.page_right_y = 0
         self.page_left_y = 0
 
+        self.ep_gun_x = 0  # 장착 중인 총 표시 위치, 버튼의 인덱스로 위치를 잡는다.
+        self.eq_gun_y = 0
+        self.eq_page = play_mode.weapon.eq_page  # 현재 장착 중인 총이 존재하는 페이지에서만 표시한다
+
+        self.eq_melee_x = 0  # 장착 중인 근접 무기 표시 위치
+        self.eq_melee_y = 0
+
+        self.ind_eq_size_x = 160  # 표시기 크기
+        self.ind_eq_size_y = 110
+        self.ind_sel_size = 160
+        self.ind_sel_size_y = 110
+
+        self.sel_item = False  # 아이템 선택 시 현재 선택중인 아이템을 표시함다. 해당 아이템 장착 시 사라진다.
 
         load_shop_resource(self)
         make_button_pos(self)

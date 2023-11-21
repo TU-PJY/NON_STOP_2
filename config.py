@@ -188,6 +188,9 @@ ammo_ar_icon_directory = 'res//ui//ammo_ar.png'
 ammo_rifle_icon_directory = 'res//ui//ammo_rifle.png'
 ammo_sr_icon_directory = 'res//ui//ammo_sr.png'
 
+ind_selected_directory = 'res//ui//item_selected.png'
+ind_equiped_directory = 'res//ui//item_equiped.png'
+
 
 # 폰트 경로
 font_directory = 'res//font//bump-it-up.ttf'

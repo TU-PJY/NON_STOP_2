@@ -101,6 +101,9 @@ def equip_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 �
                             play_mode.weapon.gun_type = 'rifle'
                             play_mode.weapon.reload_time = 250
 
+                        play_mode.weapon.eq_page = 1  # 표시할 특정 페이지 갱신
+                        self.eq_page = play_mode.weapon.eq_page
+
                     elif self.page == 2:  # sr의 경우 각 총마다 최대 관통 횟수가 다르다
                         if (i, j) == (0, 0) and self.select_gun == 'SPRING':
                             play_mode.weapon.gun = 'SPRING'
@@ -130,6 +133,9 @@ def equip_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 �
                         if j == 0:  # sr 타입
                             play_mode.weapon.gun_type = 'sr'
                             play_mode.weapon.reload_time = 350
+
+                        play_mode.weapon.eq_page = 2
+                        self.eq_page = play_mode.weapon.eq_page
 
                     # 총기 교체 시 잔탄을 모두 반환한 후 재장전 상태로 변경
                     # 이전에 사용하던 총기 타입에 맞는 탄약 개수에 반환한다
