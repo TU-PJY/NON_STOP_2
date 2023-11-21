@@ -88,10 +88,13 @@ def update_cat_button(self):
 
 def draw_ind(self):
     if self.select_mode == 0:
-        set_equiped_gun_ind_pos(self)
         if self.page == self.eq_page:
             self.ind_equip.draw\
                 (self.button_x[self.eq_gun_x], self.button_y[self.eq_gun_y], self.eq_size_x, self.eq_size_y)
+
+    elif self.select_mode == 1:
+        self.ind_equip.draw\
+            (self.button_x[self.eq_melee_x], self.button_y[self.eq_melee_y], self.eq_size_x, self.eq_size_y)
 
     if self.selected_item:
         if self.sel_page == self.page and self.sel_cat == self.select_mode:

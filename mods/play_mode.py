@@ -79,3 +79,7 @@ def pause():
 
 def resume():
     pass
+
+
+def weapon():
+    return None

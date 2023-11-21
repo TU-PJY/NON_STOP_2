@@ -198,9 +198,12 @@ def equip_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 �
                         if play_mode.weapon.skill_enable and play_mode.weapon.prev_melee == 'AXE':
                             play_mode.p.jump_acc = 0
 
-                        play_mode.weapon.skill_enable = False
+                        play_mode.weapon.skill_enable = False  # 나머지 무기들의 경우도 스킬 초기화
 
                         play_mode.weapon.prev_melee = play_mode.weapon.melee  # 이전 사용 근접 무기 갱신
+
+                        self.eq_size_x = 250  # 아이템 장착 피드백을 재생한다
+                        self.eq_size_y = 200
 
                 if self.select_mode == 0 or self.select_mode == 1:
                     self.selected_item = False   # 더 이상 선택한 아이템이 표시되지 않는다.
