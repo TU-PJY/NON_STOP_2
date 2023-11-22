@@ -263,6 +263,9 @@ class Weapon:
 
         self.eq_page = 1  # 상점창에서 특정 페이지에서만 장착중인 아이템을 표시하도록 한다.
 
+        self.buy_list_gun = [False for _ in range(30)]  # 구입 여부를 저장한다, true면 구입, false면 구입 안 함
+        self.buy_list_melee = [False for _ in range(5)]  # 근접무기 구입 여부를 저장한다
+
         self.state_machine = StateMachineGun(self)
         self.state_machine.start()
 

@@ -58,6 +58,7 @@ class Shop:
         self.sel_size_delay = 0
 
         self.selected_item = False  # 아이템 선택 시 현재 선택중인 아이템을 표시함다. 해당 아이템 장착 시 사라진다.
+        self.change = False  # 구입한 항목에 대해서만 아이템 관련 변수 값 변경읋 허용한다.
 
         load_shop_resource(self)
         make_button_pos(self)
