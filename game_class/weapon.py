@@ -195,8 +195,8 @@ class Weapon:
 
         self.flame_display_time = 0  # 총구 화염 출력 시간
 
-        self.melee = 'AXE'
-        self.prev_melee = 'AXE'
+        self.melee = 'KNIFE'
+        self.prev_melee = 'KNIFE'
         self.melee_x = 0
         self.melee_deg = 170
         self.use = False  # 무기 사용 상태

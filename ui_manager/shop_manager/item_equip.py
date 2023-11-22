@@ -78,7 +78,7 @@ def equip_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 �
                             if not play_mode.weapon.buy_list_gun[7]:
                                 if play_mode.p.coin >= 3000:
                                     play_mode.p.coin -= 3000
-                                    play_mode.wepon.buy_list_gun[7] = True
+                                    play_mode.weapon.buy_list_gun[7] = True
                             if play_mode.weapon.buy_list_gun[7]:
                                 play_mode.weapon.gun = 'VECTOR'
                                 play_mode.weapon.limit_ammo = 25
@@ -88,7 +88,7 @@ def equip_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 �
                             if not play_mode.weapon.buy_list_gun[8]:
                                 if play_mode.p.coin >= 3500:
                                     play_mode.p.coin -= 3500
-                                    play_mode.wepon.buy_list_gun[8] = True
+                                    play_mode.weapon.buy_list_gun[8] = True
                             if play_mode.weapon.buy_list_gun[8]:
                                 play_mode.weapon.gun = 'THOMPSON'
                                 play_mode.weapon.limit_ammo = 30
@@ -318,46 +318,75 @@ def equip_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 �
                             self.eq_size_y = 200
                             self.change = False
 
-
                 elif self.select_mode == 1:
                     if (i, j) == (0, 0) and self.select_melee == 'KNIFE':
                         play_mode.weapon.melee = 'KNIFE'
+                        self.change = True
+
                     elif (i, j) == (1, 0) and self.select_melee == 'BAT':
-                        play_mode.weapon.melee = 'BAT'
+                        if not play_mode.weapon.buy_list_melee[1]:
+                            if play_mode.p.coin >= 5000:
+                                play_mode.p.coin -= 5000
+                                play_mode.weapon.buy_list_melee[1] = True
+                        if play_mode.weapon.buy_list_melee[1]:
+                            play_mode.weapon.melee = 'BAT'
+                            self.change = True
+
                     elif (i, j) == (2, 0) and self.select_melee == 'RAPIER':
-                        play_mode.weapon.melee = 'RAPIER'
+                        if not play_mode.weapon.buy_list_melee[2]:
+                            if play_mode.p.coin >= 15000:
+                                play_mode.p.coin -= 15000
+                                play_mode.weapon.buy_list_melee[2] = True
+                        if play_mode.weapon.buy_list_melee[2]:
+                            play_mode.weapon.melee = 'RAPIER'
+                            self.change = True
+
                     elif (i, j) == (3, 0) and self.select_melee == 'KATANA':
-                        play_mode.weapon.melee = 'KATANA'
+                        if not play_mode.weapon.buy_list_melee[3]:
+                            if play_mode.p.coin >= 30000:
+                                play_mode.p.coin -= 30000
+                                play_mode.weapon.buy_list_melee[3] = True
+                        if play_mode.weapon.buy_list_melee[3]:
+                            play_mode.weapon.melee = 'KATANA'
+                            self.change = True
+
                     elif (i, j) == (4, 0) and self.select_melee == 'AXE':
-                        play_mode.weapon.melee = 'AXE'
+                        if not play_mode.weapon.buy_list_melee[4]:
+                            if play_mode.p.coin >= 50000:
+                                play_mode.p.coin -= 50000
+                                play_mode.weapon.buy_list_melee[4] = True
+                        if play_mode.weapon.buy_list_melee[4]:
+                            play_mode.weapon.melee = 'AXE'
+                            self.change = True
 
                     # 장착하고 있는 근접무기라면 무시
-                    if not play_mode.weapon.prev_melee == play_mode.weapon.melee:
-                        if play_mode.weapon.weapon_type == 1:
-                            play_mode.p.rotate = 0  # 무기 사용 중 무기 변경 시 무기 정보를 초기화 한다
-                        play_mode.weapon.melee_deg = 0
-                        play_mode.weapon.melee_x = 0
-                        play_mode.weapon.swing = False
-                        play_mode.weapon.swing_down = False
-                        play_mode.weapon.swing_up = False
-                        play_mode.weapon.wield = False
+                    if self.change:
+                        if not play_mode.weapon.prev_melee == play_mode.weapon.melee:
+                            if play_mode.weapon.weapon_type == 1:
+                                play_mode.p.rotate = 0  # 무기 사용 중 무기 변경 시 무기 정보를 초기화 한다
+                            play_mode.weapon.melee_deg = 0
+                            play_mode.weapon.melee_x = 0
+                            play_mode.weapon.swing = False
+                            play_mode.weapon.swing_down = False
+                            play_mode.weapon.swing_up = False
+                            play_mode.weapon.wield = False
 
-                        # 카타나 스킬 사용 중이었다면 플레이어 이동 속도를 복구
-                        if play_mode.weapon.skill_enable and play_mode.weapon.prev_melee == 'KATANA':
-                            play_mode.p.speed = play_mode.p.temp_speed
+                            # 카타나 스킬 사용 중이었다면 플레이어 이동 속도를 복구
+                            if play_mode.weapon.skill_enable and play_mode.weapon.prev_melee == 'KATANA':
+                                play_mode.p.speed = play_mode.p.temp_speed
 
-                        # AXE 스킬 사용 중이었다면 가속도 초기화
-                        if play_mode.weapon.skill_enable and play_mode.weapon.prev_melee == 'AXE':
-                            play_mode.p.jump_acc = 0
+                            # AXE 스킬 사용 중이었다면 가속도 초기화
+                            if play_mode.weapon.skill_enable and play_mode.weapon.prev_melee == 'AXE':
+                                play_mode.p.jump_acc = 0
 
-                        play_mode.weapon.skill_enable = False  # 나머지 무기들의 경우도 스킬 초기화
+                            play_mode.weapon.skill_enable = False  # 나머지 무기들의 경우도 스킬 초기화
 
-                        play_mode.weapon.prev_melee = play_mode.weapon.melee  # 이전 사용 근접 무기 갱신
+                            play_mode.weapon.prev_melee = play_mode.weapon.melee  # 이전 사용 근접 무기 갱신
 
-                        self.eq_size_x = 250  # 아이템 장착 피드백을 재생한다
-                        self.eq_size_y = 200
+                            self.eq_size_x = 250  # 아이템 장착 피드백을 재생한다
+                            self.eq_size_y = 200
 
-                if self.select_mode == 0 or self.select_mode == 1:
-                    self.selected_item = False   # 더 이상 선택한 아이템이 표시되지 않는다.
+                    if self.select_mode == 0 or self.select_mode == 1:
+                        self.selected_item = False   # 더 이상 선택한 아이템이 표시되지 않는다.
 
     self.right_click = False
