@@ -191,4 +191,5 @@ class Monster:
 
         if group == 'grenade:monster':
             # 수류탄 폭발에 맞으면 무조건 즉사
-            self.hp -= 500
+            if self.mp.playerToWallLeft <= self.x <= self.mp.playerToWallRight:
+                self.hp -= 500
