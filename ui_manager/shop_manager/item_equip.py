@@ -18,8 +18,8 @@ def equip_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 �
                             if not play_mode.weapon.buy_list_gun[1]:
                                 if play_mode.p.coin >= 300:  # 해당 총을 구입 하지 않았을 때
                                     play_mode.p.coin -= 300  # 가격 만큼 코인이 차감된다
-                                    play_mode.weapon.buy_list_gun[1] = True  # 구입 사실을 저장한다
-                            if play_mode.weapon.buy_list_gun[1]:  # 구입 후에는 코인이 차감되지 않는다
+                                    play_mode.weapon.buy_list_gun[1] = True  # 구입 사실 저장 후 아래의 조건문으로 넘어간다
+                            if play_mode.weapon.buy_list_gun[1]:  # 구입 후에 선택 시 바로 이 조건문으로 넘어간다
                                 play_mode.weapon.gun = 'M92'
                                 play_mode.weapon.limit_ammo = 15
                                 self.change = True
@@ -311,7 +311,7 @@ def equip_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 �
 
                             play_mode.weapon.cur_ammo = 0
                             play_mode.weapon.cur_reload_time = 0
-                            play_mode.weapon.reloading = False
+                            play_mode.weapon.reloading = False  # 재장전 중이었다면 재장전 소요 시간 초기화
                             play_mode.weapon.reload_need = True  # 재장전 필요 상태로 초기화
 
                             self.eq_size_x = 250  # 아이템 장착 피드백을 재생한다

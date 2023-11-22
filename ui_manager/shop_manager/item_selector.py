@@ -103,6 +103,16 @@ def click_button(self):
                     elif (i, j) == (4, 0):
                         self.select_melee = 'AXE'
 
+                elif self.select_mode == 2:
+                    if (i, j) == (0, 0):
+                        self.select_item = 'pistol_ammo'
+                    elif (i, j) == (1, 0):
+                        self.select_item = 'ar_ammo'
+                    elif (i, j) == (2, 0):
+                        self.select_item = 'rifle_ammo'
+                    elif (i, j) == (3, 0):
+                        self.select_item = 'sniper_ammo'
+
                 self.ind_sel_x = i  # 표시할 위치, 페이지, 카테고리 저장
                 self.ind_sel_y = j
                 self.sel_page = self.page

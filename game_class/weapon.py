@@ -16,7 +16,16 @@ class Shoot:
         if weapon.weapon_type == 0:
             weapon.trigger = True
             if weapon.reload_need:
-                weapon.reloading = True
+                if weapon.gun_type == 'pistol' and weapon.pistol_ammo == 0:
+                    pass
+                elif weapon.gun_type == 'ar' and weapon.ar_ammo == 0:
+                    pass
+                elif weapon.gun_type == 'rifle' and weapon.rifle_ammo == 0:
+                    pass
+                elif weapon.gun_type == 'sr' and weapon.sniper_ammo == 0:
+                    pass
+                else:
+                    weapon.reloading = True
 
         elif weapon.weapon_type == 1 and not weapon.skill_enable:
             weapon.use = True
@@ -47,8 +56,17 @@ class Shoot:
             set_skill(weapon)
 
         if weapon.limit_ammo - weapon.cur_ammo > 0:  # 탄창이 꽉 찬 상태에서는 재장전을 실행하지 않는다
-            if reload_down(e) and not weapon.reloading:  # 재장전
-                weapon.reloading = True
+            if reload_down(e) and not weapon.reloading:  # 재장전, 소유 탄약이 0인 상태에서는 재장전 하지 않는다
+                if weapon.gun_type == 'pistol' and weapon.pistol_ammo == 0:
+                    pass
+                elif weapon.gun_type == 'ar' and weapon.ar_ammo == 0:
+                    pass
+                elif weapon.gun_type == 'rifle' and weapon.rifle_ammo == 0:
+                    pass
+                elif weapon.gun_type == 'sr' and weapon.sniper_ammo == 0:
+                    pass
+                else:
+                    weapon.reloading = True
 
         if shift_down(e) and weapon.throwable:
             throw_grenade(weapon)
@@ -109,8 +127,17 @@ class Idle:
             set_skill(weapon)
 
         if weapon.limit_ammo - weapon.cur_ammo > 0:  # 탄창이 꽉 찬 상태에서는 재장전을 실행하지 않는다
-            if reload_down(e) and not weapon.reloading:  # 재장전
-                weapon.reloading = True
+            if reload_down(e) and not weapon.reloading:  # 재장전, 소유 탄약이 0인 상태에서는 재장전 하지 않는다
+                if weapon.gun_type == 'pistol' and weapon.pistol_ammo == 0:
+                    pass
+                elif weapon.gun_type == 'ar' and weapon.ar_ammo == 0:
+                    pass
+                elif weapon.gun_type == 'rifle' and weapon.rifle_ammo == 0:
+                    pass
+                elif weapon.gun_type == 'sr' and weapon.sniper_ammo == 0:
+                    pass
+                else:
+                    weapon.reloading = True
 
         if shift_down(e) and weapon.throwable:
             throw_grenade(weapon)
@@ -247,10 +274,10 @@ class Weapon:
 
         # 탄약 관련
         # 개발 중에는 99999로 초기화
-        self.pistol_ammo = 99999  # pistol, smg 탄종, 게임 시작 시 기본으로 100발이 주어짐
-        self.ar_ammo = 99999  # ar 탄종
-        self.rifle_ammo = 99999  # rifle 탄종
-        self.sniper_ammo = 99999  # sr 탄종
+        self.pistol_ammo = 100  # pistol, smg 탄종, 게임 시작 시 기본으로 100발이 주어짐
+        self.ar_ammo = 0  # ar 탄종
+        self.rifle_ammo = 0  # rifle 탄종
+        self.sniper_ammo = 0  # sr 탄종
 
         self.cur_ammo = 7  # 현재 탄창에 있는 탄약 수, 기본 권총의 장탄 수 
         self.limit_ammo = 7  # 총기마다 다른 장탄수를 가진다.

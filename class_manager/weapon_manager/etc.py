@@ -113,14 +113,32 @@ def reload_gun(weapon):
         else:  # 값에 도달하면 재장전 완료
             if weapon.gun_type == 'pistol' or weapon.gun_type == 'smg':
                 weapon.pistol_ammo -= (weapon.limit_ammo - weapon.cur_ammo)
+                weapon.cur_ammo = weapon.limit_ammo  # 탄창을 갈아 낀다
+                if weapon.pistol_ammo < 0:  # 소유 탄약이 탄창 용량보다 부족하면 소유탄약 만큼만 장전한다
+                    weapon.cur_ammo += weapon.pistol_ammo
+                    weapon.pistol_ammo = 0
+
             elif weapon.gun_type == 'ar':
                 weapon.ar_ammo -= (weapon.limit_ammo - weapon.cur_ammo)
+                weapon.cur_ammo = weapon.limit_ammo  # 탄창을 갈아 낀다
+                if weapon.ar_ammo < 0:
+                    weapon.cur_ammo += weapon.ar_ammo
+                    weapon.ar_ammo = 0
+
             elif weapon.gun_type == 'rifle':
                 weapon.rifle_ammo -= (weapon.limit_ammo - weapon.cur_ammo)
+                weapon.cur_ammo = weapon.limit_ammo  # 탄창을 갈아 낀다
+                if weapon.rifle_ammo < 0:
+                    weapon.cur_ammo += weapon.rifle_ammo
+                    weapon.rifle_ammo = 0
+
             elif weapon.gun_type == 'sr':
                 weapon.sniper_ammo -= (weapon.limit_ammo - weapon.cur_ammo)
+                weapon.cur_ammo = weapon.limit_ammo  # 탄창을 갈아 낀다
+                if weapon.sniper_ammo < 0:
+                    weapon.cur_ammo += weapon.sniper_ammo
+                    weapon.sniper_ammo = 0
 
-            weapon.cur_ammo = weapon.limit_ammo  # 탄창을 갈아 낀다
             weapon.reload_need = False
             weapon.cur_reload_time = 0
             weapon.reloading = False  # 재장전 상태 해제
