@@ -5,7 +5,7 @@ from ui_manager.shop_manager.file_loader import load_shop_resource
 from ui_manager.shop_manager.item_buy import buy_item
 from ui_manager.shop_manager.item_equip import equip_item
 from ui_manager.shop_manager.item_output import draw_items
-from ui_manager.shop_manager.item_selector import click_button
+from ui_manager.shop_manager.item_selector import click_button, on_button
 from ui_manager.shop_manager.window_output import draw_shop_window, draw_cursor, window_animation, update_cat_button, \
     update_ind_size, draw_ind
 
@@ -74,11 +74,14 @@ class Shop:
     def update(self):
         window_animation(self)
         update_cat_button(self)
+
+        on_button(self)
+
         if self.click:
             click_button(self)
-        elif self.right_click:
             equip_item(self)
             buy_item(self)
+
 
         update_ind_size(self)
         set_equiped_gun_ind_pos(self)

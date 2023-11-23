@@ -10,11 +10,13 @@ def click_button(self):
                 self.page_right_y - 50 < self.my < self.page_right_y + 50:
             if self.page < 2:
                 self.page += 1
+                self.selected_item = False
 
         elif self.page_left_x - 40 < self.mx < self.page_left_x + 40 and \
                 self.page_left_y - 50 < self.my < self.page_left_y + 50:
             if self.page > 1:
                 self.page -= 1
+                self.selected_item = False
 
     # 카테고리 버튼 클릭
     for i in range(len(self.cat_x)):
@@ -27,14 +29,27 @@ def click_button(self):
                     self.select_mode = 1  # melee
                 elif i == 2:
                     self.select_mode = 2  # exp
+                self.selected_item = False
 
-    # 아이템 버튼 클릭
+    self.click = False
+
+
+def on_button(self):  # 아이템 위에 커서를 올리면 표시된다
     for i in range(len(self.button_x)):
         for j in range(len(self.button_y)):
             if self.button_x[i] - 75 < self.mx < self.button_x[i] + 75 and \
                     self.button_y[j] - 50 < self.my < self.button_y[j] + 50:
+
                 if self.select_mode == 0:
                     if self.page == 1:
+                        if 0 <= i <= 4 and 0 <= j <= 3:  # 아이템에 대해서만 표시한다.
+                            self.ind_sel_x = i  # 표시할 위치, 페이지, 카테고리 저장
+                            self.ind_sel_y = j
+                            self.sel_cat = self.select_mode
+                            self.selected_item = True  # 선택한 이이템이 표시된다
+                        else:
+                            self.selected_item = False  # 선택한 이이템이 표시된다
+
                         if (i, j) == (0, 0):
                             self.select_gun = 'M1911'
                         elif (i, j) == (1, 0):
@@ -80,6 +95,14 @@ def click_button(self):
                             self.select_gun = 'LVOAS'
 
                     elif self.page == 2:
+                        if j == 0 <= i <= 4:  # 아이템에 대해서만 표시한다.
+                            self.ind_sel_x = i  # 표시할 위치, 페이지, 카테고리 저장
+                            self.ind_sel_y = j
+                            self.sel_cat = self.select_mode
+                            self.selected_item = True  # 선택한 이이템이 표시된다
+                        else:
+                            self.selected_item = False  # 선택한 이이템이 표시된다
+
                         if (i, j) == (0, 0):
                             self.select_gun = 'SPRING'
                         if (i, j) == (1, 0):
@@ -92,6 +115,14 @@ def click_button(self):
                             self.select_gun = 'CHEYTAC'
 
                 elif self.select_mode == 1:
+                    if j == 0 <= i <= 4:  # 아이템에 대해서만 표시한다.
+                        self.ind_sel_x = i  # 표시할 위치, 페이지, 카테고리 저장
+                        self.ind_sel_y = j
+                        self.sel_cat = self.select_mode
+                        self.selected_item = True  # 선택한 이이템이 표시된다
+                    else:
+                        self.selected_item = False  # 선택한 이이템이 표시된다
+
                     if (i, j) == (0, 0):
                         self.select_melee = 'KNIFE'
                     elif (i, j) == (1, 0):
@@ -104,6 +135,14 @@ def click_button(self):
                         self.select_melee = 'AXE'
 
                 elif self.select_mode == 2:
+                    if 0 <= i <= 4 and 0 <= j <= 3:
+                        self.ind_sel_x = i  # 표시할 위치, 페이지, 카테고리 저장
+                        self.ind_sel_y = j
+                        self.sel_cat = self.select_mode
+                        self.selected_item = True  # 선택한 이이템이 표시된다
+                    else:
+                        self.selected_item = False  # 선택한 이이템이 표시된다
+
                     if (i, j) == (0, 0):
                         self.select_item = 'pistol_ammo'
                     elif (i, j) == (1, 0):
@@ -112,11 +151,3 @@ def click_button(self):
                         self.select_item = 'rifle_ammo'
                     elif (i, j) == (3, 0):
                         self.select_item = 'sniper_ammo'
-
-                self.ind_sel_x = i  # 표시할 위치, 페이지, 카테고리 저장
-                self.ind_sel_y = j
-                self.sel_page = self.page
-                self.sel_cat = self.select_mode
-
-                self.selected_item = True  # 선택한 이이템이 표시된다
-    self.click = False

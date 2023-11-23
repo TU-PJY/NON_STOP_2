@@ -24,4 +24,4 @@ def buy_item(self):
                         if play_mode.p.coin >= 400:
                             play_mode.p.coin -= 400
                             play_mode.weapon.sniper_ammo += 50
-    self.right_click = False
+    self.click = False
