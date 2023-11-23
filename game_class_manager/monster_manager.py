@@ -237,7 +237,10 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                 m.weapon.hit_once = False
 
     if m.hp <= 0:  # hp가 0이 될 경우 죽는다.
-        coin = Coin(m.p, m.mp, m.x, m.y, m.dir)
+        if m.weapon.melee == 'KATANA' and m.weapon.skill_enable:
+            coin = Coin(m.p, m.mp, m.x, m.y + 200, m.dir)
+        else:
+            coin = Coin(m.p, m.mp, m.x, m.y, m.dir)
         game_manager.add_object(coin, 3)  # 코인을 드랍한다
         game_manager.add_collision_pair('player:coin', None, coin)
         game_manager.remove_object(m)
