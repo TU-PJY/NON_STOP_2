@@ -16,13 +16,14 @@ def draw_shop_window(self):
     self.window.draw(self.x, self.window_y, 950, 550)
     self.coin_icon.draw(WIDTH / 2 - 420, self.window_y - 280, 50, 50)
     self.font_small.draw(WIDTH / 2 - 390, self.window_y - 280, '%d' % play_mode.p.coin, (255, 255, 255))
-
+    length = len(play_mode.weapon.buy_list_gun)
     # 카테고리 및 페이지에 따라 출력되는 버튼 개수가 다르다
     if self.select_mode == 0:
         if self.page == 1:
             for i in range(5):
                 for j in range(4):
                     self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
+
         elif self.page == 2:
             for i in range(5):
                 for j in range(1):
@@ -100,6 +101,21 @@ def draw_ind(self):
         if self.sel_cat == self.select_mode:
             self.ind_select.draw\
                 (self.button_x[self.ind_sel_x], self.button_y[self.ind_sel_y], self.sel_size_x, self.sel_size_y)
+
+    for i in range(5):
+        for j in range(4):
+            if self.select_mode == 0:
+                if self.page == 1:
+                    if not play_mode.weapon.buy_list_gun[i][j]:  # 구입하지 않은 총기에 대해서는 잠김 표시
+                        self.ind_lock.draw(self.button_x[i] + 50, self.button_y[j] - 30, 30, 30)
+                elif self.page == 2:
+                    if j == 0 <= i <= 4:
+                        if not play_mode.weapon.buy_list_gun2[i][j]:  # 구입하지 않은 총기에 대해서는 잠김 표시
+                            self.ind_lock.draw(self.button_x[i] + 50, self.button_y[j] - 30, 30, 30)
+            elif self.select_mode == 1:
+                if j == 0 <= i <= 4:
+                    if not play_mode.weapon.buy_list_melee[i][j]:  # 구입하지 않은 근접무기에 대해서는 잠김 표시
+                        self.ind_lock.draw(self.button_x[i] + 50, self.button_y[j] - 30, 30, 30)
 
 
 def update_ind_size(self):  # 아이템 선택 피드백을 출력한다.

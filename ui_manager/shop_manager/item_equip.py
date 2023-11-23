@@ -15,191 +15,191 @@ def equip_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 �
                             self.change = True
 
                         elif (i, j) == (1, 0) and self.select_gun == 'M92':
-                            if not play_mode.weapon.buy_list_gun[1]:
+                            if not play_mode.weapon.buy_list_gun[1][0]:
                                 if play_mode.p.coin >= 300:  # 해당 총을 구입 하지 않았을 때
                                     play_mode.p.coin -= 300  # 가격 만큼 코인이 차감된다
-                                    play_mode.weapon.buy_list_gun[1] = True  # 구입 사실 저장 후 아래의 조건문으로 넘어간다
-                            if play_mode.weapon.buy_list_gun[1]:  # 구입 후에 선택 시 바로 이 조건문으로 넘어간다
+                                    play_mode.weapon.buy_list_gun[1][0] = True  # 구입 사실 저장 후 아래의 조건문으로 넘어간다
+                            if play_mode.weapon.buy_list_gun[1][0]:  # 구입 후에 선택 시 바로 이 조건문으로 넘어간다
                                 play_mode.weapon.gun = 'M92'
                                 play_mode.weapon.limit_ammo = 15
                                 self.change = True
 
                         elif (i, j) == (2, 0) and self.select_gun == 'DEGLE':
-                            if not play_mode.weapon.buy_list_gun[2]:
+                            if not play_mode.weapon.buy_list_gun[2][0]:
                                 if play_mode.p.coin >= 600:
                                     play_mode.p.coin -= 600
-                                    play_mode.weapon.buy_list_gun[2] = True
-                            if play_mode.weapon.buy_list_gun[2]:
+                                    play_mode.weapon.buy_list_gun[2][0] = True
+                            if play_mode.weapon.buy_list_gun[2][0]:
                                 play_mode.weapon.gun = 'DEGLE'
                                 play_mode.weapon.limit_ammo = 8
                                 self.change = True
 
                         elif (i, j) == (3, 0) and self.select_gun == 'M500':
-                            if not play_mode.weapon.buy_list_gun[3]:
+                            if not play_mode.weapon.buy_list_gun[3][0]:
                                 if play_mode.p.coin >= 800:
                                     play_mode.p.coin -= 800
-                                    play_mode.weapon.buy_list_gun[3] = True
-                            if play_mode.weapon.buy_list_gun[3]:
+                                    play_mode.weapon.buy_list_gun[3][0] = True
+                            if play_mode.weapon.buy_list_gun[3][0]:
                                 play_mode.weapon.gun = 'M500'
                                 play_mode.weapon.limit_ammo = 6
                                 self.change = True
 
                         elif (i, j) == (4, 0) and self.select_gun == 'QHAND':
-                            if not play_mode.weapon.buy_list_gun[4]:
+                            if not play_mode.weapon.buy_list_gun[4][0]:
                                 if play_mode.p.coin >= 1500:
                                     play_mode.p.coin -= 1500
-                                    play_mode.weapon.buy_list_gun[4] = True
-                            if play_mode.weapon.buy_list_gun[4]:
+                                    play_mode.weapon.buy_list_gun[4][0] = True
+                            if play_mode.weapon.buy_list_gun[4][0]:
                                 play_mode.weapon.gun = 'QHAND'
                                 play_mode.weapon.limit_ammo = 12
                                 self.change = True
 
                         elif (i, j) == (0, 1) and self.select_gun == 'AKS74':
-                            if not play_mode.weapon.buy_list_gun[5]:
+                            if not play_mode.weapon.buy_list_gun[0][1]:
                                 if play_mode.p.coin >= 2000:
                                     play_mode.p.coin -= 2000
-                                    play_mode.weapon.buy_list_gun[5] = True
-                            if play_mode.weapon.buy_list_gun[5]:
+                                    play_mode.weapon.buy_list_gun[0][1] = True
+                            if play_mode.weapon.buy_list_gun[0][1]:
                                 play_mode.weapon.gun = 'AKS74'
                                 play_mode.weapon.limit_ammo = 30
                                 self.change = True
 
                         elif (i, j) == (1, 1) and self.select_gun == 'UMP':
-                            if not play_mode.weapon.buy_list_gun[6]:
+                            if not play_mode.weapon.buy_list_gun[1][1]:
                                 if play_mode.p.coin >= 2500:
                                     play_mode.p.coin -= 2500
-                                    play_mode.weapon.buy_list_gun[6] = True
-                            if play_mode.weapon.buy_list_gun[6]:
+                                    play_mode.weapon.buy_list_gun[1][1] = True
+                            if play_mode.weapon.buy_list_gun[1][1]:
                                 play_mode.weapon.gun = 'UMP'
                                 play_mode.weapon.limit_ammo = 25
                                 self.change = True
 
                         elif (i, j) == (2, 1) and self.select_gun == 'VECTOR':
-                            if not play_mode.weapon.buy_list_gun[7]:
+                            if not play_mode.weapon.buy_list_gun[2][1]:
                                 if play_mode.p.coin >= 3000:
                                     play_mode.p.coin -= 3000
-                                    play_mode.weapon.buy_list_gun[7] = True
-                            if play_mode.weapon.buy_list_gun[7]:
+                                    play_mode.weapon.buy_list_gun[2][1] = True
+                            if play_mode.weapon.buy_list_gun[2][1]:
                                 play_mode.weapon.gun = 'VECTOR'
                                 play_mode.weapon.limit_ammo = 25
                                 self.change = True
 
                         elif (i, j) == (3, 1) and self.select_gun == 'THOMPSON':
-                            if not play_mode.weapon.buy_list_gun[8]:
+                            if not play_mode.weapon.buy_list_gun[3][1]:
                                 if play_mode.p.coin >= 3500:
                                     play_mode.p.coin -= 3500
-                                    play_mode.weapon.buy_list_gun[8] = True
-                            if play_mode.weapon.buy_list_gun[8]:
+                                    play_mode.weapon.buy_list_gun[3][1] = True
+                            if play_mode.weapon.buy_list_gun[3][1]:
                                 play_mode.weapon.gun = 'THOMPSON'
                                 play_mode.weapon.limit_ammo = 30
                                 self.change = True
 
                         elif (i, j) == (4, 1) and self.select_gun == 'P90':
-                            if not play_mode.weapon.buy_list_gun[9]:
+                            if not play_mode.weapon.buy_list_gun[4][1]:
                                 if play_mode.p.coin >= 4000:
                                     play_mode.p.coin -= 4000
-                                    play_mode.weapon.buy_list_gun[9] = True
-                            if play_mode.weapon.buy_list_gun[9]:
+                                    play_mode.weapon.buy_list_gun[4][1] = True
+                            if play_mode.weapon.buy_list_gun[4][1]:
                                 play_mode.weapon.gun = 'P90'
                                 play_mode.weapon.limit_ammo = 50
                                 self.change = True
 
                         elif (i, j) == (0, 2) and self.select_gun == 'SCAR_H':
-                            if not play_mode.weapon.buy_list_gun[10]:
+                            if not play_mode.weapon.buy_list_gun[0][2]:
                                 if play_mode.p.coin >= 5000:
                                     play_mode.p.coin -= 5000
-                                    play_mode.weapon.buy_list_gun[10] = True
-                            if play_mode.weapon.buy_list_gun[10]:
+                                    play_mode.weapon.buy_list_gun[0][2] = True
+                            if play_mode.weapon.buy_list_gun[0][2]:
                                 play_mode.weapon.gun = 'SCAR_H'
                                 play_mode.weapon.limit_ammo = 25
                                 self.change = True
 
                         elif (i, j) == (1, 2) and self.select_gun == 'M16':
-                            if not play_mode.weapon.buy_list_gun[11]:
+                            if not play_mode.weapon.buy_list_gun[1][2]:
                                 if play_mode.p.coin >= 6000:
                                     play_mode.p.coin -= 6000
-                                    play_mode.weapon.buy_list_gun[11] = True
-                            if play_mode.weapon.buy_list_gun[11]:
+                                    play_mode.weapon.buy_list_gun[1][2] = True
+                            if play_mode.weapon.buy_list_gun[1][2]:
                                 play_mode.weapon.gun = 'M16'
                                 play_mode.weapon.limit_ammo = 30
                                 self.change = True
 
                         elif (i, j) == (2, 2) and self.select_gun == 'MP44':
-                            if not play_mode.weapon.buy_list_gun[12]:
+                            if not play_mode.weapon.buy_list_gun[2][2]:
                                 if play_mode.p.coin >= 7000:
                                     play_mode.p.coin -= 7000
-                                    play_mode.weapon.buy_list_gun[12] = True
-                            if play_mode.weapon.buy_list_gun[12]:
+                                    play_mode.weapon.buy_list_gun[2][2] = True
+                            if play_mode.weapon.buy_list_gun[2][2]:
                                 play_mode.weapon.gun = 'MP44'
                                 play_mode.weapon.limit_ammo = 20
                                 self.change = True
 
                         elif (i, j) == (3, 2) and self.select_gun == 'AUG':
-                            if not play_mode.weapon.buy_list_gun[13]:
+                            if not play_mode.weapon.buy_list_gun[3][2]:
                                 if play_mode.p.coin >= 8000:
                                     play_mode.p.coin -= 8000
-                                    play_mode.weapon.buy_list_gun[13] = True
-                            if play_mode.weapon.buy_list_gun[13]:
+                                    play_mode.weapon.buy_list_gun[3][2] = True
+                            if play_mode.weapon.buy_list_gun[3][2]:
                                 play_mode.weapon.gun = 'AUG'
                                 play_mode.weapon.limit_ammo = 30
                                 self.change = True
 
                         elif (i, j) == (4, 2) and self.select_gun == 'GROZA':
-                            if not play_mode.weapon.buy_list_gun[14]:
+                            if not play_mode.weapon.buy_list_gun[4][2]:
                                 if play_mode.p.coin >= 9000:
                                     play_mode.p.coin -= 9000
-                                    play_mode.weapon.buy_list_gun[14] = True
-                            if play_mode.weapon.buy_list_gun[14]:
+                                    play_mode.weapon.buy_list_gun[4][2] = True
+                            if play_mode.weapon.buy_list_gun[4][2]:
                                 play_mode.weapon.gun = 'GROZA'
                                 play_mode.weapon.limit_ammo = 40
                                 self.change = True
 
                         elif (i, j) == (0, 3) and self.select_gun == 'M1':
-                            if not play_mode.weapon.buy_list_gun[15]:
+                            if not play_mode.weapon.buy_list_gun[0][3]:
                                 if play_mode.p.coin >= 11000:
                                     play_mode.p.coin -= 11000
-                                    play_mode.weapon.buy_list_gun[15] = True
-                            if play_mode.weapon.buy_list_gun[15]:
+                                    play_mode.weapon.buy_list_gun[0][3] = True
+                            if play_mode.weapon.buy_list_gun[0][3]:
                                 play_mode.weapon.gun = 'M1'
                                 play_mode.weapon.limit_ammo = 8
                                 self.change = True
 
                         elif (i, j) == (1, 3) and self.select_gun == 'WIN':
-                            if not play_mode.weapon.buy_list_gun[16]:
+                            if not play_mode.weapon.buy_list_gun[1][3]:
                                 if play_mode.p.coin >= 13000:
                                     play_mode.p.coin -= 13000
-                                    play_mode.weapon.buy_list_gun[16] = True
-                            if play_mode.weapon.buy_list_gun[16]:
+                                    play_mode.weapon.buy_list_gun[1][3] = True
+                            if play_mode.weapon.buy_list_gun[1][3]:
                                 play_mode.weapon.gun = 'WIN'
                                 play_mode.weapon.limit_ammo = 10
                                 self.change = True
 
                         elif (i, j) == (2, 3) and self.select_gun == 'MINI14':
-                            if not play_mode.weapon.buy_list_gun[17]:
+                            if not play_mode.weapon.buy_list_gun[2][3]:
                                 if play_mode.p.coin >= 15000:
                                     play_mode.p.coin -= 15000
-                                    play_mode.weapon.buy_list_gun[17] = True
-                            if play_mode.weapon.buy_list_gun[17]:
+                                    play_mode.weapon.buy_list_gun[2][3] = True
+                            if play_mode.weapon.buy_list_gun[2][3]:
                                 play_mode.weapon.gun = 'MINI14'
                                 play_mode.weapon.limit_ammo = 30
                                 self.change = True
 
                         elif (i, j) == (3, 3) and self.select_gun == 'FAL':
-                            if not play_mode.weapon.buy_list_gun[18]:
+                            if not play_mode.weapon.buy_list_gun[3][3]:
                                 if play_mode.p.coin >= 17000:
                                     play_mode.p.coin -= 17000
-                                    play_mode.weapon.buy_list_gun[18] = True
-                            if play_mode.weapon.buy_list_gun[18]:
+                                    play_mode.weapon.buy_list_gun[3][3] = True
+                            if play_mode.weapon.buy_list_gun[3][3]:
                                 play_mode.weapon.gun = 'FAL'
                                 play_mode.weapon.limit_ammo = 20
                                 self.change = True
 
                         elif (i, j) == (4, 3) and self.select_gun == 'LVOAS':
-                            if not play_mode.weapon.buy_list_gun[19]:
+                            if not play_mode.weapon.buy_list_gun[4][3]:
                                 if play_mode.p.coin >= 19000:
                                     play_mode.p.coin -= 19000
-                                    play_mode.weapon.buy_list_gun[19] = True
-                            if play_mode.weapon.buy_list_gun[19]:
+                                    play_mode.weapon.buy_list_gun[4][3] = True
+                            if play_mode.weapon.buy_list_gun[4][3]:
                                 play_mode.weapon.gun = 'LVOAS'
                                 play_mode.weapon.limit_ammo = 20
                                 self.change = True
@@ -223,55 +223,55 @@ def equip_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 �
 
                     elif self.page == 2:  # sr의 경우 각 총마다 최대 관통 횟수가 다르다
                         if (i, j) == (0, 0) and self.select_gun == 'SPRING':
-                            if not play_mode.weapon.buy_list_gun[20]:
+                            if not play_mode.weapon.buy_list_gun2[0][0]:
                                 if play_mode.p.coin >= 23000:
                                     play_mode.p.coin -= 23000
-                                    play_mode.weapon.buy_list_gun[20] = True
-                            if play_mode.weapon.buy_list_gun[20]:
+                                    play_mode.weapon.buy_list_gun2[0][0] = True
+                            if play_mode.weapon.buy_list_gun2[0][0]:
                                 play_mode.weapon.gun = 'SPRING'
                                 play_mode.weapon.pen_limit = 2
                                 play_mode.weapon.limit_ammo = 5
                                 self.change = True
 
                         if (i, j) == (1, 0) and self.select_gun == 'KAR98':
-                            if not play_mode.weapon.buy_list_gun[21]:
+                            if not play_mode.weapon.buy_list_gun2[1][0]:
                                 if play_mode.p.coin >= 28000:
                                     play_mode.p.coin -= 28000
-                                    play_mode.weapon.buy_list_gun[21] = True
-                            if play_mode.weapon.buy_list_gun[21]:
+                                    play_mode.weapon.buy_list_gun2[1][0] = True
+                            if play_mode.weapon.buy_list_gun2[1][0]:
                                 play_mode.weapon.gun = 'KAR98'
                                 play_mode.weapon.pen_limit = 3
                                 play_mode.weapon.limit_ammo = 5
                                 self.change = True
 
                         if (i, j) == (2, 0) and self.select_gun == 'M24':
-                            if not play_mode.weapon.buy_list_gun[22]:
+                            if not play_mode.weapon.buy_list_gun2[2][0]:
                                 if play_mode.p.coin >= 33000:
                                     play_mode.p.coin -= 33000
-                                    play_mode.weapon.buy_list_gun[22] = True
-                            if play_mode.weapon.buy_list_gun[22]:
+                                    play_mode.weapon.buy_list_gun2[2][0] = True
+                            if play_mode.weapon.buy_list_gun2[2][0]:
                                 play_mode.weapon.gun = 'M24'
                                 play_mode.weapon.pen_limit = 4
                                 play_mode.weapon.limit_ammo = 5
                                 self.change = True
 
                         if (i, j) == (3, 0) and self.select_gun == 'AWP':
-                            if not play_mode.weapon.buy_list_gun[23]:
+                            if not play_mode.weapon.buy_list_gun2[3][0]:
                                 if play_mode.p.coin >= 38000:
                                     play_mode.p.coin -= 38000
-                                    play_mode.weapon.buy_list_gun[23] = True
-                            if play_mode.weapon.buy_list_gun[23]:
+                                    play_mode.weapon.buy_list_gun2[3][0] = True
+                            if play_mode.weapon.buy_list_gun2[3][0]:
                                 play_mode.weapon.gun = 'AWP'
                                 play_mode.weapon.pen_limit = 6
                                 play_mode.weapon.limit_ammo = 5
                                 self.change = True
 
                         if (i, j) == (4, 0) and self.select_gun == 'CHEYTAC':
-                            if not play_mode.weapon.buy_list_gun[24]:
+                            if not play_mode.weapon.buy_list_gun2[4][0]:
                                 if play_mode.p.coin >= 43000:
                                     play_mode.p.coin -= 43000
-                                    play_mode.weapon.buy_list_gun[24] = True
-                            if play_mode.weapon.buy_list_gun[24]:
+                                    play_mode.weapon.buy_list_gun2[4][0] = True
+                            if play_mode.weapon.buy_list_gun2[4][0]:
                                 play_mode.weapon.gun = 'CHEYTAC'
                                 play_mode.weapon.pen_limit = 8
                                 play_mode.weapon.limit_ammo = 7
@@ -324,38 +324,38 @@ def equip_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 �
                         self.change = True
 
                     elif (i, j) == (1, 0) and self.select_melee == 'BAT':
-                        if not play_mode.weapon.buy_list_melee[1]:
+                        if not play_mode.weapon.buy_list_melee[1][0]:
                             if play_mode.p.coin >= 5000:
                                 play_mode.p.coin -= 5000
-                                play_mode.weapon.buy_list_melee[1] = True
-                        if play_mode.weapon.buy_list_melee[1]:
+                                play_mode.weapon.buy_list_melee[1][0] = True
+                        if play_mode.weapon.buy_list_melee[1][0]:
                             play_mode.weapon.melee = 'BAT'
                             self.change = True
 
                     elif (i, j) == (2, 0) and self.select_melee == 'RAPIER':
-                        if not play_mode.weapon.buy_list_melee[2]:
+                        if not play_mode.weapon.buy_list_melee[2][0]:
                             if play_mode.p.coin >= 15000:
                                 play_mode.p.coin -= 15000
-                                play_mode.weapon.buy_list_melee[2] = True
-                        if play_mode.weapon.buy_list_melee[2]:
+                                play_mode.weapon.buy_list_melee[2][0] = True
+                        if play_mode.weapon.buy_list_melee[2][0]:
                             play_mode.weapon.melee = 'RAPIER'
                             self.change = True
 
                     elif (i, j) == (3, 0) and self.select_melee == 'KATANA':
-                        if not play_mode.weapon.buy_list_melee[3]:
+                        if not play_mode.weapon.buy_list_melee[3][0]:
                             if play_mode.p.coin >= 30000:
                                 play_mode.p.coin -= 30000
-                                play_mode.weapon.buy_list_melee[3] = True
-                        if play_mode.weapon.buy_list_melee[3]:
+                                play_mode.weapon.buy_list_melee[3][0] = True
+                        if play_mode.weapon.buy_list_melee[3][0]:
                             play_mode.weapon.melee = 'KATANA'
                             self.change = True
 
                     elif (i, j) == (4, 0) and self.select_melee == 'AXE':
-                        if not play_mode.weapon.buy_list_melee[4]:
+                        if not play_mode.weapon.buy_list_melee[4][0]:
                             if play_mode.p.coin >= 50000:
                                 play_mode.p.coin -= 50000
-                                play_mode.weapon.buy_list_melee[4] = True
-                        if play_mode.weapon.buy_list_melee[4]:
+                                play_mode.weapon.buy_list_melee[4][0] = True
+                        if play_mode.weapon.buy_list_melee[4][0]:
                             play_mode.weapon.melee = 'AXE'
                             self.change = True
 

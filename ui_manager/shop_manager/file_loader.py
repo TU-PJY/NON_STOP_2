@@ -23,6 +23,8 @@ def load_shop_resource(self):
     self.ind_equip = load_image(ind_equiped_directory)
     self.ind_select = load_image(ind_selected_directory)
 
+    self.ind_lock = load_image(ind_lock_directory)
+
     self.image_m1911 = load_image(m1911_right_directory)
     self.image_m92 = load_image(m92_right_directory)
     self.image_m500 = load_image(m500_right_directory)

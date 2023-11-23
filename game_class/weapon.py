@@ -290,8 +290,13 @@ class Weapon:
 
         self.eq_page = 1  # 상점창에서 특정 페이지에서만 장착중인 아이템을 표시하도록 한다.
 
-        self.buy_list_gun = [False for _ in range(30)]  # 구입 여부를 저장한다, true면 구입, false면 구입 안 함
-        self.buy_list_melee = [False for _ in range(5)]  # 근접무기 구입 여부를 저장한다
+        # 구입 여부를 버튼의 가로세로 인덱스로 저장, 잠김 표시를 위함
+        self.buy_list_gun = [[False for _ in range(4)] for _ in range(5)]  # 구입 여부를 저장한다, true면 구입, false면 구입 안 함
+        self.buy_list_gun2 = [[False for _ in range(1)] for _ in range(5)]  # page2 전용 배열
+        self.buy_list_melee = [[False for _ in range(1)] for _ in range(5)]  # 근접무기 구입 여부를 저장한다
+
+        self.buy_list_gun[0][0] = True  # 기본무기는 처음부터 사용 가능
+        self.buy_list_melee[0][0] = True
 
         self.state_machine = StateMachineGun(self)
         self.state_machine.start()
