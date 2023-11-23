@@ -30,7 +30,12 @@ def draw_wall(self):
     x2 = self.x2 + self.p.ex
     y = self.y + self.p.ey
     self.image.draw(x1, y, 1280, 1920)
+    self.image.draw(x1, y + 1920, 1280, 1920)
+    self.image.draw(x1 - 1280, y, 1280, 1920)
+
     self.image.draw(x2, y, 1280, 1920)
+    self.image.draw(x2, y + 1920, 1280, 1920)
+    self.image.draw(x2 + 1280, y, 1280, 1920)
 
 
 def draw_background(self):
