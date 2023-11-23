@@ -102,6 +102,15 @@ def make_shell(weapon, size_x=15, size_y=15):  # 탄피 생성
     game_manager.add_object(shell, 4)  # 총을 발사하면 탄피가 나온다
 
 
+def check_ammo(weapon):
+    if (weapon.gun_type == 'pistol' and weapon.pistol_ammo > 0) or \
+            (weapon.gun_type == 'smg' and weapon.pistol_ammo > 0) or \
+            (weapon.gun_type == 'ar' and weapon.ar_ammo > 0) or \
+            (weapon.gun_type == 'rifle' and weapon.rifle_ammo > 0) or \
+            (weapon.gun_type == 'sr' and weapon.sniper_ammo > 0):
+        weapon.reloading = True
+
+
 def reload_gun(weapon):
     if weapon.weapon_type == 0:
         pps = game_framework.pps
