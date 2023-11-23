@@ -20,7 +20,7 @@ def make_button_pos(self):  # shop 버튼 위치 생성
     self.page_right_y = self.window_y - 200
 
 
-def set_equiped_gun_ind_pos(self):  # 장착 중인 아이템 표시
+def set_equiped_gun_ind_pos(self):  # 장착 중인 아이템 강조
     if self.select_mode == 0:
         if self.page == 1:
             if play_mode.weapon.gun == 'M1911':

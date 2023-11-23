@@ -1,7 +1,7 @@
 from mods import play_mode
 
 
-def buy_melee(self, i, j):
+def buy_melee(i, j):
     if (i, j) == (0, 0):
         pass
 

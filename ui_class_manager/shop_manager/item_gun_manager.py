@@ -1,7 +1,7 @@
 from mods import play_mode
 
 
-def buy_gun_page1(self, i, j):
+def buy_gun_page1(i, j):
     if (i, j) == (0, 0):  # 기본 총이므로 구입 여부 확인은 하지 않음
         pass
 
@@ -84,7 +84,7 @@ def buy_gun_page1(self, i, j):
     play_mode.weapon.buy_list_gun[i][j] = True
 
 
-def buy_gun_page2(self, i, j):
+def buy_gun_page2(i, j):
     if (i, j) == (0, 0):
         if play_mode.p.coin >= 23000:
             play_mode.p.coin -= 23000
