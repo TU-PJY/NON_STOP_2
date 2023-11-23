@@ -272,6 +272,13 @@ class Weapon:
         self.buy_list_gun[0][0] = True  # 기본무기는 처음부터 사용 가능
         self.buy_list_melee[0][0] = True
 
+        self.equip_list_melee = [[False for _ in range(1)] for _ in range(5)]
+        self.equip_list_melee[0][0] = True
+
+        self.equip_list_gun1 = [[False for _ in range(4)] for _ in range(5)]  # 장착 중인 총기 강조 표시용 리스트
+        self.equip_list_gun2 = [[False for _ in range(1)] for _ in range(5)]  # page2용
+        self.equip_list_gun1[0][0] = True
+
         self.state_machine = StateMachineGun(self)
         self.state_machine.start()
 

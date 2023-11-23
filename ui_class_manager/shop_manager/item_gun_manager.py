@@ -1,6 +1,15 @@
 from mods import play_mode
 
 
+def init_equip_list_gun():
+    for i in range(5):
+        for j in range(4):
+            play_mode.weapon.equip_list_gun1[i][j] = False
+
+    for i in range(5):
+        for j in range(1):
+            play_mode.weapon.equip_list_gun2[i][j] = False
+
 def buy_gun_page1(i, j):
     if (i, j) == (0, 0):  # 기본 총이므로 구입 여부 확인은 하지 않음
         pass
@@ -201,6 +210,9 @@ def equip_gun_page1(self, i, j):
         play_mode.weapon.gun_type = 'rifle'
         play_mode.weapon.reload_time = 250
 
+    init_equip_list_gun()  # 장착 중인 아이템 리스트 해제
+    play_mode.weapon.equip_list_gun1[i][j] = True  # 갱신
+
     play_mode.weapon.eq_page = 1  # 표시할 특정 페이지 갱신
     self.eq_page = play_mode.weapon.eq_page
     self.data_change = True
@@ -235,6 +247,9 @@ def equip_gun_page2(self, i, j):
     if j == 0:  # sr 타입
         play_mode.weapon.gun_type = 'sr'
         play_mode.weapon.reload_time = 350
+
+    init_equip_list_gun()  # 장착 중인 아이템 리스트 해제
+    play_mode.weapon.equip_list_gun2[i][j] = True  # 갱신
 
     play_mode.weapon.eq_page = 2
     self.eq_page = play_mode.weapon.eq_page

@@ -21,7 +21,7 @@ def select_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 
                     elif self.page == 2:
                         if j == 0 <= i <= 4:
                             if not play_mode.weapon.buy_list_gun2[i][j]:
-                                buy_gun_page2(self, i, j)
+                                buy_gun_page2(i, j)
                             if play_mode.weapon.buy_list_gun2[i][j]:
                                 equip_gun_page2(self, i, j)
 
@@ -30,7 +30,7 @@ def select_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 
                 elif self.select_mode == 1:  # 근접 무기
                     if j == 0 <= i <= 4:
                         if not play_mode.weapon.buy_list_melee[i][j]:
-                            buy_melee(self, i, j)
+                            buy_melee(i, j)
                         if play_mode.weapon.buy_list_melee[i][j]:
                             equip_melee(self, i, j)
 

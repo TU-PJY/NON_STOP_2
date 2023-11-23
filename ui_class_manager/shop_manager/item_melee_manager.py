@@ -1,6 +1,12 @@
 from mods import play_mode
 
 
+def init_equip_list_melee():
+    for i in range(5):
+        for j in range(1):
+            play_mode.weapon.equip_list_melee[i][j] = False
+
+
 def buy_melee(i, j):
     if (i, j) == (0, 0):
         pass
@@ -39,6 +45,9 @@ def equip_melee(self, i, j):
 
     elif (i, j) == (4, 0):
         play_mode.weapon.melee = 'AXE'
+
+    init_equip_list_melee()
+    play_mode.weapon.equip_list_melee[i][j] = True
 
     self.data_change = True
 
