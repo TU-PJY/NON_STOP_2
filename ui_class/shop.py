@@ -60,9 +60,9 @@ class Shop:
         self.sel_size_delay = 0
 
         self.pistol_ammo_size_x, self.pistol_ammo_size_y = 100, 100
-        self.ar_ammo_size_x,  self.ar_ammo_size_y = 100, 100
+        self.ar_ammo_size_x, self.ar_ammo_size_y = 100, 100
         self.rifle_ammo_size_x, self.rifle_ammo_size_y = 100, 100
-        self.sniper_ammo_size_x,  self.sniper_ammo_size_y = 100, 100
+        self.sniper_ammo_size_x, self.sniper_ammo_size_y = 100, 100
 
         self.selected_item = False  # 아이템 선택 시 현재 선택중인 아이템을 표시함다. 해당 아이템 장착 시 사라진다.
         self.change = False  # 구입한 항목에 대해서만 아이템 관련 변수 값 변경읋 허용한다.
@@ -87,7 +87,6 @@ class Shop:
             click_button(self)
             equip_item(self)
             buy_item(self)
-
 
         update_ind_size(self)
         set_equiped_gun_ind_pos(self)

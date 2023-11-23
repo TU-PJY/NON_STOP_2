@@ -1,8 +1,3 @@
-from pico2d import draw_rectangle
-
-from mods import play_mode
-
-
 def click_button(self):
     if self.select_mode == 0:
         # 페이지 이동 버튼 클릭

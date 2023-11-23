@@ -387,6 +387,6 @@ def equip_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 �
                             self.eq_size_y = 200
 
                     if self.select_mode == 0 or self.select_mode == 1:
-                        self.selected_item = False   # 더 이상 선택한 아이템이 표시되지 않는다.
+                        self.selected_item = False  # 더 이상 선택한 아이템이 표시되지 않는다.
 
     self.click = False

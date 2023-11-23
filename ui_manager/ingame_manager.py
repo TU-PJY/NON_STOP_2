@@ -56,7 +56,8 @@ def render_ammo_ind(self):
 
             # 재장전 시 재장전 피드백 표시
             if self.weapon.reloading:
-                self.reload_bar.draw(20 + ex, 90 + ey, 700 * (self.weapon.cur_reload_time / self.weapon.reload_time), 120)
+                self.reload_bar.draw(20 + ex, 90 + ey, 700 * (self.weapon.cur_reload_time / self.weapon.reload_time),
+                                     120)
 
             # 탄창에 있는 탄약을 모두 소모 시 재장전이 필요함을 알림
             if self.weapon.cur_ammo > 0:

@@ -156,5 +156,3 @@ def update_throw_delay(weapon):
         weapon.throw_delay_time = get_time() - weapon.throw_delay
         if weapon.throw_delay_time > 29:
             weapon.throwable = True  # 쿨타임이 0이되면 다시 수류탄 활성화
-
-

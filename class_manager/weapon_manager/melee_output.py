@@ -1,5 +1,3 @@
-
-
 # 근접 무기 출력
 def draw_melee(weapon):
     if weapon.weapon_type == 1:

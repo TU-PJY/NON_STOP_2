@@ -193,6 +193,5 @@ ind_equiped_directory = 'res//ui//item_equiped.png'
 
 ind_lock_directory = 'res//ui//lock.png'
 
-
 # 폰트 경로
 font_directory = 'res//font//bump-it-up.ttf'

@@ -1,9 +1,6 @@
-from pico2d import draw_rectangle
-
 from config import *
 from game_work import game_framework
 from mods import play_mode
-from ui_manager.shop_manager.etc import set_equiped_gun_ind_pos
 
 
 # 상점 창 출력
@@ -16,7 +13,7 @@ def draw_shop_window(self):
     self.window.draw(self.x, self.window_y, 950, 550)
     self.coin_icon.draw(WIDTH / 2 - 420, self.window_y - 280, 50, 50)
     self.font_small.draw(WIDTH / 2 - 390, self.window_y - 280, '%d' % play_mode.p.coin, (255, 255, 255))
-    length = len(play_mode.weapon.buy_list_gun)
+
     # 카테고리 및 페이지에 따라 출력되는 버튼 개수가 다르다
     if self.select_mode == 0:
         if self.page == 1:
@@ -90,16 +87,16 @@ def update_cat_button(self):
 def draw_ind(self):
     if self.select_mode == 0:
         if self.page == self.eq_page:
-            self.ind_equip.draw\
+            self.ind_equip.draw \
                 (self.button_x[self.eq_gun_x], self.button_y[self.eq_gun_y], self.eq_size_x, self.eq_size_y)
 
     elif self.select_mode == 1:
-        self.ind_equip.draw\
+        self.ind_equip.draw \
             (self.button_x[self.eq_melee_x], self.button_y[self.eq_melee_y], self.eq_size_x, self.eq_size_y)
 
     if self.selected_item:
         if self.sel_cat == self.select_mode:
-            self.ind_select.draw\
+            self.ind_select.draw \
                 (self.button_x[self.ind_sel_x], self.button_y[self.ind_sel_y], self.sel_size_x, self.sel_size_y)
 
     for i in range(5):
@@ -178,4 +175,3 @@ def update_item_size(self):
         if self.sniper_ammo_size_x < 100:
             self.sniper_ammo_size_x = 100
             self.sniper_ammo_size_y = 100
-
