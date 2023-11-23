@@ -288,13 +288,13 @@ def update_monster_opacify(m):  # 몬스터 대미지 피드백 관리
 
 
 def update_monster_pos(m):  # 화면 상의 몬스터 위치 업데이트
-    pps = game_framework.pps
+    speed = game_framework.pps * m.p.speed
     if m.p.mv_right:
-        m.x -= m.p.speed * pps / 4
+        m.x -= m.p.speed * speed
         if m.type == 2:
-            m.temp_x -= m.p.speed * pps / 4
+            m.temp_x -= m.p.speed * speed
 
     elif m.p.mv_left:
-        m.x += m.p.speed * pps / 4
+        m.x += m.p.speed * speed
         if m.type == 2:
-            m.temp_x += m.p.speed * pps / 4
+            m.temp_x += m.p.speed * speed

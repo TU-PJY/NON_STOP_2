@@ -64,7 +64,7 @@ def set_skill(weapon):
 
             weapon.skill_time = 80
             weapon.p.temp_speed = weapon.p.speed
-            weapon.p.speed = 30
+            weapon.p.speed = 4
 
             # 스킬 이펙트 출력
             ks = KatanaSlice(weapon.p, weapon)

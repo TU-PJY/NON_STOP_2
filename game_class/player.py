@@ -136,7 +136,7 @@ class Player:
         self.dmg_delay = 0  # 플레이어가 받는 대미지 딜레이
 
         self.temp_speed = 0  # 추후 근접무기 특수 능력 구현에 사용
-        self.speed = 4  # 플레이어 이동 속도 (사실상 맵 움직이는 속도)
+        self.speed = 1  # 플레이어 이동 속도 (사실상 맵 움직이는 속도)
         self.jump_acc = JUMP_ACC
         self.jump_count = 0
         self.jump_level = 1  # 레벨이 오를수록 연속 점프 횟수가 많아짐

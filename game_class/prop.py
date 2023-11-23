@@ -109,23 +109,24 @@ class Shell:
 
     def update(self):
         pps = game_framework.pps
+        speed = game_framework.pps * self.p.speed
         if game_framework.MODE == 'play':
             if self.p.mv_right:
-                self.x -= self.p.speed * pps / 4
+                self.x -= speed
             elif self.p.mv_left:
-                self.x += self.p.speed * pps / 4
+                self.x += speed
 
             if self.simulate:  # true 일 때만 움직인다
                 if self.dir == 1:
-                    self.x -= self.speed * pps / 4
-                    self.deg += 0.1 * pps / 3
+                    self.x -= self.speed * pps
+                    self.deg += 0.1 * pps
 
                 elif self.dir == 0:
-                    self.x += self.speed * pps / 4
-                    self.deg -= 0.1 * pps / 3
+                    self.x += self.speed * pps
+                    self.deg -= 0.1 * pps
 
-                self.y += self.acc * pps / 3
-                self.acc -= 0.05 * pps / 3  # 바닥에 튕길때마다 가속값이 감소
+                self.y += self.acc * pps
+                self.acc -= 0.05 * pps  # 바닥에 튕길때마다 가속값이 감소
 
                 if self.y < 190:  # 튕길 속도가 나는 한 계속 튄다
                     self.y = 190
@@ -191,6 +192,7 @@ class Bullet:
 
     def update(self):
         pps = game_framework.pps
+        speed = game_framework.pps * self.p.speed
 
         if game_framework.MODE == 'play':
             if self.x < self.mp.playerToWallLeft or self.x > self.mp.playerToWallRight or \
@@ -206,9 +208,9 @@ class Bullet:
                 self.y += math.sin(self.incline) * 30 * pps / 4
 
             if self.p.mv_right:
-                self.x -= self.p.speed * pps / 4
+                self.x -= speed
             elif self.p.mv_left:
-                self.x += self.p.speed * pps / 4
+                self.x += speed
 
     def draw(self):
         pass
@@ -338,6 +340,7 @@ class Coin:
 
     def update(self):
         pps = game_framework.pps
+        speed = game_framework.pps * self.p.speed
         if game_framework.MODE == 'play':
             if self.fall:  # true 일 시 코인이 떨어진다
                 self.y += self.acc
@@ -355,9 +358,9 @@ class Coin:
                     self.fall = False
 
             if self.p.mv_right:
-                self.x -= self.p.speed * pps / 4
+                self.x -= speed
             elif self.p.mv_left:
-                self.x += self.p.speed * pps / 4
+                self.x += speed
 
             if self.size_down:  # 코인이 좌우로 회전한다
                 self.size_x -= pps / 5
@@ -407,10 +410,16 @@ class Explode:
 
     def update(self):
         pps = game_framework.pps
+        speed = game_framework.pps * self.p.speed
         if game_framework.MODE == 'play':
             self.frame = (self.frame + pps / 30) % 7
             if int(self.frame) == 6:  # 폭발 애니메이션이 다 출력되면 객체 삭제
                 game_manager.remove_object(self)
+
+            if self.p.mv_right:
+                self.x -= speed
+            elif self.p.mv_left:
+                self.x += speed
 
     def handle_event(self):
         pass
@@ -451,6 +460,7 @@ class Grenade:
 
     def update(self):
         pps = game_framework.pps
+        speed = game_framework.pps * self.p.speed
         if game_framework.MODE == 'play':
             if self.simulate:  # true 일 때만 움직임
                 if self.dir == 1:
@@ -478,9 +488,9 @@ class Grenade:
                         self.simulate = False
 
             if self.p.mv_right:
-                self.x -= self.p.speed * pps / 4
+                self.x -= speed
             elif self.p.mv_left:
-                self.x += self.p.speed * pps / 4
+                self.x += speed
 
             self.timer -= pps / 3
 
