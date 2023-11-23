@@ -1,4 +1,4 @@
-from class_manager.weapon_manager.etc import make_shell
+from game_class_manager.weapon_manager.etc import make_shell
 from game_work import game_framework
 
 

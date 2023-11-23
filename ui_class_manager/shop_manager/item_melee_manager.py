@@ -40,11 +40,11 @@ def equip_melee(self, i, j):
     elif (i, j) == (4, 0):
         play_mode.weapon.melee = 'AXE'
 
-    self.change = True
+    self.data_change = True
 
 
 def update_melee_item(self):
-    if self.change:  # 장착하고 있는 근접무기라면 무시
+    if self.data_change:  # 장착하고 있는 근접무기라면 무시
         if not play_mode.weapon.prev_melee == play_mode.weapon.melee:
             if play_mode.weapon.weapon_type == 1:
                 play_mode.p.rotate = 0  # 무기 사용 중 무기 변경 시 무기 정보를 초기화 한다
@@ -71,4 +71,4 @@ def update_melee_item(self):
             self.eq_size_y = 200
 
     if self.select_mode == 0 or self.select_mode == 1:
-        self.selected_item = False  # 더 이상 선택한 아이템이 표시되지 않는다.
+        self.ind_sel_on = False  # 더 이상 선택한 아이템이 표시되지 않는다.

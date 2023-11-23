@@ -1,4 +1,4 @@
-from class_manager.monster_manager import *
+from game_class_manager.monster_manager import *
 from game_class.prop import PlayerDamage
 
 

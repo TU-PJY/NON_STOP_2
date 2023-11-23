@@ -1,12 +1,13 @@
-from class_manager.weapon_manager.etc import *
-from class_manager.weapon_manager.file_loader import load_gun_image, load_melee_image
-from class_manager.weapon_manager.flame_output import draw_flame
-from class_manager.weapon_manager.gun_output import draw_gun
-from class_manager.weapon_manager.gun_shoot import shoot_gun
-from class_manager.weapon_manager.melee_output import draw_melee
-from class_manager.weapon_manager.melee_wield import wield_melee, melee_skill, update_melee_skill, update_rapier_player, \
+from game_class_manager.weapon_manager.etc import *
+from game_class_manager.weapon_manager.file_loader import load_gun_image, load_melee_image
+from game_class_manager.weapon_manager.flame_output import draw_flame
+from game_class_manager.weapon_manager.gun_output import draw_gun
+from game_class_manager.weapon_manager.gun_shoot import shoot_gun
+from game_class_manager.weapon_manager.melee_output import draw_melee
+from game_class_manager.weapon_manager.melee_wield import wield_melee, melee_skill, update_melee_skill, \
+    update_rapier_player, \
     set_skill, init_melee
-from class_manager.weapon_manager.weapon_animation import spin_win, update_melee_position, swing
+from game_class_manager.weapon_manager.weapon_animation import spin_win, update_melee_position, swing
 from game_work import game_framework
 
 
@@ -16,15 +17,11 @@ class Shoot:
         if weapon.weapon_type == 0:
             weapon.trigger = True
             if weapon.reload_need:
-                if weapon.gun_type == 'pistol' and weapon.pistol_ammo == 0:
-                    pass
-                elif weapon.gun_type == 'ar' and weapon.ar_ammo == 0:
-                    pass
-                elif weapon.gun_type == 'rifle' and weapon.rifle_ammo == 0:
-                    pass
-                elif weapon.gun_type == 'sr' and weapon.sniper_ammo == 0:
-                    pass
-                else:
+                if (weapon.gun_type == 'pistol' and weapon.pistol_ammo > 0) or \
+                        (weapon.gun_type == 'smg' and weapon.pistol_ammo > 0) or \
+                        (weapon.gun_type == 'ar' and weapon.ar_ammo > 0) or \
+                        (weapon.gun_type == 'rifle' and weapon.rifle_ammo > 0) or \
+                        (weapon.gun_type == 'sr' and weapon.sniper_ammo > 0):
                     weapon.reloading = True
 
         elif weapon.weapon_type == 1 and not weapon.skill_enable:
@@ -57,15 +54,11 @@ class Shoot:
 
         if weapon.limit_ammo - weapon.cur_ammo > 0:  # 탄창이 꽉 찬 상태에서는 재장전을 실행하지 않는다
             if reload_down(e) and not weapon.reloading:  # 재장전, 소유 탄약이 0인 상태에서는 재장전 하지 않는다
-                if weapon.gun_type == 'pistol' and weapon.pistol_ammo == 0:
-                    pass
-                elif weapon.gun_type == 'ar' and weapon.ar_ammo == 0:
-                    pass
-                elif weapon.gun_type == 'rifle' and weapon.rifle_ammo == 0:
-                    pass
-                elif weapon.gun_type == 'sr' and weapon.sniper_ammo == 0:
-                    pass
-                else:
+                if (weapon.gun_type == 'pistol' and weapon.pistol_ammo > 0) or \
+                        (weapon.gun_type == 'smg' and weapon.pistol_ammo > 0) or \
+                        (weapon.gun_type == 'ar' and weapon.ar_ammo > 0) or \
+                        (weapon.gun_type == 'rifle' and weapon.rifle_ammo > 0) or \
+                        (weapon.gun_type == 'sr' and weapon.sniper_ammo > 0):
                     weapon.reloading = True
 
         if shift_down(e) and weapon.throwable:
@@ -128,15 +121,11 @@ class Idle:
 
         if weapon.limit_ammo - weapon.cur_ammo > 0:  # 탄창이 꽉 찬 상태에서는 재장전을 실행하지 않는다
             if reload_down(e) and not weapon.reloading:  # 재장전, 소유 탄약이 0인 상태에서는 재장전 하지 않는다
-                if weapon.gun_type == 'pistol' and weapon.pistol_ammo == 0:
-                    pass
-                elif weapon.gun_type == 'ar' and weapon.ar_ammo == 0:
-                    pass
-                elif weapon.gun_type == 'rifle' and weapon.rifle_ammo == 0:
-                    pass
-                elif weapon.gun_type == 'sr' and weapon.sniper_ammo == 0:
-                    pass
-                else:
+                if (weapon.gun_type == 'pistol' and weapon.pistol_ammo > 0) or \
+                        (weapon.gun_type == 'smg' and weapon.pistol_ammo > 0) or \
+                        (weapon.gun_type == 'ar' and weapon.ar_ammo > 0) or \
+                        (weapon.gun_type == 'rifle' and weapon.rifle_ammo > 0) or \
+                        (weapon.gun_type == 'sr' and weapon.sniper_ammo > 0):
                     weapon.reloading = True
 
         if shift_down(e) and weapon.throwable:

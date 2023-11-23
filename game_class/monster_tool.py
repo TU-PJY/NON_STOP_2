@@ -1,4 +1,4 @@
-from class_manager.monster_tool_func import *
+from game_class_manager.monster_tool_func import *
 from config import *
 
 

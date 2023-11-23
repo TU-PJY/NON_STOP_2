@@ -1,4 +1,4 @@
-from class_manager.target_manager import *
+from game_class_manager.target_manager import *
 
 
 # MOUSEBUTTON -> Gun class -> Target class

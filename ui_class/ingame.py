@@ -1,4 +1,4 @@
-from ui_manager.ingame_manager import *
+from ui_class_manager.ingame_manager import *
 
 
 class Ingame:

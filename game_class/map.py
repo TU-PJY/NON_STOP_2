@@ -1,4 +1,4 @@
-from class_manager.map_manager import *
+from game_class_manager.map_manager import *
 
 
 # Player move -> Map class

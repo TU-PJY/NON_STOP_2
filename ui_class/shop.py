@@ -1,12 +1,12 @@
 from config import *
 from mods import play_mode
-from ui_manager.shop_manager.etc import make_button_pos, set_equiped_gun_ind_pos
-from ui_manager.shop_manager.file_loader import load_shop_resource
-from ui_manager.shop_manager.item_buy import buy_item
-from ui_manager.shop_manager.item_selector import equip_item
-from ui_manager.shop_manager.item_output import draw_items
-from ui_manager.shop_manager.item_pointer import click_button, on_button
-from ui_manager.shop_manager.window_output import draw_shop_window, draw_cursor, window_animation, update_cat_button, \
+from ui_class_manager.shop_manager.etc import make_button_pos, set_equiped_gun_ind_pos
+from ui_class_manager.shop_manager.file_loader import load_shop_resource
+from ui_class_manager.shop_manager.item_buy import buy_item
+from ui_class_manager.shop_manager.item_selector import equip_item
+from ui_class_manager.shop_manager.item_output import draw_items
+from ui_class_manager.shop_manager.item_pointer import click_button, on_button
+from ui_class_manager.shop_manager.window_output import draw_shop_window, draw_cursor, window_animation, update_cat_button, \
     update_ind_size, draw_ind, update_item_size
 
 
@@ -64,8 +64,8 @@ class Shop:
         self.rifle_ammo_size_x, self.rifle_ammo_size_y = 100, 100
         self.sniper_ammo_size_x, self.sniper_ammo_size_y = 100, 100
 
-        self.selected_item = False  # 아이템 선택 시 현재 선택중인 아이템을 표시함다. 해당 아이템 장착 시 사라진다.
-        self.change = False  # 구입한 항목에 대해서만 아이템 관련 변수 값 변경읋 허용한다.
+        self.ind_sel_on = False  # 아이템 선택 시 현재 선택중인 아이템을 표시함다. 해당 아이템 장착 시 사라진다.
+        self.data_change = False  # 구입한 항목에 대해서만 아이템 관련 변수 값 변경을 허용한다.
 
         load_shop_resource(self)
         make_button_pos(self)

@@ -203,7 +203,7 @@ def equip_gun_page1(self, i, j):
 
     play_mode.weapon.eq_page = 1  # 표시할 특정 페이지 갱신
     self.eq_page = play_mode.weapon.eq_page
-    self.change = True
+    self.data_change = True
 
 
 def equip_gun_page2(self, i, j):
@@ -238,14 +238,14 @@ def equip_gun_page2(self, i, j):
 
     play_mode.weapon.eq_page = 2
     self.eq_page = play_mode.weapon.eq_page
-    self.change = True
+    self.data_change = True
 
 
 # 총기 교체 시 잔탄을 모두 반환한 후 재장전 상태로 변경
 # 이전에 사용하던 총기 타입에 맞는 탄약 개수에 반환한다
 # 만약 현재 장착하고 있는 총기라면 무시한다.
 def update_gun_item(self):
-    if self.change:
+    if self.data_change:
         if not play_mode.weapon.prev_gun == play_mode.weapon.gun:
             if play_mode.weapon.prev_gun_type == 'pistol' or play_mode.weapon.prev_gun_type == 'smg':
                 play_mode.weapon.pistol_ammo += play_mode.weapon.cur_ammo
@@ -273,4 +273,4 @@ def update_gun_item(self):
 
             self.eq_size_x = 250  # 아이템 장착 피드백을 재생한다
             self.eq_size_y = 200
-            self.change = False
+            self.data_change = False

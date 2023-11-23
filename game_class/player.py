@@ -1,4 +1,4 @@
-from class_manager.player_manager import *
+from game_class_manager.player_manager import *
 from game_work.display_manager import *
 from mods import play_mode
 

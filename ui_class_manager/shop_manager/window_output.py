@@ -94,7 +94,7 @@ def draw_ind(self):
         self.ind_equip.draw \
             (self.button_x[self.eq_melee_x], self.button_y[self.eq_melee_y], self.eq_size_x, self.eq_size_y)
 
-    if self.selected_item:
+    if self.ind_sel_on:
         if self.sel_cat == self.select_mode:
             self.ind_select.draw \
                 (self.button_x[self.ind_sel_x], self.button_y[self.ind_sel_y], self.sel_size_x, self.sel_size_y)
