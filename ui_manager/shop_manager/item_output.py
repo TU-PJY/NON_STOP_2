@@ -41,7 +41,11 @@ def draw_items(self):
         self.image_axe.rotate_draw(-45, self.button_x[4] - 28, self.button_y[0] - 20, 128, 256)
 
     elif self.select_mode == 2:
-        self.image_ammo_pistol.draw(self.button_x[0], self.button_y[0], 100, 100)
-        self.image_ammo_ar.draw(self.button_x[1], self.button_y[0], 100, 100)
-        self.image_ammo_rifle.draw(self.button_x[2], self.button_y[0], 100, 100)
-        self.image_ammo_sr.draw(self.button_x[3], self.button_y[0], 100, 100)
+        self.image_ammo_pistol.draw\
+            (self.button_x[0], self.button_y[0], self.pistol_ammo_size_x, self.pistol_ammo_size_y)
+        self.image_ammo_ar.draw\
+            (self.button_x[1], self.button_y[0], self.ar_ammo_size_x, self.ar_ammo_size_y)
+        self.image_ammo_rifle.draw\
+            (self.button_x[2], self.button_y[0], self.rifle_ammo_size_x, self.rifle_ammo_size_y)
+        self.image_ammo_sr.draw\
+            (self.button_x[3], self.button_y[0], self.sniper_ammo_size_x, self.sniper_ammo_size_y)

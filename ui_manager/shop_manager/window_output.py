@@ -132,3 +132,34 @@ def update_ind_size(self):  # 아이템 선택 피드백을 출력한다.
             self.sel_size_big = True
             self.sel_size_small = False
 
+
+def update_item_size(self):
+    pps = game_framework.pps
+    if self.pistol_ammo_size_x > 100:
+        self.pistol_ammo_size_x -= pps / 2
+        self.pistol_ammo_size_y -= pps / 2
+        if self.pistol_ammo_size_x < 100:
+            self.pistol_ammo_size_x = 100
+            self.pistol_ammo_size_y = 100
+
+    if self.ar_ammo_size_x > 100:
+        self.ar_ammo_size_x -= pps / 2
+        self.ar_ammo_size_y -= pps / 2
+        if self.ar_ammo_size_x < 100:
+            self.ar_ammo_size_x = 100
+            self.ar_ammo_size_y = 100
+
+    if self.rifle_ammo_size_x > 100:
+        self.rifle_ammo_size_x -= pps / 2
+        self.rifle_ammo_size_y -= pps / 2
+        if self.rifle_ammo_size_x < 100:
+            self.rifle_ammo_size_x = 100
+            self.rifle_ammo_size_y = 100
+
+    if self.sniper_ammo_size_x > 100:
+        self.sniper_ammo_size_x -= pps / 2
+        self.sniper_ammo_size_y -= pps / 2
+        if self.sniper_ammo_size_x < 100:
+            self.sniper_ammo_size_x = 100
+            self.sniper_ammo_size_y = 100
+
