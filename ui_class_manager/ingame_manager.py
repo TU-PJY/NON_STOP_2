@@ -19,7 +19,7 @@ def load_resource(self):
     pass
 
 
-def render_ammo_ind(self):
+def render_ingame_ui(self):
     pps = game_framework.pps
     # 현재 장탄 수
     cur = self.weapon.cur_ammo
@@ -84,6 +84,9 @@ def render_ammo_ind(self):
         # 코인 인디케이터 출력
         self.coin_icon.draw(WIDTH / 2 + 250 + ex, 30 + ey + self.get_y, 50, 50)
         self.font_small.draw(WIDTH / 2 + 280 + ex, 30 + ey + self.get_y, '%d' % play_mode.p.coin, (255, 255, 255))
+        # 라운드 수 출력
+        self.font.draw(WIDTH / 2 - 130 + ex, HEIGHT - 50 + ey, 'ROUND %d' % play_mode.tool.rounds, 
+                       (255, int(self.rg), int(self.rb)))
     pass
 
 
@@ -93,3 +96,16 @@ def update_ammo_ind(self):
     else:
         self.r, self.g, self.b = 255, 255, 255
     pass
+
+
+def update_round_ind(self):
+    pps = game_framework.pps
+    if self.rg < 255:
+        self.rg += pps / 3
+    if self.rb < 255:
+        self.rb += pps / 3
+
+    if self.rg > 255:
+        self.rg = 255
+    if self.rb > 255:
+        self.rb = 255

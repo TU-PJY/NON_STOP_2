@@ -30,7 +30,7 @@ def handle_events():
 
 
 def init():
-    global game, p, mp, bg, wall, weapon, target, tool, shop
+    global game, p, mp, bg, wall, weapon, target, tool, shop, ig
     game = []
 
     p = Player()

@@ -25,11 +25,12 @@ class Arrow:
 
     def update(self):
         pps = game_framework.pps
+        speed = game_framework.pps * self.p.speed
         if game_framework.MODE == 'play':
             if self.p.mv_right:
-                self.x -= self.p.speed * pps / 4
+                self.x -= speed
             elif self.p.mv_left:
-                self.x += self.p.speed * pps / 4
+                self.x += speed
 
             # 화살이 벽에 박힌다
             if self.simulate:
@@ -118,15 +119,15 @@ class Shell:
 
             if self.simulate:  # true 일 때만 움직인다
                 if self.dir == 1:
-                    self.x -= self.speed * pps
-                    self.deg += 0.1 * pps
+                    self.x -= self.speed * pps / 4
+                    self.deg += 0.1 * pps / 2
 
                 elif self.dir == 0:
-                    self.x += self.speed * pps
-                    self.deg -= 0.1 * pps
+                    self.x += self.speed * pps / 4
+                    self.deg -= 0.1 * pps / 2
 
-                self.y += self.acc * pps
-                self.acc -= 0.05 * pps  # 바닥에 튕길때마다 가속값이 감소
+                self.y += self.acc * pps / 4
+                self.acc -= 0.05 * pps / 4  # 바닥에 튕길때마다 가속값이 감소
 
                 if self.y < 190:  # 튕길 속도가 나는 한 계속 튄다
                     self.y = 190
@@ -319,14 +320,15 @@ class PlayerDamage:
 
 
 class Coin:
-    def __init__(self, p, mp, x, y, dir):
+    def __init__(self, p, mp, x, y, dir, sp=1):
         self.image = load_image(coin_icon_directory)
         self.p = p
         self.mp = mp
         self.x = x
         self.y = y
         self.dir = dir
-        self.acc = 4
+        self.acc = 6
+        self.sp = sp
         self.size_down = True
         self.size_x = 70
         self.up = False
@@ -348,10 +350,10 @@ class Coin:
 
                 if self.dir == 1:  # 몬스터가 드랍한 직후 지정 방향으로 살짝 움직인다.
                     if self.x > self.mp.playerToWallLeft + 20:
-                        self.x -= 1 * pps / 4
+                        self.x -= self.sp * pps / 4
                 elif self.dir == 0:
                     if self.x < self.mp.playerToWallRight + 20:
-                        self.x += 1 * pps / 4
+                        self.x += self.sp * pps / 4
 
                 if self.y <= 230 and self.acc <= 0:  # 바닥에 떨어지면
                     self.y = 230

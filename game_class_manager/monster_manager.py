@@ -3,6 +3,7 @@ from pico2d import *
 from config import *
 from game_class.prop import Arrow, Bullet, Feedback, Coin
 from game_work import game_manager, game_framework
+from mods import play_mode
 
 
 def load_monster(self):
@@ -236,9 +237,15 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                 m.is_hit = False
                 m.weapon.hit_once = False
 
+        elif m.ex_dead:
+            m.hp -= 500
+
     if m.hp <= 0:  # hp가 0이 될 경우 죽는다.
+        play_mode.tool.spawn_num -= 1
         if m.weapon.melee == 'KATANA' and m.weapon.skill_enable:
-            coin = Coin(m.p, m.mp, m.x, m.y + 200, m.dir)
+            coin = Coin(m.p, m.mp, m.x, m.y + 200, m.dir)  # 카타나 스킬에 의해 죽은 경우 조금 더 높은 곳에 드랍
+        elif m.ex_dead:
+            coin = Coin(m.p, m.mp, m.x, m.y, m.dir, 4)
         else:
             coin = Coin(m.p, m.mp, m.x, m.y, m.dir)
         game_manager.add_object(coin, 3)  # 코인을 드랍한다

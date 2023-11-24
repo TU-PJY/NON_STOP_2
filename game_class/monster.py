@@ -73,6 +73,7 @@ class Monster:
         self.op = 0
         self.flip = ''
         self.once = False  # 관통 대미지가 중복으로 발생하지 않도록 한다.
+        self.ex_dead = False
 
         # type2 전용 변수
         if self.type == 2:
@@ -192,4 +193,4 @@ class Monster:
         if group == 'grenade:monster':
             # 수류탄 폭발에 맞으면 무조건 즉사
             if self.mp.playerToWallLeft <= self.x <= self.mp.playerToWallRight:
-                self.hp -= 500
+                self.ex_dead = True
