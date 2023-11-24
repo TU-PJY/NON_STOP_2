@@ -84,8 +84,9 @@ def render_ingame_ui(self):
         # 코인 인디케이터 출력
         self.coin_icon.draw(WIDTH / 2 + 250 + ex, 30 + ey + self.get_y, 50, 50)
         self.font_small.draw(WIDTH / 2 + 280 + ex, 30 + ey + self.get_y, '%d' % play_mode.p.coin, (255, 255, 255))
+
         # 라운드 수 출력
-        self.font.draw(WIDTH / 2 - 130 + ex, HEIGHT - 50 + ey, 'ROUND %d' % play_mode.tool.rounds, 
+        self.font.draw(WIDTH / 2 - 130 + ex, HEIGHT - 50 + ey, 'ROUND %d' % play_mode.tool.rounds,
                        (255, int(self.rg), int(self.rb)))
     pass
 

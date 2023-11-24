@@ -505,3 +505,33 @@ class Grenade:
 
     def handle_event(self):
         pass
+
+
+class Splash:
+    def __init__(self, p, m, x, y):
+        self.p = p
+        self.m = m
+        self.x = x
+        self.y = y
+        self.frame = 0
+        self.image = load_image(splash_directory)
+
+    def draw(self):
+        self.image.clip_draw(int(self.frame) * 165, 0, 165, 148, self.x + self.p.ex, self.y + self.p.ey, 400, 400)
+
+    def update(self):
+        pps = game_framework.pps
+        speed = game_framework.pps * self.p.speed
+
+        if self.p.mv_right:
+            self.x -= speed
+        if self.p.mv_left:
+            self.x += speed
+
+        self.frame = (self.frame + pps / 50) % 9
+
+        if int(self.frame) == 8:
+            game_manager.remove_object(self)
+
+    def handle_event(self):
+        pass

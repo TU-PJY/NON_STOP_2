@@ -159,6 +159,7 @@ slice_effect_directory = 'res//melee_image//effect//slice_effect.png'
 player_damage_directory = 'res//player_image//player_damage.png'
 explode_directory = 'res//prop//explode.png'
 grenade_directory = 'res//prop//grenade.png'
+splash_directory = 'res//prop//splash.png'
 
 # ui 이미지 파일 경로
 shop_window_directory = 'res//ui//shop_window.png'
