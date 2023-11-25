@@ -38,13 +38,15 @@ def draw_shop_window(self):
 
     self.font.draw(WIDTH / 2 + 200, self.window_y + 295, "SHOP", (255, 255, 255))
     if self.select_mode == 0:
-        self.font.draw(WIDTH / 2 + 500, self.window_y - 120, "A", (255, 255, 255))
-        self.font.draw(WIDTH / 2 + 570, self.window_y - 120, "D", (255, 255, 255))
+        if self.page == 1:
+            self.font.draw(WIDTH / 2 + 460, self.window_y - 120, 'PAGE 1', (255, 255, 255))
+            self.button_page_right.composite_draw(0, '', self.page_right_x, self.page_right_y, 80, 100)
 
-        self.button_page_right.composite_draw(0, '', self.page_right_x, self.page_right_y, 80, 100)
-        self.button_page_left.composite_draw(0, 'h', self.page_left_x, self.page_left_y, 80, 100)
+        elif self.page == 2:
+            self.font.draw(WIDTH / 2 + 460, self.window_y - 120, 'PAGE 2', (255, 255, 255))
+            self.button_page_left.composite_draw(0, 'h', self.page_left_x, self.page_left_y, 80, 100)
 
-    self.info_back.draw(WIDTH / 2 + 560, self.window_y + 75, 240, 342)
+    self.info_back.draw(WIDTH / 2 + 580, self.window_y + 75, 280, 342)
 
 
 # 커서 출력

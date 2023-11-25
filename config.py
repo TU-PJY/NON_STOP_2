@@ -199,3 +199,4 @@ ind_lock_directory = 'res//ui//lock.png'
 
 # 폰트 경로
 font_directory = 'res//font//bump-it-up.ttf'
+font2_directory = 'res//font//KORAIL2007.ttf'

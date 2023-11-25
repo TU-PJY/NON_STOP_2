@@ -10,13 +10,13 @@ def select_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 
         for j in range(len(self.button_y)):
             if self.button_x[i] - 75 < self.mx < self.button_x[i] + 75 and \
                self.button_y[j] - 50 < self.my < self.button_y[j] + 50:
-
                 if self.select_mode == 0:  # 총
                     if self.page == 1:  # 기본무기이므로 처음부터 사용 가능
-                        if not play_mode.weapon.buy_list_gun[i][j]:  # 구입하지 않은 항목 선택 시 구입
-                            buy_gun_page1(i, j)
-                        if play_mode.weapon.buy_list_gun[i][j]:  # 구입한 항목 선택 시 장착
-                            equip_gun_page1(self, i, j)
+                        if 0 <= j <= 3:
+                            if not play_mode.weapon.buy_list_gun[i][j]:  # 구입하지 않은 항목 선택 시 구입
+                                buy_gun_page1(i, j)
+                            if play_mode.weapon.buy_list_gun[i][j]:  # 구입한 항목 선택 시 장착
+                                equip_gun_page1(self, i, j)
 
                     elif self.page == 2:
                         if j == 0 <= i <= 4:

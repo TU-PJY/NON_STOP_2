@@ -1,3 +1,6 @@
+from ui_class_manager.shop_manager.info_manager import print_info
+
+
 def hover_item(self):  # 아이템 위에 커서를 올리면 표시된다
     for i in range(len(self.button_x)):
         for j in range(len(self.button_y)):
@@ -10,9 +13,10 @@ def hover_item(self):  # 아이템 위에 커서를 올리면 표시된다
                             self.ind_sel_x = i  # 표시할 위치, 페이지, 카테고리 저장
                             self.ind_sel_y = j
                             self.sel_cat = self.select_mode
-                            self.ind_sel_on = True  # 선택한 이이템이 표시된다
+                            self.ind_sel_on = True  # 선택한 아이템이 표시된다
+                            print_info(self, i, j)
                         else:
-                            self.ind_sel_on = False  # 선택한 이이템이 표시된다
+                            self.ind_sel_on = False
 
                     elif self.page == 2:
                         if j == 0 <= i <= 4:
@@ -20,6 +24,7 @@ def hover_item(self):  # 아이템 위에 커서를 올리면 표시된다
                             self.ind_sel_y = j
                             self.sel_cat = self.select_mode
                             self.ind_sel_on = True
+                            print_info(self, i, j)
                         else:
                             self.ind_sel_on = False
 
@@ -29,6 +34,7 @@ def hover_item(self):  # 아이템 위에 커서를 올리면 표시된다
                         self.ind_sel_y = j
                         self.sel_cat = self.select_mode
                         self.ind_sel_on = True
+                        print_info(self, i, j)
                     else:
                         self.ind_sel_on = False
 
@@ -38,5 +44,6 @@ def hover_item(self):  # 아이템 위에 커서를 올리면 표시된다
                         self.ind_sel_y = j
                         self.sel_cat = self.select_mode
                         self.ind_sel_on = True
+                        print_info(self, i, j)
                     else:
                         self.ind_sel_on = False

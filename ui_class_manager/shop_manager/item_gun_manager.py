@@ -10,6 +10,7 @@ def init_equip_list_gun():
         for j in range(1):
             play_mode.weapon.equip_list_gun2[i][j] = False
 
+
 def buy_gun_page1(i, j):
     if (i, j) == (0, 0):  # 기본 총이므로 구입 여부 확인은 하지 않음
         pass
@@ -207,8 +208,12 @@ def equip_gun_page1(self, i, j):
         play_mode.weapon.gun_type = 'ar'
         play_mode.weapon.reload_time = 250
     elif j == 3:
-        play_mode.weapon.gun_type = 'rifle'
-        play_mode.weapon.reload_time = 250
+        if play_mode.weapon.gun == 'MINI14':  # MINI14는 소총탄을 사용한다
+            play_mode.weapon.gun_type = 'ar'
+            play_mode.weapon.reload_time = 250
+        else:
+            play_mode.weapon.gun_type = 'rifle'
+            play_mode.weapon.reload_time = 250
 
     init_equip_list_gun()  # 장착 중인 아이템 리스트 해제
     play_mode.weapon.equip_list_gun1[i][j] = True  # 갱신

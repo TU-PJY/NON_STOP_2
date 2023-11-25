@@ -76,13 +76,13 @@ class Shop:
         draw_items(self)
         draw_ind(self)
         draw_cursor(self)
+        hover_item(self)  # 정보가 맨 위에 출력해야 하므로 예외적으로 draw에 작성
 
     def update(self):
         window_animation(self)
         update_cat_button(self)
         update_item_size(self)
 
-        hover_item(self)
         if self.click:
             click_button(self)
             select_item(self)

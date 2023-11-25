@@ -14,6 +14,7 @@ def load_shop_resource(self):
     self.button_page_right = load_image(button_page_directory)
     self.font = load_font(font_directory, 30)
     self.font_small = load_font(font_directory, 20)
+    self.info = load_font(font2_directory, 20)
     self.info_back = load_image(info_back_directory)
 
     self.cursor = load_image(cursor_directory)
