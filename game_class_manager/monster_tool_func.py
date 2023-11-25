@@ -32,11 +32,11 @@ def spawn_monster(self):  # 몬스터 스폰
 
                 if self.rounds < 5:  # 라운드가 올라갈 수록 몬스터가 다양해진다
                     self.type = 1
-                elif self.rounds > 5:
+                elif self.rounds >= 5:
                     self.type = random.randint(1, 2)  # 타입에 따라 스폰되는 몬스터가 달라짐
-                elif self.rounds > 10:
+                elif self.rounds >= 10:
                     self.type = random.randint(1, 3)
-                elif self.rounds > 15:
+                elif self.rounds >= 15:
                     self.type = random.randint(1, 4)
 
                 if self.type == 1:

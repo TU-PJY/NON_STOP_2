@@ -151,15 +151,19 @@ class Monster:
                         game_manager.add_object(pd, 7)
 
         if group == 'weapon:monster':  # 총이나 근접무기에 맞을 경우 대미지를 가한다
-            if self.weapon.weapon_type == 1:  # 스킬 공격의 경우 범위 내 중첩 대미지로 판정
-                # AXE와 KATANA의 경우 스킬 사용 시 몬스터는 즉사한다
+            if self.weapon.weapon_type == 1:  # katana, axe 스킬 공격의 경우 범위 내 중첩 대미지로 판정
+                # AXE의 경우 스킬 사용 시 몬스터는 즉사한다
                 if self.weapon.hit_ground and self.weapon.melee == 'AXE':  # 해당 무기의 경우 아주 짧은 순간에만 대미지
                     self.hp -= 500
                     self.p.dmg_delay = 100  # 스킬 사용 직후 몬스터에게 공격받지 않도록 함
+
                 elif self.weapon.skill_enable and self.weapon.melee == 'KATANA':
-                    self.hp -= 500
-                else:  # 나머지 일반 공격
-                    self.is_hit = True
+                    self.hp -= 4
+
+                else:  # 나머지 근접 무기 공격
+                    if self.hp > 0 and not self.weapon.hit_once:
+                        self.is_hit = True
+                        self.weapon.hit_once = True
 
             elif self.weapon.weapon_type == 0:  # 여러개의 몬스터 히트박스가 중첩될경우 한 마리만 대미지를 가한다.
                 if not self.weapon.hit_once and self.hp > 0:

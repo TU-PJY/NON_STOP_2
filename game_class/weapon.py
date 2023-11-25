@@ -44,7 +44,7 @@ class Shoot:
                 elif weapon.zoom:
                     weapon.zoom = False
 
-        if r_down(e) and weapon.weapon_type == 1 and weapon.skill_usable and not weapon.skill_enable:
+        if r_down(e) and weapon.weapon_type == 1 and not weapon.skill_enable:
             set_skill(weapon)
 
         if weapon.limit_ammo - weapon.cur_ammo > 0:  # 탄창이 꽉 찬 상태에서는 재장전을 실행하지 않는다
@@ -76,6 +76,8 @@ class Shoot:
             melee_skill(weapon)
             update_melee_skill(weapon)
 
+        update_skill_delay(weapon)
+
         update_throw_delay(weapon)
 
     @staticmethod
@@ -106,7 +108,7 @@ class Idle:
                 elif weapon.zoom:
                     weapon.zoom = False
 
-        if r_down(e) and weapon.weapon_type == 1 and weapon.skill_usable and not weapon.skill_enable:
+        if r_down(e) and weapon.weapon_type == 1 and not weapon.skill_enable:
             set_skill(weapon)
 
         if weapon.limit_ammo - weapon.cur_ammo > 0:  # 탄창이 꽉 찬 상태에서는 재장전을 실행하지 않는다
@@ -136,6 +138,8 @@ class Idle:
         if weapon.skill_enable:
             melee_skill(weapon)
             update_melee_skill(weapon)
+
+        update_skill_delay(weapon)
 
         update_throw_delay(weapon)
 
@@ -237,8 +241,23 @@ class Weapon:
         # 근접무기 특수 능력 변수
         self.skill_time = 0
         self.skill_enable = False
-        self.skill_usable = True  # True일 시 스킬 사용 가능
         self.hit_ground = False
+
+        self.skill_delay_rapier = 0  # 근접무기 스킬 사용 딜레이
+        self.skill_delay_katana = 0
+        self.skill_delay_axe = 0
+
+        self.skill_delay_time_rapier = 0  # ui 출력용 변수
+        self.skill_delay_time_katana = 0
+        self.skill_delay_time_axe = 0
+
+        self.skill_temp_rapier = 0  # 모드 변경 시 쿨타임을 저장하기 위한 변수
+        self.skill_temp_katana = 0
+        self.skill_temp_axe = 0
+
+        self.skill_usable_rapier = True  # True일 시 스킬 사용 가능
+        self.skill_usable_katana = True
+        self.skill_usable_axe = True
 
         # 수류탄 전용 변수
         self.throwable = True
@@ -279,7 +298,8 @@ class Weapon:
         self.equip_list_gun2 = [[False for _ in range(1)] for _ in range(5)]  # page2용
         self.equip_list_gun1[0][0] = True
 
-        self.gren_x = 0  # 몬스터가 날아가는 방향을 정하기 위한 위치 변수
+        self.gren_x = 0  # 몬스터가 날아가는 방향을 정하기 위한 수류탄 위치 변수
+        self.gren_level = 1  # 레벨이 오를수록 폭발 반경이 넓어진다 최대 3레벨 까지
 
         self.state_machine = StateMachineGun(self)
         self.state_machine.start()

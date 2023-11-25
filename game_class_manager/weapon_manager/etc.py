@@ -154,14 +154,55 @@ def reload_gun(weapon):
 
 
 def throw_grenade(weapon):
-    gren = Grenade(weapon.p, weapon.mp, weapon, weapon.p.x, weapon.p.y - weapon.p.cam_h, weapon.p.dir)
-    game_manager.add_object(gren, 3)
-    weapon.throwable = False
-    weapon.throw_delay = get_time()  # 던진 직후부터 쿨타임 측정
+    if (weapon.p.coin >= 500 and weapon.gren_level == 1) or \
+            (weapon.p.coin >= 1500 and weapon.gren_level == 2) or \
+            (weapon.p.coin >= 4500 and weapon.gren_level == 3):
+        gren = Grenade(weapon.p, weapon.mp, weapon, weapon.p.x, weapon.p.y - weapon.p.cam_h, weapon.p.dir)
+        game_manager.add_object(gren, 3)
+        weapon.throwable = False
+        weapon.throw_delay = get_time()  # 던진 직후부터 쿨타임 측정
+        if weapon.gren_level == 1:
+            weapon.p.coin -= 500  # 레벨이 오를수록 더 많은 비용이 들어간다
+        elif weapon.gren_level == 2:
+            weapon.p.coin -= 1500
+        elif weapon.gren_level == 3:
+            weapon.p.coin -= 4500
+        weapon.p.get_coin = True  # 코인 사용 피드백 재생
 
 
 def update_throw_delay(weapon):
     if not weapon.throwable:  # 수류탄 던진 후 쿨타임 측정
         weapon.throw_delay_time = get_time() - weapon.throw_delay
-        if weapon.throw_delay_time > 29:
+        if weapon.throw_delay_time > 59:
             weapon.throwable = True  # 쿨타임이 0이되면 다시 수류탄 활성화
+
+
+def set_skill_delay(weapon):  # 근접 무기 스킬 사용 직후 딜레이를 측정하기 시작
+    if weapon.melee == 'RAPIER':
+        weapon.skill_usable_rapier = False
+        weapon.skill_delay_rapier = get_time()
+
+    elif weapon.melee == 'KATANA':
+        weapon.skill_usable_katana = False
+        weapon.skill_delay_katana = get_time()
+
+    elif weapon.melee == 'AXE':
+        weapon.skill_usable_axe = False
+        weapon.skill_delay_axe = get_time()
+
+
+def update_skill_delay(weapon):  # 각 근접무기의 스킬 딜레이를 업데이트 한다
+    if not weapon.skill_usable_rapier:
+        weapon.skill_delay_time_rapier = get_time() - weapon.skill_delay_rapier
+        if weapon.skill_delay_time_rapier > 19:
+            weapon.skill_usable_rapier = True
+
+    if not weapon.skill_usable_katana:
+        weapon.skill_delay_time_katana = get_time() - weapon.skill_delay_katana
+        if weapon.skill_delay_time_katana > 29:
+            weapon.skill_usable_katana = True
+
+    if not weapon.skill_usable_axe:
+        weapon.skill_delay_time_axe = get_time() - weapon.skill_delay_axe
+        if weapon.skill_delay_time_axe > 60:
+            weapon.skill_usable_ace = True

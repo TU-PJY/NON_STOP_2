@@ -1,6 +1,7 @@
 import random
 
 from game_class.prop import KatanaSlice
+from game_class_manager.weapon_manager.etc import set_skill_delay
 from game_work import game_framework, game_manager
 
 
@@ -50,12 +51,13 @@ def wield_melee(weapon):
 
 # 근접무기 스킬 사용 준비
 def set_skill(weapon):
-    if weapon.melee == 'RAPIER':
+    if weapon.melee == 'RAPIER' and weapon.skill_usable_rapier:
         weapon.p.rotate = 0
         weapon.skill_time = 300
         weapon.skill_enable = True
+        set_skill_delay(weapon)
 
-    elif weapon.melee == 'KATANA' and (weapon.p.mv_right or weapon.p.mv_left):
+    elif weapon.melee == 'KATANA' and (weapon.p.mv_right or weapon.p.mv_left) and weapon.skill_usable_katana:
         if (weapon.p.mv_right and weapon.p.dir == 1) or (weapon.p.mv_left and weapon.p.dir == 0):
             weapon.swing = False
             weapon.swing_down = False
@@ -71,18 +73,24 @@ def set_skill(weapon):
             game_manager.add_object(ks, 7)
 
             weapon.skill_enable = True
+            set_skill_delay(weapon)
 
-    elif weapon.melee == 'AXE' and not weapon.p.mv_jump:
-        weapon.swing = False
-        weapon.swing_down = False
-        weapon.swing_up = False
-        weapon.p.rotate = 0
+    # axe는 게임 중 단 5번만 사용할 수 있다. 대신 매우 강력하다
+    elif weapon.melee == 'AXE' and not weapon.p.mv_jump and weapon.skill_usable_axe:
+        if weapon.p.coin >= 4000:
+            weapon.swing = False
+            weapon.swing_down = False
+            weapon.swing_up = False
+            weapon.p.rotate = 0
 
-        weapon.skill_time = 235
-        weapon.skill_enable = True
-        # 위로 날아올라 내려찍을 준비
-        weapon.p.mv_jump = True
-        weapon.p.jump_acc = 8
+            weapon.skill_time = 235
+            weapon.skill_enable = True
+            # 위로 날아올라 내려찍을 준비
+            weapon.p.mv_jump = True
+            weapon.p.jump_acc = 8
+            weapon.p.coin -= 4000  # 스킬이 강력한 만큼 비용이 들어간다
+            weapon.p.get_coin = True  # 코인 사용 피드백 재생
+            set_skill_delay(weapon)
 
 
 # 근접무기 스킬 사용 시의 수치 조정
@@ -95,7 +103,7 @@ def melee_skill(weapon):
             weapon.melee_deg = 0
             weapon.melee_x = 150
             weapon.p.shake_range = 20
-            weapon.wield_delay = 18
+            weapon.wield_delay = 12
 
             weapon.wield = True
         else:

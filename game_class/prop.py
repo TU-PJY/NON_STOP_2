@@ -4,6 +4,7 @@ from pico2d import *
 
 from config import *
 from game_work import game_manager, game_framework
+from mods import play_mode
 
 
 class Arrow:
@@ -393,7 +394,7 @@ class Coin:
     def handle_collision(self, group, other):
         if group == 'player:coin':
             if not self.up:  # 획득하지 않은 코인에 대해서만 코인 획득 피드백 재생
-                self.p.coin += 30
+                self.p.coin += 28 + play_mode.tool.rounds * 2  # 라운드가 올라갈 수록 코인들 더 많이 획득한다
                 self.up = True
                 self.p.get_coin = True
 
@@ -404,12 +405,13 @@ class Coin:
 
 
 class Explode:
-    def __init__(self, p, x, y):
+    def __init__(self, p, weapon, x, y):
         self.image = load_image(explode_directory)
         self.x = x
         self.y = y + 50
         self.p = p
         self.frame = 0
+        self.weapon = weapon
 
     def draw(self):
         x = self.x + self.p.ex
@@ -433,10 +435,11 @@ class Explode:
         pass
 
     def get_bb(self):
+        bound = self.weapon.gren_level * 200
         x = self.x + self.p.ex
         y = self.y + self.p.ey
         if int(self.frame) == 0:  # 폭발 순간에만 히트박스 제공
-            return x - 300, y - 100, x + 300, y + 300
+            return x - bound, y - bound, x + bound, y + bound
         else:
             return -9999, -9999, -9999, -9999
 
@@ -505,7 +508,7 @@ class Grenade:
 
         if self.timer <= 0:  # 타이머가 0이되면 폭발한다.
             self.weapon.gren_x = self.x  # 몬스터가 날아가는 방향을 지정하기 위해 weapon 클래스로 자기 위치를 전달한다
-            ex = Explode(self.p, self.x, self.y)
+            ex = Explode(self.p, self.weapon, self.x, self.y)
             self.p.ex_shake_range = 100  # 화면이 흔들린다
             game_manager.add_object(ex, 5)  # 폭발 애니메이션 추가
             game_manager.add_collision_pair('grenade:monster', ex, None)

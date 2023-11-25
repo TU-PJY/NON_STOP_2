@@ -8,6 +8,7 @@ from mods import play_mode
 def load_resource(self):
     self.font = load_font(font_directory, 40)
     self.font_small = load_font(font_directory, 20)
+    self.font_mini = load_font(font_directory, 15)
     self.back = load_image(ammo_ind_back_directory)
     self.reload_bar = load_image(reload_bar_directory)
     self.hp_back = load_image(hp_back_directory)
@@ -71,9 +72,35 @@ def render_ingame_ui(self):
 
         # 수류탄을 던질 수 있게되면 밝은 아이콘으로 표시, 아니면 어두운 아이콘으로 표시
         if self.weapon.throwable:
-            self.grenade_able_icon.draw(500 + ex, 50 + ey, 100, 100)
+            self.coin_icon.draw(555 + ex, 45 + ey, 30, 30)
+            if self.weapon.gren_level == 1:
+                if self.p.coin >= 500:
+                    self.grenade_able_icon.draw(500 + ex, 50 + ey, 100, 100)
+                    self.font_mini.draw(575 + ex, 45 + ey, '500', (255, 255, 255))
+                    self.font_mini.draw(540 + ex, 80 + ey, 'L SHIFT', (255, 255, 255))
+                else:
+                    self.grenade_unable_icon.draw(500 + ex, 50 + ey, 100, 100)
+                    self.font_mini.draw(575 + ex, 45 + ey, '500', (255, 0, 0))
+
+            elif self.weapon.gren_level == 2:
+                if self.p.coin >= 1500:
+                    self.grenade_able_icon.draw(500 + ex, 50 + ey, 100, 100)
+                    self.font_mini.draw(575 + ex, 45 + ey, '1500', (255, 255, 255))
+                    self.font_mini.draw(540 + ex, 80 + ey, 'L SHIFT', (255, 255, 255))
+                else:
+                    self.grenade_unable_icon.draw(500 + ex, 50 + ey, 100, 100)
+                    self.font_mini.draw(575 + ex, 45 + ey, '1500', (255, 0, 0))
+
+            elif self.weapon.gren_level == 3:
+                if self.p.coin >= 4500:
+                    self.grenade_able_icon.draw(500 + ex, 50 + ey, 100, 100)
+                    self.font_mini.draw(575 + ex, 45 + ey, '4500', (255, 255, 255))
+                    self.font_mini.draw(540 + ex, 80 + ey, 'L SHIFT', (255, 255, 255))
+                else:
+                    self.grenade_unable_icon.draw(500 + ex, 50 + ey, 100, 100)
+                    self.font_mini.draw(575 + ex, 45 + ey, '4500', (255, 0, 0))
         else:
-            self.font_small.draw(550 + ex, 45 + ey, '%d' % (30 - self.weapon.throw_delay_time), (255, 255, 255))
+            self.font_small.draw(550 + ex, 45 + ey, '%d' % (60 - self.weapon.throw_delay_time), (255, 255, 255))
             self.grenade_unable_icon.draw(500 + ex, 50 + ey, 100, 100)
 
         # 플레이어 hp 출력
@@ -97,15 +124,32 @@ def render_ingame_ui(self):
         if self.weapon.weapon_type == 1:
             if self.weapon.melee == 'KNIFE':
                 self.knife_image.draw(85 + ex, 55 + ey, 150, 100)
+
             elif self.weapon.melee == 'BAT':
                 self.bat_image.rotate_draw(math.radians(-90), 45 + ex, 55 + ey, 50, 400)
+
             elif self.weapon.melee == 'RAPIER':
                 self.rapier_image.draw(45 + ex, 55 + ey, 350, 100)
+                if not self.weapon.skill_usable_rapier:
+                    self.font.draw(330 + ex, 50 + ey, '%d' % (20 - self.weapon.skill_delay_time_rapier), (255, 255, 255))
+                else:
+                    self.font_small.draw(260 + ex, 50 + ey, 'R Button', (255, 255, 255))
+
             elif self.weapon.melee == 'KATANA':
                 self.katana_image.rotate_draw(math.radians(-90), 45 + ex, 55 + ey, 60, 410)
+                if not self.weapon.skill_usable_katana:
+                    self.font.draw(330 + ex, 50 + ey, '%d' % (30 - self.weapon.skill_delay_time_katana), (255, 255, 255))
+                else:
+                    self.font_small.draw(260 + ex, 50 + ey, 'R Button', (255, 255, 255))
+
             elif self.weapon.melee == 'AXE':
                 self.axe_image.rotate_draw(math.radians(-90), 80 + ex, 70 + ey, 200, 410)
-    pass
+                if not self.weapon.skill_usable_axe:
+                    self.font.draw(330 + ex, 50 + ey, '%d' % (60 - self.weapon.skill_delay_time_axe), (255, 255, 255))
+                else:
+                    self.font_small.draw(260 + ex, 80 + ey, 'R Button', (255, 255, 255))
+                    self.coin_icon.draw(280 + ex, 30 + ey, 50, 50)
+                    self.font_small.draw(320 + ex, 30 + ey, '4000', (255, 255, 255))
 
 
 def update_ammo_ind(self):
