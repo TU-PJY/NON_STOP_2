@@ -16,7 +16,11 @@ def load_resource(self):
     self.coin_icon = load_image(coin_icon_directory)
     self.grenade_able_icon = load_image(grenable_able_icon_directory)
     self.grenade_unable_icon = load_image(grenable_unable_icon_directory)
-    pass
+    self.axe_image = load_image(axe_directory)
+    self.katana_image = load_image(katana_directory)
+    self.rapier_image = load_image(rapier_directory)
+    self.knife_image = load_image(knife_right_directory)
+    self.bat_image = load_image(bat_directory)
 
 
 def render_ingame_ui(self):
@@ -49,11 +53,11 @@ def render_ingame_ui(self):
             self.get_y = 0
 
     if game_framework.MODE == 'play':
-        if play_mode.weapon.weapon_type == 0:
-            # 탄약 인디케이터 배경 출력
-            self.back.opacify(400)
-            self.back.draw(60 + ex, 20 + ey, 810, 210)
+        # 탄약 인디케이터 배경 출력
+        self.back.opacify(400)
+        self.back.draw(60 + ex, 20 + ey, 810, 210)
 
+        if play_mode.weapon.weapon_type == 0:
             # 재장전 시 재장전 피드백 표시
             if self.weapon.reloading:
                 self.reload_bar.draw(20 + ex, 90 + ey, 700 * (self.weapon.cur_reload_time / self.weapon.reload_time),
@@ -88,6 +92,19 @@ def render_ingame_ui(self):
         # 라운드 수 출력
         self.font.draw(WIDTH / 2 - 130 + ex, HEIGHT - 50 + ey, 'ROUND %d' % play_mode.tool.rounds,
                        (255, int(self.rg), int(self.rb)))
+
+        #  근접 무기 스킬 사용 쿨타입 표시
+        if self.weapon.weapon_type == 1:
+            if self.weapon.melee == 'KNIFE':
+                self.knife_image.draw(85 + ex, 55 + ey, 150, 100)
+            elif self.weapon.melee == 'BAT':
+                self.bat_image.rotate_draw(math.radians(-90), 45 + ex, 55 + ey, 50, 400)
+            elif self.weapon.melee == 'RAPIER':
+                self.rapier_image.draw(45 + ex, 55 + ey, 350, 100)
+            elif self.weapon.melee == 'KATANA':
+                self.katana_image.rotate_draw(math.radians(-90), 45 + ex, 55 + ey, 60, 410)
+            elif self.weapon.melee == 'AXE':
+                self.axe_image.rotate_draw(math.radians(-90), 80 + ex, 70 + ey, 200, 410)
     pass
 
 
@@ -96,7 +113,6 @@ def update_ammo_ind(self):
         self.g, self.b = 0, 0
     else:
         self.r, self.g, self.b = 255, 255, 255
-    pass
 
 
 def update_round_ind(self):
