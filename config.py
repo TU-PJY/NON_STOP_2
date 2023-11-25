@@ -161,6 +161,8 @@ explode_directory = 'res//prop//explode.png'
 grenade_directory = 'res//prop//grenade.png'
 splash_directory = 'res//prop//splash.png'
 
+goblin_dead_directory = 'res//prop//goblin_dead.png'
+
 # ui 이미지 파일 경로
 shop_window_directory = 'res//ui//shop_window.png'
 pause_bg_directory = 'res//ui//pause_bg.png'

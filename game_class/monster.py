@@ -1,5 +1,15 @@
+from pico2d import draw_rectangle
+
 from game_class_manager.monster_manager import *
-from game_class.prop import PlayerDamage
+from game_class.prop import PlayerDamage, Feedback
+from game_class_manager.monster_manager.etc import monster_animation, update_monster_pos, update_monster_opacify, \
+    update_delay, update_monster_size
+from game_class_manager.monster_manager.file_loader import load_monster
+from game_class_manager.monster_manager.monster_attack import process_attack
+from game_class_manager.monster_manager.monster_damage import damage_monster
+from game_class_manager.monster_manager.monster_move import move_monster
+from game_class_manager.monster_manager.monster_output import draw_monster
+from game_work import game_framework, game_manager
 
 
 class Update:

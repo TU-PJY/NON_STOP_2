@@ -31,7 +31,7 @@ def spawn_monster(self):  # 몬스터 스폰
                 self.frame = self.frame + APT * FPA * game_framework.frame_time
 
                 if self.rounds < 5:  # 라운드가 올라갈 수록 몬스터가 다양해진다
-                    self.type = 3
+                    self.type = 1
                 elif self.rounds > 5:
                     self.type = random.randint(1, 2)  # 타입에 따라 스폰되는 몬스터가 달라짐
                 elif self.rounds > 10:
@@ -76,11 +76,11 @@ def update_timer(self):  # 스폰 타이머 업데이트
 def update_rounds(self):
     if not self.spawn_enable:
         if self.spawn_num == 0 and self.spawn_remain == 0:  # 둘 다 0이 되면
-            play_mode.ig.rg = 0
+            play_mode.ig.rg = 0  # 라운드 인디케이터 색이 빨간색으로 변한다
             play_mode.ig.rb = 0
-            self.rounds += 1
-            self.limit += 5
-            self.spawn_remain = self.limit
-            self.spawn_time = 1500
+            self.rounds += 1  # 라운드 증가
+            self.limit += 5  # 스폰 제한 횟수 5씩 증가
+            self.spawn_remain = self.limit  # 앞으로 스폰할 몬스터 수 갱신
+            self.spawn_time = 1500  # 매 라운드 시작 시 어느 정도의 시간을 두고 스폰 시작
             self.spawn_enable = True  # 다음 라운드로 넘어가 스폰을 다시 시작한다.
 
