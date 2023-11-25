@@ -320,20 +320,23 @@ class PlayerDamage:
 
 
 class Coin:
-    def __init__(self, p, mp, x, y, dir, sp=1):
+    def __init__(self, p, mp, x, y, dir, sp=2):
         self.image = load_image(coin_icon_directory)
         self.p = p
         self.mp = mp
         self.x = x
         self.y = y
         self.dir = dir
-        self.acc = 4
+        self.acc = 3
         self.sp = sp
         self.size_down = True
         self.size_x = 70
         self.up = False
         self.fall = True
         self.op = 1
+
+        if self.sp > 2:
+            self.acc = 5
 
     def draw(self):
         self.image.opacify(self.op)
@@ -344,25 +347,28 @@ class Coin:
         pps = game_framework.pps
         speed = game_framework.pps * self.p.speed
         if game_framework.MODE == 'play':
-            if self.fall:  # true 일 시 코인이 떨어진다
-                self.y += self.acc
-                self.acc -= pps / 70
-
-                if self.dir == 1:  # 몬스터가 드랍한 직후 지정 방향으로 살짝 움직인다.
-                    if self.x > self.mp.playerToWallLeft + 20:
-                        self.x -= self.sp * pps / 4
-                elif self.dir == 0:
-                    if self.x < self.mp.playerToWallRight + 20:
-                        self.x += self.sp * pps / 4
-
-                if self.y <= 230 and self.acc <= 0:  # 바닥에 떨어지면
-                    self.y = 230
-                    self.fall = False
-
             if self.p.mv_right:
                 self.x -= speed
             elif self.p.mv_left:
                 self.x += speed
+
+            if self.fall:  # true 일 시 코인이 떨어진다
+                self.y += self.acc
+                self.acc -= pps / 90
+
+                if self.dir == 1:  # 몬스터가 드랍한 직후 지정 방향으로 살짝 움직인다.
+                    self.x -= self.sp * pps / 4
+                    if self.x <= self.mp.playerToWallLeft + 20:
+                        self.dir = 0
+
+                elif self.dir == 0:
+                    self.x += self.sp * pps / 4
+                    if self.x >= self.mp.playerToWallRight + 20:
+                        self.dir = 1
+
+                if self.y <= 230 and self.acc <= 0:  # 바닥에 떨어지면
+                    self.y = 230
+                    self.fall = False
 
             if self.size_down:  # 코인이 좌우로 회전한다
                 self.size_x -= pps / 5
@@ -439,10 +445,11 @@ class Explode:
 
 
 class Grenade:
-    def __init__(self, p, mp, x, y, dir):
+    def __init__(self, p, mp, weapon, x, y, dir):
         self.image = load_image(grenade_directory)
         self.x, self.y, self.dir = x, y, dir
         self.p, self.mp = p, mp
+        self.weapon = weapon
         self.timer = 1200
         self.acc = 3
         self.speed = 5
@@ -497,6 +504,7 @@ class Grenade:
             self.timer -= pps / 3
 
         if self.timer <= 0:  # 타이머가 0이되면 폭발한다.
+            self.weapon.gren_x = self.x  # 몬스터가 날아가는 방향을 지정하기 위해 weapon 클래스로 자기 위치를 전달한다
             ex = Explode(self.p, self.x, self.y)
             self.p.ex_shake_range = 100  # 화면이 흔들린다
             game_manager.add_object(ex, 5)  # 폭발 애니메이션 추가
@@ -522,15 +530,16 @@ class Splash:
         pps = game_framework.pps
         speed = game_framework.pps * self.p.speed
 
-        if self.p.mv_right:
-            self.x -= speed
-        if self.p.mv_left:
-            self.x += speed
+        if game_framework.MODE == 'play':
+            if self.p.mv_right:
+                self.x -= speed
+            if self.p.mv_left:
+                self.x += speed
 
-        self.frame = (self.frame + pps / 50) % 9
+            self.frame = (self.frame + pps / 50) % 9
 
-        if int(self.frame) == 8:
-            game_manager.remove_object(self)
+            if int(self.frame) == 8:
+                game_manager.remove_object(self)
 
     def handle_event(self):
         pass
@@ -545,10 +554,28 @@ class Dead:
         self.deg = 0
         self.simulate = True  # 이 변수가 false가 되면 투명화를 가동한다
         self.op = 1  # 투명도
+        self.remove_timer = 300
+        self.speed = 6
 
         if self.type == 1:
             self.image = load_image(goblin_dead_directory)
             self.acc = 1.5  # 걸어오다가 앞으로 넘어져 죽는 모션을 위한 변수
+
+        elif self.type == 4:
+            self.image = load_image(apple_dead_directory)
+            self.acc = 0.5  # 걸어오다가 앞으로 넘어져 죽는 모션을 위한 변수
+
+        if self.ani == 1:
+            self.acc = 3
+
+        elif self.ani == 2:
+            self.acc = 4
+
+        elif self.ani == 3:
+            self.acc = 7
+
+        elif self.ani == 4:
+            self.acc = 4
 
     def draw(self):
         deg = math.radians(self.deg)
@@ -556,38 +583,140 @@ class Dead:
 
         if self.type == 1:  # 믄스터마다 이미지 크기가 달라 따로 지정
             if self.dir == 1:
-                self.image.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey, 280, 280)
+                self.image.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey - 50, 280, 280)
             elif self.dir == 0:
-                self.image.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey, 280, 280)
+                self.image.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey - 50, 280, 280)
+
+        elif self.type == 4:  # 믄스터마다 이미지 크기가 달라 따로 지정
+            if self.dir == 1:
+                self.image.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey - 30, 450, 450)
+            elif self.dir == 0:
+                self.image.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey - 30, 450, 450)
 
     def update(self):
         pps = game_framework.pps
         speed = game_framework.pps * self.p.speed
-        deg = math.radians(self.deg)
 
-        if self.simulate:
-            if self.ani == 0:  # 앞으로 넘어져 죽는 모션, 기본 모션
-                if self.dir == 1:
-                    self.x += self.acc
+        if game_framework.MODE == 'play':
+            if self.p.mv_right:
+                self.x -= speed
+            elif self.p.mv_left:
+                self.x += speed
 
-                elif self.dir == 0:
-                    self.x -= self.acc
+            if self.simulate:
+                # animation 0
+                if self.ani == 0:  # 앞으로 넘어져 죽는 모션, 기본 모션
+                    if self.dir == 1:
+                        self.x += self.acc
 
-                self.acc -= pps / 200
+                    elif self.dir == 0:
+                        self.x -= self.acc
 
-                if self.acc < 0:  # 앞으로 넘어지면서 점차 속도가 줄어든다.
-                    self.acc = 0
-                    self.simulate = False
+                    self.acc -= pps / 200
 
-        if self.p.mv_right:
-            self.x -= speed
-        elif self.p.mv_left:
-            self.x += speed
+                    if self.x <= self.mp.playerToWallLeft or self.x >= self.mp.playerToWallRight:
+                        self.acc = 0
 
-        else:
-            self.op += int(pps / 3)  # 시뮬레이션이 끝나면 투명해지면서 사라진다
-            if self.op >= 250:
-                game_manager.remove_object(self)
+                    if self.acc < 0:  # 앞으로 넘어지면서 점차 속도가 줄어든다.
+                        self.acc = 0
+                        self.simulate = False
+
+                # aniamtion 1
+                elif self.ani == 1:  # 고화력 총기에 튕겨저 나가 죽는 모션, rifle 이상부터 재생
+                    if self.dir == 1:
+                        self.deg = 180
+                        self.x -= self.acc
+                    elif self.dir == 0:
+                        self.deg = -180
+                        self.x += self.acc
+
+                    self.acc -= pps / 200
+
+                    if self.x <= self.mp.playerToWallLeft or self.x >= self.mp.playerToWallRight:
+                        self.acc = 0
+
+                    if self.acc < 0:
+                        self.acc = 0
+                        self.simulate = False
+
+                # animation 2
+                elif self.ani == 2:  # 고화력 총기에 튕겨저 나가 죽는 모션, rifle 이상부터 재생
+                    if self.dir == 1:
+                        self.deg += self.acc
+                        self.x -= self.acc
+                    elif self.dir == 0:
+                        self.deg -= self.acc
+                        self.x += self.acc
+
+                    self.acc -= pps / 200
+
+                    if self.x <= self.mp.playerToWallLeft or self.x >= self.mp.playerToWallRight:
+                        self.acc = 0
+
+                    if self.acc < 0:
+                        self.acc = 0
+                        self.simulate = False
+
+                # animation 3
+                elif self.ani == 3:  # 폭발에 튕겨나가는 모션
+                    if self.dir == 1:
+                        self.x += self.speed
+                        self.deg -= pps / 4
+                        if self.x >= self.mp.playerToWallRight:
+                            self.speed -= 2
+                            self.dir = 0
+
+                    elif self.dir == 0:
+                        self.x -= self.speed
+                        self.deg += pps / 4
+                        if self.x <= self.mp.playerToWallLeft:
+                            self.speed -= 2
+                            self.dir = 1
+
+                    self.y += self.acc
+                    self.acc -= pps / 90
+
+                    if self.y < 250 and self.type == 1:
+                        self.y = 260
+                        self.acc = self.acc * (-1) / 1.5
+                        if self.acc < 1:
+                            self.simulate = False
+
+                    if self.y < 230 and self.type == 4:
+                        self.y = 240
+                        self.acc = self.acc * (-1) / 1.5
+                        if self.acc < 1:
+                            self.simulate = False
+
+                # animation 4
+                elif self.ani == 4:  # 카타나 또는 도끼 스킬에 죽는 모션
+                    if self.dir == 1:
+                        self.deg -= pps / 4
+
+                    elif self.dir == 0:
+                        self.deg += pps / 4
+
+                    self.y += self.acc
+                    self.acc -= pps / 90
+
+                    if self.y < 250 and self.type == 1:
+                        self.y = 260
+                        self.acc = self.acc * (-1) / 1.5
+                        if self.acc < 1:
+                            self.simulate = False
+
+                    if self.y < 230 and self.type == 4:
+                        self.y = 240
+                        self.acc = self.acc * (-1) / 1.5
+                        if self.acc < 1:
+                            self.simulate = False
+
+            elif not self.simulate:
+                self.remove_timer -= pps / 3
+                if self.remove_timer <= 0:
+                    self.op += int(pps / 2)  # 시뮬레이션이 끝나면 투명해지면서 사라진다
+                    if self.op > 250:
+                        game_manager.remove_object(self)
 
     def handle_event(self):
         pass

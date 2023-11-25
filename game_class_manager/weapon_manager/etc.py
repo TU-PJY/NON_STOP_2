@@ -154,7 +154,7 @@ def reload_gun(weapon):
 
 
 def throw_grenade(weapon):
-    gren = Grenade(weapon.p, weapon.mp, weapon.p.x, weapon.p.y - weapon.p.cam_h, weapon.p.dir)
+    gren = Grenade(weapon.p, weapon.mp, weapon, weapon.p.x, weapon.p.y - weapon.p.cam_h, weapon.p.dir)
     game_manager.add_object(gren, 3)
     weapon.throwable = False
     weapon.throw_delay = get_time()  # 던진 직후부터 쿨타임 측정

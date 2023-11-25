@@ -1,4 +1,5 @@
-from game_class.prop import Bullet, Feedback, Coin, Splash
+from game_class.prop import Bullet, Feedback, Coin, Splash, Dead
+from game_class_manager.monster_manager.etc import add_object_after_dead
 from game_work import game_manager
 from mods import play_mode
 
@@ -84,27 +85,10 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                 m.is_hit = False
                 m.weapon.hit_once = False
 
-        elif m.ex_dead:
+        elif m.ex_dead:  # 수류탄 폭발 대미지
             m.hp -= 500
 
     if m.hp <= 0:  # hp가 0이 될 경우 죽는다.
-        play_mode.tool.spawn_num -= 1
-        if m.type == 3:
-            splash = Splash(m.p, m.x, m.y)
-            game_manager.add_object(splash, 4)
+        play_mode.tool.spawn_num -= 1  # 스폰된 몬스터 수 감소
+        add_object_after_dead(m)
 
-        # elif m.type == 1:
-        #     dead = Dead(m.p, m, m.mp, m.x, m.y, m.dir, m.type, 2)
-        #     game_manager.add_object(dead, 3)
-
-        if m.weapon.melee == 'KATANA' and m.weapon.skill_enable:
-            coin = Coin(m.p, m.mp, m.x, m.y + 200, m.dir, 2)  # 카타나 스킬에 의해 죽은 경우 조금 더 높은 곳에 드랍
-
-        elif m.ex_dead:
-            coin = Coin(m.p, m.mp, m.x, m.y, m.dir, 4)
-
-        else:
-            coin = Coin(m.p, m.mp, m.x, m.y, m.dir)
-        game_manager.add_object(coin, 3)  # 코인을 드랍한다
-        game_manager.add_collision_pair('player:coin', None, coin)
-        game_manager.remove_object(m)

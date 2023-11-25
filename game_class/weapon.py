@@ -279,6 +279,8 @@ class Weapon:
         self.equip_list_gun2 = [[False for _ in range(1)] for _ in range(5)]  # page2용
         self.equip_list_gun1[0][0] = True
 
+        self.gren_x = 0  # 몬스터가 날아가는 방향을 정하기 위한 위치 변수
+
         self.state_machine = StateMachineGun(self)
         self.state_machine.start()
 

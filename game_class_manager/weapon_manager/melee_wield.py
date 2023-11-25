@@ -146,10 +146,11 @@ def update_melee_skill(weapon):
 def init_melee(weapon):
     if weapon.melee == 'KATANA' and weapon.skill_enable:
         weapon.p.speed = weapon.p.temp_speed
-    weapon.skill_enable = False
+    if weapon.melee == 'AXE' and weapon.skill_enable:
+        weapon.p.jump_acc = 0
 
+    weapon.skill_enable = False
     weapon.swing_down = False
     weapon.swing_up = False
     weapon.swing = False
-    weapon.p.jump_acc = 0
     weapon.melee_deg = 0

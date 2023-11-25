@@ -162,6 +162,7 @@ grenade_directory = 'res//prop//grenade.png'
 splash_directory = 'res//prop//splash.png'
 
 goblin_dead_directory = 'res//prop//goblin_dead.png'
+apple_dead_directory = 'res//prop//apple_dead.png'
 
 # ui 이미지 파일 경로
 shop_window_directory = 'res//ui//shop_window.png'
