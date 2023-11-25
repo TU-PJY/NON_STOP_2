@@ -114,7 +114,7 @@ def draw_melee(weapon):
                             x = weapon.p.px + weapon.melee_x + 80
                     else:
                         x = weapon.p.px + weapon.melee_x
-                    weapon.axe.clip_composite_draw(0, 0, 64, 128, weapon.melee_deg, '', x, y, 153, 306)
+                    weapon.axe.clip_composite_draw(0, 0, 200, 410, weapon.melee_deg, '', x, y, 200, 410)
 
                 elif weapon.p.dir == 0:
                     if weapon.skill_enable:
@@ -124,12 +124,12 @@ def draw_melee(weapon):
                             x = weapon.p.px - weapon.melee_x - 80
                     else:
                         x = weapon.p.px - weapon.melee_x
-                    weapon.axe.clip_composite_draw(0, 0, 64, 128, -weapon.melee_deg, 'h', x, y, 153, 306)
+                    weapon.axe.clip_composite_draw(0, 0, 200, 410, -weapon.melee_deg, 'h', x, y, 200, 410)
 
             elif weapon.swing and weapon.swing_down:
                 if weapon.p.dir == 1:
                     x = weapon.p.px + weapon.melee_x
-                    weapon.axe.clip_composite_draw(0, 0, 64, 128, weapon.melee_deg, '', x, y, 153, 306)
+                    weapon.axe.clip_composite_draw(0, 0, 200, 410, weapon.melee_deg, '', x, y, 200, 410)
                 elif weapon.p.dir == 0:
                     x = weapon.p.px - weapon.melee_x
-                    weapon.axe.clip_composite_draw(0, 0, 64, 128, -weapon.melee_deg, 'h', x, y, 153, 306)
+                    weapon.axe.clip_composite_draw(0, 0, 200, 410, -weapon.melee_deg, 'h', x, y, 200, 410)

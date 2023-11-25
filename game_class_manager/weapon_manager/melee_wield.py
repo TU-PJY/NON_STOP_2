@@ -110,7 +110,7 @@ def melee_skill(weapon):
             weapon.melee_deg = 120.5
             weapon.p.rotate = 0.5
         else:
-            weapon.melee_deg = 118.5
+            weapon.melee_deg = 116.2
             weapon.p.rotate = -1.2
 
 
