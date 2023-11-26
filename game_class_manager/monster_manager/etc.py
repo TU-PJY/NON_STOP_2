@@ -67,7 +67,7 @@ def add_object_after_dead(m):
         splash = Splash(m.p, m.x, m.y)
         game_manager.add_object(splash, 4)
 
-    if m.type == 1 or m.type == 4:  # 총기의 종류에 따라 밀려나는 정도가 다르다
+    if m.type == 1 or m.type == 4 or m.type == 2:  # 총기의 종류에 따라 밀려나는 정도가 다르다
         if not m.ex_dead:
             if m.weapon.weapon_type == 0:
                 if m.weapon.gun_type == 'rifle':

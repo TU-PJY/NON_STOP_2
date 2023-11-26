@@ -23,6 +23,11 @@ def load_resource(self):
     self.knife_image = load_image(knife_right_directory)
     self.bat_image = load_image(bat_directory)
 
+    self.image_ammo_pistol = load_image(ammo_pistol_icon_directory)
+    self.image_ammo_ar = load_image(ammo_ar_icon_directory)
+    self.image_ammo_rifle = load_image(ammo_rifle_icon_directory)
+    self.image_ammo_sr = load_image(ammo_sr_icon_directory)
+
 
 def render_ingame_ui(self):
     pps = game_framework.pps
@@ -75,6 +80,15 @@ def render_ingame_ui(self):
                 self.font.draw(20 + ex, 40 + ey, '%d | %d' % (cur, num), (self.r, self.g, self.b))
             else:
                 self.font.draw(20 + ex, 40 + ey, 'R | %d' % num, (self.r, self.g, self.b))
+
+            if self.weapon.gun_type == 'pistol' or self.weapon.gun_type == 'smg':  # 각 총기가 사용하는 탄약을 보여준다
+                self.image_ammo_pistol.rotate_draw(math.radians(32.2), 370 + ex, 40 + ey, 100, 100)
+            elif self.weapon.gun_type == 'ar':
+                self.image_ammo_ar.rotate_draw(math.radians(32.2), 370 + ex, 40 + ey, 100, 100)
+            elif self.weapon.gun_type == 'rifle':
+                self.image_ammo_rifle.rotate_draw(math.radians(32.2), 370 + ex, 40 + ey, 100, 100)
+            elif self.weapon.gun_type == 'sr':
+                self.image_ammo_sr.rotate_draw(math.radians(32.2), 370 + ex, 40 + ey, 100, 100)
 
         # 수류탄을 던질 수 있게되면 밝은 아이콘으로 표시, 아니면 어두운 아이콘으로 표시
         if self.weapon.throwable:

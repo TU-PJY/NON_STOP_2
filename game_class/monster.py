@@ -125,13 +125,13 @@ class Monster:
 
     def get_bb(self):  # 각 몬스터마다 히트박스 크기가 다름
         if self.type == 1:
-            return self.x + self.p.ex - 50, self.y + self.p.ey - 70, self.x + self.p.ex + 50, self.y + self.p.ey + 60
+            return self.x + self.p.ex - 45, self.y + self.p.ey - 70, self.x + self.p.ex + 45, self.y + self.p.ey + 60
         elif self.type == 2:
-            return self.x + self.p.ex - 65, self.y + self.p.ey - 65, self.x + self.p.ex + 65, self.y + self.p.ey + 65
+            return self.x + self.p.ex - 50, self.y + self.p.ey - 55, self.x + self.p.ex + 45, self.y + self.p.ey + 55
         elif self.type == 3:
             return self.x + self.p.ex - 60, self.y + self.p.ey - 60, self.x + self.p.ex + 60, self.y + self.p.ey + 60
         elif self.type == 4:
-            return self.x + self.p.ex - 55, self.y + self.p.ey - 55, self.x + self.p.ex + 55, self.y + self.p.ey + 55
+            return self.x + self.p.ex - 45, self.y + self.p.ey - 55, self.x + self.p.ex + 45, self.y + self.p.ey + 45
 
     def handle_collision(self, group, other):
         if group == 'player:monster':  # 근접무기 스킬 사용 중에는 대미지를 받지 않는다.

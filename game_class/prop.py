@@ -270,7 +270,7 @@ class KatanaSlice:
                     (0, 0, 60, 410, -self.weapon.melee_deg, 'h', self.p.px - 40, self.p.py - 30, 50, 360)
             else:
                 self.katana_slice.clip_composite_draw \
-                    (0, 0, 60, 410, self.weapon.melee_deg, '', self.p.px + 40, self.p.py - 30, 50, 360) \
+                    (0, 0, 60, 410, self.weapon.melee_deg, '', self.p.px + 40, self.p.py - 30, 50, 360)
 
         elif self.p.dir == 0:
             self.player1_slice_left.opacify(self.op)
@@ -560,6 +560,8 @@ class Dead:
         self.remove_timer = 300
         self.speed = 6
 
+        self.size_reduce = 0  # type2 데드 모션 출력 용 변수
+
         if self.type == 1:
             self.image = load_image(goblin_dead_directory)
             self.acc = 1.5  # 걸어오다가 앞으로 넘어져 죽는 모션을 위한 변수
@@ -580,6 +582,10 @@ class Dead:
         elif self.ani == 4:
             self.acc = 4
 
+        if self.type == 2:
+            self.ani = -1
+            self.image = load_image(ghost_dead_directory)
+
     def draw(self):
         deg = math.radians(self.deg)
         self.image.opacify(self.op)
@@ -590,7 +596,14 @@ class Dead:
             elif self.dir == 0:
                 self.image.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey - 50, 280, 280)
 
-        elif self.type == 4:  # 믄스터마다 이미지 크기가 달라 따로 지정
+        elif self.type == 2:
+            if self.dir == 1:
+                self.image.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey,
+                                          400 - self.size_reduce, 400 - self.size_reduce)
+            elif self.dir == 0:
+                self.image.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey,
+                                          400 - self.size_reduce, 400 - self.size_reduce)
+        elif self.type == 4:
             if self.dir == 1:
                 self.image.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey - 30, 450, 450)
             elif self.dir == 0:
@@ -607,6 +620,23 @@ class Dead:
                 self.x += speed
 
             if self.simulate:
+                # animation -1
+                if self.ani == -1:
+                    if self.dir == 1:
+                        self.deg += pps / 2
+                    elif self.dir == 0:
+                        self.deg -= pps / 2
+
+                    if self.op < 250:
+                        self.op += int(pps / 2)
+                    if self.op > 250:
+                        self.op = 250
+
+                    self.size_reduce += pps / 3
+
+                    if self.size_reduce >= 400:
+                        game_manager.remove_object(self)
+
                 # animation 0
                 if self.ani == 0:  # 앞으로 넘어져 죽는 모션, 기본 모션
                     if self.dir == 1:

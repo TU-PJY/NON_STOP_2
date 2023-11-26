@@ -184,7 +184,7 @@ class Player:
         draw_rectangle(*self.get_bb())
 
     def get_bb(self):
-        return self.px - 40, self.py - 65 - self.size * 50, self.px + 40, self.py + 60 - self.size * 50
+        return self.px - 35, self.py - 60 - self.size * 50, self.px + 35, self.py + 60
 
     def handle_collision(self, group, other):
         pass

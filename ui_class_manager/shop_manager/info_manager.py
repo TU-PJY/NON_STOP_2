@@ -19,6 +19,8 @@ def print_info(self, i, j):
     x3 = WIDTH / 2 + 490
     cost = self.window_y - 70
 
+    x4 = WIDTH / 2 + 640
+
     color = (255, 255, 255)
     color2 = (0, 255, 0)
     color3 = (255, 0, 0)
@@ -39,11 +41,13 @@ def print_info(self, i, j):
                     self.info.draw(x, y2, '대미지: 25', color)
                     self.info.draw(x, y3, '장탄수: 7', color)
                     self.info.draw(x, y4, '사용 탄약: 권총탄', color)
+                    self.info.draw(x4 + 5, y, 'Pistol', color2)
                 case (1, 0):
                     self.info.draw(x, y, 'M-92', color)
                     self.info.draw(x, y2, '대미지: 23', color)
                     self.info.draw(x, y3, '장탄수: 15', color)
                     self.info.draw(x, y4, '사용 탄약: 권총탄', color)
+                    self.info.draw(x4 + 5, y, 'Pistol', color2)
                     if not buy:
                         self.info.draw(x3, cost, '300', color4)
                 case (2, 0):
@@ -51,6 +55,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y2, '대미지: 35', color)
                     self.info.draw(x, y3, '장탄수: 8', color)
                     self.info.draw(x, y4, '사용 탄약: 권총탄', color)
+                    self.info.draw(x4 + 5, y, 'Pistol', color2)
                     if not buy:
                         self.info.draw(x3, cost, '600', color4)
                 case (3, 0):
@@ -58,6 +63,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y2, '대미지: 40', color)
                     self.info.draw(x, y3, '장탄수: 6', color)
                     self.info.draw(x, y4, '사용 탄약: 권총탄', color)
+                    self.info.draw(x4 + 5, y, 'Pistol', color2)
                     if not buy:
                         self.info.draw(x3, cost, '800', color4)
                 case (4, 0):
@@ -65,6 +71,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y2, '대미지: 20', color)
                     self.info.draw(x, y3, '장탄수: 12', color)
                     self.info.draw(x, y4, '사용 탄약: 권총탄', color)
+                    self.info.draw(x4 + 5, y, 'Pistol', color2)
                     if not buy:
                         self.info.draw(x3, cost, '1500', color4)
                 case (0, 1):
@@ -72,6 +79,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y2, '대미지: 12', color)
                     self.info.draw(x, y3, '장탄수: 30', color)
                     self.info.draw(x, y4, '사용 탄약: 권총탄', color)
+                    self.info.draw(x4 + 15, y, 'SMG', color2)
                     if not buy:
                         self.info.draw(x3, cost, '2000', color4)
                 case (1, 1):
@@ -79,6 +87,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y2, '대미지: 15', color)
                     self.info.draw(x, y3, '장탄수: 25', color)
                     self.info.draw(x, y4, '사용 탄약: 권총탄', color)
+                    self.info.draw(x4 + 15, y, 'SMG', color2)
                     if not buy:
                         self.info.draw(x3, cost, '2500', color4)
                 case (2, 1):
@@ -86,6 +95,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y2, '대미지: 12', color)
                     self.info.draw(x, y3, '장탄수: 25', color)
                     self.info.draw(x, y4, '사용 탄약: 권총탄', color)
+                    self.info.draw(x4 + 15, y, 'SMG', color2)
                     if not buy:
                         self.info.draw(x3, cost, '3000', color4)
                 case (3, 1):
@@ -93,6 +103,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y2, '대미지: 18', color)
                     self.info.draw(x, y3, '장탄수: 30', color)
                     self.info.draw(x, y4, '사용 탄약: 권총탄', color)
+                    self.info.draw(x4 + 15, y, 'SMG', color2)
                     if not buy:
                         self.info.draw(x3, cost, '3500', color4)
                 case (4, 1):
@@ -100,6 +111,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y2, '대미지: 15', color)
                     self.info.draw(x, y3, '장탄수: 50', color)
                     self.info.draw(x, y4, '사용 탄약: 권총탄', color)
+                    self.info.draw(x4 + 15, y, 'SMG', color2)
                     if not buy:
                         self.info.draw(x3, cost, '4000', color4)
                 case (0, 2):
@@ -107,6 +119,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y2, '대미지: 20', color)
                     self.info.draw(x, y3, '장탄수: 25', color)
                     self.info.draw(x, y4, '사용 탄약: 소총탄', color)
+                    self.info.draw(x4 + 30, y, 'AR', color2)
                     if not buy:
                         self.info.draw(x3, cost, '5000', color4)
                 case (1, 2):
@@ -114,6 +127,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y2, '대미지: 18', color)
                     self.info.draw(x, y3, '장탄수: 30', color)
                     self.info.draw(x, y4, '사용 탄약: 소총탄', color)
+                    self.info.draw(x4 + 30, y, 'AR', color2)
                     if not buy:
                         self.info.draw(x3, cost, '6000', color4)
                 case (2, 2):
@@ -121,6 +135,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y2, '대미지: 30', color)
                     self.info.draw(x, y3, '장탄수: 20', color)
                     self.info.draw(x, y4, '사용 탄약: 소총탄', color)
+                    self.info.draw(x4 + 30, y, 'AR', color2)
                     if not buy:
                         self.info.draw(x3, cost, '7000', color4)
                 case (3, 2):
@@ -128,6 +143,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y2, '대미지: 23', color)
                     self.info.draw(x, y3, '장탄수: 30', color)
                     self.info.draw(x, y4, '사용 탄약: 소총탄', color)
+                    self.info.draw(x4 + 30, y, 'AR', color2)
                     if not buy:
                         self.info.draw(x3, cost, '8000', color4)
                 case (4, 2):
@@ -135,6 +151,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y2, '대미지: 21', color)
                     self.info.draw(x, y3, '장탄수: 40', color)
                     self.info.draw(x, y4, '사용 탄약: 소총탄', color)
+                    self.info.draw(x4 + 30, y, 'AR', color2)
                     if not buy:
                         self.info.draw(x3, cost, '9000', color4)
                 case (0, 3):
@@ -142,6 +159,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y2, '대미지: 70', color)
                     self.info.draw(x, y3, '장탄수: 8', color)
                     self.info.draw(x, y4, '사용 탄약: 대구경 소총탄', color)
+                    self.info.draw(x4 + 15, y, 'Rifle', color2)
                     if not buy:
                         self.info.draw(x3, cost, '11000', color4)
                 case (1, 3):
@@ -150,6 +168,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y3, '장탄수: 10', color)
                     self.info.draw(x, y4, '사용 탄약: 대구경 소총탄', color)
                     self.info.draw(x, y5, '관형 탄창', color4)
+                    self.info.draw(x4 + 15, y, 'Rifle', color2)
                     if not buy:
                         self.info.draw(x3, cost, '13000', color4)
                 case (2, 3):
@@ -157,6 +176,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y2, '대미지: 50', color)
                     self.info.draw(x, y3, '장탄수: 30', color)
                     self.info.draw(x, y4, '사용 탄약: 소총탄', color4)
+                    self.info.draw(x4 + 15, y, 'Rifle', color2)
                     if not buy:
                         self.info.draw(x3, cost, '15000', color4)
                 case (3, 3):
@@ -164,6 +184,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y2, '대미지: 70', color)
                     self.info.draw(x, y3, '장탄수: 20', color)
                     self.info.draw(x, y4, '사용 탄약: 대구경 소총탄', color)
+                    self.info.draw(x4 + 15, y, 'Rifle', color2)
                     if not buy:
                         self.info.draw(x3, cost, '17000', color4)
                 case (4, 3):
@@ -172,6 +193,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y3, '장탄수: 20', color)
                     self.info.draw(x, y4, '사용 탄약: 대구경 소총탄', color)
                     self.info.draw(x, y5, '2점사 사격', color4)
+                    self.info.draw(x4 + 15, y, 'Rifle', color2)
                     if not buy:
                         self.info.draw(x3, cost, '19000', color4)
 
@@ -190,6 +212,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y6, '관통 시 대미지 감소: 50', color4)
                     self.info.draw(x, y7, '우클릭으로 정조준',  color5)
                     self.info.draw(x, y8, '격발 전 정조준 필요', color3)
+                    self.info.draw(x4 + 30, y, 'SR', color2)
                     if not buy:
                         self.info.draw(x3, cost, '23000', color4)
                 case (1, 0):
@@ -201,6 +224,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y6, '관통 시 대미지 감소: 40', color4)
                     self.info.draw(x, y7, '우클릭으로 정조준', color5)
                     self.info.draw(x, y8, '격발 전 정조준 필요', color3)
+                    self.info.draw(x4 + 30, y, 'SR', color2)
                     if not buy:
                         self.info.draw(x3, cost, '28000', color4)
                 case (2, 0):
@@ -212,6 +236,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y6, '관통 시 대미지 감소: 40', color4)
                     self.info.draw(x, y7, '우클릭으로 정조준', color5)
                     self.info.draw(x, y8, '격발 전 정조준 필요', color3)
+                    self.info.draw(x4 + 30, y, 'SR', color2)
                     if not buy:
                         self.info.draw(x3, cost, '33000', color4)
                 case (3, 0):
@@ -223,6 +248,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y6, '관통 시 대미지 감소: 30', color4)
                     self.info.draw(x, y7, '우클릭으로 정조준', color5)
                     self.info.draw(x, y8, '격발 전 정조준 필요', color3)
+                    self.info.draw(x4 + 30, y, 'SR', color2)
                     if not buy:
                         self.info.draw(x3, cost, '38000', color4)
                 case (4, 0):
@@ -234,6 +260,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y6, '관통 시 대미지 감소: 30', color4)
                     self.info.draw(x, y7, '우클릭으로 정조준', color5)
                     self.info.draw(x, y8, '격발 전 정조준 필요', color3)
+                    self.info.draw(x4 + 30, y, 'SR', color2)
                     if not buy:
                         self.info.draw(x3, cost, '43000', color4)
 
@@ -268,8 +295,9 @@ def print_info(self, i, j):
                 self.info.draw(x, y3, '사거리: 270', color)
                 self.info.draw(x, y4, '스킬 사용 쿨타임: 30s', color4)
                 self.info.draw(x, y5, '스킬 실행: 우클릭 + 이동', color5)
-                self.info.draw(x, y6, '스킬 사용 도중 이동', color3)
-                self.info.draw(x, y7, '중지 시 스킬 사용 중지', color3)
+                self.info.draw(x, y6, '+ 이동 방향으로 바라보기', color5)
+                self.info.draw(x, y7, '스킬 사용 도중 이동', color3)
+                self.info.draw(x, y8, '중지 시 스킬 사용 중지', color3)
                 if not buy:
                     self.info.draw(x3, cost, '30000', color4)
             case (4, 0):
@@ -282,3 +310,28 @@ def print_info(self, i, j):
                 self.info.draw(x, y7, '소모', color3)
                 if not buy:
                     self.info.draw(x3, cost, '50000', color4)
+
+    elif self.select_mode == 2:
+        match(i, j):
+            case (0, 0):
+                self.info.draw(x, y, '권총탄 +150', color)
+                self.info.draw(x, y2, 'Pistol, SMG 전용', color4)
+                self.info.draw(x3, cost, '100', color4)
+                self.coin_icon.draw(x2, cost, 30, 30)
+            case (1, 0):
+                self.info.draw(x, y, '소총탄 +100', color)
+                self.info.draw(x, y2, 'AR 전용', color4)
+                self.coin_icon.draw(x2, cost, 30, 30)
+                self.info.draw(x3, cost, '200', color4)
+            case (2, 0):
+                self.info.draw(x, y, '대구경 소총탄 + 70', color)
+                self.info.draw(x, y2, 'Rifle 전용', color4)
+                self.info.draw(x3, cost, '350', color4)
+                self.coin_icon.draw(x2, cost, 30, 30)
+            case (3, 0):
+                self.info.draw(x, y, '저격 소총탄 + 30', color)
+                self.info.draw(x, y2, 'SR 전용', color4)
+                self.info.draw(x3, cost, '500', color4)
+                self.coin_icon.draw(x2, cost, 30, 30)
+
+
