@@ -25,7 +25,7 @@ def handle_events():
             if not weapon.skill_usable_katana:
                 weapon.skill_temp_katana = weapon.skill_delay_time_katana
             if not weapon.skill_usable_axe:
-                weapon.skill_temp_axw = weapon.skill_delay_time_axe
+                weapon.skill_temp_axe = weapon.skill_delay_time_axe
 
             game_framework.MODE = 'shop'
             game_framework.push_mode(shop_mode)

@@ -155,7 +155,7 @@ class Monster:
                 # AXE의 경우 스킬 사용 시 몬스터는 즉사한다
                 if self.weapon.hit_ground and self.weapon.melee == 'AXE':  # 해당 무기의 경우 아주 짧은 순간에만 대미지
                     self.hp -= 500
-                    self.p.dmg_delay = 100  # 스킬 사용 직후 몬스터에게 공격받지 않도록 함
+                    self.p.dmg_delay = 250  # 스킬 사용 직후 몬스터에게 공격받지 않도록 함
 
                 elif self.weapon.skill_enable and self.weapon.melee == 'KATANA':
                     self.hp -= 4

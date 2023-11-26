@@ -75,7 +75,7 @@ def set_skill(weapon):
             weapon.skill_enable = True
             set_skill_delay(weapon)
 
-    # axe는 게임 중 단 5번만 사용할 수 있다. 대신 매우 강력하다
+    # axe는 4000코인을 소모하여 스킬을 실행한다. 대신 매우 강력하다
     elif weapon.melee == 'AXE' and not weapon.p.mv_jump and weapon.skill_usable_axe:
         if weapon.p.coin >= 4000:
             weapon.swing = False
@@ -141,6 +141,7 @@ def update_melee_skill(weapon):
         if weapon.melee == 'KATANA':
             weapon.p.rotate = 0
             weapon.p.speed = weapon.p.temp_speed
+            weapon.p.dmg_delay = 250  # 시킬 사용 직후 대미지를 받지 않도록 한다.
 
         elif weapon.melee == 'AXE':
             weapon.hit_ground = False

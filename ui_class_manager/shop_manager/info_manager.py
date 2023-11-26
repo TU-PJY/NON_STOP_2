@@ -156,7 +156,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y, 'MINI-14', color)
                     self.info.draw(x, y2, '대미지: 50', color)
                     self.info.draw(x, y3, '장탄수: 30', color)
-                    self.info.draw(x, y4, '사용 탄약: 소총탄', color)
+                    self.info.draw(x, y4, '사용 탄약: 소총탄', color4)
                     if not buy:
                         self.info.draw(x3, cost, '15000', color4)
                 case (3, 3):
@@ -188,7 +188,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y4, '사용 탄약: 저격 소총탄', color)
                     self.info.draw(x, y5, '최대 관통 횟수: 2', color4)
                     self.info.draw(x, y6, '관통 시 대미지 감소: 50', color4)
-                    self.info.draw(x, y7, '마우스 우클릭으로 정조준',  color5)
+                    self.info.draw(x, y7, '우클릭으로 정조준',  color5)
                     self.info.draw(x, y8, '격발 전 정조준 필요', color3)
                     if not buy:
                         self.info.draw(x3, cost, '23000', color4)
@@ -199,7 +199,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y4, '사용 탄약: 저격 소총탄', color)
                     self.info.draw(x, y5, '최대 관통 횟수: 3', color4)
                     self.info.draw(x, y6, '관통 시 대미지 감소: 40', color4)
-                    self.info.draw(x, y7, '마우스 우클릭으로 정조준', color5)
+                    self.info.draw(x, y7, '우클릭으로 정조준', color5)
                     self.info.draw(x, y8, '격발 전 정조준 필요', color3)
                     if not buy:
                         self.info.draw(x3, cost, '28000', color4)
@@ -210,7 +210,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y4, '사용 탄약: 저격 소총탄', color)
                     self.info.draw(x, y5, '최대 관통 횟수: 4', color4)
                     self.info.draw(x, y6, '관통 시 대미지 감소: 40', color4)
-                    self.info.draw(x, y7, '마우스 우클릭으로 정조준', color5)
+                    self.info.draw(x, y7, '우클릭으로 정조준', color5)
                     self.info.draw(x, y8, '격발 전 정조준 필요', color3)
                     if not buy:
                         self.info.draw(x3, cost, '33000', color4)
@@ -221,7 +221,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y4, '사용 탄약: 저격 소총탄', color)
                     self.info.draw(x, y5, '최대 관통 횟수: 6', color4)
                     self.info.draw(x, y6, '관통 시 대미지 감소: 30', color4)
-                    self.info.draw(x, y7, '마우스 우클릭으로 정조준', color5)
+                    self.info.draw(x, y7, '우클릭으로 정조준', color5)
                     self.info.draw(x, y8, '격발 전 정조준 필요', color3)
                     if not buy:
                         self.info.draw(x3, cost, '38000', color4)
@@ -232,7 +232,53 @@ def print_info(self, i, j):
                     self.info.draw(x, y4, '사용 탄약: 저격 소총탄', color)
                     self.info.draw(x, y5, '최대 관통 횟수: 8', color4)
                     self.info.draw(x, y6, '관통 시 대미지 감소: 30', color4)
-                    self.info.draw(x, y7, '마우스 우클릭으로 정조준', color5)
+                    self.info.draw(x, y7, '우클릭으로 정조준', color5)
                     self.info.draw(x, y8, '격발 전 정조준 필요', color3)
                     if not buy:
                         self.info.draw(x3, cost, '43000', color4)
+
+    elif self.select_mode == 1:
+        if not play_mode.weapon.buy_list_melee[i][j]:
+            self.coin_icon.draw(x2, cost, 30, 30)
+            buy = False
+
+        match(i, j):
+            case (0, 0):
+                self.info.draw(x, y, 'MILITARY KNIFE', color)
+                self.info.draw(x, y2, '대미지: 60', color)
+                self.info.draw(x, y3, '사거리: 180', color)
+            case (1, 0):
+                self.info.draw(x, y, 'ALLOY BAT', color)
+                self.info.draw(x, y2, '대미지: 120', color)
+                self.info.draw(x, y3, '사거리: 220', color)
+                if not buy:
+                    self.info.draw(x3, cost, '5000', color4)
+            case (2, 0):
+                self.info.draw(x, y, 'RAPIER', color)
+                self.info.draw(x, y2, '대미지: 30', color)
+                self.info.draw(x, y3, '사거리: 300', color)
+                self.info.draw(x, y4, '스킬 사용 쿨타임: 20s', color4)
+                self.info.draw(x, y5, '스킬 실행: 우클릭', color5)
+                self.info.draw(x, y6, '스킬 실행 시 사거리 +70', color5)
+                if not buy:
+                    self.info.draw(x3, cost, '15000', color4)
+            case (3, 0):
+                self.info.draw(x, y, 'KATANA', color)
+                self.info.draw(x, y2, '대미지: 100', color)
+                self.info.draw(x, y3, '사거리: 270', color)
+                self.info.draw(x, y4, '스킬 사용 쿨타임: 30s', color4)
+                self.info.draw(x, y5, '스킬 실행: 우클릭 + 이동', color5)
+                self.info.draw(x, y6, '스킬 사용 도중 이동', color3)
+                self.info.draw(x, y7, '중지 시 스킬 사용 중지', color3)
+                if not buy:
+                    self.info.draw(x3, cost, '30000', color4)
+            case (4, 0):
+                self.info.draw(x, y, 'JARL AXE', color)
+                self.info.draw(x, y2, '대미지: 150', color)
+                self.info.draw(x, y3, '사거리: 230', color)
+                self.info.draw(x, y4, '스킬 사용 쿨타임: 60s', color4)
+                self.info.draw(x, y5, '스킬 실행: 우클릭', color5)
+                self.info.draw(x, y6, '스킬 실행에 4000 코인', color3)
+                self.info.draw(x, y7, '소모', color3)
+                if not buy:
+                    self.info.draw(x3, cost, '50000', color4)
