@@ -32,7 +32,7 @@ class Move:
 
         elif ctrl_down(e):  # 응급처치 키드를 사용하여 체력 회복
             if p.medkit_count > 0 and p.cur_hp < p.hp and p.usable_medkit:
-                p.cur_hp += 30
+                p.cur_hp += 50
                 p.medkit_count -= 1
                 heal = PlayerDamage(True)  # 플레이어 대미지 피드백 클래스를 활용한다
                 game_manager.add_object(heal, 7)
@@ -91,13 +91,13 @@ class Idle:
                 if p.jump_count == 0:
                     p.jump_acc = JUMP_ACC
                 else:
-                    p.jump_acc = JUMP_ACC / 1.2  # 두 번쨰 점프는 가속도를 조금 적게 준다
+                    p.jump_acc = JUMP_ACC / 1.3  # 두 번쨰 점프부터 가속도를 조금 적게 준다
                 p.jump_count += 1
                 p.mv_jump = True
 
         elif ctrl_down(e):  # 응급처치 키드를 사용하여 체력 회복
             if p.medkit_count > 0 and p.cur_hp < p.hp and p.usable_medkit:
-                p.cur_hp += 30
+                p.cur_hp += 50
                 p.medkit_count -= 1
                 heal = PlayerDamage(True)  # 플레이어 대미지 피드백 클래스를 활용한다
                 game_manager.add_object(heal, 7)
@@ -183,7 +183,7 @@ class Player:
         self.speed = 1  # 플레이어 이동 속도 (사실상 맵 움직이는 속도)
         self.jump_acc = JUMP_ACC
         self.jump_count = 0
-        self.jump_level = 1  # 레벨이 오를수록 연속 점프 횟수가 많아짐
+        self.jump_level = 2  # 레벨이 오를수록 연속 점프 횟수가 많아짐
         self.jump_delay = 0
 
         self.coin = 99999999  # 플레이어가 소지한 코인 개수

@@ -151,17 +151,17 @@ def update_target(t):
             t.recoil += 20
 
     elif t.weapon.gun == 'DEGLE':
-        t.dis2 = t.dis / 15
+        t.dis2 = t.dis / 20
         if t.weapon.shoot:
             t.recoil += 45
 
     elif t.weapon.gun == 'M500':
-        t.dis2 = t.dis / 15
+        t.dis2 = t.dis / 20
         if t.weapon.shoot:
             t.recoil += 65
 
     elif t.weapon.gun == 'QHAND':
-        t.dis2 = t.dis / 13
+        t.dis2 = t.dis / 15
         if t.weapon.shoot:
             t.recoil += 20
 

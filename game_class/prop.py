@@ -88,7 +88,7 @@ class Arrow:
                 if self.p.dmg_delay <= 0:
                     self.p.cur_hp -= 15
                     self.p.dmg_shake_range = 30
-                    self.p.dmg_delay = 250
+                    self.p.dmg_delay = 200
                     pd = PlayerDamage()
                     game_manager.add_object(pd, 7)
             game_manager.remove_object(self)

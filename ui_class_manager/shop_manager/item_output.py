@@ -58,16 +58,40 @@ def draw_items(self):
         self.medkit.draw(self.button_x[4], self.button_y[0], self.size_list[4][0], self.size_list[4][0])
 
         self.hpup.draw(self.button_x[0], self.button_y[1], self.size_list[0][1], self.size_list[0][1])
-        self.font_small.draw(self.button_x[0] - 35, self.button_y[1] - 70, '%d | 3' % play_mode.p.hp_count, color)
+        if play_mode.p.hp_count == 3:
+            color_hp = (0, 255, 0)
+        else:
+            color_hp = (50, 50, 50)
+        self.font_small.draw(self.button_x[0] - 35, self.button_y[1] - 70, '%d | 3' % play_mode.p.hp_count, color_hp)
 
         self.regenup.draw(self.button_x[1], self.button_y[1], self.size_list[1][1], self.size_list[1][1])
-        self.font_small.draw(self.button_x[1] - 35, self.button_y[1] - 70, '%d | 3' % play_mode.p.regen_count, color)
+        if play_mode.p.regen_count == 3:
+            color_regen = (0, 255, 0)
+        else:
+            color_regen = (50, 50, 50)
+        self.font_small.draw \
+            (self.button_x[1] - 35, self.button_y[1] - 70, '%d | 3' % play_mode.p.regen_count, color_regen)
 
         self.speedup.draw(self.button_x[2], self.button_y[1], self.size_list[2][1], self.size_list[2][1])
-        self.font_small.draw(self.button_x[2] - 35, self.button_y[1] - 70, '%d | 3' % play_mode.p.speed_count, color)
+        if play_mode.p.speed_count == 3:
+            color_speed = (0, 255, 0)
+        else:
+            color_speed = (50, 50, 50)
+        self.font_small.draw \
+            (self.button_x[2] - 35, self.button_y[1] - 70, '%d | 3' % play_mode.p.speed_count, color_speed)
 
         self.doublejump.draw(self.button_x[3], self.button_y[1], self.size_list[3][1], self.size_list[3][1])
-        self.font_small.draw(self.button_x[3] - 35, self.button_y[1] - 70, '%d | 1' % play_mode.p.double_jump, color)
+        if play_mode.p.jump_level == 3:
+            color_jump = (0, 255, 0)
+        else:
+            color_jump = (50, 50, 50)
+        self.font_small.draw \
+            (self.button_x[3] - 35, self.button_y[1] - 70, '%d | 1' % play_mode.p.double_jump, color_jump)
 
         self.grenup.draw(self.button_x[4], self.button_y[1], self.size_list[4][1], self.size_list[4][1])
-        self.font_small.draw(self.button_x[4] - 35, self.button_y[1] - 70, '%d | 2' % play_mode.p.gren_count, color)
+        if play_mode.p.gren_count == 2:
+            color_gren = (0, 255, 0)
+        else:
+            color_gren = (50, 50, 50)
+        self.font_small.draw \
+            (self.button_x[4] - 35, self.button_y[1] - 70, '%d | 2' % play_mode.p.gren_count, color_gren)

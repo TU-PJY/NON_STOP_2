@@ -154,7 +154,7 @@ class Monster:
                                 self.p.cur_hp -= 20
 
                         self.p.dmg_shake_range = 30
-                        self.p.dmg_delay = 250  # 해당 변수가 0이 되어야 플레이어는 다음 대미지를 받는다
+                        self.p.dmg_delay = 200  # 해당 변수가 0이 되어야 플레이어는 다음 대미지를 받는다
                         pd = PlayerDamage()  # 대미지를 받으면 화면에 대미지 피드백을 표시한다
                         game_manager.add_object(pd, 7)
 

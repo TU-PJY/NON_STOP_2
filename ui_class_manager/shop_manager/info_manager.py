@@ -68,7 +68,7 @@ def print_info(self, i, j):
                         self.info.draw(x3, cost, '800', color4)
                 case (4, 0):
                     self.info.draw(x, y, 'QUICK HAND', color)
-                    self.info.draw(x, y2, '대미지: 20', color)
+                    self.info.draw(x, y2, '대미지: 23', color)
                     self.info.draw(x, y3, '장탄수: 12', color)
                     self.info.draw(x, y4, '사용 탄약: 권총탄', color)
                     self.info.draw(x4 + 5, y, 'Pistol', color2)
@@ -339,7 +339,7 @@ def print_info(self, i, j):
                 self.coin_icon.draw(x2, cost, 30, 30)
             case (4, 0):
                 self.info.draw(x, y, '응급처치 키트', color)
-                self.info.draw(x, y2, '30 HP 회복', color4)
+                self.info.draw(x, y2, '50 HP 회복', color4)
                 self.info.draw(x, y3, '보유량: %d' % play_mode.p.medkit_count, color5)
                 self.info.draw(x3, cost, '400', color4)
                 self.coin_icon.draw(x2, cost, 30, 30)
@@ -363,10 +363,10 @@ def print_info(self, i, j):
                     self.info.draw(x3, cost, '%d' % play_mode.p.speed_cost, color4)
                     self.coin_icon.draw(x2, cost, 30, 30)
             case (3, 1):
-                self.info.draw(x, y, '더블 점프', color)
+                self.info.draw(x, y, '트리플 점프', color)
                 self.info.draw(x, y2, '공중에서 한 번 더 점프', color4)
                 self.info.draw(x, y3, '가능', color4)
-                if play_mode.p.jump_level < 2:
+                if play_mode.p.jump_level < 3:
                     self.info.draw(x3, cost, '3000', color4)
                     self.coin_icon.draw(x2, cost, 30, 30)
             case (4, 1):
