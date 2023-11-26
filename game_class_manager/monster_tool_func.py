@@ -80,6 +80,7 @@ def update_rounds(self):
             play_mode.ig.rb = 0
             self.rounds += 1  # 라운드 증가
             self.limit += 5  # 스폰 제한 횟수 5씩 증가
+            self.kill_count = self.limit
             self.spawn_remain = self.limit  # 앞으로 스폰할 몬스터 수 갱신
             self.spawn_time = 1500  # 매 라운드 시작 시 어느 정도의 시간을 두고 스폰 시작
             self.spawn_enable = True  # 다음 라운드로 넘어가 스폰을 다시 시작한다.

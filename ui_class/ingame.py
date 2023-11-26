@@ -16,6 +16,8 @@ class Ingame:
 
         self.get_y = 0  # 코인 획득 피드백을 위한 추가 좌표
 
+        self.ky = 0  # 몬스터 처치 시 피드백 재생
+
     def update(self):
         update_ammo_ind(self)
         update_round_ind(self)

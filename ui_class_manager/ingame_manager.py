@@ -53,6 +53,12 @@ def render_ingame_ui(self):
         if self.get_y < 0:
             self.get_y = 0
 
+    # 몬스터 킬 피드백
+    if self.ky > 0:
+        self.ky -= pps / 4
+        if self.ky < 0:
+            self.ky = 0
+
     if game_framework.MODE == 'play':
         # 탄약 인디케이터 배경 출력
         self.back.opacify(400)
@@ -119,6 +125,10 @@ def render_ingame_ui(self):
         # 라운드 수 출력
         self.font.draw(WIDTH / 2 - 130 + ex, HEIGHT - 50 + ey, 'ROUND %d' % play_mode.tool.rounds,
                        (255, int(self.rg), int(self.rb)))
+
+        self.font_small.draw \
+            (WIDTH / 2 + 200 + ex, HEIGHT - 59 + ey + self.ky, \
+             '%d | %d' % (play_mode.tool.limit - play_mode.tool.kill_count, play_mode.tool.limit), (255, 255, 255))
 
         #  근접 무기 스킬 사용 쿨타입 표시
         if self.weapon.weapon_type == 1:

@@ -90,5 +90,7 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
 
     if m.hp <= 0:  # hp가 0이 될 경우 죽는다.
         play_mode.tool.spawn_num -= 1  # 스폰된 몬스터 수 감소
+        play_mode.tool.kill_count -= 1  # 킬 카운드 감소
+        play_mode.ig.ky = 70  # 킬 피드백 재생
         add_object_after_dead(m)
 
