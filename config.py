@@ -165,6 +165,8 @@ goblin_dead_directory = 'res//prop//goblin_dead.png'
 apple_dead_directory = 'res//prop//apple_dead.png'
 ghost_dead_directory = 'res//prop//ghost_dead.png'
 
+player_heal_directory = 'res//player_image//player_heal.png'
+
 # ui 이미지 파일 경로
 shop_window_directory = 'res//ui//shop_window.png'
 pause_bg_directory = 'res//ui//pause_bg.png'
@@ -199,11 +201,15 @@ ind_equiped_directory = 'res//ui//item_equiped.png'
 ind_lock_directory = 'res//ui//lock.png'
 
 icon_medkit_directory = 'res//ui//icon_medkit.png'
+icon_medkit_unable_directory = 'res//ui//icon_medkit_unable.png'
+
 icon_grenade_upgrade_directory = 'res//ui//icon_grenade_upgrade.png'
-icon_hp_upgrade = 'res//ui//icon_hp_upgrade.png'
-icon_regen_upgrade = 'res//ui//icon_regeneration_upgrade.png'
-icon_speed_upgrade = 'res//ui//icon_speed_upgrade.png'
-icon_double_jump = 'res//ui//icon_double_jump.png'
+icon_hp_upgrade_directory = 'res//ui//icon_hp_upgrade.png'
+icon_regen_upgrade_directory = 'res//ui//icon_regeneration_upgrade.png'
+icon_speed_upgrade_directory = 'res//ui//icon_speed_upgrade.png'
+icon_double_jump_directory = 'res//ui//icon_double_jump.png'
+
+hp_regen_directory = 'res//ui//hp_regen.png'
 
 # 폰트 경로
 font_directory = 'res//font//bump-it-up.ttf'

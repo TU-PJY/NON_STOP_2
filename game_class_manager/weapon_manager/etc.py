@@ -161,12 +161,7 @@ def throw_grenade(weapon):
         game_manager.add_object(gren, 3)
         weapon.throwable = False
         weapon.throw_delay = get_time()  # 던진 직후부터 쿨타임 측정
-        if weapon.gren_level == 1:
-            weapon.p.coin -= 500  # 레벨이 오를수록 더 많은 비용이 들어간다
-        elif weapon.gren_level == 2:
-            weapon.p.coin -= 1500
-        elif weapon.gren_level == 3:
-            weapon.p.coin -= 4500
+        weapon.p.coin -= weapon.p.gren_use_cost
         weapon.p.get_coin = True  # 코인 사용 피드백 재생
 
 

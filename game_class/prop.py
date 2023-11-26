@@ -300,9 +300,13 @@ class KatanaSlice:
 
 
 class PlayerDamage:
-    def __init__(self):
+    def __init__(self, heal=False):
         self.op = 1
-        self.image = load_image(player_damage_directory)
+        self.heal = heal
+        if not self.heal:
+            self.image = load_image(player_damage_directory)
+        elif self.heal:
+            self.image = load_image(player_heal_directory)
 
     def draw(self):
         self.image.opacify(self.op)
@@ -395,7 +399,7 @@ class Coin:
     def handle_collision(self, group, other):
         if group == 'player:coin':
             if not self.up:  # 획득하지 않은 코인에 대해서만 코인 획득 피드백 재생
-                self.p.coin += 26 + play_mode.tool.rounds * 4  # 라운드가 올라갈 수록 코인을 더 많이 획득한다
+                self.p.coin += 27 + play_mode.tool.rounds * 3  # 라운드가 올라갈 수록 코인을 더 많이 획득한다
                 self.up = True
                 self.p.get_coin = True
 
@@ -417,14 +421,14 @@ class Explode:
     def draw(self):
         x = self.x + self.p.ex
         y = self.y + self.p.ey
-        size = self.weapon.gren_level * 100  # 수류탄 레벨이 올라갈수록 폭발도 커진다
-        self.image.clip_composite_draw(100 * int(self.frame), 0, 100, 695, 0, '', x, y, 400 + size, 400 + size)
+        size = self.weapon.gren_level * 200  # 수류탄 레벨이 올라갈수록 폭발도 커진다
+        self.image.clip_composite_draw(100 * int(self.frame), 0, 100, 695, 0, '', x, y, 200 + size, 200 + size)
 
     def update(self):
         pps = game_framework.pps
         speed = game_framework.pps * self.p.speed
         if game_framework.MODE == 'play':
-            self.frame = (self.frame + pps / 30) % 7
+            self.frame = (self.frame + pps / 40) % 7
             if int(self.frame) == 6:  # 폭발 애니메이션이 다 출력되면 객체 삭제
                 game_manager.remove_object(self)
 
@@ -498,7 +502,7 @@ class Grenade:
                     self.speed -= 1
                     self.y = 200
                     self.acc = self.acc / 2 * -1
-                    if self.acc < 1:
+                    if self.acc < 0.5:
                         self.simulate = False
 
             if self.p.mv_right:
@@ -695,17 +699,17 @@ class Dead:
                 # animation 3
                 elif self.ani == 3:  # 폭발에 튕겨나가는 모션
                     if self.dir == 1:
-                        self.x += self.speed
-                        self.deg -= pps / 4
-                        if self.x >= self.mp.playerToWallRight:
-                            self.speed -= 2
-                            self.dir = 0
-
-                    elif self.dir == 0:
                         self.x -= self.speed
                         self.deg += pps / 4
                         if self.x <= self.mp.playerToWallLeft:
-                            self.speed -= 2
+                            self.speed -= random.uniform(1.5, 3)
+                            self.dir = 0
+
+                    elif self.dir == 0:
+                        self.x += self.speed
+                        self.deg -= pps / 4
+                        if self.x >= self.mp.playerToWallRight:
+                            self.speed -= random.uniform(1.5, 3)
                             self.dir = 1
 
                     self.y += self.acc
@@ -726,10 +730,10 @@ class Dead:
                 # animation 4
                 elif self.ani == 4:  # 카타나 또는 도끼 스킬에 죽는 모션
                     if self.dir == 1:
-                        self.deg -= pps / 4
+                        self.deg += pps / 4
 
                     elif self.dir == 0:
-                        self.deg += pps / 4
+                        self.deg -= pps / 4
 
                     self.y += self.acc
                     self.acc -= pps / 90

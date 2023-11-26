@@ -18,12 +18,11 @@ def handle_events():
                 if exit_enable:
                     # 상점모드에서 소요된 시간을 다시 수류탄 사용 쿨타임에 반환
                     play_mode.weapon.throw_delay = get_time() - play_mode.weapon.temp_time
-                    if not play_mode.weapon.skill_usable_rapier:
-                        play_mode.weapon.skill_delay_rapier = get_time() - play_mode.weapon.skill_temp_rapier
-                    if not play_mode.weapon.skill_usable_katana:
-                        play_mode.weapon.skill_delay_katana = get_time() - play_mode.weapon.skill_temp_katana
-                    if not play_mode.weapon.skill_usable_axe:
-                        play_mode.weapon.skill_delay_axe = get_time() - play_mode.weapon.skill_temp_axe
+                    play_mode.weapon.skill_delay_rapier = get_time() - play_mode.weapon.skill_temp_rapier
+                    play_mode.weapon.skill_delay_katana = get_time() - play_mode.weapon.skill_temp_katana
+                    play_mode.weapon.skill_delay_axe = get_time() - play_mode.weapon.skill_temp_axe
+                    play_mode.p.medkit_delay = get_time() - play_mode.p.medkit_delay_temp
+
                     game_framework.MODE = 'play'
                     game_framework.pop_mode()
 

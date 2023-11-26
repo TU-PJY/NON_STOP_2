@@ -306,7 +306,7 @@ def print_info(self, i, j):
                 self.info.draw(x, y3, '사거리: 230', color)
                 self.info.draw(x, y4, '스킬 사용 쿨타임: 60s', color4)
                 self.info.draw(x, y5, '스킬 실행: 우클릭', color5)
-                self.info.draw(x, y6, '스킬 실행에 4000 코인', color3)
+                self.info.draw(x, y6, '스킬 실행에 2000 코인', color3)
                 self.info.draw(x, y7, '소모', color3)
                 if not buy:
                     self.info.draw(x3, cost, '50000', color4)
@@ -339,37 +339,42 @@ def print_info(self, i, j):
                 self.coin_icon.draw(x2, cost, 30, 30)
             case (4, 0):
                 self.info.draw(x, y, '응급처치 키트', color)
-                self.info.draw(x, y2, '20H 회복', color4)
+                self.info.draw(x, y2, '30 HP 회복', color4)
                 self.info.draw(x, y3, '보유량: %d' % play_mode.p.medkit_count, color5)
                 self.info.draw(x3, cost, '400', color4)
                 self.coin_icon.draw(x2, cost, 30, 30)
             case (0, 1):
                 self.info.draw(x, y, 'HP 업그레이드', color)
                 self.info.draw(x, y2, '+50 HP', color4)
-                self.info.draw(x, y3, '현재 최대 HP: %d' % (200 + 50 * self.hp_count), color5)
-                self.info.draw(x3, cost, '%d' % self.hp_cost, color4)
-                self.coin_icon.draw(x2, cost, 30, 30)
+                self.info.draw(x, y3, '현재 최대 HP: %d' % (200 + 50 * play_mode.p.hp_count), color5)
+                if play_mode.p.hp_count < 3:
+                    self.info.draw(x3, cost, '%d' % play_mode.p.hp_cost, color4)
+                    self.coin_icon.draw(x2, cost, 30, 30)
             case (1, 1):
                 self.info.draw(x, y, '회복력 업그레이드', color)
                 self.info.draw(x, y2, '+1 체력 회복 속도', color4)
-                self.info.draw(x3, cost, '%d' % self.regen_cost, color4)
-                self.coin_icon.draw(x2, cost, 30, 30)
+                if play_mode.p.regen_count < 3:
+                    self.info.draw(x3, cost, '%d' % play_mode.p.regen_cost, color4)
+                    self.coin_icon.draw(x2, cost, 30, 30)
             case (2, 1):
                 self.info.draw(x, y, '이동 속도 업그레이드', color)
                 self.info.draw(x, y2, '+1 이동 속도', color4)
-                self.info.draw(x3, cost, '%d' % self.speed_cost, color4)
-                self.coin_icon.draw(x2, cost, 30, 30)
+                if play_mode.p.speed_count < 3:
+                    self.info.draw(x3, cost, '%d' % play_mode.p.speed_cost, color4)
+                    self.coin_icon.draw(x2, cost, 30, 30)
             case (3, 1):
                 self.info.draw(x, y, '더블 점프', color)
                 self.info.draw(x, y2, '공중에서 한 번 더 점프', color4)
                 self.info.draw(x, y3, '가능', color4)
-                self.info.draw(x3, cost, '3000', color4)
-                self.coin_icon.draw(x2, cost, 30, 30)
+                if play_mode.p.jump_level < 2:
+                    self.info.draw(x3, cost, '3000', color4)
+                    self.coin_icon.draw(x2, cost, 30, 30)
             case (4, 1):
                 self.info.draw(x, y, '수류탄 업그레이드', color)
                 self.info.draw(x, y2, '+200 폭발 반경', color4)
                 self.info.draw(x, y3, '코인 소모 증가', color3)
-                self.info.draw(x3, cost, '%d' % self.gren_cost, color4)
-                self.coin_icon.draw(x2, cost, 30, 30)
+                if play_mode.p.gren_count < 2:
+                    self.info.draw(x3, cost, '%d' % play_mode.p.gren_cost, color4)
+                    self.coin_icon.draw(x2, cost, 30, 30)
 
 

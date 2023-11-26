@@ -1,4 +1,6 @@
+from game_class.prop import PlayerDamage
 from game_class_manager.player_manager import *
+from game_work import game_manager
 from game_work.display_manager import *
 from mods import play_mode
 
@@ -20,11 +22,25 @@ class Move:
     @staticmethod
     def exit(p, e):
         if space_down(e):
-            if not p.mv_jump:
-                if p.jump_count < p.jump_level:
+            if p.jump_count < p.jump_level:
+                if p.jump_count == 0:
                     p.jump_acc = JUMP_ACC
-                    p.jump_count += 1
-                    p.mv_jump = True
+                else:
+                    p.jump_acc = JUMP_ACC / 1.2  # 두 번쨰 점프는 가속도를 조금 적게 준다
+                p.jump_count += 1
+                p.mv_jump = True
+
+        elif ctrl_down(e):  # 응급처치 키드를 사용하여 체력 회복
+            if p.medkit_count > 0 and p.cur_hp < p.hp and p.usable_medkit:
+                p.cur_hp += 30
+                p.medkit_count -= 1
+                heal = PlayerDamage(True)  # 플레이어 대미지 피드백 클래스를 활용한다
+                game_manager.add_object(heal, 7)
+                if p.cur_hp > p.hp:
+                    p.cur_hp = p.hp
+                    p.regen_timer = 0
+                set_medkit_delay(p)
+
         else:
             if play_mode.weapon.melee == 'KATANA' and play_mode.weapon.skill_enable:
                 play_mode.weapon.skill_enable = False
@@ -55,6 +71,9 @@ class Move:
         dmg_shake(p)
         explode_shake(p)
 
+        update_medkit_delay(p)
+        regen_hp(p)
+
     @staticmethod
     def draw(p):
         draw_player(p)
@@ -68,11 +87,24 @@ class Idle:
     @staticmethod
     def exit(p, e):
         if space_down(e):
-            if not p.mv_jump:
-                if p.jump_count < p.jump_level:
+            if p.jump_count < p.jump_level:
+                if p.jump_count == 0:
                     p.jump_acc = JUMP_ACC
-                    p.jump_count += 1
-                    p.mv_jump = True
+                else:
+                    p.jump_acc = JUMP_ACC / 1.2  # 두 번쨰 점프는 가속도를 조금 적게 준다
+                p.jump_count += 1
+                p.mv_jump = True
+
+        elif ctrl_down(e):  # 응급처치 키드를 사용하여 체력 회복
+            if p.medkit_count > 0 and p.cur_hp < p.hp and p.usable_medkit:
+                p.cur_hp += 30
+                p.medkit_count -= 1
+                heal = PlayerDamage(True)  # 플레이어 대미지 피드백 클래스를 활용한다
+                game_manager.add_object(heal, 7)
+                if p.cur_hp > p.hp:
+                    p.cur_hp = p.hp
+                    p.regen_timer = 0
+                set_medkit_delay(p)
 
     @staticmethod
     def do(p):
@@ -90,6 +122,9 @@ class Idle:
         dmg_shake(p)
         explode_shake(p)
 
+        update_medkit_delay(p)
+        regen_hp(p)
+
     @staticmethod
     def draw(p):
         draw_player(p)
@@ -100,8 +135,8 @@ class StateMachine:
         self.p = p
         self.cur_state = Idle
         self.table = {
-            Idle: {right_down: Move, left_down: Move, left_up: Move, right_up: Move, space_down: Idle},
-            Move: {right_down: Idle, left_down: Idle, left_up: Idle, right_up: Idle, space_down: Move},
+            Idle: {right_down: Move, left_down: Move, left_up: Move, right_up: Move, space_down: Idle, ctrl_down: Idle},
+            Move: {right_down: Idle, left_down: Idle, left_up: Idle, right_up: Idle, space_down: Move, ctrl_down: Move},
         }
 
     def start(self):
@@ -130,8 +165,14 @@ class Player:
 
         self.hp = 200  # 업그레이드하면 체력이 커진다
         self.cur_hp = 200  # 현재 체력, 피격 시 감소한다
+        self.regen_timer = 0
+        self.regen_delay = 700  # 플레이어 체력 회복 딜레이
 
         self.medkit_count = 1  # 회복 아이템 개수
+        self.medkit_delay_time = 0
+        self.medkit_delay_temp = 0
+        self.medkit_delay = 0
+        self.usable_medkit = True
 
         # player data
         self.x, self.y, self.dir = WIDTH / 2, 250, 1
@@ -171,6 +212,20 @@ class Player:
         self.ex, self.ey = 0, 0  # 플레이어 좌표를 제외한 디스플레이 효과 변수. 객체 좌표에 더하여 사용
         self.px, self.py = 0, 0  # 플레이어 좌표
         self.wx, self.wy = 0, 0  # 무기 좌표
+
+        # 업그레이드 정보를 유지하기 위해 player 클래스에 저장
+        self.hp_count = 0  # 최대 3단계
+        self.regen_count = 0  # 최대 3단계
+        self.speed_count = 0  # 최대 3단계
+        self.double_jump = 0  # 최대 1단계, play_mode.p.jump_level로 전달
+        self.gren_count = 0  # 최대 2단계
+
+        self.hp_cost = 500
+        self.regen_cost = 500
+        self.speed_cost = 500
+        self.gren_cost = 1500
+
+        self.gren_use_cost = 500
 
         self.state_machine = StateMachine(self)
         self.state_machine.start()

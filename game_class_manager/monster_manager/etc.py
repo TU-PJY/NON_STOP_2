@@ -92,7 +92,7 @@ def add_object_after_dead(m):
         elif m.ex_dead:
             if m.weapon.gren_x < m.x:
                 dead = Dead(m.p, m.mp, m.x, m.y, 0, m.type, 3)
-            elif m.x <= m.weapon.gren_x:
+            elif m.x < m.weapon.gren_x:
                 dead = Dead(m.p, m.mp, m.x, m.y, 1, m.type, 3)
 
     if m.weapon.melee == 'KATANA' or m.weapon.melee == 'AXE' and m.weapon.skill_enable and m.weapon.weapon_type == 1:

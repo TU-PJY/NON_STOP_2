@@ -27,6 +27,10 @@ def space_down(e):
     return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_SPACE
 
 
+def ctrl_down(e):
+    return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_LCTRL
+
+
 def load_player_image(self):
     self.image = load_image(player1_right_image_directory)
     self.image_left = load_image(player1_left_image_directory)
@@ -106,3 +110,26 @@ def update_damage_delay(p):  # 플레이어 대미지 딜레이 업데이트
     pps = game_framework.pps
     if p.dmg_delay > 0:
         p.dmg_delay -= pps / 3
+
+
+def set_medkit_delay(p):
+    p.usable_medkit = False
+    p.medkit_delay = get_time()
+
+
+def update_medkit_delay(p):
+    if not p.usable_medkit:
+        p.medkit_delay_time = get_time() - p.medkit_delay
+        if p.medkit_delay_time > 4:
+            p.usable_medkit = True
+
+
+def regen_hp(p):
+    pps = game_framework.pps
+    if p.cur_hp < p.hp:
+        p.regen_timer += pps / 3
+        if p.regen_timer >= p.regen_delay:
+            p.cur_hp += 5
+            if p.cur_hp > p.hp:
+                p.cur_hp = p.hp
+            p.regen_timer = 0

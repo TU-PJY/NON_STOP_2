@@ -65,17 +65,6 @@ class Shop:
         self.ind_sel_on = False  # 아이템 선택 시 현재 선택중인 아이템을 표시함다. 해당 아이템 장착 시 사라진다.
         self.data_change = False  # 구입한 항목에 대해서만 아이템 관련 변수 값 변경을 허용한다.
 
-        self.hp_count = 0  # 최대 3단계
-        self.regen_count = 0  # 최대 3단계
-        self.speed_count = 0  # 최대 3단계
-        self.double_jump = 0  # 최대 1단계, play_mode.p.jump_level로 전달
-        self.gren_count = 0  # 최대 3단계
-
-        self.hp_cost = 500
-        self.regen_cost = 500
-        self.speed_cost = 500
-        self.gren_cost = 1500
-
         load_shop_resource(self)
         make_button_pos(self)
 

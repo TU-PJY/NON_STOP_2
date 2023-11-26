@@ -28,6 +28,11 @@ def load_resource(self):
     self.image_ammo_rifle = load_image(ammo_rifle_icon_directory)
     self.image_ammo_sr = load_image(ammo_sr_icon_directory)
 
+    self.medkit = load_image(icon_medkit_directory)
+    self.medkit_unable = load_image(icon_medkit_unable_directory)
+
+    self.hp_regen = load_image(hp_regen_directory)
+
 
 def render_ingame_ui(self):
     pps = game_framework.pps
@@ -93,48 +98,47 @@ def render_ingame_ui(self):
         # 수류탄을 던질 수 있게되면 밝은 아이콘으로 표시, 아니면 어두운 아이콘으로 표시
         if self.weapon.throwable:
             self.coin_icon.draw(555 + ex, 45 + ey, 30, 30)
-            if self.weapon.gren_level == 1:
-                if self.p.coin >= 500:
-                    self.grenade_able_icon.draw(500 + ex, 50 + ey, 100, 100)
-                    self.font_mini.draw(575 + ex, 45 + ey, '500', (255, 255, 255))
-                    self.font_mini.draw(540 + ex, 80 + ey, 'L SHIFT', (255, 255, 255))
-                else:
-                    self.grenade_unable_icon.draw(500 + ex, 50 + ey, 100, 100)
-                    self.font_mini.draw(575 + ex, 45 + ey, '500', (255, 0, 0))
-
-            elif self.weapon.gren_level == 2:
-                if self.p.coin >= 1500:
-                    self.grenade_able_icon.draw(500 + ex, 50 + ey, 100, 100)
-                    self.font_mini.draw(575 + ex, 45 + ey, '1500', (255, 255, 255))
-                    self.font_mini.draw(540 + ex, 80 + ey, 'L SHIFT', (255, 255, 255))
-                else:
-                    self.grenade_unable_icon.draw(500 + ex, 50 + ey, 100, 100)
-                    self.font_mini.draw(575 + ex, 45 + ey, '1500', (255, 0, 0))
-
-            elif self.weapon.gren_level == 3:
-                if self.p.coin >= 4500:
-                    self.grenade_able_icon.draw(500 + ex, 50 + ey, 100, 100)
-                    self.font_mini.draw(575 + ex, 45 + ey, '4500', (255, 255, 255))
-                    self.font_mini.draw(540 + ex, 80 + ey, 'L SHIFT', (255, 255, 255))
-                else:
-                    self.grenade_unable_icon.draw(500 + ex, 50 + ey, 100, 100)
-                    self.font_mini.draw(575 + ex, 45 + ey, '4500', (255, 0, 0))
+            if self.p.coin >= self.p.gren_use_cost:
+                self.grenade_able_icon.draw(500 + ex, 50 + ey, 100, 100)
+                self.font_mini.draw(575 + ex, 45 + ey, '%d' % self.p.gren_use_cost, (255, 255, 255))
+                self.font_mini.draw(540 + ex, 80 + ey, 'L SHIFT', (255, 255, 255))
+            else:
+                self.grenade_unable_icon.draw(500 + ex, 50 + ey, 100, 100)
+                self.font_mini.draw(575 + ex, 45 + ey, '%d' % self.p.gren_use_cost, (255, 0, 0))
         else:
             self.font_small.draw(550 + ex, 45 + ey, '%d' % (60 - self.weapon.throw_delay_time), (255, 255, 255))
             self.grenade_unable_icon.draw(500 + ex, 50 + ey, 100, 100)
 
         # 플레이어 hp 출력
-        self.hp_back.draw(WIDTH / 2 + ex, 20 + ey, 410, 30)
+        self.hp_back.draw(WIDTH / 2 + ex, 15 + ey, 410, 50)
         self.font_small.draw(WIDTH / 2 - 200 + ex, 50 + ey, 'HP  %d | %d' % (self.p.cur_hp, self.p.hp), (255, 255, 255))
         self.hp_player.draw(
             WIDTH / 2 + ex - 200 + (400 * self.p.cur_hp / self.p.hp) / 2,
             20 + ey, 400 * (self.p.cur_hp / self.p.hp), 25)
+        self.hp_regen.draw(
+            WIDTH / 2 + ex - 200 + (400 * self.p.regen_timer / self.p.regen_delay) / 2,
+            6 + ey, 400 * (self.p.regen_timer / self.p.regen_delay), 5)
+
+        # 상점 아이콘 출력
         self.font_small.draw(75 + ex, HEIGHT - 40 + ey, 'TAB', (255, 255, 255))
         self.shop_icon.draw(40 + ex, HEIGHT - 40 + ey, 50, 50)
 
         # 코인 인디케이터 출력
         self.coin_icon.draw(WIDTH / 2 + 250 + ex, 30 + ey + self.get_y, 50, 50)
         self.font_small.draw(WIDTH / 2 + 280 + ex, 30 + ey + self.get_y, '%d' % play_mode.p.coin, (255, 255, 255))
+
+        # 응급처치키드 출력
+        if self.p.usable_medkit:
+            if self.p.medkit_count == 0:
+                self.medkit_unable.rotate_draw(math.radians(32.05), WIDTH / 2 + 490 + ex, 32 + ey, 70, 70)
+                self.font_small.draw(WIDTH / 2 + 525 + ex, 30 + ey, '%d' % self.p.medkit_count, (255, 0, 0))
+            else:
+                self.font_mini.draw(WIDTH / 2 + 450 + ex, 65 + ey, 'LCTRL', (255, 255, 255))
+                self.medkit.rotate_draw(math.radians(32.1), WIDTH / 2 + 490 + ex, 32 + ey, 70, 70)
+                self.font_small.draw(WIDTH / 2 + 525 + ex, 30 + ey, '%d' % self.p.medkit_count, (255, 255, 0))
+        else:
+            self.medkit_unable.rotate_draw(math.radians(32.05), WIDTH / 2 + 490 + ex, 32 + ey, 70, 70)
+            self.font_small.draw(WIDTH / 2 + 525 + ex, 30 + ey, '%d' % (5 - self.p.medkit_delay_time), (255, 255, 255))
 
         # 라운드 수 출력
         self.font.draw(WIDTH / 2 - 130 + ex, HEIGHT - 50 + ey, 'ROUND %d' % play_mode.tool.rounds,
