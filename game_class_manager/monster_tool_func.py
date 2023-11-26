@@ -19,7 +19,7 @@ def update_spawn_point(self):  # 스폰 지점 업데이트
 
 def spawn_monster(self):  # 몬스터 스폰
     if self.spawn_enable:
-        if self.rounds * 5 <= self.limit:  # 라운드 마다 5씩 증가
+        if self.rounds * 3 <= self.limit:  # 라운드 마다 3씩 증가
             if self.spawn_time <= 0:
                 self.point_dir = random.randint(0, 1)
                 if self.point_dir == 0:
@@ -79,7 +79,7 @@ def update_rounds(self):
             play_mode.ig.rg = 0  # 라운드 인디케이터 색이 빨간색으로 변한다
             play_mode.ig.rb = 0
             self.rounds += 1  # 라운드 증가
-            self.limit += 5  # 스폰 제한 횟수 5씩 증가
+            self.limit += 3  # 스폰 제한 횟수 5씩 증가
             self.kill_count = self.limit
             self.spawn_remain = self.limit  # 앞으로 스폰할 몬스터 수 갱신
             self.spawn_time = 1500  # 매 라운드 시작 시 어느 정도의 시간을 두고 스폰 시작

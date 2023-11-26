@@ -20,10 +20,10 @@ class Tool:
         self.type = 0
         self.spawn_enable = True  # 해당 변수가 true일때만 스폰
         self.rounds = 1  # 라운드 수
-        self.spawn_remain = 5  # 앞으로 스폰할 몬스터 수, 이 변수와 아래의 변수가 동일하지 않으면 라운드가 넘어가지 않는다.
+        self.spawn_remain = 3  # 앞으로 스폰할 몬스터 수, 이 변수와 아래의 변수가 동일하지 않으면 라운드가 넘어가지 않는다.
         self.spawn_num = 0  # 스폰된 몬스터 수
-        self.limit = 5  # 첫 라운드는 5마리 제한부터 시작하여, 이후 5마리씩 최대 스폰 수가 증가한다.
-        self.kill_count = 5  # 라운드 별 처치 필요 횟수 출력 용, 처치할 때마다 감소
+        self.limit = 3  # 첫 라운드는 5마리 제한부터 시작하여, 이후 5마리씩 최대 스폰 수가 증가한다.
+        self.kill_count = 3  # 라운드 별 처치 필요 횟수 출력 용, 처치할 때마다 감소
 
         self.y, self.speed, self.hp = 0, 0, 0
 

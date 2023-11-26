@@ -56,6 +56,7 @@ def swing(weapon):
             weapon.melee_deg += pps / 200
             weapon.p.rotate += pps / 600
             if weapon.melee_deg >= 120:
+                weapon.p.rotate = 0
                 weapon.swing_up = False
                 weapon.swing = False
 
@@ -71,6 +72,7 @@ def swing(weapon):
             weapon.melee_deg += pps / 100
             weapon.p.rotate += pps / 500
             if weapon.melee_deg >= 0:
+                weapon.p.rotate = 0
                 weapon.swing_up = False
                 weapon.swing = False
 
@@ -86,5 +88,6 @@ def swing(weapon):
             weapon.melee_deg += pps / 300
             weapon.p.rotate += pps / 1000
             if weapon.melee_deg >= 120:
+                weapon.p.rotate = 0
                 weapon.swing_up = False
                 weapon.swing = False
