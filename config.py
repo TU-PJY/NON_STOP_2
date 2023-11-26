@@ -198,6 +198,13 @@ ind_equiped_directory = 'res//ui//item_equiped.png'
 
 ind_lock_directory = 'res//ui//lock.png'
 
+icon_medkit_directory = 'res//ui//icon_medkit.png'
+icon_grenade_upgrade_directory = 'res//ui//icon_grenade_upgrade.png'
+icon_hp_upgrade = 'res//ui//icon_hp_upgrade.png'
+icon_regen_upgrade = 'res//ui//icon_regeneration_upgrade.png'
+icon_speed_upgrade = 'res//ui//icon_speed_upgrade.png'
+icon_double_jump = 'res//ui//icon_double_jump.png'
+
 # 폰트 경로
 font_directory = 'res//font//bump-it-up.ttf'
 font2_directory = 'res//font//KORAIL2007.ttf'

@@ -128,7 +128,10 @@ class Player:
         load_player_image(self)
         self.mx, self.my = 0, 0  # 마우스 좌표
 
-        self.hp = 200
+        self.hp = 200  # 업그레이드하면 체력이 커진다
+        self.cur_hp = 200  # 현재 체력, 피격 시 감소한다
+
+        self.medkit_count = 1  # 회복 아이템 개수
 
         # player data
         self.x, self.y, self.dir = WIDTH / 2, 250, 1

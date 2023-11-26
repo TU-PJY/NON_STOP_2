@@ -316,22 +316,60 @@ def print_info(self, i, j):
             case (0, 0):
                 self.info.draw(x, y, '권총탄 +150', color)
                 self.info.draw(x, y2, 'Pistol, SMG 전용', color4)
+                self.info.draw(x, y3, '보유량: %d' % play_mode.weapon.pistol_ammo, color5)
                 self.info.draw(x3, cost, '100', color4)
                 self.coin_icon.draw(x2, cost, 30, 30)
             case (1, 0):
                 self.info.draw(x, y, '소총탄 +100', color)
                 self.info.draw(x, y2, 'AR 전용', color4)
+                self.info.draw(x, y3, '보유량: %d' % play_mode.weapon.ar_ammo, color5)
                 self.coin_icon.draw(x2, cost, 30, 30)
                 self.info.draw(x3, cost, '200', color4)
             case (2, 0):
                 self.info.draw(x, y, '대구경 소총탄 + 70', color)
                 self.info.draw(x, y2, 'Rifle 전용', color4)
+                self.info.draw(x, y3, '보유량: %d' % play_mode.weapon.rifle_ammo, color5)
                 self.info.draw(x3, cost, '350', color4)
                 self.coin_icon.draw(x2, cost, 30, 30)
             case (3, 0):
                 self.info.draw(x, y, '저격 소총탄 + 30', color)
                 self.info.draw(x, y2, 'SR 전용', color4)
+                self.info.draw(x, y3, '보유량: %d' % play_mode.weapon.sniper_ammo, color5)
                 self.info.draw(x3, cost, '500', color4)
+                self.coin_icon.draw(x2, cost, 30, 30)
+            case (4, 0):
+                self.info.draw(x, y, '응급처치 키트', color)
+                self.info.draw(x, y2, '20H 회복', color4)
+                self.info.draw(x, y3, '보유량: %d' % play_mode.p.medkit_count, color5)
+                self.info.draw(x3, cost, '400', color4)
+                self.coin_icon.draw(x2, cost, 30, 30)
+            case (0, 1):
+                self.info.draw(x, y, 'HP 업그레이드', color)
+                self.info.draw(x, y2, '+50 HP', color4)
+                self.info.draw(x, y3, '현재 최대 HP: %d' % (200 + 50 * self.hp_count), color5)
+                self.info.draw(x3, cost, '%d' % self.hp_cost, color4)
+                self.coin_icon.draw(x2, cost, 30, 30)
+            case (1, 1):
+                self.info.draw(x, y, '회복력 업그레이드', color)
+                self.info.draw(x, y2, '+1 체력 회복 속도', color4)
+                self.info.draw(x3, cost, '%d' % self.regen_cost, color4)
+                self.coin_icon.draw(x2, cost, 30, 30)
+            case (2, 1):
+                self.info.draw(x, y, '이동 속도 업그레이드', color)
+                self.info.draw(x, y2, '+1 이동 속도', color4)
+                self.info.draw(x3, cost, '%d' % self.speed_cost, color4)
+                self.coin_icon.draw(x2, cost, 30, 30)
+            case (3, 1):
+                self.info.draw(x, y, '더블 점프', color)
+                self.info.draw(x, y2, '공중에서 한 번 더 점프', color4)
+                self.info.draw(x, y3, '가능', color4)
+                self.info.draw(x3, cost, '3000', color4)
+                self.coin_icon.draw(x2, cost, 30, 30)
+            case (4, 1):
+                self.info.draw(x, y, '수류탄 업그레이드', color)
+                self.info.draw(x, y2, '+200 폭발 반경', color4)
+                self.info.draw(x, y3, '코인 소모 증가', color3)
+                self.info.draw(x3, cost, '%d' % self.gren_cost, color4)
                 self.coin_icon.draw(x2, cost, 30, 30)
 
 

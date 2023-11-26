@@ -125,10 +125,10 @@ def render_ingame_ui(self):
 
         # 플레이어 hp 출력
         self.hp_back.draw(WIDTH / 2 + ex, 20 + ey, 410, 30)
-        self.font_small.draw(WIDTH / 2 - 200 + ex, 50 + ey, 'HP  %d' % self.p.hp, (255, 255, 255))
-        self.hp_player.draw(WIDTH / 2 + ex + (self.p.hp / 200) / 2, 20 + ey, 400 * self.p.hp / 200, 25)
-
-        # 상점 아이콘 출력
+        self.font_small.draw(WIDTH / 2 - 200 + ex, 50 + ey, 'HP  %d | %d' % (self.p.cur_hp, self.p.hp), (255, 255, 255))
+        self.hp_player.draw(
+            WIDTH / 2 + ex - 200 + (400 * self.p.cur_hp / self.p.hp) / 2,
+            20 + ey, 400 * (self.p.cur_hp / self.p.hp), 25)
         self.font_small.draw(75 + ex, HEIGHT - 40 + ey, 'TAB', (255, 255, 255))
         self.shop_icon.draw(40 + ex, HEIGHT - 40 + ey, 50, 50)
 

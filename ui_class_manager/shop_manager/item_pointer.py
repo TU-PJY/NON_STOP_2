@@ -39,7 +39,7 @@ def hover_item(self):  # 아이템 위에 커서를 올리면 표시된다
                         self.ind_sel_on = False
 
                 elif self.select_mode == 2:
-                    if 0 <= i <= 4 and 0 <= j <= 3:
+                    if 0 <= i <= 4 and 0 <= j <= 1:
                         self.ind_sel_x = i
                         self.ind_sel_y = j
                         self.sel_cat = self.select_mode

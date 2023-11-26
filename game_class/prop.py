@@ -86,8 +86,9 @@ class Arrow:
         if group == 'player:arrow':
             if self.simulate:  # 움직이는 화살만 인식하도록 설정
                 if self.p.dmg_delay <= 0:
+                    self.p.cur_hp -= 15
                     self.p.dmg_shake_range = 30
-                    self.p.dmg_delay = 200
+                    self.p.dmg_delay = 250
                     pd = PlayerDamage()
                     game_manager.add_object(pd, 7)
             game_manager.remove_object(self)
@@ -394,7 +395,7 @@ class Coin:
     def handle_collision(self, group, other):
         if group == 'player:coin':
             if not self.up:  # 획득하지 않은 코인에 대해서만 코인 획득 피드백 재생
-                self.p.coin += 28 + play_mode.tool.rounds * 2  # 라운드가 올라갈 수록 코인들 더 많이 획득한다
+                self.p.coin += 26 + play_mode.tool.rounds * 4  # 라운드가 올라갈 수록 코인을 더 많이 획득한다
                 self.up = True
                 self.p.get_coin = True
 
@@ -416,7 +417,8 @@ class Explode:
     def draw(self):
         x = self.x + self.p.ex
         y = self.y + self.p.ey
-        self.image.clip_composite_draw(100 * int(self.frame), 0, 100, 695, 0, '', x, y, 500, 500)
+        size = self.weapon.gren_level * 100  # 수류탄 레벨이 올라갈수록 폭발도 커진다
+        self.image.clip_composite_draw(100 * int(self.frame), 0, 100, 695, 0, '', x, y, 400 + size, 400 + size)
 
     def update(self):
         pps = game_framework.pps

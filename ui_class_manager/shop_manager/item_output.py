@@ -42,10 +42,29 @@ def draw_items(self):
 
     elif self.select_mode == 2:
         self.image_ammo_pistol.draw \
-            (self.button_x[0], self.button_y[0], self.pistol_ammo_size_x, self.pistol_ammo_size_y)
+            (self.button_x[0], self.button_y[0], self.size_list[0][0], self.size_list[0][0])
         self.image_ammo_ar.draw \
-            (self.button_x[1], self.button_y[0], self.ar_ammo_size_x, self.ar_ammo_size_y)
+            (self.button_x[1], self.button_y[0], self.size_list[1][0], self.size_list[1][0])
         self.image_ammo_rifle.draw \
-            (self.button_x[2], self.button_y[0], self.rifle_ammo_size_x, self.rifle_ammo_size_y)
+            (self.button_x[2], self.button_y[0], self.size_list[2][0], self.size_list[2][0])
         self.image_ammo_sr.draw \
-            (self.button_x[3], self.button_y[0], self.sniper_ammo_size_x, self.sniper_ammo_size_y)
+            (self.button_x[3], self.button_y[0], self.size_list[3][0], self.size_list[3][0])
+
+        color = (50, 50, 50)
+
+        self.medkit.draw(self.button_x[4], self.button_y[0], self.size_list[4][0], self.size_list[4][0])
+
+        self.hpup.draw(self.button_x[0], self.button_y[1], self.size_list[0][1], self.size_list[0][1])
+        self.font_small.draw(self.button_x[0] - 35, self.button_y[1] - 70, '%d | 3' % self.hp_count, color)
+
+        self.regenup.draw(self.button_x[1], self.button_y[1], self.size_list[1][1], self.size_list[1][1])
+        self.font_small.draw(self.button_x[1] - 35, self.button_y[1] - 70, '%d | 3' % self.regen_count, color)
+
+        self.speedup.draw(self.button_x[2], self.button_y[1], self.size_list[2][1], self.size_list[2][1])
+        self.font_small.draw(self.button_x[2] - 35, self.button_y[1] - 70, '%d | 3' % self.speed_count, color)
+
+        self.doublejump.draw(self.button_x[3], self.button_y[1], self.size_list[3][1], self.size_list[3][1])
+        self.font_small.draw(self.button_x[3] - 35, self.button_y[1] - 70, '%d | 1' % self.double_jump, color)
+
+        self.grenup.draw(self.button_x[4], self.button_y[1], self.size_list[4][1], self.size_list[4][1])
+        self.font_small.draw(self.button_x[4] - 35, self.button_y[1] - 70, '%d | 3' % self.gren_count, color)

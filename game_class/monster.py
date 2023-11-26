@@ -139,14 +139,22 @@ class Monster:
                 if self.type == 1:  # type1 접촉 시 이동 정지
                     self.is_attack = True
 
-                if self.atk_delay <= 0 and not self.type == 4:  # 실질적인 공격, 원거리형 몬스터는 근접 대미지가 없다.
+                if self.atk_delay <= 0 and not self.type == 4:  # 실질적인 공격, 원거리형 몬스터인 타입4는 근접 대미지가 없다.
                     self.attack_motion_time = 100
                     self.atk_delay = 200
                     self.size = 200
 
                     if self.p.dmg_delay <= 0:
+                        match self.type:  # 몬스터마다 대미지가 다르다
+                            case 1:
+                                self.p.cur_hp -= 25
+                            case 2:
+                                self.p.cur_hp -= 15
+                            case 3:
+                                self.p.cur_hp -= 20
+
                         self.p.dmg_shake_range = 30
-                        self.p.dmg_delay = 200  # 해당 변수가 0이 되어야 플레이어는 다음 대미지를 받는다
+                        self.p.dmg_delay = 250  # 해당 변수가 0이 되어야 플레이어는 다음 대미지를 받는다
                         pd = PlayerDamage()  # 대미지를 받으면 화면에 대미지 피드백을 표시한다
                         game_manager.add_object(pd, 7)
 

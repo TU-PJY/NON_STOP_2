@@ -66,3 +66,10 @@ def load_shop_resource(self):
     self.image_ammo_ar = load_image(ammo_ar_icon_directory)
     self.image_ammo_rifle = load_image(ammo_rifle_icon_directory)
     self.image_ammo_sr = load_image(ammo_sr_icon_directory)
+
+    self.medkit = load_image(icon_medkit_directory)
+    self.hpup = load_image(icon_hp_upgrade)
+    self.regenup = load_image(icon_regen_upgrade)
+    self.grenup = load_image(icon_grenade_upgrade_directory)
+    self.doublejump = load_image(icon_double_jump)
+    self.speedup = load_image(icon_speed_upgrade)

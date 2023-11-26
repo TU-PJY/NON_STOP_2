@@ -31,9 +31,9 @@ def draw_shop_window(self):
             for j in range(1):
                 self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
 
-    else:
+    elif self.select_mode == 2:
         for i in range(5):
-            for j in range(4):
+            for j in range(2):
                 self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
 
     self.font.draw(WIDTH / 2 + 200, self.window_y + 295, "SHOP", (255, 255, 255))
@@ -150,30 +150,9 @@ def update_ind_size(self):  # 아이템 선택 피드백을 출력한다.
 
 def update_item_size(self):
     pps = game_framework.pps
-    if self.pistol_ammo_size_x > 100:
-        self.pistol_ammo_size_x -= pps / 2
-        self.pistol_ammo_size_y -= pps / 2
-        if self.pistol_ammo_size_x < 100:
-            self.pistol_ammo_size_x = 100
-            self.pistol_ammo_size_y = 100
-
-    if self.ar_ammo_size_x > 100:
-        self.ar_ammo_size_x -= pps / 2
-        self.ar_ammo_size_y -= pps / 2
-        if self.ar_ammo_size_x < 100:
-            self.ar_ammo_size_x = 100
-            self.ar_ammo_size_y = 100
-
-    if self.rifle_ammo_size_x > 100:
-        self.rifle_ammo_size_x -= pps / 2
-        self.rifle_ammo_size_y -= pps / 2
-        if self.rifle_ammo_size_x < 100:
-            self.rifle_ammo_size_x = 100
-            self.rifle_ammo_size_y = 100
-
-    if self.sniper_ammo_size_x > 100:
-        self.sniper_ammo_size_x -= pps / 2
-        self.sniper_ammo_size_y -= pps / 2
-        if self.sniper_ammo_size_x < 100:
-            self.sniper_ammo_size_x = 100
-            self.sniper_ammo_size_y = 100
+    for i in range(5):
+        for j in range(4):
+            if self.size_list[i][j] > 100:
+                self.size_list[i][j] -= pps / 4
+                if self.size_list[i][j] < 100:
+                    self.size_list[i][j] = 100
