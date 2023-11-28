@@ -38,13 +38,13 @@ def print_info(self, i, j):
             match(i, j):
                 case (0, 0):
                     self.info.draw(x, y, 'M-1911', color)
-                    self.info.draw(x, y2, '대미지: 25', color)
+                    self.info.draw(x, y2, '대미지: 30', color)
                     self.info.draw(x, y3, '장탄수: 7', color)
                     self.info.draw(x, y4, '사용 탄약: 권총탄', color)
                     self.info.draw(x4 + 5, y, 'Pistol', color2)
                 case (1, 0):
                     self.info.draw(x, y, 'M-92', color)
-                    self.info.draw(x, y2, '대미지: 23', color)
+                    self.info.draw(x, y2, '대미지: 25', color)
                     self.info.draw(x, y3, '장탄수: 15', color)
                     self.info.draw(x, y4, '사용 탄약: 권총탄', color)
                     self.info.draw(x4 + 5, y, 'Pistol', color2)
@@ -52,7 +52,7 @@ def print_info(self, i, j):
                         self.info.draw(x3, cost, '300', color4)
                 case (2, 0):
                     self.info.draw(x, y, 'Desert Eagle', color)
-                    self.info.draw(x, y2, '대미지: 35', color)
+                    self.info.draw(x, y2, '대미지: 40', color)
                     self.info.draw(x, y3, '장탄수: 8', color)
                     self.info.draw(x, y4, '사용 탄약: 권총탄', color)
                     self.info.draw(x4 + 5, y, 'Pistol', color2)
@@ -60,7 +60,7 @@ def print_info(self, i, j):
                         self.info.draw(x3, cost, '600', color4)
                 case (3, 0):
                     self.info.draw(x, y, 'M-500', color)
-                    self.info.draw(x, y2, '대미지: 40', color)
+                    self.info.draw(x, y2, '대미지: 45', color)
                     self.info.draw(x, y3, '장탄수: 6', color)
                     self.info.draw(x, y4, '사용 탄약: 권총탄', color)
                     self.info.draw(x4 + 5, y, 'Pistol', color2)

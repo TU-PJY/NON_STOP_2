@@ -1,8 +1,7 @@
 from pico2d import *
-from config import *
-from game_work import game_framework, game_manager
-import math
 
+from config import *
+from game_work import game_framework
 from mods import home_mode, gameover_mode
 
 
@@ -41,14 +40,14 @@ class Playerdead:
 
 
 class Reward:
-    def __init__(self):
+    def __init__(self, cursor):
         self.back = load_image(reward_bg_directory)
         self.image = load_image(reward_directory)
         self.button = load_image(ammo_ind_back_directory)
         self.font = load_font(font2_directory, 60)
-        self.mx, self.my = 0, 0
         self.click = False
         self.op = 0
+        self.cursor = cursor
 
     def draw(self):
         self.back.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
@@ -61,7 +60,7 @@ class Reward:
         pps = game_framework.pps
 
         if gameover_mode.playerdead.front_size < 0:
-            if WIDTH / 2 - 250 < self.mx < WIDTH / 2 + 250 and 150 < self.my < 250:
+            if WIDTH / 2 - 250 < self.cursor.mx < WIDTH / 2 + 250 and 150 < self.cursor.my < 250:
                 self.op += pps / 50
                 if self.op > 1:
                     self.op = 1
@@ -71,7 +70,8 @@ class Reward:
                     self.op = 0
 
             if self.click:
-                if WIDTH / 2 - 250 < self.mx < WIDTH / 2 + 250 and 150 < self.my < 250:
+                if WIDTH / 2 - 250 < self.cursor.mx < WIDTH / 2 + 250 and 150 < self.cursor.my < 250:
+                    game_framework.MODE = 'home'
                     game_framework.change_mode(home_mode)
 
                 else:
@@ -80,4 +80,16 @@ class Reward:
             self.click = False
 
     def handle_event(self):
+        pass
+
+
+class Cursor:
+    def __init__(self):
+        self.image = load_image(cursor_directory)
+        self.mx, self.my = 0, 0
+
+    def draw(self):
+        self.image.draw(self.mx + 35, self.my - 35, 70, 70)
+
+    def update(self):
         pass

@@ -761,7 +761,7 @@ class Dead:
         pass
 
 
-class Playerdead:
+class Playerdead:  # 이 클래스를 거쳐 모드를 변경하게 된다
     def __init__(self):
         self.image = load_image(dead_bg_directory)
         self.sign = load_image(you_dead_directory)
@@ -799,11 +799,7 @@ class Playerdead:
                 self.front_size = WIDTH / 2
 
         if self.delay >= 1500:
-            game_manager.remove_object(self)
             game_framework.change_mode(gameover_mode)
 
     def handle_event(self):
         pass
-
-
-

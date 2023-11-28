@@ -5,7 +5,7 @@ from config import PPS
 running = None
 stack = None
 
-MODE = 'play'
+MODE = 'home'
 
 
 def change_mode(mode):

@@ -10,6 +10,7 @@ from ui_class.ingame import Ingame
 
 def handle_events():
     global p, weapon
+    global mx, my
 
     events = get_events()
     for event in events:
@@ -20,19 +21,18 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_TAB:  # to_shop_mode
             # 수류탄 쿨타임이 남아있다면 수류탄 쿨타임이 얼마나 남았는지를 저장
             weapon.temp_time = weapon.throw_delay_time
-            if not weapon.skill_usable_rapier:  # 각 근접무기마다 스킬 쿨타임을 저장
-                weapon.skill_temp_rapier = weapon.skill_delay_time_rapier
-            if not weapon.skill_usable_katana:
-                weapon.skill_temp_katana = weapon.skill_delay_time_katana
-            if not weapon.skill_usable_axe:
-                weapon.skill_temp_axe = weapon.skill_delay_time_axe
-            if not p.usable_medkit:
-                p.medkit_delay_temp = p.medkit_delay_time
+
+            weapon.skill_temp_rapier = weapon.skill_delay_time_rapier
+            weapon.skill_temp_katana = weapon.skill_delay_time_katana
+            weapon.skill_temp_axe = weapon.skill_delay_time_axe
+            p.medkit_delay_temp = p.medkit_delay_time
 
             game_framework.MODE = 'shop'
             game_framework.push_mode(shop_mode)
+
         elif event.type == SDL_MOUSEMOTION:
             p.mx, p.my = event.x, HEIGHT - 1 - event.y
+
         else:
             p.handle_event(event)
             weapon.handle_event(event)

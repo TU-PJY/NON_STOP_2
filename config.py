@@ -218,6 +218,8 @@ icon_double_jump_directory = 'res//ui//icon_double_jump.png'
 
 hp_regen_directory = 'res//ui//hp_regen.png'
 
+logo_directory = 'res//ui//logo.png'
+
 # 폰트 경로
 font_directory = 'res//font//bump-it-up.ttf'
 font2_directory = 'res//font//KORAIL2007.ttf'

@@ -163,10 +163,10 @@ class StateMachine:
 class Player:
     def __init__(self):
         load_player_image(self)
-        self.mx, self.my = 0, 0  # 마우스 좌표
+        self.mx, self.my = 0, 0
 
         self.hp = 200  # 업그레이드하면 체력이 커진다
-        self.cur_hp = 250  # 현재 체력, 피격 시 감소한다
+        self.cur_hp = 200  # 현재 체력, 피격 시 감소한다
         self.regen_timer = 0
         self.regen_delay = 700  # 플레이어 체력 회복 딜레이
 
@@ -188,7 +188,7 @@ class Player:
         self.jump_level = 2  # 레벨이 오를수록 연속 점프 횟수가 많아짐
         self.jump_delay = 0
 
-        self.coin = 99999999  # 플레이어가 소지한 코인 개수
+        self.coin = 999999  # 플레이어가 소지한 코인 개수
         self.get_coin = False  # true일 시 코인 획득 피드백 재생
 
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
@@ -233,8 +233,10 @@ class Player:
         self.state_machine.start()
 
     def update(self):
+        pps = game_framework.pps
         if game_framework.MODE == 'play':
             self.state_machine.update()
+            # self.cur_hp -= pps / 30
 
     def handle_event(self, event):
         self.state_machine.handle_event(('INPUT', event))

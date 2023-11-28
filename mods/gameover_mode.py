@@ -2,14 +2,14 @@ from pico2d import *
 
 from config import HEIGHT
 from game_work import game_framework, game_manager
-from gameover_class.gameover_ui_class import Playerdead, Reward
+from gameover_class.gameover_ui_class import Playerdead, Reward, Cursor
 
 
 def handle_events():
     global p, weapon
 
     events = get_events()
-    global reward
+    global cursor
     for event in events:
         if event.type == SDL_QUIT:
             game_framework.quit()
@@ -17,20 +17,21 @@ def handle_events():
             game_framework.quit()
 
         elif event.type == SDL_MOUSEMOTION:
-            reward.mx, reward.my = event.x, HEIGHT - 1 - event.y
+            cursor.mx, cursor.my = event.x, HEIGHT - 1 - event.y
 
         elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
             reward.click = True
 
 
 def init():
-    global playerdead, reward
-    show_cursor()
+    global playerdead, reward, cursor
+    cursor = Cursor()
     playerdead = Playerdead()
-    reward = Reward()
+    reward = Reward(cursor)
 
     game_manager.add_object(playerdead, 7)
     game_manager.add_object(reward, 6)
+    game_manager.add_object(cursor, 7)
 
 
 def update():
