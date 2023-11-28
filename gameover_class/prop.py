@@ -44,32 +44,32 @@ class Reward:
     def __init__(self):
         self.back = load_image(reward_bg_directory)
         self.image = load_image(reward_directory)
-        self.button = load_image(shop_button_directory)
+        self.button = load_image(ammo_ind_back_directory)
         self.font = load_font(font2_directory, 60)
         self.mx, self.my = 0, 0
         self.click = False
-
-        self.color = 255
-
+        self.op = 0
 
     def draw(self):
         self.back.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
         self.image.draw(WIDTH / 2, HEIGHT - 200, 920, 190)
-        self.font.draw(WIDTH / 2 - 220, 200, '홈으로 돌아가기', (255, 255, self.color))
+        self.button.opacify(self.op)
+        self.button.draw(WIDTH / 2, 200, 500, 100)
+        self.font.draw(WIDTH / 2 - 220, 200, '홈으로 돌아가기', (255, 255, 255))
 
     def update(self):
         pps = game_framework.pps
-        if WIDTH / 2 - 230 <= self.mx <= WIDTH / 2 + 220 and 150 <= self.my <= 250:
-            self.color -= int(pps) * 2
-            if self.color < 0:
-                self.color = 0
+        if WIDTH / 2 - 250 < self.mx < WIDTH / 2 + 250 and 150 < self.my < 250:
+            self.op += pps / 50
+            if self.op > 1:
+                self.op = 1
         else:
-            self.color += int(pps) * 2
-            if self.color > 255:
-                self.color = 255
+            self.op -= pps / 50
+            if self.op < 0:
+                self.op = 0
 
         if self.click:
-            if WIDTH / 2 - 230 <= self.mx <= WIDTH / 2 + 220 and 160 <= self.my <= 240:
+            if WIDTH / 2 - 250 < self.mx < WIDTH / 2 + 250 and 150 < self.my < 250:
                 game_framework.change_mode(home_mode)
 
             else:
