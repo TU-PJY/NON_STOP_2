@@ -1,8 +1,12 @@
+from config import HEIGHT
 from game_work import game_manager, game_framework
 from pico2d import *
 
+from home_class.home_ui_class import Button
+
 
 def handle_events():
+    global button
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -10,9 +14,17 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.quit()
 
+        elif event.type == SDL_MOUSEMOTION:
+            button.mx, button.my = event.x, HEIGHT - 1 - event.y
+
+        elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
+            button.click = True
+
 
 def init():
-    pass
+    global button
+    button = Button()
+    game_manager.add_object(button, 7)
 
 
 def update():
@@ -36,7 +48,3 @@ def pause():
 
 def resume():
     pass
-
-
-def weapon():
-    return None

@@ -2,7 +2,7 @@ from pico2d import *
 
 from config import HEIGHT
 from game_work import game_framework, game_manager
-from gameover_class.prop import Playerdead, Reward
+from gameover_class.gameover_ui_class import Playerdead, Reward
 
 
 def handle_events():
@@ -20,7 +20,7 @@ def handle_events():
             reward.mx, reward.my = event.x, HEIGHT - 1 - event.y
 
         elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
-            reward.click = True  # true일 시 상점창이 반응한다
+            reward.click = True
 
 
 def init():

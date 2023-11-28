@@ -3,7 +3,7 @@ from config import *
 from game_work import game_framework, game_manager
 import math
 
-from mods import home_mode
+from mods import home_mode, gameover_mode
 
 
 class Playerdead:
@@ -28,13 +28,13 @@ class Playerdead:
 
     def update(self):
         pps = game_framework.pps
-        self.delay += pps / 3
+        if self.delay < 600:
+            self.delay += pps / 3
 
-        if self.delay >= 600:
-            self.front_size -= self.acc * pps / 4
-            self.acc += pps / 100
-            if self.front_size < 0:
-                game_manager.remove_object(self)
+        if self.delay > 600:
+            if self.front_size > 0:
+                self.front_size -= self.acc * pps / 4
+                self.acc += pps / 100
 
     def handle_event(self):
         pass
@@ -59,21 +59,25 @@ class Reward:
 
     def update(self):
         pps = game_framework.pps
-        if WIDTH / 2 - 250 < self.mx < WIDTH / 2 + 250 and 150 < self.my < 250:
-            self.op += pps / 50
-            if self.op > 1:
-                self.op = 1
-        else:
-            self.op -= pps / 50
-            if self.op < 0:
-                self.op = 0
 
-        if self.click:
+        if gameover_mode.playerdead.front_size < 0:
             if WIDTH / 2 - 250 < self.mx < WIDTH / 2 + 250 and 150 < self.my < 250:
-                game_framework.change_mode(home_mode)
-
+                self.op += pps / 50
+                if self.op > 1:
+                    self.op = 1
             else:
-                self.click = False
+                self.op -= pps / 50
+                if self.op < 0:
+                    self.op = 0
+
+            if self.click:
+                if WIDTH / 2 - 250 < self.mx < WIDTH / 2 + 250 and 150 < self.my < 250:
+                    game_framework.change_mode(home_mode)
+
+                else:
+                    self.click = False
+        else:
+            self.click = False
 
     def handle_event(self):
         pass
