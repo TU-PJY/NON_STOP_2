@@ -175,9 +175,7 @@ def render_ingame_ui(self):
                 if not self.weapon.skill_usable_axe:
                     self.font.draw(330 + ex, 50 + ey, '%d' % (60 - self.weapon.skill_delay_time_axe), (255, 255, 255))
                 else:
-                    self.font_small.draw(260 + ex, 80 + ey, 'R Button', (255, 255, 255))
-                    self.coin_icon.draw(280 + ex, 30 + ey, 50, 50)
-                    self.font_small.draw(320 + ex, 30 + ey, '4000', (255, 255, 255))
+                    self.font_small.draw(260 + ex, 50 + ey, 'R Button', (255, 255, 255))
 
 
 def update_ammo_ind(self):

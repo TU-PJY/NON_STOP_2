@@ -200,4 +200,4 @@ def update_skill_delay(weapon):  # 각 근접무기의 스킬 딜레이를 업�
     if not weapon.skill_usable_axe:
         weapon.skill_delay_time_axe = get_time() - weapon.skill_delay_axe
         if weapon.skill_delay_time_axe > 60:
-            weapon.skill_usable_ace = True
+            weapon.skill_usable_axe = True

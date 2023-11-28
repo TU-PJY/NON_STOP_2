@@ -7,7 +7,7 @@ root = Tk()
 HEIGHT = root.winfo_screenheight()
 WIDTH = root.winfo_screenwidth()
 
-JUMP_ACC = 5  # 점프 가속도
+JUMP_ACC = 4.5  # 점프 가속도
 LAND_SHAKE = 100  # 착지 시 맵이 눌리는 효과 수치
 
 # 픽셀 비율

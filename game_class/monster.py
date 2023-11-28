@@ -82,7 +82,7 @@ class Monster:
         self.hp_length = self.hp
         self.op = 0
         self.flip = ''
-        self.once = False  # 관통 대미지가 중복으로 발생하지 않도록 한다.
+        self.once = False  # 대미지가 중복으로 발생하지 않도록 한다.
         self.ex_dead = False
 
         # type2 전용 변수
@@ -117,8 +117,11 @@ class Monster:
             self.state_machine.update()
 
             # sr계열 격발 후 다시 관통 대미지를 한 번만 주도록 세팅한다.
-            if self.weapon.shoot_delay <= 10:
+            if self.weapon.shoot_delay <= 10 and self.weapon.weapon_type == 0:
                 self.once = False  # 한 개체당 한 번씩만 관통 대미지를 받도록 한다.
+
+            if self.weapon.weapon_type == 1 and not self.weapon.skill_enable:
+                self.once = False
 
     def handle_events(self, event):
         self.state_machine.handle_event(('INPUT', event))
@@ -161,12 +164,15 @@ class Monster:
         if group == 'weapon:monster':  # 총이나 근접무기에 맞을 경우 대미지를 가한다
             if self.weapon.weapon_type == 1:  # katana, axe 스킬 공격의 경우 범위 내 중첩 대미지로 판정
                 # AXE의 경우 스킬 사용 시 몬스터는 즉사한다
-                if self.weapon.hit_ground and self.weapon.melee == 'AXE':  # 해당 무기의 경우 아주 짧은 순간에만 대미지
-                    self.hp -= 500
-                    self.p.dmg_delay = 250  # 스킬 사용 직후 몬스터에게 공격받지 않도록 함
+                if self.weapon.hit_ground and self.weapon.melee == 'AXE':
+                    if not self.once and self.hp > 0:
+                        self.hp -= 150
+                        self.once = True
 
                 elif self.weapon.skill_enable and self.weapon.melee == 'KATANA':
-                    self.hp -= 4
+                    if not self.once and self.hp > 0:
+                        self.hp -= 100
+                        self.once = True
 
                 else:  # 나머지 근접 무기 공격
                     if self.hp > 0 and not self.weapon.hit_once:

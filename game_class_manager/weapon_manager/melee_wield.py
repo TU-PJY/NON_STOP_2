@@ -77,20 +77,18 @@ def set_skill(weapon):
 
     # axe는 4000코인을 소모하여 스킬을 실행한다. 대신 매우 강력하다
     elif weapon.melee == 'AXE' and not weapon.p.mv_jump and weapon.skill_usable_axe:
-        if weapon.p.coin >= 2000:
-            weapon.swing = False
-            weapon.swing_down = False
-            weapon.swing_up = False
-            weapon.p.rotate = 0
+        weapon.swing = False
+        weapon.swing_down = False
+        weapon.swing_up = False
+        weapon.p.rotate = 0
 
-            weapon.skill_time = 235
-            weapon.skill_enable = True
-            # 위로 날아올라 내려찍을 준비
-            weapon.p.mv_jump = True
-            weapon.p.jump_acc = 8
-            weapon.p.coin -= 2000  # 스킬이 강력한 만큼 비용이 들어간다
-            weapon.p.get_coin = True  # 코인 사용 피드백 재생
-            set_skill_delay(weapon)
+        weapon.skill_time = 235
+        weapon.skill_enable = True
+        # 위로 날아올라 내려찍을 준비
+        weapon.p.mv_jump = True
+        weapon.p.jump_acc = 8
+        weapon.p.get_coin = True  # 코인 사용 피드백 재생
+        set_skill_delay(weapon)
 
 
 # 근접무기 스킬 사용 시의 수치 조정
@@ -147,6 +145,7 @@ def update_melee_skill(weapon):
             weapon.hit_ground = False
             weapon.p.mv_jump = False
             weapon.p.rotate = 0
+            weapon.p.dmg_delay = 250  # 시킬 사용 직후 대미지를 받지 않도록 한다.
 
         weapon.skill_enable = False
         weapon.wield = False

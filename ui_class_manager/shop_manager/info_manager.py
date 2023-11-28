@@ -306,7 +306,6 @@ def print_info(self, i, j):
                 self.info.draw(x, y3, '사거리: 230', color)
                 self.info.draw(x, y4, '스킬 사용 쿨타임: 60s', color4)
                 self.info.draw(x, y5, '스킬 실행: 우클릭', color5)
-                self.info.draw(x, y6, '스킬 실행에 2000 코인', color3)
                 self.info.draw(x, y7, '소모', color3)
                 if not buy:
                     self.info.draw(x3, cost, '50000', color4)

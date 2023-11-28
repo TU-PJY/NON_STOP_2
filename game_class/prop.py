@@ -460,8 +460,8 @@ class Grenade:
         self.p, self.mp = p, mp
         self.weapon = weapon
         self.timer = 1200
-        self.acc = 3
-        self.speed = 5
+        self.acc = 4
+        self.speed = 4
         self.simulate = True
         self.deg = 0
 
@@ -495,7 +495,7 @@ class Grenade:
                         self.speed -= 2
                         self.dir = 1
 
-                self.y += self.acc
+                self.y += self.acc * pps / 4
                 self.acc -= pps / 90
 
                 if self.y <= 200:
@@ -583,10 +583,10 @@ class Dead:
             self.acc = 4
 
         elif self.ani == 3:
-            self.acc = 7
+            self.acc = random.uniform(5, 9)
 
         elif self.ani == 4:
-            self.acc = 4
+            self.acc = random.uniform(6, 7)
 
         if self.type == 2:
             self.ani = -1
@@ -646,12 +646,12 @@ class Dead:
                 # animation 0
                 if self.ani == 0:  # 앞으로 넘어져 죽는 모션, 기본 모션
                     if self.dir == 1:
-                        self.x += self.acc
+                        self.x += self.acc * pps / 4
 
                     elif self.dir == 0:
-                        self.x -= self.acc
+                        self.x -= self.acc * pps / 4
 
-                    self.acc -= pps / 200
+                    self.acc -= pps / 400
 
                     if self.x <= self.mp.playerToWallLeft or self.x >= self.mp.playerToWallRight:
                         self.acc = 0
@@ -664,12 +664,12 @@ class Dead:
                 elif self.ani == 1:  # 고화력 총기에 튕겨저 나가 죽는 모션, rifle 이상부터 재생
                     if self.dir == 1:
                         self.deg = 180
-                        self.x -= self.acc
+                        self.x -= self.acc * pps / 4
                     elif self.dir == 0:
                         self.deg = -180
-                        self.x += self.acc
+                        self.x += self.acc * pps / 4
 
-                    self.acc -= pps / 200
+                    self.acc -= pps / 400
 
                     if self.x <= self.mp.playerToWallLeft or self.x >= self.mp.playerToWallRight:
                         self.acc = 0
@@ -681,13 +681,13 @@ class Dead:
                 # animation 2
                 elif self.ani == 2:  # 고화력 총기에 튕겨저 나가 죽는 모션, rifle 이상부터 재생
                     if self.dir == 1:
-                        self.deg += self.acc
-                        self.x -= self.acc
+                        self.deg += self.acc * pps / 4
+                        self.x -= self.acc * pps / 4
                     elif self.dir == 0:
-                        self.deg -= self.acc
-                        self.x += self.acc
+                        self.deg -= self.acc * pps / 4
+                        self.x += self.acc * pps / 4
 
-                    self.acc -= pps / 200
+                    self.acc -= pps / 400
 
                     if self.x <= self.mp.playerToWallLeft or self.x >= self.mp.playerToWallRight:
                         self.acc = 0
@@ -699,20 +699,20 @@ class Dead:
                 # animation 3
                 elif self.ani == 3:  # 폭발에 튕겨나가는 모션
                     if self.dir == 1:
-                        self.x -= self.speed
+                        self.x -= self.speed * pps / 4
                         self.deg += pps / 4
                         if self.x <= self.mp.playerToWallLeft:
                             self.speed -= random.uniform(1.5, 3)
                             self.dir = 0
 
                     elif self.dir == 0:
-                        self.x += self.speed
+                        self.x += self.speed * pps / 4
                         self.deg -= pps / 4
                         if self.x >= self.mp.playerToWallRight:
                             self.speed -= random.uniform(1.5, 3)
                             self.dir = 1
 
-                    self.y += self.acc
+                    self.y += self.acc * pps / 4
                     self.acc -= pps / 90
 
                     if self.y < 250 and self.type == 1:
@@ -735,8 +735,8 @@ class Dead:
                     elif self.dir == 0:
                         self.deg -= pps / 4
 
-                    self.y += self.acc
                     self.acc -= pps / 90
+                    self.y += self.acc * pps / 4
 
                     if self.y < 250 and self.type == 1:
                         self.y = 260
