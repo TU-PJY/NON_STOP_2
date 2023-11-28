@@ -4,7 +4,7 @@ from pico2d import *
 
 from config import *
 from game_work import game_manager, game_framework
-from mods import play_mode
+from mods import play_mode, gameover_mode
 
 
 class Arrow:
@@ -759,3 +759,51 @@ class Dead:
 
     def handle_event(self):
         pass
+
+
+class Playerdead:
+    def __init__(self):
+        self.image = load_image(dead_bg_directory)
+        self.sign = load_image(you_dead_directory)
+        self.front = load_image(front_directory)
+        self.font = load_font(font_directory, 100)
+        self.size = 0
+
+        self.x1 = 0
+        self.x2 = WIDTH
+        self.acc = 0
+        self.delay = 0
+
+        self.front_size = 0
+
+    def draw(self):
+        self.image.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
+        self.sign.draw(WIDTH / 2, HEIGHT / 2 - 200, 800 + self.size, 200 + self.size / 3)
+
+        self.front.draw(self.x1 + self.front_size / 2, HEIGHT / 2, self.front_size, HEIGHT)
+        self.front.draw(self.x2 - self.front_size / 2, HEIGHT / 2, self.front_size, HEIGHT)
+
+        self.font.draw(self.x1 + self.front_size - 450, HEIGHT / 2, 'GAME', (255, 255, 255))
+        self.font.draw(self.x2 - self.front_size + 20, HEIGHT / 2, 'OVER', (255, 255, 255))
+
+    def update(self):
+        pps = game_framework.pps
+        self.size += pps / 5
+        self.delay += pps / 3
+
+        if self.delay >= 600:
+            self.front_size += self.acc * pps / 4
+            self.acc += pps / 200
+            if self.front_size > WIDTH / 2:
+                self.acc = self.acc / 4 * -1
+                self.front_size = WIDTH / 2
+
+        if self.delay >= 1500:
+            game_manager.remove_object(self)
+            game_framework.change_mode(gameover_mode)
+
+    def handle_event(self):
+        pass
+
+
+

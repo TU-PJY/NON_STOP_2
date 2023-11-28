@@ -3,7 +3,8 @@
 from pico2d import *
 
 from config import *
-from game_work import game_framework
+from game_class.prop import Playerdead
+from game_work import game_framework, game_manager
 from mods import play_mode
 
 
@@ -136,7 +137,9 @@ def regen_hp(p):
             p.regen_timer = 0
 
 
-def check_hp(p):
+def check_hp(p):  # 플레이어 체력이 0이 되면 게임 오버 모드로 전환한다
     if p.cur_hp <= 0:
+        play_mode.weapon.update_deg = False  # 더 이상 총기 이미지 각도 업데이트를 하지 않는다
+        playerdead = Playerdead()
+        game_manager.add_object(playerdead, 7)
         game_framework.MODE = 'GAMEOVER'
-        play_mode.weapon.update_deg = False

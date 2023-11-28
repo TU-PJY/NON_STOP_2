@@ -166,7 +166,7 @@ class Player:
         self.mx, self.my = 0, 0  # 마우스 좌표
 
         self.hp = 200  # 업그레이드하면 체력이 커진다
-        self.cur_hp = 200  # 현재 체력, 피격 시 감소한다
+        self.cur_hp = 250  # 현재 체력, 피격 시 감소한다
         self.regen_timer = 0
         self.regen_delay = 700  # 플레이어 체력 회복 딜레이
 
