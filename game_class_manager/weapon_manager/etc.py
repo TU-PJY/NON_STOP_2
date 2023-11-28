@@ -153,6 +153,26 @@ def reload_gun(weapon):
             weapon.reloading = False  # 재장전 상태 해제
 
 
+def reload_one(weapon):  # 관형 급탄 장전
+    pps = game_framework.pps
+
+    if weapon.weapon_type == 0:
+        if weapon.cur_reload_time < 150:  # 정해진 값 까지 도달할때까지 더한다
+            weapon.cur_reload_time += pps / 3
+
+        else:
+            if weapon.rifle_ammo > 0:
+                if weapon.cur_ammo < 10:  # 10발을 모두 삽한할 때까지 장전을 계속한다
+                    weapon.cur_ammo += 1
+                    weapon.rifle_ammo -= 1
+                    if weapon.cur_ammo > 0:  # 1발이라도 넣었다면 재장전 필요 상태가 해제된다
+                        weapon.reload_need = False
+                    weapon.cur_reload_time = 0
+
+                if weapon.cur_ammo == 10 or weapon.rifle_ammo == 0:
+                    weapon.reloading = False  # 모두 삽탄하거나 탄약이 떨어지면 재장전 상태 해제
+
+
 def throw_grenade(weapon):
     if (weapon.p.coin >= 500 and weapon.gren_level == 1) or \
             (weapon.p.coin >= 1500 and weapon.gren_level == 2) or \

@@ -211,6 +211,11 @@ def equip_gun_page1(self, i, j):
         if play_mode.weapon.gun == 'MINI14':  # MINI14는 소총탄을 사용한다
             play_mode.weapon.gun_type = 'ar'
             play_mode.weapon.reload_time = 250
+
+        if play_mode.weapon.gun == 'WIN':
+            play_mode.weapon.gun_type = 'rifle'
+            play_mode.weapon.reload_time = 150
+
         else:
             play_mode.weapon.gun_type = 'rifle'
             play_mode.weapon.reload_time = 250

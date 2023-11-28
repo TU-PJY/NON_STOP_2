@@ -18,6 +18,9 @@ class Shoot:
             weapon.trigger = True
             if weapon.reload_need:
                 check_ammo(weapon)  # 잔탄 체크 후 재장전 여부 결정
+            if weapon.gun == 'WIN':  # 장전 도중 발사하면 재장전 상태 해제
+                weapon.reloading = False
+                weapon.cur_reload_time = 0
 
         elif weapon.weapon_type == 1 and not weapon.skill_enable:
             weapon.use = True
@@ -64,7 +67,10 @@ class Shoot:
             spin_win(weapon)
 
         if weapon.reloading:
-            reload_gun(weapon)
+            if weapon.gun == 'WIN':
+                reload_one(weapon)
+            else:
+                reload_gun(weapon)
 
         if weapon.swing:
             swing(weapon)
@@ -127,7 +133,10 @@ class Idle:
             spin_win(weapon)
 
         if weapon.reloading:
-            reload_gun(weapon)
+            if weapon.gun == 'WIN':
+                reload_one(weapon)
+            else:
+                reload_gun(weapon)
 
         if weapon.swing:
             swing(weapon)

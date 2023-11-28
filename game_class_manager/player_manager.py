@@ -131,5 +131,6 @@ def regen_hp(p):
         if p.regen_timer >= p.regen_delay:
             p.cur_hp += 5
             if p.cur_hp > p.hp:
+                p.regen_timer = 0
                 p.cur_hp = p.hp
             p.regen_timer = 0
