@@ -73,6 +73,7 @@ class Move:
 
         update_medkit_delay(p)
         regen_hp(p)
+        check_hp(p)
 
     @staticmethod
     def draw(p):
@@ -124,6 +125,7 @@ class Idle:
 
         update_medkit_delay(p)
         regen_hp(p)
+        check_hp(p)
 
     @staticmethod
     def draw(p):

@@ -199,6 +199,7 @@ class Weapon:
         self.prev_gun = 'M1911'
         self.deg = 0  # 총 이미지 각도
         self.flip = ''
+        self.update_deg = True  # 이 변수가 false이면 총기 이미지 각도가 업데이트 되지 않는다
 
         self.trigger = False  # 마우스 좌클릭 시 True
         self.shoot = False  # True일시 격발

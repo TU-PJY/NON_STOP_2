@@ -15,7 +15,8 @@ def draw_gun(weapon):
         else:
             y = weapon.p.wy
 
-        weapon.deg = math.atan2(weapon.p.my - y, weapon.p.mx - x)  # 총기 이미지 출력 각도
+        if weapon.update_deg:
+            weapon.deg = math.atan2(weapon.p.my - y, weapon.p.mx - x)  # 총기 이미지 출력 각도
 
         # GUN_NAME에 따라 사용하는 총기가 달라진다.
         if weapon.gun == 'M1911':

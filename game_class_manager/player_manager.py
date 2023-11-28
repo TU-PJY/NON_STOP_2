@@ -134,3 +134,9 @@ def regen_hp(p):
                 p.regen_timer = 0
                 p.cur_hp = p.hp
             p.regen_timer = 0
+
+
+def check_hp(p):
+    if p.cur_hp <= 0:
+        game_framework.MODE = 'GAMEOVER'
+        play_mode.weapon.update_deg = False

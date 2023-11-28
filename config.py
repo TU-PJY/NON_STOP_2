@@ -166,6 +166,7 @@ apple_dead_directory = 'res//prop//apple_dead.png'
 ghost_dead_directory = 'res//prop//ghost_dead.png'
 
 player_heal_directory = 'res//player_image//player_heal.png'
+dead_bg_directory = 'res//prop//dead_bg.png'
 
 # ui 이미지 파일 경로
 shop_window_directory = 'res//ui//shop_window.png'
