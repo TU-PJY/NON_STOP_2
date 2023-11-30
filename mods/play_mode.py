@@ -42,7 +42,12 @@ def init():
     global game, p, mp, bg, wall, weapon, target, tool, shop, ig
     game = []
 
-    p = Player()
+    with open('data//ch_data.json', 'rb') as f:
+        data_list = json.load(f)
+        for d in data_list:
+            p = Player()
+            p.__dict__.update(d)
+
     wall = Wall(p)
     bg = BackGround(p)
     mp = Map(p, wall, bg)

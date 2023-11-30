@@ -35,6 +35,18 @@ def ctrl_down(e):
 def load_player_image(self):
     self.image = load_image(player1_right_image_directory)
     self.image_left = load_image(player1_left_image_directory)
+    self.ch2_right = load_image(player2_right_image_directory)
+    self.ch2_left = load_image(player2_left_image_directory)
+    self.ch3_right = load_image(player3_right_image_directory)
+    self.ch3_left = load_image(player3_left_image_directory)
+    self.ch4_right = load_image(player4_right_image_directory)
+    self.ch4_left = load_image(player4_left_image_directory)
+    self.ch5_right = load_image(player5_right_image_directory)
+    self.ch5_left = load_image(player5_left_image_directory)
+    self.ch6_right = load_image(player6_right_image_directory)
+    self.ch6_left = load_image(player6_left_image_directory)
+    self.ch7_right = load_image(player7_right_image_directory)
+    self.ch7_left = load_image(player7_left_image_directory)
 
 
 def look_mouse(p):
@@ -48,14 +60,86 @@ def look_mouse(p):
 def draw_player(p):
     if p.look_mouse:
         if p.dir == 1:
-            p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+            match p.ch:
+                case 1:
+                    p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 2:
+                    p.ch2_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 3:
+                    p.ch3_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 4:
+                    p.ch4_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 5:
+                    p.ch5_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 6:
+                    p.ch6_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 7:
+                    p.ch7_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+
         elif p.dir == 0:
-            p.image_left.clip_composite_draw(0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size * 100)
+            match p.ch:
+                case 1:
+                    p.image_left.clip_composite_draw \
+                        (0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size * 100)
+                case 2:
+                    p.ch2_left.clip_composite_draw \
+                        (0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size * 100)
+                case 3:
+                    p.ch3_left.clip_composite_draw \
+                        (0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size * 100)
+                case 4:
+                    p.ch4_left.clip_composite_draw \
+                        (0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size * 100)
+                case 5:
+                    p.ch5_left.clip_composite_draw \
+                        (0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size * 100)
+                case 6:
+                    p.ch6_left.clip_composite_draw \
+                        (0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size * 100)
+                case 7:
+                    p.ch7_left.clip_composite_draw \
+                        (0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size * 100)
+
     else:
         if p.dir == 1:
-            p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+            match p.ch:
+                case 1:
+                    p.image.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 2:
+                    p.ch2_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 3:
+                    p.ch3_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 4:
+                    p.ch4_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 5:
+                    p.ch5_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 6:
+                    p.ch6_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 7:
+                    p.ch7_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
         elif p.dir == 0:
-            p.image_left.clip_composite_draw(0, 0, 128, 128, -p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+            match p.ch:
+                case 1:
+                    p.image_left.clip_composite_draw \
+                        (0, 0, 128, 128, -p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 2:
+                    p.ch2_left.clip_composite_draw \
+                        (0, 0, 128, 128, -p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 3:
+                    p.ch3_left.clip_composite_draw \
+                        (0, 0, 128, 128, -p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 4:
+                    p.ch4_left.clip_composite_draw \
+                        (0, 0, 128, 128, -p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 5:
+                    p.ch5_left.clip_composite_draw \
+                        (0, 0, 128, 128, -p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 6:
+                    p.ch6_left.clip_composite_draw \
+                        (0, 0, 128, 128, -p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 7:
+                    p.ch7_left.clip_composite_draw \
+                        (0, 0, 128, 128, -p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
 
 
 def jump(p):

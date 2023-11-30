@@ -37,6 +37,24 @@ TARGET_DOT_DISPLAY_TIME = 10  # 조준점 내부에 빨간 점이 표시되는 �
 player1_right_image_directory = 'res//player_image//player1_right.png'
 player1_left_image_directory = 'res//player_image//player1_left.png'
 
+player2_right_image_directory = 'res//player_image//player2_right.png'
+player2_left_image_directory = 'res//player_image//player2_left.png'
+
+player3_right_image_directory = 'res//player_image//player3_right.png'
+player3_left_image_directory = 'res//player_image//player3_left.png'
+
+player4_right_image_directory = 'res//player_image//player4_right.png'
+player4_left_image_directory = 'res//player_image//player4_left.png'
+
+player5_right_image_directory = 'res//player_image//player5_right.png'
+player5_left_image_directory = 'res//player_image//player5_left.png'
+
+player6_right_image_directory = 'res//player_image//player6_right.png'
+player6_left_image_directory = 'res//player_image//player6_left.png'
+
+player7_right_image_directory = 'res//player_image//player7_right.png'
+player7_left_image_directory = 'res//player_image//player7_left.png'
+
 # 배경 이미지 파일 경로
 land_image_directory = 'res//map_image//land.png'
 bg_image_directory = 'res//map_image//bg.png'

@@ -163,6 +163,7 @@ class StateMachine:
 class Player:
     def __init__(self):
         load_player_image(self)
+
         self.mx, self.my = 0, 0
 
         self.hp = 200  # 업그레이드하면 체력이 커진다
@@ -235,6 +236,14 @@ class Player:
         if game_framework.MODE == 'play':
             self.state_machine.update()
             # self.cur_hp -= pps / 30
+
+    def __getstate__(self):
+        state = {'ch': self.ch}
+        return state
+
+    def __setstate__(self, state):
+        self.__dict__.update(state)
+        self.__init__()
 
     def handle_event(self, event):
         self.state_machine.handle_event(('INPUT', event))
