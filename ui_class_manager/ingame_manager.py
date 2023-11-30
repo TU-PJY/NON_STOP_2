@@ -98,15 +98,10 @@ def render_ingame_ui(self):
         # 수류탄을 던질 수 있게되면 밝은 아이콘으로 표시, 아니면 어두운 아이콘으로 표시
         if self.weapon.throwable:
             self.coin_icon.draw(555 + ex, 45 + ey, 30, 30)
-            if self.p.coin >= self.p.gren_use_cost:
-                self.grenade_able_icon.draw(500 + ex, 50 + ey, 100, 100)
-                self.font_mini.draw(575 + ex, 45 + ey, '%d' % self.p.gren_use_cost, (255, 255, 255))
-                self.font_mini.draw(540 + ex, 80 + ey, 'L SHIFT', (255, 255, 255))
-            else:
-                self.grenade_unable_icon.draw(500 + ex, 50 + ey, 100, 100)
-                self.font_mini.draw(575 + ex, 45 + ey, '%d' % self.p.gren_use_cost, (255, 0, 0))
+            self.grenade_able_icon.draw(500 + ex, 50 + ey, 100, 100)
+            self.font_mini.draw(540 + ex, 80 + ey, 'L SHIFT', (255, 255, 255))
         else:
-            self.font_small.draw(550 + ex, 45 + ey, '%d' % (60 - self.weapon.throw_delay_time), (255, 255, 255))
+            self.font_small.draw(550 + ex, 45 + ey, '%d' % (120 - self.weapon.throw_delay_time), (255, 255, 255))
             self.grenade_unable_icon.draw(500 + ex, 50 + ey, 100, 100)
 
         # 플레이어 hp 출력
@@ -138,7 +133,7 @@ def render_ingame_ui(self):
                 self.font_small.draw(WIDTH / 2 + 525 + ex, 30 + ey, '%d' % self.p.medkit_count, (255, 255, 0))
         else:
             self.medkit_unable.rotate_draw(math.radians(32.05), WIDTH / 2 + 490 + ex, 32 + ey, 70, 70)
-            self.font_small.draw(WIDTH / 2 + 525 + ex, 30 + ey, '%d' % (5 - self.p.medkit_delay_time), (255, 255, 255))
+            self.font_small.draw(WIDTH / 2 + 525 + ex, 30 + ey, '%d' % (10 - self.p.medkit_delay_time), (255, 255, 255))
 
         # 라운드 수 출력
         self.font.draw(WIDTH / 2 - 130 + ex, HEIGHT - 50 + ey, 'ROUND %d' % play_mode.tool.rounds,
@@ -166,7 +161,7 @@ def render_ingame_ui(self):
             elif self.weapon.melee == 'KATANA':
                 self.katana_image.rotate_draw(math.radians(-90), 45 + ex, 55 + ey, 60, 410)
                 if not self.weapon.skill_usable_katana:
-                    self.font.draw(330 + ex, 50 + ey, '%d' % (30 - self.weapon.skill_delay_time_katana), (255, 255, 255))
+                    self.font.draw(330 + ex, 50 + ey, '%d' % (60 - self.weapon.skill_delay_time_katana), (255, 255, 255))
                 else:
                     self.font_small.draw(260 + ex, 50 + ey, 'R Button', (255, 255, 255))
 

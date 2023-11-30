@@ -102,7 +102,9 @@ def add_object_after_dead(m):
     else:
         coin = Coin(m.p, m.mp, m.x, m.y, m.dir)
 
-    game_manager.add_object(dead, 3)  # 시체를 추가한다
+    if not m.type == 3:
+        game_manager.add_object(dead, 3)  # 시체를 추가한다
+
     game_manager.add_object(coin, 3)  # 코인을 드랍한다
     game_manager.add_collision_pair('player:coin', None, coin)
     game_manager.remove_object(m)

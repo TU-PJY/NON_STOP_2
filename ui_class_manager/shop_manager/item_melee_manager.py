@@ -14,23 +14,23 @@ def buy_melee(i, j):
         pass
 
     elif (i, j) == (1, 0):
-        if play_mode.p.coin >= 5000:
-            play_mode.p.coin -= 5000
+        if play_mode.p.coin >= 3000:
+            play_mode.p.coin -= 3000
             play_mode.weapon.buy_list_melee[i][j] = True
 
     elif (i, j) == (2, 0):
-        if play_mode.p.coin >= 15000:
-            play_mode.p.coin -= 15000
+        if play_mode.p.coin >= 10000:
+            play_mode.p.coin -= 10000
             play_mode.weapon.buy_list_melee[i][j] = True
 
     elif (i, j) == (3, 0):
-        if play_mode.p.coin >= 30000:
-            play_mode.p.coin -= 30000
+        if play_mode.p.coin >= 25000:
+            play_mode.p.coin -= 25000
             play_mode.weapon.buy_list_melee[i][j] = True
 
     elif (i, j) == (4, 0):
-        if play_mode.p.coin >= 50000:
-            play_mode.p.coin -= 50000
+        if play_mode.p.coin >= 55000:
+            play_mode.p.coin -= 55000
             play_mode.weapon.buy_list_melee[i][j] = True
 
 

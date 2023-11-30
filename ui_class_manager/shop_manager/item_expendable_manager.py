@@ -9,23 +9,23 @@ def buy_expendables(self, i, j):
                 play_mode.weapon.pistol_ammo += 150
                 self.size_list[i][j] = 150  # 구입 피드백 재생
         case (1, 0):
-            if play_mode.p.coin >= 200:
-                play_mode.p.coin -= 200
+            if play_mode.p.coin >= 300:
+                play_mode.p.coin -= 300
                 play_mode.weapon.ar_ammo += 100
                 self.size_list[i][j] = 150  # 구입 피드백 재생
         case (2, 0):
-            if play_mode.p.coin >= 350:
-                play_mode.p.coin -= 350
+            if play_mode.p.coin >= 600:
+                play_mode.p.coin -= 600
                 play_mode.weapon.rifle_ammo += 70
                 self.size_list[i][j] = 150  # 구입 피드백 재생
         case (3, 0):
-            if play_mode.p.coin >= 500:
-                play_mode.p.coin -= 500
-                play_mode.weapon.sniper_ammo += 30
+            if play_mode.p.coin >= 2000:
+                play_mode.p.coin -= 2000
+                play_mode.weapon.sniper_ammo += 20
                 self.size_list[i][j] = 150  # 구입 피드백 재생
         case (4, 0):
-            if play_mode.p.coin >= 400:
-                play_mode.p.coin -= 400
+            if play_mode.p.coin >= 800:
+                play_mode.p.coin -= 800
                 play_mode.p.medkit_count += 1
                 self.size_list[i][j] = 150  # 구입 피드백 재생
 
@@ -36,25 +36,25 @@ def buy_expendables(self, i, j):
                 play_mode.p.hp += 50
                 play_mode.p.cur_hp = play_mode.p.hp  # 체력 업그레이드 시 체력 회복
                 play_mode.p.hp_count += 1
-                play_mode.p.hp_cost *= 3
+                play_mode.p.hp_cost *= 4
                 self.size_list[i][j] = 150  # 구입 피드백 재생
         case (1, 1):
             if play_mode.p.coin >= play_mode.p.regen_cost and play_mode.p.regen_count < 3:
                 play_mode.p.coin -= play_mode.p.regen_cost
                 play_mode.p.regen_delay -= 100
                 play_mode.p.regen_count += 1
-                play_mode.p.regen_cost *= 3
+                play_mode.p.regen_cost *= 4
                 self.size_list[i][j] = 150  # 구입 피드백 재생
         case (2, 1):
             if play_mode.p.coin >= play_mode.p.speed_cost and play_mode.p.speed_count < 3:
                 play_mode.p.coin -= play_mode.p.speed_cost
                 play_mode.p.speed += 0.1
                 play_mode.p.speed_count += 1
-                play_mode.p.speed_cost *= 3
+                play_mode.p.speed_cost *= 4
                 self.size_list[i][j] = 150  # 구입 피드백 재생
         case (3, 1):
-            if play_mode.p.coin >= 3000 and play_mode.p.double_jump < 1:
-                play_mode.p.coin -= 3000
+            if play_mode.p.coin >= 6000 and play_mode.p.double_jump < 1:
+                play_mode.p.coin -= 6000
                 play_mode.p.jump_level += 1
                 play_mode.p.double_jump += 1
                 self.size_list[i][j] = 150  # 구입 피드백 재생
@@ -63,6 +63,5 @@ def buy_expendables(self, i, j):
                 play_mode.p.coin -= play_mode.p.gren_cost
                 play_mode.weapon.gren_level += 1
                 play_mode.p.gren_count += 1
-                play_mode.p.gren_cost *= 4
-                play_mode.p.gren_use_cost *= 2
+                play_mode.p.gren_cost *= 10
                 self.size_list[i][j] = 150  # 구입 피드백 재생

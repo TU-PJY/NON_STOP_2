@@ -28,8 +28,8 @@ def process_attack(m):
 
         if m.is_dash:  # True일 시 대쉬 공격
             m.frame = 3
-            m.x += 7 * math.cos(m.incline) * pps / 4
-            m.y += 7 * math.sin(m.incline) * pps / 4
+            m.x += 5 * math.cos(m.incline) * pps / 4
+            m.y += 5 * math.sin(m.incline) * pps / 4
 
             if m.temp_x - 10 <= m.x <= m.temp_x + 10 and m.temp_y - 10 <= m.y <= m.temp_y + 10:
                 m.dash_delay = 700

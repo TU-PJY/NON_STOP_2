@@ -32,7 +32,7 @@ class Move:
 
         elif ctrl_down(e):  # 응급처치 키드를 사용하여 체력 회복
             if p.medkit_count > 0 and p.cur_hp < p.hp and p.usable_medkit:
-                p.cur_hp += 50
+                p.cur_hp += 100
                 p.medkit_count -= 1
                 heal = PlayerDamage(True)  # 플레이어 대미지 피드백 클래스를 활용한다
                 game_manager.add_object(heal, 7)
@@ -98,7 +98,7 @@ class Idle:
 
         elif ctrl_down(e):  # 응급처치 키드를 사용하여 체력 회복
             if p.medkit_count > 0 and p.cur_hp < p.hp and p.usable_medkit:
-                p.cur_hp += 50
+                p.cur_hp += 100
                 p.medkit_count -= 1
                 heal = PlayerDamage(True)  # 플레이어 대미지 피드백 클래스를 활용한다
                 game_manager.add_object(heal, 7)
@@ -188,7 +188,7 @@ class Player:
         self.jump_level = 2  # 레벨이 오를수록 연속 점프 횟수가 많아짐
         self.jump_delay = 0
 
-        self.coin = 0  # 플레이어가 소지한 코인 개수
+        self.coin = 999999  # 플레이어가 소지한 코인 개수
         self.get_coin = False  # true일 시 코인 획득 피드백 재생
 
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
@@ -222,12 +222,10 @@ class Player:
         self.double_jump = 0  # 최대 1단계, play_mode.p.jump_level로 전달
         self.gren_count = 0  # 최대 2단계
 
-        self.hp_cost = 500
-        self.regen_cost = 500
-        self.speed_cost = 500
-        self.gren_cost = 1500
-
-        self.gren_use_cost = 500
+        self.hp_cost = 1500
+        self.regen_cost = 1500
+        self.speed_cost = 1500
+        self.gren_cost = 10000
 
         self.state_machine = StateMachine(self)
         self.state_machine.start()

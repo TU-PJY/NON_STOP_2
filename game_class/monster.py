@@ -154,7 +154,7 @@ class Monster:
                             case 2:
                                 self.p.cur_hp -= 15
                             case 3:
-                                self.p.cur_hp -= 20
+                                self.p.cur_hp -= 30
 
                         self.p.dmg_shake_range = 30
                         self.p.dmg_delay = 200  # 해당 변수가 0이 되어야 플레이어는 다음 대미지를 받는다
@@ -166,12 +166,12 @@ class Monster:
                 # AXE의 경우 스킬 사용 시 몬스터는 즉사한다
                 if self.weapon.hit_ground and self.weapon.melee == 'AXE':
                     if not self.once and self.hp > 0:
-                        self.hp -= 150
+                        self.hp -= 200
                         self.once = True
 
                 elif self.weapon.skill_enable and self.weapon.melee == 'KATANA':
                     if not self.once and self.hp > 0:
-                        self.hp -= 100
+                        self.hp -= 150
                         self.once = True
 
                 else:  # 나머지 근접 무기 공격

@@ -174,21 +174,16 @@ def reload_one(weapon):  # 관형 급탄 장전
 
 
 def throw_grenade(weapon):
-    if (weapon.p.coin >= 500 and weapon.gren_level == 1) or \
-            (weapon.p.coin >= 1500 and weapon.gren_level == 2) or \
-            (weapon.p.coin >= 4500 and weapon.gren_level == 3):
-        gren = Grenade(weapon.p, weapon.mp, weapon, weapon.p.x, weapon.p.y - weapon.p.cam_h, weapon.p.dir)
-        game_manager.add_object(gren, 3)
-        weapon.throwable = False
-        weapon.throw_delay = get_time()  # 던진 직후부터 쿨타임 측정
-        weapon.p.coin -= weapon.p.gren_use_cost
-        weapon.p.get_coin = True  # 코인 사용 피드백 재생
+    gren = Grenade(weapon.p, weapon.mp, weapon, weapon.p.x, weapon.p.y - weapon.p.cam_h, weapon.p.dir)
+    game_manager.add_object(gren, 3)
+    weapon.throwable = False
+    weapon.throw_delay = get_time()  # 던진 직후부터 쿨타임 측정
 
 
 def update_throw_delay(weapon):
     if not weapon.throwable:  # 수류탄 던진 후 쿨타임 측정
         weapon.throw_delay_time = get_time() - weapon.throw_delay
-        if weapon.throw_delay_time > 59:
+        if weapon.throw_delay_time > 119:
             weapon.throwable = True  # 쿨타임이 0이되면 다시 수류탄 활성화
 
 
@@ -214,7 +209,7 @@ def update_skill_delay(weapon):  # 각 근접무기의 스킬 딜레이를 업�
 
     if not weapon.skill_usable_katana:
         weapon.skill_delay_time_katana = get_time() - weapon.skill_delay_katana
-        if weapon.skill_delay_time_katana > 29:
+        if weapon.skill_delay_time_katana > 60:
             weapon.skill_usable_katana = True
 
     if not weapon.skill_usable_axe:

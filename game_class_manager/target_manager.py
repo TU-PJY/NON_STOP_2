@@ -191,7 +191,7 @@ def update_target(t):
             t.recoil += 12
 
     elif t.weapon.gun == 'SCAR_H':
-        t.dis2 = t.dis / 20
+        t.dis2 = t.dis / 30
         if t.weapon.shoot:
             t.recoil += 20
 

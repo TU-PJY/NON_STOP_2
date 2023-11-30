@@ -11,35 +11,35 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                 if m.weapon.gun == 'M1911':
                     m.hp -= 30
                 elif m.weapon.gun == 'M92':
-                    m.hp -= 25
+                    m.hp -= 30
                 elif m.weapon.gun == 'DEGLE':
-                    m.hp -= 40
-                elif m.weapon.gun == 'M500':
                     m.hp -= 45
+                elif m.weapon.gun == 'M500':
+                    m.hp -= 50
                 elif m.weapon.gun == 'QHAND':
-                    m.hp -= 23
+                    m.hp -= 25
 
                 elif m.weapon.gun == 'AKS74':
-                    m.hp -= 12
+                    m.hp -= 17
                 elif m.weapon.gun == 'UMP':
-                    m.hp -= 16
+                    m.hp -= 20
                 elif m.weapon.gun == 'VECTOR':
                     m.hp -= 11
                 elif m.weapon.gun == 'THOMPSON':
-                    m.hp -= 18
+                    m.hp -= 20
                 elif m.weapon.gun == 'P90':
                     m.hp -= 16
 
                 elif m.weapon.gun == 'SCAR_H':
-                    m.hp -= 20
+                    m.hp -= 28
                 elif m.weapon.gun == 'M16':
                     m.hp -= 18
                 elif m.weapon.gun == 'MP44':
-                    m.hp -= 30
+                    m.hp -= 35
                 elif m.weapon.gun == 'AUG':
-                    m.hp -= 23
+                    m.hp -= 25
                 elif m.weapon.gun == 'GROZA':
-                    m.hp -= 21
+                    m.hp -= 23
 
                 elif m.weapon.gun == 'M1':
                     m.hp -= 70

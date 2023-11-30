@@ -31,28 +31,28 @@ def buy_gun_page1(i, j):
             play_mode.weapon.buy_list_gun[i][j] = True
 
     elif (i, j) == (4, 0):
+        if play_mode.p.coin >= 1200:
+            play_mode.p.coin -= 1200
+            play_mode.weapon.buy_list_gun[i][j] = True
+
+    elif (i, j) == (0, 1):
         if play_mode.p.coin >= 1500:
             play_mode.p.coin -= 1500
             play_mode.weapon.buy_list_gun[i][j] = True
 
-    elif (i, j) == (0, 1):
+    elif (i, j) == (1, 1):
         if play_mode.p.coin >= 2000:
             play_mode.p.coin -= 2000
             play_mode.weapon.buy_list_gun[i][j] = True
 
-    elif (i, j) == (1, 1):
+    elif (i, j) == (2, 1):
         if play_mode.p.coin >= 2500:
             play_mode.p.coin -= 2500
             play_mode.weapon.buy_list_gun[i][j] = True
 
-    elif (i, j) == (2, 1):
+    elif (i, j) == (3, 1):
         if play_mode.p.coin >= 3000:
             play_mode.p.coin -= 3000
-            play_mode.weapon.buy_list_gun[i][j] = True
-
-    elif (i, j) == (3, 1):
-        if play_mode.p.coin >= 3500:
-            play_mode.p.coin -= 3500
             play_mode.weapon.buy_list_gun[i][j] = True
 
     elif (i, j) == (4, 1):
@@ -66,75 +66,75 @@ def buy_gun_page1(i, j):
             play_mode.weapon.buy_list_gun[i][j] = True
 
     elif (i, j) == (1, 2):
-        if play_mode.p.coin >= 6000:
-            play_mode.p.coin -= 6000
-            play_mode.weapon.buy_list_gun[i][j] = True
-
-    elif (i, j) == (2, 2):
         if play_mode.p.coin >= 7000:
             play_mode.p.coin -= 7000
             play_mode.weapon.buy_list_gun[i][j] = True
 
-    elif (i, j) == (3, 2):
-        if play_mode.p.coin >= 8000:
-            play_mode.p.coin -= 8000
-            play_mode.weapon.buy_list_gun[i][j] = True
-
-    elif (i, j) == (4, 2):
+    elif (i, j) == (2, 2):
         if play_mode.p.coin >= 9000:
             play_mode.p.coin -= 9000
             play_mode.weapon.buy_list_gun[i][j] = True
 
-    elif (i, j) == (0, 3):
+    elif (i, j) == (3, 2):
         if play_mode.p.coin >= 11000:
             play_mode.p.coin -= 11000
             play_mode.weapon.buy_list_gun[i][j] = True
 
-    elif (i, j) == (1, 3):
+    elif (i, j) == (4, 2):
         if play_mode.p.coin >= 13000:
             play_mode.p.coin -= 13000
             play_mode.weapon.buy_list_gun[i][j] = True
 
-    elif (i, j) == (2, 3):
+    elif (i, j) == (0, 3):
         if play_mode.p.coin >= 15000:
             play_mode.p.coin -= 15000
             play_mode.weapon.buy_list_gun[i][j] = True
 
+    elif (i, j) == (1, 3):
+        if play_mode.p.coin >= 20000:
+            play_mode.p.coin -= 20000
+            play_mode.weapon.buy_list_gun[i][j] = True
+
+    elif (i, j) == (2, 3):
+        if play_mode.p.coin >= 25000:
+            play_mode.p.coin -= 25000
+            play_mode.weapon.buy_list_gun[i][j] = True
+
     elif (i, j) == (3, 3):
-        if play_mode.p.coin >= 17000:
-            play_mode.p.coin -= 17000
+        if play_mode.p.coin >= 30000:
+            play_mode.p.coin -= 30000
             play_mode.weapon.buy_list_gun[i][j] = True
 
     elif (i, j) == (4, 3):
-        if play_mode.p.coin >= 19000:
-            play_mode.p.coin -= 19000
+        if play_mode.p.coin >= 35000:
+            play_mode.p.coin -= 35000
             play_mode.weapon.buy_list_gun[i][j] = True
 
 
 def buy_gun_page2(i, j):
     if (i, j) == (0, 0):
-        if play_mode.p.coin >= 23000:
-            play_mode.p.coin -= 23000
+        if play_mode.p.coin >= 45000:
+            play_mode.p.coin -= 45000
             play_mode.weapon.buy_list_gun2[i][j] = True
 
     if (i, j) == (1, 0):
-        if play_mode.p.coin >= 28000:
-            play_mode.p.coin -= 28000
+        if play_mode.p.coin >= 55000:
+            play_mode.p.coin -= 55000
             play_mode.weapon.buy_list_gun2[i][j] = True
 
     if (i, j) == (2, 0):
-        if play_mode.p.coin >= 33000:
-            play_mode.p.coin -= 33000
+        if play_mode.p.coin >= 65000:
+            play_mode.p.coin -= 65000
             play_mode.weapon.buy_list_gun2[i][j] = True
 
     if (i, j) == (3, 0):
-        if play_mode.p.coin >= 38000:
-            play_mode.p.coin -= 38000
+        if play_mode.p.coin >= 75000:
+            play_mode.p.coin -= 75000
             play_mode.weapon.buy_list_gun2[i][j] = True
 
     if (i, j) == (4, 0):
-        if play_mode.p.coin >= 43000:
-            play_mode.p.coin -= 43000
+        if play_mode.p.coin >= 100000:
+            play_mode.p.coin -= 100000
             play_mode.weapon.buy_list_gun2[i][j] = True
 
 
