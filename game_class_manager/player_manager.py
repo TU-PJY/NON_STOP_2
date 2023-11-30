@@ -47,6 +47,8 @@ def load_player_image(self):
     self.ch6_left = load_image(player6_left_image_directory)
     self.ch7_right = load_image(player7_right_image_directory)
     self.ch7_left = load_image(player7_left_image_directory)
+    self.ch8_right = load_image(player8_right_image_directory)
+    self.ch8_left = load_image(player8_left_image_directory)
 
 
 def look_mouse(p):
@@ -75,6 +77,8 @@ def draw_player(p):
                     p.ch6_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
                 case 7:
                     p.ch7_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 8:
+                    p.ch8_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
 
         elif p.dir == 0:
             match p.ch:
@@ -98,6 +102,9 @@ def draw_player(p):
                         (0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size * 100)
                 case 7:
                     p.ch7_left.clip_composite_draw \
+                        (0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size * 100)
+                case 8:
+                    p.ch8_left.clip_composite_draw \
                         (0, 0, 128, 128, p.rotate, 'h, v', p.px, p.py, 400, 400 + p.size * 100)
 
     else:
@@ -117,6 +124,8 @@ def draw_player(p):
                     p.ch6_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
                 case 7:
                     p.ch7_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 8:
+                    p.ch8_right.clip_composite_draw(0, 0, 128, 128, p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
         elif p.dir == 0:
             match p.ch:
                 case 1:
@@ -139,6 +148,9 @@ def draw_player(p):
                         (0, 0, 128, 128, -p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
                 case 7:
                     p.ch7_left.clip_composite_draw \
+                        (0, 0, 128, 128, -p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
+                case 8:
+                    p.ch8_left.clip_composite_draw \
                         (0, 0, 128, 128, -p.rotate, '', p.px, p.py, 400, 400 + p.size * 100)
 
 

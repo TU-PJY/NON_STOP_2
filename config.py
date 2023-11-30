@@ -55,6 +55,9 @@ player6_left_image_directory = 'res//player_image//player6_left.png'
 player7_right_image_directory = 'res//player_image//player7_right.png'
 player7_left_image_directory = 'res//player_image//player7_left.png'
 
+player8_right_image_directory = 'res//player_image//player8_right.png'
+player8_left_image_directory = 'res//player_image//player8_left.png'
+
 # 배경 이미지 파일 경로
 land_image_directory = 'res//map_image//land.png'
 bg_image_directory = 'res//map_image//bg.png'
@@ -237,6 +240,8 @@ icon_double_jump_directory = 'res//ui//icon_double_jump.png'
 hp_regen_directory = 'res//ui//hp_regen.png'
 
 logo_directory = 'res//ui//logo.png'
+
+ch_selected_directory = 'res//ui//ch_selected.png'
 
 # 폰트 경로
 font_directory = 'res//font//bump-it-up.ttf'

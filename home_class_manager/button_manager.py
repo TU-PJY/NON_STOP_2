@@ -12,7 +12,11 @@ def load_file(self):  # 캐릭터 선택 버튼을 출력하기 위한 이미지
     self.ch5 = load_image(player5_right_image_directory)
     self.ch6 = load_image(player6_right_image_directory)
     self.ch7 = load_image(player7_right_image_directory)
+    self.ch8 = load_image(player8_right_image_directory)
     self.back_button = load_image(button_page_directory)
+    self.back_button_back = load_image(shop_button_directory)
+
+    self.ch_sel = load_image(ch_selected_directory)
 
 
 def home_draw_button(self):
@@ -36,9 +40,32 @@ def ch_draw_button(self):  # 캐릭터 선택 버튼
     self.button4.draw(700, HEIGHT / 2 + 119, 130, 130)
     self.button4.draw(850, HEIGHT / 2 + 119, 130, 130)
     self.button4.draw(1000, HEIGHT / 2 + 119, 130, 130)
+    self.button4.draw(1150, HEIGHT / 2 + 119, 130, 130)
 
-    self.button4.draw(60, 60, 100, 100)
+    self.back_button_back.opacify(self.op4)
+    self.back_button_back.draw(60, 60, 100, 100)
+
     self.back_button.clip_composite_draw(0, 0, 10, 15, 0, 'h', 60, 60, 80, 80)
+
+    match self.data.ch:
+        case 1:
+            x = 100
+        case 2:
+            x = 250
+        case 3:
+            x = 400
+        case 4:
+            x = 550
+        case 5:
+            x = 700
+        case 6:
+            x = 850
+        case 7:
+            x = 1000
+        case 8:
+            x = 1150
+
+    self.ch_sel.draw(x, HEIGHT / 2 + 250, 100, 100)
 
     self.ch1.clip_composite_draw(0, 56, 128, 128, 0, '', 100, HEIGHT / 2 + 200, 500, 285)
     self.ch2.clip_composite_draw(0, 56, 128, 128, 0, '', 250, HEIGHT / 2 + 200, 500, 285)
@@ -47,9 +74,23 @@ def ch_draw_button(self):  # 캐릭터 선택 버튼
     self.ch5.clip_composite_draw(0, 56, 128, 128, 0, '', 700, HEIGHT / 2 + 200, 500, 285)
     self.ch6.clip_composite_draw(0, 56, 128, 128, 0, '', 850, HEIGHT / 2 + 200, 500, 285)
     self.ch7.clip_composite_draw(0, 56, 128, 128, 0, '', 1000, HEIGHT / 2 + 200, 500, 285)
+    self.ch8.clip_composite_draw(0, 56, 128, 128, 0, '', 1150, HEIGHT / 2 + 200, 500, 285)
 
 
 def ch_update_button(self):
+    mx = self.cursor.mx
+    my = self.cursor.my
+    pps = game_framework.pps
+
+    if 10 <= mx <= 110 and 10 <= my <= 110:
+        self.op4 += pps / 50
+        if self.op4 > 1:
+            self.op4 = 1
+    else:
+        self.op4 -= pps / 50
+        if self.op4 < 0:
+            self.op4 = 0
+
     if self.click:
         mx = self.cursor.mx
         my = self.cursor.my
@@ -57,20 +98,22 @@ def ch_update_button(self):
         if 10 <= mx <= 110 and 10 <= my <= 110:
             self.data.mode = 'home'
 
-        elif 35 <= mx <= 165 and HEIGHT / 2 - 11 <= my <= HEIGHT / 2 + 149:
+        elif 35 <= mx <= 165 and HEIGHT / 2 + 65 <= my <= HEIGHT / 2 + 184:
             self.data.ch = 1
-        elif 185 <= mx <= 315 and HEIGHT / 2 - 11 <= my <= HEIGHT / 2 + 149:
+        elif 185 <= mx <= 315 and HEIGHT / 2 + 65 <= my <= HEIGHT / 2 + 184:
             self.data.ch = 2
-        elif 335 <= mx <= 465 and HEIGHT / 2 - 11 <= my <= HEIGHT / 2 + 149:
+        elif 335 <= mx <= 465 and HEIGHT / 2 + 65 <= my <= HEIGHT / 2 + 184:
             self.data.ch = 3
-        elif 385 <= mx <= 615 and HEIGHT / 2 - 11 <= my <= HEIGHT / 2 + 149:
+        elif 385 <= mx <= 615 and HEIGHT / 2 + 65 <= my <= HEIGHT / 2 + 184:
             self.data.ch = 4
-        elif 535 <= mx <= 765 and HEIGHT / 2 - 11 <= my <= HEIGHT / 2 + 149:
+        elif 535 <= mx <= 765 and HEIGHT / 2 + 65 <= my <= HEIGHT / 2 + 184:
             self.data.ch = 5
-        elif 685 <= mx <= 915 and HEIGHT / 2 - 11 <= my <= HEIGHT / 2 + 149:
+        elif 685 <= mx <= 915 and HEIGHT / 2 + 65 <= my <= HEIGHT / 2 + 184:
             self.data.ch = 6
-        elif 835 <= mx <= 1065 and HEIGHT / 2 - 11 <= my <= HEIGHT / 2 + 149:
+        elif 835 <= mx <= 1065 and HEIGHT / 2 + 65 <= my <= HEIGHT / 2 + 184:
             self.data.ch = 7
+        elif 985 <= mx <= 1315 and HEIGHT / 2 + 65 <= my <= HEIGHT / 2 + 184:
+            self.data.ch = 8
 
         data = [
             {"ch": self.data.ch}

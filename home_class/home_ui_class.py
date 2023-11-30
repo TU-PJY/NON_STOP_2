@@ -36,8 +36,11 @@ class Button:
         self.font = load_font(font2_directory, 50)
         self.cursor = cursor
         self.op1, self.op2, self.op3 = 0, 0, 0
+        self.op4 = 0
         self.click = False
         self.data = data
+        self.sel_x = 0
+
         load_file(self)
 
     def draw(self):
@@ -85,6 +88,7 @@ class Playerimage:
         self.ch5 = load_image(player5_right_image_directory)
         self.ch6 = load_image(player6_right_image_directory)
         self.ch7 = load_image(player7_right_image_directory)
+        self.ch8 = load_image(player8_right_image_directory)
 
         self.gun_image = load_image(scar_h_right_directory)
         self.cursor = cursor
@@ -110,6 +114,8 @@ class Playerimage:
                 self.ch6.rotate_draw(math.radians(-3), 450 + ex, 100 + ey + self.size / 2, 1500, 1500 + self.size)
             case 7:
                 self.ch7.rotate_draw(math.radians(-3), 450 + ex, 100 + ey + self.size / 2, 1500, 1500 + self.size)
+            case 8:
+                self.ch8.rotate_draw(math.radians(-3), 450 + ex, 100 + ey + self.size / 2, 1500, 1500 + self.size)
 
         self.gun_image.rotate_draw(math.radians(-3), 456 + ex, 80 + ey + self.size / 2, 1000, 500)
 
