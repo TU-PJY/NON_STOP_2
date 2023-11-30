@@ -6,7 +6,7 @@ from game_class.weapon import *
 from game_work import game_manager, game_framework
 from mods import shop_mode
 from ui_class.ingame import Ingame
-
+import pickle
 
 def handle_events():
     global p, weapon
