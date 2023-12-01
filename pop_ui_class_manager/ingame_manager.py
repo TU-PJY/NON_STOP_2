@@ -139,7 +139,7 @@ def render_ingame_ui(self):
                        (255, int(self.rg), int(self.rb)))
 
         self.font_small.draw \
-            (WIDTH / 2 + 200 + ex, HEIGHT - 59 + ey + self.ky, \
+            (WIDTH / 2 + 250 + ex, HEIGHT - 59 + ey + self.ky, \
              '%d | %d' % (play_mode.tool.limit - play_mode.tool.kill_count, play_mode.tool.limit), (255, 255, 255))
 
         #  근접 무기 스킬 사용 쿨타입 표시

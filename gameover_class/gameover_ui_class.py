@@ -73,6 +73,9 @@ class Reward:
         if self.highscore:
             self.font3.draw(WIDTH / 2 - 105, HEIGHT / 2 - 50, 'HIGHSCORE!', (255, 255, 0))
 
+        else:
+            self.font3.draw(WIDTH / 2 - 105, HEIGHT / 2 - 50, 'HIGHSCORE: %d' % self.max_rounds, (255, 255, 255))
+
     def update(self):
         pps = game_framework.pps
 
