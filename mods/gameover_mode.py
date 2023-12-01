@@ -14,7 +14,7 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            game_framework.quit()
+            pass
 
         elif event.type == SDL_MOUSEMOTION:
             cursor.mx, cursor.my = event.x, HEIGHT - 1 - event.y
@@ -27,7 +27,12 @@ def init():
     global playerdead, reward, cursor
     cursor = Cursor()
     playerdead = Playerdead()
-    reward = Reward(cursor)
+
+    with open('data//rounds_data.json', 'rb') as f:
+        data = json.load(f)
+        for d in data:
+            reward = Reward(cursor)
+            reward.__dict__.update(d)
 
     game_manager.add_object(playerdead, 7)
     game_manager.add_object(reward, 6)

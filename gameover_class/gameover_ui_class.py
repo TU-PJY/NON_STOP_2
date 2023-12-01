@@ -2,7 +2,7 @@ from pico2d import *
 
 from config import *
 from game_work import game_framework
-from mods import home_mode, gameover_mode
+from mods import home_mode, gameover_mode, play_mode
 
 
 class Playerdead:
@@ -45,19 +45,44 @@ class Reward:
         self.image = load_image(reward_directory)
         self.button = load_image(ammo_ind_back_directory)
         self.font = load_font(font2_directory, 60)
+        self.font2 = load_font(font_directory, 40)
+        self.font3 = load_font(font_directory, 20)
         self.click = False
         self.op = 0
         self.cursor = cursor
+        self.highscore = False  # 이전 최고 기록과 비교하여 현재 기록이 더 높으면 True가 되어 최고 기록을 갱신한다
+
+        self.total_rounds = play_mode.tool.rounds
+
+    def __getstate__(self):
+        state = {'max_rounds': self.max_rounds}
+        return state
+
+    def __setstate__(self, state):
+        self.__init__()
+        self.__dict__.update(state)
 
     def draw(self):
         self.back.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
         self.image.draw(WIDTH / 2, HEIGHT - 200, 920, 190)
         self.button.opacify(self.op)
+        self.font2.draw(WIDTH / 2 - 270, HEIGHT / 2, 'TOTAL ROUNDS: %d' % self.total_rounds, (255, 255, 255))
         self.button.draw(WIDTH / 2, 200, 500, 100)
         self.font.draw(WIDTH / 2 - 220, 200, '홈으로 돌아가기', (255, 255, 255))
 
+        if self.highscore:
+            self.font3.draw(WIDTH / 2 - 105, HEIGHT / 2 - 50, 'HIGHSCORE!', (255, 255, 0))
+
     def update(self):
         pps = game_framework.pps
+
+        if self.max_rounds < self.total_rounds:  # 이전 최고 기록과 비교하여 최고 기록을 넘었다면 데이터 갱신
+            self.highscore = True
+            data = [
+                {"max_rounds": self.total_rounds}
+            ]
+            with open('data//rounds_data.json', 'w') as f:
+                json.dump(data, f)
 
         if gameover_mode.playerdead.front_size < 0:
             if WIDTH / 2 - 250 < self.cursor.mx < WIDTH / 2 + 250 and 150 < self.cursor.my < 250:
