@@ -29,17 +29,20 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            game_framework.MODE = 'pause'
-            save_cooltime()
-            game_framework.push_mode(pause_mode)
+            if p.cur_hp > 0:
+                game_framework.MODE = 'pause'
+                save_cooltime()
+                game_framework.push_mode(pause_mode)
 
         elif event.type == SDL_KEYDOWN and event.key == SDLK_TAB:  # to_shop_mode
-            save_cooltime()
-            game_framework.MODE = 'shop'
-            game_framework.push_mode(shop_mode)
+            if p.cur_hp > 0:
+                save_cooltime()
+                game_framework.MODE = 'shop'
+                game_framework.push_mode(shop_mode)
 
         elif event.type == SDL_MOUSEMOTION:
-            p.mx, p.my = event.x, HEIGHT - 1 - event.y
+            if p.cur_hp > 0:
+                p.mx, p.my = event.x, HEIGHT - 1 - event.y
 
         else:
             p.handle_event(event)

@@ -786,8 +786,8 @@ class Playerdead:  # 이 클래스를 거쳐 모드를 변경하게 된다
         self.front.draw(self.x1 + self.front_size / 2, HEIGHT / 2, self.front_size, HEIGHT)
         self.front.draw(self.x2 - self.front_size / 2, HEIGHT / 2, self.front_size, HEIGHT)
 
-        self.font.draw(self.x1 + self.front_size - 450, HEIGHT / 2, 'GAME', (255, 255, 255))
-        self.font.draw(self.x2 - self.front_size + 20, HEIGHT / 2, 'OVER', (255, 255, 255))
+        self.font.draw(self.x1 + self.front_size - 450, HEIGHT / 2, 'GAME', (172, 162, 132))
+        self.font.draw(self.x2 - self.front_size + 20, HEIGHT / 2, 'OVER', (172, 162, 132))
 
     def update(self):
         pps = game_framework.pps

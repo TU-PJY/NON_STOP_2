@@ -49,13 +49,15 @@ def init():
     pimage = Playerimage(cursor, data)
     mimage = Monsterimage(cursor)
     start = Start(data)
-    start2 = Start2()
+    if game_framework.ANIMATION:  # true일때만 객체 삽입
+        start2 = Start2()
     game_manager.add_object(data, 0)
     game_manager.add_object(bg, 6)
     game_manager.add_object(pimage, 7)
     game_manager.add_object(mimage, 7)
     game_manager.add_object(button, 7)
-    game_manager.add_object(start2, 7)
+    if game_framework.ANIMATION:
+        game_manager.add_object(start2, 7)
     game_manager.add_object(cursor, 7)
     game_manager.add_object(start, 7)
 

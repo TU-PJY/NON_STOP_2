@@ -22,8 +22,8 @@ class Playerdead:
         self.front.draw(self.x1 + self.front_size / 2, HEIGHT / 2, self.front_size, HEIGHT)
         self.front.draw(self.x2 - self.front_size / 2, HEIGHT / 2, self.front_size, HEIGHT)
 
-        self.font.draw(self.x1 + self.front_size - 450, HEIGHT / 2, 'GAME', (255, 255, 255))
-        self.font.draw(self.x2 - self.front_size + 20, HEIGHT / 2, 'OVER', (255, 255, 255))
+        self.font.draw(self.x1 + self.front_size - 450, HEIGHT / 2, 'GAME', (172, 162, 132))
+        self.font.draw(self.x2 - self.front_size + 20, HEIGHT / 2, 'OVER', (172, 162, 132))
 
     def update(self):
         pps = game_framework.pps
@@ -100,6 +100,7 @@ class Reward:
             if self.click:
                 if WIDTH / 2 - 250 < self.cursor.mx < WIDTH / 2 + 250 and 150 < self.cursor.my < 250:
                     game_framework.MODE = 'home'
+                    game_framework.ANIMATION = False
                     game_framework.change_mode(home_mode)
 
                 else:

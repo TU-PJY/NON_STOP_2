@@ -6,6 +6,7 @@ running = None
 stack = None
 
 MODE = 'home'
+ANIMATION = True
 
 
 def change_mode(mode):

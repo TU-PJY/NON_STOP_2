@@ -216,7 +216,7 @@ class End:
     def draw(self):
         self.up.draw(WIDTH / 2, self.y1, WIDTH, HEIGHT)
         self.down.draw(WIDTH / 2, self.y2, WIDTH, HEIGHT)
-        self.font.draw(50, self.y1 - HEIGHT / 2 + 90, 'BYE BYE', (255, 255, 255))
+        self.font.draw(50, self.y1 - HEIGHT / 2 + 90, 'BYE BYE', (172, 162, 132))
 
     def update(self):
         pps = game_framework.pps
@@ -233,4 +233,5 @@ class End:
 
         if self.delay >= 550:
             game_framework.MODE = 'home'
+            game_framework.ANIMATION = True
             game_framework.change_mode(home_mode)

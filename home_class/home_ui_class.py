@@ -181,10 +181,10 @@ class Start:
     def draw(self):
         self.up.draw(WIDTH / 2, self.y1, WIDTH, HEIGHT)
         self.down.draw(WIDTH / 2, self.y2, WIDTH, HEIGHT)
-        self.font.draw(WIDTH / 2 - 600, self.y1 - HEIGHT / 2 + 90, 'OKAY! LETS GO!', (255, 255, 255))
+        self.font.draw(WIDTH / 2 - 600, self.y1 - HEIGHT / 2 + 90, 'OKAY! LETS GO!', (172, 162, 132))
 
         if self.font_out:
-            self.font2.draw(20, 50, 'LOADING...', (255, 255, 255))
+            self.font2.draw(20, 50, 'LOADING...', (172, 162, 132))
 
     def update(self):
         pps = game_framework.pps
