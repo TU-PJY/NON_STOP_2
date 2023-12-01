@@ -3,7 +3,7 @@ from pico2d import *
 from config import *
 from game_work import game_framework
 from home_class_manager.button_manager import home_update_button, home_draw_button, ch_draw_button, load_file, \
-    ch_update_button
+    ch_update_button, exit_draw_button, exit_update_button
 from mods import play_mode
 
 
@@ -29,10 +29,6 @@ class Data:  # 홈 모드에서 사용되는 데이터를 저장하기 위한 �
 
 class Button:
     def __init__(self, data, cursor):
-        self.button1 = load_image(ammo_ind_back_directory)
-        self.button2 = load_image(ammo_ind_back_directory)
-        self.button3 = load_image(ammo_ind_back_directory)
-        self.button4 = load_image(shop_button_directory)
         self.font = load_font(font2_directory, 50)
         self.cursor = cursor
         self.op1, self.op2, self.op3 = 0, 0, 0
@@ -41,6 +37,12 @@ class Button:
         self.data = data
         self.sel_x = 0
 
+        self.op_bg = 0
+
+        self.kx, self.ky = WIDTH / 2 + 300, -500
+        self.kacc = 0
+        self.deg, self.pos = 0, 0
+
         load_file(self)
 
     def draw(self):
@@ -48,12 +50,16 @@ class Button:
             home_draw_button(self)
         elif self.data.mode == 'ch_mode':
             ch_draw_button(self)
+        elif self.data.mode == 'exit_mode':
+            exit_draw_button(self)
 
     def update(self):
         if self.data.mode == 'home':
             home_update_button(self)
         elif self.data.mode == 'ch_mode':
             ch_update_button(self)
+        elif self.data.mode == 'exit_mode':
+            exit_update_button(self)
 
         self.click = False
 

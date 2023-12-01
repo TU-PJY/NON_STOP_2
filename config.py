@@ -192,8 +192,8 @@ dead_bg_directory = 'res//prop//dead_bg.png'
 you_dead_directory = 'res//prop//you_dead.png'
 front_directory = 'res//prop//front.png'
 
-reward_directory = 'res//prop//reward.png'
-reward_bg_directory = 'res//prop//reward_bg.png'
+reward_directory = 'res//ui//reward.png'
+reward_bg_directory = 'res//ui//reward_bg.png'
 
 # ui 이미지 파일 경로
 shop_window_directory = 'res//ui//shop_window.png'
@@ -242,6 +242,9 @@ hp_regen_directory = 'res//ui//hp_regen.png'
 logo_directory = 'res//ui//logo.png'
 
 ch_selected_directory = 'res//ui//ch_selected.png'
+
+button_exit_mode_directory = 'res//ui//button_exit_mode.png'
+button_home_mode_directory = 'res//ui//button_home_mode.png'
 
 # 폰트 경로
 font_directory = 'res//font//bump-it-up.ttf'

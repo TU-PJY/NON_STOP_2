@@ -6,13 +6,23 @@ from home_class.home_ui_class import Button, Background, Playerimage, Monsterima
 
 
 def handle_events():
-    global cursor
+    global cursor, data, button
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            game_framework.quit()
+            match data.mode:
+                case 'home':
+                    button.op3 = 0
+                    button.kacc = 28
+                    button.ky = -500
+                    button.deg = 0
+                    data.mode = 'exit_mode'
+                case 'ch_mode':
+                    data.mode = 'home'
+                case 'exit_mode':
+                    data.mode = 'home'
 
         elif event.type == SDL_MOUSEMOTION:
             cursor.mx, cursor.my = event.x, HEIGHT - 1 - event.y
@@ -22,7 +32,7 @@ def handle_events():
 
 
 def init():
-    global button, cursor
+    global button, cursor, data
 
     with open('data//ch_data.json', 'rb') as f:
         data_list = json.load(f)

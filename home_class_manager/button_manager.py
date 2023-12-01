@@ -5,6 +5,15 @@ from mods import play_mode
 
 
 def load_file(self):  # 캐릭터 선택 버튼을 출력하기 위한 이미지 로드
+    self.button1 = load_image(button_home_mode_directory)
+    self.button2 = load_image(button_home_mode_directory)
+    self.button3 = load_image(button_home_mode_directory)
+    self.button4 = load_image(shop_button_directory)
+
+    self.button_exit1 = load_image(button_exit_mode_directory)
+    self.button_exit2 = load_image(button_exit_mode_directory)
+    self.button_exit3 = load_image(button_exit_mode_directory)
+
     self.ch1 = load_image(player1_right_image_directory)
     self.ch2 = load_image(player2_right_image_directory)
     self.ch3 = load_image(player3_right_image_directory)
@@ -16,7 +25,11 @@ def load_file(self):  # 캐릭터 선택 버튼을 출력하기 위한 이미지
     self.back_button = load_image(button_page_directory)
     self.back_button_back = load_image(shop_button_directory)
 
+    self.exit_bg = load_image(reward_bg_directory)
+
     self.ch_sel = load_image(ch_selected_directory)
+
+    self.knife = load_image(knife_right_directory)
 
 
 def home_draw_button(self):
@@ -24,10 +37,13 @@ def home_draw_button(self):
     self.button2.opacify(self.op2)
     self.button3.opacify(self.op3)
 
+    self.exit_bg.opacify(self.op_bg)
+    self.exit_bg.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
+
     self.button1.draw(160, HEIGHT / 2 - 100, 300, 80)
     self.font.draw(50, HEIGHT / 2 - 100, '게임 시작', (255, 255, 255))
     self.button2.draw(160, HEIGHT / 2 - 210, 300, 80)
-    self.font.draw(80, HEIGHT / 2 - 210, '캐릭터', (255, 255, 255))
+    self.font.draw(50, HEIGHT / 2 - 210, '캐릭터', (255, 255, 255))
     self.button3.draw(160, HEIGHT / 2 - 320, 300, 80)
     self.font.draw(50, HEIGHT / 2 - 320, '홈 나가기', (255, 255, 255))
 
@@ -77,10 +93,95 @@ def ch_draw_button(self):  # 캐릭터 선택 버튼
     self.ch8.clip_composite_draw(0, 56, 128, 128, 0, '', 1150, HEIGHT / 2 + 200, 500, 285)
 
 
+def exit_draw_button(self):
+    self.button_exit1.opacify(self.op1)
+    self.button_exit2.opacify(self.op2)
+    self.button_exit3.opacify(self.op3)
+
+    self.exit_bg.opacify(self.op_bg)
+    self.exit_bg.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
+
+    self.knife.opacify(self.op_bg)
+    self.knife.rotate_draw(math.radians(30), self.kx, self.ky + self.pos, 600, 400)
+
+    self.button_exit1.draw(280, HEIGHT / 2 - 100, 540, 80)
+    self.font.draw(50, HEIGHT / 2 - 100, '홈으로 돌아가기', (255, 255, 255))
+    self.button_exit2.draw(280, HEIGHT / 2 - 210, 540, 80)
+    self.font.draw(50, HEIGHT / 2 - 210, '환경 설정', (255, 255, 255))
+    self.button_exit3.draw(280, HEIGHT / 2 - 320, 540, 80)
+    self.font.draw(50, HEIGHT / 2 - 320, '바탕화면으로 나가기', (255, 255, 255))
+
+
+def exit_update_button(self):
+    pps = game_framework.pps
+    mx = self.cursor.mx
+    my = self.cursor.my
+
+    if self.kacc > 0:
+        self.ky += self.kacc * pps / 4
+        self.kacc -= pps / 10
+
+    self.pos = math.sin(self.deg) * 50
+    self.deg += pps / 1000
+
+    if self.op_bg < 1:
+        self.op_bg += pps / 80
+        if self.op_bg > 1:
+            self.op_bg = 1
+
+    if 10 < mx < 550 and HEIGHT / 2 - 100 - 40 < my < HEIGHT / 2 - 100 + 40:
+        self.op1 += pps / 50
+        if self.op1 > 1:
+            self.op1 = 1
+    else:
+        self.op1 -= pps / 50
+        if self.op1 < 0:
+            self.op1 = 0
+
+    if 10 < mx < 550 and HEIGHT / 2 - 210 - 40 < my < HEIGHT / 2 - 210 + 40:
+        self.op2 += pps / 50
+        if self.op2 > 1:
+            self.op2 = 1
+    else:
+        self.op2 -= pps / 50
+        if self.op2 < 0:
+            self.op2 = 0
+
+    if 10 < mx < 550 and HEIGHT / 2 - 320 - 40 < my < HEIGHT / 2 - 320 + 40:
+        self.op3 += pps / 50
+        if self.op3 > 1:
+            self.op3 = 1
+    else:
+        self.op3 -= pps / 50
+        if self.op3 < 0:
+            self.op3 = 0
+
+    if self.click:
+        # 홈으로 돌아가기
+        if 10 < mx < 550 and HEIGHT / 2 - 100 - 40 < my < HEIGHT / 2 - 100 + 40:
+            self.op1 = 0
+            self.op2 = 0
+            self.op3 = 0
+            self.data.mode = 'home'
+
+        # 환경 설정
+        if 10 < mx < 550 and HEIGHT / 2 - 210 - 40 < my < HEIGHT / 2 - 210 + 40:
+            pass
+
+        # 바탕화면으로 나가기
+        if 0 < mx < 550 and HEIGHT / 2 - 320 - 40 < my < HEIGHT / 2 - 320 + 40:
+            game_framework.quit()
+
+
 def ch_update_button(self):
     mx = self.cursor.mx
     my = self.cursor.my
     pps = game_framework.pps
+
+    if self.op_bg > 0:
+        self.op_bg -= pps / 80
+        if self.op_bg < 0:
+            self.op_bg = 0
 
     if 10 <= mx <= 110 and 10 <= my <= 110:
         self.op4 += pps / 50
@@ -96,6 +197,7 @@ def ch_update_button(self):
         my = self.cursor.my
 
         if 10 <= mx <= 110 and 10 <= my <= 110:
+            self.op4 = 0
             self.data.mode = 'home'
 
         elif 35 <= mx <= 165 and HEIGHT / 2 + 65 <= my <= HEIGHT / 2 + 184:
@@ -125,6 +227,12 @@ def ch_update_button(self):
 
 def home_update_button(self):
     pps = game_framework.pps
+
+    if self.op_bg > 0:
+        self.op_bg -= pps / 80
+        if self.op_bg < 0:
+            self.op_bg = 0
+
     if 10 < self.cursor.mx < 310 and HEIGHT / 2 - 100 - 40 < self.cursor.my < HEIGHT / 2 - 100 + 40:
         self.op1 += pps / 50
         if self.op1 > 1:
@@ -162,3 +270,11 @@ def home_update_button(self):
         if 10 < self.cursor.mx < 310 and HEIGHT / 2 - 210 - 40 < self.cursor.my < HEIGHT / 2 - 210 + 40:
             self.op2 = 0
             self.data.mode = 'ch_mode'
+
+        # 게임 나가기 및 설정
+        if 0 < self.cursor.mx < 310 and HEIGHT / 2 - 320 - 40 < self.cursor.my < HEIGHT / 2 - 320 + 40:
+            self.op3 = 0
+            self.kacc = 28
+            self.ky = -500
+            self.deg = 0
+            self.data.mode = 'exit_mode'
