@@ -806,3 +806,27 @@ class Playerdead:  # 이 클래스를 거쳐 모드를 변경하게 된다
 
     def handle_event(self):
         pass
+
+
+class Start:
+    def __init__(self):
+        self.y1 = HEIGHT
+        self.y2 = 0
+        self.up = load_image(front_directory)
+        self.down = load_image(front_directory)
+        self.font = load_font(font_directory, 80)
+        self.acc = 0
+
+    def draw(self):
+        self.up.draw(WIDTH / 2, self.y1, WIDTH, HEIGHT)
+        self.down.draw(WIDTH / 2, self.y2, WIDTH, HEIGHT)
+
+    def update(self):
+        pps = game_framework.pps
+        self.y1 += self.acc * pps / 4
+        self.y2 -= self.acc * pps / 4
+
+        self.acc += pps / 100
+
+        if self.y1 > HEIGHT + HEIGHT / 2:
+            game_manager.remove_object(self)

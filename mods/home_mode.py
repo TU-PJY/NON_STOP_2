@@ -2,7 +2,7 @@ from pico2d import *
 
 from config import HEIGHT
 from game_work import game_manager, game_framework
-from home_class.home_ui_class import Button, Background, Playerimage, Monsterimage, Cursor, Data
+from home_class.home_ui_class import Button, Background, Playerimage, Monsterimage, Cursor, Data, Start, Start2
 
 
 def handle_events():
@@ -12,23 +12,26 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            match data.mode:
-                case 'home':
-                    button.op3 = 0
-                    button.kacc = 28
-                    button.ky = -500
-                    button.deg = 0
-                    data.mode = 'exit_mode'
-                case 'ch_mode':
-                    data.mode = 'home'
-                case 'exit_mode':
-                    data.mode = 'home'
+            if not data.mode == 'loading_mode':
+                match data.mode:
+                    case 'home':
+                        button.op3 = 0
+                        button.kacc = 28
+                        button.ky = -500
+                        button.deg = 0
+                        data.mode = 'exit_mode'
+                    case 'ch_mode':
+                        data.mode = 'home'
+                    case 'exit_mode':
+                        data.mode = 'home'
 
         elif event.type == SDL_MOUSEMOTION:
-            cursor.mx, cursor.my = event.x, HEIGHT - 1 - event.y
+            if not data.mode == 'loading_mode':
+                cursor.mx, cursor.my = event.x, HEIGHT - 1 - event.y
 
         elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
-            button.click = True
+            if not data.mode == 'loading_mode':
+                button.click = True
 
 
 def init():
@@ -40,17 +43,21 @@ def init():
             data = Data()
             data.__dict__.update(d)
 
-    cursor = Cursor()
+    cursor = Cursor(data)
     button = Button(data, cursor)
     bg = Background(data, cursor)
     pimage = Playerimage(cursor, data)
     mimage = Monsterimage(cursor)
+    start = Start(data)
+    start2 = Start2()
     game_manager.add_object(data, 0)
     game_manager.add_object(bg, 6)
     game_manager.add_object(pimage, 7)
     game_manager.add_object(mimage, 7)
     game_manager.add_object(button, 7)
+    game_manager.add_object(start2, 7)
     game_manager.add_object(cursor, 7)
+    game_manager.add_object(start, 7)
 
 
 def update():

@@ -1,5 +1,4 @@
 from config import *
-from pico2d import *
 
 from mods import play_mode
 
@@ -35,7 +34,7 @@ def print_info(self, i, j):
                 self.coin_icon.draw(x2, cost, 30, 30)
                 buy = False
 
-            match(i, j):
+            match (i, j):
                 case (0, 0):
                     self.info.draw(x, y, 'M-1911', color)
                     self.info.draw(x, y2, '대미지: 30', color)
@@ -202,7 +201,7 @@ def print_info(self, i, j):
                 self.coin_icon.draw(x2, cost, 30, 30)
                 buy = False
 
-            match(i, j):
+            match (i, j):
                 case (0, 0):
                     self.info.draw(x, y, 'M1903', color)
                     self.info.draw(x, y2, '대미지: 150', color)
@@ -210,7 +209,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y4, '사용 탄약: 저격 소총탄', color)
                     self.info.draw(x, y5, '최대 관통 횟수: 2', color4)
                     self.info.draw(x, y6, '관통 시 대미지 감소: 50', color4)
-                    self.info.draw(x, y7, '우클릭으로 정조준',  color5)
+                    self.info.draw(x, y7, '우클릭으로 정조준', color5)
                     self.info.draw(x, y8, '격발 전 정조준 필요', color3)
                     self.info.draw(x4 + 30, y, 'SR', color2)
                     if not buy:
@@ -269,7 +268,7 @@ def print_info(self, i, j):
             self.coin_icon.draw(x2, cost, 30, 30)
             buy = False
 
-        match(i, j):
+        match (i, j):
             case (0, 0):
                 self.info.draw(x, y, 'MILITARY KNIFE', color)
                 self.info.draw(x, y2, '대미지: 60', color)
@@ -310,7 +309,7 @@ def print_info(self, i, j):
                     self.info.draw(x3, cost, '50000', color4)
 
     elif self.select_mode == 2:
-        match(i, j):
+        match (i, j):
             case (0, 0):
                 self.info.draw(x, y, '권총탄 +150', color)
                 self.info.draw(x, y2, 'Pistol, SMG 전용', color4)
@@ -373,5 +372,3 @@ def print_info(self, i, j):
                 if play_mode.p.gren_count < 2:
                     self.info.draw(x3, cost, '%d' % play_mode.p.gren_cost, color4)
                     self.coin_icon.draw(x2, cost, 30, 30)
-
-

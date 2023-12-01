@@ -1,5 +1,5 @@
-from game_class_manager.monster_tool_func import *
 from config import *
+from game_class_manager.monster_tool_func import *
 
 
 # 몬스터 스폰 클래스

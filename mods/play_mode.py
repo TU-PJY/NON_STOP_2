@@ -1,12 +1,12 @@
 from game_class.map import Map, BackGround, Wall
 from game_class.monster_tool import Tool
 from game_class.player import *
+from game_class.prop import Start
 from game_class.target import *
 from game_class.weapon import *
 from game_work import game_manager, game_framework
 from mods import shop_mode, pause_mode
 from pop_ui_class.ingame import Ingame
-import pickle
 
 
 def save_cooltime():
@@ -63,6 +63,7 @@ def init():
     target = Target(p, weapon)
     tool = Tool(p, weapon, target, mp)
     ig = Ingame(weapon, p)  # 인게임 ui
+    s = Start()
 
     game_manager.add_collision_pair('player:monster', p, None)
     game_manager.add_collision_pair('weapon:monster', target, None)
@@ -77,6 +78,7 @@ def init():
     game_manager.add_object(wall, 6)
     game_manager.add_object(target, 7)
     game_manager.add_object(ig, 7)
+    game_manager.add_object(s, 7)
 
 
 def update():

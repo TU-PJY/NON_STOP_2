@@ -153,14 +153,16 @@ def render_ingame_ui(self):
             elif self.weapon.melee == 'RAPIER':
                 self.rapier_image.draw(45 + ex, 55 + ey, 350, 100)
                 if not self.weapon.skill_usable_rapier:
-                    self.font.draw(330 + ex, 50 + ey, '%d' % (20 - self.weapon.skill_delay_time_rapier), (255, 255, 255))
+                    self.font.draw(330 + ex, 50 + ey, '%d' % (20 - self.weapon.skill_delay_time_rapier),
+                                   (255, 255, 255))
                 else:
                     self.font_small.draw(260 + ex, 50 + ey, 'R Button', (255, 255, 255))
 
             elif self.weapon.melee == 'KATANA':
                 self.katana_image.rotate_draw(math.radians(-90), 45 + ex, 55 + ey, 60, 410)
                 if not self.weapon.skill_usable_katana:
-                    self.font.draw(330 + ex, 50 + ey, '%d' % (60 - self.weapon.skill_delay_time_katana), (255, 255, 255))
+                    self.font.draw(330 + ex, 50 + ey, '%d' % (60 - self.weapon.skill_delay_time_katana),
+                                   (255, 255, 255))
                 else:
                     self.font_small.draw(260 + ex, 50 + ey, 'R Button', (255, 255, 255))
 

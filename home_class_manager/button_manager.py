@@ -1,7 +1,7 @@
 from pico2d import *
+
 from config import *
 from game_work import game_framework
-from mods import play_mode
 
 
 def load_file(self):  # 캐릭터 선택 버튼을 출력하기 위한 이미지 로드
@@ -271,8 +271,8 @@ def home_update_button(self):
     if self.click:  # 게임 시작 선택 시 play_mode로 넘어간다.
         # 게임 시작
         if 10 < self.cursor.mx < 310 and HEIGHT / 2 - 100 - 40 < self.cursor.my < HEIGHT / 2 - 100 + 40:
-            game_framework.MODE = 'play'
-            game_framework.change_mode(play_mode)
+            # game_framework.MODE = 'play'
+            self.data.mode = 'loading_mode'
 
         # 캐릭터
         if 10 < self.cursor.mx < 310 and HEIGHT / 2 - 210 - 40 < self.cursor.my < HEIGHT / 2 - 210 + 40:

@@ -1,5 +1,3 @@
-from pico2d import get_time
-
 from mods import play_mode
 
 

@@ -1,7 +1,7 @@
 from pico2d import *
 
 from config import *
-from game_work import game_framework
+from game_work import game_framework, game_manager
 from home_class_manager.button_manager import home_update_button, home_draw_button, ch_draw_button, load_file, \
     ch_update_button, exit_draw_button, exit_update_button
 from mods import play_mode
@@ -152,12 +152,81 @@ class Monsterimage:
 
 
 class Cursor:
-    def __init__(self):
+    def __init__(self, data):
         self.image = load_image(cursor_directory)
         self.mx, self.my = 0, 0
+        self.data = data
 
     def draw(self):
-        self.image.draw(self.mx + 35, self.my - 35, 70, 70)
+        if not self.data.mode == 'loading_mode':
+            self.image.draw(self.mx + 35, self.my - 35, 70, 70)
 
     def update(self):
         pass
+
+
+class Start:
+    def __init__(self, data):
+        self.y1 = HEIGHT + HEIGHT / 2
+        self.y2 = - HEIGHT / 2
+        self.up = load_image(front_directory)
+        self.down = load_image(front_directory)
+        self.font = load_font(font_directory, 80)
+        self.font2 = load_font(font_directory, 40)
+        self.font_out = False
+        self.acc = 0
+        self.delay = 0
+        self.data = data
+
+    def draw(self):
+        self.up.draw(WIDTH / 2, self.y1, WIDTH, HEIGHT)
+        self.down.draw(WIDTH / 2, self.y2, WIDTH, HEIGHT)
+        self.font.draw(WIDTH / 2 - 600, self.y1 - HEIGHT / 2 + 90, 'OKAY! LETS GO!', (255, 255, 255))
+
+        if self.font_out:
+            self.font2.draw(20, 50, 'LOADING...', (255, 255, 255))
+
+    def update(self):
+        pps = game_framework.pps
+        if self.data.mode == 'loading_mode':
+            self.delay += pps / 4
+
+            # if self.y1 > HEIGHT:
+            self.y1 -= self.acc * pps / 4
+            self.y2 += self.acc * pps / 4
+            self.acc += pps / 100
+
+            if self.y1 < HEIGHT:
+                self.y1 = HEIGHT
+                self.y2 = 0
+                self.acc = self.acc / 2 * -1
+
+            if self.delay >= 550:
+                self.font_out = True
+
+            if self.delay >= 600:
+                game_framework.MODE = 'play'
+                game_framework.change_mode(play_mode)
+
+
+class Start2:
+    def __init__(self):
+        self.y1 = HEIGHT
+        self.y2 = 0
+        self.up = load_image(front_directory)
+        self.down = load_image(front_directory)
+        self.acc = 0
+
+    def draw(self):
+        self.up.draw(WIDTH / 2, self.y1, WIDTH, HEIGHT)
+        self.down.draw(WIDTH / 2, self.y2, WIDTH, HEIGHT)
+
+    def update(self):
+        pps = game_framework.pps
+        self.y1 += self.acc * pps / 4
+        self.y2 -= self.acc * pps / 4
+
+        self.acc += pps / 100
+
+        if self.y1 > HEIGHT + HEIGHT / 2:
+            game_manager.remove_object(self)

@@ -1,6 +1,5 @@
 from pico2d import draw_rectangle
 
-from game_class_manager.monster_manager import *
 from game_class.prop import PlayerDamage, Feedback
 from game_class_manager.monster_manager.etc import monster_animation, update_monster_pos, update_monster_opacify, \
     update_delay, update_monster_size

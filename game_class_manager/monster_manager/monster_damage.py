@@ -1,4 +1,4 @@
-from game_class.prop import Bullet, Feedback, Coin, Splash, Dead
+from game_class.prop import Bullet, Feedback
 from game_class_manager.monster_manager.etc import add_object_after_dead
 from game_work import game_manager
 from mods import play_mode
@@ -96,4 +96,3 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
         play_mode.tool.kill_count -= 1  # 킬 카운드 감소
         play_mode.ig.ky = 70  # 킬 피드백 재생
         add_object_after_dead(m)
-

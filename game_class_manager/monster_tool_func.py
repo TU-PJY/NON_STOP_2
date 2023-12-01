@@ -114,4 +114,3 @@ def update_rounds(self):
             if self.time_reduce < 690:  # 최소 스폰 간격은 100
                 self.time_reduce += 15  # 매 라운드마다 스폰 간격이 15씩 줄어든다
             self.spawn_enable = True  # 다음 라운드로 넘어가 스폰을 다시 시작한다.
-

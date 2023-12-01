@@ -4,7 +4,7 @@ from mods import play_mode
 def buy_expendables(self, i, j):
     buy = False
 
-    match(i, j):
+    match (i, j):
         case (0, 0):
             if play_mode.p.coin >= 100:
                 play_mode.p.coin -= 100
@@ -31,8 +31,8 @@ def buy_expendables(self, i, j):
                 play_mode.p.medkit_count += 1
                 buy = True
 
-    # 예외적으로 업그레이드도 이 함수에서 관리
-        case(0, 1):
+        # 예외적으로 업그레이드도 이 함수에서 관리
+        case (0, 1):
             if play_mode.p.coin >= play_mode.p.hp_cost and play_mode.p.hp_count < 3:
                 play_mode.p.coin -= play_mode.p.hp_cost
                 play_mode.p.hp += 50
