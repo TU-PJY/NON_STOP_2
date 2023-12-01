@@ -31,24 +31,51 @@ def spawn_monster(self):  # 몬스터 스폰
 
             if self.rounds < 5:  # 라운드가 올라갈 수록 몬스터가 다양해진다
                 self.type = 1
+
             elif 5 <= self.rounds <= 9:
-                self.type = random.randint(1, 2)  # 타입에 따라 스폰되는 몬스터가 달라짐
+                if self.type2_enable:
+                    self.type = random.randint(1, 2)
+                    self.type2_delay += 1
+                else:
+                    self.type = 1
+                    self.type2_delay -= 1
+                    if self.type2_delay == 0:
+                        self.type2_enable = True
+
             elif 10 <= self.rounds <= 14:
-                self.type = random.randint(1, 3)
+                if self.type2_enable:
+                    self.type = random.randint(1, 3)
+                    self.type2_delay += 1
+                else:
+                    rand = [1, 3]
+                    self.type = random.choice(rand)
+                    self.type2_delay -= 1
+                    if self.type2_delay == 0:
+                        self.type2_enable = True
+
             elif 15 <= self.rounds:
-                self.type = random.randint(1, 4)
+                if self.type2_enable:
+                    self.type = random.randint(1, 4)
+                    self.type2_delay += 1
+                else:
+                    rand = [1, 3, 4]
+                    self.type = random.choice(rand)
+                    self.type2_delay -= 1
+                    if self.type2_delay == 0:  # 스폰 제한 3회를 넘기면 type2를 다시 스폰할 수 있게 된다
+                        self.type2_enable = True
 
-            if self.type == 1:
-                self.y, self.speed, self.hp = 260, 1.5, 200
+            if self.type2_delay == 3:  # type2를 3번 스폰하면 다음 3회 스폰 동안에는 스폰을 제한한다
+                self.type2_enable = False
 
-            elif self.type == 2:
-                self.y, self.speed, self.hp = 670, 1.1, 120
-
-            elif self.type == 3:
-                self.y, self.speed, self.hp, self.frame = 230, 0.9, 180, 0
-
-            elif self.type == 4:
-                self.y, self.speed, self.hp = 240, 0.5, 150
+            match self.type:
+                case 1:
+                    self.y, self.speed, self.hp = 260, 1.5, 200
+                case 2:
+                    self.y, self.speed, self.hp = 670, 1.1, 120
+                case 3:
+                    self.y, self.speed, self.hp, self.frame = 230, 0.9, 180, 0
+                case 4:
+                    self.y, self.speed, self.hp = 240, 0.5, 150
 
             m = Monster \
                 (self.p, self.weapon, self.target, self.mp, self.spawn_point,
@@ -64,6 +91,7 @@ def spawn_monster(self):  # 몬스터 스폰
             if self.spawn_remain == 0:
                 self.spawn_enable = False
 
+            self.type = 0
             self.spawn_time = 800 - self.time_reduce  # 다음 스폰 간격 지정
 
 
@@ -84,6 +112,6 @@ def update_rounds(self):
             self.spawn_remain = self.limit  # 앞으로 스폰할 몬스터 수 갱신
             self.spawn_time = 1500  # 매 라운드 시작 시 어느 정도의 시간을 두고 스폰 시작
             if self.time_reduce < 690:  # 최소 스폰 간격은 100
-                self.time_reduce += 10  # 매 라운드마다 스폰 간격이 15씩 줄어든다
+                self.time_reduce += 15  # 매 라운드마다 스폰 간격이 15씩 줄어든다
             self.spawn_enable = True  # 다음 라운드로 넘어가 스폰을 다시 시작한다.
 

@@ -4,9 +4,21 @@ from game_class.player import *
 from game_class.target import *
 from game_class.weapon import *
 from game_work import game_manager, game_framework
-from mods import shop_mode
-from ui_class.ingame import Ingame
+from mods import shop_mode, pause_mode
+from pop_ui_class.ingame import Ingame
 import pickle
+
+
+def save_cooltime():
+    # 수류탄 쿨타임이 남아있다면 수류탄 쿨타임이 얼마나 남았는지를 저장
+    weapon.temp_time = weapon.throw_delay_time
+    # 각 근접무기의 스킬 사용 쿨타임을 저장한다
+    weapon.skill_temp_rapier = weapon.skill_delay_time_rapier
+    weapon.skill_temp_katana = weapon.skill_delay_time_katana
+    weapon.skill_temp_axe = weapon.skill_delay_time_axe
+    # 응급처치키트 사용 쿨타임을 저장한다
+    p.medkit_delay_temp = p.medkit_delay_time
+
 
 def handle_events():
     global p, weapon
@@ -17,16 +29,12 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            game_framework.quit()
+            game_framework.MODE = 'pause'
+            save_cooltime()
+            game_framework.push_mode(pause_mode)
+
         elif event.type == SDL_KEYDOWN and event.key == SDLK_TAB:  # to_shop_mode
-            # 수류탄 쿨타임이 남아있다면 수류탄 쿨타임이 얼마나 남았는지를 저장
-            weapon.temp_time = weapon.throw_delay_time
-
-            weapon.skill_temp_rapier = weapon.skill_delay_time_rapier
-            weapon.skill_temp_katana = weapon.skill_delay_time_katana
-            weapon.skill_temp_axe = weapon.skill_delay_time_axe
-            p.medkit_delay_temp = p.medkit_delay_time
-
+            save_cooltime()
             game_framework.MODE = 'shop'
             game_framework.push_mode(shop_mode)
 

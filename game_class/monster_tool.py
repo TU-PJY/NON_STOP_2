@@ -29,6 +29,9 @@ class Tool:
 
         self.y, self.speed, self.hp = 0, 0, 0
 
+        self.type2_enable = True
+        self.type2_delay = 0
+
     def draw(self):
         pass
 

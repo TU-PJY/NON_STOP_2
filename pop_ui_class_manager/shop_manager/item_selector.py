@@ -1,8 +1,8 @@
 from mods import play_mode
-from ui_class_manager.shop_manager.item_expendable_manager import buy_expendables
-from ui_class_manager.shop_manager.item_gun_manager import buy_gun_page1, equip_gun_page1, buy_gun_page2, equip_gun_page2, \
+from pop_ui_class_manager.shop_manager.item_expendable_manager import buy_expendables
+from pop_ui_class_manager.shop_manager.item_gun_manager import buy_gun_page1, equip_gun_page1, buy_gun_page2, equip_gun_page2, \
     update_gun_item
-from ui_class_manager.shop_manager.item_melee_manager import buy_melee, equip_melee, update_melee_item
+from pop_ui_class_manager.shop_manager.item_melee_manager import buy_melee, equip_melee, update_melee_item
 
 
 def select_item(self):  # 우클릭 시 좌클릭한 아이템과 동일할 시 해당 아이템 장착

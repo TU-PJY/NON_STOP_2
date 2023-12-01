@@ -1,12 +1,12 @@
 from config import *
 from mods import play_mode
-from ui_class_manager.shop_manager.etc import make_button_pos, set_equiped_gun_ind_pos
-from ui_class_manager.shop_manager.file_loader import load_shop_resource
-from ui_class_manager.shop_manager.item_output import draw_items
-from ui_class_manager.shop_manager.item_pointer import hover_item
-from ui_class_manager.shop_manager.item_selector import select_item
-from ui_class_manager.shop_manager.page_and_cat_manager import click_button
-from ui_class_manager.shop_manager.window_output import draw_shop_window, draw_cursor, window_animation, \
+from pop_ui_class_manager.shop_manager.etc import make_button_pos, set_equiped_gun_ind_pos
+from pop_ui_class_manager.shop_manager.file_loader import load_shop_resource
+from pop_ui_class_manager.shop_manager.item_output import draw_items
+from pop_ui_class_manager.shop_manager.item_pointer import hover_item
+from pop_ui_class_manager.shop_manager.item_selector import select_item
+from pop_ui_class_manager.shop_manager.page_and_cat_manager import click_button
+from pop_ui_class_manager.shop_manager.window_output import draw_shop_window, draw_cursor, window_animation, \
     update_cat_button, \
     update_ind_size, draw_ind, update_item_size
 

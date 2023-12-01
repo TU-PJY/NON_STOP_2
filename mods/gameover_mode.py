@@ -6,10 +6,9 @@ from gameover_class.gameover_ui_class import Playerdead, Reward, Cursor
 
 
 def handle_events():
-    global p, weapon
+    global cursor
 
     events = get_events()
-    global cursor
     for event in events:
         if event.type == SDL_QUIT:
             game_framework.quit()
@@ -25,6 +24,7 @@ def handle_events():
 
 def init():
     global playerdead, reward, cursor
+
     cursor = Cursor()
     playerdead = Playerdead()
 

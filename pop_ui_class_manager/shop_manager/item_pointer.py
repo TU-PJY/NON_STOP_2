@@ -1,4 +1,4 @@
-from ui_class_manager.shop_manager.info_manager import print_info
+from pop_ui_class_manager.shop_manager.info_manager import print_info
 
 
 def hover_item(self):  # 아이템 위에 커서를 올리면 표시된다

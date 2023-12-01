@@ -2,7 +2,16 @@ from config import *
 from game_class.weapon import *
 from game_work import game_manager, game_framework
 from mods import play_mode
-from ui_class.shop import Shop
+from pop_ui_class.shop import Shop
+
+
+def return_time():
+    # 상점모드에서 소요된 시간을 다시 수류탄 사용 쿨타임에 반환
+    play_mode.weapon.throw_delay = get_time() - play_mode.weapon.temp_time
+    play_mode.weapon.skill_delay_rapier = get_time() - play_mode.weapon.skill_temp_rapier
+    play_mode.weapon.skill_delay_katana = get_time() - play_mode.weapon.skill_temp_katana
+    play_mode.weapon.skill_delay_axe = get_time() - play_mode.weapon.skill_temp_axe
+    play_mode.p.medkit_delay = get_time() - play_mode.p.medkit_delay_temp
 
 
 def handle_events():
@@ -16,13 +25,7 @@ def handle_events():
         elif event.type == SDL_KEYDOWN:
             if event.key == SDLK_ESCAPE or event.key == SDLK_TAB:  # to play_mode
                 if exit_enable:
-                    # 상점모드에서 소요된 시간을 다시 수류탄 사용 쿨타임에 반환
-                    play_mode.weapon.throw_delay = get_time() - play_mode.weapon.temp_time
-                    play_mode.weapon.skill_delay_rapier = get_time() - play_mode.weapon.skill_temp_rapier
-                    play_mode.weapon.skill_delay_katana = get_time() - play_mode.weapon.skill_temp_katana
-                    play_mode.weapon.skill_delay_axe = get_time() - play_mode.weapon.skill_temp_axe
-                    play_mode.p.medkit_delay = get_time() - play_mode.p.medkit_delay_temp
-
+                    return_time()
                     game_framework.MODE = 'play'
                     game_framework.pop_mode()
 

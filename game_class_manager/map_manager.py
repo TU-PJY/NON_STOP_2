@@ -39,8 +39,8 @@ def draw_wall(self):
 
 
 def draw_background(self):
-    x = self.x + self.p.ex
-    y = self.y + self.p.ey
+    x = self.x + self.p.ex / 2
+    y = self.y + self.p.ey / 2
     self.image_back.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
     self.image.draw(x, y, 4096, 1100)
 
@@ -58,7 +58,7 @@ def update_map(self):  # 맵 업데이트
         self.x += speed
         self.wall.x1 += speed
         self.wall.x2 += speed
-        self.bg.x += speed / 2
+        self.bg.x += speed / 4
         self.playerToWallRight += speed
         self.playerToWallLeft += speed
 
@@ -71,7 +71,7 @@ def restore_map_pos(self):
         self.x += speed  # 플레이어를 벽 위치로 보정한다
         self.wall.x1 += speed
         self.wall.x2 += speed
-        self.bg.x += speed / 2
+        self.bg.x += speed / 4
         self.playerToWallRight += speed
         self.playerToWallLeft += speed
 
@@ -86,7 +86,7 @@ def restore_map_pos(self):
         self.x -= speed
         self.wall.x1 -= speed
         self.wall.x2 -= speed
-        self.bg.x -= speed / 2
+        self.bg.x -= speed / 4
         self.playerToWallRight -= speed
         self.playerToWallLeft -= speed
 
