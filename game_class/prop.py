@@ -179,9 +179,9 @@ class Feedback:
         pps = game_framework.pps
 
         if game_framework.MODE == 'play':
-            if self.op < 99:  # 피드백이 점차 투명해진다
-                self.op += int(2 * pps / 3)
-            else:  # 완전히 투명해지면 객체 삭제
+            if self.op > 0:  # 피드백이 점차 투명해진다
+                self.op -= pps / 400
+            if self.op <= 0:
                 game_manager.remove_object(self)
 
     def handle_event(self):
@@ -240,7 +240,7 @@ class KatanaSlice:
         self.dir = 0
         self.player_deg = 0
         self.melee_deg = 0
-        self.op = 1
+        self.op = 0.8
         self.op_reduce = False
 
         self.dir = self.p.dir
@@ -255,7 +255,7 @@ class KatanaSlice:
         self.stary_y = self.p.py
 
     def draw(self):
-        self.back.opacify(self.op + 50)
+        self.back.opacify(self.op)
         self.katana_slice.opacify(self.op)
         self.effect.opacify(self.op)
 
@@ -295,8 +295,8 @@ class KatanaSlice:
                 self.op_reduce = True
 
             if self.op_reduce:  # 스킬 사용이 끝나면 효과가 점차 투명해진다
-                self.op += int(4 * pps / 3)
-                if self.op >= 99:  # 완전히 투명해지면 객체 삭제
+                self.op -= pps / 400
+                if self.op <= 0:  # 완전히 투명해지면 객체 삭제
                     game_manager.remove_object(self)
 
     def handle_event(self):
@@ -320,10 +320,9 @@ class PlayerDamage:
     def update(self):
         pps = game_framework.pps
         if game_framework.MODE == 'play':
-            if self.op < 250:  # 점점 투명해진다
-                self.op += int(pps / 2)
-            else:
-                game_manager.remove_object(self)  # 완전히 투명해지면 객체 삭제
+            self.op -= pps / 800
+            if self.op <= 0:
+                game_manager.remove_object(self)
 
     def handle_event(self):
         pass
@@ -393,8 +392,8 @@ class Coin:
 
             if self.up:  # 플레이어가 코인을 얻으면 투명해지면서 사라지는 효과를 출력
                 self.y += pps
-                self.op += int(pps)
-                if self.op > 250:
+                self.op -= pps / 800
+                if self.op <= 0:
                     game_manager.remove_object(self)
 
     def handle_event(self):

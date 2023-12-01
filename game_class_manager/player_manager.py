@@ -50,6 +50,8 @@ def load_player_image(self):
     self.ch8_right = load_image(player8_right_image_directory)
     self.ch8_left = load_image(player8_left_image_directory)
 
+    self.here = load_image(ch_selected_directory)
+
 
 def look_mouse(p):
     if p.look_mouse:  # 해당 변수가 true일 때만 플레이어는 마우스를 바라본다
@@ -60,7 +62,11 @@ def look_mouse(p):
 
 
 def draw_player(p):
-    if p.look_mouse:
+    # 플레이어가 너무 높게 점프하여 화면 높이보다 더 올라가게 되면 플레이어 위치를 화살표로 표시한다
+    if p.y + p.cam_y >= HEIGHT:
+        p.here.rotate_draw(math.radians(180), p.x + p.ex, HEIGHT - 120, 80, 80)
+
+    if p.look_mouse:  # 캐릭터에 따라 이미지가 다르게 출력 된다. look mouse = true 일시 플레이어가 마우스를 따라본다
         if p.dir == 1:
             match p.ch:
                 case 1:
@@ -221,7 +227,7 @@ def update_medkit_delay(p):
             p.usable_medkit = True
 
 
-def regen_hp(p):
+def regen_hp(p):  # 일정 시간마다 체력을 스스로 회복한다
     pps = game_framework.pps
     if p.cur_hp < p.hp:
         p.regen_timer += pps / 3

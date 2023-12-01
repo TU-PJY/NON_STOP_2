@@ -190,7 +190,7 @@ class Monster:
                 fd = Feedback(self.x + self.p.cam_x, self.y + self.p.cam_y + self.p.cam_h, 1)
                 game_manager.add_object(fd, 7)  # 명중 피드백
 
-                self.op = 100
+                self.op = 1
 
                 if self.weapon.pen_enable:
                     if self.weapon.gun == 'SPRING':

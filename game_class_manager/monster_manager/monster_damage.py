@@ -60,7 +60,7 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                     game_manager.add_collision_pair('bullet:monster', bullet, None)
                     m.weapon.pen_enable = True  # 해당 변수가 활성화 되어야 관통이 된다.
 
-                m.op = 100  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달
+                m.op = 1  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달
                 m.is_hit = False  # 다시 대미지를 받을 준비를 한다
                 m.weapon.hit_once = False
 
@@ -81,7 +81,7 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                 elif m.weapon.melee == 'AXE':
                     m.hp -= 150
 
-                m.op = 100  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달
+                m.op = 1  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달
                 m.is_hit = False
                 m.weapon.hit_once = False
 

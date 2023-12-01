@@ -44,8 +44,8 @@ def update_monster_size(m):  # 몬스터 공격 피드백 관리
 def update_monster_opacify(m):  # 몬스터 대미지 피드백 관리
     pps = game_framework.pps
     if m.op > 0:
-        m.op -= int(4 * pps / 3)
-        if m.op < 0:
+        m.op -= pps / 200
+        if m.op <= 0:
             m.op = 0
 
 

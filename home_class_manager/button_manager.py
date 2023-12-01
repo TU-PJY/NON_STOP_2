@@ -32,6 +32,7 @@ def load_file(self):  # 캐릭터 선택 버튼을 출력하기 위한 이미지
     self.knife = load_image(knife_right_directory)
 
 
+# 홈 화면 버튼 출력
 def home_draw_button(self):
     self.button1.opacify(self.op1)
     self.button2.opacify(self.op2)
@@ -48,6 +49,7 @@ def home_draw_button(self):
     self.font.draw(50, HEIGHT / 2 - 320, '홈 나가기', (255, 255, 255))
 
 
+# 캐릭터 선택 화면 버튼 출력
 def ch_draw_button(self):  # 캐릭터 선택 버튼
     self.button4.draw(100, HEIGHT / 2 + 119, 130, 130)
     self.button4.draw(250, HEIGHT / 2 + 119, 130, 130)
@@ -63,6 +65,7 @@ def ch_draw_button(self):  # 캐릭터 선택 버튼
 
     self.back_button.clip_composite_draw(0, 0, 10, 15, 0, 'h', 60, 60, 80, 80)
 
+    # 어떤 캐릭터냐에 따라 화살표 출력 위치가 달라진다
     match self.data.ch:
         case 1:
             x = 100
@@ -93,6 +96,7 @@ def ch_draw_button(self):  # 캐릭터 선택 버튼
     self.ch8.clip_composite_draw(0, 56, 128, 128, 0, '', 1150, HEIGHT / 2 + 200, 500, 285)
 
 
+# 나가기 화면 버튼 출력
 def exit_draw_button(self):
     self.button_exit1.opacify(self.op1)
     self.button_exit2.opacify(self.op2)
@@ -112,6 +116,7 @@ def exit_draw_button(self):
     self.font.draw(50, HEIGHT / 2 - 320, '바탕화면으로 나가기', (255, 255, 255))
 
 
+# 나가기 화면 버튼 업데이트
 def exit_update_button(self):
     pps = game_framework.pps
     mx = self.cursor.mx
@@ -129,6 +134,7 @@ def exit_update_button(self):
         if self.op_bg > 1:
             self.op_bg = 1
 
+    # 버튼 위에 마우스를 올리면 불투명해지고, 다시 치우면 투명해진다
     if 10 < mx < 550 and HEIGHT / 2 - 100 - 40 < my < HEIGHT / 2 - 100 + 40:
         self.op1 += pps / 50
         if self.op1 > 1:
@@ -173,6 +179,7 @@ def exit_update_button(self):
             game_framework.quit()
 
 
+# 캐릭터 선택 화면 버튼 업데이트
 def ch_update_button(self):
     mx = self.cursor.mx
     my = self.cursor.my
@@ -225,6 +232,7 @@ def ch_update_button(self):
             json.dump(data, f)
 
 
+# 홈 화면 버튼 업데이트
 def home_update_button(self):
     pps = game_framework.pps
 

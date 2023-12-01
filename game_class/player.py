@@ -202,9 +202,9 @@ class Player:
         self.push_y = 0  # 이 수치만큼 화면의 모든 이미지들이 아래로 눌린다.
         self.shake_x, self.shake_y = 0, 0
         self.shake_range = 0  # 화면 흔들림의 정도
-        self.camera_y = 0  # 화면이 마우스 좌표를 살짝 따라간다.
-        self.camera_x = 0
-        self.camera_h = 0  # 플레이어 점프 시 플레이어, 무기를 제외한 나머지 객제들의 위치가 살짝 내려간다.
+        self.cam_y = 0  # 카메라 변수, 객체 좌표에 더하여 사용
+        self.cam_x = 0
+        self.cam_h = 0  # 플레이어 점프 시 플레이어, 무기를 제외한 나머지 객제들의 위치가 살짝 내려간다.
 
         self.dmg_shake_range = 0  # 플레이어가 대미지를 받을 시 화면이 흔들리는 수치
         self.shake_dx, self.shake_dy = 0, 0
