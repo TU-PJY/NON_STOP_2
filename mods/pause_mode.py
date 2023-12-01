@@ -2,7 +2,7 @@ from pico2d import *
 from config import *
 from game_work import game_framework, game_manager
 from mods import play_mode
-from pop_ui_class.pause_ui import Back, Button, Cursor
+from pop_ui_class.pause_ui import Back, Button, Cursor, Back2
 
 
 def handle_events():
@@ -15,6 +15,8 @@ def handle_events():
             exit_enable = True
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             if exit_enable:
+                bg = Back2()
+                game_manager.add_object(bg, 7)
                 game_framework.MODE = 'play'
                 game_framework.pop_mode()
 

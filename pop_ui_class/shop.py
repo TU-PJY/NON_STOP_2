@@ -1,4 +1,7 @@
+from pico2d import load_image
+
 from config import *
+from game_work import game_manager, game_framework
 from mods import play_mode
 from pop_ui_class_manager.shop_manager.etc import make_button_pos, set_equiped_gun_ind_pos
 from pop_ui_class_manager.shop_manager.file_loader import load_shop_resource
@@ -25,6 +28,7 @@ class Shop:
         self.select_gun = ''  # 현재 선택한 총
         self.select_melee = ''  # 현재 선택한 근접무기
         self.select_item = ''  # 현재 선택한 아이템
+        self.acc = 23
 
         self.select_mode = 0  # 초기값 총 선택
         self.cat_x = []  # 카테고리 버튼의 x, y 좌표
@@ -65,6 +69,8 @@ class Shop:
         self.ind_sel_on = False  # 아이템 선택 시 현재 선택중인 아이템을 표시함다. 해당 아이템 장착 시 사라진다.
         self.data_change = False  # 구입한 항목에 대해서만 아이템 관련 변수 값 변경을 허용한다.
 
+        self.op = 0
+
         load_shop_resource(self)
         make_button_pos(self)
 
@@ -89,3 +95,19 @@ class Shop:
 
     def handle_event(self):
         pass
+
+
+class Back3:
+    def __init__(self):
+        self.image = load_image(pause_bg_directory)
+        self.op = 0.6
+
+    def draw(self):
+        self.image.opacify(self.op)
+        self.image.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
+
+    def update(self):
+        pps = game_framework.pps
+        self.op -= pps / 400
+        if self.op < 0:
+            game_manager.remove_object(self)

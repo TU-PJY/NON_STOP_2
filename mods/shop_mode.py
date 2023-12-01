@@ -2,7 +2,7 @@ from config import *
 from game_class.weapon import *
 from game_work import game_manager, game_framework
 from mods import play_mode
-from pop_ui_class.shop import Shop
+from pop_ui_class.shop import Shop, Back3
 
 
 def return_time():
@@ -26,6 +26,8 @@ def handle_events():
             if event.key == SDLK_ESCAPE or event.key == SDLK_TAB:  # to play_mode
                 if exit_enable:
                     return_time()
+                    back3 = Back3()
+                    game_manager.add_object(back3, 7)
                     game_framework.MODE = 'play'
                     game_framework.pop_mode()
 

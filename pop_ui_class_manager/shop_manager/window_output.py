@@ -6,7 +6,7 @@ from mods import play_mode
 # 상점 창 출력
 def draw_shop_window(self):
     self.back.draw(self.x, self.y, WIDTH, HEIGHT)
-    self.back.opacify(80)
+    self.back.opacify(self.op)
     self.button_gun.draw(self.cat_x[0], self.cat_y[0], 200, 120)
     self.button_melee.draw(self.cat_x[1], self.cat_y[1], 200, 120)
     self.button_exp.draw(self.cat_x[2], self.cat_y[2], 200, 120)
@@ -58,32 +58,40 @@ def draw_cursor(self):
 def window_animation(self):
     pps = game_framework.pps
 
-    if self.window_y <= HEIGHT / 2:
-        self.window_y += 20 * pps / 4
-        for i in range(len(self.button_y)):
-            self.button_y[i] += 20 * pps / 4
-        for i in range(len(self.cat_x)):
-            self.cat_y[i] += 20 * pps / 4
+    self.window_y += self.acc * pps / 4
 
-        self.page_right_y += 20 * pps / 4
-        self.page_left_y += 20 * pps / 4
+    for i in range(len(self.button_y)):
+        self.button_y[i] += self.acc * pps / 4
 
-    if self.window_y > HEIGHT / 2:
-        self.window_y = HEIGHT / 2
+    for i in range(len(self.cat_x)):
+        self.cat_y[i] += self.acc * pps / 4
 
-        for i in range(len(self.button_y)):
-            self.button_y[i] = self.window_y + 175 - (115 * i)
+    self.page_right_y += self.acc * pps / 4
+    self.page_left_y += self.acc * pps / 4
 
-        for i in range(len(self.cat_x)):
-            self.cat_y[i] = self.window_y + 270
+    if self.acc > 0:
+        self.acc -= pps / 14
+        if self.acc < 0:
+            self.acc = 0
 
-        self.page_right_y = self.window_y - 200
-        self.page_left_y = self.window_y - 200
+    for i in range(len(self.button_y)):
+        self.button_y[i] = self.window_y + 175 - (115 * i)
+
+    for i in range(len(self.cat_x)):
+        self.cat_y[i] = self.window_y + 270
+
+    self.op += pps / 400
+    if self.op > 0.6:
+        self.op = 0.6
 
 
 # 선택한 카테고리 버튼은 위로 올라와 표시된다
 def update_cat_button(self):
-    self.cat_y[self.select_mode] = self.window_y + 290
+    for i in range(3):
+        if i == self.select_mode:
+            self.cat_y[i] = self.window_y + 290
+        else:
+            self.cat_y[i] = self.window_y + 270
 
 
 def draw_ind(self):
@@ -96,10 +104,10 @@ def draw_ind(self):
         self.ind_equip.draw \
             (self.button_x[self.eq_melee_x], self.button_y[self.eq_melee_y], self.eq_size_x, self.eq_size_y)
 
-    if self.ind_sel_on:
-        if self.sel_cat == self.select_mode:
-            self.ind_select.draw \
-                (self.button_x[self.ind_sel_x], self.button_y[self.ind_sel_y], self.sel_size_x, self.sel_size_y)
+    # if self.ind_sel_on:
+    if self.sel_cat == self.select_mode:
+        self.ind_select.draw \
+            (self.button_x[self.ind_sel_x], self.button_y[self.ind_sel_y], self.sel_size_x, self.sel_size_y)
 
     for i in range(5):
         for j in range(4):

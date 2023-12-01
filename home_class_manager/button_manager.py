@@ -29,7 +29,7 @@ def load_file(self):  # 캐릭터 선택 버튼을 출력하기 위한 이미지
 
     self.ch_sel = load_image(ch_selected_directory)
 
-    self.knife = load_image(knife_right_directory)
+    self.gun = load_image(awp_left_directory)
 
 
 # 홈 화면 버튼 출력
@@ -105,8 +105,8 @@ def exit_draw_button(self):
     self.exit_bg.opacify(self.op_bg)
     self.exit_bg.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
 
-    self.knife.opacify(self.op_bg)
-    self.knife.rotate_draw(math.radians(30), self.kx, self.ky + self.pos, 600, 400)
+    self.gun.opacify(self.op_bg)
+    self.gun.rotate_draw(math.radians(-30), WIDTH / 2 + 300, self.ky + self.pos - 200, 1800, 600)
 
     self.button_exit1.draw(280, HEIGHT / 2 - 100, 540, 80)
     self.font.draw(50, HEIGHT / 2 - 100, '홈으로 돌아가기', (255, 255, 255))
