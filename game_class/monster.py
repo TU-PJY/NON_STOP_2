@@ -187,7 +187,7 @@ class Monster:
         if group == 'bullet:monster':  # sr 계열 총기 관통 대미지
             # 대미지를 여러 번 받지 않게 끔 한다.
             if not self.once and self.hp > 0:
-                fd = Feedback(self.x + self.p.cam_x, self.y + self.p.cam_y + self.p.cam_h)
+                fd = Feedback(self.x + self.p.cam_x, self.y + self.p.cam_y + self.p.cam_h, 1)
                 game_manager.add_object(fd, 7)  # 명중 피드백
 
                 self.op = 100

@@ -161,15 +161,19 @@ class Shell:
 
 
 class Feedback:
-    def __init__(self, x, y):
+    def __init__(self, x, y, size):
         self.image = load_image(hit_feeeback_directory)
         self.x = x
         self.y = y
         self.op = 1
+        self.size = size
 
     def draw(self):
         self.image.opacify(self.op)
-        self.image.draw(self.x, self.y, 40, 40)
+        if self.size == 2:
+            self.image.draw(self.x, self.y, 60, 60)
+        elif self.size == 1:
+            self.image.draw(self.x, self.y, 40, 40)
 
     def update(self):
         pps = game_framework.pps
@@ -191,7 +195,7 @@ class Bullet:
         self.x, self.y = x, y
         self.incline = incline
         self.name = name
-        self.move_delay = 30
+        self.move_delay = 10
 
     def update(self):
         pps = game_framework.pps

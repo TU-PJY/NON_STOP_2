@@ -97,7 +97,6 @@ def render_ingame_ui(self):
 
         # 수류탄을 던질 수 있게되면 밝은 아이콘으로 표시, 아니면 어두운 아이콘으로 표시
         if self.weapon.throwable:
-            self.coin_icon.draw(555 + ex, 45 + ey, 30, 30)
             self.grenade_able_icon.draw(500 + ex, 50 + ey, 100, 100)
             self.font_mini.draw(540 + ex, 80 + ey, 'L SHIFT', (255, 255, 255))
         else:

@@ -24,7 +24,7 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                 elif m.weapon.gun == 'UMP':
                     m.hp -= 20
                 elif m.weapon.gun == 'VECTOR':
-                    m.hp -= 11
+                    m.hp -= 13
                 elif m.weapon.gun == 'THOMPSON':
                     m.hp -= 20
                 elif m.weapon.gun == 'P90':
@@ -50,7 +50,7 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                 elif m.weapon.gun == 'FAL':
                     m.hp -= 70
                 elif m.weapon.gun == 'LVOAS':
-                    m.hp -= 40
+                    m.hp -= 45
 
                 elif m.weapon.gun_type == 'sr':
                     # 관통을 위한 가상 객체 생성
@@ -65,7 +65,7 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                 m.weapon.hit_once = False
 
                 if not m.weapon.gun_type == 'sr':
-                    fd = Feedback(m.target.tx, m.target.ty)
+                    fd = Feedback(m.target.tx, m.target.ty, 1)
                     game_manager.add_object(fd, 7)
 
         elif m.weapon.wield:  # 근접무기
@@ -84,6 +84,9 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                 m.op = 100  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달
                 m.is_hit = False
                 m.weapon.hit_once = False
+
+                fd = Feedback(m.x + m.p.ex, m.y + m.p.ey, 2)
+                game_manager.add_object(fd, 7)
 
         elif m.ex_dead:  # 수류탄 폭발 대미지
             m.hp -= 500
