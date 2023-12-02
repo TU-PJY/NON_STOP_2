@@ -95,6 +95,8 @@ class Arrow:
 
 
 class Shell:
+    sound = None
+
     def __init__(self, p, mp, x, y, dir, size_x, size_y):
         self.image = load_image(shell_directory)
         self.p = p
@@ -109,6 +111,9 @@ class Shell:
         self.deg = 0
         self.simulate = True
         self.remove_timer = 100
+
+        if not Shell.sound:
+            Shell.sound = load_wav(shell_hit_directory)
 
     def update(self):
         pps = game_framework.pps
@@ -134,6 +139,7 @@ class Shell:
                 if self.y < 190:  # 튕길 속도가 나는 한 계속 튄다
                     self.y = 190
                     self.acc = (self.acc / 2) * -1
+                    Shell.sound.play()
 
                     if -1 <= self.acc <= 1:  # 더 이상 튕길 속도가 나지 않으면 시뮬레이션을 정지한다.
                         self.deg = 0

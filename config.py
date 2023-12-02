@@ -270,6 +270,14 @@ groza_shoot_directory = 'res//sounds//ar//groza_shoot.ogg'
 # rifle
 m1_shoot_directory = 'res//sounds//rifle//m1_shoot.ogg'
 win_shoot_directory = 'res//sounds//rifle//win_shoot.ogg'
+win_spin_directory = 'res//sounds//rifle//win_spin.ogg'
+win_reload_directory = 'res//sounds//rifle//win_reload.ogg'
 mini14_shoot_directory = 'res//sounds//rifle//mini14_shoot.ogg'
 fal_shoot_directory = 'res//sounds//rifle//fal_shoot.ogg'
 lvoas_shoot_directory = 'res//sounds//rifle//lvoas_shoot.ogg'
+
+# etc
+shell_hit_directory = 'res//sounds//etc//shell_hit.ogg'
+walk_directory = 'res//sounds//etc//walk.ogg'
+land_directory = 'res//sounds//etc//land.ogg'
+jump_directory = 'res//sounds//etc//jump.ogg'

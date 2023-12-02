@@ -163,6 +163,7 @@ def reload_one(weapon):  # 관형 급탄 장전
         else:
             if weapon.rifle_ammo > 0:
                 if weapon.cur_ammo < 10:  # 10발을 모두 삽한할 때까지 장전을 계속한다
+                    weapon.win_reload.play()
                     weapon.cur_ammo += 1
                     weapon.rifle_ammo -= 1
                     if weapon.cur_ammo > 0:  # 1발이라도 넣었다면 재장전 필요 상태가 해제된다

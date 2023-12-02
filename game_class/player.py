@@ -23,11 +23,13 @@ class Move:
     def exit(p, e):
         if space_down(e):
             if p.jump_count < p.jump_level:
+                p.jump_sound.play()
                 if p.jump_count == 0:
                     p.jump_acc = JUMP_ACC
                 else:
                     p.jump_acc = JUMP_ACC / 1.2  # 두 번쨰 점프는 가속도를 조금 적게 준다
                 p.jump_count += 1
+                p.sound_delay = 0
                 p.mv_jump = True
 
         elif ctrl_down(e):  # 응급처치 키드를 사용하여 체력 회복
@@ -54,6 +56,8 @@ class Move:
             p.size_deg = 0
             p.size = 0
 
+            # p.sound_delay = 0
+
     @staticmethod
     def do(p):
         if not play_mode.weapon.skill_enable:
@@ -75,6 +79,8 @@ class Move:
         regen_hp(p)
         check_hp(p)
 
+        play_player_sound(p)
+
     @staticmethod
     def draw(p):
         draw_player(p)
@@ -89,6 +95,7 @@ class Idle:
     def exit(p, e):
         if space_down(e):
             if p.jump_count < p.jump_level:
+                p.jump_sound.play()
                 if p.jump_count == 0:
                     p.jump_acc = JUMP_ACC
                 else:
@@ -227,6 +234,8 @@ class Player:
         self.regen_cost = 1500
         self.speed_cost = 1500
         self.gren_cost = 10000
+
+        self.sound_delay = 0
 
         self.state_machine = StateMachine(self)
         self.state_machine.start()

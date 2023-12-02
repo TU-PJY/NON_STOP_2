@@ -52,6 +52,13 @@ def load_player_image(self):
 
     self.here = load_image(ch_selected_directory)
 
+    self.sound = load_wav(walk_directory)
+    self.sound.set_volume(80)
+    self.land_sound = load_wav(land_directory)
+    self.land_sound.set_volume(128)
+    self.jump_sound = load_wav(jump_directory)
+    self.jump_sound.set_volume(128)
+
 
 def look_mouse(p):
     if p.look_mouse:  # 해당 변수가 true일 때만 플레이어는 마우스를 바라본다
@@ -195,6 +202,7 @@ def jump(p):
                 p.mv_jump = False  # 점프가 가능해진다
                 p.push_y = LAND_SHAKE  # LAND_SHAKE 만큼 화면이 눌린다
                 p.jump_count = 0  # 점프 가능 횟수 초기화
+                p.land_sound.play()
 
             p.jump_acc -= pps / 90
 
@@ -245,3 +253,12 @@ def check_hp(p):  # 플레이어 체력이 0이 되면 게임 오버 모드로 �
         playerdead = Playerdead()
         game_manager.add_object(playerdead, 7)
         game_framework.MODE = 'GAMEOVER'
+
+
+def play_player_sound(p):
+    pps = game_framework.pps
+    if (p.mv_right or p.mv_left) and not p.mv_jump:
+        p.sound_delay -= pps / 4
+        if p.sound_delay <= 0:
+            p.sound.play()
+            p.sound_delay = 70
