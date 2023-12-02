@@ -77,6 +77,7 @@ def load_melee_image(self):
     self.katana = load_image(katana_directory)
     self.katana_swing = load_image(katana_swing_directory)
     self.axe = load_image(axe_directory)
+    self.axe_swing = load_image(axe_swing_directory)
 
 
 def load_gun_sound(self):

@@ -129,7 +129,7 @@ def draw_melee(weapon):
             elif weapon.swing and weapon.swing_down:
                 if weapon.p.dir == 1:
                     x = weapon.p.px + weapon.melee_x
-                    weapon.axe.clip_composite_draw(0, 0, 200, 410, weapon.melee_deg, '', x, y, 200, 410)
+                    weapon.axe_swing.clip_composite_draw(0, 0, 410, 410, weapon.melee_deg, '', x, y, 410, 410)
                 elif weapon.p.dir == 0:
                     x = weapon.p.px - weapon.melee_x
-                    weapon.axe.clip_composite_draw(0, 0, 200, 410, -weapon.melee_deg, 'h', x, y, 200, 410)
+                    weapon.axe_swing.clip_composite_draw(0, 0, 410, 410, -weapon.melee_deg, 'h', x, y, 410, 410)
