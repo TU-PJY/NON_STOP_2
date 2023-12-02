@@ -69,13 +69,17 @@ def spawn_monster(self):  # 몬스터 스폰
 
             match self.type:
                 case 1:
-                    self.y, self.speed, self.hp = 260, 1.5, 200
+                    speed = random.uniform(1.1, 1.6)
+                    self.y, self.speed, self.hp = 260, speed, 200
                 case 2:
-                    self.y, self.speed, self.hp = 670, 1.1, 120
+                    speed = random.uniform(0.6, 1.2)
+                    self.y, self.speed, self.hp = 670, speed, 120
                 case 3:
-                    self.y, self.speed, self.hp, self.frame = 230, 0.9, 180, 0
+                    speed = random.uniform(0.7, 1.1)
+                    self.y, self.speed, self.hp, self.frame = 230, speed, 180, 0
                 case 4:
-                    self.y, self.speed, self.hp = 240, 0.5, 150
+                    speed = random.uniform(0.5, 0.8)
+                    self.y, self.speed, self.hp = 240, speed, 150
 
             m = Monster \
                 (self.p, self.weapon, self.target, self.mp, self.spawn_point,

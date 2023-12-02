@@ -4,6 +4,17 @@ from game_class_manager.weapon_manager.etc import make_shell
 
 def play_gun_sound(weapon, gun):
     match gun:
+        # pistol
+        case 'M1911':
+            weapon.m1911_shoot.play()
+        case 'M92':
+            weapon.m92_shoot.play()
+        case 'DEGLE':
+            weapon.degle_shoot.play()
+        case 'M500':
+            weapon.m500_shoot.play()
+        case 'QHAND':
+            weapon.qhand_shoot.play()
         # smg
         case 'AKS74':
             weapon.aks74_shoot.play()
@@ -55,11 +66,11 @@ def shoot_gun(weapon):
                     weapon.p.shake_range = 15
 
                 elif weapon.gun == 'DEGLE':
-                    weapon.shoot_delay = 95
+                    weapon.shoot_delay = 120
                     weapon.p.shake_range = 25
 
                 elif weapon.gun == 'M500':
-                    weapon.shoot_delay = 130
+                    weapon.shoot_delay = 170
                     weapon.p.shake_range = 30
                     weapon.flame_display_time = FLAME_DISPLAY_TIME
 

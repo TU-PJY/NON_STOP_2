@@ -171,7 +171,7 @@ class Player:
     def __init__(self):
         load_player_image(self)
 
-        self.mx, self.my = 0, 0
+        self.mx, self.my = WIDTH / 2 - 10, 250
 
         self.hp = 200  # 업그레이드하면 체력이 커진다
         self.cur_hp = 200  # 현재 체력, 피격 시 감소한다

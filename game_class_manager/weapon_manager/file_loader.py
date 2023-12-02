@@ -84,6 +84,12 @@ def load_melee_image(self):
 
 def load_gun_sound(self):
     # pistol
+    self.m1911_shoot = load_wav(m1911_shoot_directory)
+    self.m92_shoot = load_wav(m92_shoot_directory)
+    self.degle_shoot = load_wav(degle_shoot_directory)
+    self.m500_shoot = load_wav(m500_shoot_directory)
+    self.qhand_shoot = load_wav(qhand_shoot_directory)
+
     self.pistol_reload = load_wav(pistol_reload_directory)
     self.revolver_reload = load_wav(revolver_reload_directory)
 

@@ -258,6 +258,12 @@ font2_directory = 'res//font//KORAIL2007.ttf'
 
 # 사운드 경로
 # pistol
+m1911_shoot_directory = 'res//sounds//pistol//m1911_shoot.ogg'
+m92_shoot_directory = 'res//sounds//pistol//m92_shoot.ogg'
+m500_shoot_directory = 'res//sounds//pistol//m500_shoot.ogg'
+qhand_shoot_directory = 'res//sounds//pistol//qhand_shoot.ogg'
+degle_shoot_directory = 'res//sounds//pistol//degle_shoot.ogg'
+
 pistol_reload_directory = 'res//sounds//pistol//pistol_reload.ogg'
 revolver_reload_directory = 'res//sounds//pistol//revolver_reload.ogg'
 
