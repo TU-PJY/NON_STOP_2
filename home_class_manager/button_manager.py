@@ -124,7 +124,7 @@ def exit_update_button(self):
 
     if self.kacc > 0:
         self.ky += self.kacc * pps / 4
-        self.kacc -= pps / 10
+        self.kacc -= pps / 30
 
     self.pos = math.sin(self.deg) * 50
     self.deg += pps / 1000
@@ -282,7 +282,7 @@ def home_update_button(self):
         # 게임 나가기 및 설정
         if 0 < self.cursor.mx < 310 and HEIGHT / 2 - 320 - 40 < self.cursor.my < HEIGHT / 2 - 320 + 40:
             self.op3 = 0
-            self.kacc = 28
+            self.kacc = 16
             self.ky = -500
             self.deg = 0
             self.data.mode = 'exit_mode'
