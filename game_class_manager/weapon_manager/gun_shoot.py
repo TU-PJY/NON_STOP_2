@@ -2,6 +2,43 @@ from config import FLAME_DISPLAY_TIME
 from game_class_manager.weapon_manager.etc import make_shell
 
 
+def play_gun_sound(weapon, gun):
+    match gun:
+        # smg
+        case 'AKS74':
+            weapon.aks74_shoot.play()
+        case 'UMP':
+            weapon.ump_shoot.play()
+        case 'VECTOR':
+            weapon.vector_shoot.play()
+        case 'THOMPSON':
+            weapon.thompson_shoot.play()
+        case 'P90':
+            weapon.p90_shoot.play()
+        # ar
+        case 'SCAR_H':
+            weapon.scar_shoot.play()
+        case 'M16':
+            weapon.m16_shoot.play()
+        case 'MP44':
+            weapon.mp44_shoot.play()
+        case 'AUG':
+            weapon.aug_shoot.play()
+        case 'GROZA':
+            weapon.groza_shoot.play()
+        # rifle
+        case 'M1':
+            weapon.m1_shoot.play()
+        case 'WIN':
+            weapon.win_shoot.play()
+        case 'MINI14':
+            weapon.mini14_shoot.play()
+        case 'FAL':
+            weapon.fal_shoot.play()
+        case 'LVOAS':
+            weapon.lvoas_shoot.play()
+
+
 def shoot_gun(weapon):
     if weapon.trigger and weapon.weapon_type == 0:
         if weapon.shoot_delay <= 0:  # 딜레이는 총마다 다르며, 딜레이 수치가 낮을수록 연사 속도가 빠르다. 0이 될 때마다 발사된다.
@@ -150,6 +187,8 @@ def shoot_gun(weapon):
                         weapon.cur_ammo -= 1  # 발사 시 총알 소모
                         if weapon.cur_ammo == 0:  # 탄창의 탄약을 모두 소모하면 재장전을 해야한다.
                             weapon.reload_need = True
+
+                play_gun_sound(weapon, weapon.gun)
 
                 # 일부 총기는 장전 시 탄피를 배출하므로 예외 처리
                 if not weapon.gun_type == 'sr' and not weapon.gun == 'WIN':  # 총 종류에 따라 탄피 크기가 다르다

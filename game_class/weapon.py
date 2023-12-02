@@ -1,5 +1,5 @@
 from game_class_manager.weapon_manager.etc import *
-from game_class_manager.weapon_manager.file_loader import load_gun_image, load_melee_image
+from game_class_manager.weapon_manager.file_loader import load_gun_image, load_melee_image, load_gun_sound
 from game_class_manager.weapon_manager.flame_output import draw_flame
 from game_class_manager.weapon_manager.gun_output import draw_gun
 from game_class_manager.weapon_manager.gun_shoot import shoot_gun
@@ -22,7 +22,7 @@ class Shoot:
                 if weapon.reloading:
                     weapon.reloading = False
                     weapon.cur_reload_time = 0
-                if weapon.reload_need:
+                if weapon.reload_need and weapon.rifle_ammo > 0:
                     weapon.reloading = True
 
         elif weapon.weapon_type == 1 and not weapon.skill_enable:
@@ -194,6 +194,7 @@ class Weapon:
     def __init__(self, p, mp):
         load_gun_image(self)
         load_melee_image(self)
+        load_gun_sound(self)
         self.p = p
         self.mp = mp
 
@@ -208,7 +209,7 @@ class Weapon:
         self.shoot = False  # True일시 격발
         self.shoot_delay = 0  # 0이 될때마다 self.shoot == True
 
-        self.gun_type = 'pistol'  # 현재 총 타입 
+        self.gun_type = 'pistol'  # 현재 총 타입
         self.prev_gun_type = 'pistol'  # 교체 전 이전 총 타입
 
         self.flame_display_time = 0  # 총구 화염 출력 시간

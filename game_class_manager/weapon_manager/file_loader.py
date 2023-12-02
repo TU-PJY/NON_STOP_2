@@ -1,4 +1,4 @@
-from pico2d import load_image
+from pico2d import load_image, load_wav
 
 from config import *
 
@@ -77,3 +77,26 @@ def load_melee_image(self):
     self.katana = load_image(katana_directory)
     self.katana_swing = load_image(katana_swing_directory)
     self.axe = load_image(axe_directory)
+
+
+def load_gun_sound(self):
+    # smg
+    self.p90_shoot = load_wav(p90_shoot_directory)
+    self.vector_shoot = load_wav(vector_shoot_directory)
+    self.thompson_shoot = load_wav(thompson_shoot_directory)
+    self.aks74_shoot = load_wav(aks74_shoot_directory)
+    self.ump_shoot = load_wav(ump_shoot_directory)
+
+    # ar
+    self.scar_shoot = load_wav(scar_shoot_directory)
+    self.m16_shoot = load_wav(m16_shoot_directory)
+    self.mp44_shoot = load_wav(mp44_shoot_directory)
+    self.aug_shoot = load_wav(aug_shoot_directory)
+    self.groza_shoot = load_wav(groza_shoot_directory)
+
+    # rifle
+    self.m1_shoot = load_wav(m1_shoot_directory)
+    self.win_shoot = load_wav(win_shoot_directory)
+    self.mini14_shoot = load_wav(mini14_shoot_directory)
+    self.fal_shoot = load_wav(fal_shoot_directory)
+    self.lvoas_shoot = load_wav(lvoas_shoot_directory)

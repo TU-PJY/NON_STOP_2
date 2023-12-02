@@ -251,3 +251,25 @@ warning_directory = 'res//ui//warning.png'
 # 폰트 경로
 font_directory = 'res//font//bump-it-up.ttf'
 font2_directory = 'res//font//KORAIL2007.ttf'
+
+# 사운드 경로
+# smg
+p90_shoot_directory = 'res//sounds//smg//p90_shoot.ogg'
+vector_shoot_directory = 'res//sounds//smg//vector_shoot.ogg'
+thompson_shoot_directory = 'res//sounds//smg//thompson_shoot.ogg'
+aks74_shoot_directory = 'res//sounds//smg//aks74_shoot.ogg'
+ump_shoot_directory = 'res//sounds//smg//ump_shoot.ogg'
+
+# ar
+scar_shoot_directory = 'res//sounds//ar//scar_shoot.ogg'
+m16_shoot_directory = 'res//sounds//ar//m16_shoot.ogg'
+mp44_shoot_directory = 'res//sounds//ar//mp44_shoot.ogg'
+aug_shoot_directory = 'res//sounds//ar//aug_shoot.ogg'
+groza_shoot_directory = 'res//sounds//ar//groza_shoot.ogg'
+
+# rifle
+m1_shoot_directory = 'res//sounds//rifle//m1_shoot.ogg'
+win_shoot_directory = 'res//sounds//rifle//win_shoot.ogg'
+mini14_shoot_directory = 'res//sounds//rifle//mini14_shoot.ogg'
+fal_shoot_directory = 'res//sounds//rifle//fal_shoot.ogg'
+lvoas_shoot_directory = 'res//sounds//rifle//lvoas_shoot.ogg'

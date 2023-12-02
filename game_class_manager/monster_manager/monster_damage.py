@@ -31,7 +31,7 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                     m.hp -= 16
 
                 elif m.weapon.gun == 'SCAR_H':
-                    m.hp -= 28
+                    m.hp -= 22
                 elif m.weapon.gun == 'M16':
                     m.hp -= 18
                 elif m.weapon.gun == 'MP44':

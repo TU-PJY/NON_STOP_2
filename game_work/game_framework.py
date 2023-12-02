@@ -5,7 +5,7 @@ from config import PPS
 running = None
 stack = None
 
-MODE = 'home'
+MODE = 'play'
 ANIMATION = True
 
 
