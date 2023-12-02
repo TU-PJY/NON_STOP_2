@@ -2,21 +2,25 @@ from game_class_manager.weapon_manager.etc import make_shell
 from game_work import game_framework
 
 
-# 윈체스터 휘두르기 장전 모션
+# 총 회전 장전 모션
 def spin_win(weapon):
     pps = game_framework.pps
-    if weapon.shoot_delay < 200:
-        if not weapon.shell_out:  # 장전하는 순간 탄피를 1회만 생성한다.
-            weapon.win_spin.play()
-            make_shell(weapon, 20, 20)
-            weapon.shell_out = True
+    if weapon.gun == 'WIN':
+        if weapon.shoot_delay < 200:
+            if not weapon.shell_out:  # 장전하는 순간 탄피를 1회만 생성한다.
+                weapon.win_spin.play()
+                make_shell(weapon, 20, 20)
+                weapon.shell_out = True
 
-        if weapon.spin < 6:
-            weapon.spin += pps / 30
-            if weapon.spin >= 6:
-                weapon.spin = 0
-                weapon.is_spin = False
-                weapon.shell_out = False
+            if weapon.spin < 6:
+                weapon.spin += pps / 30
+                if weapon.spin >= 6:
+                    weapon.spin = 0
+                    weapon.is_spin = False
+                    weapon.shell_out = False
+
+    elif weapon.gun == 'M500' or weapon.gun == 'QHAND':
+        weapon.spin += pps / 30
 
 
 # 근접무기 출력 위치 조정

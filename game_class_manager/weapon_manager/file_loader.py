@@ -19,6 +19,8 @@ def load_gun_image(self):
     self.qhand_left = load_image(qhand_left_directory)
     self.qhand_spin_right = load_image(qhand_spin_right_directory)
     self.qhand_spin_left = load_image(qhand_spin_left_directory)
+    self.m500_spin_right = load_image(m500_spin_right_directory)
+    self.m500_spin_left = load_image(m500_spin_left_directory)
 
     self.aks74_right = load_image(aks74_right_directory)
     self.aks74_left = load_image(aks74_left_directory)

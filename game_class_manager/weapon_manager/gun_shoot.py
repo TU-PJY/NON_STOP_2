@@ -61,6 +61,7 @@ def shoot_gun(weapon):
                 elif weapon.gun == 'M500':
                     weapon.shoot_delay = 130
                     weapon.p.shake_range = 30
+                    weapon.flame_display_time = FLAME_DISPLAY_TIME
 
                 elif weapon.gun == 'QHAND':
                     weapon.shoot_delay = 40
@@ -69,6 +70,7 @@ def shoot_gun(weapon):
                         weapon.fire_pos = 'out'
                     else:
                         weapon.fire_pos = 'in'
+                    weapon.flame_display_time = FLAME_DISPLAY_TIME
 
                 elif weapon.gun == 'SCAR_H':
                     weapon.shoot_delay = 38

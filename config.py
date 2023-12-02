@@ -93,6 +93,9 @@ qhand_left_directory = 'res//gun_image//pistol//qhand_left.png'
 qhand_spin_right_directory = 'res//gun_image//pistol//qhand_spin_right.png'
 qhand_spin_left_directory = 'res//gun_image//pistol//qhand_spin_left.png'
 
+m500_spin_right_directory = 'res//gun_image//pistol//m500_spin_right.png'
+m500_spin_left_directory = 'res//gun_image//pistol//m500_spin_left.png'
+
 # smg
 aks74_right_directory = 'res//gun_image//smg//aks74_right.png'
 aks74_left_directory = 'res//gun_image//smg//aks74_left.png'

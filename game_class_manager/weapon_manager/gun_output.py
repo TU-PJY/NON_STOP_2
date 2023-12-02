@@ -32,10 +32,16 @@ def draw_gun(weapon):
                 weapon.m92_left.clip_composite_draw(0, 0, 200, 100, weapon.deg, 'h, v', x, y, 300, 150)
 
         if weapon.gun == 'M500':
-            if weapon.p.dir == 1:
-                weapon.m500_right.clip_composite_draw(0, 0, 200, 100, weapon.deg, '', x, y, 300, 150)
-            elif weapon.p.dir == 0:
-                weapon.m500_left.clip_composite_draw(0, 0, 200, 100, weapon.deg, 'h, v', x, y, 300, 150)
+            if weapon.reloading:
+                if weapon.p.dir == 1:
+                    weapon.m500_spin_right.clip_composite_draw(0, 0, 200, 200, weapon.spin, '', x + 30, y, 300, 250)
+                elif weapon.p.dir == 0:
+                    weapon.m500_spin_left.clip_composite_draw(0, 0, 200, 200, -weapon.spin, 'h, v', x - 30, y, 300, 250)
+            else:
+                if weapon.p.dir == 1:
+                    weapon.m500_right.clip_composite_draw(0, 0, 200, 100, weapon.deg, '', x, y, 300, 150)
+                elif weapon.p.dir == 0:
+                    weapon.m500_left.clip_composite_draw(0, 0, 200, 100, weapon.deg, 'h, v', x, y, 300, 150)
 
         if weapon.gun == 'DEGLE':
             if weapon.p.dir == 1:
@@ -44,10 +50,19 @@ def draw_gun(weapon):
                 weapon.degle_left.clip_composite_draw(0, 0, 200, 100, weapon.deg, 'h, v', x, y, 320, 160)
 
         if weapon.gun == 'QHAND':
-            if weapon.p.dir == 1:
-                weapon.qhand_right.clip_composite_draw(0, 0, 200, 100, weapon.deg, '', x, y, 300, 150)
-            elif weapon.p.dir == 0:
-                weapon.qhand_left.clip_composite_draw(0, 0, 200, 100, weapon.deg, 'h, v', x, y, 300, 150)
+            if weapon.reloading:
+                if weapon.p.dir == 1:
+                    weapon.qhand_spin_right.clip_composite_draw(0, 0, 100, 100, weapon.spin, '', x + 50, y, 200, 150)
+                    weapon.qhand_spin_right.clip_composite_draw(0, 0, 100, 100, weapon.spin, '', x + 10, y, 200, 150)
+
+                elif weapon.p.dir == 0:
+                    weapon.qhand_spin_left.clip_composite_draw(0, 0, 100, 100, -weapon.spin, 'h, v', x - 50, y, 200, 150)
+                    weapon.qhand_spin_left.clip_composite_draw(0, 0, 100, 100, -weapon.spin, 'h, v', x - 10, y, 200, 150)
+            else:
+                if weapon.p.dir == 1:
+                    weapon.qhand_right.clip_composite_draw(0, 0, 200, 100, weapon.deg, '', x, y, 300, 150)
+                elif weapon.p.dir == 0:
+                    weapon.qhand_left.clip_composite_draw(0, 0, 200, 100, weapon.deg, 'h, v', x, y, 300, 150)
 
         elif weapon.gun == 'AKS74':
             if weapon.p.dir == 1:
