@@ -342,6 +342,8 @@ class PlayerDamage:
 
 
 class Coin:
+    pickup = None
+
     def __init__(self, p, mp, x, y, dir, sp=2):
         self.image = load_image(coin_icon_directory)
         self.p = p
@@ -359,6 +361,9 @@ class Coin:
 
         if self.sp > 2:
             self.acc = 5
+
+        if not Coin.pickup:
+            Coin.pickup = load_wav(pickup_directory)
 
     def draw(self):
         self.image.opacify(self.op)
@@ -415,6 +420,7 @@ class Coin:
     def handle_collision(self, group, other):
         if group == 'player:coin':
             if not self.up:  # 획득하지 않은 코인에 대해서만 코인 획득 피드백 재생
+                Coin.pickup.play()
                 self.p.coin += 20 + play_mode.tool.rounds * 10  # 라운드가 올라갈 수록 코인을 더 많이 획득한다
                 self.up = True
                 self.p.get_coin = True
@@ -470,6 +476,9 @@ class Explode:
 
 
 class Grenade:
+    sound = None
+    hit_sound = None
+
     def __init__(self, p, mp, weapon, x, y, dir):
         self.image = load_image(grenade_directory)
         self.x, self.y, self.dir = x, y, dir
@@ -480,7 +489,10 @@ class Grenade:
         self.speed = 4
         self.simulate = True
         self.deg = 0
-        self.hit_sound = load_wav(gren_hit_directory)
+
+        if not Grenade.sound:
+            Grenade.sound = load_wav(explode_sound_directory)
+            Grenade.hit_sound = load_wav(gren_hit_directory)
 
         if self.p.mv_right and self.dir == 1:  # 움직이는 방향으로 향하여 던지면 더 빨리 날아간다
             self.speed = 9
@@ -516,7 +528,7 @@ class Grenade:
                 self.acc -= pps / 90
 
                 if self.y <= 200:
-                    self.hit_sound.play()
+                    Grenade.hit_sound.play()
                     self.speed -= 1
                     self.y = 200
                     self.acc = self.acc / 2 * -1
@@ -531,7 +543,7 @@ class Grenade:
             self.timer -= pps / 3
 
         if self.timer <= 0:  # 타이머가 0이되면 폭발한다.
-            self.weapon.explode_sound.play()
+            Grenade.sound.play()
             self.weapon.gren_x = self.x  # 몬스터가 날아가는 방향을 지정하기 위해 weapon 클래스로 자기 위치를 전달한다
             ex = Explode(self.p, self.weapon, self.x, self.y)
             self.p.ex_shake_range = 100  # 화면이 흔들린다

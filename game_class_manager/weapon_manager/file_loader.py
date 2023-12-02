@@ -123,4 +123,3 @@ def load_gun_sound(self):
 
     # etc
     self.throw_sound = load_wav(throw_directoy)
-    self.explode_sound = load_wav(explode_sound_directory)
