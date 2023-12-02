@@ -8,6 +8,8 @@ from mods import play_mode, gameover_mode
 
 
 class Arrow:
+    sound = None
+
     def __init__(self, p, mp, x, y, incline, dir):
         self.x = x
         self.y = y
@@ -23,6 +25,9 @@ class Arrow:
             self.arrow_left = load_image(arrow_left_directory)
         elif self.dir == 1:
             self.arrow_right = load_image(arrow_right_directory)
+
+        if not Arrow.sound:
+            Arrow.sound = load_wav(arrow_wall_directory)
 
     def update(self):
         pps = game_framework.pps
@@ -50,6 +55,7 @@ class Arrow:
 
                 # 화살이 벽에 박히면
                 if self.x >= self.mp.playerToWallRight - 10 or self.x <= self.mp.playerToWallLeft + 10 or self.y <= 190:
+                    Arrow.sound.play()
                     self.simulate = False  # 움직임을 멈춘다
 
                 if self.y >= 2000:  # 너무 높이 올라가면 삭제
@@ -86,6 +92,7 @@ class Arrow:
         if group == 'player:arrow':
             if self.simulate:  # 움직이는 화살만 인식하도록 설정
                 if self.p.dmg_delay <= 0:
+                    self.p.damage_sound.play()
                     self.p.cur_hp -= 15
                     self.p.dmg_shake_range = 30
                     self.p.dmg_delay = 200
@@ -473,6 +480,7 @@ class Grenade:
         self.speed = 4
         self.simulate = True
         self.deg = 0
+        self.hit_sound = load_wav(gren_hit_directory)
 
         if self.p.mv_right and self.dir == 1:  # 움직이는 방향으로 향하여 던지면 더 빨리 날아간다
             self.speed = 9
@@ -508,6 +516,7 @@ class Grenade:
                 self.acc -= pps / 90
 
                 if self.y <= 200:
+                    self.hit_sound.play()
                     self.speed -= 1
                     self.y = 200
                     self.acc = self.acc / 2 * -1
@@ -522,6 +531,7 @@ class Grenade:
             self.timer -= pps / 3
 
         if self.timer <= 0:  # 타이머가 0이되면 폭발한다.
+            self.weapon.explode_sound.play()
             self.weapon.gren_x = self.x  # 몬스터가 날아가는 방향을 지정하기 위해 weapon 클래스로 자기 위치를 전달한다
             ex = Explode(self.p, self.weapon, self.x, self.y)
             self.p.ex_shake_range = 100  # 화면이 흔들린다
@@ -564,6 +574,8 @@ class Splash:
 
 
 class Dead:
+    sound = None
+
     def __init__(self, p, mp, x, y, dir, type, animation=0):
         self.p, self.mp = p, mp
         self.x, self.y, self.dir = x, y, dir
@@ -600,6 +612,9 @@ class Dead:
         if self.type == 2:
             self.ani = -1
             self.image = load_image(ghost_dead_directory)
+
+        if not Dead.sound:
+            Dead.sound = load_wav(flesh_directory)
 
     def draw(self):
         deg = math.radians(self.deg)
@@ -725,12 +740,14 @@ class Dead:
                     self.acc -= pps / 90
 
                     if self.y < 250 and self.type == 1:
+                        Dead.sound.play()
                         self.y = 260
                         self.acc = self.acc * (-1) / 1.5
                         if self.acc < 1:
                             self.simulate = False
 
                     if self.y < 230 and self.type == 4:
+                        Dead.sound.play()
                         self.y = 240
                         self.acc = self.acc * (-1) / 1.5
                         if self.acc < 1:
@@ -748,12 +765,14 @@ class Dead:
                     self.y += self.acc * pps / 4
 
                     if self.y < 250 and self.type == 1:
+                        Dead.sound.play()
                         self.y = 260
                         self.acc = self.acc * (-1) / 1.5
                         if self.acc < 1:
                             self.simulate = False
 
                     if self.y < 230 and self.type == 4:
+                        Dead.sound.play()
                         self.y = 240
                         self.acc = self.acc * (-1) / 1.5
                         if self.acc < 1:

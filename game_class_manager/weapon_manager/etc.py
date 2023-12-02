@@ -112,6 +112,12 @@ def check_ammo(weapon):
 
 
 def reload_gun(weapon):
+    if weapon.play_sound:
+        match weapon.gun_type:
+            case 'ar':
+                weapon.ar_reload.play(1)
+        weapon.play_sound = False
+
     if weapon.weapon_type == 0:
         pps = game_framework.pps
 
@@ -151,6 +157,7 @@ def reload_gun(weapon):
             weapon.reload_need = False
             weapon.cur_reload_time = 0
             weapon.reloading = False  # 재장전 상태 해제
+            weapon.play_sound = True
 
 
 def reload_one(weapon):  # 관형 급탄 장전
@@ -175,6 +182,7 @@ def reload_one(weapon):  # 관형 급탄 장전
 
 
 def throw_grenade(weapon):
+    weapon.throw_sound.play()
     gren = Grenade(weapon.p, weapon.mp, weapon, weapon.p.x, weapon.p.y - weapon.p.cam_h, weapon.p.dir)
     game_manager.add_object(gren, 3)
     weapon.throwable = False

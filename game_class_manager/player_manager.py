@@ -59,6 +59,8 @@ def load_player_image(self):
     self.jump_sound = load_wav(jump_directory)
     self.jump_sound.set_volume(128)
 
+    self.damage_sound = load_wav(damage_directory)
+
 
 def look_mouse(p):
     if p.look_mouse:  # 해당 변수가 true일 때만 플레이어는 마우스를 바라본다

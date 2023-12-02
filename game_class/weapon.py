@@ -315,6 +315,8 @@ class Weapon:
         self.gren_x = 0  # 몬스터가 날아가는 방향을 정하기 위한 수류탄 위치 변수
         self.gren_level = 1  # 레벨이 오를수록 폭발 반경이 넓어진다 최대 3레벨 까지
 
+        self.play_sound = True  # 재장전 사운드를 한 번만 플레이 하도록 한다
+
         self.state_machine = StateMachineGun(self)
         self.state_machine.start()
 

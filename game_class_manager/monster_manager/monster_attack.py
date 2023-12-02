@@ -53,6 +53,7 @@ def process_attack(m):
                 m.incline = math.atan2(m.p.y + 70 - (m.y + m.p.cam_h), m.p.x - m.x)  # 머리쪽으로 살짝 높혀서 쏜다
                 m.frame = 2
                 if m.shoot_delay <= 0:
+                    m.bow.play()
                     ar = Arrow(m.p, m.mp, m.x, m.y, m.incline, m.dir)  # 일정 간격으로 화살을 발사한다
                     game_manager.add_collision_pair('player:arrow', None, ar)
                     game_manager.add_object(ar, 2)

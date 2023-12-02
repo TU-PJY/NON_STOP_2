@@ -94,6 +94,8 @@ def load_gun_sound(self):
     self.aug_shoot = load_wav(aug_shoot_directory)
     self.groza_shoot = load_wav(groza_shoot_directory)
 
+    self.ar_reload = load_wav(ar_reload_directory)
+
     # rifle
     self.m1_shoot = load_wav(m1_shoot_directory)
     self.win_shoot = load_wav(win_shoot_directory)
@@ -103,3 +105,7 @@ def load_gun_sound(self):
     self.mini14_shoot = load_wav(mini14_shoot_directory)
     self.fal_shoot = load_wav(fal_shoot_directory)
     self.lvoas_shoot = load_wav(lvoas_shoot_directory)
+
+    # etc
+    self.throw_sound = load_wav(throw_directoy)
+    self.explode_sound = load_wav(explode_sound_directory)

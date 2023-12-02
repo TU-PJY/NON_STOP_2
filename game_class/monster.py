@@ -1,5 +1,6 @@
-from pico2d import draw_rectangle
+from pico2d import draw_rectangle, load_wav
 
+from config import bow_sound_directory
 from game_class.prop import PlayerDamage, Feedback
 from game_class_manager.monster_manager.etc import monster_animation, update_monster_pos, update_monster_opacify, \
     update_delay, update_monster_size
@@ -103,6 +104,7 @@ class Monster:
         elif self.type == 4:
             self.is_shoot = False
             self.shoot_delay = 100
+            self.bow = load_wav(bow_sound_directory)
 
         self.state_machine = StateMachineTarget(self)
         self.state_machine.start()
@@ -154,6 +156,8 @@ class Monster:
                                 self.p.cur_hp -= 15
                             case 3:
                                 self.p.cur_hp -= 30
+
+                        self.p.damage_sound.play()
 
                         self.p.dmg_shake_range = 30
                         self.p.dmg_delay = 200  # 해당 변수가 0이 되어야 플레이어는 다음 대미지를 받는다

@@ -14,21 +14,34 @@ def handle_events():
             game_framework.quit()
         elif event.type == SDL_KEYUP and event.key == SDLK_ESCAPE:
             exit_enable = True
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            if not button.mode == 'none':
-                if exit_enable:
-                    bg = Back2()
-                    game_manager.add_object(bg, 7)
-                    game_framework.MODE = 'play'
-                    game_framework.pop_mode()
+        elif event.type == SDL_KEYDOWN:
+            if event.key == SDLK_ESCAPE:
+                if not button.mode == 'none':
+                    if exit_enable:
+                        bg = Back2()
+                        game_manager.add_object(bg, 7)
+                        game_framework.MODE = 'play'
+                        game_framework.pop_mode()
+
+            elif event.key == SDLK_LSHIFT:
+                pass
+            elif event.key == SDLK_LCTRL:
+                pass
+            elif event.key == SDLK_r:
+                pass
+            elif event.key == SDLK_q:
+                pass
 
         elif event.type == SDL_MOUSEMOTION:
             if not button.mode == 'none':
                 cursor.mx, cursor.my = event.x, HEIGHT - 1 - event.y
 
-        elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
-            if not button.mode == 'none':
-                button.click = True
+        elif event.type == SDL_MOUSEBUTTONDOWN:
+            if event.button == SDL_BUTTON_LEFT:
+                if not button.mode == 'none':
+                    button.click = True
+            elif event.button == SDL_BUTTON_RIGHT:
+                pass
 
         else:
             play_mode.p.handle_event(event)  # 이동키를 누른 상태로 모드 전환 시 동작 오류 방지

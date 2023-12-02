@@ -244,7 +244,6 @@ class Player:
         pps = game_framework.pps
         if game_framework.MODE == 'play':
             self.state_machine.update()
-            # self.cur_hp -= pps / 30
 
     def __getstate__(self):
         state = {'ch': self.ch}

@@ -47,7 +47,14 @@ def handle_events():
                 if shop.select_mode > 0:
                     shop.select_mode -= 1
 
-            play_mode.p.handle_event(event)  # 상점 페이지 이동 키 사용 시 플레이어 상태 오류 방지
+            elif event.key == SDLK_LSHIFT:
+                pass
+
+            elif event.key == SDLK_r:
+                pass
+
+            if not event.key == SDLK_LCTRL:
+                play_mode.p.handle_event(event)  # 상점 페이지 이동 키 사용 시 플레이어 상태 오류 방지
 
         elif event.type == SDL_MOUSEMOTION:
             shop.mx, shop.my = event.x, HEIGHT - 1 - event.y

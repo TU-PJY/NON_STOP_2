@@ -235,11 +235,11 @@ def equip_gun_page1(self, i, j):
         play_mode.weapon.reload_time = 200
     elif j == 2:
         play_mode.weapon.gun_type = 'ar'
-        play_mode.weapon.reload_time = 250
+        play_mode.weapon.reload_time = 350
     elif j == 3:
         if play_mode.weapon.gun == 'MINI14':  # MINI14는 소총탄을 사용한다
             play_mode.weapon.gun_type = 'ar'
-            play_mode.weapon.reload_time = 250
+            play_mode.weapon.reload_time = 350
 
         elif play_mode.weapon.gun == 'WIN':
             play_mode.weapon.gun_type = 'rifle'
@@ -324,6 +324,7 @@ def update_gun_item(self):
             play_mode.weapon.cur_reload_time = 0
             play_mode.weapon.reloading = False  # 재장전 중이었다면 재장전 소요 시간 초기화
             play_mode.weapon.reload_need = True  # 재장전 필요 상태로 초기화
+            play_mode.weapon.play_sound = True  # 재장전 사운드를 출력 할 수 있도록 한다
 
             self.eq_size_x = 250  # 아이템 장착 피드백을 재생한다
             self.eq_size_y = 200
