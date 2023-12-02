@@ -331,6 +331,9 @@ def update_gun_item(self):
             play_mode.weapon.reload_need = True  # 재장전 필요 상태로 초기화
             play_mode.weapon.play_sound = True  # 재장전 사운드를 출력 할 수 있도록 한다
 
+            play_mode.weapon.is_spin = False  # 회전 중이었던 각도 초기화
+            play_mode.weapon.spin = 0
+
             self.eq_size_x = 250  # 아이템 장착 피드백을 재생한다
             self.eq_size_y = 200
             self.data_change = False
