@@ -6,12 +6,27 @@ def move_monster(m):
     pps = game_framework.pps
     m.dir = 1 if m.p.x > m.x else 0
 
-    if not m.is_attack and m.attack_motion_time <= 0:
-        if not m.p.x - 5 <= m.x <= m.p.x + 5:  # 몬스터 제자리 와리가리 방지
-            if m.dir == 0:
-                m.x -= m.speed * pps / 4
-            elif m.dir == 1:
-                m.x += m.speed * pps / 4
+    if not m.knockback:  # 넉백 시간 동안에는 움직이지 못한다.
+        if not m.is_attack and m.attack_motion_time <= 0:
+            if not m.p.x - 5 <= m.x <= m.p.x + 5:  # 몬스터 제자리 와리가리 방지
+                if m.dir == 0:
+                    m.x -= m.speed * pps / 4
+                elif m.dir == 1:
+                    m.x += m.speed * pps / 4
+
+    if m.knockback:
+        match m.knockback_dir:
+            case 1:
+                back = -1
+            case 0:
+                back = 1
+
+        m.x += m.back_acc * back
+        m.back_acc -= pps / 20
+
+        if m.back_acc <= 0:
+            m.knockback = False
+
 
     if m.type == 2 and not m.is_dash:
         if m.y < 670:  # 670보다 낮게 있으면 자기 자리로 복귀한다

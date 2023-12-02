@@ -421,7 +421,7 @@ class Coin:
         if group == 'player:coin':
             if not self.up:  # 획득하지 않은 코인에 대해서만 코인 획득 피드백 재생
                 Coin.pickup.play()
-                self.p.coin += 20 + play_mode.tool.rounds * 10  # 라운드가 올라갈 수록 코인을 더 많이 획득한다
+                self.p.coin += 10 + play_mode.tool.rounds * 30  # 라운드가 올라갈 수록 코인을 더 많이 획득한다
                 self.up = True
                 self.p.get_coin = True
 

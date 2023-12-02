@@ -1,14 +1,18 @@
 def click_button(self):
+    play_sound = True
+
     if self.select_mode == 0:
         # 페이지 이동 버튼 클릭
         if self.page_right_x - 40 < self.mx < self.page_right_x + 40 and \
                 self.page_right_y - 50 < self.my < self.page_right_y + 50:
+            self.button_sound.play()
             if self.page < 2:
                 self.page += 1
                 self.ind_sel_on = False
 
         elif self.page_left_x - 40 < self.mx < self.page_left_x + 40 and \
                 self.page_left_y - 50 < self.my < self.page_left_y + 50:
+            self.button_sound.play()
             if self.page > 1:
                 self.page -= 1
                 self.ind_sel_on = False
@@ -18,6 +22,11 @@ def click_button(self):
         for j in range(len(self.cat_y)):
             if self.cat_x[i] - 100 < self.mx < self.cat_x[i] + 100 and \
                     self.cat_y[j] - 20 < self.my < self.cat_y[j] + 60:
+
+                if play_sound:
+                    self.button_sound.play()
+                    play_sound = False
+
                 if i == 0:
                     self.select_mode = 0  # gun
                 elif i == 1:

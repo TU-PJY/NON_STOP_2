@@ -71,7 +71,10 @@ def add_object_after_dead(m):
         if not m.ex_dead:
             if m.weapon.weapon_type == 0:
                 if m.weapon.gun_type == 'rifle':
-                    dead = Dead(m.p, m.mp, m.x, m.y, m.dir, m.type, 1)
+                    if m.weapon.gun == 'WIN':
+                        dead = Dead(m.p, m.mp, m.x, m.y, m.dir, m.type, 2)
+                    else:
+                        dead = Dead(m.p, m.mp, m.x, m.y, m.dir, m.type, 1)
                 elif m.weapon.gun_type == 'sr':
                     dead = Dead(m.p, m.mp, m.x, m.y, m.dir, m.type, 2)
                 else:

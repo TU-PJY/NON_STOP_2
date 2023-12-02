@@ -4,6 +4,49 @@ from game_work import game_manager
 from mods import play_mode
 
 
+def knockback(m, gun):  # 총에 맞으면 살짝 뒤로 밀려난다
+    back = 0
+    match m.dir:
+        case 1:
+            back = -1
+        case 0:
+            back = 1
+
+    match gun:
+        case 'SCAR_H':
+            m.x += 12 * back
+        case 'M16':
+            m.x += 10 * back
+        case 'MP44':
+            m.knockback = True
+            m.knockback_dir = m.dir
+            m.back_acc = 3
+        case 'AUG':
+            m.x += 10 * back
+        case 'GROZA':
+            m.x += 10 * back
+        case 'M1':
+            m.knockback = True
+            m.knockback_dir = m.dir
+            m.back_acc = 6
+        case 'WIN':
+            m.knockback = True
+            m.knockback_dir = m.dir
+            m.back_acc = 10
+        case 'MINI14':
+            m.knockback = True
+            m.knockback_dir = m.dir
+            m.back_acc = 4
+        case 'FAL':
+            m.knockback = True
+            m.knockback_dir = m.dir
+            m.back_acc = 5
+        case 'LVOAS':
+            m.knockback = True
+            m.knockback_dir = m.dir
+            m.back_acc = 4
+
+
 def damage_monster(m):  # 맵 안에서만 대미지를 받는다
     if m.mp.playerToWallLeft - 30 <= m.p.x <= m.mp.playerToWallRight + 30:
         if m.weapon.shoot:
@@ -33,9 +76,9 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                 elif m.weapon.gun == 'SCAR_H':
                     m.hp -= 22
                 elif m.weapon.gun == 'M16':
-                    m.hp -= 18
+                    m.hp -= 20
                 elif m.weapon.gun == 'MP44':
-                    m.hp -= 35
+                    m.hp -= 38
                 elif m.weapon.gun == 'AUG':
                     m.hp -= 25
                 elif m.weapon.gun == 'GROZA':
@@ -44,9 +87,9 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                 elif m.weapon.gun == 'M1':
                     m.hp -= 70
                 elif m.weapon.gun == 'WIN':
-                    m.hp -= 100
+                    m.hp -= 120
                 elif m.weapon.gun == 'MINI14':
-                    m.hp -= 50
+                    m.hp -= 40
                 elif m.weapon.gun == 'FAL':
                     m.hp -= 70
                 elif m.weapon.gun == 'LVOAS':
@@ -59,6 +102,9 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                     game_manager.add_object(bullet, 3)
                     game_manager.add_collision_pair('bullet:monster', bullet, None)
                     m.weapon.pen_enable = True  # 해당 변수가 활성화 되어야 관통이 된다.
+
+                if m.hp > 0:
+                    knockback(m, m.weapon.gun)
 
                 m.op = 1  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달
                 m.is_hit = False  # 다시 대미지를 받을 준비를 한다

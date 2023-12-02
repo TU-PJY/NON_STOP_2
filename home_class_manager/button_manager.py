@@ -165,6 +165,7 @@ def exit_update_button(self):
     if self.click:
         # 홈으로 돌아가기
         if 10 < mx < 550 and HEIGHT / 2 - 100 - 40 < my < HEIGHT / 2 - 100 + 40:
+            self.button_sound.play()
             self.op1 = 0
             self.op2 = 0
             self.op3 = 0
@@ -172,6 +173,7 @@ def exit_update_button(self):
 
         # 환경 설정
         if 10 < mx < 550 and HEIGHT / 2 - 210 - 40 < my < HEIGHT / 2 - 210 + 40:
+            self.button_sound.play()
             pass
 
         # 바탕화면으로 나가기
@@ -204,25 +206,34 @@ def ch_update_button(self):
         my = self.cursor.my
 
         if 10 <= mx <= 110 and 10 <= my <= 110:
+            self.button_sound.play()
             self.op4 = 0
             self.data.mode = 'home'
 
         elif 35 <= mx <= 165 and HEIGHT / 2 + 65 <= my <= HEIGHT / 2 + 184:
             self.data.ch = 1
+            self.ch_sound.play()
         elif 185 <= mx <= 315 and HEIGHT / 2 + 65 <= my <= HEIGHT / 2 + 184:
             self.data.ch = 2
+            self.ch_sound.play()
         elif 335 <= mx <= 465 and HEIGHT / 2 + 65 <= my <= HEIGHT / 2 + 184:
             self.data.ch = 3
+            self.ch_sound.play()
         elif 385 <= mx <= 615 and HEIGHT / 2 + 65 <= my <= HEIGHT / 2 + 184:
             self.data.ch = 4
+            self.ch_sound.play()
         elif 535 <= mx <= 765 and HEIGHT / 2 + 65 <= my <= HEIGHT / 2 + 184:
             self.data.ch = 5
+            self.ch_sound.play()
         elif 685 <= mx <= 915 and HEIGHT / 2 + 65 <= my <= HEIGHT / 2 + 184:
             self.data.ch = 6
+            self.ch_sound.play()
         elif 835 <= mx <= 1065 and HEIGHT / 2 + 65 <= my <= HEIGHT / 2 + 184:
             self.data.ch = 7
+            self.ch_sound.play()
         elif 985 <= mx <= 1315 and HEIGHT / 2 + 65 <= my <= HEIGHT / 2 + 184:
             self.data.ch = 8
+            self.ch_sound.play()
 
         data = [
             {"ch": self.data.ch}
@@ -271,16 +282,19 @@ def home_update_button(self):
     if self.click:  # 게임 시작 선택 시 play_mode로 넘어간다.
         # 게임 시작
         if 10 < self.cursor.mx < 310 and HEIGHT / 2 - 100 - 40 < self.cursor.my < HEIGHT / 2 - 100 + 40:
+            self.button_sound.play()
             # game_framework.MODE = 'play'
             self.data.mode = 'loading_mode'
 
         # 캐릭터
         if 10 < self.cursor.mx < 310 and HEIGHT / 2 - 210 - 40 < self.cursor.my < HEIGHT / 2 - 210 + 40:
+            self.button_sound.play()
             self.op2 = 0
             self.data.mode = 'ch_mode'
 
         # 게임 나가기 및 설정
         if 0 < self.cursor.mx < 310 and HEIGHT / 2 - 320 - 40 < self.cursor.my < HEIGHT / 2 - 320 + 40:
+            self.button_sound.play()
             self.op3 = 0
             self.kacc = 16
             self.ky = -500

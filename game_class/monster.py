@@ -85,6 +85,11 @@ class Monster:
         self.once = False  # 대미지가 중복으로 발생하지 않도록 한다.
         self.ex_dead = False
 
+        #  저지력이 강한 총기는 일정 시간동안 강력한 넉백을 가한다
+        self.knockback = False  # true이면 뒤로 밀려난다
+        self.knockback_dir = 0  # 바라보는 방향 기준으로 넉백 방향을 지정한다
+        self.back_acc = 0  # 넉백 가속
+
         # type2 전용 변수
         if self.type == 2:
             self.is_dash = False
@@ -189,37 +194,54 @@ class Monster:
 
         if group == 'bullet:monster':  # sr 계열 총기 관통 대미지
             # 대미지를 여러 번 받지 않게 끔 한다.
-            if not self.once and self.hp > 0:
-                fd = Feedback(self.x + self.p.cam_x, self.y + self.p.cam_y + self.p.cam_h, 1)
-                game_manager.add_object(fd, 7)  # 명중 피드백
+            if self.mp.playerToWallLeft <= self.x <= self.mp.playerToWallRight:
+                if not self.once and self.hp > 0:
+                    fd = Feedback(self.x + self.p.cam_x, self.y + self.p.cam_y + self.p.cam_h, 1)
+                    game_manager.add_object(fd, 7)  # 명중 피드백
 
-                self.op = 1
+                    self.op = 1
 
-                if self.weapon.pen_enable:
-                    if self.weapon.gun == 'SPRING':
-                        self.hp -= 150 - 50 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
-                        self.weapon.pen_count += 1
+                    if self.weapon.pen_enable:
+                        if self.weapon.gun == 'SPRING':
+                            self.hp -= 200 - 50 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
+                            self.knockback_dir = self.dir
+                            self.knockback = True
+                            self.back_acc = 14 - (1 * self.weapon.pen_count)
+                            self.weapon.pen_count += 1
 
-                    elif self.weapon.gun == 'KAR98':
-                        self.hp -= 170 - 40 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
-                        self.weapon.pen_count += 1
+                        elif self.weapon.gun == 'KAR98':
+                            self.hp -= 200 - 40 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
+                            self.knockback_dir = self.dir
+                            self.knockback = True
+                            self.back_acc = 14 - (1 * self.weapon.pen_count)
+                            self.weapon.pen_count += 1
 
-                    elif self.weapon.gun == 'M24':
-                        self.hp -= 200 - 40 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
-                        self.weapon.pen_count += 1
+                        elif self.weapon.gun == 'M24':
+                            self.hp -= 200 - 40 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
+                            self.knockback_dir = self.dir
+                            self.knockback = True
+                            self.back_acc = 14 - (1 * self.weapon.pen_count)
+                            self.weapon.pen_count += 1
 
-                    elif self.weapon.gun == 'AWP':
-                        self.hp -= 220 - 30 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
-                        self.weapon.pen_count += 1
+                        elif self.weapon.gun == 'AWP':
+                            self.hp -= 250 - 30 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
+                            self.knockback_dir = self.dir
+                            self.knockback = True
+                            self.back_acc = 14 - (1 * self.weapon.pen_count)
+                            self.weapon.pen_count += 1
 
-                    elif self.weapon.gun == 'CHEYTAC':
-                        self.hp -= 250 - 30 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
-                        self.weapon.pen_count += 1
+                        elif self.weapon.gun == 'CHEYTAC':
+                            self.hp -= 250 - 30 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
+                            if self.hp > 0:
+                                self.knockback_dir = self.dir
+                                self.knockback = True
+                                self.back_acc = 16 - (1 * self.weapon.pen_count)
+                            self.weapon.pen_count += 1
 
-                    if self.weapon.pen_count == self.weapon.pen_limit:  # 최대 관통 수를 초과하면 더 이상 초과하지 않는다.
-                        self.weapon.pen_count = 0
-                        self.weapon.pen_enable = False
-                self.once = True  # 이 변수가 true가 되면 더 이상 대미지가 중첩되지 않는다.
+                        if self.weapon.pen_count == self.weapon.pen_limit:  # 최대 관통 수를 초과하면 더 이상 초과하지 않는다.
+                            self.weapon.pen_count = 0
+                            self.weapon.pen_enable = False
+                    self.once = True  # 이 변수가 true가 되면 더 이상 대미지가 중첩되지 않는다.
 
         if group == 'grenade:monster':
             # 수류탄 폭발에 맞으면 무조건 즉사

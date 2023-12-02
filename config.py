@@ -307,3 +307,17 @@ flesh_directory = 'res//sounds//etc//flesh.ogg'
 arrow_wall_directory = 'res//sounds//etc//arrow_wall.ogg'
 bow_sound_directory = 'res//sounds//etc//bow_shoot.ogg'
 pickup_directory = 'res//sounds//etc//pickup.ogg'
+
+# bgm
+home_bgm_directory = 'res//sounds//bgm//home_bgm.mp3'
+
+# button
+button_click_directory = 'res//sounds//button//button_click.ogg'
+ch_change_directory = 'res//sounds//button//ch_change.ogg'
+cant_buy_directory = 'res//sounds//button//cant_buy.ogg'
+buy_ammo_directory = 'res//sounds//button//buy_ammo.ogg'
+buy_medkit_directory = 'res//sounds//button//buy_medkit.ogg'
+upgrade_sound_directory = 'res//sounds//button//upgrade.ogg'
+select_gun_directory = 'res//sounds//button//select_gun.ogg'
+select_melee_directory = 'res//sounds//button//select_melee.ogg'
+buy_sound_directory = 'res//sounds//button//buy.ogg'

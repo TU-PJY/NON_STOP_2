@@ -11,7 +11,7 @@ def init_equip_list_gun():
             play_mode.weapon.equip_list_gun2[i][j] = False
 
 
-def buy_gun_page1(i, j):
+def buy_gun_page1(self, i, j):
     buy = False
 
     if (i, j) == (0, 0):  # 기본 총이므로 구입 여부 확인은 하지 않음
@@ -114,9 +114,12 @@ def buy_gun_page1(i, j):
 
     if buy:
         play_mode.weapon.buy_list_gun[i][j] = True
+        self.buy_sound.play()
+    else:
+        self.cant_buy.play()
 
 
-def buy_gun_page2(i, j):
+def buy_gun_page2(self, i, j):
     buy = False
     if (i, j) == (0, 0):
         if play_mode.p.coin >= 45000:
@@ -145,9 +148,14 @@ def buy_gun_page2(i, j):
 
     if buy:
         play_mode.weapon.buy_list_gun2[i][j] = True
+        self.buy_sound.play()
+    else:
+        self.cant_buy.play()
 
 
 def equip_gun_page1(self, i, j):
+    self.select_gun.play()
+
     if (i, j) == (0, 0):
         play_mode.weapon.gun = 'M1911'
         play_mode.weapon.limit_ammo = 7
@@ -263,6 +271,8 @@ def equip_gun_page1(self, i, j):
 
 
 def equip_gun_page2(self, i, j):
+    self.select_gun.play()
+
     if (i, j) == (0, 0):
         play_mode.weapon.gun = 'SPRING'
         play_mode.weapon.pen_limit = 2

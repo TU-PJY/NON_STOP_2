@@ -7,6 +7,19 @@ from home_class_manager.button_manager import home_update_button, home_draw_butt
 from mods import play_mode
 
 
+class Bgm:
+    def __init__(self):
+        self.sound = load_music(home_bgm_directory)
+        self.sound.set_volume(32)
+        self.sound.repeat_play()
+
+    def draw(self):
+        pass
+
+    def update(self):
+        pass
+
+
 class Data:  # 홈 모드에서 사용되는 데이터를 저장하기 위한 가상 객체
     def __init__(self):
         self.mode = 'home'  # 모드에 따라 보이는 화면이 달라진다.
@@ -42,6 +55,9 @@ class Button:
         self.kx, self.ky = WIDTH / 2 + 300, -500
         self.kacc = 0
         self.deg, self.pos = 0, 0
+
+        self.button_sound = load_wav(button_click_directory)
+        self.ch_sound = load_wav(ch_change_directory)
 
         load_file(self)
 

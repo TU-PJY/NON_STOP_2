@@ -1,4 +1,4 @@
-from pico2d import load_image
+from pico2d import load_image, load_wav
 
 from config import *
 from game_work import game_manager, game_framework
@@ -70,6 +70,15 @@ class Shop:
         self.data_change = False  # 구입한 항목에 대해서만 아이템 관련 변수 값 변경을 허용한다.
 
         self.op = 0
+
+        self.button_sound = load_wav(button_click_directory)
+        self.cant_buy = load_wav(cant_buy_directory)
+        self.select_gun = load_wav(select_gun_directory)
+        self.select_melee = load_wav(select_melee_directory)
+        self.buy_ammo = load_wav(buy_ammo_directory)
+        self.buy_medkit = load_wav(buy_medkit_directory)
+        self.buy_upgrade = load_wav(upgrade_sound_directory)
+        self.buy_sound = load_wav(buy_sound_directory)
 
         load_shop_resource(self)
         make_button_pos(self)

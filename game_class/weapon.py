@@ -34,8 +34,10 @@ class Shoot:
         weapon.shoot = False
         weapon.use = False
 
-        if weapon.gun == 'LVOAS':  # LVOAS는 2점사 소총이므로 따로 처리를 해주어야 한다
-            weapon.shoot_count = 0
+        if weapon.gun_type == 'rifle' and not weapon.gun == 'WIN':
+            weapon.shoot_delay = 0
+        if weapon.gun_type == 'ar' and weapon.gun == 'MINI14':
+            weapon.shoot_delay = 0
 
         if q_down(e):
             change_weapon(weapon)

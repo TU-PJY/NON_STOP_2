@@ -124,32 +124,26 @@ def shoot_gun(weapon):
                     weapon.p.shake_range = 15
 
                 elif weapon.gun == 'M1':  # 반자동 소총이므로 연사 딜레이를 무한대로 부여함
-                    weapon.shoot_delay = 220
-                    weapon.p.shake_range = 30
+                    weapon.shoot_delay = 99999999999999999999999
+                    weapon.p.shake_range = 35
 
                 elif weapon.gun == 'WIN':
-                    weapon.shoot_delay = 310
+                    weapon.shoot_delay = 250
                     weapon.p.shake_range = 40
                     weapon.is_spin = True
                     weapon.flame_display_time = FLAME_DISPLAY_TIME
 
                 elif weapon.gun == 'MINI14':
-                    weapon.shoot_delay = 140
+                    weapon.shoot_delay = 99999999999999999999999
                     weapon.p.shake_range = 25
 
                 elif weapon.gun == 'FAL':
-                    weapon.shoot_delay = 180
+                    weapon.shoot_delay = 99999999999999999999999
                     weapon.p.shake_range = 30
 
-                elif weapon.gun == 'LVOAS':  # 2점사ㅣ 총기이므로 2번 쏠 때마다 딜레이를 길게 부여
-                    if weapon.shoot_count < 1:
-                        weapon.shoot_delay = 35
-                        weapon.p.shake_range = 15
-                        weapon.shoot_count += 1
-                    else:
-                        weapon.shoot_delay = 120
-                        weapon.p.shake_range = 27
-                        weapon.shoot_count = 0
+                elif weapon.gun == 'LVOAS':
+                    weapon.shoot_delay = 35
+                    weapon.p.shake_range = 25
 
                 elif weapon.gun == 'SPRING':
                     if weapon.zoom:  # 정조준 시에만 발사 가능

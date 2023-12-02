@@ -18,7 +18,7 @@ def process_attack(m):
 
     # type 2 attack
     if m.type == 2:
-        if m.mp.playerToWallLeft - 50 < m.x < m.mp.playerToWallRight + 50:  # 스폰 지점에서 바로 대쉬하지 않도록
+        if m.mp.playerToWallLeft - 23 < m.x < m.mp.playerToWallRight + 23:  # 스폰 지점에서 바로 대쉬하지 않도록
             if m.dash_delay <= 0 and not m.is_attack and m.atk_delay <= 0:
                 if math.sqrt((m.x - m.p.x) ** 2 + ((m.y + m.p.cam_h) - m.p.y) ** 2) <= 600:
                     m.incline = math.atan2(m.p.y - (m.y + m.p.cam_h), m.p.x - m.x)
