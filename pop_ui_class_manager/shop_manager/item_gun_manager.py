@@ -159,13 +159,18 @@ def equip_gun_page1(self, i, j):
     elif (i, j) == (2, 0):
         play_mode.weapon.gun = 'DEGLE'
         play_mode.weapon.limit_ammo = 8
+
     elif (i, j) == (3, 0):
         play_mode.weapon.gun = 'M500'
         play_mode.weapon.limit_ammo = 6
+        play_mode.weapon.revolver_count = 6
+        play_mode.weapon.revolver_shell_out = False  # 최초 재장전 시에는 탄피를 배출하지 않는다
 
     elif (i, j) == (4, 0):
         play_mode.weapon.gun = 'QHAND'
         play_mode.weapon.limit_ammo = 12
+        play_mode.weapon.revolver_count = 12
+        play_mode.weapon.revolver_shell_out = False  # 최초 재장전 시에는 탄피를 배출하지 않는다
 
     elif (i, j) == (0, 1):
         play_mode.weapon.gun = 'AKS74'
@@ -229,7 +234,7 @@ def equip_gun_page1(self, i, j):
 
     if j == 0:  # 총기 타입마다 사용 탄약, 재장전 소요 시간이 다르다
         play_mode.weapon.gun_type = 'pistol'
-        play_mode.weapon.reload_time = 150
+        play_mode.weapon.reload_time = 250
     elif j == 1:
         play_mode.weapon.gun_type = 'smg'
         play_mode.weapon.reload_time = 300

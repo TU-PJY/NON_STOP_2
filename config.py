@@ -253,6 +253,10 @@ font_directory = 'res//font//bump-it-up.ttf'
 font2_directory = 'res//font//KORAIL2007.ttf'
 
 # 사운드 경로
+# pistol
+pistol_reload_directory = 'res//sounds//pistol//pistol_reload.ogg'
+revolver_reload_directory = 'res//sounds//pistol//revolver_reload.ogg'
+
 # smg
 p90_shoot_directory = 'res//sounds//smg//p90_shoot.ogg'
 vector_shoot_directory = 'res//sounds//smg//vector_shoot.ogg'

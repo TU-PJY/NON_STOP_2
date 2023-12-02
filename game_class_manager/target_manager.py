@@ -218,7 +218,7 @@ def update_target(t):
     elif t.weapon.gun == 'M1':
         t.dis2 = t.dis / 55
         if t.weapon.shoot:
-            t.recoil += 110
+            t.recoil += 95
 
     elif t.weapon.gun == 'WIN':
         t.dis2 = t.dis / 55

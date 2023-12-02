@@ -108,22 +108,39 @@ def check_ammo(weapon):
             (weapon.gun_type == 'ar' and weapon.ar_ammo > 0) or \
             (weapon.gun_type == 'rifle' and weapon.rifle_ammo > 0) or \
             (weapon.gun_type == 'sr' and weapon.sniper_ammo > 0):
+        weapon.shell_count = weapon.limit_ammo - weapon.cur_ammo
         weapon.reloading = True
 
 
 def reload_gun(weapon):
+    pps = game_framework.pps
+
     if weapon.play_sound:
-        match weapon.gun_type:
+        match weapon.gun_type:  # 총기 종류에 따라 다른 재장전 사운드를 출력한다
             case 'ar':
                 weapon.ar_reload.play()
             case 'smg':
                 weapon.smg_reload.play()
+            case 'pistol':
+                if weapon.gun == 'M500' or weapon.gun == 'QHAND':  # 리볼버는 라챗 돌아가는 소리를 출력한다
+                    weapon.revolver_reload.play()
+                else:
+                    weapon.pistol_reload.play()
         weapon.play_sound = False
 
-    if weapon.weapon_type == 0:
-        pps = game_framework.pps
+    if weapon.revolver_shell_out:  # 리볼버 전용 코드
+        if weapon.gun == 'M500' or weapon.gun == 'QHAND':  # 재장전 시 필요한 장탄수 만큼 탄피를 배출한다
+            if weapon.shell_count > 0:
+                weapon.out_delay += pps / 3
+                if weapon.out_delay >= 20:
+                    make_shell(weapon)
+                    weapon.shell_count -= 1
+                    weapon.out_delay = 0
+            else:
+                weapon.out_delay = 0
 
-        weapon.zoom = False
+    if weapon.weapon_type == 0:
+        weapon.zoom = False  # 정조준 상태였다면 정조준 상태 해제
         if weapon.cur_reload_time < weapon.reload_time:  # 정해진 값 까지 도달할때까지 더한다
             weapon.cur_reload_time += pps / 3
 
@@ -160,6 +177,8 @@ def reload_gun(weapon):
             weapon.cur_reload_time = 0
             weapon.reloading = False  # 재장전 상태 해제
             weapon.play_sound = True
+            # 리볼버 전용 코드
+            weapon.revolver_shell_out = True  # 최조 재장전 이후의 재장전부터는 탄피를 생성한다
 
 
 def reload_one(weapon):  # 관형 급탄 장전

@@ -317,6 +317,10 @@ class Weapon:
 
         self.play_sound = True  # 재장전 사운드를 한 번만 플레이 하도록 한다
 
+        self.shell_count = 0  # 이 숫자만큼 리볼버 재장전 시 탄피를 배출한다
+        self.revolver_shell_out = False  # true일 동안만 탄피 생성
+        self.out_delay = 0
+
         self.state_machine = StateMachineGun(self)
         self.state_machine.start()
 
