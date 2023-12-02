@@ -87,6 +87,8 @@ def load_gun_sound(self):
     self.aks74_shoot = load_wav(aks74_shoot_directory)
     self.ump_shoot = load_wav(ump_shoot_directory)
 
+    self.smg_reload = load_wav(smg_reload_directory)
+
     # ar
     self.scar_shoot = load_wav(scar_shoot_directory)
     self.m16_shoot = load_wav(m16_shoot_directory)

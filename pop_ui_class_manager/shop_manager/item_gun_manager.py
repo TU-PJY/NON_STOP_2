@@ -232,7 +232,7 @@ def equip_gun_page1(self, i, j):
         play_mode.weapon.reload_time = 150
     elif j == 1:
         play_mode.weapon.gun_type = 'smg'
-        play_mode.weapon.reload_time = 200
+        play_mode.weapon.reload_time = 300
     elif j == 2:
         play_mode.weapon.gun_type = 'ar'
         play_mode.weapon.reload_time = 350

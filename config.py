@@ -260,6 +260,8 @@ thompson_shoot_directory = 'res//sounds//smg//thompson_shoot.ogg'
 aks74_shoot_directory = 'res//sounds//smg//aks74_shoot.ogg'
 ump_shoot_directory = 'res//sounds//smg//ump_shoot.ogg'
 
+smg_reload_directory = 'res//sounds//smg//smg_reload.ogg'
+
 # ar
 scar_shoot_directory = 'res//sounds//ar//scar_shoot.ogg'
 m16_shoot_directory = 'res//sounds//ar//m16_shoot.ogg'

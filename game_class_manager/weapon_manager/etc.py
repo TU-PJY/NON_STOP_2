@@ -115,7 +115,9 @@ def reload_gun(weapon):
     if weapon.play_sound:
         match weapon.gun_type:
             case 'ar':
-                weapon.ar_reload.play(1)
+                weapon.ar_reload.play()
+            case 'smg':
+                weapon.smg_reload.play()
         weapon.play_sound = False
 
     if weapon.weapon_type == 0:
