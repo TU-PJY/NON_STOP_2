@@ -30,7 +30,7 @@ def spawn_monster(self):  # 몬스터 스폰
             self.frame = self.frame + APT * FPA * game_framework.frame_time
 
             if self.rounds < 5:  # 라운드가 올라갈 수록 몬스터가 다양해진다
-                self.type = 2
+                self.type = 1
 
             elif 5 <= self.rounds <= 9:
                 if self.type2_enable:
