@@ -70,13 +70,21 @@ def add_object_after_dead(m):
     if m.type == 1 or m.type == 4 or m.type == 2:  # 총기의 종류에 따라 밀려나는 정도가 다르다
         if not m.ex_dead:
             if m.weapon.weapon_type == 0:
-                if m.weapon.gun_type == 'rifle':
+                if m.weapon.gun_type == 'ar':
+                    if m.weapon.gun == 'MINI14':
+                        dead = Dead(m.p, m.mp, m.x, m.y, m.dir, m.type, 1)
+                    else:
+                        dead = Dead(m.p, m.mp, m.x, m.y, m.dir, m.type)
+
+                elif m.weapon.gun_type == 'rifle':
                     if m.weapon.gun == 'WIN':
                         dead = Dead(m.p, m.mp, m.x, m.y, m.dir, m.type, 2)
                     else:
                         dead = Dead(m.p, m.mp, m.x, m.y, m.dir, m.type, 1)
+
                 elif m.weapon.gun_type == 'sr':
                     dead = Dead(m.p, m.mp, m.x, m.y, m.dir, m.type, 2)
+
                 else:
                     dead = Dead(m.p, m.mp, m.x, m.y, m.dir, m.type)
 

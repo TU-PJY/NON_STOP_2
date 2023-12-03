@@ -476,7 +476,7 @@ class Explode:
     def draw(self):
         x = self.x + self.p.ex
         y = self.y + self.p.ey
-        size = self.weapon.gren_level * 200  # 수류탄 레벨이 올라갈수록 폭발도 커진다
+        size = self.weapon.gren_level * 100  # 수류탄 레벨이 올라갈수록 폭발도 커진다
         Explode.image.clip_composite_draw(100 * int(self.frame), 0, 100, 695, 0, '', x, y, 200 + size, 200 + size)
 
     def update(self):
@@ -496,7 +496,7 @@ class Explode:
         pass
 
     def get_bb(self):
-        bound = self.weapon.gren_level * 200
+        bound = self.weapon.gren_level * 100 + 200
         x = self.x + self.p.ex
         y = self.y + self.p.ey
         if int(self.frame) == 0:  # 폭발 순간에만 히트박스 제공
@@ -676,10 +676,16 @@ class Dead:
 
         if self.type == 1:  # 믄스터마다 이미지 크기가 달라 따로 지정
             Dead.type1.opacify(self.op)
-            if self.dir == 1:
-                Dead.type1.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey - 20, 280, 280)
-            elif self.dir == 0:
-                Dead.type1.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey - 20, 280, 280)
+            if self.ani == 0 or self.ani == 1:
+                if self.dir == 1:
+                    Dead.type1.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey - 50, 280, 280)
+                elif self.dir == 0:
+                    Dead.type1.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey - 50, 280, 280)
+            else:
+                if self.dir == 1:
+                    Dead.type1.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey - 30, 280, 280)
+                elif self.dir == 0:
+                    Dead.type1.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey - 30, 280, 280)
 
         elif self.type == 2:
             Dead.type2.opacify(self.op)
@@ -692,10 +698,17 @@ class Dead:
 
         elif self.type == 4:
             Dead.type4.opacify(self.op)
-            if self.dir == 1:
-                Dead.type4.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey - 10, 450, 450)
-            elif self.dir == 0:
-                Dead.type4.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey - 10, 450, 450)
+
+            if self.ani == 0 or self.ani == 1:
+                if self.dir == 1:
+                    Dead.type4.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey - 40, 450, 450)
+                elif self.dir == 0:
+                    Dead.type4.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey - 40, 450, 450)
+            else:
+                if self.dir == 1:
+                    Dead.type4.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey - 20, 450, 450)
+                elif self.dir == 0:
+                    Dead.type4.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey - 20, 450, 450)
 
     def update(self):
         pps = game_framework.pps
