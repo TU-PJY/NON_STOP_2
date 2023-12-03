@@ -2,7 +2,7 @@ from pico2d import *
 
 from config import *
 from game_work import game_framework, game_manager
-from mods import home_mode, pause_mode
+from mods import home_mode, pause_mode, play_mode
 
 
 class Back:
@@ -152,6 +152,7 @@ class Button:
                 # 게임으로 돌아가기
                 if WIDTH / 2 - 270 <= x <= WIDTH / 2 + 270 and HEIGHT / 2 + 70 <= y <= HEIGHT / 2 + 150:
                     Button.sound.play()
+                    play_mode.p.play_bgm.set_volume(64)
                     bg = Back2()
                     game_manager.add_object(bg, 7)
                     game_framework.MODE = 'play'
@@ -247,6 +248,7 @@ class End:
         self.font_out = False
         self.acc = 0
         self.delay = 0
+        self.volume = 12
 
     def draw(self):
         End.up.draw(WIDTH / 2, self.y1, WIDTH, HEIGHT)
@@ -255,6 +257,9 @@ class End:
 
     def update(self):
         pps = game_framework.pps
+        self.volume -= pps / 100  # 브금이 점차 작아진다
+        play_mode.p.play_bgm.set_volume(int(self.volume))
+
         self.delay += pps / 4
 
         self.y1 -= self.acc * pps / 4

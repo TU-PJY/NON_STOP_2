@@ -1,10 +1,12 @@
+import random
+
 from pico2d import *
 
 from config import *
 from game_work import game_framework, game_manager
 from home_class_manager.button_manager import home_update_button, home_draw_button, ch_draw_button, load_file, \
     ch_update_button, exit_draw_button, exit_update_button
-from mods import play_mode
+from mods import play_mode, home_mode
 
 
 class Bgm:
@@ -182,7 +184,7 @@ class Cursor:
         pass
 
 
-class Start:
+class Start:  # 홈모드 -> 플레이 모드 전환 시
     def __init__(self, data):
         self.y1 = HEIGHT + HEIGHT / 2
         self.y2 = - HEIGHT / 2
@@ -190,22 +192,44 @@ class Start:
         self.down = load_image(front_directory)
         self.font = load_font(font_directory, 80)
         self.font2 = load_font(font_directory, 40)
+        self.font3 = load_font(font2_directory, 30)
         self.font_out = False
         self.acc = 0
         self.delay = 0
         self.data = data
+        self.volume = 32
+
+        self.tip = random.randint(0, 4)  # 랜덤으로 팁을 표시한다
 
     def draw(self):
         self.up.draw(WIDTH / 2, self.y1, WIDTH, HEIGHT)
         self.down.draw(WIDTH / 2, self.y2, WIDTH, HEIGHT)
         self.font.draw(WIDTH / 2 - 600, self.y1 - HEIGHT / 2 + 90, 'OKAY! LETS GO!', (172, 162, 132))
 
+        match self.tip:
+            case 0:
+                self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 근접무기로 적 처치 시 더 많은 코인을 얻을 수 있습니다.', (172, 162, 132))
+            case 1:
+                self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 무작정 난사하는 것은 그다지 좋은 선택은 아닙니다.', (172, 162, 132))
+            case 2:
+                self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 벽에 기대지 마세요!', (172, 162, 132))
+            case 3:
+                self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 적이 코 앞에 있을 때는 근접무기를 휘두르는 것이 더 좋을 수 있습니다.', (172, 162, 132))
+            case 4:
+                self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 적들에게 둘러 쌓였을 때 상대하지 않고 옆으로 빠져나가는 것이 더 안전할 수 있습니다.', (172, 162, 132))
+
         if self.font_out:
             self.font2.draw(20, 50, 'LOADING...', (172, 162, 132))
 
     def update(self):
         pps = game_framework.pps
+
         if self.data.mode == 'loading_mode':
+            self.volume -= pps / 50  # 브금이 점차 작아진다
+            if self.volume <= 0:
+                self.volume = 0
+            home_mode.bgm.sound.set_volume(int(self.volume))
+
             self.delay += pps / 4
 
             # if self.y1 > HEIGHT:
@@ -222,11 +246,12 @@ class Start:
                 self.font_out = True
 
             if self.delay >= 600:
+                home_mode.bgm.sound.stop()
                 game_framework.MODE = 'play'
                 game_framework.change_mode(play_mode)
 
 
-class Start2:
+class Start2:  # 플레이 모드 -> 홈 모드 전환 및 게임 시작 시
     def __init__(self):
         self.y1 = HEIGHT
         self.y2 = 0

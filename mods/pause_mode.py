@@ -15,9 +15,13 @@ def handle_events():
         elif event.type == SDL_KEYUP and event.key == SDLK_ESCAPE:
             exit_enable = True
         elif event.type == SDL_KEYDOWN:
+            if event.key == SDLK_a or event.key == SDLK_d:
+                play_mode.p.handle_event(event)  # 이동키를 누른 상태로 모드 전환 시 동작 오류 방지
+
             if event.key == SDLK_ESCAPE:
                 if not button.mode == 'none':
                     if exit_enable:
+                        play_mode.p.play_bgm.set_volume(64)
                         bg = Back2()
                         game_manager.add_object(bg, 7)
                         game_framework.MODE = 'play'

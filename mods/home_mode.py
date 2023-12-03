@@ -35,7 +35,7 @@ def handle_events():
 
 
 def init():
-    global button, cursor, data
+    global button, cursor, data, bgm
 
     with open('data//ch_data.json', 'rb') as f:
         data_list = json.load(f)
@@ -43,7 +43,7 @@ def init():
             data = Data()
             data.__dict__.update(d)
 
-    bgm  = Bgm()
+    bgm = Bgm()
     cursor = Cursor(data)
     button = Button(data, cursor)
     bg = Background(data, cursor)

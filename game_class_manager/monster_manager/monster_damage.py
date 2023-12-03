@@ -32,19 +32,19 @@ def knockback_gun(m, gun):  # 총에 맞으면 살짝 뒤로 밀려난다
         case 'M1':
             m.knockback = True
             m.knockback_dir = m.dir
-            m.back_acc = 8
+            m.back_acc = 7
         case 'WIN':
             m.knockback = True
             m.knockback_dir = m.dir
-            m.back_acc = 10
+            m.back_acc = 9
         case 'MINI14':
             m.knockback = True
             m.knockback_dir = m.dir
-            m.back_acc = 6
+            m.back_acc = 5
         case 'FAL':
             m.knockback = True
             m.knockback_dir = m.dir
-            m.back_acc = 8
+            m.back_acc = 7
         case 'LVOAS':
             m.knockback = True
             m.knockback_dir = m.dir

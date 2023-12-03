@@ -69,7 +69,8 @@ class Shoot:
         update_delay(weapon)
         shoot_gun(weapon)
         wield_melee(weapon)
-        update_sniper_bolt(weapon)
+        if weapon.weapon_type == 0:
+            update_sniper_bolt(weapon)
         if weapon.is_spin:
             spin_win(weapon)
 
@@ -136,7 +137,8 @@ class Idle:
     def do(weapon):
         update_delay(weapon)
         update_melee_position(weapon)
-        update_sniper_bolt(weapon)
+        if weapon.weapon_type == 0:
+            update_sniper_bolt(weapon)
         if weapon.is_spin:
             spin_win(weapon)
 

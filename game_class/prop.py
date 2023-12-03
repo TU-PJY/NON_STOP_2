@@ -910,7 +910,7 @@ class Playerdead:  # 이 클래스를 거쳐 모드를 변경하게 된다
         pass
 
 
-class Start:
+class Start:  # 홈 모드 -> 플레이 모드 전환 끝난 직후 애니메이션
     def __init__(self):
         self.y1 = HEIGHT
         self.y2 = 0

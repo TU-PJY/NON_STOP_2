@@ -31,6 +31,7 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             if p.cur_hp > 0:
                 game_framework.MODE = 'pause'
+                p.play_bgm.set_volume(12)
                 save_cooltime()
                 game_framework.push_mode(pause_mode)
 

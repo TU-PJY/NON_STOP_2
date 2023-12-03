@@ -244,7 +244,6 @@ class Player:
         self.state_machine.start()
 
     def update(self):
-        pps = game_framework.pps
         if game_framework.MODE == 'play':
             self.state_machine.update()
 

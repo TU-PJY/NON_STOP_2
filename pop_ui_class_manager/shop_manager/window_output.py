@@ -7,8 +7,8 @@ from mods import play_mode
 def draw_shop_window(self):
     from pop_ui_class.shop import Shop
 
-    Shop.back.draw(self.x, self.y, WIDTH, HEIGHT)
     Shop.back.opacify(self.op)
+    Shop.back.draw(self.x, self.y, WIDTH, HEIGHT)
     Shop.button_gun.draw(self.cat_x[0], self.cat_y[0], 200, 120)
     Shop.button_melee.draw(self.cat_x[1], self.cat_y[1], 200, 120)
     Shop.button_exp.draw(self.cat_x[2], self.cat_y[2], 200, 120)
