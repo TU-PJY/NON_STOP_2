@@ -128,3 +128,18 @@ def load_gun_sound(self):
 
     # etc
     self.throw_sound = load_wav(throw_directoy)
+
+
+def load_melee_sound(self):
+    self.knife_wield = load_wav(knife_wield_directory)
+    self.bat_wield = load_wav(bat_wield_directory)
+    self.rapier_wield = load_wav(rapier_wield_directory)
+    self.rapier_rapid = load_wav(rapier_rapid_directory)
+    self.katana_wield = load_wav(katana_wield_directory)
+    self.katana_slice = load_wav(katana_skill_sound_directory)
+    self.axe_wield = load_wav(axe_wield_directory)
+    self.axe_up = load_wav(axe_up_directory)
+    self.axe_hit = load_wav(axe_hit_directory)
+
+    self.melee_hit = load_wav(melee_hit_directory)
+    self.melee_hit2 = load_wav(melee_hit2_directory)

@@ -11,12 +11,14 @@ def wield_melee(weapon):
         if weapon.wield_delay <= 0:
             weapon.wield = True
             if weapon.melee == 'KNIFE':
+                weapon.knife_wield.play()
                 weapon.melee_x = 100
                 weapon.melee_deg = 0
                 weapon.wield_delay = 80
                 weapon.p.shake_range = 15
 
             elif weapon.melee == 'BAT':
+                weapon.bat_wield.play()
                 weapon.melee_x = 100
                 weapon.p.shake_range = 20
                 weapon.wield_delay = 250
@@ -25,13 +27,15 @@ def wield_melee(weapon):
 
             elif weapon.melee == 'RAPIER':
                 # 찌를 시 랜덤한 높이로 출력되도록 한다
+                weapon.rapier_wield.play()
                 weapon.rapier_y = random.randint(-10, 10)
                 weapon.melee_deg = 0
                 weapon.melee_x = 150
-                weapon.p.shake_range = 20
+                weapon.p.shake_range = 15
                 weapon.wield_delay = 45
 
             elif weapon.melee == 'KATANA':
+                weapon.katana_wield.play()
                 weapon.melee_x = 100
                 weapon.p.shake_range = 20
                 weapon.wield_delay = 140
@@ -40,6 +44,7 @@ def wield_melee(weapon):
                 weapon.swing = True
 
             elif weapon.melee == 'AXE':
+                weapon.axe_wield.play()
                 weapon.melee_x = 100
                 weapon.p.shake_range = 20
                 weapon.wield_delay = 350
@@ -55,6 +60,7 @@ def set_skill(weapon):
         weapon.p.rotate = 0
         weapon.skill_time = 300
         weapon.skill_enable = True
+        weapon.rapier_rapid.play()
         set_skill_delay(weapon)
 
     elif weapon.melee == 'KATANA' and (weapon.p.mv_right or weapon.p.mv_left) and weapon.skill_usable_katana:
@@ -69,25 +75,26 @@ def set_skill(weapon):
             weapon.p.speed = 4
 
             # 스킬 이펙트 출력
+            weapon.katana_slice.play()
+
             ks = Slice(weapon.p, weapon)
             game_manager.add_object(ks, 7)
 
             weapon.skill_enable = True
             set_skill_delay(weapon)
 
-    # axe는 4000코인을 소모하여 스킬을 실행한다. 대신 매우 강력하다
     elif weapon.melee == 'AXE' and not weapon.p.mv_jump and weapon.skill_usable_axe:
         weapon.swing = False
         weapon.swing_down = False
         weapon.swing_up = False
         weapon.p.rotate = 0
 
-        weapon.skill_time = 235
+        weapon.skill_time = 315
         weapon.skill_enable = True
         # 위로 날아올라 내려찍을 준비
         weapon.p.mv_jump = True
         weapon.p.jump_acc = 8
-        weapon.p.get_coin = True  # 코인 사용 피드백 재생
+        weapon.axe_up.play()
         set_skill_delay(weapon)
 
 

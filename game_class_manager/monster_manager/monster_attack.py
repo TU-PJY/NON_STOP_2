@@ -33,7 +33,7 @@ def process_attack(m):
             m.x += 5 * math.cos(m.incline) * pps / 4
             m.y += 5 * math.sin(m.incline) * pps / 4
 
-            if m.temp_x - 10 <= m.x <= m.temp_x + 10 and m.temp_y - 10 <= m.y <= m.temp_y + 10:
+            if m.temp_x - 40 <= m.x <= m.temp_x + 40 and m.temp_y - 40 <= m.y <= m.temp_y + 40:
                 m.dash_delay = 700
                 m.is_dash = False
                 m.is_attack = False
@@ -44,7 +44,7 @@ def process_attack(m):
 
     # type 4 attack
     if m.type == 4:
-        if m.mp.playerToWallLeft + 100 <= m.x <= m.mp.playerToWallRight - 100:
+        if m.mp.playerToWallLeft + 25 <= m.x <= m.mp.playerToWallRight - 25:
             if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - (m.y + m.p.cam_h)) ** 2) <= 750:
                 m.is_attack = True
             else:
@@ -59,4 +59,4 @@ def process_attack(m):
                     ar = Arrow(m.p, m.mp, m.x, m.y, m.incline, m.dir)  # 일정 간격으로 화살을 발사한다
                     game_manager.add_collision_pair('player:arrow', None, ar)
                     game_manager.add_object(ar, 2)
-                    m.shoot_delay = 450
+                    m.shoot_delay = 550

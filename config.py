@@ -6,6 +6,7 @@ from tkinter import *
 root = Tk()
 HEIGHT = root.winfo_screenheight()
 WIDTH = root.winfo_screenwidth()
+print(HEIGHT, WIDTH)
 
 JUMP_ACC = 4.5  # 점프 가속도
 LAND_SHAKE = 100  # 착지 시 맵이 눌리는 효과 수치
@@ -297,6 +298,19 @@ m1_reload_directory = 'res//sounds//rifle//m1_reload.ogg'
 m1_clip_sound_directory = 'res//sounds//rifle//m1_clip.ogg'
 m1_clip_hit_directory = 'res//sounds//rifle//m1_clip_hit.ogg'
 m1_reload_middle_directory = 'res//sounds//rifle//m1_reload_middle.ogg'
+
+# melee
+knife_wield_directory = 'res//sounds//melee//knife_wield.ogg'
+katana_wield_directory = 'res//sounds//melee//katana_wield.ogg'
+katana_skill_sound_directory = 'res//sounds//melee//katana_slice.ogg'
+bat_wield_directory = 'res//sounds//melee//axe_wield.ogg'
+rapier_wield_directory = 'res//sounds//melee//rapier_wield.ogg'
+rapier_rapid_directory = 'res//sounds//melee//rapier_rapid.ogg'
+axe_wield_directory = 'res//sounds//melee//axe_wield.ogg'
+axe_up_directory = 'res//sounds//melee//axe_up.ogg'
+axe_hit_directory = 'res//sounds//melee//axe_hit.ogg'
+melee_hit_directory = 'res//sounds//melee//melee_hit.ogg'
+melee_hit2_directory = 'res//sounds//melee//melee_hit2.ogg'
 
 # etc
 shell_hit_directory = 'res//sounds//etc//shell_hit.ogg'

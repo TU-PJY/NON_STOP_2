@@ -26,7 +26,7 @@ class Arrow:
         if not Arrow.sound:
             Arrow.sound = load_wav(arrow_wall_directory)
             Arrow.arrow_right = load_image(arrow_right_directory)
-            Arrow.arrow_left = load_image(arrow_right_directory)
+            Arrow.arrow_left = load_image(arrow_left_directory)
 
     def update(self):
         pps = game_framework.pps
@@ -639,6 +639,8 @@ class Dead:
         self.remove_timer = 300
         self.speed = 6
 
+        self.rolling_speed = random.uniform(1, 1.5)
+
         self.size_reduce = 0  # type2 데드 모션 출력 용 변수
 
         if not Dead.sound:
@@ -675,9 +677,9 @@ class Dead:
         if self.type == 1:  # 믄스터마다 이미지 크기가 달라 따로 지정
             Dead.type1.opacify(self.op)
             if self.dir == 1:
-                Dead.type1.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey - 50, 280, 280)
+                Dead.type1.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey - 20, 280, 280)
             elif self.dir == 0:
-                Dead.type1.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey - 50, 280, 280)
+                Dead.type1.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey - 20, 280, 280)
 
         elif self.type == 2:
             Dead.type2.opacify(self.op)
@@ -691,9 +693,9 @@ class Dead:
         elif self.type == 4:
             Dead.type4.opacify(self.op)
             if self.dir == 1:
-                Dead.type4.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey - 30, 450, 450)
+                Dead.type4.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey - 10, 450, 450)
             elif self.dir == 0:
-                Dead.type4.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey - 30, 450, 450)
+                Dead.type4.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey - 10, 450, 450)
 
     def update(self):
         pps = game_framework.pps
@@ -754,25 +756,25 @@ class Dead:
                     if self.x <= self.mp.playerToWallLeft or self.x >= self.mp.playerToWallRight:
                         self.acc = 0
 
-                    if self.acc < 0:
+                    if self.acc <= 0:
                         self.acc = 0
                         self.simulate = False
 
                 # animation 2
                 elif self.ani == 2:  # 고화력 총기에 튕겨저 나가 죽는 모션, rifle 이상부터 재생
                     if self.dir == 1:
-                        self.deg += self.acc * pps / 4
-                        self.x -= self.acc * pps / 4
+                        self.deg += self.acc * pps / 4 * self.rolling_speed
+                        self.x -= self.acc * pps / 4 * self.rolling_speed
                     elif self.dir == 0:
-                        self.deg -= self.acc * pps / 4
-                        self.x += self.acc * pps / 4
+                        self.deg -= self.acc * pps / 4 * self.rolling_speed
+                        self.x += self.acc * pps / 4 * self.rolling_speed
 
                     self.acc -= pps / 400
 
                     if self.x <= self.mp.playerToWallLeft or self.x >= self.mp.playerToWallRight:
                         self.acc = 0
 
-                    if self.acc < 0:
+                    if self.acc <= 0:
                         self.acc = 0
                         self.simulate = False
 

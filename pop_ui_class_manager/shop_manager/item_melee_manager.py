@@ -95,5 +95,7 @@ def update_melee_item(self):
             self.eq_size_x = 250  # 아이템 장착 피드백을 재생한다
             self.eq_size_y = 200
 
+            play_mode.weapon.wield_delay = 0
+
     if self.select_mode == 0 or self.select_mode == 1:
         self.ind_sel_on = False  # 더 이상 선택한 아이템이 표시되지 않는다.

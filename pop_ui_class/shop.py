@@ -99,7 +99,8 @@ class Shop:
         self.y = HEIGHT / 2
         self.button_x = []  # 아이템 버튼의 x, y 좌표
         self.button_y = []
-        self.window_y = -500  # 초기 윈도우 t 위치
+        # 기준 화면 세로 길이: 960px
+        self.window_y = -500 + (HEIGHT - 960)  # 초기 윈도우 y 위치, 화면 세로 길이에 따라 초기 위치가 달라진다
         self.mx = 0  # 마우스좌표
         self.my = 0
         self.click = False  # 마우스 누름 여부
@@ -107,7 +108,7 @@ class Shop:
         self.select_gun = ''  # 현재 선택한 총
         self.select_melee = ''  # 현재 선택한 근접무기
         self.select_item = ''  # 현재 선택한 아이템
-        self.acc = 23
+        self.acc = 23 - (HEIGHT - 960) / 200
 
         self.select_mode = 0  # 초기값 총 선택
         self.cat_x = []  # 카테고리 버튼의 x, y 좌표
@@ -123,7 +124,7 @@ class Shop:
         self.page_right_y = 0
         self.page_left_y = 0
 
-        self.ep_gun_x = 0  # 장착 중인 총 표시 위치, 버튼의 인덱스로 위치를 잡는다.
+        self.eq_gun_x = 0  # 장착 중인 총 표시 위치, 버튼의 인덱스로 위치를 잡는다.
         self.eq_gun_y = 0
         self.eq_page = play_mode.weapon.eq_page  # 현재 장착 중인 총이 존재하는 페이지에서만 표시한다
 

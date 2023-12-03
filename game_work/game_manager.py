@@ -21,7 +21,6 @@ def render():
 
 def add_collision_pair(group, a, b):  # add_collision_pair('boy:ball', None, ball)
     if group not in collision_pairs:  # 딕셔너리에 그룹이 없다면
-        print(f'New group {group} added')
         collision_pairs[group] = [[], []]
 
     if a:

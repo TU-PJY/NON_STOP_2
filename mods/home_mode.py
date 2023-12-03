@@ -16,8 +16,8 @@ def handle_events():
                 match data.mode:
                     case 'home':
                         button.op3 = 0
-                        button.kacc = 16
-                        button.ky = -500
+                        button.kacc = 16 - (HEIGHT - 960) / 200
+                        button.ky = -500 + (HEIGHT - 960)
                         button.deg = 0
                         data.mode = 'exit_mode'
                     case 'ch_mode':

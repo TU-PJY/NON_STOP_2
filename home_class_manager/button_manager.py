@@ -296,7 +296,7 @@ def home_update_button(self):
         if 0 < self.cursor.mx < 310 and HEIGHT / 2 - 320 - 40 < self.cursor.my < HEIGHT / 2 - 320 + 40:
             self.button_sound.play()
             self.op3 = 0
-            self.kacc = 16
-            self.ky = -500
+            self.kacc = 16 - (HEIGHT - 960) / 200
+            self.ky = -500 + (HEIGHT - 960)
             self.deg = 0
             self.data.mode = 'exit_mode'

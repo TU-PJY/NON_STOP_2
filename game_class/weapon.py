@@ -1,5 +1,6 @@
 from game_class_manager.weapon_manager.etc import *
-from game_class_manager.weapon_manager.file_loader import load_gun_image, load_melee_image, load_gun_sound
+from game_class_manager.weapon_manager.file_loader import load_gun_image, load_melee_image, load_gun_sound, \
+    load_melee_sound
 from game_class_manager.weapon_manager.flame_output import draw_flame
 from game_class_manager.weapon_manager.gun_output import draw_gun
 from game_class_manager.weapon_manager.gun_shoot import shoot_gun
@@ -197,6 +198,7 @@ class Weapon:
         load_gun_image(self)
         load_melee_image(self)
         load_gun_sound(self)
+        load_melee_sound(self)
         self.p = p
         self.mp = mp
 

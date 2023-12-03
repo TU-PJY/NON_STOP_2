@@ -181,16 +181,17 @@ def jump(p):
             p.push_y = 150  # LAND_SHAKE 만큼 화면이 눌린다
             p.jump_delay = 0
             p.shake_range = 80
+            play_mode.weapon.axe_hit.play()
             play_mode.weapon.hit_ground = True
 
         if 0 < p.jump_acc:
             p.jump_acc -= pps / 50
 
         elif p.jump_acc <= 0:
-            if p.jump_delay < 30:
+            if p.jump_delay < 100:
                 p.jump_acc = 0
                 p.jump_delay += pps / 4
-            elif p.jump_delay > 30:
+            elif p.jump_delay > 100:
                 p.jump_acc -= pps / 5
 
     # 일반 점프

@@ -52,7 +52,8 @@ class Button:
 
         self.op_bg = 0
 
-        self.kx, self.ky = WIDTH / 2 + 300, -500
+        # 기준 화면 높이: 960px
+        self.kx, self.ky = WIDTH / 2 + 300, -500 + (HEIGHT - 960)
         self.kacc = 0
         self.deg, self.pos = 0, 0
 

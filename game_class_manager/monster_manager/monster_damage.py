@@ -4,7 +4,7 @@ from game_work import game_manager
 from mods import play_mode
 
 
-def knockback(m, gun):  # 총에 맞으면 살짝 뒤로 밀려난다
+def knockback_gun(m, gun):  # 총에 맞으면 살짝 뒤로 밀려난다
     back = 0
     match m.dir:
         case 1:
@@ -14,17 +14,17 @@ def knockback(m, gun):  # 총에 맞으면 살짝 뒤로 밀려난다
 
     match gun:
         case 'SCAR_H':
-            m.x += 12 * back
+            m.x += 20 * back
         case 'M16':
-            m.x += 10 * back
+            m.x += 20 * back
         case 'MP44':
             m.knockback = True
             m.knockback_dir = m.dir
-            m.back_acc = 3
+            m.back_acc = 4
         case 'AUG':
-            m.x += 10 * back
+            m.x += 20 * back
         case 'GROZA':
-            m.x += 10 * back
+            m.x += 20 * back
         case 'M1':
             m.knockback = True
             m.knockback_dir = m.dir
@@ -45,6 +45,23 @@ def knockback(m, gun):  # 총에 맞으면 살짝 뒤로 밀려난다
             m.knockback = True
             m.knockback_dir = m.dir
             m.back_acc = 4
+
+
+def knockback_melee(m, melee):
+    match melee:
+        case 'KNIFE':
+            m.back_acc = 4
+        case 'BAT':
+            m.back_acc = 6
+        case 'RAPIER':
+            m.back_acc = 3
+        case 'KATANA':
+            m.back_acc = 8
+        case 'AXE':
+            m.back_acc = 10
+
+    m.knockback = True
+    m.knockback_dir = m.dir
 
 
 def damage_monster(m):  # 맵 안에서만 대미지를 받는다
@@ -87,7 +104,7 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                 elif m.weapon.gun == 'M1':
                     m.hp -= 70
                 elif m.weapon.gun == 'WIN':
-                    m.hp -= 120
+                    m.hp -= 150
                 elif m.weapon.gun == 'MINI14':
                     m.hp -= 40
                 elif m.weapon.gun == 'FAL':
@@ -104,7 +121,7 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                     m.weapon.pen_enable = True  # 해당 변수가 활성화 되어야 관통이 된다.
 
                 if m.hp > 0:
-                    knockback(m, m.weapon.gun)
+                    knockback_gun(m, m.weapon.gun)
 
                 m.op = 1  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달
                 m.is_hit = False  # 다시 대미지를 받을 준비를 한다
@@ -117,15 +134,28 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
         elif m.weapon.wield:  # 근접무기
             if m.is_hit:
                 if m.weapon.melee == 'KNIFE':
+                    m.p.shake_range = 30
+                    m.weapon.melee_hit.play()
                     m.hp -= 60
                 elif m.weapon.melee == 'BAT':
+                    m.p.shake_range = 40
+                    m.weapon.melee_hit2.play()
                     m.hp -= 120
                 elif m.weapon.melee == 'RAPIER':
+                    m.p.shake_range = 30
+                    m.weapon.melee_hit.play()
                     m.hp -= 30
                 elif m.weapon.melee == 'KATANA':
+                    m.p.shake_range = 40
+                    m.weapon.melee_hit.play()
                     m.hp -= 100
                 elif m.weapon.melee == 'AXE':
+                    m.p.shake_range = 40
+                    m.weapon.melee_hit2.play()
                     m.hp -= 150
+
+                if m.hp > 0:
+                    knockback_melee(m, m.weapon.melee)
 
                 m.op = 1  # 몬스터가 빨갛게 변하며 대미지를 입었다는 피드백을 전달
                 m.is_hit = False

@@ -27,7 +27,6 @@ def move_monster(m):
         if m.back_acc <= 0:
             m.knockback = False
 
-
     if m.type == 2 and not m.is_dash:
         if m.y < 670:  # 670보다 낮게 있으면 자기 자리로 복귀한다
             m.y += 2 * pps / 4
