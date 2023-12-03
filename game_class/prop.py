@@ -757,7 +757,7 @@ class Dead:
                     if self.x <= self.mp.playerToWallLeft or self.x >= self.mp.playerToWallRight:
                         self.acc = 0
 
-                    if self.acc < 0:  # 앞으로 넘어지면서 점차 속도가 줄어든다.
+                    if self.acc <= 0:  # 앞으로 넘어지면서 점차 속도가 줄어든다.
                         self.acc = 0
                         self.simulate = False
 

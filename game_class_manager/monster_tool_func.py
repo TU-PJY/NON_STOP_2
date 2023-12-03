@@ -97,6 +97,7 @@ def spawn_monster(self):  # 몬스터 스폰
 
             self.type = 0
             self.spawn_time = 800 - self.time_reduce  # 다음 스폰 간격 지정
+            print('%d th spawn at %d rounds' % (self.limit - self.spawn_remain, self.rounds))
 
 
 def update_timer(self):  # 스폰 타이머 업데이트

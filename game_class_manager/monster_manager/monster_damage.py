@@ -14,21 +14,25 @@ def knockback_gun(m, gun):  # 총에 맞으면 살짝 뒤로 밀려난다
 
     match gun:
         case 'SCAR_H':
-            m.x += 20 * back
+            if m.mp.playerToWallLeft < m.x < m.mp.playerToWallRight:
+                m.x += 20 * back
         case 'M16':
-            m.x += 20 * back
+            if m.mp.playerToWallLeft < m.x < m.mp.playerToWallRight:
+                m.x += 15 * back
         case 'MP44':
             m.knockback = True
             m.knockback_dir = m.dir
             m.back_acc = 4
         case 'AUG':
-            m.x += 20 * back
+            if m.mp.playerToWallLeft < m.x < m.mp.playerToWallRight:
+                m.x += 20 * back
         case 'GROZA':
-            m.x += 20 * back
+            if m.mp.playerToWallLeft < m.x < m.mp.playerToWallRight:
+                m.x += 10 * back
         case 'M1':
             m.knockback = True
             m.knockback_dir = m.dir
-            m.back_acc = 6
+            m.back_acc = 8
         case 'WIN':
             m.knockback = True
             m.knockback_dir = m.dir
@@ -36,15 +40,15 @@ def knockback_gun(m, gun):  # 총에 맞으면 살짝 뒤로 밀려난다
         case 'MINI14':
             m.knockback = True
             m.knockback_dir = m.dir
-            m.back_acc = 4
+            m.back_acc = 6
         case 'FAL':
             m.knockback = True
             m.knockback_dir = m.dir
-            m.back_acc = 5
+            m.back_acc = 8
         case 'LVOAS':
             m.knockback = True
             m.knockback_dir = m.dir
-            m.back_acc = 4
+            m.back_acc = 5
 
 
 def knockback_melee(m, melee):
@@ -95,22 +99,22 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                 elif m.weapon.gun == 'M16':
                     m.hp -= 20
                 elif m.weapon.gun == 'MP44':
-                    m.hp -= 38
+                    m.hp -= 40
                 elif m.weapon.gun == 'AUG':
-                    m.hp -= 27
+                    m.hp -= 25
                 elif m.weapon.gun == 'GROZA':
-                    m.hp -= 23
+                    m.hp -= 22
 
                 elif m.weapon.gun == 'M1':
                     m.hp -= 70
                 elif m.weapon.gun == 'WIN':
                     m.hp -= 150
                 elif m.weapon.gun == 'MINI14':
-                    m.hp -= 40
+                    m.hp -= 50
                 elif m.weapon.gun == 'FAL':
                     m.hp -= 70
                 elif m.weapon.gun == 'LVOAS':
-                    m.hp -= 45
+                    m.hp -= 50
 
                 elif m.weapon.gun_type == 'sr':
                     # 관통을 위한 가상 객체 생성
@@ -168,7 +172,4 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
             m.hp -= 500
 
     if m.hp <= 0:  # hp가 0이 될 경우 죽는다.
-        play_mode.tool.spawn_num -= 1  # 스폰된 몬스터 수 감소
-        play_mode.tool.kill_count -= 1  # 킬 카운드 감소
-        play_mode.ig.ky = 70  # 킬 피드백 재생
         add_object_after_dead(m)

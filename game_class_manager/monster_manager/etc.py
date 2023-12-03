@@ -3,6 +3,7 @@ import math
 from config import *
 from game_class.prop import Coin, Dead, Splash
 from game_work import game_framework, game_manager
+from mods import play_mode
 
 
 def monster_animation(m):
@@ -120,6 +121,10 @@ def add_object_after_dead(m):
 
     if not m.type == 3:
         game_manager.add_object(dead, 3)  # 시체를 추가한다
+
+    play_mode.tool.spawn_num -= 1  # 스폰된 몬스터 수 감소
+    play_mode.tool.kill_count -= 1  # 킬 카운드 감소
+    play_mode.ig.ky = 70  # 킬 피드백 재생
 
     game_manager.add_object(coin, 3)  # 코인을 드랍한다
     game_manager.add_collision_pair('player:coin', None, coin)

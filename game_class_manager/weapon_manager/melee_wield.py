@@ -164,6 +164,7 @@ def init_melee(weapon):
     if weapon.melee == 'AXE' and weapon.skill_enable:
         weapon.p.jump_acc = 0
 
+    weapon.wield = False
     weapon.skill_enable = False
     weapon.swing_down = False
     weapon.swing_up = False

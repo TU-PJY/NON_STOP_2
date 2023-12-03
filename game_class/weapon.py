@@ -173,7 +173,7 @@ class StateMachineGun:
         self.cur_state = Idle
         self.table = {
             Idle: {l_down: Shoot, q_down: Idle, r_down: Idle, r_up: Idle, reload_down: Idle, shift_down: Idle},
-            Shoot: {l_up: Idle, q_down: Shoot, r_down: Shoot, r_up: Shoot, reload_down: Idle, shift_down: Shoot}
+            Shoot: {l_up: Idle, q_down: Idle, r_down: Shoot, r_up: Shoot, reload_down: Idle, shift_down: Shoot}
         }
 
     def start(self):
