@@ -53,13 +53,15 @@ def load_player_image(self):
     self.here = load_image(ch_selected_directory)
 
     self.sound = load_wav(walk_directory)
-    self.sound.set_volume(80)
+    self.sound.set_volume(128)
     self.land_sound = load_wav(land_directory)
     self.land_sound.set_volume(128)
     self.jump_sound = load_wav(jump_directory)
     self.jump_sound.set_volume(128)
 
     self.damage_sound = load_wav(damage_directory)
+
+    self.play_bgm = load_music(play_bgm_directory)
 
 
 def look_mouse(p):
@@ -258,9 +260,9 @@ def check_hp(p):  # 플레이어 체력이 0이 되면 게임 오버 모드로 �
         game_framework.MODE = 'GAMEOVER'
 
 
-def play_player_sound(p):
+def play_player_sound(p):  # 일정 주기로 걷는 소리를 출력한다
     pps = game_framework.pps
-    if (p.mv_right or p.mv_left) and not p.mv_jump:
+    if (p.mv_right or p.mv_left) and not p.mv_jump:  # 땅에 닿지 않으면 출력하지 않는다
         p.sound_delay -= pps / 4
         if p.sound_delay <= 0:
             p.sound.play()

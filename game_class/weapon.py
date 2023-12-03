@@ -56,9 +56,10 @@ class Shoot:
         if r_down(e) and weapon.weapon_type == 1 and not weapon.skill_enable:
             set_skill(weapon)
 
-        if weapon.limit_ammo - weapon.cur_ammo > 0:  # 탄창이 꽉 찬 상태에서는 재장전을 실행하지 않는다
-            if reload_down(e) and not weapon.reloading:  # 재장전, 소유 탄약이 0인 상태에서는 재장전 하지 않는다
-                check_ammo(weapon)
+        if weapon.weapon_type == 0:
+            if weapon.limit_ammo - weapon.cur_ammo > 0:  # 탄창이 꽉 찬 상태에서는 재장전을 실행하지 않는다
+                if reload_down(e) and not weapon.reloading:  # 재장전, 소유 탄약이 0인 상태에서는 재장전 하지 않는다
+                    check_ammo(weapon)
 
         if shift_down(e) and weapon.throwable:
             throw_grenade(weapon)
@@ -123,9 +124,10 @@ class Idle:
         if r_down(e) and weapon.weapon_type == 1 and not weapon.skill_enable:
             set_skill(weapon)
 
-        if weapon.limit_ammo - weapon.cur_ammo > 0:  # 탄창이 꽉 찬 상태에서는 재장전을 실행하지 않는다
-            if reload_down(e) and not weapon.reloading:  # 재장전, 소유 탄약이 0인 상태에서는 재장전 하지 않는다
-                check_ammo(weapon)
+        if weapon.weapon_type == 0:
+            if weapon.limit_ammo - weapon.cur_ammo > 0:  # 탄창이 꽉 찬 상태에서는 재장전을 실행하지 않는다
+                if reload_down(e) and not weapon.reloading:  # 재장전, 소유 탄약이 0인 상태에서는 재장전 하지 않는다
+                    check_ammo(weapon)
 
         if shift_down(e) and weapon.throwable:
             throw_grenade(weapon)

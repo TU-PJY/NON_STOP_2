@@ -108,10 +108,15 @@ def add_object_after_dead(m):
 
     if m.weapon.melee == 'KATANA' or m.weapon.melee == 'AXE' and m.weapon.skill_enable and m.weapon.weapon_type == 1:
         coin = Coin(m.p, m.mp, m.x, m.y + 200, m.dir, 2)  # 카타나 스킬에 의해 죽은 경우 조금 더 높은 곳에 드랍
+
     elif m.ex_dead:
         coin = Coin(m.p, m.mp, m.x, m.y, m.dir, 3)  # 수튜탄에 죽는경우 코인이 날아간다
+
+    elif m.weapon.weapon_type == 1 and not m.weapon.skill_enable:  # 근접무기 처치 시 더 많은 코인을 얻는다
+        coin = Coin(m.p, m.mp, m.x, m.y, m.dir, 2, True)
+
     else:
-        coin = Coin(m.p, m.mp, m.x, m.y, m.dir)
+        coin = Coin(m.p, m.mp, m.x, m.y, m.dir, 2)
 
     if not m.type == 3:
         game_manager.add_object(dead, 3)  # 시체를 추가한다

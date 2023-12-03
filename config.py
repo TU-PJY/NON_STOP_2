@@ -341,6 +341,7 @@ pickup_directory = 'res//sounds//etc//pickup.ogg'
 
 # bgm
 home_bgm_directory = 'res//sounds//bgm//home_bgm.mp3'
+play_bgm_directory = 'res//sounds//bgm//play_bgm.mp3'
 
 # button
 button_click_directory = 'res//sounds//button//button_click.ogg'

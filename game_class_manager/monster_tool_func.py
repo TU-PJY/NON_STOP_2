@@ -101,8 +101,9 @@ def spawn_monster(self):  # 몬스터 스폰
 
 def update_timer(self):  # 스폰 타이머 업데이트
     pps = game_framework.pps
-    if self.spawn_time > 0:
-        self.spawn_time -= pps / 3
+    if self.spawn_enable:
+        if self.spawn_time > 0:
+            self.spawn_time -= pps / 3
 
 
 def update_rounds(self):
@@ -114,7 +115,7 @@ def update_rounds(self):
             self.limit += 3  # 스폰 제한 횟수 3씩 증가
             self.kill_count = self.limit
             self.spawn_remain = self.limit  # 앞으로 스폰할 몬스터 수 갱신
-            self.spawn_time = 1500  # 매 라운드 시작 시 어느 정도의 시간을 두고 스폰 시작
+            self.spawn_time = 1000  # 매 라운드 시작 시 어느 정도의 시간을 두고 스폰 시작
             if self.time_reduce < 690:  # 최소 스폰 간격은 100
                 self.time_reduce += 15  # 매 라운드마다 스폰 간격이 15씩 줄어든다
             self.spawn_enable = True  # 다음 라운드로 넘어가 스폰을 다시 시작한다.

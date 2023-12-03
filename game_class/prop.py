@@ -373,19 +373,25 @@ class Coin:
     pickup = None
     image = None
 
-    def __init__(self, p, mp, x, y, dir, sp=2):
+    def __init__(self, p, mp, x, y, dir, sp=2, melee=False):
         self.p = p
         self.mp = mp
         self.x = x
         self.y = y
         self.dir = dir
         self.acc = 3
-        self.sp = sp
         self.size_down = True
         self.size_x = 70
         self.up = False
         self.fall = True
         self.op = 1
+        self.sp = sp
+        self.is_melee = melee
+
+        self.value = 10 + play_mode.tool.rounds * 30  # 라운드가 올라갈 수록 코인을 더 많이 획득한다
+
+        if self.is_melee:
+            self.value = 10 + play_mode.tool.rounds * 40  # 근접무기 처치 시 더 많은 코인을 획득한다
 
         if self.sp > 2:
             self.acc = 5
@@ -450,7 +456,7 @@ class Coin:
         if group == 'player:coin':
             if not self.up:  # 획득하지 않은 코인에 대해서만 코인 획득 피드백 재생
                 Coin.pickup.play()
-                self.p.coin += 10 + play_mode.tool.rounds * 30  # 라운드가 올라갈 수록 코인을 더 많이 획득한다
+                self.p.coin += self.value
                 self.up = True
                 self.p.get_coin = True
 
@@ -912,6 +918,7 @@ class Start:
         self.down = load_image(front_directory)
         self.font = load_font(font_directory, 80)
         self.acc = 0
+        play_mode.p.play_bgm.repeat_play()  # 전환 효과가 끝나면 브금을 재생한다
 
     def draw(self):
         self.up.draw(WIDTH / 2, self.y1, WIDTH, HEIGHT)
