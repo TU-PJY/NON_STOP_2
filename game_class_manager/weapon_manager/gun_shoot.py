@@ -155,6 +155,7 @@ def shoot_gun(weapon):
 
                 elif weapon.gun == 'SPRING':
                     if weapon.zoom:  # 정조준 시에만 발사 가능
+                        weapon.spring_shoot.play()
                         weapon.shoot_delay = 600
                         weapon.p.shake_range = 60
                         weapon.flame_display_time = FLAME_DISPLAY_TIME
@@ -165,6 +166,7 @@ def shoot_gun(weapon):
 
                 elif weapon.gun == 'KAR98':
                     if weapon.zoom:  # 정조준 시에만 발사 가능
+                        weapon.kar98_shoot.play()
                         weapon.shoot_delay = 600
                         weapon.p.shake_range = 60
                         weapon.flame_display_time = FLAME_DISPLAY_TIME
@@ -175,6 +177,7 @@ def shoot_gun(weapon):
 
                 elif weapon.gun == 'M24':
                     if weapon.zoom:  # 정조준 시에만 발사 가능
+                        weapon.m24_shoot.play()
                         weapon.shoot_delay = 700
                         weapon.p.shake_range = 70
                         weapon.flame_display_time = FLAME_DISPLAY_TIME
@@ -185,6 +188,7 @@ def shoot_gun(weapon):
 
                 elif weapon.gun == 'AWP':
                     if weapon.zoom:  # 정조준 시에만 발사 가능
+                        weapon.awp_shoot.play()
                         weapon.shoot_delay = 700
                         weapon.p.shake_range = 70
                         weapon.flame_display_time = FLAME_DISPLAY_TIME
@@ -195,6 +199,7 @@ def shoot_gun(weapon):
 
                 elif weapon.gun == 'CHEYTAC':
                     if weapon.zoom:  # 정조준 시에만 발사 가능
+                        weapon.cheytac_shoot.play()
                         weapon.shoot_delay = 1000
                         weapon.p.shake_range = 100
                         weapon.flame_display_time = FLAME_DISPLAY_TIME

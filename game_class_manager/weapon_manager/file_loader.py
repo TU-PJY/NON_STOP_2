@@ -126,6 +126,20 @@ def load_gun_sound(self):
     self.m1_clip = load_wav(m1_clip_sound_directory)
     self.m1_reload_middle = load_wav(m1_reload_middle_directory)
 
+    # sr
+    self.spring_shoot = load_wav(spring_shoot_directory)
+    self.kar98_shoot = load_wav(kar98_shoot_directory)
+    self.m24_shoot = load_wav(m24_shoot_directory)
+    self.awp_shoot = load_wav(awp_shoot_directory)
+    self.cheytac_shoot = load_wav(cheytac_shoot_directory)
+    self.sr_reload = load_wav(sr_reload_directory)
+
+    self.spring_bolt = load_wav(spring_bolt_directory)
+    self.kar98_bolt = load_wav(kar98_bolt_directory)
+    self.m24_bolt = load_wav(m24_bolt_directory)
+    self.awp_bolt = load_wav(awp_bolt_directory)
+    self.cheytac_bolt = load_wav(cheytac_bolt_directory)
+
     # etc
     self.throw_sound = load_wav(throw_directoy)
 

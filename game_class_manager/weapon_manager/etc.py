@@ -57,30 +57,35 @@ def update_delay(weapon):  # 발사 간격과 근접 무기 공속 관리
 def update_sniper_bolt(weapon):
     if weapon.gun == 'AWP':
         if 100 < weapon.shoot_delay < 500 and not weapon.shell_out:  # 탄피를 한 번만 만들도록 한다
+            weapon.awp_bolt.play()
             weapon.bolt_action = True
             make_shell(weapon, 30, 20)
             weapon.shell_out = True
 
     if weapon.gun == 'SPRING':
         if 100 < weapon.shoot_delay < 400 and not weapon.shell_out:
+            weapon.spring_bolt.play()
             weapon.bolt_action = True
             make_shell(weapon, 30, 20)
             weapon.shell_out = True
 
     if weapon.gun == 'KAR98':
         if 100 < weapon.shoot_delay < 400 and not weapon.shell_out:
+            weapon.kar98_bolt.play()
             weapon.bolt_action = True
             make_shell(weapon, 30, 20)
             weapon.shell_out = True
 
     if weapon.gun == 'M24':
         if 100 < weapon.shoot_delay < 500 and not weapon.shell_out:
+            weapon.m24_bolt.play()
             weapon.bolt_action = True
             make_shell(weapon, 30, 20)
             weapon.shell_out = True
 
     if weapon.gun == 'CHEYTAC':
         if 100 < weapon.shoot_delay < 700 and not weapon.shell_out:  # 탄피를 한 번만 만들도록 한다
+            weapon.cheytac_bolt.play()
             weapon.bolt_action = True
             make_shell(weapon, 40, 30)
             weapon.shell_out = True
@@ -123,13 +128,16 @@ def reload_gun(weapon):
         match weapon.gun_type:  # 총기 종류에 따라 다른 재장전 사운드를 출력한다
             case 'ar':
                 weapon.ar_reload.play()
+
             case 'smg':
                 weapon.smg_reload.play()
+
             case 'pistol':
                 if weapon.gun == 'M500' or weapon.gun == 'QHAND':  # 리볼버는 라챗 돌아가는 소리를 출력한다
                     weapon.revolver_reload.play()
                 else:
                     weapon.pistol_reload.play()
+
             case 'rifle':
                 if weapon.gun == 'M1':
                     if weapon.cur_ammo == 0:
@@ -140,6 +148,9 @@ def reload_gun(weapon):
                         weapon.m1_reload_middle.play()
                 else:
                     weapon.rifle_reload.play()
+
+            case 'sr':
+                weapon.sr_reload.play()
         weapon.play_sound = False
 
     if weapon.revolver_shell_out:  # 리볼버 전용 코드

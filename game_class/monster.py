@@ -191,7 +191,7 @@ class Monster:
 
                 elif self.weapon.skill_enable and self.weapon.melee == 'KATANA':
                     if not self.once and self.hp > 0:
-                        self.hp -= 150
+                        self.hp -= 200
                         self.once = True
 
                 else:  # 나머지 근접 무기 공격

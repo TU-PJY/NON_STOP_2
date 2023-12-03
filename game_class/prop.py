@@ -273,7 +273,7 @@ class Slice:
         self.dir = 0
         self.player_deg = 0
         self.melee_deg = 0
-        self.op = 0.8
+        self.op = 0.9
         self.op_reduce = False
 
         self.dir = self.p.dir

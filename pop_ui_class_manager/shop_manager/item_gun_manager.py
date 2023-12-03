@@ -312,7 +312,7 @@ def equip_gun_page2(self, i, j):
 
     if j == 0:  # sr 타입
         play_mode.weapon.gun_type = 'sr'
-        play_mode.weapon.reload_time = 350
+        play_mode.weapon.reload_time = 850
 
     init_equip_list_gun()  # 장착 중인 아이템 리스트 해제
     play_mode.weapon.equip_list_gun2[i][j] = True  # 갱신

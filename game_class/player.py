@@ -21,7 +21,7 @@ class Move:
 
     @staticmethod
     def exit(p, e):
-        if space_down(e):
+        if space_down(e) and not play_mode.weapon.skill_enable:
             if p.jump_count < p.jump_level:
                 p.jump_sound.play()
                 if p.jump_count == 0:
@@ -93,7 +93,7 @@ class Idle:
 
     @staticmethod
     def exit(p, e):
-        if space_down(e):
+        if space_down(e) and not play_mode.weapon.skill_enable:
             if p.jump_count < p.jump_level:
                 p.jump_sound.play()
                 if p.jump_count == 0:

@@ -299,6 +299,19 @@ m1_clip_sound_directory = 'res//sounds//rifle//m1_clip.ogg'
 m1_clip_hit_directory = 'res//sounds//rifle//m1_clip_hit.ogg'
 m1_reload_middle_directory = 'res//sounds//rifle//m1_reload_middle.ogg'
 
+# sr
+spring_shoot_directory = 'res//sounds//sr//spring_shoot.ogg'
+spring_bolt_directory = 'res//sounds//sr//spring_bolt.ogg'
+kar98_shoot_directory = 'res//sounds//sr//kar98_shoot.ogg'
+kar98_bolt_directory = 'res//sounds//sr//kar98_bolt.ogg'
+m24_shoot_directory = 'res//sounds//sr//m24_shoot.ogg'
+m24_bolt_directory = 'res//sounds//sr//m24_bolt.ogg'
+awp_shoot_directory = 'res//sounds//sr//awp_shoot.ogg'
+awp_bolt_directory = 'res//sounds//sr//awp_bolt.ogg'
+cheytac_shoot_directory = 'res//sounds//sr//cheytac_shoot.ogg'
+cheytac_bolt_directory = 'res//sounds//sr//cheytac_bolt.ogg'
+sr_reload_directory = 'res//sounds//sr//sr_reload.ogg'
+
 # melee
 knife_wield_directory = 'res//sounds//melee//knife_wield.ogg'
 katana_wield_directory = 'res//sounds//melee//katana_wield.ogg'
