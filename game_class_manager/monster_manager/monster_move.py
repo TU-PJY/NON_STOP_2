@@ -24,6 +24,9 @@ def move_monster(m):
         m.x += m.back_acc * back
         m.back_acc -= pps / 20
 
+        if m.x < m.mp.playerToWallLeft or m.x > m.mp.playerToWallRight:  # 벽 뒤로 밀리지 않게 한다
+            m.x += m.back_acc * -back
+
         if m.back_acc <= 0:
             m.knockback = False
 

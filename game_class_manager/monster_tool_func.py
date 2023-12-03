@@ -30,7 +30,7 @@ def spawn_monster(self):  # 몬스터 스폰
             self.frame = self.frame + APT * FPA * game_framework.frame_time
 
             if self.rounds < 5:  # 라운드가 올라갈 수록 몬스터가 다양해진다
-                self.type = 1
+                self.type = 2
 
             elif 5 <= self.rounds <= 9:
                 if self.type2_enable:
@@ -97,7 +97,7 @@ def spawn_monster(self):  # 몬스터 스폰
 
             self.type = 0
             self.spawn_time = 800 - self.time_reduce  # 다음 스폰 간격 지정
-            print('%d th spawn at %d rounds' % (self.limit - self.spawn_remain, self.rounds))
+            # print('type: %d, %dth spawn at %d rounds' % (self.type, self.limit - self.spawn_remain, self.rounds))
 
 
 def update_timer(self):  # 스폰 타이머 업데이트

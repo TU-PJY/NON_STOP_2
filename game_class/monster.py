@@ -215,21 +215,21 @@ class Monster:
 
                     if self.weapon.pen_enable:
                         if self.weapon.gun == 'SPRING':
-                            self.hp -= 200 - 50 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
+                            self.hp -= 250 - 50 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
                             self.knockback_dir = self.dir
                             self.knockback = True
                             self.back_acc = 14 - (1 * self.weapon.pen_count)
                             self.weapon.pen_count += 1
 
                         elif self.weapon.gun == 'KAR98':
-                            self.hp -= 200 - 40 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
+                            self.hp -= 250 - 40 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
                             self.knockback_dir = self.dir
                             self.knockback = True
                             self.back_acc = 14 - (1 * self.weapon.pen_count)
                             self.weapon.pen_count += 1
 
                         elif self.weapon.gun == 'M24':
-                            self.hp -= 200 - 40 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
+                            self.hp -= 250 - 40 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
                             self.knockback_dir = self.dir
                             self.knockback = True
                             self.back_acc = 14 - (1 * self.weapon.pen_count)
@@ -243,7 +243,7 @@ class Monster:
                             self.weapon.pen_count += 1
 
                         elif self.weapon.gun == 'CHEYTAC':
-                            self.hp -= 250 - 30 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
+                            self.hp -= 300 - 30 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
                             self.knockback_dir = self.dir
                             self.knockback = True
                             self.back_acc = 16 - (1 * self.weapon.pen_count)

@@ -33,7 +33,7 @@ def process_attack(m):
             m.x += 5 * math.cos(m.incline) * pps / 4
             m.y += 5 * math.sin(m.incline) * pps / 4
 
-            if m.temp_x - 40 <= m.x <= m.temp_x + 40 and m.temp_y - 40 <= m.y <= m.temp_y + 40:
+            if m.y <= m.temp_y:
                 m.dash_delay = 700
                 m.is_dash = False
                 m.is_attack = False

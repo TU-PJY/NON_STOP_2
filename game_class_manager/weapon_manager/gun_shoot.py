@@ -136,7 +136,7 @@ def shoot_gun(weapon):
                         weapon.reload_time = 150  # M1은 구조 상 완전 재장전이 더 빠르다
 
                 elif weapon.gun == 'WIN':
-                    weapon.shoot_delay = 250
+                    weapon.shoot_delay = 230
                     weapon.p.shake_range = 40
                     weapon.is_spin = True
                     weapon.flame_display_time = FLAME_DISPLAY_TIME
