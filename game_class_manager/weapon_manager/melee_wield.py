@@ -1,6 +1,6 @@
 import random
 
-from game_class.prop import KatanaSlice
+from game_class.prop import Slice
 from game_class_manager.weapon_manager.etc import set_skill_delay
 from game_work import game_framework, game_manager
 
@@ -69,7 +69,7 @@ def set_skill(weapon):
             weapon.p.speed = 4
 
             # 스킬 이펙트 출력
-            ks = KatanaSlice(weapon.p, weapon)
+            ks = Slice(weapon.p, weapon)
             game_manager.add_object(ks, 7)
 
             weapon.skill_enable = True

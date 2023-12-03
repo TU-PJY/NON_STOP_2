@@ -15,6 +15,85 @@ from pop_ui_class_manager.shop_manager.window_output import draw_shop_window, dr
 
 
 class Shop:
+    button_sound = None
+    cant_buy = None
+    select_gun = None
+    select_melee = None
+    buy_ammo = None
+    buy_medkit = None
+    buy_upgrade = None
+    buy_sound = None
+
+    window = None
+    back = None
+    button = None
+    button_gun = None
+    button_melee = None
+    button_exp = None
+    button_page_left = None
+    button_page_right = None
+    font = None
+    font_small = None
+    info = None
+    info_back = None
+
+    cursor = None
+
+    coin_icon = None
+
+    ind_equip = None
+    ind_select = None
+
+    ind_lock = None
+
+    image_m1911 = None
+    image_m92 = None
+    image_m500 = None
+    image_degle = None
+    image_qhand = None
+
+    image_aks74 = None
+    image_ump = None
+    image_vector = None
+    image_thompson = None
+    image_p90 = None
+
+    image_scar = None
+    image_m16 = None
+    image_mp44 = None
+    image_aug = None
+    image_groza = None
+
+    image_m1 = None
+    image_win = None
+    image_mini14 = None
+    image_fal = None
+    image_lvoas = None
+
+    image_spring = None
+    image_kar98 = None
+    image_m24 = None
+    image_awp = None
+    image_cheytac = None
+
+    image_knife = None
+    image_bat = None
+    image_rapier = None
+    image_katana = None
+    image_axe = None
+
+    image_ammo_pistol = None
+    image_ammo_ar = None
+    image_ammo_rifle = None
+    image_ammo_sr = None
+
+    medkit = None
+    hpup = None
+    regenup = None
+    grenup = None
+    doublejump = None
+    speedup = None
+
     def __init__(self):
         self.x = WIDTH / 2
         self.y = HEIGHT / 2
@@ -70,15 +149,6 @@ class Shop:
         self.data_change = False  # 구입한 항목에 대해서만 아이템 관련 변수 값 변경을 허용한다.
 
         self.op = 0
-
-        self.button_sound = load_wav(button_click_directory)
-        self.cant_buy = load_wav(cant_buy_directory)
-        self.select_gun = load_wav(select_gun_directory)
-        self.select_melee = load_wav(select_melee_directory)
-        self.buy_ammo = load_wav(buy_ammo_directory)
-        self.buy_medkit = load_wav(buy_medkit_directory)
-        self.buy_upgrade = load_wav(upgrade_sound_directory)
-        self.buy_sound = load_wav(buy_sound_directory)
 
         load_shop_resource(self)
         make_button_pos(self)

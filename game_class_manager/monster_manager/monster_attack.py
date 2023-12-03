@@ -6,6 +6,8 @@ from game_work import game_framework, game_manager
 
 # cam_h는 플레이어와 상대적 위치 차이를 발생시키기 때문에 몬스터 y위치에 cam_h를 포함해줘야함
 def process_attack(m):
+    from game_class.monster import Monster
+
     pps = game_framework.pps
     # type 1 attack
     if m.type == 1:
@@ -53,7 +55,7 @@ def process_attack(m):
                 m.incline = math.atan2(m.p.y + 70 - (m.y + m.p.cam_h), m.p.x - m.x)  # 머리쪽으로 살짝 높혀서 쏜다
                 m.frame = 2
                 if m.shoot_delay <= 0:
-                    m.bow.play()
+                    Monster.bow.play()
                     ar = Arrow(m.p, m.mp, m.x, m.y, m.incline, m.dir)  # 일정 간격으로 화살을 발사한다
                     game_manager.add_collision_pair('player:arrow', None, ar)
                     game_manager.add_object(ar, 2)

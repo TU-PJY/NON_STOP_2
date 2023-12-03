@@ -30,7 +30,7 @@ APT = 1.0 / TIME_PER_ACTION
 FPA = 8
 
 RECOIL_REDUCE = 1  # 조준점 복구 지연 속도
-FLAME_DISPLAY_TIME = 12  # 총구 화염 출력 시간
+FLAME_DISPLAY_TIME = 15  # 총구 화염 출력 시간
 TARGET_DOT_DISPLAY_TIME = 10  # 조준점 내부에 빨간 점이 표시되는 시간
 
 # 플레이어 이미지 파일 경로
@@ -196,8 +196,7 @@ dead_bg_directory = 'res//prop//dead_bg.png'
 you_dead_directory = 'res//prop//you_dead.png'
 front_directory = 'res//prop//front.png'
 
-reward_directory = 'res//ui//reward.png'
-reward_bg_directory = 'res//ui//reward_bg.png'
+clip_directory = 'res//prop//clip.png'
 
 # ui 이미지 파일 경로
 shop_window_directory = 'res//ui//shop_window.png'
@@ -243,13 +242,12 @@ icon_double_jump_directory = 'res//ui//icon_double_jump.png'
 
 hp_regen_directory = 'res//ui//hp_regen.png'
 
+reward_directory = 'res//ui//reward.png'
+reward_bg_directory = 'res//ui//reward_bg.png'
 logo_directory = 'res//ui//logo.png'
-
 ch_selected_directory = 'res//ui//ch_selected.png'
-
 button_exit_mode_directory = 'res//ui//button_exit_mode.png'
 button_home_mode_directory = 'res//ui//button_home_mode.png'
-
 warning_directory = 'res//ui//warning.png'
 
 # 폰트 경로
@@ -293,6 +291,12 @@ win_reload_directory = 'res//sounds//rifle//win_reload.ogg'
 mini14_shoot_directory = 'res//sounds//rifle//mini14_shoot.ogg'
 fal_shoot_directory = 'res//sounds//rifle//fal_shoot.ogg'
 lvoas_shoot_directory = 'res//sounds//rifle//lvoas_shoot.ogg'
+
+rifle_reload_directory = 'res//sounds//rifle//rifle_reload.ogg'
+m1_reload_directory = 'res//sounds//rifle//m1_reload.ogg'
+m1_clip_sound_directory = 'res//sounds//rifle//m1_clip.ogg'
+m1_clip_hit_directory = 'res//sounds//rifle//m1_clip_hit.ogg'
+m1_reload_middle_directory = 'res//sounds//rifle//m1_reload_middle.ogg'
 
 # etc
 shell_hit_directory = 'res//sounds//etc//shell_hit.ogg'

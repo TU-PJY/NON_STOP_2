@@ -48,7 +48,7 @@ def knockback(m, gun):  # 총에 맞으면 살짝 뒤로 밀려난다
 
 
 def damage_monster(m):  # 맵 안에서만 대미지를 받는다
-    if m.mp.playerToWallLeft - 30 <= m.p.x <= m.mp.playerToWallRight + 30:
+    if m.mp.playerToWallLeft <= m.p.x <= m.mp.playerToWallRight:
         if m.weapon.shoot:
             if m.is_hit:  # 맞은걸로 판정되면 대미지를 가한다.
                 if m.weapon.gun == 'M1911':
@@ -80,7 +80,7 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                 elif m.weapon.gun == 'MP44':
                     m.hp -= 38
                 elif m.weapon.gun == 'AUG':
-                    m.hp -= 25
+                    m.hp -= 27
                 elif m.weapon.gun == 'GROZA':
                     m.hp -= 23
 

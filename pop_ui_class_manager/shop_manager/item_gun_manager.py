@@ -12,6 +12,8 @@ def init_equip_list_gun():
 
 
 def buy_gun_page1(self, i, j):
+    from pop_ui_class.shop import Shop
+
     buy = False
 
     if (i, j) == (0, 0):  # 기본 총이므로 구입 여부 확인은 하지 않음
@@ -114,12 +116,14 @@ def buy_gun_page1(self, i, j):
 
     if buy:
         play_mode.weapon.buy_list_gun[i][j] = True
-        self.buy_sound.play()
+        Shop.buy_sound.play()
     else:
-        self.cant_buy.play()
+        Shop.cant_buy.play()
 
 
 def buy_gun_page2(self, i, j):
+    from pop_ui_class.shop import Shop
+
     buy = False
     if (i, j) == (0, 0):
         if play_mode.p.coin >= 45000:
@@ -148,13 +152,15 @@ def buy_gun_page2(self, i, j):
 
     if buy:
         play_mode.weapon.buy_list_gun2[i][j] = True
-        self.buy_sound.play()
+        Shop.buy_sound.play()
     else:
-        self.cant_buy.play()
+        Shop.cant_buy.play()
 
 
 def equip_gun_page1(self, i, j):
-    self.select_gun.play()
+    from pop_ui_class.shop import Shop
+
+    Shop.select_gun.play()
 
     if (i, j) == (0, 0):
         play_mode.weapon.gun = 'M1911'
@@ -258,9 +264,13 @@ def equip_gun_page1(self, i, j):
             play_mode.weapon.gun_type = 'rifle'
             play_mode.weapon.reload_time = 150
 
+        elif play_mode.weapon.gun == 'M1':
+            play_mode.weapon.gun_type = 'rifle'
+            play_mode.weapon.reload_time = 150
+
         else:
             play_mode.weapon.gun_type = 'rifle'
-            play_mode.weapon.reload_time = 250
+            play_mode.weapon.reload_time = 450
 
     init_equip_list_gun()  # 장착 중인 아이템 리스트 해제
     play_mode.weapon.equip_list_gun1[i][j] = True  # 갱신
@@ -271,7 +281,9 @@ def equip_gun_page1(self, i, j):
 
 
 def equip_gun_page2(self, i, j):
-    self.select_gun.play()
+    from pop_ui_class.shop import Shop
+
+    Shop.select_gun.play()
 
     if (i, j) == (0, 0):
         play_mode.weapon.gun = 'SPRING'

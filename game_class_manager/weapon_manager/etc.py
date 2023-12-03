@@ -1,6 +1,6 @@
 from pico2d import *
 
-from game_class.prop import Shell, Grenade
+from game_class.prop import Shell, Grenade, Clip
 from game_work import game_manager, game_framework
 
 
@@ -130,6 +130,16 @@ def reload_gun(weapon):
                     weapon.revolver_reload.play()
                 else:
                     weapon.pistol_reload.play()
+            case 'rifle':
+                if weapon.gun == 'M1':
+                    if weapon.cur_ammo == 0:
+                        weapon.m1_reload.play()
+                    else:
+                        clip = Clip(weapon.p, weapon.mp, weapon.p.x, weapon.p.y - weapon.p.cam_h, weapon.p.dir)
+                        game_manager.add_object(clip, 3)
+                        weapon.m1_reload_middle.play()
+                else:
+                    weapon.rifle_reload.play()
         weapon.play_sound = False
 
     if weapon.revolver_shell_out:  # 리볼버 전용 코드
@@ -186,6 +196,9 @@ def reload_gun(weapon):
             weapon.revolver_shell_out = True  # 최조 재장전 이후의 재장전부터는 탄피를 생성한다
             if weapon.gun == 'M500' or weapon.gun == 'QHAND':
                 weapon.spin = 0
+
+            if weapon.gun == 'M1':
+                weapon.reload_time = 450
 
 
 def reload_one(weapon):  # 관형 급탄 장전

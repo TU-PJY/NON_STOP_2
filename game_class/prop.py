@@ -9,6 +9,8 @@ from mods import play_mode, gameover_mode
 
 class Arrow:
     sound = None
+    arrow_right = None
+    arrow_left = None
 
     def __init__(self, p, mp, x, y, incline, dir):
         self.x = x
@@ -21,13 +23,10 @@ class Arrow:
         self.remove_timer = 300
         self.simulate = True  # True일 동안 움직임
 
-        if self.dir == 0:
-            self.arrow_left = load_image(arrow_left_directory)
-        elif self.dir == 1:
-            self.arrow_right = load_image(arrow_right_directory)
-
         if not Arrow.sound:
             Arrow.sound = load_wav(arrow_wall_directory)
+            Arrow.arrow_right = load_image(arrow_right_directory)
+            Arrow.arrow_left = load_image(arrow_right_directory)
 
     def update(self):
         pps = game_framework.pps
@@ -72,10 +71,10 @@ class Arrow:
         x = self.x + self.p.ex
         y = self.y + self.p.ey
         if self.dir == 0:
-            self.arrow_left.clip_composite_draw \
+            Arrow.arrow_left.clip_composite_draw \
                 (0, 0, 128, 128, self.incline, 'h', x, y, 400, 400)
         elif self.dir == 1:
-            self.arrow_right.clip_composite_draw \
+            Arrow.arrow_right.clip_composite_draw \
                 (0, 0, 128, 128, self.incline, '', x, y, 400, 400)
 
         draw_rectangle(*self.get_bb())
@@ -103,24 +102,35 @@ class Arrow:
 
 class Shell:
     sound = None
+    image = None
 
     def __init__(self, p, mp, x, y, dir, size_x, size_y):
-        self.image = load_image(shell_directory)
         self.p = p
         self.mp = mp
-        self.x = x
-        self.y = y
         self.dir = dir
         self.size_x = size_x
         self.size_y = size_y
-        self.acc = 2
-        self.speed = random.uniform(1, 2)
+        if play_mode.weapon.gun == 'P90':  # p90은 탄피배출구가 하단에 있다
+            self.speed = 0
+            self.acc = 0
+            if self.p.dir == 1:
+                self.x = x - 20
+            else:
+                self.x = x + 20
+            self.y = y - 30
+        else:
+            self.speed = random.uniform(1, 2)
+            self.acc = 2
+            self.x = x
+            self.y = y
+
         self.deg = 0
         self.simulate = True
         self.remove_timer = 100
 
         if not Shell.sound:
             Shell.sound = load_wav(shell_hit_directory)
+            Shell.image = load_image(shell_directory)
 
     def update(self):
         pps = game_framework.pps
@@ -167,26 +177,30 @@ class Shell:
     def draw(self):
         x = self.x + self.p.ex
         y = self.y + self.p.ey
-        self.image.rotate_draw(self.deg, x, y, self.size_x, self.size_y)
+        Shell.image.rotate_draw(self.deg, x, y, self.size_x, self.size_y)
 
     def handle_evnet(self):
         pass
 
 
 class Feedback:
+    image = None
+
     def __init__(self, x, y, size):
-        self.image = load_image(hit_feeeback_directory)
         self.x = x
         self.y = y
         self.op = 1
         self.size = size
 
+        if not Feedback.image:
+            Feedback.image = load_image(hit_feeeback_directory)
+
     def draw(self):
-        self.image.opacify(self.op)
+        Feedback.image.opacify(self.op)
         if self.size == 2:
-            self.image.draw(self.x, self.y, 60, 60)
+            Feedback.image.draw(self.x, self.y, 60, 60)
         elif self.size == 1:
-            self.image.draw(self.x, self.y, 40, 40)
+            Feedback.image.draw(self.x, self.y, 40, 40)
 
     def update(self):
         pps = game_framework.pps
@@ -246,7 +260,13 @@ class Bullet:
         pass
 
 
-class KatanaSlice:
+class Slice:
+    back = None
+    katana_slice = None
+    player1_slice_right = None
+    player1_slice_left = None
+    effect = None
+
     def __init__(self, p, weapon):
         self.p, self.weapon = p, weapon
         self.x, self.y = 0, 0
@@ -258,46 +278,47 @@ class KatanaSlice:
 
         self.dir = self.p.dir
 
-        self.back = load_image(pause_bg_directory)
-        self.katana_slice = load_image(katana_slice_directory)
-        self.player1_slice_right = load_image(player1_slice_right_directory)
-        self.player1_slice_left = load_image(player1_slice_left_directory)
-        self.effect = load_image(slice_effect_directory)
+        if not Slice.back:
+            Slice.back = load_image(pause_bg_directory)
+            Slice.katana_slice = load_image(katana_slice_directory)
+            Slice.player1_slice_right = load_image(player1_slice_right_directory)
+            Slice.player1_slice_left = load_image(player1_slice_left_directory)
+            Slice.effect = load_image(slice_effect_directory)
 
         self.start_x = self.p.px
         self.stary_y = self.p.py
 
     def draw(self):
-        self.back.opacify(self.op)
-        self.katana_slice.opacify(self.op)
-        self.effect.opacify(self.op)
+        Slice.back.opacify(self.op)
+        Slice.katana_slice.opacify(self.op)
+        Slice.effect.opacify(self.op)
 
-        self.back.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
+        Slice.back.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
 
         # 스킬 이펙트 출력
         if self.dir == 1:
-            self.effect.clip_composite_draw(0, 0, 1500, 280, 0, '', self.p.px - 900, self.p.py, 1500, 280)
+            Slice.effect.clip_composite_draw(0, 0, 1500, 280, 0, '', self.p.px - 900, self.p.py, 1500, 280)
         else:
-            self.effect.clip_composite_draw(0, 0, 1500, 280, 0, 'h', self.p.px + 900, self.p.py, 1500, 280)
+            Slice.effect.clip_composite_draw(0, 0, 1500, 280, 0, 'h', self.p.px + 900, self.p.py, 1500, 280)
 
         if self.p.dir == 1:
-            self.player1_slice_right.opacify(self.op)
-            (self.player1_slice_right.rotate_draw(self.p.rotate, self.p.px, self.p.py, 400, 400))
+            Slice.player1_slice_right.opacify(self.op)
+            Slice.player1_slice_right.rotate_draw(self.p.rotate, self.p.px, self.p.py, 400, 400)
             if self.weapon.skill_enable:
-                self.katana_slice.clip_composite_draw \
+                Slice.katana_slice.clip_composite_draw \
                     (0, 0, 60, 410, -self.weapon.melee_deg, 'h', self.p.px - 40, self.p.py - 30, 50, 360)
             else:
-                self.katana_slice.clip_composite_draw \
+                Slice.katana_slice.clip_composite_draw \
                     (0, 0, 60, 410, self.weapon.melee_deg, '', self.p.px + 40, self.p.py - 30, 50, 360)
 
         elif self.p.dir == 0:
-            self.player1_slice_left.opacify(self.op)
-            self.player1_slice_left.rotate_draw(-self.p.rotate, self.p.px, self.p.py, 400, 400)
+            Slice.player1_slice_left.opacify(self.op)
+            Slice.player1_slice_left.rotate_draw(-self.p.rotate, self.p.px, self.p.py, 400, 400)
             if self.weapon.skill_enable:
-                self.katana_slice.clip_composite_draw \
+                Slice.katana_slice.clip_composite_draw \
                     (0, 0, 60, 410, self.weapon.melee_deg, '', self.p.px + 40, self.p.py - 30, 50, 360)
             else:
-                self.katana_slice.clip_composite_draw \
+                Slice.katana_slice.clip_composite_draw \
                     (0, 0, 60, 410, -self.weapon.melee_deg, 'h', self.p.px - 40, self.p.py - 30, 50, 360)
 
     def update(self):
@@ -317,17 +338,24 @@ class KatanaSlice:
 
 
 class PlayerDamage:
+    image_damage = None
+    image_heal = None
+
     def __init__(self, heal=False):
         self.op = 1
         self.heal = heal
-        if not self.heal:
-            self.image = load_image(player_damage_directory)
-        elif self.heal:
-            self.image = load_image(player_heal_directory)
+
+        if not PlayerDamage.image_damage:
+            PlayerDamage.image_damage = load_image(player_damage_directory)
+            PlayerDamage.image_heal = load_image(player_heal_directory)
 
     def draw(self):
-        self.image.opacify(self.op)
-        self.image.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
+        if not self.heal:
+            PlayerDamage.image_damage.opacify(self.op)
+            PlayerDamage.image_damage.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
+        else:
+            PlayerDamage.image_heal.opacify(self.op)
+            PlayerDamage.image_heal.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
         pass
 
     def update(self):
@@ -343,9 +371,9 @@ class PlayerDamage:
 
 class Coin:
     pickup = None
+    image = None
 
     def __init__(self, p, mp, x, y, dir, sp=2):
-        self.image = load_image(coin_icon_directory)
         self.p = p
         self.mp = mp
         self.x = x
@@ -364,10 +392,11 @@ class Coin:
 
         if not Coin.pickup:
             Coin.pickup = load_wav(pickup_directory)
+            Coin.image = load_image(coin_icon_directory)
 
     def draw(self):
-        self.image.opacify(self.op)
-        self.image.draw(self.x + self.p.ex, self.y + self.p.ey, self.size_x, 70)
+        Coin.image.opacify(self.op)
+        Coin.image.draw(self.x + self.p.ex, self.y + self.p.ey, self.size_x, 70)
         draw_rectangle(*self.get_bb())
 
     def update(self):
@@ -385,12 +414,12 @@ class Coin:
 
                 if self.dir == 1:  # 몬스터가 드랍한 직후 지정 방향으로 살짝 움직인다.
                     self.x -= self.sp * pps / 4
-                    if self.x <= self.mp.playerToWallLeft + 20:
+                    if self.x <= self.mp.playerToWallLeft + 35:
                         self.dir = 0
 
                 elif self.dir == 0:
                     self.x += self.sp * pps / 4
-                    if self.x >= self.mp.playerToWallRight + 20:
+                    if self.x >= self.mp.playerToWallRight - 35:
                         self.dir = 1
 
                 if self.y <= 230 and self.acc <= 0:  # 바닥에 떨어지면
@@ -432,19 +461,23 @@ class Coin:
 
 
 class Explode:
+    image = None
+
     def __init__(self, p, weapon, x, y):
-        self.image = load_image(explode_directory)
         self.x = x
         self.y = y + 50
         self.p = p
         self.frame = 0
         self.weapon = weapon
 
+        if not Explode.image:
+            Explode.image = load_image(explode_directory)
+
     def draw(self):
         x = self.x + self.p.ex
         y = self.y + self.p.ey
         size = self.weapon.gren_level * 200  # 수류탄 레벨이 올라갈수록 폭발도 커진다
-        self.image.clip_composite_draw(100 * int(self.frame), 0, 100, 695, 0, '', x, y, 200 + size, 200 + size)
+        Explode.image.clip_composite_draw(100 * int(self.frame), 0, 100, 695, 0, '', x, y, 200 + size, 200 + size)
 
     def update(self):
         pps = game_framework.pps
@@ -478,9 +511,9 @@ class Explode:
 class Grenade:
     sound = None
     hit_sound = None
+    image = None
 
     def __init__(self, p, mp, weapon, x, y, dir):
-        self.image = load_image(grenade_directory)
         self.x, self.y, self.dir = x, y, dir
         self.p, self.mp = p, mp
         self.weapon = weapon
@@ -493,6 +526,7 @@ class Grenade:
         if not Grenade.sound:
             Grenade.sound = load_wav(explode_sound_directory)
             Grenade.hit_sound = load_wav(gren_hit_directory)
+            Grenade.image = load_image(grenade_directory)
 
         if self.p.mv_right and self.dir == 1:  # 움직이는 방향으로 향하여 던지면 더 빨리 날아간다
             self.speed = 9
@@ -502,7 +536,7 @@ class Grenade:
     def draw(self):
         x = self.x + self.p.ex
         y = self.y + self.p.ey
-        self.image.rotate_draw(self.deg, x, y, 40, 40)
+        Grenade.image.rotate_draw(self.deg, x, y, 40, 40)
         pass
 
     def update(self):
@@ -556,15 +590,18 @@ class Grenade:
 
 
 class Splash:
+    image = None
+
     def __init__(self, p, x, y):
         self.p = p
         self.x = x
         self.y = y
         self.frame = 0
-        self.image = load_image(splash_directory)
+        if not Splash.image:
+            Splash.image = load_image(splash_directory)
 
     def draw(self):
-        self.image.clip_draw(int(self.frame) * 165, 0, 165, 148, self.x + self.p.ex, self.y + self.p.ey, 400, 400)
+        Splash.image.clip_draw(int(self.frame) * 165, 0, 165, 148, self.x + self.p.ex, self.y + self.p.ey, 400, 400)
 
     def update(self):
         pps = game_framework.pps
@@ -587,6 +624,9 @@ class Splash:
 
 class Dead:
     sound = None
+    type1 = None
+    type2 = None
+    type4 = None
 
     def __init__(self, p, mp, x, y, dir, type, animation=0):
         self.p, self.mp = p, mp
@@ -601,12 +641,16 @@ class Dead:
 
         self.size_reduce = 0  # type2 데드 모션 출력 용 변수
 
+        if not Dead.sound:
+            Dead.sound = load_wav(flesh_directory)
+            Dead.type1 = load_image(goblin_dead_directory)
+            Dead.type2 = load_image(ghost_dead_directory)
+            Dead.type4 = load_image(apple_dead_directory)
+
         if self.type == 1:
-            self.image = load_image(goblin_dead_directory)
             self.acc = 1.5  # 걸어오다가 앞으로 넘어져 죽는 모션을 위한 변수
 
         elif self.type == 4:
-            self.image = load_image(apple_dead_directory)
             self.acc = 0.5  # 걸어오다가 앞으로 넘어져 죽는 모션을 위한 변수
 
         if self.ani == 1:
@@ -625,31 +669,31 @@ class Dead:
             self.ani = -1
             self.image = load_image(ghost_dead_directory)
 
-        if not Dead.sound:
-            Dead.sound = load_wav(flesh_directory)
-
     def draw(self):
         deg = math.radians(self.deg)
-        self.image.opacify(self.op)
 
         if self.type == 1:  # 믄스터마다 이미지 크기가 달라 따로 지정
+            Dead.type1.opacify(self.op)
             if self.dir == 1:
-                self.image.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey - 50, 280, 280)
+                Dead.type1.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey - 50, 280, 280)
             elif self.dir == 0:
-                self.image.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey - 50, 280, 280)
+                Dead.type1.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey - 50, 280, 280)
 
         elif self.type == 2:
+            Dead.type2.opacify(self.op)
             if self.dir == 1:
-                self.image.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey,
+                Dead.type2.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey,
                                           400 - self.size_reduce, 400 - self.size_reduce)
             elif self.dir == 0:
-                self.image.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey,
+                Dead.type2.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey,
                                           400 - self.size_reduce, 400 - self.size_reduce)
+
         elif self.type == 4:
+            Dead.type4.opacify(self.op)
             if self.dir == 1:
-                self.image.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey - 30, 450, 450)
+                Dead.type4.composite_draw(deg, 'h', self.x + self.p.ex, self.y + self.p.ey - 30, 450, 450)
             elif self.dir == 0:
-                self.image.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey - 30, 450, 450)
+                Dead.type4.composite_draw(deg, '', self.x + self.p.ex, self.y + self.p.ey - 30, 450, 450)
 
     def update(self):
         pps = game_framework.pps
@@ -867,3 +911,69 @@ class Start:
 
         if self.y1 > HEIGHT + HEIGHT / 2:
             game_manager.remove_object(self)
+
+
+class Clip:
+    image = None
+    sound = None
+
+    def __init__(self, p, mp, x, y, dir):
+        self.x, self.y, self.dir = x, y, dir
+        self.p, self.mp = p, mp
+        self.deg = 0
+        self.speed = 2
+        self.acc = 3
+        self.simulate = True
+        self.remove_timer = 100
+
+        if not Clip.image:
+            Clip.image = load_image(clip_directory)
+            Clip.sound = load_wav(m1_clip_hit_directory)
+
+    def draw(self):
+        Clip.image.rotate_draw(self.deg, self.x + self.p.ex, self.y + self.p.ey, 40, 40)
+
+    def update(self):
+        pps = game_framework.pps
+        speed = game_framework.pps * self.p.speed
+        if game_framework.MODE == 'play':
+            if self.p.mv_right:
+                self.x -= speed
+            elif self.p.mv_left:
+                self.x += speed
+
+            if self.simulate:  # true 일 때만 움직인다
+                if self.dir == 1:
+                    self.x -= self.speed * pps / 4
+                    self.deg += 0.1 * pps / 2
+
+                elif self.dir == 0:
+                    self.x += self.speed * pps / 4
+                    self.deg -= 0.1 * pps / 2
+
+                self.y += self.acc * pps / 4
+                self.acc -= 0.05 * pps / 4  # 바닥에 튕길때마다 가속값이 감소
+
+                if self.y < 195:  # 튕길 속도가 나는 한 계속 튄다
+                    self.y = 195
+                    self.acc = (self.acc / 2) * -1
+                    Clip.sound.play()
+
+                    if -1 <= self.acc <= 1:  # 더 이상 튕길 속도가 나지 않으면 시뮬레이션을 정지한다.
+                        self.deg = 0
+                        self.y = 200
+                        self.simulate = False
+
+                if self.x <= self.mp.playerToWallLeft + 10:  # 벽에 튕기면 반대로 튄다
+                    self.dir = 0
+
+                if self.x >= self.mp.playerToWallRight - 10:
+                    self.dir = 1
+
+            else:
+                self.remove_timer -= pps / 3
+                if self.remove_timer <= 0:
+                    game_manager.remove_object(self)
+
+    def handle_event(self):
+        pass

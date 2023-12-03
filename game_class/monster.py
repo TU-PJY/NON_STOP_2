@@ -1,15 +1,14 @@
-from pico2d import draw_rectangle, load_wav
-
-from config import bow_sound_directory
+from pico2d import draw_rectangle, load_wav, load_image
 from game_class.prop import PlayerDamage, Feedback
 from game_class_manager.monster_manager.etc import monster_animation, update_monster_pos, update_monster_opacify, \
     update_delay, update_monster_size
-from game_class_manager.monster_manager.file_loader import load_monster
+from game_class_manager.monster_manager.file_loader import load_file
 from game_class_manager.monster_manager.monster_attack import process_attack
 from game_class_manager.monster_manager.monster_damage import damage_monster
 from game_class_manager.monster_manager.monster_move import move_monster
 from game_class_manager.monster_manager.monster_output import draw_monster
 from game_work import game_framework, game_manager
+from config import *
 
 
 class Update:
@@ -65,13 +64,27 @@ class StateMachineTarget:
 
 
 class Monster:
+    type1 = None
+    type1_damage = None
+    type2 = None
+    type2_damage = None
+    type3 = None
+    type3_damage = None
+    type4 = None
+    type4_damage = None
+
+    hp_back = None
+    hp_front = None
+
+    bow = None
+
     def __init__(self, p, weapon, target, mp, x, y, speed, hp, frame, monster_type):
         self.p, self.weapon, self.target = p, weapon, target
         self.mp = mp
         self.type, self.x, self.y, self.hp, self.speed, self.frame = \
             monster_type, x, y, hp, speed, frame
 
-        load_monster(self)
+        load_file(self)
 
         # 공용 변수
         self.atk_delay, self.dir = 0, 0
@@ -109,7 +122,6 @@ class Monster:
         elif self.type == 4:
             self.is_shoot = False
             self.shoot_delay = 100
-            self.bow = load_wav(bow_sound_directory)
 
         self.state_machine = StateMachineTarget(self)
         self.state_machine.start()
@@ -232,10 +244,9 @@ class Monster:
 
                         elif self.weapon.gun == 'CHEYTAC':
                             self.hp -= 250 - 30 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
-                            if self.hp > 0:
-                                self.knockback_dir = self.dir
-                                self.knockback = True
-                                self.back_acc = 16 - (1 * self.weapon.pen_count)
+                            self.knockback_dir = self.dir
+                            self.knockback = True
+                            self.back_acc = 16 - (1 * self.weapon.pen_count)
                             self.weapon.pen_count += 1
 
                         if self.weapon.pen_count == self.weapon.pen_limit:  # 최대 관통 수를 초과하면 더 이상 초과하지 않는다.

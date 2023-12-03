@@ -5,53 +5,58 @@ from mods import play_mode
 
 # 상점 창 출력
 def draw_shop_window(self):
-    self.back.draw(self.x, self.y, WIDTH, HEIGHT)
-    self.back.opacify(self.op)
-    self.button_gun.draw(self.cat_x[0], self.cat_y[0], 200, 120)
-    self.button_melee.draw(self.cat_x[1], self.cat_y[1], 200, 120)
-    self.button_exp.draw(self.cat_x[2], self.cat_y[2], 200, 120)
-    self.window.draw(self.x, self.window_y, 950, 550)
-    self.coin_icon.draw(WIDTH / 2 - 420, self.window_y - 280, 50, 50)
-    self.font_small.draw(WIDTH / 2 - 390, self.window_y - 280, '%d' % play_mode.p.coin, (255, 255, 255))
+    from pop_ui_class.shop import Shop
+
+    Shop.back.draw(self.x, self.y, WIDTH, HEIGHT)
+    Shop.back.opacify(self.op)
+    Shop.button_gun.draw(self.cat_x[0], self.cat_y[0], 200, 120)
+    Shop.button_melee.draw(self.cat_x[1], self.cat_y[1], 200, 120)
+    Shop.button_exp.draw(self.cat_x[2], self.cat_y[2], 200, 120)
+    Shop.window.draw(self.x, self.window_y, 950, 550)
+    Shop.coin_icon.draw(WIDTH / 2 - 420, self.window_y - 280, 50, 50)
+    Shop.font_small.draw(WIDTH / 2 - 390, self.window_y - 280, '%d' % play_mode.p.coin, (255, 255, 255))
 
     # 카테고리 및 페이지에 따라 출력되는 버튼 개수가 다르다
     if self.select_mode == 0:
         if self.page == 1:
             for i in range(5):
                 for j in range(4):
-                    self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
+                    Shop.button.draw(self.button_x[i], self.button_y[j], 160, 110)
 
         elif self.page == 2:
             for i in range(5):
                 for j in range(1):
-                    self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
+                    Shop.button.draw(self.button_x[i], self.button_y[j], 160, 110)
 
     elif self.select_mode == 1:
         for i in range(5):
             for j in range(1):
-                self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
+                Shop.button.draw(self.button_x[i], self.button_y[j], 160, 110)
 
     elif self.select_mode == 2:
         for i in range(5):
             for j in range(2):
-                self.button.draw(self.button_x[i], self.button_y[j], 160, 110)
+                Shop.button.draw(self.button_x[i], self.button_y[j], 160, 110)
 
-    self.font.draw(WIDTH / 2 + 200, self.window_y + 295, "SHOP", (255, 255, 255))
+    Shop.font.draw(WIDTH / 2 + 200, self.window_y + 295, "SHOP", (255, 255, 255))
+
     if self.select_mode == 0:
         if self.page == 1:
-            self.font.draw(WIDTH / 2 + 460, self.window_y - 120, 'PAGE 1', (255, 255, 255))
-            self.button_page_right.composite_draw(0, '', self.page_right_x, self.page_right_y, 80, 100)
+            Shop.font.draw(WIDTH / 2 + 460, self.window_y - 120, 'PAGE 1', (255, 255, 255))
+            Shop.button_page_right.composite_draw(0, '', self.page_right_x, self.page_right_y, 80, 100)
 
         elif self.page == 2:
-            self.font.draw(WIDTH / 2 + 460, self.window_y - 120, 'PAGE 2', (255, 255, 255))
-            self.button_page_left.composite_draw(0, 'h', self.page_left_x, self.page_left_y, 80, 100)
+            Shop.font.draw(WIDTH / 2 + 460, self.window_y - 120, 'PAGE 2', (255, 255, 255))
+            Shop.button_page_left.composite_draw(0, 'h', self.page_left_x, self.page_left_y, 80, 100)
 
-    self.info_back.draw(WIDTH / 2 + 580, self.window_y + 75, 280, 342)
+    Shop.info_back.draw(WIDTH / 2 + 580, self.window_y + 75, 280, 342)
 
 
 # 커서 출력
 def draw_cursor(self):
-    self.cursor.draw(self.mx + 35, self.my - 35, 70, 70)
+    from pop_ui_class.shop import Shop
+
+    Shop.cursor.draw(self.mx + 35, self.my - 35, 70, 70)
 
 
 # 최초 상점 실행 시 밑에서 위로 창이 올라온다
@@ -89,18 +94,20 @@ def update_cat_button(self):
 
 
 def draw_ind(self):
+    from pop_ui_class.shop import Shop
+
     if self.select_mode == 0:
         if self.page == self.eq_page:
-            self.ind_equip.draw \
+            Shop.ind_equip.draw \
                 (self.button_x[self.eq_gun_x], self.button_y[self.eq_gun_y], self.eq_size_x, self.eq_size_y)
 
     elif self.select_mode == 1:
-        self.ind_equip.draw \
+        Shop.ind_equip.draw \
             (self.button_x[self.eq_melee_x], self.button_y[self.eq_melee_y], self.eq_size_x, self.eq_size_y)
 
     if self.ind_sel_on:
         if self.sel_cat == self.select_mode:
-            self.ind_select.draw \
+            Shop.ind_select.draw \
                 (self.button_x[self.ind_sel_x], self.button_y[self.ind_sel_y], self.sel_size_x, self.sel_size_y)
 
     for i in range(5):
@@ -108,15 +115,15 @@ def draw_ind(self):
             if self.select_mode == 0:
                 if self.page == 1:
                     if not play_mode.weapon.buy_list_gun[i][j]:  # 구입하지 않은 총기에 대해서는 잠김 표시
-                        self.ind_lock.draw(self.button_x[i] + 50, self.button_y[j] - 30, 30, 30)
+                        Shop.ind_lock.draw(self.button_x[i] + 50, self.button_y[j] - 30, 30, 30)
                 elif self.page == 2:
                     if j == 0 <= i <= 4:
                         if not play_mode.weapon.buy_list_gun2[i][j]:  # 구입하지 않은 총기에 대해서는 잠김 표시
-                            self.ind_lock.draw(self.button_x[i] + 50, self.button_y[j] - 30, 30, 30)
+                            Shop.ind_lock.draw(self.button_x[i] + 50, self.button_y[j] - 30, 30, 30)
             elif self.select_mode == 1:
                 if j == 0 <= i <= 4:
                     if not play_mode.weapon.buy_list_melee[i][j]:  # 구입하지 않은 근접무기에 대해서는 잠김 표시
-                        self.ind_lock.draw(self.button_x[i] + 50, self.button_y[j] - 30, 30, 30)
+                        Shop.ind_lock.draw(self.button_x[i] + 50, self.button_y[j] - 30, 30, 30)
 
 
 def update_ind_size(self):  # 아이템 선택 피드백을 출력한다.

@@ -121,5 +121,10 @@ def load_gun_sound(self):
     self.fal_shoot = load_wav(fal_shoot_directory)
     self.lvoas_shoot = load_wav(lvoas_shoot_directory)
 
+    self.rifle_reload = load_wav(rifle_reload_directory)
+    self.m1_reload = load_wav(m1_reload_directory)
+    self.m1_clip = load_wav(m1_clip_sound_directory)
+    self.m1_reload_middle = load_wav(m1_reload_middle_directory)
+
     # etc
     self.throw_sound = load_wav(throw_directoy)

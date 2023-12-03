@@ -1,5 +1,7 @@
 from config import FLAME_DISPLAY_TIME
+from game_class.prop import Clip
 from game_class_manager.weapon_manager.etc import make_shell
+from game_work import game_manager
 
 
 def play_gun_sound(weapon, gun):
@@ -40,6 +42,8 @@ def play_gun_sound(weapon, gun):
         # rifle
         case 'M1':
             weapon.m1_shoot.play()
+            if weapon.cur_ammo == 1:
+                weapon.m1_clip.play()
         case 'WIN':
             weapon.win_shoot.play()
         case 'MINI14':
@@ -126,6 +130,10 @@ def shoot_gun(weapon):
                 elif weapon.gun == 'M1':  # 반자동 소총이므로 연사 딜레이를 무한대로 부여함
                     weapon.shoot_delay = 99999999999999999999999
                     weapon.p.shake_range = 35
+                    if weapon.cur_ammo == 1:
+                        clip = Clip(weapon.p, weapon.mp, weapon.p.x, weapon.p.y - weapon.p.cam_h, weapon.p.dir)
+                        game_manager.add_object(clip, 3)
+                        weapon.reload_time = 150  # M1은 구조 상 완전 재장전이 더 빠르다
 
                 elif weapon.gun == 'WIN':
                     weapon.shoot_delay = 250

@@ -8,6 +8,8 @@ def init_equip_list_melee():
 
 
 def buy_melee(self, i, j):
+    from pop_ui_class.shop import Shop
+
     buy = False
 
     if (i, j) == (0, 0):
@@ -35,13 +37,15 @@ def buy_melee(self, i, j):
 
     if buy:
         play_mode.weapon.buy_list_melee[i][j] = True
-        self.buy_sound.play()
+        Shop.buy_sound.play()
     else:
-        self.cant_buy.play()
+        Shop.cant_buy.play()
 
 
 def equip_melee(self, i, j):
-    self.select_melee.play()
+    from pop_ui_class.shop import Shop
+
+    Shop.select_melee.play()
 
     if (i, j) == (0, 0):
         play_mode.weapon.melee = 'KNIFE'
