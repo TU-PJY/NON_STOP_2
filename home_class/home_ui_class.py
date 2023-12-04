@@ -48,7 +48,7 @@ class Data:  # 홈 모드에서 사용되는 데이터를 저장하기 위한 �
 class Button:
     def __init__(self, data, cursor):
         self.font = load_font(font2_directory, 50)
-        self.font2 = load_font(font_directory, 50)
+        self.font2 = load_font(font_directory, 40)
         self.font3 = load_font(font2_directory, 30)
         self.cursor = cursor
         self.op1, self.op2, self.op3 = 0, 0, 0

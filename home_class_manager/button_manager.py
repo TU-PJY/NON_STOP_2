@@ -136,7 +136,7 @@ def setting_draw_button(self):
         self.font.draw(50, HEIGHT / 2 - 100, '플레이 데이터 삭제', (255, 255, 255))
     elif self.data_wipe_count == 1:
         self.font3.draw(50, HEIGHT / 2 - 20, '플레이 데이터를 초기화 하시겠습니까?', (255, 255, 255))
-        self.font2.draw(50, HEIGHT / 2 - 100, 'YES', (255, 255, 255))
+        self.font2.draw(50, HEIGHT / 2 - 103, 'YES', (255, 255, 255))
 
     # self.button_setting2.draw(280, HEIGHT / 2 - 210, 540, 80)
     # if game_framework.DEBUG:
