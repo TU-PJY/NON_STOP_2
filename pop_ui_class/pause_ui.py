@@ -274,4 +274,5 @@ class End:
         if self.delay >= 550:
             game_framework.MODE = 'home'
             game_framework.ANIMATION = True
+            game_framework.START = False
             game_framework.change_mode(home_mode)

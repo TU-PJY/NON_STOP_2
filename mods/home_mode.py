@@ -57,7 +57,6 @@ def init():
 
     if game_framework.START:  # 게임 첫 실행때만 객체 삽입
         start3 = Start3(data)
-        game_manager.START = False
         pass
 
     game_manager.add_object(bgm)

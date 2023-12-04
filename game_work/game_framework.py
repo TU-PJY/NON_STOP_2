@@ -7,7 +7,8 @@ stack = None
 
 MODE = 'play'
 ANIMATION = False
-START = True
+START = False
+# DEBUG = False
 
 
 def change_mode(mode):

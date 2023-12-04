@@ -14,6 +14,9 @@ def load_file(self):  # 캐릭터 선택 버튼을 출력하기 위한 이미지
     self.button_exit2 = load_image(button_exit_mode_directory)
     self.button_exit3 = load_image(button_exit_mode_directory)
 
+    self.button_setting1 = load_image(button_exit_mode_directory)
+    self.button_setting2 = load_image(button_exit_mode_directory)
+
     self.ch1 = load_image(player1_right_image_directory)
     self.ch2 = load_image(player2_right_image_directory)
     self.ch3 = load_image(player3_right_image_directory)
@@ -116,6 +119,126 @@ def exit_draw_button(self):
     self.font.draw(50, HEIGHT / 2 - 320, '바탕화면으로 나가기', (255, 255, 255))
 
 
+# 설정 화면 버튼 출력
+def setting_draw_button(self):
+    self.button_setting1.opacify(self.op1)
+    self.button_setting2.opacify(self.op2)
+
+    self.exit_bg.opacify(self.op_bg)
+    self.exit_bg.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
+    self.gun.opacify(self.op_bg)
+    self.gun.rotate_draw(math.radians(-30), WIDTH / 2 + 300, self.ky + self.pos - 200, 1800, 600)
+
+    self.button_setting1.draw(280, HEIGHT / 2 - 100, 540, 80)
+    if self.data_wipe_count == 0:
+        if self.data_wiped:
+            self.font3.draw(50, HEIGHT / 2 - 20, '플레이 데이터가 초기화 되었습니다.', (255, 255, 255))
+        self.font.draw(50, HEIGHT / 2 - 100, '플레이 데이터 삭제', (255, 255, 255))
+    elif self.data_wipe_count == 1:
+        self.font3.draw(50, HEIGHT / 2 - 20, '플레이 데이터를 초기화 하시겠습니까?', (255, 255, 255))
+        self.font2.draw(50, HEIGHT / 2 - 100, 'YES', (255, 255, 255))
+
+    # self.button_setting2.draw(280, HEIGHT / 2 - 210, 540, 80)
+    # if game_framework.DEBUG:
+    #     self.font.draw(50, HEIGHT / 2 - 210, '히트박스: ON', (255, 255, 255))
+    # else:
+    #     self.font.draw(50, HEIGHT / 2 - 210, '히트박스: OFF', (255, 255, 255))
+
+    self.back_button_back.opacify(self.op4)
+    self.back_button_back.draw(60, 60, 100, 100)
+    self.back_button.clip_composite_draw(0, 0, 10, 15, 0, 'h', 60, 60, 80, 80)
+
+
+# 설정 화면 버튼 업데이트
+def setting_update_button(self):
+    pps = game_framework.pps
+    mx = self.cursor.mx
+    my = self.cursor.my
+
+    if self.kacc > 0:
+        self.ky += self.kacc * pps / 4
+        self.kacc -= pps / 30
+
+    self.pos = math.sin(self.deg) * 50
+    self.deg += pps / 1000
+
+    if self.op_bg < 1:
+        self.op_bg += pps / 80
+        if self.op_bg > 1:
+            self.op_bg = 1
+
+    # button 1
+    if 10 < mx < 550 and HEIGHT / 2 - 100 - 40 < my < HEIGHT / 2 - 100 + 40:
+        self.op1 += pps / 50
+        if self.op1 > 1:
+            self.op1 = 1
+    else:
+        self.op1 -= pps / 50
+        if self.op1 < 0:
+            self.op1 = 0
+
+    # button 2
+    if 10 < mx < 550 and HEIGHT / 2 - 210 - 40 < my < HEIGHT / 2 - 210 + 40:
+        self.op2 += pps / 50
+        if self.op2 > 1:
+            self.op2 = 1
+    else:
+        self.op2 -= pps / 50
+        if self.op2 < 0:
+            self.op2 = 0
+
+    # button 3
+    if 10 <= mx <= 110 and 10 <= my <= 110:
+        self.op4 += pps / 50
+        if self.op4 > 1:
+            self.op4 = 1
+    else:
+        self.op4 -= pps / 50
+        if self.op4 < 0:
+            self.op4 = 0
+
+    if self.click:
+        # 플레이 데이터 삭제
+        if 10 < mx < 550 and HEIGHT / 2 - 100 - 40 < my < HEIGHT / 2 - 100 + 40:
+            self.button_sound.play()
+            self.op1 = 0
+            self.data_wipe_count += 1
+            if self.data_wipe_count == 2:
+                data = [
+                    {"max_rounds": 0}
+                ]
+                with open('data//rounds_data.json', 'w') as f:
+                    json.dump(data, f)
+
+                data2 = [
+                    {"ch": 1}
+                ]
+                with open('data//ch_data.json', 'w') as f:
+                    json.dump(data2, f)
+
+                self.data.ch = 1
+                self.data_wiped = True
+                self.data_wipe_count = 0
+
+        # # 디버그 모드
+        # if 10 < mx < 550 and HEIGHT / 2 - 210 - 40 < my < HEIGHT / 2 - 210 + 40:
+        #     self.button_sound.play()
+        #     self.op2 = 0
+        #     match game_framework.DEBUG:
+        #         case False:
+        #             game_framework.DEBUG = True
+        #         case True:
+        #             game_framework.DEBUG = False
+
+        # 뒤로 가기
+        if 10 <= mx <= 110 and 10 <= my <= 110:
+            self.button_sound.play()
+            self.op4 = 0
+            self.data_wipe_count = 0
+            self.data_wiped = False
+            self.data.mode = 'exit_mode'
+
+
 # 나가기 화면 버튼 업데이트
 def exit_update_button(self):
     pps = game_framework.pps
@@ -173,6 +296,9 @@ def exit_update_button(self):
 
         # 환경 설정
         if 10 < mx < 550 and HEIGHT / 2 - 210 - 40 < my < HEIGHT / 2 - 210 + 40:
+            self.op1 = 0
+            self.op2 = 0
+            self.data.mode = 'setting'
             self.button_sound.play()
             pass
 

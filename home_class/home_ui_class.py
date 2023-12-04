@@ -5,7 +5,7 @@ from pico2d import *
 from config import *
 from game_work import game_framework, game_manager
 from home_class_manager.button_manager import home_update_button, home_draw_button, ch_draw_button, load_file, \
-    ch_update_button, exit_draw_button, exit_update_button
+    ch_update_button, exit_draw_button, exit_update_button, setting_draw_button, setting_update_button
 from mods import play_mode, home_mode
 
 
@@ -24,7 +24,10 @@ class Bgm:
 
 class Data:  # 홈 모드에서 사용되는 데이터를 저장하기 위한 가상 객체
     def __init__(self):
-        self.mode = 'title_mode'  # 모드에 따라 보이는 화면이 달라진다.
+        if game_framework.START:
+            self.mode = 'title_mode'  # 모드에 따라 보이는 화면이 달라진다.
+        else:
+            self.mode = 'home'  # 모드에 따라 보이는 화면이 달라진다.
         self.exp = 0  # 캐릭터를 구매하는데에 필요한 재화
 
     def __getstate__(self):
@@ -45,6 +48,8 @@ class Data:  # 홈 모드에서 사용되는 데이터를 저장하기 위한 �
 class Button:
     def __init__(self, data, cursor):
         self.font = load_font(font2_directory, 50)
+        self.font2 = load_font(font_directory, 50)
+        self.font3 = load_font(font2_directory, 30)
         self.cursor = cursor
         self.op1, self.op2, self.op3 = 0, 0, 0
         self.op4 = 0
@@ -62,6 +67,9 @@ class Button:
         self.button_sound = load_wav(button_click_directory)
         self.ch_sound = load_wav(ch_change_directory)
 
+        self.data_wipe_count = 0  # 버튼 두 번 클릭 시 플레이 데이터 초기화
+        self.data_wiped = False
+
         load_file(self)
 
     def draw(self):
@@ -71,6 +79,8 @@ class Button:
             ch_draw_button(self)
         elif self.data.mode == 'exit_mode':
             exit_draw_button(self)
+        elif self.data.mode == 'setting':
+            setting_draw_button(self)
 
     def update(self):
         if self.data.mode == 'home':
@@ -79,6 +89,8 @@ class Button:
             ch_update_button(self)
         elif self.data.mode == 'exit_mode':
             exit_update_button(self)
+        elif self.data.mode == 'setting':
+            setting_update_button(self)
 
         self.click = False
 
