@@ -29,7 +29,7 @@ class Image:
         self.logo.draw(410, 230, 400, 200)
 
         self.font2.draw(10, 270, 'Powered by', (0, 0, 0))
-        self.font.draw(130, 272, 'Pico2D', (0, 0, 0))
+        self.font2.draw(130, 272, 'Pico2D', (0, 0, 0))
 
     def update(self):
         pass
