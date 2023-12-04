@@ -14,6 +14,8 @@ class Image:
         self.gun = load_image(awp_right_directory)
         self.rapier = load_image(rapier_directory)
         self.pistol = load_image(m500_left_directory)
+        self.font = load_font(font_splash_directory, 30)
+        self.font2 = load_font(font2_directory, 20)
 
     def draw(self):
         self.bg.draw(400, 20)
@@ -25,6 +27,9 @@ class Image:
         self.gun.rotate_draw(math.radians(-10), 370, 32, 600, 200)
 
         self.logo.draw(410, 230, 400, 200)
+
+        self.font2.draw(10, 270, 'Powered by', (0, 0, 0))
+        self.font.draw(130, 272, 'Pico2D', (0, 0, 0))
 
     def update(self):
         pass
@@ -51,8 +56,9 @@ def handle_events():
 
 
 def init():
-    global delay, image, back, delete_enable
+    global delay, image, back, delete_enable, resize_enable
     delete_enable = True
+    resize_enable = True
     delay = 0
     back = Back()
     image = Image()
@@ -62,20 +68,21 @@ def init():
 
 
 def update():
-    global delay, delete_enable
+    global delay, delete_enable, resize_enable
     pps = game_framework.pps
     game_manager.update()
     delay += pps / 4
 
-    if delay >= 500 and delete_enable:  # 화면 사이즈 변경 전 스플래쉬 이미지 삭제
+    if delay >= 800 and delete_enable:  # 화면 사이즈 변경 전 스플래쉬 이미지 삭제
         game_manager.remove_object(image)
         delete_enable = False
 
-    if delay >= 550:  # 화면 사이즈 변경
+    if delay >= 850 and resize_enable:  # 화면 사이즈 변경
         set_position_canvas(0, 0, WIDTH, HEIGHT)
         resize_canvas(WIDTH, HEIGHT)
+        resize_enable = False
 
-    if delay >= 600:  # 홈 모드 진입
+    if delay >= 900:  # 홈 모드 진입
         game_framework.change_mode(home_mode)
 
 

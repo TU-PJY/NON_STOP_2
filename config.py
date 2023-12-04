@@ -251,9 +251,12 @@ button_exit_mode_directory = 'res//ui//button_exit_mode.png'
 button_home_mode_directory = 'res//ui//button_home_mode.png'
 warning_directory = 'res//ui//warning.png'
 
+mata_logo_directory = 'res//ui//mata_logo.png'
+
 # 폰트 경로
 font_directory = 'res//font//bump-it-up.ttf'
 font2_directory = 'res//font//KORAIL2007.ttf'
+font_splash_directory = 'res//font//Ubuntu-Title.ttf'
 
 # 사운드 경로
 # pistol

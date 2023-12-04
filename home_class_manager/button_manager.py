@@ -283,7 +283,6 @@ def home_update_button(self):
         # 게임 시작
         if 10 < self.cursor.mx < 310 and HEIGHT / 2 - 100 - 40 < self.cursor.my < HEIGHT / 2 - 100 + 40:
             self.button_sound.play()
-            # game_framework.MODE = 'play'
             self.data.mode = 'loading_mode'
 
         # 캐릭터

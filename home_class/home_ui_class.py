@@ -24,7 +24,7 @@ class Bgm:
 
 class Data:  # 홈 모드에서 사용되는 데이터를 저장하기 위한 가상 객체
     def __init__(self):
-        self.mode = 'home'  # 모드에 따라 보이는 화면이 달라진다.
+        self.mode = 'title_mode'  # 모드에 따라 보이는 화면이 달라진다.
         self.exp = 0  # 캐릭터를 구매하는데에 필요한 재화
 
     def __getstate__(self):
@@ -210,7 +210,7 @@ class Start:  # 홈모드 -> 플레이 모드 전환 시
             case 0:
                 self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 근접무기로 적 처치 시 더 많은 코인을 얻을 수 있습니다.', (172, 162, 132))
             case 1:
-                self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 무작정 난사하는 것은 그다지 좋은 선택은 아닙니다.', (172, 162, 132))
+                self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 무작정 난사하는 것은 그다지 좋은 전략이 아닙니다.', (172, 162, 132))
             case 2:
                 self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 벽에 기대지 마세요!', (172, 162, 132))
             case 3:
@@ -272,3 +272,83 @@ class Start2:  # 플레이 모드 -> 홈 모드 전환 및 게임 시작 시
 
         if self.y1 > HEIGHT + HEIGHT / 2:
             game_manager.remove_object(self)
+
+
+class Start3:  # 스플래시 모드 -> 홈 모드 전환 시
+    def __init__(self, data):
+        self.data = data
+        self.y1 = HEIGHT
+        self.y2 = 0
+        self.delay = 0
+        self.font_delay = 0
+        self.bar_delay = 0
+        self.bar_on = True
+        self.font_on = [False for i in range(5)]
+        self.up = load_image(front_directory)
+        self.down = load_image(front_directory)
+        self.acc = 0
+        self.font = load_font(font_directory, 100)
+        self.logo = load_image(mata_logo_directory)
+
+        self.bar_x = 150
+
+    def draw(self):
+        self.up.draw(WIDTH / 2, self.y1, WIDTH, HEIGHT)
+        self.down.draw(WIDTH / 2, self.y2, WIDTH, HEIGHT)
+
+        if self.font_on[0]:
+            self.font.draw(150, self.y1 - HEIGHT / 2 + 80, 'M', (172, 162, 132))
+            self.bar_x = 260
+        if self.font_on[1]:
+            self.font.draw(260, self.y1 - HEIGHT / 2 + 80, 'A', (172, 162, 132))
+            self.bar_x = 370
+        if self.font_on[2]:
+            self.font.draw(370, self.y1 - HEIGHT / 2 + 80, 'T', (172, 162, 132))
+            self.bar_x = 480
+        if self.font_on[3]:
+            self.font.draw(480, self.y1 - HEIGHT / 2 + 80, 'A', (172, 162, 132))
+            self.bar_x = 590
+        if self.font_on[4]:
+            self.logo.draw(640, self.y1 - HEIGHT / 2 + 70, 240, 240)
+            self.bar_x = 700
+
+        if self.bar_on:
+            self.font.draw(self.bar_x, self.y1 - HEIGHT / 2 + 80, '_', (172, 162, 132))
+
+    def update(self):
+        pps = game_framework.pps
+
+        self.delay += pps / 4
+        self.font_delay += pps / 4
+
+        if self.font_on[4]:
+            self.bar_delay += pps / 4
+
+        if self.font_delay >= 100 and not self.font_on[0]:
+            self.font_on[0] = True
+        if self.font_delay >= 200 and not self.font_on[1]:
+            self.font_on[1] = True
+        if self.font_delay >= 300 and not self.font_on[2]:
+            self.font_on[2] = True
+        if self.font_delay >= 400 and not self.font_on[3]:
+            self.font_on[3] = True
+        if self.font_delay >= 500 and not self.font_on[4]:
+            self.font_on[4] = True
+
+        if self.bar_delay >= 100 and not self.bar_on:
+            self.bar_on = True
+            self.bar_delay = 0
+
+        if self.bar_delay >= 100 and self.bar_on:
+            self.bar_on = False
+            self.bar_delay = 0
+
+        if self.delay >= 1000:
+            self.data.mode = 'home'
+            self.y1 += self.acc * pps / 4
+            self.y2 -= self.acc * pps / 4
+
+            self.acc += pps / 100
+
+            if self.y1 > HEIGHT + HEIGHT / 2:
+                game_manager.remove_object(self)

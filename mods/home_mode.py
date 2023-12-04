@@ -2,7 +2,8 @@ from pico2d import *
 
 from config import *
 from game_work import game_manager, game_framework
-from home_class.home_ui_class import Button, Background, Playerimage, Monsterimage, Cursor, Data, Start, Start2, Bgm
+from home_class.home_ui_class import Button, Background, Playerimage, Monsterimage, Cursor, Data, Start, Start2, Bgm, \
+    Start3
 
 
 def handle_events():
@@ -12,7 +13,7 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            if not data.mode == 'loading_mode':
+            if not data.mode == 'loading_mode' and not data.mode == 'title_mode':
                 match data.mode:
                     case 'home':
                         button.op3 = 0
@@ -26,11 +27,11 @@ def handle_events():
                         data.mode = 'home'
 
         elif event.type == SDL_MOUSEMOTION:
-            if not data.mode == 'loading_mode':
+            if not data.mode == 'loading_mode' and not data.mode == 'title_mode':
                 cursor.mx, cursor.my = event.x, HEIGHT - 1 - event.y
 
         elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
-            if not data.mode == 'loading_mode':
+            if not data.mode == 'loading_mode' and not data.mode == 'title_mode':
                 button.click = True
 
 
@@ -54,6 +55,11 @@ def init():
     if game_framework.ANIMATION:  # true일때만 객체 삽입
         start2 = Start2()
 
+    if game_framework.START:  # 게임 첫 실행때만 객체 삽입
+        start3 = Start3(data)
+        game_manager.START = False
+        pass
+
     game_manager.add_object(bgm)
     game_manager.add_object(data, 0)
     game_manager.add_object(bg, 6)
@@ -63,6 +69,9 @@ def init():
 
     if game_framework.ANIMATION:
         game_manager.add_object(start2, 7)
+
+    if game_framework.START:
+        game_manager.add_object(start3, 7)
 
     game_manager.add_object(cursor, 7)
     game_manager.add_object(start, 7)
