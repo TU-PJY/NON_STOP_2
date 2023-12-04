@@ -260,6 +260,9 @@ class End:
         self.volume -= pps / 100  # 브금이 점차 작아진다
         play_mode.p.play_bgm.set_volume(int(self.volume))
 
+        if self.volume <= 0:
+            play_mode.p.play_bgm.stop()
+
         self.delay += pps / 4
 
         self.y1 -= self.acc * pps / 4

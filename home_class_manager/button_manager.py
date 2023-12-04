@@ -34,6 +34,8 @@ def load_file(self):  # 캐릭터 선택 버튼을 출력하기 위한 이미지
 
     self.gun = load_image(awp_left_directory)
 
+    self.tutorial = load_image(tutorial_setting_directory)
+
 
 # 홈 화면 버튼 출력
 def home_draw_button(self):
@@ -127,22 +129,23 @@ def setting_draw_button(self):
     self.exit_bg.opacify(self.op_bg)
     self.exit_bg.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
     self.gun.opacify(self.op_bg)
-    self.gun.rotate_draw(math.radians(-30), WIDTH / 2 + 300, self.ky + self.pos - 200, 1800, 600)
+    if not self.tutorial_out:
+        self.gun.rotate_draw(math.radians(-30), WIDTH / 2 + 300, self.ky + self.pos - 200, 1800, 600)
 
-    self.button_setting1.draw(280, HEIGHT / 2 - 100, 540, 80)
-    if self.data_wipe_count == 0:
-        if self.data_wiped:
-            self.font3.draw(50, HEIGHT / 2 - 20, '플레이 데이터가 초기화 되었습니다.', (255, 255, 255))
-        self.font.draw(50, HEIGHT / 2 - 100, '플레이 데이터 삭제', (255, 255, 255))
-    elif self.data_wipe_count == 1:
-        self.font3.draw(50, HEIGHT / 2 - 20, '플레이 데이터를 초기화 하시겠습니까?', (255, 255, 255))
-        self.font2.draw(50, HEIGHT / 2 - 103, 'YES', (255, 255, 255))
+        self.button_setting1.draw(280, HEIGHT / 2 - 100, 540, 80)
+        self.button_setting2.draw(280, HEIGHT / 2 - 210, 540, 80)
+        self.font.draw(50, HEIGHT / 2 - 210, '조작키', (255, 255, 255))
 
-    # self.button_setting2.draw(280, HEIGHT / 2 - 210, 540, 80)
-    # if game_framework.DEBUG:
-    #     self.font.draw(50, HEIGHT / 2 - 210, '히트박스: ON', (255, 255, 255))
-    # else:
-    #     self.font.draw(50, HEIGHT / 2 - 210, '히트박스: OFF', (255, 255, 255))
+        if self.data_wipe_count == 0:
+            if self.data_wiped:
+                self.font3.draw(50, HEIGHT / 2 - 20, '플레이 데이터가 초기화 되었습니다.', (255, 255, 255))
+            self.font.draw(50, HEIGHT / 2 - 100, '플레이 데이터 삭제', (255, 255, 255))
+        elif self.data_wipe_count == 1:
+            self.font3.draw(50, HEIGHT / 2 - 20, '플레이 데이터를 초기화 하시겠습니까?', (255, 255, 255))
+            self.font2.draw(50, HEIGHT / 2 - 103, 'YES', (255, 255, 255))
+
+    if self.tutorial_out:
+        self.tutorial.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
 
     self.back_button_back.opacify(self.op4)
     self.back_button_back.draw(60, 60, 100, 100)
@@ -187,7 +190,7 @@ def setting_update_button(self):
         if self.op2 < 0:
             self.op2 = 0
 
-    # button 3
+    # back button
     if 10 <= mx <= 110 and 10 <= my <= 110:
         self.op4 += pps / 50
         if self.op4 > 1:
@@ -199,44 +202,44 @@ def setting_update_button(self):
 
     if self.click:
         # 플레이 데이터 삭제
-        if 10 < mx < 550 and HEIGHT / 2 - 100 - 40 < my < HEIGHT / 2 - 100 + 40:
-            self.button_sound.play()
-            self.op1 = 0
-            self.data_wipe_count += 1
-            if self.data_wipe_count == 2:
-                data = [
-                    {"max_rounds": 0}
-                ]
-                with open('data//rounds_data.json', 'w') as f:
-                    json.dump(data, f)
+        if not self.tutorial_out:
+            if 10 < mx < 550 and HEIGHT / 2 - 100 - 40 < my < HEIGHT / 2 - 100 + 40:
+                self.button_sound.play()
+                self.op1 = 0
+                self.data_wipe_count += 1
+                if self.data_wipe_count == 2:
+                    data = [
+                        {"max_rounds": 0}
+                    ]
+                    with open('data//rounds_data.json', 'w') as f:
+                        json.dump(data, f)
 
-                data2 = [
-                    {"ch": 1}
-                ]
-                with open('data//ch_data.json', 'w') as f:
-                    json.dump(data2, f)
+                    data2 = [
+                        {"ch": 1, "first_play": 1}
+                    ]
+                    with open('data//player_data.json', 'w') as f:
+                        json.dump(data2, f)
 
-                self.data.ch = 1
-                self.data_wiped = True
+                    self.data.ch = 1
+                    self.data.first_play = 1
+                    self.data_wiped = True
+                    self.data_wipe_count = 0
+
+            if 10 < mx < 550 and HEIGHT / 2 - 210 - 40 < my < HEIGHT / 2 - 210 + 40:
+                self.button_sound.play()
                 self.data_wipe_count = 0
-
-        # # 디버그 모드
-        # if 10 < mx < 550 and HEIGHT / 2 - 210 - 40 < my < HEIGHT / 2 - 210 + 40:
-        #     self.button_sound.play()
-        #     self.op2 = 0
-        #     match game_framework.DEBUG:
-        #         case False:
-        #             game_framework.DEBUG = True
-        #         case True:
-        #             game_framework.DEBUG = False
+                self.tutorial_out = True
 
         # 뒤로 가기
         if 10 <= mx <= 110 and 10 <= my <= 110:
             self.button_sound.play()
             self.op4 = 0
-            self.data_wipe_count = 0
-            self.data_wiped = False
-            self.data.mode = 'exit_mode'
+            if self.tutorial_out:
+                self.tutorial_out = False
+            else:
+                self.data_wipe_count = 0
+                self.data_wiped = False
+                self.data.mode = 'exit_mode'
 
 
 # 나가기 화면 버튼 업데이트
@@ -362,10 +365,9 @@ def ch_update_button(self):
             self.ch_sound.play()
 
         data = [
-            {"ch": self.data.ch}
+            {"ch": self.data.ch, "first_play": self.data.first_play}
         ]
-
-        with open('data//ch_data.json', 'w') as f:  # 캐릭터 선택 시 데이터에 저장한다
+        with open('data//player_data.json', 'w') as f:  # 캐릭터 선택 시 데이터에 저장한다
             json.dump(data, f)
 
 

@@ -40,10 +40,14 @@ class Playerdead:
 
 
 class Reward:
+    sound = None
+
     def __init__(self, cursor):
+        if not Reward.sound:
+            Reward.sound = load_wav(button_click_directory)
         self.back = load_image(reward_bg_directory)
         self.image = load_image(reward_directory)
-        self.button = load_image(ammo_ind_back_directory)
+        self.button = load_image(button_exit_mode_directory)
         self.font = load_font(font2_directory, 60)
         self.font2 = load_font(font_directory, 40)
         self.font3 = load_font(font_directory, 20)
@@ -99,6 +103,7 @@ class Reward:
 
             if self.click:
                 if WIDTH / 2 - 250 < self.cursor.mx < WIDTH / 2 + 250 and 150 < self.cursor.my < 250:
+                    Reward.sound.play()
                     game_framework.MODE = 'home'
                     game_framework.ANIMATION = False
                     game_framework.change_mode(home_mode)

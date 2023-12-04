@@ -118,9 +118,6 @@ def update_rounds(self):
             self.spawn_remain = self.limit  # 앞으로 스폰할 몬스터 수 갱신
             self.spawn_time = 1000  # 매 라운드 시작 시 어느 정도의 시간을 두고 스폰 시작
             if self.time_reduce < 690:  # 최소 스폰 간격은 100
-                if self.rounds <= 18:
-                    self.time_reduce += 15  # 매 라운드마다 스폰 간격이 15씩 줄어든다
-                elif self.rounds >= 19:
-                    self.time_reduce += 30  # 라운드 20부터는 매 라운드마다 스폰 간격이 30씩 줄어든다
+                self.time_reduce += 15  # 매 라운드마다 스폰 간격이 15씩 줄어든다
 
             self.spawn_enable = True  # 다음 라운드로 넘어가 스폰을 다시 시작한다.

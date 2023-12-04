@@ -253,6 +253,9 @@ warning_directory = 'res//ui//warning.png'
 
 mata_logo_directory = 'res//ui//mata_logo.png'
 
+tutorial_directory = 'res//ui//tutorial.png'
+tutorial_setting_directory = 'res//ui//tutorial_setting.png'
+
 # 폰트 경로
 font_directory = 'res//font//bump-it-up.ttf'
 font2_directory = 'res//font//KORAIL2007.ttf'
@@ -344,6 +347,9 @@ pickup_directory = 'res//sounds//etc//pickup.ogg'
 dead_sound_directory = 'res//sounds//etc//dead.ogg'
 weapon_change_sound_directory = 'res//sounds//etc//weapon_change.ogg'
 medkit_sound_directory = 'res//sounds//etc//medkit.ogg'
+
+title_sound1_directory = 'res//sounds//etc//title_sound1.ogg'
+title_sound2_directory = 'res//sounds//etc//title_sound2.ogg'
 
 # bgm
 home_bgm_directory = 'res//sounds//bgm//home_bgm.mp3'

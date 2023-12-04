@@ -54,7 +54,7 @@ def init():
     global game, p, mp, bg, wall, weapon, target, tool, shop, ig
     game = []
 
-    with open('data//ch_data.json', 'rb') as f:
+    with open('data//player_data.json', 'rb') as f:
         data_list = json.load(f)
         for d in data_list:
             p = Player()

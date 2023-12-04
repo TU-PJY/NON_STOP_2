@@ -10,16 +10,20 @@ from mods import play_mode, home_mode
 
 
 class Bgm:
-    def __init__(self):
+    def __init__(self, data):
+        self.data = data
         self.sound = load_music(home_bgm_directory)
-        self.sound.set_volume(64)
-        self.sound.repeat_play()
+        self.sound.set_volume(48)
+        self.turn_on = False
 
     def draw(self):
         pass
 
     def update(self):
-        pass
+        if self.data.mode == 'home':  # 홈모드에 진입하면 bgm을 재생한다
+            if not self.turn_on:
+                self.sound.repeat_play()
+                self.turn_on = True
 
 
 class Data:  # 홈 모드에서 사용되는 데이터를 저장하기 위한 가상 객체
@@ -31,7 +35,7 @@ class Data:  # 홈 모드에서 사용되는 데이터를 저장하기 위한 �
         self.exp = 0  # 캐릭터를 구매하는데에 필요한 재화
 
     def __getstate__(self):
-        state = {'ch': self.ch}
+        state = {'ch': self.ch, 'first_play': self.first_play}
         return state
 
     def __setstate__(self, state):
@@ -56,6 +60,7 @@ class Button:
         self.click = False
         self.data = data
         self.sel_x = 0
+        self.tutorial_out = False
 
         self.op_bg = 0
 
@@ -198,6 +203,7 @@ class Cursor:
 
 class Start:  # 홈모드 -> 플레이 모드 전환 시
     def __init__(self, data):
+        self.data = data
         self.y1 = HEIGHT + HEIGHT / 2
         self.y2 = - HEIGHT / 2
         self.up = load_image(front_directory)
@@ -205,38 +211,48 @@ class Start:  # 홈모드 -> 플레이 모드 전환 시
         self.font = load_font(font_directory, 80)
         self.font2 = load_font(font_directory, 40)
         self.font3 = load_font(font2_directory, 30)
+        self.tutorial_image = load_image(tutorial_directory)
         self.font_out = False
         self.acc = 0
         self.delay = 0
-        self.data = data
+        self.t_delay = 0
         self.volume = 32
-
-        self.tip = random.randint(0, 5)  # 랜덤으로 팁을 표시한다
+        self.tip = random.randint(0, 6)  # 랜덤으로 팁을 표시한다
+        self.tutorial = False
+        self.tutorial_out = False
 
     def draw(self):
         self.up.draw(WIDTH / 2, self.y1, WIDTH, HEIGHT)
         self.down.draw(WIDTH / 2, self.y2, WIDTH, HEIGHT)
-        self.font.draw(WIDTH / 2 - 600, self.y1 - HEIGHT / 2 + 90, 'OKAY! LETS GO!', (172, 162, 132))
 
-        match self.tip:
-            case 0:
-                self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 근접무기로 적 처치 시 더 많은 코인을 얻을 수 있습니다.', (172, 162, 132))
-            case 1:
-                self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 무작정 난사하는 것은 그다지 좋은 전략이 아닙니다.', (172, 162, 132))
-            case 2:
-                self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 벽에 기대지 마세요!', (172, 162, 132))
-            case 3:
-                self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 적이 코 앞에 있을 때는 근접무기를 휘두르는 것이 더 좋을 수 있습니다.', (172, 162, 132))
-            case 4:
-                self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 적들에게 둘러 쌓였을 때 상대하지 않고 옆으로 빠져나가는 것이 더 안전할 수 있습니다.', (172, 162, 132))
-            case 5:
-                self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, ' TIP: M1은 탄창을 비우고 재장전 하는 것이 더 빠릅니다!', (172, 162, 132))
+        if not self.tutorial:
+            self.font.draw(WIDTH / 2 - 600, self.y1 - HEIGHT / 2 + 90, 'OKAY! LETS GO!', (172, 162, 132))
 
-        if self.font_out:
-            self.font2.draw(20, 50, 'LOADING...', (172, 162, 132))
+            match self.tip:
+                case 0:
+                    self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 근접무기로 적 처치 시 더 많은 코인을 얻을 수 있습니다.', (172, 162, 132))
+                case 1:
+                    self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 무작정 난사하는 것은 그다지 좋은 전략이 아닙니다.', (172, 162, 132))
+                case 2:
+                    self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 벽에 기대지 마세요!', (172, 162, 132))
+                case 3:
+                    self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 적이 코 앞에 있을 때는 근접무기를 휘두르는 것이 더 좋을 수 있습니다.', (172, 162, 132))
+                case 4:
+                    self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 적들에게 둘러 쌓였을 때 상대하지 않고 옆으로 빠져나가는 것이 더 안전할 수 있습니다.', (172, 162, 132))
+                case 5:
+                    self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: M1은 탄창을 비우고 재장전 하는 것이 더 빠릅니다!', (172, 162, 132))
+                case 6:
+                    self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 탄창이 빈 상태에서 마우스 왼쪽 버튼으로 재장전을 할 수 있습니다.', (172, 162, 132))
+            if self.font_out:
+                self.font2.draw(20, 50, 'LOADING...', (172, 162, 132))
+
+        if self.tutorial_out:  # 튜토리얼 상태라면 조작키를 알려준다
+            self.tutorial_image.draw(WIDTH / 2, HEIGHT / 2, 1000, 600)
 
     def update(self):
         pps = game_framework.pps
+        if self.data.first_play == 1:  # 첫 플레이라면 튜토리얼이 활성화 된다
+            self.tutorial = True
 
         if self.data.mode == 'loading_mode':
             self.volume -= pps / 50  # 브금이 점차 작아진다
@@ -244,9 +260,9 @@ class Start:  # 홈모드 -> 플레이 모드 전환 시
                 self.volume = 0
             home_mode.bgm.sound.set_volume(int(self.volume))
 
-            self.delay += pps / 4
+            if self.volume <= 0:
+                home_mode.bgm.sound.stop()
 
-            # if self.y1 > HEIGHT:
             self.y1 -= self.acc * pps / 4
             self.y2 += self.acc * pps / 4
             self.acc += pps / 100
@@ -256,13 +272,23 @@ class Start:  # 홈모드 -> 플레이 모드 전환 시
                 self.y2 = 0
                 self.acc = self.acc / 2 * -1
 
-            if self.delay >= 550:
-                self.font_out = True
+            if self.tutorial:  # 튜토리얼 상태라면 튜토리얼 전용 딜레이를 업데이트한다
+                if self.t_delay < 550:
+                    self.t_delay += pps / 4
+                    if self.t_delay >= 550:
+                        self.delay = 550  # 튜토리얼이 끝나면 바로 로딩 모드로 들어가도록 한다
+                        self.tutorial_out = True  # 특정 시간이 되면 조작키를 알려준다
 
-            if self.delay >= 600:
-                home_mode.bgm.sound.stop()
-                game_framework.MODE = 'play'
-                game_framework.change_mode(play_mode)
+            if not self.tutorial:  # 더 이상 튜토리얼 상태가 아니라면 게임 로딩을 진행한다
+                self.delay += pps / 4
+
+                if self.delay >= 550:
+                    self.font_out = True
+
+                if self.delay >= 600:
+                    home_mode.bgm.sound.stop()
+                    game_framework.MODE = 'play'
+                    game_framework.change_mode(play_mode)
 
 
 class Start2:  # 플레이 모드 -> 홈 모드 전환 및 게임 시작 시
@@ -306,6 +332,9 @@ class Start3:  # 스플래시 모드 -> 홈 모드 전환 시
 
         self.bar_x = 150
 
+        self.sound1 = load_wav(title_sound1_directory)
+        self.sound2 = load_wav(title_sound2_directory)
+
     def draw(self):
         self.up.draw(WIDTH / 2, self.y1, WIDTH, HEIGHT)
         self.down.draw(WIDTH / 2, self.y2, WIDTH, HEIGHT)
@@ -339,14 +368,23 @@ class Start3:  # 스플래시 모드 -> 홈 모드 전환 시
             self.bar_delay += pps / 4
 
         if self.font_delay >= 100 and not self.font_on[0]:
+            self.sound1.play()
             self.font_on[0] = True
+
         if self.font_delay >= 200 and not self.font_on[1]:
+            self.sound1.play()
             self.font_on[1] = True
+
         if self.font_delay >= 300 and not self.font_on[2]:
+            self.sound1.play()
             self.font_on[2] = True
+
         if self.font_delay >= 400 and not self.font_on[3]:
+            self.sound1.play()
             self.font_on[3] = True
+
         if self.font_delay >= 500 and not self.font_on[4]:
+            self.sound2.play()
             self.font_on[4] = True
 
         if self.bar_delay >= 100 and not self.bar_on:
@@ -357,7 +395,7 @@ class Start3:  # 스플래시 모드 -> 홈 모드 전환 시
             self.bar_on = False
             self.bar_delay = 0
 
-        if self.delay >= 1000:
+        if self.delay >= 1300:
             self.data.mode = 'home'
             self.y1 += self.acc * pps / 4
             self.y2 -= self.acc * pps / 4

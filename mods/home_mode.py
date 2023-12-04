@@ -7,7 +7,7 @@ from home_class.home_ui_class import Button, Background, Playerimage, Monsterima
 
 
 def handle_events():
-    global cursor, data, button
+    global cursor, data, button, start
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -25,6 +25,17 @@ def handle_events():
                         data.mode = 'home'
                     case 'exit_mode':
                         data.mode = 'home'
+        if event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:  # 튜토리얼 상태에서 space를 누르면 게임으로 진행
+            if data.mode == 'loading_mode' and data.first_play == 1 and start.tutorial_out:
+                data_list = [
+                    {"ch": data.ch, "first_play": 0}
+                ]
+                with open('data//player_data.json', 'w') as f:
+                    json.dump(data_list, f)
+
+                data.first_play = 0
+                start.tutorial = False
+                start.tutorial_out = False
 
         elif event.type == SDL_MOUSEMOTION:
             if not data.mode == 'loading_mode' and not data.mode == 'title_mode':
@@ -36,15 +47,15 @@ def handle_events():
 
 
 def init():
-    global button, cursor, data, bgm
+    global button, cursor, data, bgm, start
 
-    with open('data//ch_data.json', 'rb') as f:
+    with open('data//player_data.json', 'rb') as f:
         data_list = json.load(f)
         for d in data_list:
             data = Data()
             data.__dict__.update(d)
 
-    bgm = Bgm()
+    bgm = Bgm(data)
     cursor = Cursor(data)
     button = Button(data, cursor)
     bg = Background(data, cursor)
