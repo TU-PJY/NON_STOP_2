@@ -1,4 +1,5 @@
 # 플레이어 관련 함수 모음
+import random
 
 from pico2d import *
 
@@ -61,7 +62,14 @@ def load_player_image(self):
 
     self.damage_sound = load_wav(damage_directory)
 
-    self.play_bgm = load_music(play_bgm_directory)
+    self.dead_sound = load_wav(dead_sound_directory)
+
+    self.random_bgm = random.randint(1, 2)
+    match self.random_bgm:
+        case 1:
+            self.play_bgm = load_music(play_bgm_directory)
+        case 2:
+            self.play_bgm = load_music(play_bgm2_directory)
 
 
 def look_mouse(p):
@@ -254,6 +262,7 @@ def regen_hp(p):  # 일정 시간마다 체력을 스스로 회복한다
 
 def check_hp(p):  # 플레이어 체력이 0이 되면 게임 오버 모드로 전환한다
     if p.cur_hp <= 0:
+        p.dead_sound.play()
         play_mode.weapon.update_deg = False  # 더 이상 총기 이미지 각도 업데이트를 하지 않는다
         p.play_bgm.stop()
         game_framework.START = False

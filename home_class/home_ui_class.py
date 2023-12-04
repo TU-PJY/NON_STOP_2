@@ -12,7 +12,7 @@ from mods import play_mode, home_mode
 class Bgm:
     def __init__(self):
         self.sound = load_music(home_bgm_directory)
-        self.sound.set_volume(32)
+        self.sound.set_volume(64)
         self.sound.repeat_play()
 
     def draw(self):

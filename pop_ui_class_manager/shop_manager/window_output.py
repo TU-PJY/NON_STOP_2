@@ -62,7 +62,6 @@ def draw_cursor(self):
 # 최초 상점 실행 시 밑에서 위로 창이 올라온다
 def window_animation(self):
     pps = game_framework.pps
-
     self.window_y += self.acc * pps / 4
 
     for i in range(len(self.button_y)):
@@ -74,10 +73,12 @@ def window_animation(self):
     self.page_right_y += self.acc * pps / 4
     self.page_left_y += self.acc * pps / 4
 
-    if self.acc > 0:
-        self.acc -= pps / 14
-        if self.acc < 0:
-            self.acc = 0
+    self.acc -= pps / 14
+    if self.acc < 0:
+        self.acc = 0
+
+    if self.window_y >= HEIGHT / 2:
+        self.window_y = HEIGHT / 2
 
     self.op += pps / 400
     if self.op > 0.6:

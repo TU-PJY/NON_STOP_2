@@ -99,8 +99,6 @@ class Shop:
         self.y = HEIGHT / 2
         self.button_x = []  # 아이템 버튼의 x, y 좌표
         self.button_y = []
-        # 기준 화면 세로 길이: 960px
-        self.window_y = -500 + (HEIGHT - 960)  # 초기 윈도우 y 위치, 화면 세로 길이에 따라 초기 위치가 달라진다
         self.mx = 0  # 마우스좌표
         self.my = 0
         self.click = False  # 마우스 누름 여부
@@ -108,6 +106,9 @@ class Shop:
         self.select_gun = ''  # 현재 선택한 총
         self.select_melee = ''  # 현재 선택한 근접무기
         self.select_item = ''  # 현재 선택한 아이템
+
+        # 기준 화면 세로 길이: 960px
+        self.window_y = -500 + (HEIGHT - 960)  # 초기 윈도우 y 위치, 화면 세로 길이에 따라 초기 위치가 달라진다
         self.acc = 23 - (HEIGHT - 960) / 200
 
         self.select_mode = 0  # 초기값 총 선택

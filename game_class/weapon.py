@@ -41,6 +41,7 @@ class Shoot:
             weapon.shoot_delay = 0
 
         if q_down(e):
+            weapon.weapon_change_sound.play()
             change_weapon(weapon)
             init_melee(weapon)
             weapon.cur_reload_time = 0  # 근접무기 전환 시 재장전이 취소된다
@@ -110,6 +111,7 @@ class Idle:
     @staticmethod
     def exit(weapon, e):
         if q_down(e):
+            weapon.weapon_change_sound.play()
             change_weapon(weapon)
             init_melee(weapon)
             weapon.cur_reload_time = 0

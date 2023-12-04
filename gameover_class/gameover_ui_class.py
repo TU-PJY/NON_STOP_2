@@ -64,7 +64,7 @@ class Reward:
 
     def draw(self):
         self.back.draw(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
-        self.image.draw(WIDTH / 2, HEIGHT - 200, 920, 190)
+        self.image.draw(WIDTH / 2 + 40, HEIGHT - 200, 1000, 600)
         self.button.opacify(self.op)
         self.font2.draw(WIDTH / 2 - 270, HEIGHT / 2, 'TOTAL ROUNDS: %d' % self.total_rounds, (255, 255, 255))
         self.button.draw(WIDTH / 2, 200, 500, 100)

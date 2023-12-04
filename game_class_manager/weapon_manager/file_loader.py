@@ -142,6 +142,7 @@ def load_gun_sound(self):
 
     # etc
     self.throw_sound = load_wav(throw_directoy)
+    self.weapon_change_sound = load_wav(weapon_change_sound_directory)
 
 
 def load_melee_sound(self):

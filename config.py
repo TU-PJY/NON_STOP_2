@@ -341,10 +341,13 @@ flesh_directory = 'res//sounds//etc//flesh.ogg'
 arrow_wall_directory = 'res//sounds//etc//arrow_wall.ogg'
 bow_sound_directory = 'res//sounds//etc//bow_shoot.ogg'
 pickup_directory = 'res//sounds//etc//pickup.ogg'
+dead_sound_directory = 'res//sounds//etc//dead.ogg'
+weapon_change_sound_directory = 'res//sounds//etc//weapon_change.ogg'
 
 # bgm
 home_bgm_directory = 'res//sounds//bgm//home_bgm.mp3'
-play_bgm_directory = 'res//sounds//bgm//play_bgm.mp3'
+play_bgm_directory = 'res//sounds//bgm//play_bgm1.mp3'
+play_bgm2_directory = 'res//sounds//bgm//play_bgm2.mp3'
 
 # button
 button_click_directory = 'res//sounds//button//button_click.ogg'
