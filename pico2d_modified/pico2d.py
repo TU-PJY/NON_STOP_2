@@ -129,12 +129,13 @@ def resize_canvas(w, h):
     SDL_SetWindowSize(window, w, h)
     caption = ('Pico2D Canvas (' + str(w) + 'x' + str(h) + ')' + ' 1000.0 FPS').encode('UTF-8')
     SDL_SetWindowTitle(window, caption)
-    clear_canvas_now()
+    # clear_canvas_now()
 
 
-def set_position_canvas(x, y):
-    global window
+def set_position_canvas(x, y, w, h):
+    global window, canvas_width, canvas_height
     SDL_SetWindowPosition(window, x, y)
+    # clear_canvas_now()
 
 
 def show_lattice():
