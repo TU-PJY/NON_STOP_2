@@ -33,10 +33,16 @@ def process_attack(m):
             m.x += 5 * math.cos(m.incline) * pps / 4
             m.y += 5 * math.sin(m.incline) * pps / 4
 
-            if m.y <= m.temp_y:
+            if m.temp_x - 20 <= m.x <= m.temp_x + 20 and m.temp_y - 20 <= m.y <= m.temp_y + 20:
                 m.dash_delay = 700
                 m.is_dash = False
                 m.is_attack = False
+
+            if m.y < 230:  # 어떠한 이유로 목표지점에 도달하지 못했을 때 강제로 대쉬 상태를 해제하도록 한다
+                m.y = 230
+                m.dash_delay = 700
+                m.is_attack = False
+                m.is_dash = False
 
     # type 3 attack
     if m.type == 3:

@@ -7,7 +7,7 @@ stack = None
 
 MODE = 'play'
 ANIMATION = False
-START = False
+START = True
 # DEBUG = False
 
 
