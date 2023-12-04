@@ -74,7 +74,8 @@ class Target:
         if game_framework.MODE == 'play':
             self.state_machine.draw()
         if self.weapon.weapon_type == 1:
-            draw_rectangle(*self.get_melee_bb())
+            pass
+            # draw_rectangle(*self.get_melee_bb())
 
     def update(self):
         if game_framework.MODE == 'play':

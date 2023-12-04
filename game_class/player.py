@@ -260,7 +260,7 @@ class Player:
 
     def draw(self):
         self.state_machine.draw()
-        draw_rectangle(*self.get_bb())
+        # draw_rectangle(*self.get_bb())
 
     def get_bb(self):
         return self.px - 35, self.py - 60 - self.size * 50, self.px + 35, self.py + 60

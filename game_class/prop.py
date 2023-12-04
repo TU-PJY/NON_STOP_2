@@ -77,7 +77,7 @@ class Arrow:
             Arrow.arrow_right.clip_composite_draw \
                 (0, 0, 128, 128, self.incline, '', x, y, 400, 400)
 
-        draw_rectangle(*self.get_bb())
+        # draw_rectangle(*self.get_bb())
 
     def handle_event(self):
         pass
@@ -403,7 +403,7 @@ class Coin:
     def draw(self):
         Coin.image.opacify(self.op)
         Coin.image.draw(self.x + self.p.ex, self.y + self.p.ey, self.size_x, 70)
-        draw_rectangle(*self.get_bb())
+        # draw_rectangle(*self.get_bb())
 
     def update(self):
         pps = game_framework.pps

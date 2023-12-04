@@ -165,6 +165,7 @@ def init_melee(weapon):
         weapon.p.jump_acc = 0
 
     weapon.wield = False
+    weapon.use = False
     weapon.skill_enable = False
     weapon.swing_down = False
     weapon.swing_up = False
