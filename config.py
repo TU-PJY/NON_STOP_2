@@ -343,6 +343,7 @@ bow_sound_directory = 'res//sounds//etc//bow_shoot.ogg'
 pickup_directory = 'res//sounds//etc//pickup.ogg'
 dead_sound_directory = 'res//sounds//etc//dead.ogg'
 weapon_change_sound_directory = 'res//sounds//etc//weapon_change.ogg'
+medkit_sound_directory = 'res//sounds//etc//medkit.ogg'
 
 # bgm
 home_bgm_directory = 'res//sounds//bgm//home_bgm.mp3'

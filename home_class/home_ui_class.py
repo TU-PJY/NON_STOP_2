@@ -211,7 +211,7 @@ class Start:  # 홈모드 -> 플레이 모드 전환 시
         self.data = data
         self.volume = 32
 
-        self.tip = random.randint(0, 4)  # 랜덤으로 팁을 표시한다
+        self.tip = random.randint(0, 5)  # 랜덤으로 팁을 표시한다
 
     def draw(self):
         self.up.draw(WIDTH / 2, self.y1, WIDTH, HEIGHT)
@@ -229,6 +229,8 @@ class Start:  # 홈모드 -> 플레이 모드 전환 시
                 self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 적이 코 앞에 있을 때는 근접무기를 휘두르는 것이 더 좋을 수 있습니다.', (172, 162, 132))
             case 4:
                 self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, 'TIP: 적들에게 둘러 쌓였을 때 상대하지 않고 옆으로 빠져나가는 것이 더 안전할 수 있습니다.', (172, 162, 132))
+            case 5:
+                self.font3.draw(20, self.y2 + HEIGHT / 2 - 30, ' TIP: M1은 탄창을 비우고 재장전 하는 것이 더 빠릅니다!', (172, 162, 132))
 
         if self.font_out:
             self.font2.draw(20, 50, 'LOADING...', (172, 162, 132))

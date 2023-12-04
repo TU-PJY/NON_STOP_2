@@ -61,8 +61,8 @@ def load_player_image(self):
     self.jump_sound.set_volume(128)
 
     self.damage_sound = load_wav(damage_directory)
-
     self.dead_sound = load_wav(dead_sound_directory)
+    self.medkit_sound = load_wav(medkit_sound_directory)
 
     self.random_bgm = random.randint(1, 2)
     match self.random_bgm:

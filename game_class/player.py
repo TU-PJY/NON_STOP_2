@@ -34,6 +34,7 @@ class Move:
 
         elif ctrl_down(e):  # 응급처치 키드를 사용하여 체력 회복
             if p.medkit_count > 0 and p.cur_hp < p.hp and p.usable_medkit:
+                p.medkit_sound.play()
                 p.cur_hp += 100
                 p.medkit_count -= 1
                 heal = PlayerDamage(True)  # 플레이어 대미지 피드백 클래스를 활용한다
@@ -105,6 +106,7 @@ class Idle:
 
         elif ctrl_down(e):  # 응급처치 키드를 사용하여 체력 회복
             if p.medkit_count > 0 and p.cur_hp < p.hp and p.usable_medkit:
+                p.medkit_sound.play()
                 p.cur_hp += 100
                 p.medkit_count -= 1
                 heal = PlayerDamage(True)  # 플레이어 대미지 피드백 클래스를 활용한다
@@ -196,7 +198,7 @@ class Player:
         self.jump_level = 2  # 레벨이 오를수록 연속 점프 횟수가 많아짐
         self.jump_delay = 0
 
-        self.coin = 99999999  # 플레이어가 소지한 코인 개수
+        self.coin = 999999  # 플레이어가 소지한 코인 개수
         self.get_coin = False  # true일 시 코인 획득 피드백 재생
 
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다

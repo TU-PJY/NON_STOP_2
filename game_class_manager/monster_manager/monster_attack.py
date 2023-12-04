@@ -50,7 +50,7 @@ def process_attack(m):
 
     # type 4 attack
     if m.type == 4:
-        if m.mp.playerToWallLeft + 25 <= m.x <= m.mp.playerToWallRight - 25:
+        if m.mp.playerToWallLeft <= m.x <= m.mp.playerToWallRight:
             if math.sqrt((m.p.x - m.x) ** 2 + (m.p.y - (m.y + m.p.cam_h)) ** 2) <= 750:
                 m.is_attack = True
             else:

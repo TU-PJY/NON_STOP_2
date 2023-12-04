@@ -287,7 +287,7 @@ def equip_gun_page2(self, i, j):
 
     if (i, j) == (0, 0):
         play_mode.weapon.gun = 'SPRING'
-        play_mode.weapon.pen_limit = 2
+        play_mode.weapon.pen_limit = 3
         play_mode.weapon.limit_ammo = 5
 
     if (i, j) == (1, 0):
@@ -308,7 +308,7 @@ def equip_gun_page2(self, i, j):
     if (i, j) == (4, 0):
         play_mode.weapon.gun = 'CHEYTAC'
         play_mode.weapon.pen_limit = 8
-        play_mode.weapon.limit_ammo = 7
+        play_mode.weapon.limit_ammo = 5
 
     if j == 0:  # sr 타입
         play_mode.weapon.gun_type = 'sr'

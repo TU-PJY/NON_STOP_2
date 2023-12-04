@@ -32,8 +32,8 @@ def buy_expendables(self, i, j):
                 Shop.buy_ammo.play()
                 buy = True
         case (4, 0):
-            if play_mode.p.coin >= 800:
-                play_mode.p.coin -= 800
+            if play_mode.p.coin >= 1000:
+                play_mode.p.coin -= 1000
                 play_mode.p.medkit_count += 1
                 Shop.buy_medkit.play()
                 buy = True
@@ -51,7 +51,7 @@ def buy_expendables(self, i, j):
         case (1, 1):
             if play_mode.p.coin >= play_mode.p.regen_cost and play_mode.p.regen_count < 3:
                 play_mode.p.coin -= play_mode.p.regen_cost
-                play_mode.p.regen_delay -= 150
+                play_mode.p.regen_delay -= 80
                 play_mode.p.regen_count += 1
                 play_mode.p.regen_cost *= 4
                 Shop.buy_upgrade.play()
