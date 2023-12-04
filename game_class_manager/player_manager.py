@@ -255,6 +255,7 @@ def regen_hp(p):  # 일정 시간마다 체력을 스스로 회복한다
 def check_hp(p):  # 플레이어 체력이 0이 되면 게임 오버 모드로 전환한다
     if p.cur_hp <= 0:
         play_mode.weapon.update_deg = False  # 더 이상 총기 이미지 각도 업데이트를 하지 않는다
+        p.play_bgm.stop()
         playerdead = Playerdead()
         game_manager.add_object(playerdead, 7)
         game_framework.MODE = 'GAMEOVER'

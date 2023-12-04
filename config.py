@@ -353,3 +353,6 @@ upgrade_sound_directory = 'res//sounds//button//upgrade.ogg'
 select_gun_directory = 'res//sounds//button//select_gun.ogg'
 select_melee_directory = 'res//sounds//button//select_melee.ogg'
 buy_sound_directory = 'res//sounds//button//buy.ogg'
+
+# splash
+splash_center_directory = 'res//splash_image//splash_center.png'

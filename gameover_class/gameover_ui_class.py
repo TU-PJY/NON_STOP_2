@@ -71,10 +71,10 @@ class Reward:
         self.font.draw(WIDTH / 2 - 220, 200, '홈으로 돌아가기', (255, 255, 255))
 
         if self.highscore:
-            self.font3.draw(WIDTH / 2 - 105, HEIGHT / 2 - 50, 'HIGHSCORE!', (255, 255, 0))
+            self.font3.draw(WIDTH / 2 - 270, HEIGHT / 2 - 50, 'HIGHSCORE!', (255, 255, 0))
 
         else:
-            self.font3.draw(WIDTH / 2 - 105, HEIGHT / 2 - 50, 'HIGHSCORE: %d' % self.max_rounds, (255, 255, 255))
+            self.font3.draw(WIDTH / 2 - 270, HEIGHT / 2 - 50, 'HIGHSCORE: %d' % self.max_rounds, (255, 255, 255))
 
     def update(self):
         pps = game_framework.pps
