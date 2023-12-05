@@ -132,7 +132,7 @@ def render_ingame_ui(self):
                 self.font_small.draw(WIDTH / 2 + 525 + ex, 30 + ey, '%d' % self.p.medkit_count, (255, 255, 0))
         else:
             self.medkit_unable.rotate_draw(math.radians(32.05), WIDTH / 2 + 490 + ex, 32 + ey, 70, 70)
-            self.font_small.draw(WIDTH / 2 + 525 + ex, 30 + ey, '%d' % (10 - self.p.medkit_delay_time), (255, 255, 255))
+            self.font_small.draw(WIDTH / 2 + 525 + ex, 30 + ey, '%d' % (20 - self.p.medkit_delay_time), (255, 255, 255))
 
         # 라운드 수 출력
         self.font.draw(WIDTH / 2 - 130 + ex, HEIGHT - 50 + ey, 'ROUND %d' % play_mode.tool.rounds,

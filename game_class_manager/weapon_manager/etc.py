@@ -216,12 +216,12 @@ def reload_one(weapon):  # 관형 급탄 장전
     pps = game_framework.pps
 
     if weapon.weapon_type == 0:
-        if weapon.cur_reload_time < 150:  # 정해진 값 까지 도달할때까지 더한다
+        if weapon.cur_reload_time < weapon.reload_time:  # 정해진 값 까지 도달할때까지 더한다
             weapon.cur_reload_time += pps / 3
 
         else:
             if weapon.rifle_ammo > 0:
-                if weapon.cur_ammo < 10:  # 10발을 모두 삽한할 때까지 장전을 계속한다
+                if weapon.cur_ammo < 10:  # 10발을 모두 삽탄할 때까지 장전을 계속한다
                     weapon.win_reload.play()
                     weapon.cur_ammo += 1
                     weapon.rifle_ammo -= 1

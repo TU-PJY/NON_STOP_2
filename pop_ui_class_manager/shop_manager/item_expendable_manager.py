@@ -32,9 +32,10 @@ def buy_expendables(self, i, j):
                 Shop.buy_ammo.play()
                 buy = True
         case (4, 0):
-            if play_mode.p.coin >= 1000:
-                play_mode.p.coin -= 1000
+            if play_mode.p.coin >= play_mode.p.medkit_cost:
+                play_mode.p.coin -= play_mode.p.medkit_cost
                 play_mode.p.medkit_count += 1
+                play_mode.p.medkit_cost += 1500
                 Shop.buy_medkit.play()
                 buy = True
 

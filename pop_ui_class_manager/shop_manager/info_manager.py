@@ -164,7 +164,7 @@ def print_info(self, i, j):
                         self.info.draw(x3, cost, '15000', color4)
                 case (1, 3):
                     self.info.draw(x, y, 'MODEL-1866', color)
-                    self.info.draw(x, y2, '대미지: 150', color)
+                    self.info.draw(x, y2, '대미지: 180', color)
                     self.info.draw(x, y3, '장탄수: 10', color)
                     self.info.draw(x, y4, '사용 탄약: 대구경 소총탄', color)
                     self.info.draw(x, y5, '관형 탄창', color3)
@@ -173,7 +173,7 @@ def print_info(self, i, j):
                         self.info.draw(x3, cost, '20000', color4)
                 case (2, 3):
                     self.info.draw(x, y, 'MINI-14', color)
-                    self.info.draw(x, y2, '대미지: 50', color)
+                    self.info.draw(x, y2, '대미지: 55', color)
                     self.info.draw(x, y3, '장탄수: 30', color)
                     self.info.draw(x, y4, '사용 탄약: 소총탄', color4)
                     self.info.draw(x, y5, '단발 사격', color4)
@@ -191,7 +191,7 @@ def print_info(self, i, j):
                         self.info.draw(x3, cost, '30000', color4)
                 case (4, 3):
                     self.info.draw(x, y, 'M14 EBR', color)
-                    self.info.draw(x, y2, '대미지: 50', color)
+                    self.info.draw(x, y2, '대미지: 55', color)
                     self.info.draw(x, y3, '장탄수: 20', color)
                     self.info.draw(x, y4, '사용 탄약: 대구경 소총탄', color)
                     self.info.draw(x4 + 15, y, 'DMR', color2)
@@ -206,7 +206,7 @@ def print_info(self, i, j):
             match (i, j):
                 case (0, 0):
                     self.info.draw(x, y, 'M1903', color)
-                    self.info.draw(x, y2, '대미지: 200', color)
+                    self.info.draw(x, y2, '대미지: 250', color)
                     self.info.draw(x, y3, '장탄수: 5', color)
                     self.info.draw(x, y4, '사용 탄약: 저격 소총탄', color)
                     self.info.draw(x, y5, '최대 관통 횟수: 3', color4)
@@ -218,7 +218,7 @@ def print_info(self, i, j):
                         self.info.draw(x3, cost, '45000', color4)
                 case (1, 0):
                     self.info.draw(x, y, 'KAR98K', color)
-                    self.info.draw(x, y2, '대미지: 200', color)
+                    self.info.draw(x, y2, '대미지: 250', color)
                     self.info.draw(x, y3, '장탄수: 5', color)
                     self.info.draw(x, y4, '사용 탄약: 저격 소총탄', color)
                     self.info.draw(x, y5, '최대 관통 횟수: 3', color4)
@@ -230,7 +230,7 @@ def print_info(self, i, j):
                         self.info.draw(x3, cost, '55000', color4)
                 case (2, 0):
                     self.info.draw(x, y, 'M24', color)
-                    self.info.draw(x, y2, '대미지: 200', color)
+                    self.info.draw(x, y2, '대미지: 250', color)
                     self.info.draw(x, y3, '장탄수: 5', color)
                     self.info.draw(x, y4, '사용 탄약: 저격 소총탄', color)
                     self.info.draw(x, y5, '최대 관통 횟수: 4', color4)
@@ -242,7 +242,7 @@ def print_info(self, i, j):
                         self.info.draw(x3, cost, '65000', color4)
                 case (3, 0):
                     self.info.draw(x, y, 'AWP', color)
-                    self.info.draw(x, y2, '대미지: 200', color)
+                    self.info.draw(x, y2, '대미지: 250', color)
                     self.info.draw(x, y3, '장탄수: 5', color)
                     self.info.draw(x, y4, '사용 탄약: 저격 소총탄', color)
                     self.info.draw(x, y5, '최대 관통 횟수: 6', color4)
@@ -254,7 +254,7 @@ def print_info(self, i, j):
                         self.info.draw(x3, cost, '75000', color4)
                 case (4, 0):
                     self.info.draw(x, y, 'CHEYTAC M-200', color)
-                    self.info.draw(x, y2, '대미지: 250', color)
+                    self.info.draw(x, y2, '대미지: 300', color)
                     self.info.draw(x, y3, '장탄수: 5', color)
                     self.info.draw(x, y4, '사용 탄약: 저격 소총탄', color)
                     self.info.draw(x, y5, '최대 관통 횟수: 8', color4)
@@ -340,7 +340,7 @@ def print_info(self, i, j):
                 self.info.draw(x, y, '응급처치 키트', color)
                 self.info.draw(x, y2, '100 HP 회복', color4)
                 self.info.draw(x, y3, '보유량: %d' % play_mode.p.medkit_count, color5)
-                self.info.draw(x3, cost, '1000', color4)
+                self.info.draw(x3, cost, '%d' % play_mode.p.medkit_cost, color4)
                 self.coin_icon.draw(x2, cost, 30, 30)
             case (0, 1):
                 self.info.draw(x, y, 'HP 업그레이드', color)

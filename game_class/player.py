@@ -198,7 +198,7 @@ class Player:
         self.jump_level = 2  # 레벨이 오를수록 연속 점프 횟수가 많아짐
         self.jump_delay = 0
 
-        self.coin = 0  # 플레이어가 소지한 코인 개수
+        self.coin = 300000  # 플레이어가 소지한 코인 개수
         self.get_coin = False  # true일 시 코인 획득 피드백 재생
 
         self.rotate = 0  # 플레이어가 마우스 좌표를 살짝 따라 본다
@@ -236,6 +236,7 @@ class Player:
         self.regen_cost = 1500
         self.speed_cost = 1500
         self.gren_cost = 10000
+        self.medkit_cost = 1000  # 기본 1000에서 시작하여 1000씩 비싸진다
 
         self.sound_delay = 0
 

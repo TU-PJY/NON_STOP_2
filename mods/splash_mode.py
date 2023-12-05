@@ -14,8 +14,8 @@ class Image:
         self.gun = load_image(awp_right_directory)
         self.rapier = load_image(rapier_directory)
         self.pistol = load_image(m500_left_directory)
-        self.font = load_font(font_splash_directory, 30)
-        self.font2 = load_font(font2_directory, 20)
+        self.font = load_font(font2_directory, 20)
+        # self.font2 = load_font(font2_directory, 20)
 
     def draw(self):
         self.bg.draw(400, 20)
@@ -28,8 +28,7 @@ class Image:
 
         self.logo.draw(410, 230, 400, 200)
 
-        self.font2.draw(10, 270, 'Powered by', (0, 0, 0))
-        self.font2.draw(130, 272, 'Pico2D', (0, 0, 0))
+        self.font.draw(5, 285, 'Powered by Pico 2D', (255, 255, 255))
 
     def update(self):
         pass

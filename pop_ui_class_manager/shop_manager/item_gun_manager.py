@@ -262,7 +262,7 @@ def equip_gun_page1(self, i, j):
 
         elif play_mode.weapon.gun == 'WIN':
             play_mode.weapon.gun_type = 'rifle'
-            play_mode.weapon.reload_time = 150
+            play_mode.weapon.reload_time = 120
 
         elif play_mode.weapon.gun == 'M1':
             play_mode.weapon.gun_type = 'rifle'

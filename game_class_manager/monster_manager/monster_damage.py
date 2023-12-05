@@ -92,7 +92,7 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                 elif m.weapon.gun == 'THOMPSON':
                     m.hp -= 20
                 elif m.weapon.gun == 'P90':
-                    m.hp -= 16
+                    m.hp -= 17
 
                 elif m.weapon.gun == 'SCAR_H':
                     m.hp -= 22
@@ -108,13 +108,13 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                 elif m.weapon.gun == 'M1':
                     m.hp -= 80
                 elif m.weapon.gun == 'WIN':
-                    m.hp -= 150
+                    m.hp -= 180
                 elif m.weapon.gun == 'MINI14':
-                    m.hp -= 50
+                    m.hp -= 55
                 elif m.weapon.gun == 'FAL':
                     m.hp -= 80
                 elif m.weapon.gun == 'LVOAS':
-                    m.hp -= 50
+                    m.hp -= 55
 
                 elif m.weapon.gun_type == 'sr':
                     # 관통을 위한 가상 객체 생성
@@ -152,11 +152,11 @@ def damage_monster(m):  # 맵 안에서만 대미지를 받는다
                 elif m.weapon.melee == 'KATANA':
                     m.p.shake_range = 40
                     m.weapon.melee_hit.play()
-                    m.hp -= 100
+                    m.hp -= 120
                 elif m.weapon.melee == 'AXE':
                     m.p.shake_range = 40
                     m.weapon.melee_hit2.play()
-                    m.hp -= 150
+                    m.hp -= 180
 
                 if m.hp > 0:
                     knockback_melee(m, m.weapon.melee)

@@ -244,7 +244,7 @@ def set_medkit_delay(p):
 def update_medkit_delay(p):
     if not p.usable_medkit:
         p.medkit_delay_time = get_time() - p.medkit_delay
-        if p.medkit_delay_time > 9:
+        if p.medkit_delay_time > 19:
             p.usable_medkit = True
 
 

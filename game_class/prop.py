@@ -53,7 +53,7 @@ class Arrow:
                         self.acc -= 0.0000055 * pps / 3
 
                 # 화살이 벽에 박히면
-                if self.x >= self.mp.playerToWallRight - 10 or self.x <= self.mp.playerToWallLeft + 10 or self.y <= 190:
+                if self.x >= self.mp.playerToWallRight + 15 or self.x <= self.mp.playerToWallLeft - 15 or self.y <= 190:
                     Arrow.sound.play()
                     self.simulate = False  # 움직임을 멈춘다
 
@@ -388,10 +388,10 @@ class Coin:
         self.sp = sp
         self.is_melee = melee
 
-        self.value = 10 + play_mode.tool.rounds * 30  # 라운드가 올라갈 수록 코인을 더 많이 획득한다
+        self.value = 10 + play_mode.tool.rounds * 20  # 라운드가 올라갈 수록 코인을 더 많이 획득한다
 
         if self.is_melee:
-            self.value = 10 + play_mode.tool.rounds * 40  # 근접무기 처치 시 더 많은 코인을 획득한다
+            self.value = 10 + play_mode.tool.rounds * 30  # 근접무기 처치 시 더 많은 코인을 획득한다
 
         if self.sp > 2:
             self.acc = 5
