@@ -97,6 +97,13 @@ class Shop:
     def __init__(self):
         self.x = WIDTH / 2
         self.y = HEIGHT / 2
+
+        self.height = HEIGHT
+
+        # 기준 화면 세로 길이: 960px
+        self.window_y = -500 + (self.height - 960)  # 초기 윈도우 y 위치, 화면 세로 길이에 따라 초기 위치가 달라진다
+        self.acc = 23 - (self.height - 960) / 200
+
         self.button_x = []  # 아이템 버튼의 x, y 좌표
         self.button_y = []
         self.mx = 0  # 마우스좌표
@@ -106,10 +113,6 @@ class Shop:
         self.select_gun = ''  # 현재 선택한 총
         self.select_melee = ''  # 현재 선택한 근접무기
         self.select_item = ''  # 현재 선택한 아이템
-
-        # 기준 화면 세로 길이: 960px
-        self.window_y = -500 + (HEIGHT - 960)  # 초기 윈도우 y 위치, 화면 세로 길이에 따라 초기 위치가 달라진다
-        self.acc = 23 - (HEIGHT - 960) / 200
 
         self.select_mode = 0  # 초기값 총 선택
         self.cat_x = []  # 카테고리 버튼의 x, y 좌표

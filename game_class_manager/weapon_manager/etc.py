@@ -244,7 +244,7 @@ def throw_grenade(weapon):
 def update_throw_delay(weapon):
     if not weapon.throwable:  # 수류탄 던진 후 쿨타임 측정
         weapon.throw_delay_time = get_time() - weapon.throw_delay
-        if weapon.throw_delay_time > 119:
+        if weapon.throw_delay_time > 60:
             weapon.throwable = True  # 쿨타임이 0이되면 다시 수류탄 활성화
 
 

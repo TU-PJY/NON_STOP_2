@@ -194,6 +194,9 @@ class Monster:
                         self.hp -= 200
                         self.once = True
 
+                elif self.weapon.melee == 'RAPIER' and self.weapon.skill_enable:
+                    self.is_hit = True
+
                 else:  # 나머지 근접 무기 공격
                     if self.hp > 0 and not self.weapon.hit_once:
                         self.is_hit = True

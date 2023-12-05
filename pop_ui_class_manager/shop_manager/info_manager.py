@@ -147,7 +147,7 @@ def print_info(self, i, j):
                         self.info.draw(x3, cost, '11000', color4)
                 case (4, 2):
                     self.info.draw(x, y, 'OTS-14', color)
-                    self.info.draw(x, y2, '대미지: 21', color)
+                    self.info.draw(x, y2, '대미지: 23', color)
                     self.info.draw(x, y3, '장탄수: 40', color)
                     self.info.draw(x, y4, '사용 탄약: 소총탄', color)
                     self.info.draw(x4 + 30, y, 'AR', color2)

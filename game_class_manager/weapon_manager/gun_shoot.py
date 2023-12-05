@@ -60,6 +60,7 @@ def shoot_gun(weapon):
             # True일시 해당 값을 Target 클래스로 전달하여 Target 클래스의 recoil을 증가시킨다.
             if not weapon.reloading and not weapon.reload_need:  # 재장전 중이거나 재장전이 필요하면 발사되지 않는다
                 weapon.shoot = True
+                weapon.hit_once = False
 
                 if weapon.gun == 'M1911':
                     weapon.shoot_delay = 65

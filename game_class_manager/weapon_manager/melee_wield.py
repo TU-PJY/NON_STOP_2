@@ -10,6 +10,7 @@ def wield_melee(weapon):
     if weapon.use and weapon.weapon_type == 1:
         if weapon.wield_delay <= 0:
             weapon.wield = True
+            weapon.hit_once = False
             if weapon.melee == 'KNIFE':
                 weapon.knife_wield.play()
                 weapon.melee_x = 100
