@@ -234,7 +234,7 @@ def print_info(self, i, j):
                     self.info.draw(x, y3, '장탄수: 5', color)
                     self.info.draw(x, y4, '사용 탄약: 저격 소총탄', color)
                     self.info.draw(x, y5, '최대 관통 횟수: 4', color4)
-                    self.info.draw(x, y6, '관통 시 대미지 감소: 40', color4)
+                    self.info.draw(x, y6, '관통 시 대미지 감소: 30', color4)
                     self.info.draw(x, y7, '우클릭으로 정조준', color5)
                     self.info.draw(x, y8, '격발 전 정조준 필요', color3)
                     self.info.draw(x4 + 30, y, 'SR', color2)
