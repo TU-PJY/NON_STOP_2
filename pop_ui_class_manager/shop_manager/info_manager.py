@@ -206,7 +206,7 @@ def print_info(self, i, j):
             match (i, j):
                 case (0, 0):
                     self.info.draw(x, y, 'M1903', color)
-                    self.info.draw(x, y2, '대미지: 250', color)
+                    self.info.draw(x, y2, '대미지: 220', color)
                     self.info.draw(x, y3, '장탄수: 5', color)
                     self.info.draw(x, y4, '사용 탄약: 저격 소총탄', color)
                     self.info.draw(x, y5, '최대 관통 횟수: 3', color4)

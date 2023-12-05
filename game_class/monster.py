@@ -215,7 +215,7 @@ class Monster:
                         game_manager.add_object(fd, 7)  # 명중 피드백
 
                         if self.weapon.gun == 'SPRING':
-                            self.hp -= 250 - 50 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
+                            self.hp -= 220 - 50 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
                             self.knockback_dir = self.dir
                             self.knockback = True
                             self.back_acc = 16 - (1 * self.weapon.pen_count)
