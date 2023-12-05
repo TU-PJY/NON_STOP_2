@@ -218,35 +218,35 @@ class Monster:
                             self.hp -= 250 - 50 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
                             self.knockback_dir = self.dir
                             self.knockback = True
-                            self.back_acc = 14 - (1 * self.weapon.pen_count)
+                            self.back_acc = 16 - (1 * self.weapon.pen_count)
                             self.weapon.pen_count += 1
 
                         elif self.weapon.gun == 'KAR98':
                             self.hp -= 250 - 40 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
                             self.knockback_dir = self.dir
                             self.knockback = True
-                            self.back_acc = 14 - (1 * self.weapon.pen_count)
+                            self.back_acc = 16 - (1 * self.weapon.pen_count)
                             self.weapon.pen_count += 1
 
                         elif self.weapon.gun == 'M24':
                             self.hp -= 250 - 30 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
                             self.knockback_dir = self.dir
                             self.knockback = True
-                            self.back_acc = 14 - (1 * self.weapon.pen_count)
+                            self.back_acc = 16 - (1 * self.weapon.pen_count)
                             self.weapon.pen_count += 1
 
                         elif self.weapon.gun == 'AWP':
                             self.hp -= 250 - 30 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
                             self.knockback_dir = self.dir
                             self.knockback = True
-                            self.back_acc = 14 - (1 * self.weapon.pen_count)
+                            self.back_acc = 16 - (1 * self.weapon.pen_count)
                             self.weapon.pen_count += 1
 
                         elif self.weapon.gun == 'CHEYTAC':
                             self.hp -= 300 - 30 * self.weapon.pen_count  # 관통이 될 수록 대미지가 감소한다.
                             self.knockback_dir = self.dir
                             self.knockback = True
-                            self.back_acc = 16 - (1 * self.weapon.pen_count)
+                            self.back_acc = 18 - (1 * self.weapon.pen_count)
                             self.weapon.pen_count += 1
 
                         if self.weapon.pen_count == self.weapon.pen_limit:  # 최대 관통 수를 초과하면 더 이상 초과하지 않는다.
